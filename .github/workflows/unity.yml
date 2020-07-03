@@ -1,4 +1,4 @@
-name: Unity Build 😎
+name: Unity
 
 on:
   pull_request: {}
