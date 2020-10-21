@@ -1,0 +1,17 @@
+{
+    "Dependencies": [],
+    "Components": [{
+        "$type": "Unity.Build.Common.GeneralSettings, Unity.Build.Common",
+        "ProductName": "Reia",
+        "CompanyName": "Quaint Studios"
+    }, {
+        "$type": "Unity.Build.Common.SceneList, Unity.Build.Common",
+        "BuildCurrentScene": false,
+        "Scenes": [
+            "GlobalObjectId_V1-1-74ccda45c2e8e444b9baa48afa495023-102900000-0"
+        ]
+    }, {
+        "$type": "Unity.Build.Common.OutputBuildDirectory, Unity.Build.Common",
+        "OutputDirectory": "./Builds/Main"
+    }]
+}
