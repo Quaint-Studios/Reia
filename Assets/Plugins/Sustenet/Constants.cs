@@ -22,8 +22,8 @@ namespace SustenetUnity
     public static class Constants
     {
         #region User Constants
-        public const byte USER_LEN_MAX = 3;
-        public const byte USER_LEN_MIN = 16;
+        public const byte USER_LEN_MAX = 16;
+        public const byte USER_LEN_MIN = 3;
         public static Regex USER_VALID_REGEX = new Regex(@"^[a-zA-Z0-9_]$");
         #endregion
     }
