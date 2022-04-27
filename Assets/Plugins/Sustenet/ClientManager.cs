@@ -18,6 +18,7 @@
 namespace SustenetUnity
 {
     using Sustenet.Transport;
+    using System.Threading;
     using TMPro;
     using UnityEngine;
     using UnityEngine.UI;
@@ -33,6 +34,7 @@ namespace SustenetUnity
         [SerializeField] private string ipAddress = "127.0.0.1";
         [SerializeField] private ushort port = 6256;
         public Client client;
+        private bool gracefullyDisconnected = false; // If true, don't auto reconnect.
 
         private string _username;
         [SerializeField]
@@ -63,7 +65,9 @@ namespace SustenetUnity
             public TMP_InputField password;
             public Button login;
         }
-        [SerializeField] private ClientInterface Interface = new ClientInterface();
+        [SerializeField] private ClientInterface Interface = new();
+
+        private SynchronizationContext syncContext;
         #endregion
 
         #region Setup
@@ -83,7 +87,7 @@ namespace SustenetUnity
         /// </summary>
         private void SetupInterface()
         {
-            Debug.Log("jo");
+            Debug.Log("Client Interface Setup.");
             Interface.login.interactable = false;
 
             Interface.login.onClick.AddListener(() =>
@@ -95,6 +99,8 @@ namespace SustenetUnity
             {
                 Username = inputValue;
             });
+
+            syncContext = SynchronizationContext.Current;
         }
 
         /// <summary>
@@ -115,6 +121,7 @@ namespace SustenetUnity
         /// </summary>
         public void Connect(string username, string password = null)
         {
+            Debug.Log($"Connecting with {Username} and {password}");
             if (Username != "") // If the username was set by the setter properly
             {
                 // TODO: client.isConnected;
@@ -130,8 +137,8 @@ namespace SustenetUnity
         /// </summary>
         public void OnClientConnected()
         {
-            Debug.Log("ja");
-            Interface.login.interactable = true;
+            Debug.Log("Client Connected.");
+            syncContext.Post(_ => Interface.login.interactable = true, null);
         }
 
         /// <summary>
@@ -139,8 +146,15 @@ namespace SustenetUnity
         /// </summary>
         public void OnClientDisconnected()
         {
-            Debug.Log("ji");
-            Interface.login.interactable = false;
+            Debug.Log("Client Disconnected.");
+            Debug.Log(gracefullyDisconnected);
+            syncContext.Post(_ => Interface.login.interactable = false, null);
+
+            if (gracefullyDisconnected == false)
+            {
+                Debug.Log("Reconnecting...");
+                client.Connect();
+            }
         }
 
         /// <summary>
@@ -155,6 +169,7 @@ namespace SustenetUnity
             // 4. Allow a user to click join to enter that cluster or
             //    auto select to find the best one (random currently).
             // 5. Handle disconnects properly. <-- don't do this here, separate it.
+            Debug.Log("Client Initialized.");
         }
 
         /// <summary>
