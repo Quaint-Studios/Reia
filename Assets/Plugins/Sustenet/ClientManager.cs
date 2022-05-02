@@ -147,7 +147,6 @@ namespace SustenetUnity
         public void OnClientDisconnected()
         {
             Debug.Log("Client Disconnected.");
-            Debug.Log(gracefullyDisconnected);
             syncContext.Post(_ => Interface.login.interactable = false, null);
 
             if (gracefullyDisconnected == false)
