@@ -44,7 +44,7 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   m_SampleCount:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 8
 --- !u!114 &-1016694868962581565
 MonoBehaviour:
@@ -93,8 +93,8 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0.15
   m_SampleCount:
-    m_OverrideState: 1
-    m_Value: 12
+    m_OverrideState: 0
+    m_Value: 10
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,10 +143,10 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   upperHemisphereLuxValue:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.46608552
   upperHemisphereLuxColor:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {x: 0, y: 0, z: 0}
   desiredLuxValue:
     m_OverrideState: 0
@@ -276,13 +276,13 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   m_Resolution:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 2
   m_HighQualityPrefiltering:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   m_HighQualityFiltering:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 1
 --- !u!114 &1932259527246508038
 MonoBehaviour:
@@ -534,13 +534,13 @@ MonoBehaviour:
     m_Value: 2
   m_RayLength:
     m_OverrideState: 0
-    m_Value: 0.5
+    m_Value: 3
   m_SampleCount:
     m_OverrideState: 0
-    m_Value: 4
+    m_Value: 2
   m_Denoise:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: 1
   m_DenoiserRadius:
     m_OverrideState: 0
     m_Value: 0.5
@@ -560,6 +560,9 @@ MonoBehaviour:
   mode:
     m_OverrideState: 1
     m_Value: 2
+  useFullACES:
+    m_OverrideState: 0
+    m_Value: 0
   toeStrength:
     m_OverrideState: 0
     m_Value: 0
@@ -584,6 +587,33 @@ MonoBehaviour:
   lutContribution:
     m_OverrideState: 0
     m_Value: 1
+  neutralHDRRangeReductionMode:
+    m_OverrideState: 0
+    m_Value: 2
+  acesPreset:
+    m_OverrideState: 0
+    m_Value: 3
+  fallbackMode:
+    m_OverrideState: 0
+    m_Value: 1
+  hueShiftAmount:
+    m_OverrideState: 0
+    m_Value: 0
+  detectPaperWhite:
+    m_OverrideState: 0
+    m_Value: 0
+  paperWhite:
+    m_OverrideState: 0
+    m_Value: 300
+  detectBrightnessLimits:
+    m_OverrideState: 0
+    m_Value: 1
+  minNits:
+    m_OverrideState: 0
+    m_Value: 0.005
+  maxNits:
+    m_OverrideState: 0
+    m_Value: 1000
 --- !u!114 &7686318427622180703
 MonoBehaviour:
   m_ObjectHideFlags: 3
