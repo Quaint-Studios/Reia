@@ -47,7 +47,7 @@ namespace SustenetUnity
 
             set
             {
-                if (value.Length >= Constants.USER_LEN_MIN && value.Length <= Constants.USER_LEN_MAX)
+                if(value.Length >= Constants.USER_LEN_MIN && value.Length <= Constants.USER_LEN_MAX)
                 {
                     _username = value;
                 }
@@ -63,6 +63,7 @@ namespace SustenetUnity
         {
             public TMP_InputField username;
             public TMP_InputField password;
+            public TMP_Text status;
             public Button login;
         }
         [SerializeField] private ClientInterface Interface = new();
@@ -122,7 +123,7 @@ namespace SustenetUnity
         public void Connect(string username, string password = null)
         {
             Debug.Log($"Connecting with {Username} and {password}");
-            if (Username != "") // If the username was set by the setter properly
+            if(Username != "") // If the username was set by the setter properly
             {
                 // TODO: client.isConnected;
                 client.Login(Username);
@@ -138,7 +139,12 @@ namespace SustenetUnity
         public void OnClientConnected()
         {
             Debug.Log("Client Connected.");
-            syncContext.Post(_ => Interface.login.interactable = true, null);
+            syncContext.Post(_ =>
+            {
+                Interface.login.interactable = true;
+                Interface.status.text = "Connected";
+                Interface.status.color = Color.green;
+            }, null);
         }
 
         /// <summary>
@@ -147,9 +153,14 @@ namespace SustenetUnity
         public void OnClientDisconnected()
         {
             Debug.Log("Client Disconnected.");
-            syncContext.Post(_ => Interface.login.interactable = false, null);
+            syncContext.Post(_ =>
+            {
+                Interface.login.interactable = false;
+                Interface.status.text = "Lost connection...";
+                Interface.status.color = Color.red;
+            }, null);
 
-            if (gracefullyDisconnected == false)
+            if(gracefullyDisconnected == false)
             {
                 Debug.Log("Reconnecting...");
                 client.Connect();
@@ -179,7 +190,7 @@ namespace SustenetUnity
         public void OnClientReceived(Protocols protocol, byte[] data)
         {
             Debug.Log(protocol);
-            Debug.Log(data);
+            Debug.Log(System.BitConverter.ToString(data));
         }
         #endregion
     }
