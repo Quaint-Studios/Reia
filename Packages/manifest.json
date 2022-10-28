@@ -6,6 +6,7 @@
     "com.unity.ide.vscode": "1.2.5",
     "com.unity.inputsystem": "1.4.3",
     "com.unity.render-pipelines.high-definition": "13.1.8",
+    "com.unity.render-pipelines.universal": "13.1.8",
     "com.unity.terrain-tools": "4.0.3",
     "com.unity.test-framework": "1.1.33",
     "com.unity.textmeshpro": "3.0.6",
