@@ -111,9 +111,11 @@ namespace SustenetUnity
         {
             SetupInterface();
 
+#if !UNITY_SERVER
             client = new Client(ipAddress, port);
             SetupClient();
             client.Connect();
+#endif
         }
 
         /// <summary>

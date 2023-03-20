@@ -2,6 +2,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
+#if UNITY_EDITOR
 public class MapGenerator : EditorWindow
 {
     [MenuItem("Generate/Map/Generate Texture Layers")]
@@ -83,3 +84,4 @@ public class MapGenerator : EditorWindow
         }
     }
 }
+#endif
