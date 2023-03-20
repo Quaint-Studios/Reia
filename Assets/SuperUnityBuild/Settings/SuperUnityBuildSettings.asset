@@ -50,8 +50,8 @@ MonoBehaviour:
     buildPath: $VERSION/$RELEASE_TYPE/$PLATFORM/$ARCHITECTURE
     openFolderPostBuild: 1
   _productParameters:
-    buildCounter: 0
-    buildVersion: 
+    buildCounter: 3
+    buildVersion: 0.1.0.3
     versionTemplate: 0.1.0.$BUILD
     autoGenerate: 1
     syncWithPlayerSettings: 0
@@ -110,9 +110,9 @@ MonoBehaviour:
       - 
       - 
       _Values:
-      - enabled: 1
+      - enabled: 0
         childKeys: []
-      - enabled: 1
+      - enabled: 0
         childKeys:
         - Client/Linux/Linux x64
       - enabled: 1
@@ -131,7 +131,7 @@ MonoBehaviour:
         - Server/Linux/Linux x64
       - enabled: 1
         childKeys: []
-      - enabled: 1
+      - enabled: 0
         childKeys:
         - Server/PC/Windows x64 (App)
       - enabled: 1
@@ -157,7 +157,7 @@ MonoBehaviour:
     showBuildInfo: 0
     hideDisabled: 0
     treeView: 1
-    selectedKeyChain: 
+    selectedKeyChain: Server/Linux/Linux x64
   _preBuildActions:
     buildActions: []
   _postBuildActions:
