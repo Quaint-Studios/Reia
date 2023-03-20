@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.github.superunitybuild.buildtool": {
+      "version": "5.0.4",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://package.openupm.com"
+    },
     "com.unity.burst": {
       "version": "1.7.4",
       "depth": 1,
