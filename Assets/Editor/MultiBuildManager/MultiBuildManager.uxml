@@ -1,9 +1,0 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
-    <ui:Foldout text="Globals" name="Globals" style="margin-bottom: 10px;">
-        <ui:TextField picking-mode="Ignore" label="Company name" value="filler text" text="filler text" name="CompanyName" />
-        <ui:TextField picking-mode="Ignore" label="Product name" value="filler text" text="filler text" name="ProductName" />
-        <ui:TextField picking-mode="Ignore" label="Version" value="0.1.0" text="0.1.0" name="Version" />
-    </ui:Foldout>
-    <ui:Foldout text="Builds" name="Builds" />
-    <ui:ListView focusable="true" show-foldout-header="true" show-add-remove-footer="true" reorderable="true" show-border="true" show-bound-collection-size="false" header-title="Sequences" name="Sequences" />
-</ui:UXML>
