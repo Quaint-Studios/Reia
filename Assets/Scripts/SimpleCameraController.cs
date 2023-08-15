@@ -119,42 +119,42 @@ namespace UnityTemplateProjects
 #if ENABLE_LEGACY_INPUT_MANAGER
 
             // Exit Sample  
-            if (Input.GetKey(KeyCode.Escape))
+            if(Input.GetKey(KeyCode.Escape))
             {
                 Application.Quit();
 #if UNITY_EDITOR
-				UnityEditor.EditorApplication.isPlaying = false; 
+                UnityEditor.EditorApplication.isPlaying = false;
 #endif
             }
             // Hide and lock cursor when right mouse button pressed
-            if (Input.GetMouseButtonDown(1))
+            if(Input.GetMouseButtonDown(1))
             {
                 Cursor.lockState = CursorLockMode.Locked;
             }
 
             // Unlock and show cursor when right mouse button released
-            if (Input.GetMouseButtonUp(1))
+            if(Input.GetMouseButtonUp(1))
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }
 
             // Rotation
-            if (Input.GetMouseButton(1))
+            if(Input.GetMouseButton(1))
             {
                 var mouseMovement = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y") * (invertY ? 1 : -1));
-                
+
                 var mouseSensitivityFactor = mouseSensitivityCurve.Evaluate(mouseMovement.magnitude);
 
                 m_TargetCameraState.yaw += mouseMovement.x * mouseSensitivityFactor;
                 m_TargetCameraState.pitch += mouseMovement.y * mouseSensitivityFactor;
             }
-            
+
             // Translation
             translation = GetInputTranslationDirection() * Time.deltaTime;
 
             // Speed up movement when shift key held
-            if (Input.GetKey(KeyCode.LeftShift))
+            if(Input.GetKey(KeyCode.LeftShift))
             {
                 translation *= 10.0f;
             }
