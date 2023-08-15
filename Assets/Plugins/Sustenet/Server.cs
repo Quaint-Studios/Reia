@@ -23,9 +23,9 @@ namespace SustenetUnity
     public class Server : Sustenet.World.ClusterServer
     {
         /// <summary>
-        /// Creates a Sustenet Client and overrides the InitializeClientData()
+        /// Creates a Sustenet Cluster Server and overrides teh InitializeData()
         /// </summary>
-        public Server(int _maxConnections = 0, ushort _port = 6257) : base(_maxConnections, _port) { }
+        public Server(ExternalFuncs _externalFuncs, int _maxConnections = 0, ushort _port = 6257) : base(_externalFuncs, _maxConnections, _port) { }
 
         protected override void InitializeData()
         {

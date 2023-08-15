@@ -65,6 +65,8 @@ namespace SustenetUnity
             public TMP_InputField password;
             public TMP_Text status;
             public Button login;
+            public Button requestClusterServers;
+            public Button reconnect;
         }
         [SerializeField] private ClientInterface Interface = new();
 
@@ -78,8 +80,9 @@ namespace SustenetUnity
         private void SetupClient()
         {
             client.onConnected.Run += () => OnClientConnected();
-            client.onDisconnected.Run += () => OnClientDisconnected();
+            client.onDisconnected.Run += (proto) => OnClientDisconnected(proto);
             client.onInitialized.Run += () => OnClientInitialized();
+            client.onClusterServerList.Run += (ci) => OnClusterServerList(ci);
             client.onReceived.Run += (protocol, data) => OnClientReceived(protocol, data);
         }
 
@@ -90,6 +93,7 @@ namespace SustenetUnity
         {
             Debug.Log("Client Interface Setup.");
             Interface.login.interactable = false;
+            Interface.requestClusterServers.interactable = false;
 
             Interface.login.onClick.AddListener(() =>
             {
@@ -101,7 +105,26 @@ namespace SustenetUnity
                 Username = inputValue;
             });
 
+            Interface.requestClusterServers.onClick.AddListener(() =>
+            {
+                RequestClusterServers();
+            });
+
+            Interface.reconnect.onClick.AddListener(() =>
+            {
+                Debug.Log("Reconnecting manually...");
+                gracefullyDisconnected = true;
+
+                client.HandleDisconnect(Protocols.TCP);
+                client.Connect();
+            });
+
             syncContext = SynchronizationContext.Current;
+        }
+
+        private void Awake()
+        {
+            SetupInterface();
         }
 
         /// <summary>
@@ -109,12 +132,13 @@ namespace SustenetUnity
         /// </summary>
         private void Start()
         {
-            SetupInterface();
+            Debug.Log("Starting...");
 
 #if !UNITY_SERVER
             client = new Client(ipAddress, port);
             SetupClient();
             client.Connect();
+            Debug.Log("Test");
 #endif
         }
 
@@ -132,6 +156,12 @@ namespace SustenetUnity
                 return;
             }
         }
+
+        public void RequestClusterServers()
+        {
+            Debug.Log($"Requesting cluster servers.");
+            client.GetClusterServers();
+        }
         #endregion
 
         #region Events
@@ -141,9 +171,11 @@ namespace SustenetUnity
         public void OnClientConnected()
         {
             Debug.Log("Client Connected.");
+            gracefullyDisconnected = false;
             syncContext.Post(_ =>
             {
                 Interface.login.interactable = true;
+                Interface.requestClusterServers.interactable = true;
                 Interface.status.text = "Connected";
                 Interface.status.color = Color.green;
             }, null);
@@ -152,12 +184,13 @@ namespace SustenetUnity
         /// <summary>
         /// When a client loses connection to a server or closes itself.
         /// </summary>
-        public void OnClientDisconnected()
+        public void OnClientDisconnected(Protocols proto)
         {
-            Debug.Log("Client Disconnected.");
+            Debug.Log($"Client Disconnected ({proto}).");
             syncContext.Post(_ =>
             {
                 Interface.login.interactable = false;
+                Interface.requestClusterServers.interactable = false;
                 Interface.status.text = "Lost connection...";
                 Interface.status.color = Color.red;
             }, null);
@@ -182,6 +215,34 @@ namespace SustenetUnity
             //    auto select to find the best one (random currently).
             // 5. Handle disconnects properly. <-- don't do this here, separate it.
             Debug.Log("Client Initialized.");
+
+        }
+
+        /// <summary>
+        /// Whenever the client gets a response with a list of cluster servers containing
+        /// their name, ip, and port.
+        /// </summary>
+        /// <param name="clusterServers"></param>
+        public void OnClusterServerList(Sustenet.World.ClusterInfo[] clusterServers)
+        {
+            Debug.Log("Received a list of cluster servers.");
+
+            foreach(Sustenet.World.ClusterInfo clusterInfo in clusterServers)
+            {
+                Debug.Log(clusterInfo.name);
+                Debug.Log(clusterInfo.ip);
+                Debug.Log(clusterInfo.port);
+                Debug.Log("===");
+            }
+            if(clusterServers.Length <= 0)
+            {
+                Debug.Log("No cluster servers registered.");
+                return;
+            }
+
+            client.clusterConnection = new Client.Connection { Ip = clusterServers[0].ip, Port = clusterServers[0].port == 0 ? Sustenet.Utils. };
+            client.HandleDisconnect(Protocols.TCP);
+            client.Connect(Client.ConnectionType.ClusterServer);
         }
 
         /// <summary>
