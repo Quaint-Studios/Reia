@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bm7q7lxahnhl4"]
+
+[ext_resource type="Script" path="res://scripts/mob/attackable/player/player.gd" id="1_fl81d"]
+[ext_resource type="PackedScene" uid="uid://dcerwphs865gy" path="res://assets/characters/player/female_model.tscn" id="2_mm2ce"]
+
+[node name="MyPlayer" type="CharacterBody3D"]
+script = ExtResource("1_fl81d")
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.234975, 1.27103, 0.0370264)
+depth = 0.3
+polygon = PackedVector2Array(0.341, -1.279, 0.499, -0.457, 0.387, 0.342, 0.07, 0.339, -0.038, -0.49, 0.134, -1.277)
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="FemaleModel" parent="Visuals" instance=ExtResource("2_mm2ce")]
+
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.08917, -0.0442547)
+
+[node name="Camera" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.968696, 0.24825, 0, -0.24825, 0.968696, 0, 0.5, 1.5)
+fov = 70.0
