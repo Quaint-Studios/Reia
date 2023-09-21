@@ -1,0 +1,57 @@
+[gd_scene load_steps=2 format=3 uid="uid://cqxplnocmdh0f"]
+
+[ext_resource type="Script" path="res://scenes/main_menu/menu.gd" id="1_3638y"]
+
+[node name="Map_MainMenu" type="Node"]
+
+[node name="UI" type="Node" parent="."]
+
+[node name="Menu" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_3638y")
+
+[node name="Margins" type="MarginContainer" parent="UI/Menu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Main" type="VBoxContainer" parent="UI/Menu/Margins"]
+layout_mode = 2
+
+[node name="Play" type="Button" parent="UI/Menu/Margins/Main"]
+layout_mode = 2
+text = "Play"
+
+[node name="Settings" type="Button" parent="UI/Menu/Margins/Main"]
+layout_mode = 2
+text = "Settings"
+
+[node name="Exit" type="Button" parent="UI/Menu/Margins/Main"]
+layout_mode = 2
+text = "Exit"
+
+[node name="Settings" type="VBoxContainer" parent="UI/Menu/Margins"]
+visible = false
+layout_mode = 2
+
+[node name="Controls" type="Button" parent="UI/Menu/Margins/Settings"]
+layout_mode = 2
+text = "Controls"
+
+[node name="Volume" type="Button" parent="UI/Menu/Margins/Settings"]
+layout_mode = 2
+text = "Volume"
+
+[node name="Back" type="Button" parent="UI/Menu/Margins/Settings"]
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="UI/Menu/Margins/Main/Play" to="UI/Menu" method="_on_play_pressed"]
+[connection signal="pressed" from="UI/Menu/Margins/Main/Settings" to="UI/Menu" method="_on_settings_pressed"]
+[connection signal="pressed" from="UI/Menu/Margins/Main/Exit" to="UI/Menu" method="_on_exit_pressed"]
+[connection signal="pressed" from="UI/Menu/Margins/Settings/Controls" to="UI/Menu" method="_on_controls_pressed"]
+[connection signal="pressed" from="UI/Menu/Margins/Settings/Volume" to="UI/Menu" method="_on_volume_pressed"]
+[connection signal="pressed" from="UI/Menu/Margins/Settings/Back" to="UI/Menu" method="_on_back_pressed"]
