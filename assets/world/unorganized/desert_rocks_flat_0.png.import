@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dl2pjiiu0fnsm"
 path.s3tc="res://.godot/imported/desert_rocks_flat_0.png-1db53291219c50a68c3d0fa61ce1fc86.s3tc.ctex"
+path.etc2="res://.godot/imported/desert_rocks_flat_0.png-1db53291219c50a68c3d0fa61ce1fc86.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +14,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://assets/world/unorganized/desert_rocks_flat_0.png"
-dest_files=["res://.godot/imported/desert_rocks_flat_0.png-1db53291219c50a68c3d0fa61ce1fc86.s3tc.ctex"]
+dest_files=["res://.godot/imported/desert_rocks_flat_0.png-1db53291219c50a68c3d0fa61ce1fc86.s3tc.ctex", "res://.godot/imported/desert_rocks_flat_0.png-1db53291219c50a68c3d0fa61ce1fc86.etc2.ctex"]
 
 [params]
 

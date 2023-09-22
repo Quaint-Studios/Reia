@@ -10,7 +10,6 @@ sky_material = SubResource("PanoramaSkyMaterial_0bkfe")
 
 [resource]
 background_mode = 2
-background_energy_multiplier = 1.5
 sky = SubResource("Sky_4vlmk")
 sky_rotation = Vector3(3.14159, 0, 0)
 ambient_light_source = 3
@@ -18,5 +17,5 @@ reflected_light_source = 2
 ssil_enabled = true
 sdfgi_enabled = true
 volumetric_fog_enabled = true
-volumetric_fog_density = 0.005
+volumetric_fog_density = 0.008
 volumetric_fog_emission = Color(0.839216, 1, 0.972549, 1)

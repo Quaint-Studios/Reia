@@ -1,0 +1,44 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmicgu6inl8e5"]
+
+[ext_resource type="Script" path="res://assets/characters/npcs/larry.gd" id="1_7b1nv"]
+[ext_resource type="Script" path="res://scripts/mob/attackable/health_manager.gd" id="1_ile63"]
+[ext_resource type="PackedScene" uid="uid://b3p21o2ljivu2" path="res://assets/characters/npcs/aqua_wizard.glb" id="1_perw3"]
+[ext_resource type="PackedScene" uid="uid://bb6pl2i42qjqf" path="res://scenes/ui/status_bars/health_bar.tscn" id="2_46ytx"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tslik"]
+radius = 0.376215
+height = 1.77435
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vjeyi"]
+viewport_path = NodePath("Visuals/Health/SubViewport")
+
+[node name="Larry" type="CharacterBody3D" node_paths=PackedStringArray("health_manager")]
+script = ExtResource("1_7b1nv")
+health_manager = NodePath("Visuals/Health")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.88408, 0)
+shape = SubResource("CapsuleShape3D_tslik")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="Health" type="Node3D" parent="Visuals"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.72083, 0)
+script = ExtResource("1_ile63")
+metadata/_edit_lock_ = true
+
+[node name="SubViewport" type="SubViewport" parent="Visuals/Health"]
+transparent_bg = true
+size = Vector2i(530, 65)
+
+[node name="HealthBar" parent="Visuals/Health/SubViewport" instance=ExtResource("2_46ytx")]
+
+[node name="Sprite" type="Sprite3D" parent="Visuals/Health"]
+transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.0731125, 0)
+texture = SubResource("ViewportTexture_vjeyi")
+metadata/_edit_lock_ = true
+
+[node name="HideTimer" type="Timer" parent="Visuals/Health"]
+
+[node name="Larry" parent="Visuals" instance=ExtResource("1_perw3")]
+metadata/_edit_lock_ = true

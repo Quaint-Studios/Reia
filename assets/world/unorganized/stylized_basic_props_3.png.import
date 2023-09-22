@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c80xvygy8mjve"
 path.s3tc="res://.godot/imported/stylized_basic_props_3.png-43ae313eb502cc6f23a3c403dbf0e213.s3tc.ctex"
+path.etc2="res://.godot/imported/stylized_basic_props_3.png-43ae313eb502cc6f23a3c403dbf0e213.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +14,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://assets/world/unorganized/stylized_basic_props_3.png"
-dest_files=["res://.godot/imported/stylized_basic_props_3.png-43ae313eb502cc6f23a3c403dbf0e213.s3tc.ctex"]
+dest_files=["res://.godot/imported/stylized_basic_props_3.png-43ae313eb502cc6f23a3c403dbf0e213.s3tc.ctex", "res://.godot/imported/stylized_basic_props_3.png-43ae313eb502cc6f23a3c403dbf0e213.etc2.ctex"]
 
 [params]
 

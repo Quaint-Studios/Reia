@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://sop1cod4x1vo"
 path.s3tc="res://.godot/imported/stylized_rock_cliff__agustin_honnun_0.png-779ef9d99d045f0af9180db644948192.s3tc.ctex"
+path.etc2="res://.godot/imported/stylized_rock_cliff__agustin_honnun_0.png-779ef9d99d045f0af9180db644948192.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +14,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://assets/world/rocks/desert/cliff/stylized_rock_cliff__agustin_honnun_0.png"
-dest_files=["res://.godot/imported/stylized_rock_cliff__agustin_honnun_0.png-779ef9d99d045f0af9180db644948192.s3tc.ctex"]
+dest_files=["res://.godot/imported/stylized_rock_cliff__agustin_honnun_0.png-779ef9d99d045f0af9180db644948192.s3tc.ctex", "res://.godot/imported/stylized_rock_cliff__agustin_honnun_0.png-779ef9d99d045f0af9180db644948192.etc2.ctex"]
 
 [params]
 
