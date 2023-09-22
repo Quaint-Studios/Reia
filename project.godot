@@ -71,6 +71,16 @@ quit={
 ]
 }
 
+[layer_names]
+
+3d_physics/layer_1="walls"
+3d_physics/layer_2="attackable"
+3d_physics/layer_3="player"
+3d_physics/layer_4="npc"
+3d_physics/layer_5="enemy"
+3d_physics/layer_6="item"
+3d_physics/layer_9="ground"
+
 [rendering]
 
 textures/vram_compression/import_etc2_astc=true

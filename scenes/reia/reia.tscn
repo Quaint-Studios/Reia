@@ -28,17 +28,22 @@ light_data = ExtResource("1_6htgl")
 
 [node name="MyPlayer" parent="Players" instance=ExtResource("3_m63h2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.347, -0.754201, 2.465)
+collision_layer = 6
+collision_mask = 287
 
 [node name="NPCs" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57933, -0.75015, 1.28274)
 
 [node name="Larry" parent="NPCs" instance=ExtResource("2_w4lqh")]
+collision_mask = 287
 
 [node name="Enemies" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57933, -0.75015, 1.28274)
 
 [node name="AquaWizard" parent="Enemies" instance=ExtResource("3_jgoiv")]
 transform = Transform3D(-0.351793, 0, 0.936078, 0, 1, 0, -0.936078, 0, -0.351793, -5.80119, 0, 2.76315)
+collision_layer = 18
+collision_mask = 287
 
 [node name="Terrain" type="Node" parent="."]
 
@@ -58,6 +63,8 @@ transform = Transform3D(0.766045, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766045, 
 [node name="Ground" type="CSGBox3D" parent="Terrain/Groundings"]
 transform = Transform3D(3.86976, 0, 0, 0, 1.00056, 0, 0, 0, 8.83943, 0, -0.75856, -24.7402)
 use_collision = true
+collision_layer = 256
+collision_mask = 0
 size = Vector3(35, 0.002, 15)
 material = SubResource("StandardMaterial3D_epo51")
 
