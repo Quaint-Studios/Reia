@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://bwki0m8ltpa4f"
 path.s3tc="res://.godot/imported/stylized_tree_3.png-71e548be7d96ef6cf23ebe9f57cf1d9b.s3tc.ctex"
+path.etc2="res://.godot/imported/stylized_tree_3.png-71e548be7d96ef6cf23ebe9f57cf1d9b.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +14,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://assets/world/trees/compositions/stylized_tree_3.png"
-dest_files=["res://.godot/imported/stylized_tree_3.png-71e548be7d96ef6cf23ebe9f57cf1d9b.s3tc.ctex"]
+dest_files=["res://.godot/imported/stylized_tree_3.png-71e548be7d96ef6cf23ebe9f57cf1d9b.s3tc.ctex", "res://.godot/imported/stylized_tree_3.png-71e548be7d96ef6cf23ebe9f57cf1d9b.etc2.ctex"]
 
 [params]
 

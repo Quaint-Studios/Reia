@@ -1,16 +1,17 @@
-[gd_scene load_steps=14 format=3 uid="uid://njgkawiv7sdy"]
+[gd_scene load_steps=15 format=3 uid="uid://njgkawiv7sdy"]
 
 [ext_resource type="Script" path="res://scripts/managers/game_manager.gd" id="1_0emf4"]
+[ext_resource type="LightmapGIData" uid="uid://bog8vgj034dhh" path="res://scenes/reia/reia.lmbake" id="1_6htgl"]
 [ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia.tres" id="1_gkwf7"]
 [ext_resource type="PackedScene" uid="uid://c28gkmhvhs58v" path="res://scenes/ui/game_ui.tscn" id="1_ttgxx"]
 [ext_resource type="Script" path="res://scripts/managers/debug_manager.gd" id="2_m1mwx"]
+[ext_resource type="PackedScene" uid="uid://bmicgu6inl8e5" path="res://assets/characters/npcs/larry.tscn" id="2_w4lqh"]
+[ext_resource type="PackedScene" uid="uid://op561o2k0d4o" path="res://assets/characters/enemies/aqua_wizard.tscn" id="3_jgoiv"]
 [ext_resource type="PackedScene" uid="uid://bm7q7lxahnhl4" path="res://scripts/mob/attackable/player/my_player.tscn" id="3_m63h2"]
-[ext_resource type="PackedScene" uid="uid://b3p21o2ljivu2" path="res://assets/characters/npcs/aqua_wizard.glb" id="4_k623l"]
 [ext_resource type="PackedScene" uid="uid://bm6j14ip2oywr" path="res://assets/world/rocks/collections/stylized_rocks.glb" id="5_glpdm"]
 [ext_resource type="PackedScene" uid="uid://bj7e34l2ty1yt" path="res://assets/world/trees/compositions/stylized_tree.glb" id="8_bup5i"]
 [ext_resource type="PackedScene" uid="uid://bvb75kmlbcbav" path="res://assets/world/fountains/stylized_fountain.glb" id="9_ksg1v"]
 [ext_resource type="PackedScene" uid="uid://cmnfswjhhgkfd" path="res://assets/world/sky/islands/floating_house.glb" id="12_x2unh"]
-[ext_resource type="PackedScene" uid="uid://e8wiqognmgss" path="res://assets/characters/enemies/stylized_barbarian.glb" id="13_tuyhs"]
 [ext_resource type="PackedScene" uid="uid://cslscakiyp5gs" path="res://assets/world/sky/islands/floating_island.glb" id="14_r436h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epo51"]
@@ -18,43 +19,30 @@ albedo_color = Color(0.265625, 0.898438, 0.4375, 1)
 
 [node name="Map_Reia" type="Node"]
 
-[node name="World" type="Node" parent="."]
+[node name="LightmapGI" type="LightmapGI" parent="."]
+quality = 3
+directional = true
+light_data = ExtResource("1_6htgl")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
-transform = Transform3D(0.866025, -0.353553, 0.353554, 0, 0.707107, 0.707106, -0.5, -0.612372, 0.612373, 0, 2, 0)
-light_color = Color(0.86, 1, 0.953333, 1)
-light_energy = 1.5
-shadow_enabled = true
-shadow_opacity = 0.8
+[node name="Players" type="Node" parent="."]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
-environment = ExtResource("1_gkwf7")
-
-[node name="Managers" type="Node" parent="."]
-
-[node name="Game Manager" type="Node" parent="Managers"]
-script = ExtResource("1_0emf4")
-
-[node name="Players" type="Node" parent="Managers/Game Manager"]
-
-[node name="MyPlayer" parent="Managers/Game Manager/Players" instance=ExtResource("3_m63h2")]
+[node name="MyPlayer" parent="Players" instance=ExtResource("3_m63h2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.347, -0.754201, 2.465)
 
-[node name="Debug Manager" type="Node" parent="Managers"]
-script = ExtResource("2_m1mwx")
+[node name="NPCs" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57933, -0.75015, 1.28274)
 
-[node name="FPS Counter" type="RichTextLabel" parent="Managers/Debug Manager"]
-visible = false
-offset_right = 113.0
-offset_bottom = 40.0
-text = "FPS: N/A"
+[node name="Larry" parent="NPCs" instance=ExtResource("2_w4lqh")]
+
+[node name="Enemies" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57933, -0.75015, 1.28274)
+
+[node name="AquaWizard" parent="Enemies" instance=ExtResource("3_jgoiv")]
+transform = Transform3D(-0.351793, 0, 0.936078, 0, 1, 0, -0.936078, 0, -0.351793, -5.80119, 0, 2.76315)
 
 [node name="Terrain" type="Node" parent="."]
 
-[node name="Uncatagorized" type="Node" parent="Terrain"]
-
-[node name="aqua_wizard" parent="Terrain/Uncatagorized" instance=ExtResource("4_k623l")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57933, -0.75015, 1.28274)
+[node name="Uncatagorized" type="Node3D" parent="Terrain"]
 
 [node name="stylized_tree" parent="Terrain/Uncatagorized" instance=ExtResource("8_bup5i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.174368, -0.852344, 0.25471)
@@ -65,7 +53,7 @@ transform = Transform3D(-1.28502, 0, -1.69996, 0, 2.13099, 0, 1.69996, 0, -1.285
 [node name="stylized_fountain" parent="Terrain/Uncatagorized" instance=ExtResource("9_ksg1v")]
 transform = Transform3D(0.766045, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766045, 1.89809, -0.683953, -6.31448)
 
-[node name="Groundings" type="Node" parent="Terrain"]
+[node name="Groundings" type="Node3D" parent="Terrain"]
 
 [node name="Ground" type="CSGBox3D" parent="Terrain/Groundings"]
 transform = Transform3D(3.86976, 0, 0, 0, 1.00056, 0, 0, 0, 8.83943, 0, -0.75856, -24.7402)
@@ -73,17 +61,47 @@ use_collision = true
 size = Vector3(35, 0.002, 15)
 material = SubResource("StandardMaterial3D_epo51")
 
+[node name="Background" type="Node3D" parent="Terrain"]
+
+[node name="floating_house" parent="Terrain/Background" instance=ExtResource("12_x2unh")]
+transform = Transform3D(0.528438, 0, -0.848972, 0, 1, 0, 0.848972, 0, 0.528438, 283.536, 0.54, -508.363)
+
+[node name="floating_island" parent="Terrain/Background" instance=ExtResource("14_r436h")]
+transform = Transform3D(-0.759271, 0, -0.650774, 0, 1, 0, 0.650774, 0, -0.759271, -195.998, 62.915, -391.051)
+
 [node name="UI" type="Node" parent="."]
 
 [node name="GameUI" parent="UI" instance=ExtResource("1_ttgxx")]
 
-[node name="floating_house" parent="." instance=ExtResource("12_x2unh")]
-transform = Transform3D(0.528438, 0, -0.848972, 0, 1, 0, 0.848972, 0, 0.528438, 283.536, 0.54, -508.363)
+[node name="World" type="Node" parent="."]
 
-[node name="stylized_barbarian" parent="." instance=ExtResource("13_tuyhs")]
-transform = Transform3D(0.821149, 0, 0.570714, 0, 1, 0, -0.570714, 0, 0.821149, -0.216, -0.75, -18.292)
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(0.866025, -0.353553, 0.353554, 0, 0.707107, 0.707106, -0.5, -0.612372, 0.612373, 8.0816, 7.32544, 14.4232)
+light_energy = 1.5
+shadow_enabled = true
+shadow_bias = 0.202
+shadow_normal_bias = 8.788
+directional_shadow_blend_splits = true
+directional_shadow_fade_start = 0.098
+sky_mode = 1
 
-[node name="floating_island" parent="." instance=ExtResource("14_r436h")]
-transform = Transform3D(-0.759271, 0, -0.650774, 0, 1, 0, 0.650774, 0, -0.759271, -195.998, 62.915, -391.051)
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = ExtResource("1_gkwf7")
 
-[editable path="Managers/Game Manager/Players/MyPlayer"]
+[node name="Managers" type="Node" parent="."]
+
+[node name="GameManager" type="Node" parent="Managers"]
+script = ExtResource("1_0emf4")
+
+[node name="UIManager" type="Node" parent="Managers"]
+
+[node name="DebugManager" type="Node" parent="Managers"]
+script = ExtResource("2_m1mwx")
+
+[node name="FPSCounter" type="RichTextLabel" parent="Managers/DebugManager"]
+visible = false
+offset_right = 113.0
+offset_bottom = 40.0
+text = "FPS: N/A"
+
+[editable path="Players/MyPlayer"]

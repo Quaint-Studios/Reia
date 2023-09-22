@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://d0hrhcvk0m1nn"
 path.s3tc="res://.godot/imported/stylized_rocks_2.png-04dabdedd757a0ad56e7f1d6c23cd9f4.s3tc.ctex"
+path.etc2="res://.godot/imported/stylized_rocks_2.png-04dabdedd757a0ad56e7f1d6c23cd9f4.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +14,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://assets/world/rocks/collections/stylized_rocks_2.png"
-dest_files=["res://.godot/imported/stylized_rocks_2.png-04dabdedd757a0ad56e7f1d6c23cd9f4.s3tc.ctex"]
+dest_files=["res://.godot/imported/stylized_rocks_2.png-04dabdedd757a0ad56e7f1d6c23cd9f4.s3tc.ctex", "res://.godot/imported/stylized_rocks_2.png-04dabdedd757a0ad56e7f1d6c23cd9f4.etc2.ctex"]
 
 [params]
 

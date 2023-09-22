@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://op561o2k0d4o"]
+
+[ext_resource type="PackedScene" uid="uid://b3p21o2ljivu2" path="res://assets/characters/npcs/aqua_wizard.glb" id="1_hf2bh"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jxymx"]
+radius = 0.573225
+height = 2.59712
+
+[node name="AquaWizard" type="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29, 0)
+shape = SubResource("CapsuleShape3D_jxymx")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="AquaWizard" parent="Visuals" instance=ExtResource("1_hf2bh")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)

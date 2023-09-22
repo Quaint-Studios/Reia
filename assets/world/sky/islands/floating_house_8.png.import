@@ -4,8 +4,9 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://c8jvrv70pnauv"
 path.s3tc="res://.godot/imported/floating_house_8.png-9aa92f66b73dc188b3ddc4b1f8238f3e.s3tc.ctex"
+path.etc2="res://.godot/imported/floating_house_8.png-9aa92f66b73dc188b3ddc4b1f8238f3e.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 generator_parameters={}
@@ -13,7 +14,7 @@ generator_parameters={}
 [deps]
 
 source_file="res://assets/world/sky/islands/floating_house_8.png"
-dest_files=["res://.godot/imported/floating_house_8.png-9aa92f66b73dc188b3ddc4b1f8238f3e.s3tc.ctex"]
+dest_files=["res://.godot/imported/floating_house_8.png-9aa92f66b73dc188b3ddc4b1f8238f3e.s3tc.ctex", "res://.godot/imported/floating_house_8.png-9aa92f66b73dc188b3ddc4b1f8238f3e.etc2.ctex"]
 
 [params]
 

@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://boeljf8xa2s5d"
 path.s3tc="res://.godot/imported/progress8.svg-f4c6912cb79e58fffa4e23976af93b45.s3tc.ctex"
+path.etc2="res://.godot/imported/progress8.svg-f4c6912cb79e58fffa4e23976af93b45.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/proton_scatter/icons/loading/progress8.svg"
-dest_files=["res://.godot/imported/progress8.svg-f4c6912cb79e58fffa4e23976af93b45.s3tc.ctex"]
+dest_files=["res://.godot/imported/progress8.svg-f4c6912cb79e58fffa4e23976af93b45.s3tc.ctex", "res://.godot/imported/progress8.svg-f4c6912cb79e58fffa4e23976af93b45.etc2.ctex"]
 
 [params]
 

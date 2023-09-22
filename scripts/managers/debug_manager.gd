@@ -5,7 +5,7 @@ var debugging = true # debug option
 const FPS_TIMER_LIMIT = 2.0
 var fps_debug = true # debug option
 var fps_timer = 0.0
-@onready var fps_counter = $"FPS Counter";
+@onready var fps_counter = $"FPSCounter";
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

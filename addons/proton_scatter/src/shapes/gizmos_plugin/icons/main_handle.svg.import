@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://dmjp2vpqp4qjy"
 path.s3tc="res://.godot/imported/main_handle.svg-e76638c615070e68035d2b711214a1fc.s3tc.ctex"
+path.etc2="res://.godot/imported/main_handle.svg-e76638c615070e68035d2b711214a1fc.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://addons/proton_scatter/src/shapes/gizmos_plugin/icons/main_handle.svg"
-dest_files=["res://.godot/imported/main_handle.svg-e76638c615070e68035d2b711214a1fc.s3tc.ctex"]
+dest_files=["res://.godot/imported/main_handle.svg-e76638c615070e68035d2b711214a1fc.s3tc.ctex", "res://.godot/imported/main_handle.svg-e76638c615070e68035d2b711214a1fc.etc2.ctex"]
 
 [params]
 
