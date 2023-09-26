@@ -17,14 +17,15 @@ metadata/_edit_lock_ = true
 metadata/_edit_lock_ = true
 
 [node name="female_model" parent="Visuals" instance=ExtResource("2_c3kj5")]
+metadata/_edit_lock_ = true
 
 [node name="CameraPoints" type="Node3D" parent="."]
 
-[node name="LookPoint" type="Node3D" parent="CameraPoints"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-
 [node name="FollowPoint" type="Node3D" parent="CameraPoints"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2149, 0)
+
+[node name="LookPoint" type="Node3D" parent="CameraPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0747, 0)
 
 [node name="CameraPivot" type="Node3D" parent="." node_paths=PackedStringArray("look_point", "follow_point")]
 top_level = true
