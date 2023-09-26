@@ -1,4 +1,4 @@
-extends Attackable
+class_name Player extends Attackable
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -6,6 +6,7 @@ const JUMP_VELOCITY = 4.5
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var visuals: Node3D = $Visuals
+@onready var camera_points : Node3D = $CameraPoints
 
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera : Camera3D = $CameraPivot/Camera
@@ -34,8 +35,7 @@ func _unhandled_input(event: InputEvent):
 		pass
 
 	if event is InputEventMouseMotion:
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			handle_camera(event)
+		pass
 
 func _physics_process(delta: float):
 	# Add the gravity.
@@ -46,21 +46,6 @@ func _physics_process(delta: float):
 		handle_inputs()
 
 	move_and_slide()
-
-func handle_camera(event: InputEvent):
-	var cur_rot = camera_pivot.rotation
-	camera_pivot.set_rotation(Vector3(cur_rot.x + -event.relative.y * 0.005, cur_rot.y + -event.relative.x * 0.005, 0))
-	camera_pivot.rotation.x = clamp(camera_pivot.rotation.x, -(deg_to_rad(25.0)), deg_to_rad(25.0))
-	camera_pivot.rotation.z = 0
-
-	var zoom = 10
-	var pos_y_formula_1 = 0.5 + ((0.5 / PI) * camera_pivot.rotation.x)
-	var pos_y_formula_2 = 0.5 + ((0.5 / PI / 2) * camera_pivot.rotation.x)
-	var pos_z_formula = 1.5 + ((1.5 / PI / 2) * camera_pivot.rotation.x * -zoom)
-	camera.position.x = 0
-	camera.position.y = pos_y_formula_2 * 2
-	camera.position.y = clamp(camera.position.y, pos_y_formula_1, pos_y_formula_2)
-	camera.position.z =  pos_z_formula
 
 func handle_inputs():
 	handle_attack()
@@ -73,7 +58,7 @@ func handle_inputs():
 
 	var input_dir = Input.get_vector("left", "right", "forward", "back")
 	if(input_dir): print("input dir: ", input_dir)
-	var direction = (camera_pivot.transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	var direction = (camera.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
