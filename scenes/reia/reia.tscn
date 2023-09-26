@@ -20,7 +20,6 @@ albedo_color = Color(0.265625, 0.898438, 0.4375, 1)
 [node name="Map_Reia" type="Node"]
 
 [node name="LightmapGI" type="LightmapGI" parent="."]
-quality = 3
 directional = true
 light_data = ExtResource("1_6htgl")
 
@@ -86,11 +85,13 @@ transform = Transform3D(-0.759271, 0, -0.650774, 0, 1, 0, 0.650774, 0, -0.759271
 transform = Transform3D(0.866025, -0.353553, 0.353554, 0, 0.707107, 0.707106, -0.5, -0.612372, 0.612373, 8.0816, 7.32544, 14.4232)
 light_energy = 1.5
 shadow_enabled = true
-shadow_bias = 0.202
-shadow_normal_bias = 8.788
+shadow_bias = 0.025
+directional_shadow_split_1 = 0.02
+directional_shadow_split_2 = 0.04
+directional_shadow_split_3 = 0.08
 directional_shadow_blend_splits = true
-directional_shadow_fade_start = 0.098
-sky_mode = 1
+directional_shadow_max_distance = 300.0
+directional_shadow_pancake_size = 4.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
 environment = ExtResource("1_gkwf7")
