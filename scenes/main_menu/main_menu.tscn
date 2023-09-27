@@ -1,57 +1,282 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqxplnocmdh0f"]
+[gd_scene load_steps=5 format=3 uid="uid://cqxplnocmdh0f"]
 
+[ext_resource type="Texture2D" uid="uid://dw8dxdsi60dw6" path="res://assets/ui/logos/Reia_LOGO.png" id="1_6ljrg"]
 [ext_resource type="Script" path="res://scenes/main_menu/menu.gd" id="1_3638y"]
+[ext_resource type="AudioStream" uid="uid://bjmsfaw5a1nh5" path="res://assets/audio/menu/forest_theme_v1.wav" id="3_3o1dl"]
+[ext_resource type="Theme" uid="uid://cvudtn0hd6gap" path="res://scenes/main_menu/main_menu.tres" id="4_r7mv3"]
 
 [node name="Map_MainMenu" type="Node"]
 
 [node name="UI" type="Node" parent="."]
 
-[node name="Menu" type="Control" parent="UI"]
+[node name="Control" type="Control" parent="UI"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -460.0
+offset_right = 460.0
+offset_bottom = 430.0
+grow_horizontal = 2
+scale = Vector2(0.36, 0.36)
+pivot_offset = Vector2(460, 0)
+texture = ExtResource("1_6ljrg")
+
+[node name="Selectors" type="Control" parent="UI/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_3638y")
+menu_music = ExtResource("3_3o1dl")
 
-[node name="Margins" type="MarginContainer" parent="UI/Menu"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Margins" type="MarginContainer" parent="UI/Control/Selectors"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -256.0
+offset_right = 185.0
+grow_vertical = 0
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_bottom = 64
 
-[node name="Main" type="VBoxContainer" parent="UI/Menu/Margins"]
+[node name="Main" type="VBoxContainer" parent="UI/Control/Selectors/Margins"]
+unique_name_in_owner = true
 layout_mode = 2
+theme_override_constants/separation = 16
 
-[node name="Play" type="Button" parent="UI/Menu/Margins/Main"]
+[node name="Play" type="Button" parent="UI/Control/Selectors/Margins/Main"]
 layout_mode = 2
+theme = ExtResource("4_r7mv3")
 text = "Play"
+alignment = 0
 
-[node name="Settings" type="Button" parent="UI/Menu/Margins/Main"]
+[node name="Settings" type="Button" parent="UI/Control/Selectors/Margins/Main"]
 layout_mode = 2
+theme = ExtResource("4_r7mv3")
 text = "Settings"
+alignment = 0
 
-[node name="Exit" type="Button" parent="UI/Menu/Margins/Main"]
+[node name="Exit" type="Button" parent="UI/Control/Selectors/Margins/Main"]
 layout_mode = 2
+theme = ExtResource("4_r7mv3")
 text = "Exit"
+alignment = 0
 
-[node name="Settings" type="VBoxContainer" parent="UI/Menu/Margins"]
+[node name="Settings" type="VBoxContainer" parent="UI/Control/Selectors/Margins"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
+theme_override_constants/separation = 16
 
-[node name="Controls" type="Button" parent="UI/Menu/Margins/Settings"]
+[node name="ContainerLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Settings"]
+custom_minimum_size = Vector2(180, 50.18)
 layout_mode = 2
+theme = ExtResource("4_r7mv3")
+bbcode_enabled = true
+text = "[font_size=36]Settings"
+
+[node name="Controls" type="Button" parent="UI/Control/Selectors/Margins/Settings"]
+layout_mode = 2
+theme = ExtResource("4_r7mv3")
 text = "Controls"
+alignment = 0
 
-[node name="Volume" type="Button" parent="UI/Menu/Margins/Settings"]
+[node name="Volume" type="Button" parent="UI/Control/Selectors/Margins/Settings"]
 layout_mode = 2
+theme = ExtResource("4_r7mv3")
 text = "Volume"
+alignment = 0
 
-[node name="Back" type="Button" parent="UI/Menu/Margins/Settings"]
+[node name="Back" type="Button" parent="UI/Control/Selectors/Margins/Settings"]
 layout_mode = 2
+theme = ExtResource("4_r7mv3")
 text = "Back"
+alignment = 0
 
-[connection signal="pressed" from="UI/Menu/Margins/Main/Play" to="UI/Menu" method="_on_play_pressed"]
-[connection signal="pressed" from="UI/Menu/Margins/Main/Settings" to="UI/Menu" method="_on_settings_pressed"]
-[connection signal="pressed" from="UI/Menu/Margins/Main/Exit" to="UI/Menu" method="_on_exit_pressed"]
-[connection signal="pressed" from="UI/Menu/Margins/Settings/Controls" to="UI/Menu" method="_on_controls_pressed"]
-[connection signal="pressed" from="UI/Menu/Margins/Settings/Volume" to="UI/Menu" method="_on_volume_pressed"]
-[connection signal="pressed" from="UI/Menu/Margins/Settings/Back" to="UI/Menu" method="_on_back_pressed"]
+[node name="Controls" type="VBoxContainer" parent="UI/Control/Selectors/Margins"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ContainerLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Controls"]
+custom_minimum_size = Vector2(180, 50.18)
+layout_mode = 2
+theme = ExtResource("4_r7mv3")
+bbcode_enabled = true
+text = "[font_size=36]Controls"
+
+[node name="Back" type="Button" parent="UI/Control/Selectors/Margins/Controls"]
+layout_mode = 2
+theme = ExtResource("4_r7mv3")
+text = "Back"
+alignment = 0
+
+[node name="Volume" type="VBoxContainer" parent="UI/Control/Selectors/Margins"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ContainerLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume"]
+custom_minimum_size = Vector2(180, 50.18)
+layout_mode = 2
+theme = ExtResource("4_r7mv3")
+bbcode_enabled = true
+text = "[font_size=36]Volumes"
+
+[node name="MasterContainer" type="HBoxContainer" parent="UI/Control/Selectors/Margins/Volume"]
+layout_mode = 2
+
+[node name="MasterLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/MasterContainer"]
+custom_minimum_size = Vector2(180, 34)
+layout_mode = 2
+theme = ExtResource("4_r7mv3")
+text = "Master"
+
+[node name="MasterVolume" type="HSlider" parent="UI/Control/Selectors/Margins/Volume/MasterContainer"]
+custom_minimum_size = Vector2(200, 34)
+layout_mode = 2
+size_flags_horizontal = 8
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="MasterVolumeLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/MasterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 34)
+layout_mode = 2
+theme = ExtResource("4_r7mv3")
+bbcode_enabled = true
+text = "[right]100%"
+
+[node name="Music Container" type="HBoxContainer" parent="UI/Control/Selectors/Margins/Volume"]
+layout_mode = 2
+
+[node name="MusicLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/Music Container"]
+custom_minimum_size = Vector2(180, 34)
+layout_mode = 2
+theme = ExtResource("4_r7mv3")
+text = "Music"
+
+[node name="MusicVolume" type="HSlider" parent="UI/Control/Selectors/Margins/Volume/Music Container"]
+custom_minimum_size = Vector2(200, 34)
+layout_mode = 2
+size_flags_horizontal = 8
+max_value = 1.0
+step = 0.05
+value = 0.5
+
+[node name="MusicVolumeLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/Music Container"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 34)
+layout_mode = 2
+theme = ExtResource("4_r7mv3")
+bbcode_enabled = true
+text = "[right]50%"
+
+[node name="SFXContainer" type="HBoxContainer" parent="UI/Control/Selectors/Margins/Volume"]
+layout_mode = 2
+
+[node name="SFXLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/SFXContainer"]
+custom_minimum_size = Vector2(180, 34)
+layout_mode = 2
+theme = ExtResource("4_r7mv3")
+text = "Sound Effects"
+
+[node name="SFXVolume" type="HSlider" parent="UI/Control/Selectors/Margins/Volume/SFXContainer"]
+custom_minimum_size = Vector2(200, 34)
+layout_mode = 2
+size_flags_horizontal = 8
+max_value = 1.0
+step = 0.05
+value = 0.5
+
+[node name="SFXVolumeLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/SFXContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 34)
+layout_mode = 2
+theme = ExtResource("4_r7mv3")
+bbcode_enabled = true
+text = "[right]50%"
+
+[node name="UIContainer" type="HBoxContainer" parent="UI/Control/Selectors/Margins/Volume"]
+layout_mode = 2
+
+[node name="UILabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/UIContainer"]
+custom_minimum_size = Vector2(180, 34)
+layout_mode = 2
+theme = ExtResource("4_r7mv3")
+text = "UI Volume"
+
+[node name="UIVolume" type="HSlider" parent="UI/Control/Selectors/Margins/Volume/UIContainer"]
+custom_minimum_size = Vector2(200, 34)
+layout_mode = 2
+size_flags_horizontal = 8
+max_value = 1.0
+step = 0.05
+value = 0.6
+
+[node name="UIVolumeLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/UIContainer"]
+custom_minimum_size = Vector2(90, 34)
+layout_mode = 2
+theme = ExtResource("4_r7mv3")
+bbcode_enabled = true
+text = "[right]60%"
+
+[node name="DialogueContainer" type="HBoxContainer" parent="UI/Control/Selectors/Margins/Volume"]
+layout_mode = 2
+
+[node name="DialogueLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/DialogueContainer"]
+custom_minimum_size = Vector2(180, 34)
+layout_mode = 2
+theme = ExtResource("4_r7mv3")
+text = "Dialogue"
+
+[node name="DialogueVolume" type="HSlider" parent="UI/Control/Selectors/Margins/Volume/DialogueContainer"]
+custom_minimum_size = Vector2(200, 34)
+layout_mode = 2
+size_flags_horizontal = 8
+max_value = 1.0
+step = 0.05
+value = 0.75
+
+[node name="DialogueVolumeLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/DialogueContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 34)
+layout_mode = 2
+theme = ExtResource("4_r7mv3")
+bbcode_enabled = true
+text = "[right]75%"
+
+[node name="Back" type="Button" parent="UI/Control/Selectors/Margins/Volume"]
+layout_mode = 2
+theme = ExtResource("4_r7mv3")
+text = "Back"
+alignment = 0
+
+[connection signal="pressed" from="UI/Control/Selectors/Margins/Main/Play" to="UI/Control/Selectors" method="_on_play_pressed"]
+[connection signal="pressed" from="UI/Control/Selectors/Margins/Main/Settings" to="UI/Control/Selectors" method="_on_settings_pressed"]
+[connection signal="pressed" from="UI/Control/Selectors/Margins/Main/Exit" to="UI/Control/Selectors" method="_on_exit_pressed"]
+[connection signal="pressed" from="UI/Control/Selectors/Margins/Settings/Controls" to="UI/Control/Selectors" method="_on_controls_pressed"]
+[connection signal="pressed" from="UI/Control/Selectors/Margins/Settings/Volume" to="UI/Control/Selectors" method="_on_volume_pressed"]
+[connection signal="pressed" from="UI/Control/Selectors/Margins/Settings/Back" to="UI/Control/Selectors" method="_on_back_pressed"]
+[connection signal="pressed" from="UI/Control/Selectors/Margins/Controls/Back" to="UI/Control/Selectors" method="_on_back_pressed"]
+[connection signal="changed" from="UI/Control/Selectors/Margins/Volume/MasterContainer/MasterVolume" to="UI/Control/Selectors" method="_on_master_volume_changed"]
+[connection signal="changed" from="UI/Control/Selectors/Margins/Volume/Music Container/MusicVolume" to="UI/Control/Selectors" method="_on_music_volume_changed"]
+[connection signal="changed" from="UI/Control/Selectors/Margins/Volume/SFXContainer/SFXVolume" to="UI/Control/Selectors" method="_on_sfx_volume_changed"]
+[connection signal="changed" from="UI/Control/Selectors/Margins/Volume/UIContainer/UIVolume" to="UI/Control/Selectors" method="_on_ui_volume_changed"]
+[connection signal="changed" from="UI/Control/Selectors/Margins/Volume/DialogueContainer/DialogueVolume" to="UI/Control/Selectors" method="_on_dialogue_volume_changed"]
+[connection signal="pressed" from="UI/Control/Selectors/Margins/Volume/Back" to="UI/Control/Selectors" method="_on_back_pressed"]
