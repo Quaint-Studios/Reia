@@ -30,10 +30,12 @@ func _init() -> void:
 	add_child(sound_effects)
 	add_child(ui_sound_effects)
 	add_child(music)
+	add_child(dialogue)
 
 	self.sound_process_mode = PROCESS_MODE_PAUSABLE
 	self.ui_sound_process_mode = PROCESS_MODE_ALWAYS
 	self.music_process_mode = PROCESS_MODE_ALWAYS
+	self.dialogue_process_mode = PROCESS_MODE_ALWAYS
 
 
 func get_sound_volume() -> float:
@@ -129,6 +131,47 @@ func _show_shared_bus_warning() -> void:
 	if music.bus == sound_effects.bus or music.bus == ui_sound_effects.bus:
 		push_warning("Both music and sounds are using the same bus: %s" % music.bus)
 
+
+### Custom Code goes here to make it easier to re-add after updates
+var dialogue_process_mode: ProcessMode:
+	set(value):
+		dialogue.process_mode = value
+	get:
+		return dialogue.process_mode
+
+var dialogue: MusicPlayer = MusicPlayer.new(["Dialogue"], 2)
+
+func get_dialogue_volume() -> float:
+	return db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(music.bus)))
+
+
+func set_dialogue_volume(volume_between_0_and_1: float) -> void:
+	_show_shared_bus_warning()
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(music.bus), linear_to_db(volume_between_0_and_1))
+
+
+func play_dialogue(resource: AudioStream, crossfade_duration: float = 0.0, override_bus: String = "") -> AudioStreamPlayer:
+	return music.play(resource, 0.0, crossfade_duration, override_bus)
+
+
+func play_dialogue_at_volume(resource: AudioStream, volume: float = 0.0, crossfade_duration: float = 0.0, override_bus: String = "") -> AudioStreamPlayer:
+	return music.play(resource, volume, crossfade_duration, override_bus)
+
+
+func get_dialogue_track_history() -> Array:
+	return music.track_history
+
+
+func get_last_played_dialogue_track() -> String:
+	return music.track_history[0]
+
+
+func is_dialogue_playing(resource: AudioStream = null) -> bool:
+	return music.is_playing(resource)
+
+
+func is_dialogue_track_playing(resource_path: String) -> bool:
+	return music.is_track_playing(resource_path)
 
 
 func get_currently_playing_dialogue() -> Array:
