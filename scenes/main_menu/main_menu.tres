@@ -1,0 +1,38 @@
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://cvudtn0hd6gap"]
+
+[ext_resource type="FontFile" uid="uid://cvl0migkjbg2m" path="res://fonts/Nunito/static/Nunito-Black.ttf" id="1_28yde"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_488ou"]
+bg_color = Color(0, 0, 0, 0)
+anti_aliasing_size = 1.137
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_y1syc"]
+bg_color = Color(0, 0, 0, 0)
+anti_aliasing_size = 1.137
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_01rt3"]
+bg_color = Color(0, 0, 0, 0)
+anti_aliasing_size = 1.137
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6w6lq"]
+bg_color = Color(0, 0, 0, 0)
+anti_aliasing_size = 3.327
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yqfja"]
+anti_aliasing_size = 1.137
+
+[resource]
+default_font = ExtResource("1_28yde")
+default_font_size = 24
+Button/colors/font_color = Color(0.972549, 0.972549, 0.972549, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(0.94902, 0.94902, 0.94902, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(1, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/styles/disabled = SubResource("StyleBoxFlat_488ou")
+Button/styles/focus = SubResource("StyleBoxFlat_y1syc")
+Button/styles/hover = SubResource("StyleBoxFlat_01rt3")
+Button/styles/normal = SubResource("StyleBoxFlat_6w6lq")
+Button/styles/pressed = SubResource("StyleBoxFlat_yqfja")
