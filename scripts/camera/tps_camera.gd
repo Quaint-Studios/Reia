@@ -12,7 +12,7 @@ func _ready():
 	pass
 
 func _physics_process(delta: float):
-	var tween = create_tween().bind_node(self).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_LINEAR)
+	# var tween = create_tween().bind_node(self).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_LINEAR)
 	global_position = follow_point.global_position
 	# tween.tween_property(self, "global_position", follow_point.global_position, 0.25)
 
