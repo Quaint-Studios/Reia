@@ -31,7 +31,7 @@ static func toggle_pause():
 	update_fps()
 
 static func update_fps():
-	var max_fps = Constants.UI_DEFAULT_FPS if current_ui == UI_TYPES.PLAY else Constants.GAME_DEFAULT_FPS
+	var max_fps = Constants.GAME_DEFAULT_FPS if current_ui == UI_TYPES.PLAY else Constants.UI_DEFAULT_FPS
 	Engine.set_max_fps(max_fps)
 
 static func setup_sound_manager():
