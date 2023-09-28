@@ -10,11 +10,11 @@ func _ready():
 
 func _prepare_sound():
 	SoundManager.set_sound_volume(0.5)
-	#%SoundVolume.text = "50%"
 	SoundManager.set_music_volume(0.5)
-	#%MusicVolume.text = "50%"
 
 	SoundManager.play_music(menu_music, 1.0)
+
+	update_volumes()
 
 ###
 ### Main Functions
@@ -57,20 +57,35 @@ func disable_all_roots():
 	%Volume.visible = false
 
 
-func _on_master_volume_changed(value):
-	pass # Replace with function body.
+func _on_master_volume_changed(value: float):
+	SoundManager.set_master_volume(value)
+	update_volumes()
+func _on_music_volume_changed(value: float):
+	SoundManager.set_music_volume(value)
+	update_volumes()
+func _on_sfx_volume_changed(value: float):
+	SoundManager.set_sound_volume(value)
+	update_volumes()
+func _on_ui_volume_changed(value: float):
+	SoundManager.set_ui_sound_volume(value)
+	update_volumes()
+func _on_dialogue_volume_changed(value: float):
+	SoundManager.set_dialogue_volume(value)
+	update_volumes()
 
+func volume_to_perc(vol: float) -> String:
+	var perc: int = clamp(int(vol * 100), 0, 100)
+	return str(perc) + "%"
 
-func _on_music_volume_changed(value):
-	SoundManager.set_music_volume(linear_to_db(value))
-	pass # Replace with function body.
+func update_volumes():
+	%MasterVolume.value = SoundManager.get_master_volume()
+	%MasterVolumeLabel.text = volume_to_perc(SoundManager.get_master_volume())
+	%MusicVolume.value = SoundManager.get_music_volume()
+	%MusicVolumeLabel.text = volume_to_perc(SoundManager.get_music_volume())
+	%SFXVolume.value = SoundManager.get_sound_volume()
+	%SFXVolumeLabel.text = volume_to_perc(SoundManager.get_sound_volume())
+	%UIVolume.value = SoundManager.get_ui_sound_volume()
+	%UIVolumeLabel.text = volume_to_perc(SoundManager.get_ui_sound_volume())
+	%DialogueVolume.value = SoundManager.get_dialogue_volume()
+	%DialogueVolumeLabel.text = volume_to_perc(SoundManager.get_dialogue_volume())
 
-func _on_sfx_volume_changed(value):
-	SoundManager.set_sound_volume(linear_to_db(value))
-	pass # Replace with function body.
-
-func _on_ui_volume_changed() -> void:
-	pass # Replace with function body.
-
-func _on_dialogue_volume_changed(value):
-	pass # Replace with function body.
