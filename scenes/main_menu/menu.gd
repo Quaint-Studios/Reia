@@ -20,8 +20,7 @@ func _prepare_sound():
 ### Main Functions
 ###
 func _on_play_pressed():
-	if GameManager.is_in_ui:
-		GameManager.toggle_is_in_ui()
+	GameManager.current_ui = GameManager.UI_TYPES.PLAY
 	get_tree().change_scene_to_file(SceneSelector.REIA)
 
 func _on_settings_pressed():
