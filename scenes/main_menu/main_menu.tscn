@@ -126,6 +126,7 @@ alignment = 0
 
 [node name="Volume" type="VBoxContainer" parent="UI/Control/Selectors/Margins"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 16
 
@@ -151,7 +152,7 @@ custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
 size_flags_horizontal = 8
 max_value = 1.0
-step = 0.05
+step = 0.01
 value = 1.0
 
 [node name="MasterVolumeLabel" type="Label" parent="UI/Control/Selectors/Margins/Volume/MasterContainer"]
@@ -177,7 +178,7 @@ custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
 size_flags_horizontal = 8
 max_value = 1.0
-step = 0.05
+step = 0.01
 value = 0.5
 
 [node name="MusicVolumeLabel" type="Label" parent="UI/Control/Selectors/Margins/Volume/Music Container"]
@@ -203,7 +204,7 @@ custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
 size_flags_horizontal = 8
 max_value = 1.0
-step = 0.05
+step = 0.01
 value = 0.5
 
 [node name="SFXVolumeLabel" type="Label" parent="UI/Control/Selectors/Margins/Volume/SFXContainer"]
@@ -229,7 +230,7 @@ custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
 size_flags_horizontal = 8
 max_value = 1.0
-step = 0.05
+step = 0.01
 value = 0.6
 
 [node name="UIVolumeLabel" type="Label" parent="UI/Control/Selectors/Margins/Volume/UIContainer"]
@@ -255,7 +256,7 @@ custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
 size_flags_horizontal = 8
 max_value = 1.0
-step = 0.05
+step = 0.01
 value = 0.75
 
 [node name="DialogueVolumeLabel" type="Label" parent="UI/Control/Selectors/Margins/Volume/DialogueContainer"]
