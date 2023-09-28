@@ -126,7 +126,6 @@ alignment = 0
 
 [node name="Volume" type="VBoxContainer" parent="UI/Control/Selectors/Margins"]
 unique_name_in_owner = true
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 16
 
@@ -147,6 +146,7 @@ theme = ExtResource("4_r7mv3")
 text = "Master"
 
 [node name="MasterVolume" type="HSlider" parent="UI/Control/Selectors/Margins/Volume/MasterContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -154,13 +154,13 @@ max_value = 1.0
 step = 0.05
 value = 1.0
 
-[node name="MasterVolumeLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/MasterContainer"]
+[node name="MasterVolumeLabel" type="Label" parent="UI/Control/Selectors/Margins/Volume/MasterContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 34)
 layout_mode = 2
 theme = ExtResource("4_r7mv3")
-bbcode_enabled = true
-text = "[right]100%"
+text = "100%"
+horizontal_alignment = 2
 
 [node name="Music Container" type="HBoxContainer" parent="UI/Control/Selectors/Margins/Volume"]
 layout_mode = 2
@@ -172,6 +172,7 @@ theme = ExtResource("4_r7mv3")
 text = "Music"
 
 [node name="MusicVolume" type="HSlider" parent="UI/Control/Selectors/Margins/Volume/Music Container"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -179,13 +180,13 @@ max_value = 1.0
 step = 0.05
 value = 0.5
 
-[node name="MusicVolumeLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/Music Container"]
+[node name="MusicVolumeLabel" type="Label" parent="UI/Control/Selectors/Margins/Volume/Music Container"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 34)
 layout_mode = 2
 theme = ExtResource("4_r7mv3")
-bbcode_enabled = true
-text = "[right]50%"
+text = "50%"
+horizontal_alignment = 2
 
 [node name="SFXContainer" type="HBoxContainer" parent="UI/Control/Selectors/Margins/Volume"]
 layout_mode = 2
@@ -197,6 +198,7 @@ theme = ExtResource("4_r7mv3")
 text = "Sound Effects"
 
 [node name="SFXVolume" type="HSlider" parent="UI/Control/Selectors/Margins/Volume/SFXContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -204,13 +206,13 @@ max_value = 1.0
 step = 0.05
 value = 0.5
 
-[node name="SFXVolumeLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/SFXContainer"]
+[node name="SFXVolumeLabel" type="Label" parent="UI/Control/Selectors/Margins/Volume/SFXContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 34)
 layout_mode = 2
 theme = ExtResource("4_r7mv3")
-bbcode_enabled = true
-text = "[right]50%"
+text = "50%"
+horizontal_alignment = 2
 
 [node name="UIContainer" type="HBoxContainer" parent="UI/Control/Selectors/Margins/Volume"]
 layout_mode = 2
@@ -222,6 +224,7 @@ theme = ExtResource("4_r7mv3")
 text = "UI Volume"
 
 [node name="UIVolume" type="HSlider" parent="UI/Control/Selectors/Margins/Volume/UIContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -229,12 +232,13 @@ max_value = 1.0
 step = 0.05
 value = 0.6
 
-[node name="UIVolumeLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/UIContainer"]
+[node name="UIVolumeLabel" type="Label" parent="UI/Control/Selectors/Margins/Volume/UIContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 34)
 layout_mode = 2
 theme = ExtResource("4_r7mv3")
-bbcode_enabled = true
-text = "[right]60%"
+text = "60%"
+horizontal_alignment = 2
 
 [node name="DialogueContainer" type="HBoxContainer" parent="UI/Control/Selectors/Margins/Volume"]
 layout_mode = 2
@@ -246,6 +250,7 @@ theme = ExtResource("4_r7mv3")
 text = "Dialogue"
 
 [node name="DialogueVolume" type="HSlider" parent="UI/Control/Selectors/Margins/Volume/DialogueContainer"]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
 size_flags_horizontal = 8
@@ -253,13 +258,13 @@ max_value = 1.0
 step = 0.05
 value = 0.75
 
-[node name="DialogueVolumeLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/DialogueContainer"]
+[node name="DialogueVolumeLabel" type="Label" parent="UI/Control/Selectors/Margins/Volume/DialogueContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 34)
 layout_mode = 2
 theme = ExtResource("4_r7mv3")
-bbcode_enabled = true
-text = "[right]75%"
+text = "75%"
+horizontal_alignment = 2
 
 [node name="Back" type="Button" parent="UI/Control/Selectors/Margins/Volume"]
 layout_mode = 2
@@ -274,9 +279,9 @@ alignment = 0
 [connection signal="pressed" from="UI/Control/Selectors/Margins/Settings/Volume" to="UI/Control/Selectors" method="_on_volume_pressed"]
 [connection signal="pressed" from="UI/Control/Selectors/Margins/Settings/Back" to="UI/Control/Selectors" method="_on_back_pressed"]
 [connection signal="pressed" from="UI/Control/Selectors/Margins/Controls/Back" to="UI/Control/Selectors" method="_on_back_pressed"]
-[connection signal="changed" from="UI/Control/Selectors/Margins/Volume/MasterContainer/MasterVolume" to="UI/Control/Selectors" method="_on_master_volume_changed"]
-[connection signal="changed" from="UI/Control/Selectors/Margins/Volume/Music Container/MusicVolume" to="UI/Control/Selectors" method="_on_music_volume_changed"]
-[connection signal="changed" from="UI/Control/Selectors/Margins/Volume/SFXContainer/SFXVolume" to="UI/Control/Selectors" method="_on_sfx_volume_changed"]
-[connection signal="changed" from="UI/Control/Selectors/Margins/Volume/UIContainer/UIVolume" to="UI/Control/Selectors" method="_on_ui_volume_changed"]
-[connection signal="changed" from="UI/Control/Selectors/Margins/Volume/DialogueContainer/DialogueVolume" to="UI/Control/Selectors" method="_on_dialogue_volume_changed"]
+[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/MasterContainer/MasterVolume" to="UI/Control/Selectors" method="_on_master_volume_changed"]
+[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/Music Container/MusicVolume" to="UI/Control/Selectors" method="_on_music_volume_changed"]
+[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/SFXContainer/SFXVolume" to="UI/Control/Selectors" method="_on_sfx_volume_changed"]
+[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/UIContainer/UIVolume" to="UI/Control/Selectors" method="_on_ui_volume_changed"]
+[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/DialogueContainer/DialogueVolume" to="UI/Control/Selectors" method="_on_dialogue_volume_changed"]
 [connection signal="pressed" from="UI/Control/Selectors/Margins/Volume/Back" to="UI/Control/Selectors" method="_on_back_pressed"]
