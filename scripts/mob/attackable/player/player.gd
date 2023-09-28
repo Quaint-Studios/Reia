@@ -18,17 +18,6 @@ func _process(_delta):
 	if position.y <= -10: # handle falling off the map for now
 		position.y = 1
 
-func _input(_event: InputEvent):
-	if Input.is_action_just_pressed("quit"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		print("quit")
-
-	if Input.is_action_just_pressed("click"):
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_VISIBLE:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		print("click")
-
 func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseButton:
 		print("Mouse Click/Unclick at: ", event.position)
@@ -43,13 +32,15 @@ func _physics_process(delta: float):
 		velocity.y -= gravity * delta
 
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		handle_inputs()
+		_handle_inputs()
 
 	move_and_slide()
 
-func handle_inputs():
+func _handle_inputs():
 	handle_attack()
+	handle_movement()
 
+func handle_movement():
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY

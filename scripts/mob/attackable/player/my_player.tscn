@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://bm7q7lxahnhl4"]
+[gd_scene load_steps=5 format=3 uid="uid://bm7q7lxahnhl4"]
 
 [ext_resource type="Script" path="res://scripts/mob/attackable/player/player.gd" id="1_fl81d"]
 [ext_resource type="PackedScene" uid="uid://c3rorlipfs0aj" path="res://assets/characters/player/female_model.glb" id="2_c3kj5"]
 [ext_resource type="Script" path="res://scripts/camera/tps_camera.gd" id="3_0ip71"]
+[ext_resource type="PackedScene" uid="uid://dud8gf6n8gvk" path="res://scripts/inventory/ui/player_inventory.tscn" id="4_tvn1c"]
 
 [node name="MyPlayer" type="CharacterBody3D"]
 script = ExtResource("1_fl81d")
@@ -35,3 +36,10 @@ follow_point = NodePath("../CameraPoints/FollowPoint")
 [node name="Camera" type="Camera3D" parent="CameraPivot"]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 2)
 fov = 70.0
+
+[node name="UI" type="Node" parent="."]
+
+[node name="PlayerInventory" parent="UI" instance=ExtResource("4_tvn1c")]
+visible = false
+essence = 0
+ui_shown = false
