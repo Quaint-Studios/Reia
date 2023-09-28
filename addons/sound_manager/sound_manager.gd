@@ -49,7 +49,6 @@ func get_ui_sound_volume() -> float:
 func set_sound_volume(volume_between_0_and_1) -> void:
 	_show_shared_bus_warning()
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(sound_effects.bus), linear_to_db(volume_between_0_and_1))
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(ui_sound_effects.bus), linear_to_db(volume_between_0_and_1))
 
 
 func play_sound(resource: AudioStream, override_bus: String = "") -> AudioStreamPlayer:
@@ -72,7 +71,6 @@ func get_music_volume() -> float:
 
 
 func set_music_volume(volume_between_0_and_1: float) -> void:
-	_show_shared_bus_warning()
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(music.bus), linear_to_db(volume_between_0_and_1))
 
 
@@ -133,6 +131,15 @@ func _show_shared_bus_warning() -> void:
 
 
 ### Custom Code goes here to make it easier to re-add after updates
+func get_master_volume() -> float:
+	return db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))
+
+func set_master_volume(volume_between_0_and_1) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(volume_between_0_and_1))
+
+func set_ui_sound_volume(volume_between_0_and_1) -> void:
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(ui_sound_effects.bus), linear_to_db(volume_between_0_and_1))
+
 var dialogue_process_mode: ProcessMode:
 	set(value):
 		dialogue.process_mode = value
@@ -142,36 +149,35 @@ var dialogue_process_mode: ProcessMode:
 var dialogue: MusicPlayer = MusicPlayer.new(["Dialogue"], 2)
 
 func get_dialogue_volume() -> float:
-	return db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(music.bus)))
+	return db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(dialogue.bus)))
 
 
 func set_dialogue_volume(volume_between_0_and_1: float) -> void:
-	_show_shared_bus_warning()
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(music.bus), linear_to_db(volume_between_0_and_1))
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(dialogue.bus), linear_to_db(volume_between_0_and_1))
 
 
 func play_dialogue(resource: AudioStream, crossfade_duration: float = 0.0, override_bus: String = "") -> AudioStreamPlayer:
-	return music.play(resource, 0.0, crossfade_duration, override_bus)
+	return dialogue.play(resource, 0.0, crossfade_duration, override_bus)
 
 
 func play_dialogue_at_volume(resource: AudioStream, volume: float = 0.0, crossfade_duration: float = 0.0, override_bus: String = "") -> AudioStreamPlayer:
-	return music.play(resource, volume, crossfade_duration, override_bus)
+	return dialogue.play(resource, volume, crossfade_duration, override_bus)
 
 
 func get_dialogue_track_history() -> Array:
-	return music.track_history
+	return dialogue.track_history
 
 
 func get_last_played_dialogue_track() -> String:
-	return music.track_history[0]
+	return dialogue.track_history[0]
 
 
 func is_dialogue_playing(resource: AudioStream = null) -> bool:
-	return music.is_playing(resource)
+	return dialogue.is_playing(resource)
 
 
 func is_dialogue_track_playing(resource_path: String) -> bool:
-	return music.is_track_playing(resource_path)
+	return dialogue.is_track_playing(resource_path)
 
 
 func get_currently_playing_dialogue() -> Array:
