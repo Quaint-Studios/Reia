@@ -18,13 +18,24 @@ func _ready():
 	setup_ui()
 
 func _input(event: InputEvent):
-	if event.is_action_pressed("inventory") || event.is_action_pressed("quit"):
-		toggle_inventory()
+	# TODO: You'll eventually run into an issue where you need to hide all UI.
+	if GameManager.current_ui == GameManager.UI_TYPES.PLAY:
+		if event.is_action_pressed("inventory"):
+			show_inventory_ui()
+		return
 
-func toggle_inventory():
-	self.visible = !self.visible
-	GameManager.current_ui = GameManager.UI_TYPES.INVENTORY if self.visible else GameManager.UI_TYPES.PLAY
-	GameManager.update_fps()
+	if GameManager.current_ui == GameManager.UI_TYPES.INVENTORY:
+		if event.is_action_pressed("inventory") || event.is_action_pressed("quit"):
+			hide_inventory_ui()
+		return
+
+func show_inventory_ui():
+	GameManager.current_ui = GameManager.UI_TYPES.INVENTORY
+	self.visible = true
+
+func hide_inventory_ui():
+	GameManager.current_ui = GameManager.UI_TYPES.PLAY
+	self.visible = false
 
 func create_inventory():
 	if inventory != null:
