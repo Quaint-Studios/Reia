@@ -1,6 +1,18 @@
 class_name GameManager extends Node
 
-static var current_ui: UI_TYPES = UI_TYPES.MAIN_MENU
+static var current_ui: UI_TYPES = UI_TYPES.MAIN_MENU :
+	set(value):
+		current_ui = _on_current_ui_change(value)
+
+		match value:
+			UI_TYPES.PLAY:
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			_:
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		update_fps()
+	get:
+		return current_ui
+static func _on_current_ui_change(value: UI_TYPES) -> UI_TYPES: return value
 enum UI_TYPES { PLAY, PAUSE, MAIN_MENU, INVENTORY }
 
 func _ready():
@@ -28,10 +40,10 @@ static func toggle_pause():
 			current_ui = UI_TYPES.PAUSE
 		UI_TYPES.PAUSE:
 			current_ui = UI_TYPES.PLAY
-	update_fps()
 
 static func update_fps():
 	var max_fps = Constants.GAME_DEFAULT_FPS if current_ui == UI_TYPES.PLAY else Constants.UI_DEFAULT_FPS
+	print("FPS: ", max_fps)
 	Engine.set_max_fps(max_fps)
 
 static func setup_sound_manager():
