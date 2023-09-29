@@ -36,14 +36,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Background" type="ColorRect" parent="Content"]
 material = SubResource("ShaderMaterial_2aahi")
 layout_mode = 2
+mouse_filter = 2
 color = Color(1, 0.14902, 1, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="Content"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_top = 77
 
 [node name="Panel" type="Panel" parent="."]
@@ -52,6 +55,7 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 grow_horizontal = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kavop")
 metadata/_edit_lock_ = true
 
@@ -62,18 +66,21 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 77.0
 grow_horizontal = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 24
 theme_override_constants/margin_right = 24
 
 [node name="StartContainer" type="HBoxContainer" parent="Panel/Header"]
 clip_contents = true
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 14
 
 [node name="TextureRect" type="TextureRect" parent="Panel/Header/StartContainer"]
 modulate = Color(0.741176, 0.647059, 0.45098, 1)
 custom_minimum_size = Vector2(67, 67)
 layout_mode = 2
+mouse_filter = 2
 texture = SubResource("AtlasTexture_07wub")
 expand_mode = 1
 stretch_mode = 5
@@ -87,17 +94,21 @@ text = "Inventory"
 
 [node name="CenterContainer" type="CenterContainer" parent="Panel/Header"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel/Header/CenterContainer"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="HeaderContainer" type="HBoxContainer" parent="Panel/Header/CenterContainer/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 14
 
 [node name="EndContainer" type="BoxContainer" parent="Panel/Header"]
 layout_mode = 2
+mouse_filter = 2
 alignment = 2
 
 [node name="Label" type="Label" parent="Panel/Header/EndContainer"]
@@ -121,6 +132,7 @@ vertical_alignment = 1
 [node name="TextureRect" type="TextureRect" parent="Panel/Header/EndContainer"]
 custom_minimum_size = Vector2(67, 67)
 layout_mode = 2
+mouse_filter = 2
 texture = SubResource("AtlasTexture_07wub")
 expand_mode = 1
 stretch_mode = 5
@@ -132,9 +144,12 @@ anchors_preset = 10
 anchor_right = 1.0
 offset_bottom = 81.5
 grow_horizontal = 2
+mouse_filter = 2
 
 [node name="IndicatorMargin" type="MarginContainer" parent="Panel/IndicatorContainer"]
+unique_name_in_owner = true
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 70
 theme_override_constants/margin_right = 406
@@ -142,6 +157,7 @@ theme_override_constants/margin_right = 406
 [node name="Indicator" type="Control" parent="Panel/IndicatorContainer/IndicatorMargin"]
 custom_minimum_size = Vector2(67, 11.5)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Diamond" type="ColorRect" parent="Panel/IndicatorContainer/IndicatorMargin/Indicator"]
 modulate = Color(0.823529, 0.737255, 0.552941, 1)
@@ -160,6 +176,7 @@ grow_horizontal = 2
 grow_vertical = 2
 rotation = 0.785398
 pivot_offset = Vector2(4, 4)
+mouse_filter = 2
 metadata/_edit_lock_ = true
 
 [node name="Line" type="ColorRect" parent="Panel/IndicatorContainer/IndicatorMargin/Indicator"]
@@ -177,4 +194,5 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 pivot_offset = Vector2(33, 1)
+mouse_filter = 2
 metadata/_edit_lock_ = true

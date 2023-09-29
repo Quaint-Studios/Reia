@@ -11,6 +11,7 @@ region = Rect2(0, 128, 128, 128)
 custom_minimum_size = Vector2(67, 67)
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 2
 
 [node name="Button" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -45,6 +46,7 @@ grow_vertical = 2
 rotation = 0.785398
 scale = Vector2(0.8, 0.8)
 pivot_offset = Vector2(33, 33)
+mouse_filter = 2
 theme = ExtResource("1_u1gh1")
 
 [node name="Icon" type="TextureRect" parent="."]
@@ -61,6 +63,7 @@ offset_right = 33.5
 offset_bottom = 32.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 texture = SubResource("AtlasTexture_oxfm4")
 expand_mode = 1
 stretch_mode = 5
