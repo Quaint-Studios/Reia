@@ -73,21 +73,34 @@ func setup_header_tabs():
 		HeaderTab.new("Materials", Vector2(0, 1))
 	]
 
-	for tab in header_tabs:
+	for i in header_tabs.size():
+		var tab = header_tabs[i]
+
 		var node = header_tab.instantiate() as Control
+		node.name = tab.name
+		if tab.name == starting_tab:
+			update_indicator_pos(i)
+
 		var btn: Button = node.get_node("Button") as Button
-		var bg: Panel = node.get_node("SelectedBG") as Panel
 		var icon: TextureRect = node.get_node("Icon") as TextureRect
 
 		btn.mouse_entered.connect(_on_btn_mouse_entered.bind(btn))
-		btn.mouse_exited.connect(_on_btn_mouse_entered.bind(btn))
-		btn.modulate = Color("ffffff", 1)
+		btn.mouse_exited.connect(_on_btn_mouse_exited.bind(btn))
+		btn.pressed.connect(_on_btn_pressed.bind(btn))
 
-		node.name = tab.name
 		var atlas = AtlasTexture.new()
 		atlas.set_atlas(ui_header_atlas)
+		atlas.region = Rect2(
+			Constants.DEFAULT_ATLAS_SIZE * tab.pos.x,
+			Constants.DEFAULT_ATLAS_SIZE * tab.pos.y,
+			Constants.DEFAULT_ATLAS_SIZE,
+			Constants.DEFAULT_ATLAS_SIZE
+		)
+		icon.texture = atlas
 
 		%HeaderContainer.add_child(node)
+
+
 
 func handle_tab_style(node: Control):
 	var btn: Button = node.get_node("Button") as Button
@@ -104,13 +117,16 @@ func handle_tab_style(node: Control):
 		bg.modulate.a = 0
 		icon.modulate = Color(Constants.INVENTORY_FG_COLOR)
 
+func update_indicator_pos(i: int):
+	var margin = %IndicatorMargin as MarginContainer
+	margin.add_theme_constant_override("margin_right", Constants.INVENTORY_SELECTOR_POS(i))
+
 func _on_btn_pressed(btn: Button):
-	for i in header_tab_nodes.size():
-		var tab = header_tab_nodes[i]
+	for i in %HeaderContainer.get_child_count():
+		var tab = %HeaderContainer.get_child(i)
 		if btn.get_parent() == tab:
 			tab.set_meta("selected", true)
-			var margin = %IndicatorMargin as MarginContainer
-			margin.add_theme_constant_override("margin_right", Constants.INVENTORY_SELECTOR_POS(i))
+			update_indicator_pos(i)
 		else:
 			tab.set_meta("selected", false)
 		handle_tab_style(tab)
