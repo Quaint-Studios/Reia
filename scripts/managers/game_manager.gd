@@ -18,6 +18,7 @@ enum UI_TYPES { PLAY, PAUSE, MAIN_MENU, INVENTORY }
 func _ready():
 	GameManager.update_fps()
 	GameManager.setup_sound_manager()
+	GameManager.set_window_size()
 
 func _input(_event: InputEvent):
 	# Let the UI handle the rest
@@ -52,3 +53,5 @@ static func setup_sound_manager():
 	SoundManager.set_default_ui_sound_bus("Interface")
 	SoundManager.set_default_dialogue_bus("Dialogue")
 
+static func set_window_size():
+	DisplayServer.window_set_min_size(Vector2i(1152, 648))
