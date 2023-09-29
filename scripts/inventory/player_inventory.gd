@@ -6,12 +6,18 @@ class_name PlayerInventory extends Control
 
 @export var ui_shown: bool = false
 
+var current_tab = Tab.WEAPONS
+
 # Resources
 @export var ui_header_atlas: CompressedTexture2D
 @export var header_tab: PackedScene
 
 # Cache
 var header_tab_nodes: Array[Control]
+
+enum Tab { WEAPONS, SOULSTONES, CONSUMABLES, QUEST_ITEMS, EQUIPMENT, MATERIALS }
+
+const starting_tab = Tab.WEAPONS
 
 func _ready():
 	create_inventory()
@@ -42,14 +48,15 @@ func create_inventory():
 		print("An inventory already exists here.")
 		return
 
+	var keys = Tab.keys()
 	inventory = Inventory.new()
 	(inventory
-		.add_category("Weapons")
-		.add_category("Soulstones")
-		.add_category("Consumables")
-		.add_category("Quest Items")
-		.add_category("Equipment")
-		.add_category("Materials"))
+		.add_category(keys[Tab.WEAPONS])
+		.add_category(keys[Tab.SOULSTONES])
+		.add_category(keys[Tab.CONSUMABLES])
+		.add_category(keys[Tab.QUEST_ITEMS])
+		.add_category(keys[Tab.EQUIPMENT])
+		.add_category(keys[Tab.MATERIALS]))
 
 
 func setup_ui():
@@ -64,13 +71,14 @@ class HeaderTab:
 		pos = _pos
 
 func setup_header_tabs():
+	var keys = Tab.keys()
 	var header_tabs: Array[HeaderTab] = [
-		HeaderTab.new("Weapons", Vector2(0, 1)),
-		HeaderTab.new("Soulstones", Vector2(0, 1)),
-		HeaderTab.new("Consumables",Vector2(0, 1)),
-		HeaderTab.new("Quest Items", Vector2(0, 1)),
-		HeaderTab.new("Equipment", Vector2(0, 1)),
-		HeaderTab.new("Materials", Vector2(0, 1))
+		HeaderTab.new(keys[Tab.WEAPONS], Vector2(0, 0)),
+		HeaderTab.new(keys[Tab.SOULSTONES], Vector2(0, 1)),
+		HeaderTab.new(keys[Tab.CONSUMABLES],Vector2(0, 1)),
+		HeaderTab.new(keys[Tab.QUEST_ITEMS], Vector2(0, 1)),
+		HeaderTab.new(keys[Tab.EQUIPMENT], Vector2(0, 1)),
+		HeaderTab.new(keys[Tab.MATERIALS], Vector2(0, 1))
 	]
 
 	for i in header_tabs.size():
