@@ -108,8 +108,6 @@ func setup_header_tabs():
 
 		%HeaderContainer.add_child(node)
 
-
-
 func handle_tab_style(node: Control):
 	var btn: Button = node.get_node("Button") as Button
 	var bg: Panel = node.get_node("SelectedBG") as Panel
