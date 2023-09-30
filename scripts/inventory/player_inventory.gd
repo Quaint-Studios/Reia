@@ -11,6 +11,7 @@ var current_tab = Tab.WEAPONS
 # Resources
 @export var ui_header_atlas: CompressedTexture2D
 @export var header_tab: PackedScene
+@export var inventory_item: PackedScene
 
 # Cache
 var header_tab_nodes: Array[Control]
@@ -58,9 +59,25 @@ func create_inventory():
 		.add_category(keys[Tab.EQUIPMENT])
 		.add_category(keys[Tab.MATERIALS]))
 
+	inventory.add_item(keys[Tab.WEAPONS], load("res://scripts/items/1000_wooden_sword.tres"))
 
 func setup_ui():
 	setup_header_tabs()
+	update_inventory_items()
+
+func update_inventory_items():
+	var keys = Tab.keys()
+	var items: Array[SlotData] = inventory.get_category(keys[current_tab]).slots
+
+	for slot in items:
+		var item = slot.item
+		var node = inventory_item.instantiate() as Control
+		var label = node.get_node("Label") as Label
+		label.text = item.name
+		var icon = node.get_node("Icon") as TextureRect
+		icon.texture
+
+		%CurrentItems.add_child(node)
 
 class HeaderTab:
 	var name: String
@@ -86,7 +103,7 @@ func setup_header_tabs():
 
 		var node = header_tab.instantiate() as Control
 		node.name = tab.name
-		if tab.name == starting_tab:
+		if tab.name == keys[starting_tab]:
 			update_indicator_pos(i)
 
 		var btn: Button = node.get_node("Button") as Button

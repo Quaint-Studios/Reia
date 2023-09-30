@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dud8gf6n8gvk"]
+[gd_scene load_steps=12 format=3 uid="uid://dud8gf6n8gvk"]
 
 [ext_resource type="Shader" path="res://shaders/screen_space/blur.gdshader" id="1_26j76"]
 [ext_resource type="Script" path="res://scripts/inventory/player_inventory.gd" id="1_42t1g"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://br4fw1ofxo8ib" path="res://assets/ui/ui_header_atlas.png" id="3_7rn8e"]
 [ext_resource type="FontFile" uid="uid://db8hdu6hj307i" path="res://fonts/Nunito/static/Nunito-ExtraBold.ttf" id="3_hyp47"]
 [ext_resource type="PackedScene" uid="uid://cgd2msq0xf0d8" path="res://scripts/inventory/ui/header_tab.tscn" id="4_bogme"]
+[ext_resource type="PackedScene" uid="uid://mnb51x6xo73p" path="res://scripts/inventory/ui/inventory_item.tscn" id="4_to4l4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2aahi"]
 shader = ExtResource("1_26j76")
@@ -13,6 +14,10 @@ shader_parameter/amount = 3.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kavop"]
 bg_color = Color(0.027451, 0.14902, 0.239216, 0.784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hl1u6"]
+bg_color = Color(0.984314, 0.980392, 0.960784, 1)
+corner_radius_bottom_right = 77
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_07wub"]
 atlas = ExtResource("3_7rn8e")
@@ -28,6 +33,7 @@ grow_vertical = 2
 script = ExtResource("1_42t1g")
 ui_header_atlas = ExtResource("3_7rn8e")
 header_tab = ExtResource("4_bogme")
+inventory_item = ExtResource("4_to4l4")
 
 [node name="Content" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -47,7 +53,15 @@ color = Color(1, 0.14902, 1, 1)
 [node name="MarginContainer" type="MarginContainer" parent="Content"]
 layout_mode = 2
 mouse_filter = 2
-theme_override_constants/margin_top = 77
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 101
+theme_override_constants/margin_right = 24
+
+[node name="CurrentItems" type="HFlowContainer" parent="Content/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
 
 [node name="Panel" type="Panel" parent="."]
 custom_minimum_size = Vector2(0, 77)
@@ -58,6 +72,18 @@ grow_horizontal = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_kavop")
 metadata/_edit_lock_ = true
+
+[node name="BGDesignContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 77.0
+grow_horizontal = 2
+
+[node name="Panel" type="Panel" parent="Panel/BGDesignContainer"]
+custom_minimum_size = Vector2(240, 77)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hl1u6")
 
 [node name="Header" type="MarginContainer" parent="Panel"]
 custom_minimum_size = Vector2(0, 77)
