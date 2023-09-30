@@ -41,5 +41,3 @@ fov = 70.0
 
 [node name="PlayerInventory" parent="UI" instance=ExtResource("4_tvn1c")]
 visible = false
-essence = 0
-ui_shown = false

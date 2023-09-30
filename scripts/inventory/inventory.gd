@@ -9,3 +9,23 @@ func add_category(name: String, slots: Array[SlotData] = []):
 
 	categories.append(new_category)
 	return self
+
+func add_item(category_name: String, item: ItemData):
+	var category: CategoryData = get_category(category_name)
+	category.add_item(item)
+	return self
+
+func get_category(category_name: String) -> CategoryData:
+	var filtered = categories.filter(func(elem): return elem.name == category_name)
+
+	# Category doesn't exist
+	if filtered.size() <= 0:
+		return
+
+	var category = filtered.front()
+
+	# Shouldn't happen, but be safe and end if null.
+	if category == null:
+		return
+
+	return category
