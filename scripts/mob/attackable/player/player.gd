@@ -11,6 +11,9 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera : Camera3D = $CameraPivot/Camera
 
+func set_anim(node_name: String, param_name: String):
+	%AnimationTree.set("parameters/" + node_name + "/transition_request", param_name)
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -42,13 +45,20 @@ func _handle_inputs():
 
 func handle_movement():
 	# Handle jump.
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
+	if is_on_floor():
+		if Input.is_action_just_pressed("jump"):
+			set_anim("in_air", "true")
+			velocity.y = JUMP_VELOCITY
+		else:
+			set_anim("in_air", "false")
 
 	# Get the input direction and handle movement.
 
 	var input_dir = Input.get_vector("left", "right", "forward", "back")
-	if(input_dir): print("input dir: ", input_dir)
+	if input_dir:
+		set_anim("movements", "run")
+	else:
+		set_anim("movements", "idle")
 	var direction = (camera.global_transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 	if direction:
 		velocity.x = direction.x * SPEED

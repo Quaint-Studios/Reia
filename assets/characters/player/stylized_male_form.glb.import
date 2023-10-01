@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://e3vmdnp5la4r"
-path="res://.godot/imported/stylized_male_form.glb-c2c52c6f35a792d96abf2818d5f279d6.scn"
+path="res://.godot/imported/stylized_male_form.glb-ff4148e762ddada95ab4138696e1b44e.scn"
 
 [deps]
 
-source_file="res://assets/world/unorganized/stylized_male_form.glb"
-dest_files=["res://.godot/imported/stylized_male_form.glb-c2c52c6f35a792d96abf2818d5f279d6.scn"]
+source_file="res://assets/characters/player/stylized_male_form.glb"
+dest_files=["res://.godot/imported/stylized_male_form.glb-ff4148e762ddada95ab4138696e1b44e.scn"]
 
 [params]
 
