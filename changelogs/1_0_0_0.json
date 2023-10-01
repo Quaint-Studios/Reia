@@ -1,0 +1,19 @@
+{
+	version: "1.0.0.0",
+	description: "This is the beginning!",
+	changes: {
+		add: [
+			""
+		],
+		remove: [
+			""
+		],
+		change: [
+			""
+		],
+		fix: [
+			""
+		]
+	}
+
+}
