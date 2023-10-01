@@ -25,9 +25,7 @@ light_data = ExtResource("1_6htgl")
 [node name="Players" type="Node" parent="."]
 
 [node name="MyPlayer" parent="Players" instance=ExtResource("3_m63h2")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.347, -0.754201, 2.465)
-collision_layer = 6
-collision_mask = 287
+transform = Transform3D(0.998268, 0, -0.0588184, 0, 1, 0, 0.0588184, 0, 0.998268, 1.26472, -0.756826, 3.37216)
 
 [node name="NPCs" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57933, -0.75015, 1.28274)
@@ -96,5 +94,3 @@ directional_shadow_pancake_size = 4.0
 environment = ExtResource("1_gkwf7")
 
 [node name="Managers" parent="." instance=ExtResource("12_n0e80")]
-
-[editable path="Players/MyPlayer"]
