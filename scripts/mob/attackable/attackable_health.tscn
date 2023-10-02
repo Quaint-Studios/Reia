@@ -1,7 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://bqpe013mgarni"]
+[gd_scene load_steps=6 format=3 uid="uid://bqpe013mgarni"]
 
 [ext_resource type="Script" path="res://scripts/mob/attackable/health_manager.gd" id="1_tkq40"]
 [ext_resource type="PackedScene" uid="uid://bb6pl2i42qjqf" path="res://scenes/ui/status_bars/health_bar.tscn" id="2_xssh5"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_nxwf2"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hllck"]
+resource_local_to_scene = true
+transparency = 1
+albedo_texture = SubResource("ViewportTexture_nxwf2")
+backlight = Color(0.701961, 0.701961, 0.701961, 1)
+billboard_mode = 2
+billboard_keep_scale = true
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_pf4sx"]
 viewport_path = NodePath("SubViewport")
@@ -30,6 +41,8 @@ scale = Vector2(0.438, 0.438)
 
 [node name="Sprite" type="Sprite3D" parent="."]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.0731125, 0)
+material_override = SubResource("StandardMaterial3D_hllck")
+gi_mode = 0
 texture = SubResource("ViewportTexture_pf4sx")
 
 [node name="HideTimer" type="Timer" parent="."]
