@@ -10,7 +10,8 @@ viewport_path = NodePath("SubViewport")
 resource_local_to_scene = true
 transparency = 1
 albedo_texture = SubResource("ViewportTexture_nxwf2")
-backlight = Color(0.701961, 0.701961, 0.701961, 1)
+backlight_enabled = true
+backlight = Color(0.6, 0.6, 0.6, 1)
 billboard_mode = 2
 billboard_keep_scale = true
 
@@ -42,6 +43,7 @@ scale = Vector2(0.438, 0.438)
 [node name="Sprite" type="Sprite3D" parent="."]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.0731125, 0)
 material_override = SubResource("StandardMaterial3D_hllck")
+cast_shadow = 0
 gi_mode = 0
 texture = SubResource("ViewportTexture_pf4sx")
 
