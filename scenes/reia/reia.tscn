@@ -54,10 +54,13 @@ transform = Transform3D(-1.28502, 0, -1.69996, 0, 2.13099, 0, 1.69996, 0, -1.285
 [node name="stylized_fountain" parent="Terrain/Uncatagorized" instance=ExtResource("9_ksg1v")]
 transform = Transform3D(0.766045, 0, 0.642788, 0, 1, 0, -0.642788, 0, 0.766045, 1.89809, -0.683953, -6.31448)
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Terrain/Uncatagorized"]
+
 [node name="Groundings" type="Node3D" parent="Terrain"]
 
 [node name="Ground" type="CSGBox3D" parent="Terrain/Groundings"]
 transform = Transform3D(3.86976, 0, 0, 0, 1.00056, 0, 0, 0, 8.83943, 0, -0.75856, -24.7402)
+layers = 1025
 use_collision = true
 collision_layer = 256
 collision_mask = 0

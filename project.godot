@@ -23,12 +23,11 @@ buses/default_bus_layout="res://assets/audio/default_bus_layout.tres"
 [autoload]
 
 Managers="*res://scenes/managers/managers.tscn"
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/sound_manager/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg")
+enabled=PackedStringArray("res://addons/sound_manager/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg")
 
 [filesystem]
 
@@ -98,6 +97,7 @@ inventory={
 
 [layer_names]
 
+3d_render/layer_11="Minimap"
 3d_physics/layer_1="walls"
 3d_physics/layer_2="attackable"
 3d_physics/layer_3="player"
