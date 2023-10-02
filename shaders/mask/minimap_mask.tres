@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://ppmy8y80e2l0"]
+
+[ext_resource type="Shader" path="res://shaders/mask/minimap_mask.gdshader" id="1_6s62n"]
+
+[resource]
+shader = ExtResource("1_6s62n")
+shader_parameter/tint_color = Color(0.027451, 0.14902, 0.239216, 1)
+shader_parameter/tint_effect_factor = 0.1
+shader_parameter/multiplier = 0.4
+shader_parameter/softness = 0.5
+shader_parameter/brightness = 0.2
