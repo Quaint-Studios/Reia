@@ -1,12 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://bmicgu6inl8e5"]
+[gd_scene load_steps=8 format=3 uid="uid://bmicgu6inl8e5"]
 
 [ext_resource type="Script" path="res://scripts/mob/attackable/npc/larry.gd" id="1_mma82"]
 [ext_resource type="PackedScene" uid="uid://b3p21o2ljivu2" path="res://assets/characters/npcs/aqua_wizard.glb" id="1_perw3"]
 [ext_resource type="PackedScene" uid="uid://bqpe013mgarni" path="res://scripts/mob/attackable/attackable_health.tscn" id="2_8ta6c"]
+[ext_resource type="PackedScene" uid="uid://c03x7cx3t0083" path="res://scripts/mob/attackable/player/minimap_markers/map_marker.tscn" id="4_f2fn6"]
+[ext_resource type="Texture2D" uid="uid://mfj02y3po58g" path="res://scripts/items/textures/items_atlas.png" id="5_l14u6"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tslik"]
 radius = 0.376215
 height = 1.77435
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmisf"]
+atlas = ExtResource("5_l14u6")
+region = Rect2(256, 512, 128, 128)
 
 [node name="Larry" type="CharacterBody3D"]
 script = ExtResource("1_mma82")
@@ -21,3 +27,7 @@ shape = SubResource("CapsuleShape3D_tslik")
 
 [node name="Larry" parent="Visuals" instance=ExtResource("1_perw3")]
 metadata/_edit_lock_ = true
+
+[node name="MapMarker" parent="Visuals" instance=ExtResource("4_f2fn6")]
+transform = Transform3D(1.6383, 0, -1.14715, 0, 2, 0, 1.14715, 0, 1.6383, 0, 0, 0)
+texture = SubResource("AtlasTexture_lmisf")
