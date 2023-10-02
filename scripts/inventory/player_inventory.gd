@@ -55,9 +55,9 @@ func create_inventory():
 		.add_category(keys[Tab.WEAPONS])
 		.add_category(keys[Tab.SOULSTONES])
 		.add_category(keys[Tab.CONSUMABLES])
-		.add_category(keys[Tab.QUEST_ITEMS])
 		.add_category(keys[Tab.EQUIPMENT])
-		.add_category(keys[Tab.MATERIALS]))
+		.add_category(keys[Tab.MATERIALS])
+		.add_category(keys[Tab.QUEST_ITEMS]))
 
 	inventory.add_item(keys[Tab.WEAPONS], load("res://scripts/items/1000_wooden_sword.tres"))
 
