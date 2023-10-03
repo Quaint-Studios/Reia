@@ -8,7 +8,7 @@ shader = ExtResource("1_6nonx")
 shader_parameter/tint_color = null
 shader_parameter/tint_effect_factor = 0.1
 shader_parameter/multiplier = 0.4
-shader_parameter/softness = 0.5
+shader_parameter/softness = 0.525
 shader_parameter/brightness = 0.0
 
 [node name="Minimap" type="Control"]
