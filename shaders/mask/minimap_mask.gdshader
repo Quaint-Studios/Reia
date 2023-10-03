@@ -3,7 +3,7 @@ shader_type canvas_item;
 uniform vec4 tint_color: source_color;
 uniform float tint_effect_factor : hint_range(0, 1) = 0.1;
 uniform float multiplier = 0.4;
-uniform float softness = 0.5;
+uniform float softness = 0.525;
 uniform float brightness = 0.0;
 
 mat4 brightnessMatrix( float _brightness ){
