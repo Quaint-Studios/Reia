@@ -10,6 +10,7 @@ shader_parameter/tint_effect_factor = 0.1
 shader_parameter/multiplier = 0.4
 shader_parameter/softness = 0.525
 shader_parameter/brightness = 0.0
+shader_parameter/transparency = 0.85
 
 [node name="Minimap" type="Control"]
 layout_mode = 3
