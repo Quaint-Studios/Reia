@@ -5,7 +5,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4mb21"]
 shader = ExtResource("1_6nonx")
-shader_parameter/tint_color = null
+shader_parameter/tint_color = Color(0.027451, 0.14902, 0.239216, 1)
 shader_parameter/tint_effect_factor = 0.1
 shader_parameter/multiplier = 0.4
 shader_parameter/softness = 0.525
