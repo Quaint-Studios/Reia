@@ -20,6 +20,11 @@ func _ready():
 func _process(_delta):
 	if position.y <= -10: # handle falling off the map for now
 		position.y = 1
+		velocity = Vector3.ZERO
+		# TODO: For some fun in the future, let's just set a max velocity on reset.
+		# Then lerp or tween to it.
+		# So you can still fall really fast but won't go at the speed of light
+		# and break the game lol.
 
 func _unhandled_input(event: InputEvent):
 	if event is InputEventMouseButton:
