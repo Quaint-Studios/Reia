@@ -1,19 +1,28 @@
-[gd_scene load_steps=6 format=3 uid="uid://bqpe013mgarni"]
+[gd_scene load_steps=7 format=3 uid="uid://bqpe013mgarni"]
 
 [ext_resource type="Script" path="res://scripts/mob/attackable/health_manager.gd" id="1_tkq40"]
 [ext_resource type="PackedScene" uid="uid://bb6pl2i42qjqf" path="res://scenes/ui/status_bars/health_bar.tscn" id="2_xssh5"]
+[ext_resource type="Shader" path="res://shaders/camera/billboard.gdshader" id="3_xobt2"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_nxwf2"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_jwf1e"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hllck"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vrubs"]
 resource_local_to_scene = true
-transparency = 1
-albedo_texture = SubResource("ViewportTexture_nxwf2")
-backlight_enabled = true
-backlight = Color(0.6, 0.6, 0.6, 1)
-billboard_mode = 2
-billboard_keep_scale = true
+render_priority = 0
+shader = ExtResource("3_xobt2")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/backlight = Color(0.6, 0.6, 0.6, 1)
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = null
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = null
+shader_parameter/texture_albedo = SubResource("ViewportTexture_jwf1e")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_pf4sx"]
 viewport_path = NodePath("SubViewport")
@@ -42,7 +51,7 @@ scale = Vector2(0.438, 0.438)
 
 [node name="Sprite" type="Sprite3D" parent="."]
 transform = Transform3D(0.15, 0, 0, 0, 0.15, 0, 0, 0, 0.15, 0, 0.0731125, 0)
-material_override = SubResource("StandardMaterial3D_hllck")
+material_override = SubResource("ShaderMaterial_vrubs")
 cast_shadow = 0
 gi_mode = 0
 texture = SubResource("ViewportTexture_pf4sx")
