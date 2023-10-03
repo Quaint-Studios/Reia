@@ -1,19 +1,19 @@
 {
-	version: "1.0.0.0",
-	description: "This is the beginning!",
-	changes: {
-		add: [
+	"version": "1.0.0.0",
+	"description": "This is the beginning!",
+	"changes": {
+		"add": [
 			""
 		],
-		remove: [
+		"remove": [
 			""
 		],
-		change: [
+		"change": [
 			""
 		],
-		fix: [
+		"fix": [
 			""
 		]
-	}
-	extra: ""
+	},
+	"extra": ""
 }
