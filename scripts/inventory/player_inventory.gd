@@ -142,7 +142,7 @@ func handle_tab_style(node: Control):
 
 func update_indicator_pos(i: int):
 	var margin = %IndicatorMargin as MarginContainer
-	margin.add_theme_constant_override("margin_right", Constants.INVENTORY_SELECTOR_POS(i))
+	margin.add_theme_constant_override("margin_right", int(Constants.INVENTORY_SELECTOR_POS(i)))
 
 func _on_btn_pressed(btn: Button):
 	for i in %HeaderContainer.get_child_count():

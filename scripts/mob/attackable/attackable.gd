@@ -18,7 +18,7 @@ func init(_name = "Attackable"):
 	name = _name # + _uuid
 
 # turn these into signals so things can subscribe? to them?
-func _on_died(attacker: Attackable):
+func _on_died(_attacker: Attackable):
 	print("")
 	return
 
