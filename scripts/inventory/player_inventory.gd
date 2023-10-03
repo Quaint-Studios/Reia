@@ -75,7 +75,7 @@ func update_inventory_items():
 		var label = node.get_node("Label") as Label
 		label.text = item.name
 		var icon = node.get_node("Icon") as TextureRect
-		icon.texture
+		icon.texture = item.texture
 
 		%CurrentItems.add_child(node)
 
