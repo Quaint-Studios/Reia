@@ -11,7 +11,7 @@ extends Node3D
 func _ready():
 	pass
 
-func _physics_process(delta: float):
+func _physics_process(_delta: float):
 	# var tween = create_tween().bind_node(self).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_LINEAR)
 	global_position = follow_point.global_position
 	# tween.tween_property(self, "global_position", follow_point.global_position, 0.25)
@@ -25,7 +25,7 @@ func _physics_process(delta: float):
 	global_rotation = old_rotation
 
 
-func _input(event: InputEvent):
+func _input(_event: InputEvent):
 	handle_zoom()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
