@@ -8,24 +8,14 @@
 		"hour": 14,
 		"minute": 06
 	},
-	"description": "This is the beginning!",
+	"description": "New character and animation.",
 	"changes": {
 		"add": [
-			"test1",
-			"test2"
-		],
-		"remove": [
-			"test3",
-			"test4"
+			"Finally animated the character model."
 		],
 		"change": [
-			"test5",
-			"test6"
+			"The character model has been changed. In the wise words of almost everyone who has seen it, \"She do be thicc.\""
 		],
-		"fix": [
-			"test7",
-			"test8"
-		]
 	},
-	"extra": "It works!"
+	"extra": "I don't believe anyone truly likes rigging and the time it consumes."
 }

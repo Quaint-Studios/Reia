@@ -8,24 +8,14 @@
 		"hour": 05,
 		"minute": 15
 	},
-	"description": "This is the beginning!",
+	"description": "Slowly getting there...",
 	"changes": {
 		"add": [
-			"test1",
-			"test2"
+			"The lighting is improved. But... it could be better!",
+			"We now have... COMBAT! You can click things.",
+			"Two mobs exist now, an enemy and an npc to test combat.",
+			"mobs other than yourself now have health bars you can see!",
 		],
-		"remove": [
-			"test3",
-			"test4"
-		],
-		"change": [
-			"test5",
-			"test6"
-		],
-		"fix": [
-			"test7",
-			"test8"
-		]
 	},
-	"extra": "It works!"
+	"extra": "Only if we had something to fight with other than our fists."
 }

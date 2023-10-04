@@ -74,6 +74,7 @@ theme_override_colors/font_color = Color(1, 0.909804, 0.752941, 1)
 theme_override_constants/line_spacing = 0
 text = "v1.0.0.0"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="Stage" type="Label" parent="MainMargin/List/DescMargin/TextMargin/List/Version"]
 layout_mode = 1
@@ -92,6 +93,7 @@ theme = SubResource("Theme_4joqp")
 theme_override_colors/font_color = Color(1, 0.909804, 0.752941, 1)
 text = "pre-alpha"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="Date" type="Label" parent="MainMargin/List/DescMargin/TextMargin/List"]
 layout_mode = 2
@@ -99,12 +101,14 @@ theme = SubResource("Theme_4joqp")
 theme_override_colors/font_color = Color(1, 0.909804, 0.752941, 1)
 text = "December 32, 1337"
 horizontal_alignment = 1
+autowrap_mode = 3
 
 [node name="Description" type="Label" parent="MainMargin/List/DescMargin/TextMargin/List"]
 layout_mode = 2
 theme = SubResource("Theme_aeyac")
 theme_override_colors/font_color = Color(1, 0.909804, 0.752941, 1)
 text = "This is the beginning!"
+autowrap_mode = 3
 
 [node name="ChangesMargin" type="MarginContainer" parent="MainMargin/List"]
 layout_mode = 2
@@ -132,6 +136,7 @@ layout_mode = 2
 theme = SubResource("Theme_fypvy")
 theme_override_colors/font_color = Color(0.0941176, 0.101961, 0.0941176, 1)
 text = "Added"
+autowrap_mode = 3
 
 [node name="Added" type="Label" parent="MainMargin/List/ChangesMargin/TextMargin/List"]
 layout_mode = 2
@@ -139,39 +144,46 @@ theme = SubResource("Theme_hrxb5")
 theme_override_colors/font_color = Color(0.984314, 0.980392, 0.960784, 1)
 text = "• test1
 • test2"
+autowrap_mode = 3
 
 [node name="RemovedHeader" type="Label" parent="MainMargin/List/ChangesMargin/TextMargin/List"]
 layout_mode = 2
 theme = SubResource("Theme_fypvy")
 theme_override_colors/font_color = Color(0.0941176, 0.101961, 0.0941176, 1)
 text = "Removed"
+autowrap_mode = 3
 
 [node name="Removed" type="Label" parent="MainMargin/List/ChangesMargin/TextMargin/List"]
 layout_mode = 2
 theme = SubResource("Theme_hrxb5")
 theme_override_colors/font_color = Color(0.984314, 0.980392, 0.960784, 1)
+autowrap_mode = 3
 
 [node name="ChangedHeader" type="Label" parent="MainMargin/List/ChangesMargin/TextMargin/List"]
 layout_mode = 2
 theme = SubResource("Theme_fypvy")
 theme_override_colors/font_color = Color(0.0941176, 0.101961, 0.0941176, 1)
 text = "Changed"
+autowrap_mode = 3
 
 [node name="Changed" type="Label" parent="MainMargin/List/ChangesMargin/TextMargin/List"]
 layout_mode = 2
 theme = SubResource("Theme_hrxb5")
 theme_override_colors/font_color = Color(0.984314, 0.980392, 0.960784, 1)
+autowrap_mode = 3
 
 [node name="FixedHeader" type="Label" parent="MainMargin/List/ChangesMargin/TextMargin/List"]
 layout_mode = 2
 theme = SubResource("Theme_fypvy")
 theme_override_colors/font_color = Color(0.0941176, 0.101961, 0.0941176, 1)
 text = "Fixed"
+autowrap_mode = 3
 
 [node name="Fixed" type="Label" parent="MainMargin/List/ChangesMargin/TextMargin/List"]
 layout_mode = 2
 theme = SubResource("Theme_hrxb5")
 theme_override_colors/font_color = Color(0.984314, 0.980392, 0.960784, 1)
+autowrap_mode = 3
 
 [node name="ExtraMargin" type="MarginContainer" parent="MainMargin/List"]
 layout_mode = 2
@@ -195,3 +207,4 @@ layout_mode = 2
 theme = SubResource("Theme_hrxb5")
 theme_override_colors/font_color = Color(0.984314, 0.980392, 0.960784, 1)
 text = "This is extra! Say cheese, Louise!"
+autowrap_mode = 3
