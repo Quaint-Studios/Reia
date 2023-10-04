@@ -11,14 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        platform: [windows] #, linux, mac]
+        platform: [win64] #, linux, mac]
     steps:
       - uses: actions/checkout@v2
         with:
           lfs: false
       - name: Build
         id: build
-        uses: manleydev/build-godot-action@v1.4.1
+        uses: manleydev/build-godot-action@v1.5.0
         with:
           preset: ${{ matrix.platform }}
           debugMode: "false"
