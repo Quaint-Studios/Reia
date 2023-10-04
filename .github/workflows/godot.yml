@@ -1,0 +1,29 @@
+name: Godot Builder
+
+on:
+  pull_request: {}
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  Godot:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform: [windows] #, linux, mac]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          lfs: false
+      - name: Build
+        id: build
+        uses: manleydev/build-godot-action@v1.4.1
+        with:
+          preset: ${{ matrix.platform }}
+          debugMode: "false"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Reia ${{ github.event.release.tag_name }} - ${{ matrix.platform }} client
+          path: ${{ github.workspace }}/${{ steps.build.outputs.build }}
