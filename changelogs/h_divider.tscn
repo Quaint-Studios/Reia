@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://cc2q1r1b6ojug"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fbo4t"]
+bg_color = Color(0, 0, 0, 0.0980392)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[sub_resource type="Theme" id="Theme_86bfq"]
+Panel/styles/panel = SubResource("StyleBoxFlat_fbo4t")
+
+[node name="HDivider" type="Panel"]
+custom_minimum_size = Vector2(0, 3)
+theme = SubResource("Theme_86bfq")
