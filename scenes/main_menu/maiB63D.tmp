@@ -422,7 +422,6 @@ horizontal_scroll_mode = 0
 
 [node name="List" type="VBoxContainer" parent="UI/Changelog/Margin/Panel/Margin/Scroll"]
 layout_mode = 2
-theme_override_constants/separation = 36
 
 [connection signal="pressed" from="UI/Control/Selectors/Margins/Main/Play" to="UI/Control/Selectors" method="_on_play_pressed"]
 [connection signal="pressed" from="UI/Control/Selectors/Margins/Main/Settings" to="UI/Control/Selectors" method="_on_settings_pressed"]
