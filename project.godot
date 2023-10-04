@@ -14,6 +14,7 @@ config/name="Reia"
 config/description="Explore endless worlds and embark on a magical adventure of a lifetime! Reia is an open-soure oRPG game where you can explore worlds, create your own, manage your own economy and products, and choose the way you want to play."
 run/main_scene="res://scenes/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [audio]
@@ -24,6 +25,10 @@ buses/default_bus_layout="res://assets/audio/default_bus_layout.tres"
 
 Managers="*res://scenes/managers/managers.tscn"
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
+
+[display]
+
+window/size/mode=3
 
 [editor_plugins]
 
