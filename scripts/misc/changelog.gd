@@ -32,31 +32,80 @@ func get_changelogs():
 
 # Read each individual changelog.
 func read_changelog(data: Dictionary):
-	var version: String = data.version
-	var description: String = data.description
-	var added: Array = data.changes.add
-	var removed: Array = data.changes.remove
-	var changed: Array = data.changes.change
-	var fixed: Array = data.changes.fix
-	var extra: String = data.extra
+	var version: String = data.version if data.has("version") else ""
+	var stage: String = data.stage if data.has("stage") else ""
+	var date: Dictionary = data.date if data.has("date") else null
+	var description: String = data.description if data.has("description") else ""
+
+	var has_changes = data.has("changes")
+	var added: Array = data.changes.add if has_changes && "add" in data.changes else []
+	var removed: Array = data.changes.remove if has_changes && "remove" in data.changes else []
+	var changed: Array = data.changes.change if has_changes && "change" in data.changes else []
+	var fixed: Array = data.changes.fix if has_changes && "fix" in data.changes else []
+
+	var extra: String = data.extra if data.has("extra") else ""
 
 	var changelog = changelog_prefab.instantiate()
 
 	var path = "MainMargin/List/DescMargin/TextMargin/List/"
 	changelog.get_node(path + "Version").text = version
+	changelog.get_node(path + "Version/Stage").text = stage
+	changelog.get_node(path + "Date").text = date_format(date) if date != null else ""
 	changelog.get_node(path + "Description").text = description
 
 	path = "MainMargin/List/ChangesMargin/TextMargin/List/"
-	changelog.get_node(path + "Added").text = array_to_listtext(added)
-	changelog.get_node(path + "Removed").text = array_to_listtext(removed)
-	changelog.get_node(path + "Changed").text = array_to_listtext(changed)
-	changelog.get_node(path + "Fixed").text = array_to_listtext(fixed)
+
+	var set_section = func(arr: Array, section_name: String, hide: bool = false):
+		changelog.get_node(path + section_name).text = array_to_listtext(arr)
+
+		if hide:
+			changelog.get_node(path + section_name).visible = false
+			changelog.get_node(path + section_name + "Header").visible = false
+
+	set_section.call(added, "Added", added.is_empty())
+	set_section.call(removed, "Removed", removed.is_empty())
+	set_section.call(changed, "Changed", changed.is_empty())
+	set_section.call(fixed, "Fixed", fixed.is_empty())
 
 	path = "MainMargin/List/ExtraMargin/TextMargin/"
 	changelog.get_node(path + "Extra").text = extra
 	if changelog_holder.get_child_count() > 0:
 		changelog_holder.add_child(h_divider_prefab.instantiate())
 	changelog_holder.add_child(changelog)
+
+func date_format(date: Dictionary):
+	const months := [
+		"Jan_uary",
+		"Feb_ruary",
+		"Mar_ch",
+		"Apr_il",
+		"May",
+		"Jun_e",
+		"Jul_y",
+		"Aug_ust",
+		"Sep_tember",
+		"Oct_ober",
+		"Nov_ember",
+		"Dec_ember"
+	]
+
+	# month day, year hour:min<am/pm>
+	var month = months[int(date.month)-1].replace("_", "")
+	var day = date.day
+	var year = date.year
+
+	var hour = date.hour
+	var minute = date.minute
+
+	var ampm = "pm" if hour >= 12 && hour <= 23 else "am"
+
+	if ampm == "pm":
+		hour -= 12
+
+	if hour == 0:
+		hour = 12
+
+	return month + " " + day + ", " + year + " " + str(hour) + ":" + str(minute) + ampm
 
 # Format the array from changes into new lines and bullets.
 func array_to_listtext(arr: Array):
