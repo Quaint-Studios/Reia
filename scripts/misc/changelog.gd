@@ -105,7 +105,7 @@ func date_format(date: Dictionary):
 	if hour == 0:
 		hour = 12
 
-	return month + " " + day + ", " + year + " " + str(hour) + ":" + str(minute) + ampm
+	return month + " " + day + ", " + year + " " + str(hour) + ":" + str(minute).pad_zeros(2) + ampm
 
 # Format the array from changes into new lines and bullets.
 func array_to_listtext(arr: Array):
