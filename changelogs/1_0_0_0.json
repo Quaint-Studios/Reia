@@ -8,23 +8,13 @@
 		"hour": 14,
 		"minute": 59
 	},
-	"description": "This is the beginning!",
+	"description": "This is the beginning! Migrating from Unity to Godot.",
 	"changes": {
 		"add": [
-			"test1",
-			"test2"
+			"A basic level was created to test some features of the project.",
 		],
 		"remove": [
-			"test3",
-			"test4"
-		],
-		"change": [
-			"test5",
-			"test6"
-		],
-		"fix": [
-			"test7",
-			"test8"
+			"All Unity-related assets have been removed."
 		]
 	},
 	"extra": "It works!"
