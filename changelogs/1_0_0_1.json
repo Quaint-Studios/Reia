@@ -1,5 +1,13 @@
 {
 	"version": "1.0.0.1",
+	"stage": "pre-alpha",
+	"date": {
+		"month": "9",
+		"day": "21",
+		"year": "2023",
+		"hour": 14,
+		"minute": 59
+	},
 	"description": "This is the beginning!",
 	"changes": {
 		"add": [

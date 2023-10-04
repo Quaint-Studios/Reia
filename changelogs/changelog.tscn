@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://21awe3eq635r"]
+[gd_scene load_steps=10 format=3 uid="uid://21awe3eq635r"]
 
 [ext_resource type="FontFile" uid="uid://cvl0migkjbg2m" path="res://fonts/Nunito/static/Nunito-Black.ttf" id="2_cyy2x"]
 [ext_resource type="FontFile" uid="uid://csid2dfym77r7" path="res://fonts/Nunito/static/Nunito-Bold.ttf" id="3_i6keq"]
@@ -16,6 +16,10 @@ Panel/styles/panel = SubResource("StyleBoxFlat_db5wx")
 [sub_resource type="Theme" id="Theme_meep4"]
 default_font = ExtResource("2_cyy2x")
 default_font_size = 24
+
+[sub_resource type="Theme" id="Theme_4joqp"]
+default_font = ExtResource("2_cyy2x")
+default_font_size = 12
 
 [sub_resource type="Theme" id="Theme_aeyac"]
 default_font = ExtResource("2_cyy2x")
@@ -67,7 +71,34 @@ mouse_filter = 2
 layout_mode = 2
 theme = SubResource("Theme_meep4")
 theme_override_colors/font_color = Color(1, 0.909804, 0.752941, 1)
+theme_override_constants/line_spacing = 0
 text = "v1.0.0.0"
+horizontal_alignment = 1
+
+[node name="Stage" type="Label" parent="MainMargin/List/DescMargin/TextMargin/List/Version"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -56.0
+offset_top = -11.0
+offset_right = 56.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_4joqp")
+theme_override_colors/font_color = Color(1, 0.909804, 0.752941, 1)
+text = "pre-alpha"
+horizontal_alignment = 1
+
+[node name="Date" type="Label" parent="MainMargin/List/DescMargin/TextMargin/List"]
+layout_mode = 2
+theme = SubResource("Theme_4joqp")
+theme_override_colors/font_color = Color(1, 0.909804, 0.752941, 1)
+text = "December 32, 1337"
+horizontal_alignment = 1
 
 [node name="Description" type="Label" parent="MainMargin/List/DescMargin/TextMargin/List"]
 layout_mode = 2
