@@ -2,11 +2,11 @@
 	"version": "1.0.0.3",
 	"stage": "pre-alpha",
 	"date": {
-		"month": "9",
-		"day": "21",
+		"month": "10",
+		"day": "1",
 		"year": "2023",
 		"hour": 14,
-		"minute": 59
+		"minute": 06
 	},
 	"description": "This is the beginning!",
 	"changes": {

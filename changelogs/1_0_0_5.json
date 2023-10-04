@@ -4,23 +4,10 @@
 		"month": "9",
 		"day": "21",
 		"year": "2023",
-		"hour": 14,
-		"minute": 59
+		"hour": 00,
+		"minute": 00
 	},
-	"description": "This is the beginning!",
-	"changes": {
-		"add": [
-			"test1",
-			"test2"
-		],
-		"change": [
-			"test5",
-			"test6"
-		],
-		"fix": [
-			"test7",
-			"test8"
-		]
-	},
-	"extra": "It works!"
+	"description": "Changelogs are finally here!",
+	"changes": {},
+	"extra": "Still in development..."
 }
