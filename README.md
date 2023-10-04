@@ -1,7 +1,7 @@
 # Reia
 Description soon...
 
-![Unity Build](https://github.com/Quaint-Studios/Reia/workflows/Unity/badge.svg)
+[![Godot Builder](https://github.com/Quaint-Studios/Reia/actions/workflows/godot.yml/badge.svg)](https://github.com/Quaint-Studios/Reia/actions/workflows/godot.yml)
 
 ## About This Project
 ### Overview
