@@ -13,6 +13,13 @@ jobs:
       matrix:
         platform: [win64] #, linux, mac]
     steps:
+      - name: Format Tag Name
+        id: replace_string
+        uses: frabert/replace-string-action@v2
+        with:
+          pattern: '\.'
+          string: ${{ github.ref_name }}
+          replace-with: '_'
       - uses: actions/checkout@v2
         with:
           lfs: false
@@ -23,28 +30,16 @@ jobs:
           name: "Reia.exe"
           preset: ${{ matrix.platform }}
           debugMode: "false"
-      - name: Get Tag Name
-        id: tag_name
-        uses: revam/gh-action-get-tag-and-version@v1
-        with:
-          tag: ${{ github.ref }}
-      - name: Format Tag Name
-        id: replace_string
-        uses: frabert/replace-string-action@v2
-        with:
-          pattern: '\.'
-          string: ${{ steps.tag_name.outputs.tag }}
-          replace-with: '_'
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ steps.tag_name.outputs.tag }}
-          release_name: ${{ steps.tag_name.outputs.tag }}
+          tag_name: ${{ github.ref_name }}
+          release_name: ${{ github.ref_name }}
           body: |
-            # Reia - `${{ steps.tag_name.outputs.tag }}`
+            # Reia - `${{ github.ref_name }}`
 
             ...
 
