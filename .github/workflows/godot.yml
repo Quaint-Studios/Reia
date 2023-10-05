@@ -27,9 +27,10 @@ jobs:
         id: build
         uses: manleydev/build-godot-action@v1.5.0
         with:
-          name: "Reia.exe"
+          name: "Reia_${{ steps.replace_string.outputs.replaced }}"
           preset: ${{ matrix.platform }}
           debugMode: "false"
+          package: true
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -69,5 +70,5 @@ jobs:
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
           asset_path: ${{ github.workspace }}/${{ steps.build.outputs.build }}
-          asset_name: Reia_${{ steps.replace_string.outputs }}.zip
+          asset_name: Reia_${{ steps.replace_string.outputs.replaced }}.zip
           asset_content_type: application/zip
