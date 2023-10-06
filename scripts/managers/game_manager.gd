@@ -53,5 +53,8 @@ static func setup_sound_manager():
 	SoundManager.set_default_ui_sound_bus("Interface")
 	SoundManager.set_default_dialogue_bus("Dialogue")
 
+	# Temp
+	SoundManager.set_master_volume(5.0/100.0)
+
 static func set_window_size():
 	DisplayServer.window_set_min_size(Vector2i(1152, 648))

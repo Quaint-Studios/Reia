@@ -1,7 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://njgkawiv7sdy"]
+[gd_scene load_steps=16 format=3 uid="uid://njgkawiv7sdy"]
 
 [ext_resource type="LightmapGIData" uid="uid://bog8vgj034dhh" path="res://scenes/reia/reia.lmbake" id="1_6htgl"]
-[ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia.tres" id="1_gkwf7"]
 [ext_resource type="PackedScene" uid="uid://c28gkmhvhs58v" path="res://scenes/ui/game_ui.tscn" id="1_ttgxx"]
 [ext_resource type="PackedScene" uid="uid://bmicgu6inl8e5" path="res://assets/characters/npcs/larry.tscn" id="2_w4lqh"]
 [ext_resource type="PackedScene" uid="uid://op561o2k0d4o" path="res://assets/characters/enemies/aqua_wizard.tscn" id="3_jgoiv"]
@@ -9,10 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://bm6j14ip2oywr" path="res://assets/world/rocks/collections/stylized_rocks.glb" id="5_glpdm"]
 [ext_resource type="PackedScene" uid="uid://bj7e34l2ty1yt" path="res://assets/world/trees/compositions/stylized_tree.glb" id="8_bup5i"]
 [ext_resource type="PackedScene" uid="uid://bvb75kmlbcbav" path="res://assets/world/fountains/stylized_fountain.glb" id="9_ksg1v"]
+[ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="11_d2pml"]
 [ext_resource type="PackedScene" uid="uid://dgpnu1i4wpcpm" path="res://scenes/managers/managers.tscn" id="12_n0e80"]
 [ext_resource type="PackedScene" uid="uid://cmnfswjhhgkfd" path="res://assets/world/sky/islands/floating_house.glb" id="12_x2unh"]
 [ext_resource type="PackedScene" uid="uid://ce72x7shwqq2l" path="res://assets/world/forest/trees/forest_large_tree.glb" id="13_la4es"]
 [ext_resource type="PackedScene" uid="uid://cslscakiyp5gs" path="res://assets/world/sky/islands/floating_island.glb" id="14_r436h"]
+[ext_resource type="PackedScene" uid="uid://inny187m6t4r" path="res://scenes/vfx_test/Ball.glb" id="14_wasve"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epo51"]
 albedo_color = Color(0.265625, 0.898438, 0.4375, 1)
@@ -82,7 +83,7 @@ transform = Transform3D(-0.759271, 0, -0.650774, 0, 1, 0, 0.650774, 0, -0.759271
 
 [node name="World" type="Node" parent="."]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+[node name="Day_DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(0.866025, -0.353553, 0.353554, 0, 0.707107, 0.707106, -0.5, -0.612372, 0.612373, 8.0816, 7.32544, 14.4232)
 light_energy = 1.5
 shadow_enabled = true
@@ -94,10 +95,18 @@ directional_shadow_blend_splits = true
 directional_shadow_max_distance = 300.0
 directional_shadow_pancake_size = 4.0
 
+[node name="Night_DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(0.707107, 0.5, 0.5, 0, -0.707107, 0.707107, 0.707107, -0.5, -0.5, 0, 10.2533, 0)
+visible = false
+light_energy = 0.01
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
-environment = ExtResource("1_gkwf7")
+environment = ExtResource("11_d2pml")
 
 [node name="Managers" parent="." instance=ExtResource("12_n0e80")]
 
 [node name="forest_large_tree" parent="." instance=ExtResource("13_la4es")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.10894, -0.757559, 3.49435)
+
+[node name="Ball" parent="." instance=ExtResource("14_wasve")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.143777, 0.761905, 6.35004)
