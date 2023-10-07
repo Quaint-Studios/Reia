@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://njgkawiv7sdy"]
+[gd_scene load_steps=18 format=3 uid="uid://njgkawiv7sdy"]
 
 [ext_resource type="LightmapGIData" uid="uid://bog8vgj034dhh" path="res://scenes/reia/reia.lmbake" id="1_6htgl"]
 [ext_resource type="PackedScene" uid="uid://c28gkmhvhs58v" path="res://scenes/ui/game_ui.tscn" id="1_ttgxx"]
@@ -17,6 +17,15 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epo51"]
 albedo_color = Color(0.265625, 0.898438, 0.4375, 1)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gpi7f"]
+animation = &"Animation"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_hw55u"]
+graph_offset = Vector2(-267.545, 115.273)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_gpi7f")
+nodes/Animation/position = Vector2(80, 160)
+node_connections = [&"output", 0, &"Animation"]
 
 [node name="Map_Reia" type="Node"]
 
@@ -109,4 +118,17 @@ environment = ExtResource("11_d2pml")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.10894, -0.757559, 3.49435)
 
 [node name="Ball" parent="." instance=ExtResource("14_wasve")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.143777, 0.761905, 6.35004)
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.143777, 0.761905, 6.35004)
+
+[node name="Base" parent="Ball/Fireball" index="1"]
+transform = Transform3D(3.51589, 0, 0.607313, 0, 0.886765, 0, -0.607313, 0, 3.51589, 0.0359489, -1.83662, -0.0231009)
+
+[node name="Outer" parent="Ball/Fireball" index="2"]
+transform = Transform3D(1.41755, 1.32253, 0.510252, -1.41755, 1.32253, 0.510252, 1.1949e-07, -0.721606, 1.87034, 0, 0, 0)
+
+[node name="AnimationTree" type="AnimationTree" parent="Ball"]
+tree_root = SubResource("AnimationNodeBlendTree_hw55u")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+
+[editable path="Ball"]
