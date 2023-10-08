@@ -1839,6 +1839,10 @@ _subresources={
 "use_external/enabled": true,
 "use_external/path": "res://scenes/vfx_test/Ball_BaseMat.material"
 },
+"InnerMat": {
+"use_external/enabled": true,
+"use_external/path": "res://scenes/vfx_test/Ball_InnerMat.material"
+},
 "OuterMat": {
 "use_external/enabled": true,
 "use_external/path": "res://scenes/vfx_test/Ball_OuterMat.material"
