@@ -16,6 +16,7 @@ func set_anim(node_name: String, param_name: String):
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	%AnimationTree.active = true
 
 func _process(_delta):
 	if position.y <= -10: # handle falling off the map for now
