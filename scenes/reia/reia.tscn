@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c28gkmhvhs58v" path="res://scenes/ui/game_ui.tscn" id="1_ttgxx"]
 [ext_resource type="PackedScene" uid="uid://bmicgu6inl8e5" path="res://assets/characters/npcs/larry.tscn" id="2_w4lqh"]
 [ext_resource type="PackedScene" uid="uid://op561o2k0d4o" path="res://assets/characters/enemies/aqua_wizard.tscn" id="3_jgoiv"]
-[ext_resource type="PackedScene" path="res://scripts/mob/attackable/player/my_player.tscn" id="3_m63h2"]
+[ext_resource type="PackedScene" uid="uid://eicmer2kdgy" path="res://scripts/mob/attackable/player/my_player.tscn" id="3_m63h2"]
 [ext_resource type="PackedScene" uid="uid://bm6j14ip2oywr" path="res://assets/world/rocks/collections/stylized_rocks.glb" id="5_glpdm"]
 [ext_resource type="PackedScene" uid="uid://bj7e34l2ty1yt" path="res://assets/world/trees/compositions/stylized_tree.glb" id="8_bup5i"]
 [ext_resource type="PackedScene" uid="uid://bvb75kmlbcbav" path="res://assets/world/fountains/stylized_fountain.glb" id="9_ksg1v"]
@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://cmnfswjhhgkfd" path="res://assets/world/sky/islands/floating_house.glb" id="12_x2unh"]
 [ext_resource type="PackedScene" uid="uid://ce72x7shwqq2l" path="res://assets/world/forest/trees/forest_large_tree.glb" id="13_la4es"]
 [ext_resource type="PackedScene" uid="uid://cslscakiyp5gs" path="res://assets/world/sky/islands/floating_island.glb" id="14_r436h"]
-[ext_resource type="PackedScene" uid="uid://inny187m6t4r" path="res://scenes/vfx_test/Ball.glb" id="14_wasve"]
+[ext_resource type="PackedScene" uid="uid://inny187m6t4r" path="res://scripts/mob/attackable/player/abilities/combat/pyro/fireball/Ball.glb" id="14_wasve"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epo51"]
 albedo_color = Color(0.265625, 0.898438, 0.4375, 1)
@@ -126,28 +126,28 @@ active = true
 transform = Transform3D(0.0949471, 0, 0, 0, -0.0118227, 0.0942081, 0, -0.0942081, -0.0118227, 1.47486, 0.0329688, 3.27314)
 
 [node name="Base" parent="Ball2/Fireball" index="0"]
-transform = Transform3D(-0.87121, 0, -3.29373, 0, 6.522, 0, 3.29373, 0, -0.87121, 0, -0.916145, -3.33786e-06)
+transform = Transform3D(-3.10291, 0, 1.40699, 0, 6.522, 0, -1.40699, 0, -3.10291, 0, -0.916145, -3.33786e-06)
 
 [node name="Core" parent="Ball2/Fireball" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 7.45058e-09, 0, -7.45058e-09, 1, 0, 0, 0)
 
 [node name="Inner" parent="Ball2/Fireball" index="2"]
-transform = Transform3D(0.0521878, -0.507468, 0.860089, -0.996195, -0.0866564, 0.00931746, 0.0698039, -0.857302, -0.51006, 0, 0, 0)
+transform = Transform3D(0.0521876, -0.697739, -0.714449, -0.996195, 0.0136336, -0.0860828, 0.0698038, 0.716222, -0.694372, 0, 0, 0)
 
 [node name="Outer" parent="Ball2/Fireball" index="3"]
-transform = Transform3D(0.707107, 0.674264, -0.212997, -0.707107, 0.674264, -0.212997, -2.98023e-08, 0.301224, 0.953553, 0, 0, 0)
+transform = Transform3D(0.707107, -0.681748, -0.18767, -0.707107, -0.681748, -0.18767, 4.47035e-08, 0.265405, -0.964137, 0, 0, 0)
 
 [node name="Ball" parent="." instance=ExtResource("14_wasve")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
 [node name="Base" parent="Ball/Fireball" index="0"]
-transform = Transform3D(-0.99314, 0, -0.116931, 0, 1, 0, 0.116931, 0, -0.99314, 0, -0.916148, 0)
+transform = Transform3D(-0.0494532, 0, 0.998776, 0, 1, 0, -0.998776, 0, -0.0494532, 0, -0.916148, 0)
 
 [node name="Inner" parent="Ball/Fireball" index="2"]
-transform = Transform3D(0.0521877, -0.998085, -0.0332154, -0.996194, -0.0497064, -0.0715919, 0.0698038, 0.0368252, -0.996881, 0, 0, 0)
+transform = Transform3D(0.0521876, 0.283854, -0.957446, -0.996194, 0.0818134, -0.0300444, 0.0698037, 0.955371, 0.287044, 0, 0, 0)
 
 [node name="Outer" parent="Ball/Fireball" index="3"]
-transform = Transform3D(0.707107, -0.201893, 0.677672, -0.707107, -0.201893, 0.677672, 2.98023e-08, -0.958373, -0.285519, 0, 0, 0)
+transform = Transform3D(0.707107, 0.533674, -0.463888, -0.707107, 0.533674, -0.463888, -5.96046e-08, 0.656037, 0.754729, 0, 0, 0)
 
 [editable path="Ball2"]
 [editable path="Ball"]

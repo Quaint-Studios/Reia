@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://bpythdmv1s63u"
-path.s3tc="res://.godot/imported/Ball_Emissive.png-b7b2ec758fb00e2c2ba091d5887c9a0e.s3tc.ctex"
-path.etc2="res://.godot/imported/Ball_Emissive.png-b7b2ec758fb00e2c2ba091d5887c9a0e.etc2.ctex"
+path.s3tc="res://.godot/imported/Ball_Emissive.png-d5698a00be5d00b86930b434d031a284.s3tc.ctex"
+path.etc2="res://.godot/imported/Ball_Emissive.png-d5698a00be5d00b86930b434d031a284.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -13,8 +13,8 @@ generator_parameters={}
 
 [deps]
 
-source_file="res://scenes/vfx_test/Ball_Emissive.png"
-dest_files=["res://.godot/imported/Ball_Emissive.png-b7b2ec758fb00e2c2ba091d5887c9a0e.s3tc.ctex", "res://.godot/imported/Ball_Emissive.png-b7b2ec758fb00e2c2ba091d5887c9a0e.etc2.ctex"]
+source_file="res://scripts/mob/attackable/player/abilities/combat/pyro/fireball/Ball_Emissive.png"
+dest_files=["res://.godot/imported/Ball_Emissive.png-d5698a00be5d00b86930b434d031a284.s3tc.ctex", "res://.godot/imported/Ball_Emissive.png-d5698a00be5d00b86930b434d031a284.etc2.ctex"]
 
 [params]
 

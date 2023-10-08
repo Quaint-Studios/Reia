@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://civks6shrhm5e"]
 
-[ext_resource type="PackedScene" uid="uid://inny187m6t4r" path="res://scenes/vfx_test/Ball.glb" id="1_osrfo"]
+[ext_resource type="PackedScene" uid="uid://inny187m6t4r" path="res://scripts/mob/attackable/player/abilities/combat/pyro/fireball/Ball.glb" id="1_osrfo"]
 [ext_resource type="Environment" uid="uid://bf8wpnbq18xeu" path="res://scenes/reia/reia_night.tres" id="3_latdu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j6jqp"]
