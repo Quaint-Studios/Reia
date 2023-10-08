@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://inny187m6t4r"
-path="res://.godot/imported/Ball.glb-7fccf4c642a56053b47e63a2c3cbed2f.scn"
+path="res://.godot/imported/Ball.glb-9280c5920371e786127a7359d5232115.scn"
 
 [deps]
 
-source_file="res://scenes/vfx_test/Ball.glb"
-dest_files=["res://.godot/imported/Ball.glb-7fccf4c642a56053b47e63a2c3cbed2f.scn"]
+source_file="res://scripts/mob/attackable/player/abilities/combat/pyro/fireball/Ball.glb"
+dest_files=["res://.godot/imported/Ball.glb-9280c5920371e786127a7359d5232115.scn"]
 
 [params]
 
