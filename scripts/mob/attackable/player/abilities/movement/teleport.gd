@@ -1,4 +1,3 @@
-class_name Teleport extends Abilities
-
-func cast():
+class_name Teleport extends Ability
+func cast(player: Player):
 	pass

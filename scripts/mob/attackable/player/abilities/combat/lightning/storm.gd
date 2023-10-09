@@ -1,4 +1,4 @@
-class_name Storm extends Abilities
+class_name Storm extends Ability
 
 func cast():
 	pass

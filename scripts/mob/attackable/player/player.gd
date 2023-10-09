@@ -1,5 +1,7 @@
 class_name Player extends Attackable
 
+@export var abilities: AbilityManager
+
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
@@ -47,6 +49,7 @@ func _physics_process(delta: float):
 
 func _handle_inputs():
 	handle_attack()
+	handle_skills()
 	handle_movement()
 
 func handle_movement():
@@ -89,5 +92,19 @@ func handle_attack():
 		if collision:
 			print("Attacked:", collision.collider.name)
 			_attack(collision.collider)
+		else:
+			print("Collide with:", "nuthin")
+
+func handle_skills():
+	if Input.is_action_just_pressed("skill_2"):
+		var space = get_world_3d().direct_space_state
+		var query = PhysicsRayQueryParameters3D.create(camera.global_position,
+			camera.global_position - camera.global_transform.basis.z * 100, PhysicsUtils.arr_to_collision_mask(
+				[ PhysicsUtils.ENEMY_MASK ]
+			))
+		var collision = space.intersect_ray(query)
+		if collision:
+			print("Casted on:", collision.collider.name)
+			abilities.skill_2.cast_on_target(self, collision.collider.position)
 		else:
 			print("Collide with:", "nuthin")
