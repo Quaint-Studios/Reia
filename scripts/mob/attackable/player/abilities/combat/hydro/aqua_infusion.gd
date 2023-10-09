@@ -1,4 +1,4 @@
-class_name AquaInfusion extends Abilities
+class_name AquaInfusion extends Ability
 
 func cast():
 	pass

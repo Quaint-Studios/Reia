@@ -141,13 +141,13 @@ transform = Transform3D(0.707107, -0.681748, -0.18767, -0.707107, -0.681748, -0.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
 [node name="Base" parent="Ball/Fireball" index="0"]
-transform = Transform3D(-0.0494532, 0, 0.998776, 0, 1, 0, -0.998776, 0, -0.0494532, 0, -0.916148, 0)
+transform = Transform3D(-0.932279, 0, 0.36174, 0, 1, 0, -0.36174, 0, -0.932279, 0, -0.916148, 0)
 
 [node name="Inner" parent="Ball/Fireball" index="2"]
-transform = Transform3D(0.0521876, 0.283854, -0.957446, -0.996194, 0.0818134, -0.0300444, 0.0698037, 0.955371, 0.287044, 0, 0, 0)
+transform = Transform3D(0.0521876, -0.735233, -0.675802, -0.996194, 0.00897397, -0.0866925, 0.0698038, 0.677755, -0.731967, 0, 0, 0)
 
 [node name="Outer" parent="Ball/Fireball" index="3"]
-transform = Transform3D(0.707107, 0.533674, -0.463888, -0.707107, 0.533674, -0.463888, -5.96046e-08, 0.656037, 0.754729, 0, 0, 0)
+transform = Transform3D(0.707107, -0.698174, -0.112043, -0.707107, -0.698174, -0.112043, -4.47035e-08, 0.158453, -0.987366, 0, 0, 0)
 
 [editable path="Ball2"]
 [editable path="Ball"]

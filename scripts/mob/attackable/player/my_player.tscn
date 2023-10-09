@@ -1,13 +1,28 @@
-[gd_scene load_steps=19 format=3 uid="uid://eicmer2kdgy"]
+[gd_scene load_steps=26 format=3 uid="uid://eicmer2kdgy"]
 
 [ext_resource type="Script" path="res://scripts/mob/attackable/player/player.gd" id="1_fl81d"]
+[ext_resource type="Script" path="res://scripts/mob/attackable/player/abilities/ability_manager.gd" id="2_fdbkp"]
 [ext_resource type="PackedScene" uid="uid://cykr5gmvdm7xf" path="res://assets/characters/player/female_player.glb" id="2_s3eb4"]
 [ext_resource type="Script" path="res://scripts/camera/tps_camera.gd" id="3_0ip71"]
 [ext_resource type="PackedScene" uid="uid://c03x7cx3t0083" path="res://scripts/mob/attackable/player/minimap_markers/map_marker.tscn" id="3_aj2dj"]
+[ext_resource type="Script" path="res://scripts/mob/attackable/player/abilities/combat/pyro/fireball.gd" id="3_jyvxa"]
+[ext_resource type="Script" path="res://scripts/mob/attackable/player/abilities/combat/pyro/explosion.gd" id="3_myfqk"]
 [ext_resource type="Texture2D" uid="uid://mfj02y3po58g" path="res://scripts/items/textures/items_atlas.png" id="4_qds30"]
 [ext_resource type="PackedScene" uid="uid://dud8gf6n8gvk" path="res://scripts/inventory/ui/player_inventory.tscn" id="4_tvn1c"]
 [ext_resource type="Script" path="res://scripts/mob/attackable/player/player_hud.gd" id="5_gmuxt"]
 [ext_resource type="PackedScene" uid="uid://gm47ucg1gegr" path="res://scripts/mob/attackable/player/player_minimap.tscn" id="5_vfast"]
+[ext_resource type="PackedScene" uid="uid://inny187m6t4r" path="res://scripts/mob/attackable/player/abilities/combat/pyro/fireball/Ball.glb" id="6_ymcpu"]
+
+[sub_resource type="Resource" id="Resource_q15dm"]
+script = ExtResource("3_myfqk")
+
+[sub_resource type="Resource" id="Resource_t5xeo"]
+script = ExtResource("3_jyvxa")
+
+[sub_resource type="Resource" id="Resource_rkqow"]
+script = ExtResource("2_fdbkp")
+skill_1 = SubResource("Resource_q15dm")
+skill_2 = SubResource("Resource_t5xeo")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o0wyg"]
 radius = 0.25
@@ -75,6 +90,7 @@ region = Rect2(128, 512, 128, 128)
 collision_layer = 6
 collision_mask = 273
 script = ExtResource("1_fl81d")
+abilities = SubResource("Resource_rkqow")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.825, 0)
@@ -240,9 +256,12 @@ bones/100/position = Vector3(0.000234642, 34.1829, -0.0011157)
 
 [node name="RightHand" type="BoneAttachment3D" parent="Visuals/female_player/Armature/Skeleton3D" index="0"]
 unique_name_in_owner = true
-transform = Transform3D(-0.845704, -0.24909, 0.471951, 0.393156, 0.307188, 0.866639, -0.360849, 0.918471, -0.161859, -159.895, 45.6698, -2044.23)
+transform = Transform3D(-0.845706, -0.249089, 0.47195, 0.393156, 0.307186, 0.866641, -0.360847, 0.918472, -0.161858, -159.896, 45.6685, -2044.23)
 bone_name = "CC_Base_R_Hand"
 bone_idx = 81
+
+[node name="Ball" parent="Visuals/female_player/Armature/Skeleton3D/RightHand" instance=ExtResource("6_ymcpu")]
+transform = Transform3D(1, -1.49012e-08, 0, 2.23517e-08, 1, 2.98023e-08, -2.98023e-08, 0, 1, 0, 0, 0)
 
 [node name="AnimationTree" type="AnimationTree" parent="Visuals"]
 unique_name_in_owner = true
