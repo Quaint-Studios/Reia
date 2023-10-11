@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Reia"
 config/description="Explore endless worlds and embark on a magical adventure of a lifetime! Reia is an open-soure oRPG game where you can explore worlds, create your own, manage your own economy and products, and choose the way you want to play."
-run/main_scene="res://scenes/main_menu/main_menu.tscn"
+run/main_scene="res://scenes/shader_test/shader_test.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 boot_splash/show_image=false
 config/icon="res://icon.svg"
@@ -117,7 +117,9 @@ skill_3={
 
 [layer_names]
 
-3d_render/layer_11="Minimap"
+3d_render/layer_11="minimap"
+2d_render/layer_20="water_canvas"
+3d_render/layer_20="water_collision"
 3d_physics/layer_1="walls"
 3d_physics/layer_2="attackable"
 3d_physics/layer_3="player"

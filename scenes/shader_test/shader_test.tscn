@@ -1,0 +1,194 @@
+[gd_scene load_steps=21 format=3 uid="uid://ci8xxveoikhj1"]
+
+[ext_resource type="Shader" uid="uid://c6xa27alwomtc" path="res://scenes/shader_test/shaders/water_simulation.tres" id="1_6kd1s"]
+[ext_resource type="Script" path="res://scenes/shader_test/shaders/water_helper.gd" id="1_kd41s"]
+[ext_resource type="Shader" uid="uid://be1vq213btatp" path="res://scenes/shader_test/shaders/water.tres" id="1_q8ku7"]
+[ext_resource type="Shader" uid="uid://ble2knw8iu65w" path="res://scenes/shader_test/shaders/water_simulation_buffer.tres" id="3_4rtb3"]
+[ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="4_8l1uh"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_3kbj8"]
+viewport_path = NodePath("StylizedWater/Collision")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_b586q"]
+viewport_path = NodePath("StylizedWater/SimulationBuffer")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1gjb5"]
+resource_local_to_scene = true
+shader = ExtResource("1_6kd1s")
+shader_parameter/phase = 0.2
+shader_parameter/attenuation = 0.999
+shader_parameter/delta_uv = 3.0
+shader_parameter/viewport_size = Vector2(1024, 1024)
+shader_parameter/sim_tex = SubResource("ViewportTexture_b586q")
+shader_parameter/col_tex = SubResource("ViewportTexture_3kbj8")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ya6mw"]
+viewport_path = NodePath("StylizedWater/Simulation")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7begn"]
+resource_local_to_scene = true
+shader = ExtResource("3_4rtb3")
+shader_parameter/buffer = SubResource("ViewportTexture_ya6mw")
+
+[sub_resource type="Environment" id="Environment_dj1c8"]
+background_mode = 1
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_4nlpa"]
+viewport_path = NodePath("StylizedWater/Simulation")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_kmc7l"]
+viewport_path = NodePath("StylizedWater/Simulation")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qvsc"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_q8ku7")
+shader_parameter/amplitude = 0.5
+shader_parameter/wave_speed = 2.0
+shader_parameter/wave_frequency = 0.800001
+shader_parameter/wave_scale = 0.8
+shader_parameter/refraction_strength = 0.1
+shader_parameter/viewport_size = Vector2(512, 512)
+shader_parameter/deep_water = Color(0, 0.0588235, 0.305882, 0.964706)
+shader_parameter/shallow_water = Color(0.160784, 0.811765, 0.964706, 0.654902)
+shader_parameter/murkiness = 0.5
+shader_parameter/edge_weight = Vector3(0.8, 0.8, 0.8)
+shader_parameter/v_simulation = SubResource("ViewportTexture_kmc7l")
+shader_parameter/simulation = SubResource("ViewportTexture_4nlpa")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ob4bc"]
+material = SubResource("ShaderMaterial_1qvsc")
+size = Vector2(14, 14)
+subdivide_width = 100
+subdivide_depth = 100
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1djka"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4txsv"]
+material = SubResource("StandardMaterial3D_1djka")
+
+[sub_resource type="Animation" id="Animation_ej0rx"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 5.11918, 0)
+
+[sub_resource type="Animation" id="Animation_wkepb"]
+resource_name = "bounce"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 5.11918, 0, 0.8, 1, 0, 2.25, 0, 1.5, 1, 0, 5.11918, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ei3ge"]
+_data = {
+"RESET": SubResource("Animation_ej0rx"),
+"bounce": SubResource("Animation_wkepb")
+}
+
+[node name="shader_test" type="Node3D"]
+
+[node name="StylizedWater" type="Node3D" parent="."]
+script = ExtResource("1_kd41s")
+
+[node name="Simulation" type="SubViewport" parent="StylizedWater"]
+size = Vector2i(1024, 1024)
+render_target_clear_mode = 2
+render_target_update_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="StylizedWater/Simulation"]
+light_mask = 524288
+visibility_layer = 524288
+material = SubResource("ShaderMaterial_1gjb5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SimulationBuffer" type="SubViewport" parent="StylizedWater"]
+size = Vector2i(1024, 1024)
+render_target_clear_mode = 2
+render_target_update_mode = 4
+
+[node name="ColorRect" type="ColorRect" parent="StylizedWater/SimulationBuffer"]
+light_mask = 524288
+visibility_layer = 524288
+material = SubResource("ShaderMaterial_7begn")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Collision" type="SubViewport" parent="StylizedWater"]
+size = Vector2i(1024, 1024)
+render_target_update_mode = 4
+
+[node name="WaterCam" type="Camera3D" parent="StylizedWater/Collision"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -2, 0)
+keep_aspect = 0
+cull_mask = 524288
+environment = SubResource("Environment_dj1c8")
+projection = 1
+current = true
+size = 14.0
+near = 0.01
+far = 5.0
+
+[node name="Water" type="MeshInstance3D" parent="StylizedWater"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+mesh = SubResource("PlaneMesh_ob4bc")
+skeleton = NodePath("../..")
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="MainCamera" type="Camera3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 0.972239, 0.233988, 0, -0.233988, 0.972239, 0.158157, 7.48913, 9.32288)
+cull_mask = 524287
+current = true
+
+[node name="Pool3D" type="CSGCombiner3D" parent="World"]
+
+[node name="Outer" type="CSGBox3D" parent="World/Pool3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+size = Vector3(16, 16, 16)
+
+[node name="Inner" type="CSGBox3D" parent="World/Pool3D"]
+operation = 2
+size = Vector3(14, 8, 14)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(0.84346, 0.278024, 0.459649, -0.534085, 0.342124, 0.773113, 0.0576872, -0.897582, 0.437057, 0, 19.1224, 7.81059)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = ExtResource("4_8l1uh")
+
+[node name="Tests" type="Node3D" parent="."]
+
+[node name="Ball" type="Node3D" parent="Tests"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.11918, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Tests/Ball"]
+mesh = SubResource("SphereMesh_4txsv")
+
+[node name="WaterCollision" type="MeshInstance3D" parent="Tests/Ball"]
+layers = 524288
+mesh = SubResource("SphereMesh_4txsv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tests/Ball"]
+libraries = {
+"": SubResource("AnimationLibrary_ei3ge")
+}
