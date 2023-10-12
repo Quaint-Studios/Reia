@@ -44,24 +44,32 @@ viewport_path = NodePath("StylizedWater/Simulation")
 resource_local_to_scene = true
 render_priority = -1
 shader = ExtResource("1_q8ku7")
+shader_parameter/noise_add_mul_ratio = 1.0
+shader_parameter/noise_power = 2.0
+shader_parameter/noise_strength = 1.0
+shader_parameter/noise_strength2 = 1.5
+shader_parameter/noise_speed = 0.0500002
+shader_parameter/noise_speed2 = 0.0250002
 shader_parameter/amplitude = 0.5
 shader_parameter/wave_speed = 2.0
 shader_parameter/wave_frequency = 0.800001
 shader_parameter/wave_scale = 0.8
 shader_parameter/refraction_strength = 0.1
 shader_parameter/viewport_size = Vector2(512, 512)
-shader_parameter/deep_water = Color(0, 0.0588235, 0.305882, 0.964706)
-shader_parameter/shallow_water = Color(0.160784, 0.811765, 0.964706, 0.654902)
-shader_parameter/murkiness = 0.5
-shader_parameter/edge_weight = Vector3(0.8, 0.8, 0.8)
+shader_parameter/deep_water = Color(0, 0.156863, 0.611765, 0.964706)
+shader_parameter/shallow_water = Color(0, 0.180392, 0.333333, 0.921569)
+shader_parameter/murkiness = 0.3
+shader_parameter/color_weight = Vector3(0.8, 0.8, 0.8)
+shader_parameter/mat_metallic = 0.25
+shader_parameter/mat_roughness = 0.5
 shader_parameter/v_simulation = SubResource("ViewportTexture_kmc7l")
 shader_parameter/simulation = SubResource("ViewportTexture_4nlpa")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ob4bc"]
 material = SubResource("ShaderMaterial_1qvsc")
 size = Vector2(14, 14)
-subdivide_width = 10
-subdivide_depth = 10
+subdivide_width = 50
+subdivide_depth = 50
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_835ng"]
 render_priority = 0
@@ -112,7 +120,6 @@ _data = {
 script = ExtResource("1_kd41s")
 
 [node name="Simulation" type="SubViewport" parent="StylizedWater"]
-render_target_clear_mode = 2
 render_target_update_mode = 4
 
 [node name="ColorRect" type="ColorRect" parent="StylizedWater/Simulation"]
@@ -126,7 +133,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SimulationBuffer" type="SubViewport" parent="StylizedWater"]
-render_target_clear_mode = 2
 render_target_update_mode = 4
 
 [node name="ColorRect" type="ColorRect" parent="StylizedWater/SimulationBuffer"]
