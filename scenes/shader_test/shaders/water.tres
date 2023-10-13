@@ -835,76 +835,8 @@ void fragment() {
 
 
 }
-
-void light() {
-// VaryingGetter:3
-	vec3 n_out3p0 = old_pos;
-
-
-// DerivativeFunc:12
-	vec3 n_out12p0 = dFdx(n_out3p0);
-
-
-// VectorLen:9
-	float n_out9p0 = length(vec2(n_out12p0.xy));
-
-
-// DerivativeFunc:13
-	vec3 n_out13p0 = dFdy(n_out3p0);
-
-
-// VectorLen:7
-	float n_out7p0 = length(vec2(n_out13p0.xy));
-
-
-// FloatOp:2
-	float n_out2p0 = n_out9p0 * n_out7p0;
-
-
-// VaryingGetter:5
-	vec3 n_out5p0 = new_pos;
-
-
-// DerivativeFunc:14
-	vec3 n_out14p0 = dFdx(n_out5p0);
-
-
-// VectorLen:6
-	float n_out6p0 = length(n_out14p0);
-
-
-// DerivativeFunc:15
-	vec3 n_out15p0 = dFdy(n_out5p0);
-
-
-// VectorLen:8
-	float n_out8p0 = length(vec2(n_out15p0.xy));
-
-
-// FloatOp:4
-	float n_out4p0 = n_out6p0 * n_out8p0;
-
-
-// FloatOp:10
-	float n_out10p0 = n_out2p0 / n_out4p0;
-
-
-// FloatOp:11
-	float n_in11p1 = 0.20000;
-	float n_out11p0 = n_out10p0 * n_in11p1;
-
-
-// VectorCompose:16
-	vec4 n_out16p0 = vec4(n_out11p0, n_out11p0, n_out11p0, n_out11p0);
-
-
-// Output:0
-	DIFFUSE_LIGHT = vec3(n_out16p0.xyz);
-
-
-}
 "
-graph_offset = Vector2(12.3481, -320.667)
+graph_offset = Vector2(-687.783, -438.342)
 varyings/new_pos = "0,4"
 varyings/old_pos = "0,4"
 nodes/vertex/0/position = Vector2(1800, 660)
@@ -1138,4 +1070,4 @@ nodes/light/15/node = SubResource("VisualShaderNodeDerivativeFunc_grufm")
 nodes/light/15/position = Vector2(-546.048, 270.056)
 nodes/light/16/node = SubResource("VisualShaderNodeVectorCompose_8s5t6")
 nodes/light/16/position = Vector2(332.722, 9.48407)
-nodes/light/connections = PackedInt32Array(12, 0, 9, 0, 13, 0, 7, 0, 7, 0, 2, 1, 9, 0, 2, 0, 3, 0, 12, 0, 3, 0, 13, 0, 14, 0, 6, 0, 15, 0, 8, 0, 8, 0, 4, 1, 6, 0, 4, 0, 5, 0, 14, 0, 5, 0, 15, 0, 2, 0, 10, 0, 4, 0, 10, 1, 10, 0, 11, 0, 11, 0, 16, 0, 11, 0, 16, 1, 11, 0, 16, 2, 11, 0, 16, 3, 16, 0, 0, 0)
+nodes/light/connections = PackedInt32Array(12, 0, 9, 0, 13, 0, 7, 0, 7, 0, 2, 1, 9, 0, 2, 0, 3, 0, 12, 0, 3, 0, 13, 0, 14, 0, 6, 0, 15, 0, 8, 0, 8, 0, 4, 1, 6, 0, 4, 0, 5, 0, 14, 0, 5, 0, 15, 0, 2, 0, 10, 0, 4, 0, 10, 1, 10, 0, 11, 0, 11, 0, 16, 0, 11, 0, 16, 1, 11, 0, 16, 2, 11, 0, 16, 3)
