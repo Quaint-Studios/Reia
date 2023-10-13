@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=33 format=3 uid="uid://c6xa27alwomtc"]
+[gd_resource type="VisualShader" load_steps=32 format=3 uid="uid://c6xa27alwomtc"]
 
 [sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_awjma"]
 default_input_values = [0, 1.0, 1, 512.0]
@@ -56,7 +56,7 @@ op_type = 0
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_8kmgg"]
 parameter_name = "attenuation"
 default_value_enabled = true
-default_value = 0.999
+default_value = 0.995
 
 [sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_vgise"]
 default_input_values = [0, 0.0, 1, 0.0, 2, 0.0, 3, 0.0]
@@ -74,7 +74,7 @@ default_value_enabled = true
 default_value = 3.0
 
 [sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_mawed"]
-size = Vector2(851.143, 599.228)
+size = Vector2(796.225, 457.257)
 expression = "output = (2.0 * c.r - c.g + phase * (
 	texture(sim_tex, uv - duv.zy).r +
 	texture(sim_tex, uv + duv.zy).r +
@@ -120,10 +120,6 @@ if(prev_col > 0.0 && col == 0.0) {
 
 output = p;"
 
-[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_h4oxf"]
-default_input_values = [0, 0.0, 1, 1.002]
-operator = 3
-
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_2llux"]
 input_name = "uv"
 
@@ -141,7 +137,7 @@ render_mode blend_mix;
 
 uniform sampler2D sim_tex : source_color;
 uniform float phase = 0.20000000298023;
-uniform float attenuation = 0.9990000128746;
+uniform float attenuation = 0.99500000476837;
 uniform float delta_uv = 3;
 uniform vec2 viewport_size = vec2(512.000000, 512.000000);
 uniform sampler2D col_tex;
@@ -258,14 +254,9 @@ void fragment() {
 	}
 
 
-// FloatOp:60
-	float n_in60p1 = 1.00200;
-	float n_out60p0 = n_out15p1 / n_in60p1;
-
-
 // VectorCompose:46
 	float n_in46p3 = 0.00000;
-	vec4 n_out46p0 = vec4(n_out59p0, n_out60p0, n_out57p0, n_in46p3);
+	vec4 n_out46p0 = vec4(n_out59p0, n_out15p1, n_out57p0, n_in46p3);
 
 
 // Output:0
@@ -274,6 +265,7 @@ void fragment() {
 
 }
 "
+graph_offset = Vector2(-1433.86, -934.257)
 mode = 1
 flags/light_only = false
 nodes/vertex/0/position = Vector2(700, 180)
@@ -309,7 +301,7 @@ nodes/fragment/17/position = Vector2(-1980, 760)
 nodes/fragment/21/node = SubResource("VisualShaderNodeParameterRef_r8x2c")
 nodes/fragment/21/position = Vector2(-1620, 980)
 nodes/fragment/32/node = SubResource("VisualShaderNodeExpression_yc80b")
-nodes/fragment/32/position = Vector2(-2540, 1080)
+nodes/fragment/32/position = Vector2(-2540, 960)
 nodes/fragment/32/size = Vector2(393.471, 197.916)
 nodes/fragment/32/input_ports = "0,4,duv3;1,0,delta_uv;"
 nodes/fragment/32/output_ports = "0,4,output;"
@@ -328,7 +320,7 @@ nodes/fragment/48/node = SubResource("VisualShaderNodeVectorCompose_n3ugj")
 nodes/fragment/48/position = Vector2(-1780, 520)
 nodes/fragment/50/node = SubResource("VisualShaderNodeExpression_mawed")
 nodes/fragment/50/position = Vector2(-1260, 960)
-nodes/fragment/50/size = Vector2(851.143, 599.228)
+nodes/fragment/50/size = Vector2(796.225, 457.257)
 nodes/fragment/50/input_ports = "0,5,c;1,0,phase;2,8,sim_tex;3,3,uv;4,4,duv;5,0,attenuation;"
 nodes/fragment/50/output_ports = "0,0,output;"
 nodes/fragment/50/expression = "output = (2.0 * c.r - c.g + phase * (
@@ -368,6 +360,4 @@ if(prev_col > 0.0 && col == 0.0) {
 }
 
 output = p;"
-nodes/fragment/60/node = SubResource("VisualShaderNodeFloatOp_h4oxf")
-nodes/fragment/60/position = Vector2(-560, 700)
-nodes/fragment/connections = PackedInt32Array(7, 0, 8, 0, 16, 0, 15, 2, 17, 0, 15, 0, 11, 0, 12, 1, 10, 0, 12, 0, 12, 0, 32, 0, 14, 0, 32, 1, 33, 0, 35, 0, 35, 0, 10, 1, 35, 1, 11, 1, 9, 0, 48, 1, 8, 0, 48, 0, 51, 0, 50, 5, 21, 0, 50, 1, 15, 0, 50, 0, 32, 0, 50, 4, 16, 0, 50, 2, 46, 0, 0, 0, 48, 0, 57, 1, 58, 0, 57, 0, 50, 0, 59, 2, 8, 1, 9, 1, 7, 0, 50, 3, 57, 0, 59, 0, 15, 3, 59, 1, 59, 0, 46, 0, 57, 0, 46, 2, 15, 1, 60, 0, 60, 0, 46, 1)
+nodes/fragment/connections = PackedInt32Array(7, 0, 8, 0, 16, 0, 15, 2, 17, 0, 15, 0, 11, 0, 12, 1, 10, 0, 12, 0, 12, 0, 32, 0, 14, 0, 32, 1, 33, 0, 35, 0, 9, 0, 48, 1, 8, 0, 48, 0, 51, 0, 50, 5, 21, 0, 50, 1, 15, 0, 50, 0, 32, 0, 50, 4, 16, 0, 50, 2, 46, 0, 0, 0, 48, 0, 57, 1, 58, 0, 57, 0, 50, 0, 59, 2, 8, 1, 9, 1, 7, 0, 50, 3, 57, 0, 59, 0, 15, 3, 59, 1, 59, 0, 46, 0, 57, 0, 46, 2, 35, 1, 11, 1, 35, 0, 10, 1, 15, 1, 46, 1)
