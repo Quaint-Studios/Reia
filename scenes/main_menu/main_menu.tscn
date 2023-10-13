@@ -20,6 +20,8 @@ corner_radius_bottom_left = 8
 Panel/styles/panel = SubResource("StyleBoxFlat_nxt2h")
 
 [node name="Map_MainMenu" type="Node"]
+script = ExtResource("1_3638y")
+menu_music = ExtResource("3_3o1dl")
 
 [node name="LightmapGI" type="LightmapGI" parent="."]
 visible = false
@@ -50,7 +52,8 @@ environment = ExtResource("2_ofhs3")
 [node name="Terrain" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.283048, 0, 0)
 
-[node name="female_player" parent="Terrain" instance=ExtResource("7_g5ofp")]
+[node name="Character" parent="Terrain" instance=ExtResource("7_g5ofp")]
+unique_name_in_owner = true
 transform = Transform3D(-0.895567, -0.190233, -0.426465, -0.265899, 0.965995, 0.127482, 0.383873, 0.225312, -0.906629, 6.4156, 1.14787, -13.0171)
 
 [node name="Island" type="CSGCombiner3D" parent="Terrain"]
@@ -140,8 +143,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_3638y")
-menu_music = ExtResource("3_3o1dl")
 
 [node name="Margins" type="MarginContainer" parent="UI/Control/Selectors"]
 layout_mode = 1
@@ -424,16 +425,16 @@ horizontal_scroll_mode = 0
 layout_mode = 2
 theme_override_constants/separation = 36
 
-[connection signal="pressed" from="UI/Control/Selectors/Margins/Main/Play" to="UI/Control/Selectors" method="_on_play_pressed"]
-[connection signal="pressed" from="UI/Control/Selectors/Margins/Main/Settings" to="UI/Control/Selectors" method="_on_settings_pressed"]
-[connection signal="pressed" from="UI/Control/Selectors/Margins/Main/Exit" to="UI/Control/Selectors" method="_on_exit_pressed"]
-[connection signal="pressed" from="UI/Control/Selectors/Margins/Settings/Controls" to="UI/Control/Selectors" method="_on_controls_pressed"]
-[connection signal="pressed" from="UI/Control/Selectors/Margins/Settings/Volume" to="UI/Control/Selectors" method="_on_volume_pressed"]
-[connection signal="pressed" from="UI/Control/Selectors/Margins/Settings/Back" to="UI/Control/Selectors" method="_on_back_pressed"]
-[connection signal="pressed" from="UI/Control/Selectors/Margins/Controls/Back" to="UI/Control/Selectors" method="_on_back_pressed"]
-[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/MasterContainer/MasterVolume" to="UI/Control/Selectors" method="_on_master_volume_changed"]
-[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/Music Container/MusicVolume" to="UI/Control/Selectors" method="_on_music_volume_changed"]
-[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/SFXContainer/SFXVolume" to="UI/Control/Selectors" method="_on_sfx_volume_changed"]
-[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/UIContainer/UIVolume" to="UI/Control/Selectors" method="_on_ui_volume_changed"]
-[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/DialogueContainer/DialogueVolume" to="UI/Control/Selectors" method="_on_dialogue_volume_changed"]
-[connection signal="pressed" from="UI/Control/Selectors/Margins/Volume/Back" to="UI/Control/Selectors" method="_on_back_pressed"]
+[connection signal="pressed" from="UI/Control/Selectors/Margins/Main/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="UI/Control/Selectors/Margins/Main/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="UI/Control/Selectors/Margins/Main/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="UI/Control/Selectors/Margins/Settings/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="UI/Control/Selectors/Margins/Settings/Volume" to="." method="_on_volume_pressed"]
+[connection signal="pressed" from="UI/Control/Selectors/Margins/Settings/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="UI/Control/Selectors/Margins/Controls/Back" to="." method="_on_back_pressed"]
+[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/MasterContainer/MasterVolume" to="." method="_on_master_volume_changed"]
+[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/Music Container/MusicVolume" to="." method="_on_music_volume_changed"]
+[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/SFXContainer/SFXVolume" to="." method="_on_sfx_volume_changed"]
+[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/UIContainer/UIVolume" to="." method="_on_ui_volume_changed"]
+[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/DialogueContainer/DialogueVolume" to="." method="_on_dialogue_volume_changed"]
+[connection signal="pressed" from="UI/Control/Selectors/Margins/Volume/Back" to="." method="_on_back_pressed"]
