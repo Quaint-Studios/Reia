@@ -1,12 +1,16 @@
-extends Control
+extends Node
 
 @export var menu_music: AudioStream
 
 @onready var packed_scene_reia = preload(SceneSelector.REIA)
 
 func _ready():
+	_prepare_background()
 	_prepare_sound()
 	pass
+
+func _prepare_background():
+	%Character.get_node("AnimationPlayer").play("IdleR")
 
 func _prepare_sound():
 	SoundManager.set_sound_volume(0.5)
