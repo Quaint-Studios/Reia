@@ -17,9 +17,9 @@ viewport_path = NodePath("StylizedWater/SimulationBuffer")
 resource_local_to_scene = true
 shader = ExtResource("1_6kd1s")
 shader_parameter/phase = 0.2
-shader_parameter/attenuation = 0.999
-shader_parameter/delta_uv = 3.0
-shader_parameter/viewport_size = Vector2(512, 512)
+shader_parameter/attenuation = 0.995
+shader_parameter/delta_uv = 5.0
+shader_parameter/viewport_size = Vector2(1024, 1024)
 shader_parameter/sim_tex = SubResource("ViewportTexture_b586q")
 shader_parameter/col_tex = SubResource("ViewportTexture_3kbj8")
 
@@ -133,6 +133,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SimulationBuffer" type="SubViewport" parent="StylizedWater"]
+size = Vector2i(1024, 1024)
 render_target_update_mode = 4
 
 [node name="ColorRect" type="ColorRect" parent="StylizedWater/SimulationBuffer"]
@@ -146,6 +147,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Collision" type="SubViewport" parent="StylizedWater"]
+size = Vector2i(1024, 1024)
 render_target_update_mode = 4
 
 [node name="WaterCam" type="Camera3D" parent="StylizedWater/Collision"]
