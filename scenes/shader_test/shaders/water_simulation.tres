@@ -47,7 +47,7 @@ param_type = 4
 [sub_resource type="VisualShaderNodeVec2Parameter" id="VisualShaderNodeVec2Parameter_juj36"]
 parameter_name = "viewport_size"
 default_value_enabled = true
-default_value = Vector2(512, 512)
+default_value = Vector2(1024, 1024)
 
 [sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_0yp3i"]
 default_input_values = [0, Vector2(0, 0)]
@@ -139,7 +139,7 @@ uniform sampler2D sim_tex : source_color;
 uniform float phase = 0.20000000298023;
 uniform float attenuation = 0.99500000476837;
 uniform float delta_uv = 3;
-uniform vec2 viewport_size = vec2(512.000000, 512.000000);
+uniform vec2 viewport_size = vec2(1024.000000, 1024.000000);
 uniform sampler2D col_tex;
 
 
@@ -265,7 +265,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-1433.86, -934.257)
+graph_offset = Vector2(-1035.16, -953.365)
 mode = 1
 flags/light_only = false
 nodes/vertex/0/position = Vector2(700, 180)
