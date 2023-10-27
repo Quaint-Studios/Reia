@@ -1,86 +1,12 @@
-[gd_scene load_steps=26 format=3 uid="uid://ci8xxveoikhj1"]
+[gd_scene load_steps=11 format=3 uid="uid://ci8xxveoikhj1"]
 
-[ext_resource type="Shader" uid="uid://c6xa27alwomtc" path="res://scenes/shader_test/shaders/water_simulation.tres" id="1_6kd1s"]
-[ext_resource type="Script" path="res://scenes/shader_test/shaders/water_helper.gd" id="1_kd41s"]
-[ext_resource type="Shader" uid="uid://be1vq213btatp" path="res://scenes/shader_test/shaders/water.tres" id="1_q8ku7"]
-[ext_resource type="Shader" uid="uid://ble2knw8iu65w" path="res://scenes/shader_test/shaders/water_simulation_buffer.tres" id="3_4rtb3"]
+[ext_resource type="PackedScene" uid="uid://bu0tke3h67pf4" path="res://shaders/water/stylized_water.tscn" id="1_153o6"]
+[ext_resource type="Shader" uid="uid://bt8b5swyqde5g" path="res://shaders/water/assets/water_mask.tres" id="2_nc2q7"]
 [ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="4_8l1uh"]
-[ext_resource type="Shader" uid="uid://bt8b5swyqde5g" path="res://scenes/shader_test/shaders/water_mask.tres" id="5_6q6mx"]
-[ext_resource type="Texture2D" uid="uid://b72ynl13gwjug" path="res://shaders/water/water_caustics_a.tres" id="5_p7d00"]
-[ext_resource type="Texture2D" uid="uid://dq187kmadmrm4" path="res://shaders/water/water_caustics_b.tres" id="6_urmet"]
-[ext_resource type="Texture2D" uid="uid://8usqstks21qt" path="res://shaders/water/water_foam.tres" id="7_ju051"]
-[ext_resource type="Texture2D" uid="uid://b46fun4drry5l" path="res://shaders/water/simulation.tres" id="7_yedpj"]
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_3kbj8"]
-viewport_path = NodePath("StylizedWater/Collision")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_b586q"]
-viewport_path = NodePath("StylizedWater/SimulationBuffer")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1gjb5"]
-resource_local_to_scene = true
-shader = ExtResource("1_6kd1s")
-shader_parameter/phase = 0.1
-shader_parameter/attenuation = 0.995
-shader_parameter/delta_uv = 10.0
-shader_parameter/viewport_size = Vector2(1024, 1024)
-shader_parameter/sim_tex = SubResource("ViewportTexture_b586q")
-shader_parameter/col_tex = SubResource("ViewportTexture_3kbj8")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_ya6mw"]
-viewport_path = NodePath("StylizedWater/Simulation")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7begn"]
-resource_local_to_scene = true
-shader = ExtResource("3_4rtb3")
-shader_parameter/buffer = SubResource("ViewportTexture_ya6mw")
-
-[sub_resource type="Environment" id="Environment_dj1c8"]
-background_mode = 1
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_4u6eh"]
-resource_local_to_scene = true
-render_priority = -1
-shader = ExtResource("1_q8ku7")
-shader_parameter/metallic = 0.0
-shader_parameter/roughness = 0.01
-shader_parameter/specular = 2.0
-shader_parameter/deep_water = Color(0.556863, 0.819608, 0.890196, 0.333333)
-shader_parameter/shallow_water = Color(0.811765, 0.956863, 0.996078, 0.333333)
-shader_parameter/murkiness = 0.3
-shader_parameter/refraction = 0.1
-shader_parameter/color_factor = Vector4(0.5, 0.5, 0.5, 0.5)
-shader_parameter/foam_color = Color(1, 1, 1, 1)
-shader_parameter/foam_depth = 4.0
-shader_parameter/foam_size = 0.5
-shader_parameter/foam_speed = 0.01
-shader_parameter/foam_step_size = 4.0
-shader_parameter/foam_step_speed = 0.2
-shader_parameter/caustic_speed_a = 0.005
-shader_parameter/caustic_speed_b = 0.025
-shader_parameter/caustic_strength_a = 1.0
-shader_parameter/caustic_strength_b = 1.5
-shader_parameter/caustic_power = 3.0
-shader_parameter/caustic_type = 1.0
-shader_parameter/viewport_size = Vector2(1024, 1024)
-shader_parameter/wave_speed = 1.0
-shader_parameter/wave_frequency = 0.8
-shader_parameter/wave_scale = 0.2
-shader_parameter/sim_amplitude = 0.5
-shader_parameter/foam_texture = ExtResource("7_ju051")
-shader_parameter/caustic_a = ExtResource("5_p7d00")
-shader_parameter/caustic_b = ExtResource("6_urmet")
-shader_parameter/simulation = ExtResource("7_yedpj")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_ob4bc"]
-material = SubResource("ShaderMaterial_4u6eh")
-size = Vector2(14, 14)
-subdivide_width = 50
-subdivide_depth = 50
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_835ng"]
 render_priority = 0
-shader = ExtResource("5_6q6mx")
+shader = ExtResource("2_nc2q7")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_yqgen"]
 material = SubResource("ShaderMaterial_835ng")
@@ -123,56 +49,7 @@ _data = {
 
 [node name="shader_test" type="Node3D"]
 
-[node name="StylizedWater" type="Node3D" parent="."]
-script = ExtResource("1_kd41s")
-
-[node name="Simulation" type="SubViewport" parent="StylizedWater"]
-size = Vector2i(1024, 1024)
-render_target_update_mode = 4
-
-[node name="ColorRect" type="ColorRect" parent="StylizedWater/Simulation"]
-light_mask = 524288
-visibility_layer = 524288
-material = SubResource("ShaderMaterial_1gjb5")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SimulationBuffer" type="SubViewport" parent="StylizedWater"]
-size = Vector2i(1024, 1024)
-render_target_update_mode = 4
-
-[node name="ColorRect" type="ColorRect" parent="StylizedWater/SimulationBuffer"]
-light_mask = 524288
-visibility_layer = 524288
-material = SubResource("ShaderMaterial_7begn")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Collision" type="SubViewport" parent="StylizedWater"]
-size = Vector2i(1024, 1024)
-render_target_update_mode = 4
-
-[node name="WaterCam" type="Camera3D" parent="StylizedWater/Collision"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -2, 0)
-keep_aspect = 0
-cull_mask = 524288
-environment = SubResource("Environment_dj1c8")
-projection = 1
-current = true
-size = 14.0
-near = 0.01
-far = 5.0
-
-[node name="Water" type="MeshInstance3D" parent="StylizedWater"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
-mesh = SubResource("PlaneMesh_ob4bc")
-skeleton = NodePath("../..")
+[node name="StylizedWater" parent="." instance=ExtResource("1_153o6")]
 
 [node name="World" type="Node3D" parent="."]
 
