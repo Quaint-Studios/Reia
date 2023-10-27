@@ -10,7 +10,6 @@ func _ready():
 	var _col_tex = $Collision.get_texture()
 
 	water.mesh.surface_get_material(0).set_shader_parameter('simulation', sim_tex) # fragment
-	water.mesh.surface_get_material(0).set_shader_parameter('v_simulation', sim_tex) # vertex
 
 	if testing:
 		print("Testing the water shader. You can disable this variable later.")
