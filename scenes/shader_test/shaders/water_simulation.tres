@@ -34,7 +34,7 @@ parameter_name = "phase"
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_hwdod"]
 parameter_name = "phase"
 default_value_enabled = true
-default_value = 0.2
+default_value = 0.1
 
 [sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_yc80b"]
 size = Vector2(393.471, 197.916)
@@ -71,7 +71,7 @@ op_type = 0
 [sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_cense"]
 parameter_name = "delta_uv"
 default_value_enabled = true
-default_value = 3.0
+default_value = 10.0
 
 [sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_mawed"]
 size = Vector2(796.225, 457.257)
@@ -93,7 +93,7 @@ size = Vector2(1422.13, 422.061)
 title = "vec3 duv"
 
 [sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_vc6y4"]
-size = Vector2(1043.83, 694.949)
+size = Vector2(908.888, 585.537)
 title = "float p"
 
 [sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_aqs00"]
@@ -101,7 +101,7 @@ size = Vector2(1125.97, 312.643)
 title = "float col"
 
 [sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_iod4o"]
-size = Vector2(426.02, 225.25)
+size = Vector2(423.774, 232.028)
 expression = "output = texture(col_tex, col_uv).r;"
 
 [sub_resource type="VisualShaderNodeParameterRef" id="VisualShaderNodeParameterRef_vs0ov"]
@@ -136,9 +136,9 @@ code = "shader_type canvas_item;
 render_mode blend_mix;
 
 uniform sampler2D sim_tex : source_color;
-uniform float phase = 0.20000000298023;
+uniform float phase = 0.10000000149012;
 uniform float attenuation = 0.99500000476837;
-uniform float delta_uv = 3;
+uniform float delta_uv = 10;
 uniform vec2 viewport_size = vec2(1024.000000, 1024.000000);
 uniform sampler2D col_tex;
 
@@ -265,7 +265,7 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-1035.16, -953.365)
+graph_offset = Vector2(-839.127, 155.978)
 mode = 1
 flags/light_only = false
 nodes/vertex/0/position = Vector2(700, 180)
@@ -340,7 +340,7 @@ nodes/fragment/56/node = SubResource("VisualShaderNodeComment_aqs00")
 nodes/fragment/56/position = Vector2(-2200, 380)
 nodes/fragment/57/node = SubResource("VisualShaderNodeExpression_iod4o")
 nodes/fragment/57/position = Vector2(-1560, 420)
-nodes/fragment/57/size = Vector2(426.02, 225.25)
+nodes/fragment/57/size = Vector2(423.774, 232.028)
 nodes/fragment/57/input_ports = "0,8,col_tex;1,3,col_uv;"
 nodes/fragment/57/output_ports = "0,0,output;"
 nodes/fragment/57/expression = "output = texture(col_tex, col_uv).r;"
