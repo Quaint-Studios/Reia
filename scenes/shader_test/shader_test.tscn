@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ci8xxveoikhj1"]
+[gd_scene load_steps=26 format=3 uid="uid://ci8xxveoikhj1"]
 
 [ext_resource type="Shader" uid="uid://c6xa27alwomtc" path="res://scenes/shader_test/shaders/water_simulation.tres" id="1_6kd1s"]
 [ext_resource type="Script" path="res://scenes/shader_test/shaders/water_helper.gd" id="1_kd41s"]
@@ -6,6 +6,10 @@
 [ext_resource type="Shader" uid="uid://ble2knw8iu65w" path="res://scenes/shader_test/shaders/water_simulation_buffer.tres" id="3_4rtb3"]
 [ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="4_8l1uh"]
 [ext_resource type="Shader" uid="uid://bt8b5swyqde5g" path="res://scenes/shader_test/shaders/water_mask.tres" id="5_6q6mx"]
+[ext_resource type="Texture2D" uid="uid://b72ynl13gwjug" path="res://shaders/water/water_caustics_a.tres" id="5_p7d00"]
+[ext_resource type="Texture2D" uid="uid://dq187kmadmrm4" path="res://shaders/water/water_caustics_b.tres" id="6_urmet"]
+[ext_resource type="Texture2D" uid="uid://8usqstks21qt" path="res://shaders/water/water_foam.tres" id="7_ju051"]
+[ext_resource type="Texture2D" uid="uid://b46fun4drry5l" path="res://shaders/water/simulation.tres" id="7_yedpj"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_3kbj8"]
 viewport_path = NodePath("StylizedWater/Collision")
@@ -16,9 +20,9 @@ viewport_path = NodePath("StylizedWater/SimulationBuffer")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1gjb5"]
 resource_local_to_scene = true
 shader = ExtResource("1_6kd1s")
-shader_parameter/phase = 0.2
+shader_parameter/phase = 0.1
 shader_parameter/attenuation = 0.995
-shader_parameter/delta_uv = 5.0
+shader_parameter/delta_uv = 10.0
 shader_parameter/viewport_size = Vector2(1024, 1024)
 shader_parameter/sim_tex = SubResource("ViewportTexture_b586q")
 shader_parameter/col_tex = SubResource("ViewportTexture_3kbj8")
@@ -34,39 +38,42 @@ shader_parameter/buffer = SubResource("ViewportTexture_ya6mw")
 [sub_resource type="Environment" id="Environment_dj1c8"]
 background_mode = 1
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_4nlpa"]
-viewport_path = NodePath("StylizedWater/Simulation")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_kmc7l"]
-viewport_path = NodePath("StylizedWater/Simulation")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qvsc"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4u6eh"]
 resource_local_to_scene = true
 render_priority = -1
 shader = ExtResource("1_q8ku7")
-shader_parameter/noise_add_mul_ratio = 1.0
-shader_parameter/noise_power = 2.0
-shader_parameter/noise_strength = 1.0
-shader_parameter/noise_strength2 = 1.5
-shader_parameter/noise_speed = 0.0500002
-shader_parameter/noise_speed2 = 0.0250002
-shader_parameter/amplitude = 0.5
-shader_parameter/wave_speed = 2.0
-shader_parameter/wave_frequency = 0.800001
-shader_parameter/wave_scale = 0.8
-shader_parameter/refraction_strength = 0.1
-shader_parameter/viewport_size = Vector2(512, 512)
-shader_parameter/deep_water = Color(0, 0.156863, 0.611765, 0.964706)
-shader_parameter/shallow_water = Color(0, 0.180392, 0.333333, 0.921569)
+shader_parameter/metallic = 0.0
+shader_parameter/roughness = 0.01
+shader_parameter/specular = 2.0
+shader_parameter/deep_water = Color(0.556863, 0.819608, 0.890196, 0.333333)
+shader_parameter/shallow_water = Color(0.811765, 0.956863, 0.996078, 0.333333)
 shader_parameter/murkiness = 0.3
-shader_parameter/color_weight = Vector3(0.8, 0.8, 0.8)
-shader_parameter/mat_metallic = 0.25
-shader_parameter/mat_roughness = 0.5
-shader_parameter/v_simulation = SubResource("ViewportTexture_kmc7l")
-shader_parameter/simulation = SubResource("ViewportTexture_4nlpa")
+shader_parameter/refraction = 0.1
+shader_parameter/color_factor = Vector4(0.5, 0.5, 0.5, 0.5)
+shader_parameter/foam_color = Color(1, 1, 1, 1)
+shader_parameter/foam_depth = 4.0
+shader_parameter/foam_size = 0.5
+shader_parameter/foam_speed = 0.01
+shader_parameter/foam_step_size = 4.0
+shader_parameter/foam_step_speed = 0.2
+shader_parameter/caustic_speed_a = 0.005
+shader_parameter/caustic_speed_b = 0.025
+shader_parameter/caustic_strength_a = 1.0
+shader_parameter/caustic_strength_b = 1.5
+shader_parameter/caustic_power = 3.0
+shader_parameter/caustic_type = 1.0
+shader_parameter/viewport_size = Vector2(1024, 1024)
+shader_parameter/wave_speed = 1.0
+shader_parameter/wave_frequency = 0.8
+shader_parameter/wave_scale = 0.2
+shader_parameter/sim_amplitude = 0.5
+shader_parameter/foam_texture = ExtResource("7_ju051")
+shader_parameter/caustic_a = ExtResource("5_p7d00")
+shader_parameter/caustic_b = ExtResource("6_urmet")
+shader_parameter/simulation = ExtResource("7_yedpj")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ob4bc"]
-material = SubResource("ShaderMaterial_1qvsc")
+material = SubResource("ShaderMaterial_4u6eh")
 size = Vector2(14, 14)
 subdivide_width = 50
 subdivide_depth = 50
@@ -120,6 +127,7 @@ _data = {
 script = ExtResource("1_kd41s")
 
 [node name="Simulation" type="SubViewport" parent="StylizedWater"]
+size = Vector2i(1024, 1024)
 render_target_update_mode = 4
 
 [node name="ColorRect" type="ColorRect" parent="StylizedWater/Simulation"]
@@ -195,6 +203,13 @@ size = Vector3(2, 8, 2)
 [node name="WaterMask" type="MeshInstance3D" parent="World/Pool3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 6)
 mesh = SubResource("PlaneMesh_yqgen")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Pool3D"]
+transform = Transform3D(0.551573, 0, -0.834127, 0, 1, 0, 0.834127, 0, 0.551573, -3.98765, 0.678325, -3.84156)
+size = Vector3(5.06332, 6.52411, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/Pool3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67584, 3.42398, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(0.84346, 0.278024, 0.459649, -0.534085, 0.342124, 0.773113, 0.0576872, -0.897582, 0.437057, 0, 19.1224, 7.81059)
