@@ -1,13 +1,13 @@
 [gd_scene load_steps=17 format=3 uid="uid://bu0tke3h67pf4"]
 
-[ext_resource type="Script" path="res://scenes/shader_test/shaders/water_helper.gd" id="1_bdns5"]
-[ext_resource type="Shader" uid="uid://c6xa27alwomtc" path="res://scenes/shader_test/shaders/water_simulation.tres" id="2_im4mw"]
-[ext_resource type="Shader" uid="uid://ble2knw8iu65w" path="res://scenes/shader_test/shaders/water_simulation_buffer.tres" id="3_t000f"]
-[ext_resource type="Shader" uid="uid://be1vq213btatp" path="res://scenes/shader_test/shaders/water.tres" id="4_mei3p"]
-[ext_resource type="Texture2D" uid="uid://b72ynl13gwjug" path="res://shaders/water/water_caustics_a.tres" id="5_6byin"]
-[ext_resource type="Texture2D" uid="uid://dq187kmadmrm4" path="res://shaders/water/water_caustics_b.tres" id="6_xh81f"]
-[ext_resource type="Texture2D" uid="uid://8usqstks21qt" path="res://shaders/water/water_foam.tres" id="7_wpwb7"]
-[ext_resource type="Texture2D" uid="uid://b46fun4drry5l" path="res://shaders/water/simulation.tres" id="8_ijuq5"]
+[ext_resource type="Script" path="res://shaders/water/assets/water_helper.gd" id="1_bdns5"]
+[ext_resource type="Shader" uid="uid://c6xa27alwomtc" path="res://shaders/water/assets/water_simulation.tres" id="2_im4mw"]
+[ext_resource type="Shader" uid="uid://ble2knw8iu65w" path="res://shaders/water/assets/water_simulation_buffer.tres" id="3_t000f"]
+[ext_resource type="Shader" uid="uid://be1vq213btatp" path="res://shaders/water/assets/water_shader.tres" id="4_mei3p"]
+[ext_resource type="Texture2D" uid="uid://b72ynl13gwjug" path="res://shaders/water/assets/water_caustics_a.tres" id="5_6byin"]
+[ext_resource type="Texture2D" uid="uid://dq187kmadmrm4" path="res://shaders/water/assets/water_caustics_b.tres" id="6_xh81f"]
+[ext_resource type="Texture2D" uid="uid://8usqstks21qt" path="res://shaders/water/assets/water_foam.tres" id="7_wpwb7"]
+[ext_resource type="Texture2D" uid="uid://b46fun4drry5l" path="res://shaders/water/assets/simulation.tres" id="8_ijuq5"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_3kbj8"]
 viewport_path = NodePath("StylizedWater/Collision")
