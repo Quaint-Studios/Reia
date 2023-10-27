@@ -1,0 +1,4 @@
+[gd_resource type="ViewportTexture" format=3 uid="uid://b46fun4drry5l"]
+
+[resource]
+viewport_path = NodePath("StylizedWater/Simulation")
