@@ -1,0 +1,16 @@
+[gd_resource type="NoiseTexture2D" load_steps=2 format=3 uid="uid://dq187kmadmrm4"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_t8bic"]
+noise_type = 2
+seed = 7331
+frequency = 0.035
+fractal_type = 0
+cellular_distance_function = 1
+cellular_jitter = 1.0
+
+[resource]
+width = 1024
+height = 1024
+seamless = true
+seamless_blend_skirt = 0.145
+noise = SubResource("FastNoiseLite_t8bic")
