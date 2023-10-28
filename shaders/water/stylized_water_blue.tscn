@@ -1,12 +1,12 @@
-[gd_scene load_steps=12 format=3 uid="uid://bu0tke3h67pf4"]
+[gd_scene load_steps=12 format=3 uid="uid://bo1vtvp2wnp6f"]
 
-[ext_resource type="Script" path="res://shaders/water/assets/water_helper.gd" id="1_bdns5"]
-[ext_resource type="Material" uid="uid://laoetxmgcapy" path="res://shaders/water/stylized_water.material" id="2_ihupq"]
-[ext_resource type="Shader" uid="uid://c6xa27alwomtc" path="res://shaders/water/assets/water_simulation.tres" id="2_im4mw"]
-[ext_resource type="Shader" uid="uid://ble2knw8iu65w" path="res://shaders/water/assets/water_simulation_buffer.tres" id="3_t000f"]
+[ext_resource type="Script" path="res://shaders/water/assets/water_helper.gd" id="1_vduo2"]
+[ext_resource type="Material" uid="uid://dl32cm0ja7plm" path="res://shaders/water/stylized_water_blue.material" id="2_dclcg"]
+[ext_resource type="Shader" uid="uid://c6xa27alwomtc" path="res://shaders/water/assets/water_simulation.tres" id="3_csvor"]
+[ext_resource type="Shader" uid="uid://ble2knw8iu65w" path="res://shaders/water/assets/water_simulation_buffer.tres" id="4_c2is6"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ob4bc"]
-material = ExtResource("2_ihupq")
+material = ExtResource("2_dclcg")
 size = Vector2(14, 14)
 subdivide_width = 50
 subdivide_depth = 50
@@ -19,7 +19,7 @@ viewport_path = NodePath("SimulationBuffer")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1gjb5"]
 resource_local_to_scene = true
-shader = ExtResource("2_im4mw")
+shader = ExtResource("3_csvor")
 shader_parameter/phase = 0.1
 shader_parameter/attenuation = 0.995
 shader_parameter/delta_uv = 10.0
@@ -32,14 +32,14 @@ viewport_path = NodePath("Simulation")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7begn"]
 resource_local_to_scene = true
-shader = ExtResource("3_t000f")
+shader = ExtResource("4_c2is6")
 shader_parameter/buffer = SubResource("ViewportTexture_mx2qp")
 
 [sub_resource type="Environment" id="Environment_dj1c8"]
 background_mode = 1
 
-[node name="StylizedWater" type="Node3D"]
-script = ExtResource("1_bdns5")
+[node name="StylizedWaterBlue" type="Node3D"]
+script = ExtResource("1_vduo2")
 
 [node name="Water" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
