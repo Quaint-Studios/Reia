@@ -1,0 +1,21 @@
+{
+	"version": "1.0.0.1",
+	"stage": "pre-alpha",
+	"date": {
+		"month": "9",
+		"day": "22",
+		"year": "2023",
+		"hour": 05,
+		"minute": 15
+	},
+	"description": "Slowly getting there...",
+	"changes": {
+		"add": [
+			"The lighting is improved. But... it could be better!",
+			"We now have... COMBAT! You can click things.",
+			"Two mobs exist now, an enemy and an npc to test combat.",
+			"mobs other than yourself now have health bars you can see!",
+		],
+	},
+	"extra": "Only if we had something to fight with other than our fists."
+}

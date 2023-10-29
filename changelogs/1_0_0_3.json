@@ -1,0 +1,21 @@
+{
+	"version": "1.0.0.3",
+	"stage": "pre-alpha",
+	"date": {
+		"month": "10",
+		"day": "1",
+		"year": "2023",
+		"hour": 14,
+		"minute": 06
+	},
+	"description": "New character and animation.",
+	"changes": {
+		"add": [
+			"Finally animated the character model."
+		],
+		"change": [
+			"The character model has been changed. In the wise words of almost everyone who has seen it, \"She do be thicc.\""
+		],
+	},
+	"extra": "I don't believe anyone truly likes rigging and the time it consumes."
+}

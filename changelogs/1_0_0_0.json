@@ -1,0 +1,21 @@
+{
+	"version": "1.0.0.0",
+	"stage": "pre-alpha",
+	"date": {
+		"month": "9",
+		"day": "21",
+		"year": "2023",
+		"hour": 14,
+		"minute": 59
+	},
+	"description": "This is the beginning! Migrating from Unity to Godot.",
+	"changes": {
+		"add": [
+			"A basic level was created to test some features of the project.",
+		],
+		"remove": [
+			"All Unity-related assets have been removed."
+		]
+	},
+	"extra": "It works!"
+}

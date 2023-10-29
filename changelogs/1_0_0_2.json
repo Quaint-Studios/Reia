@@ -1,0 +1,30 @@
+{
+	"version": "1.0.0.2",
+	"stage": "pre-alpha",
+	"date": {
+		"month": "9",
+		"day": "25",
+		"year": "2023",
+		"hour": 02,
+		"minute": 00
+	},
+	"description": "Items and Inventory system, better lighting, better ui, papa-- oh.",
+	"changes": {
+		"add": [
+			"Oooo... Music! There's not a sound manager so you can have volume for sound effects, music, dialogue, and your interface! Sorry, no volume for your face yet.",
+			"The main menu has a temporary logo finally. Programmer art, am I right? It gets the job done.",
+			"Your mouse now gets eaten by the game when you're playing. It's okay. Just press escape and it'll spit it back out.",
+			"There's an inventory system now! It can hold items. That's about it. Press I to see some wonderful programmer art. Some effort was actually put into this one."
+		],
+		"remove": [
+			"Removed your ability to ben--resize your window below a certain threshold (1152x648)."
+		],
+		"change": [
+			"The third-person camera has been improved. A lot. The old one looked great but.... blech. It sucked. It felt really weird.",
+			"Guess what? The lighting was improved. Again. It's small this time but still an improvement.",
+			"The main menu UI is improved and you can now change the volume from there.",
+			"The FPS changes if you're looking at a UI or not. Pretty much, when you need high FPS you get high FPS. Otherwise, let's save some energy. Summers are hot enough anyways."
+		]
+	},
+	"extra": "Okay, we have a stick to fight with now. But... we can't use it? What the!?!"
+}
