@@ -31,7 +31,6 @@ class StatusBars extends Node:
 		health_value = _health_value
 		ether_bar = _ether_bar
 		ether_value = _ether_value
-		super()
 
 	func set_health(current_health, max_health):
 		var pos_x = health_start_x - (health_size.x - health_size.x * (float(current_health) / float(max_health)))
