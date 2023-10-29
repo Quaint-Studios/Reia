@@ -1,0 +1,113 @@
+[gd_scene load_steps=11 format=3 uid="uid://ci8xxveoikhj1"]
+
+[ext_resource type="PackedScene" uid="uid://bu0tke3h67pf4" path="res://shaders/water/stylized_water.tscn" id="1_153o6"]
+[ext_resource type="Shader" uid="uid://bt8b5swyqde5g" path="res://shaders/water/assets/water_mask.tres" id="2_nc2q7"]
+[ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="4_8l1uh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_835ng"]
+render_priority = 0
+shader = ExtResource("2_nc2q7")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yqgen"]
+material = SubResource("ShaderMaterial_835ng")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1djka"]
+shading_mode = 0
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4txsv"]
+material = SubResource("StandardMaterial3D_1djka")
+radial_segments = 32
+
+[sub_resource type="Animation" id="Animation_ej0rx"]
+length = 0.001
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 5.11918, 0)
+
+[sub_resource type="Animation" id="Animation_wkepb"]
+resource_name = "bounce"
+length = 1.5
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 5.11918, 0, 0.8, 1, 0, 2.25, 0, 1.5, 1, 0, 5.11918, 0)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ei3ge"]
+_data = {
+"RESET": SubResource("Animation_ej0rx"),
+"bounce": SubResource("Animation_wkepb")
+}
+
+[node name="shader_test" type="Node3D"]
+
+[node name="StylizedWater" parent="." instance=ExtResource("1_153o6")]
+
+[node name="World" type="Node3D" parent="."]
+
+[node name="MainCamera" type="Camera3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 0.972239, 0.233988, 0, -0.233988, 0.972239, 0.158157, 7.48913, 9.32288)
+cull_mask = 524287
+current = true
+
+[node name="Pool3D" type="CSGCombiner3D" parent="World"]
+
+[node name="Outer" type="CSGBox3D" parent="World/Pool3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 0)
+size = Vector3(16, 16, 16)
+
+[node name="Inner" type="CSGBox3D" parent="World/Pool3D"]
+operation = 2
+size = Vector3(14, 8, 14)
+
+[node name="EdgeOuter" type="CSGBox3D" parent="World/Pool3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -4, 6)
+size = Vector3(4, 16, 4)
+
+[node name="EdgeInner" type="CSGBox3D" parent="World/Pool3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+operation = 2
+size = Vector3(2, 8, 2)
+
+[node name="WaterMask" type="MeshInstance3D" parent="World/Pool3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 6)
+mesh = SubResource("PlaneMesh_yqgen")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World/Pool3D"]
+transform = Transform3D(0.551573, 0, -0.834127, 0, 1, 0, 0.834127, 0, 0.551573, -3.98765, 0.678325, -3.84156)
+size = Vector3(5.06332, 6.52411, 1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="World/Pool3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.67584, 3.42398, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(0.84346, 0.278024, 0.459649, -0.534085, 0.342124, 0.773113, 0.0576872, -0.897582, 0.437057, 0, 19.1224, 7.81059)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = ExtResource("4_8l1uh")
+
+[node name="Tests" type="Node3D" parent="."]
+
+[node name="Ball" type="Node3D" parent="Tests"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.11918, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Tests/Ball"]
+mesh = SubResource("SphereMesh_4txsv")
+
+[node name="WaterCollision" type="MeshInstance3D" parent="Tests/Ball"]
+layers = 524288
+mesh = SubResource("SphereMesh_4txsv")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Tests/Ball"]
+libraries = {
+"": SubResource("AnimationLibrary_ei3ge")
+}

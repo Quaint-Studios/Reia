@@ -1,0 +1,224 @@
+[gd_scene load_steps=12 format=3 uid="uid://dud8gf6n8gvk"]
+
+[ext_resource type="Shader" path="res://shaders/screen_space/blur.gdshader" id="1_26j76"]
+[ext_resource type="Script" path="res://scripts/inventory/player_inventory.gd" id="1_42t1g"]
+[ext_resource type="Theme" uid="uid://cvudtn0hd6gap" path="res://scenes/main_menu/main_menu.tres" id="2_oytrn"]
+[ext_resource type="Texture2D" uid="uid://br4fw1ofxo8ib" path="res://assets/ui/ui_header_atlas.png" id="3_7rn8e"]
+[ext_resource type="FontFile" uid="uid://db8hdu6hj307i" path="res://fonts/Nunito/static/Nunito-ExtraBold.ttf" id="3_hyp47"]
+[ext_resource type="PackedScene" uid="uid://cgd2msq0xf0d8" path="res://scripts/inventory/ui/header_tab.tscn" id="4_bogme"]
+[ext_resource type="PackedScene" uid="uid://mnb51x6xo73p" path="res://scripts/inventory/ui/inventory_item.tscn" id="4_to4l4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2aahi"]
+shader = ExtResource("1_26j76")
+shader_parameter/amount = 3.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kavop"]
+bg_color = Color(0.027451, 0.14902, 0.239216, 0.784314)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hl1u6"]
+bg_color = Color(0.984314, 0.980392, 0.960784, 1)
+corner_radius_bottom_right = 77
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_07wub"]
+atlas = ExtResource("3_7rn8e")
+region = Rect2(0, 0, 128, 128)
+
+[node name="PlayerInventory" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_42t1g")
+ui_header_atlas = ExtResource("3_7rn8e")
+header_tab = ExtResource("4_bogme")
+inventory_item = ExtResource("4_to4l4")
+
+[node name="Content" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="Content"]
+material = SubResource("ShaderMaterial_2aahi")
+layout_mode = 2
+mouse_filter = 2
+color = Color(1, 0.14902, 1, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Content"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 101
+theme_override_constants/margin_right = 24
+
+[node name="CurrentItems" type="HFlowContainer" parent="Content/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/h_separation = 16
+theme_override_constants/v_separation = 16
+
+[node name="Panel" type="Panel" parent="."]
+custom_minimum_size = Vector2(0, 77)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kavop")
+metadata/_edit_lock_ = true
+
+[node name="BGDesignContainer" type="HBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 77.0
+grow_horizontal = 2
+
+[node name="Panel" type="Panel" parent="Panel/BGDesignContainer"]
+custom_minimum_size = Vector2(240, 77)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hl1u6")
+
+[node name="Header" type="MarginContainer" parent="Panel"]
+custom_minimum_size = Vector2(0, 77)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 77.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+
+[node name="StartContainer" type="HBoxContainer" parent="Panel/Header"]
+clip_contents = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 14
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Header/StartContainer"]
+modulate = Color(0.741176, 0.647059, 0.45098, 1)
+custom_minimum_size = Vector2(67, 67)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_07wub")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Panel/Header/StartContainer"]
+modulate = Color(0.823529, 0.737255, 0.552941, 1)
+layout_mode = 2
+theme = ExtResource("2_oytrn")
+theme_override_font_sizes/font_size = 22
+text = "Inventory"
+
+[node name="CenterContainer" type="CenterContainer" parent="Panel/Header"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel/Header/CenterContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HeaderContainer" type="HBoxContainer" parent="Panel/Header/CenterContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 14
+
+[node name="EndContainer" type="BoxContainer" parent="Panel/Header"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="Label" type="Label" parent="Panel/Header/EndContainer"]
+modulate = Color(0.823529, 0.737255, 0.552941, 1)
+layout_mode = 2
+theme = ExtResource("2_oytrn")
+theme_override_fonts/font = ExtResource("3_hyp47")
+theme_override_font_sizes/font_size = 18
+text = "Items:"
+vertical_alignment = 1
+
+[node name="Count" type="Label" parent="Panel/Header/EndContainer"]
+modulate = Color(0.823529, 0.737255, 0.552941, 1)
+layout_mode = 2
+theme = ExtResource("2_oytrn")
+theme_override_fonts/font = ExtResource("3_hyp47")
+theme_override_font_sizes/font_size = 18
+text = "10000"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Header/EndContainer"]
+custom_minimum_size = Vector2(67, 67)
+layout_mode = 2
+mouse_filter = 2
+texture = SubResource("AtlasTexture_07wub")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="IndicatorContainer" type="CenterContainer" parent="Panel"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 81.5
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="IndicatorMargin" type="MarginContainer" parent="Panel/IndicatorContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 70
+theme_override_constants/margin_right = 406
+
+[node name="Indicator" type="Control" parent="Panel/IndicatorContainer/IndicatorMargin"]
+custom_minimum_size = Vector2(67, 11.5)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Diamond" type="ColorRect" parent="Panel/IndicatorContainer/IndicatorMargin/Indicator"]
+modulate = Color(0.823529, 0.737255, 0.552941, 1)
+custom_minimum_size = Vector2(8, 8)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = 0.785398
+pivot_offset = Vector2(4, 4)
+mouse_filter = 2
+metadata/_edit_lock_ = true
+
+[node name="Line" type="ColorRect" parent="Panel/IndicatorContainer/IndicatorMargin/Indicator"]
+modulate = Color(0.823529, 0.737255, 0.552941, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -33.5
+offset_top = -1.0
+offset_right = 33.5
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(33, 1)
+mouse_filter = 2
+metadata/_edit_lock_ = true

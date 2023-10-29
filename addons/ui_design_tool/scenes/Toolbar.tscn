@@ -1,0 +1,384 @@
+[gd_scene load_steps=20 format=3 uid="uid://nq7vlsvxhv2p"]
+
+[ext_resource type="Script" path="res://addons/ui_design_tool/scenes/Toolbar.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://d3xaf7s36xuqc" path="res://addons/ui_design_tool/assets/icons/format_bold-white-18dp.svg" id="2"]
+[ext_resource type="Texture2D" uid="uid://ck4h5hqubttt7" path="res://addons/ui_design_tool/assets/icons/format_italic-white-18dp.svg" id="3"]
+[ext_resource type="Texture2D" uid="uid://b44il4qj7cem1" path="res://addons/ui_design_tool/assets/icons/format_underlined-white-18dp.svg" id="4"]
+[ext_resource type="Texture2D" uid="uid://b3tqua2bt1ix2" path="res://addons/ui_design_tool/assets/icons/format-color-text.png" id="5"]
+[ext_resource type="Texture2D" uid="uid://8qawl7hrofkj" path="res://addons/ui_design_tool/assets/icons/format_color_reset-white-18dp.svg" id="6"]
+[ext_resource type="Texture2D" uid="uid://cqv3uc8bew0am" path="res://addons/ui_design_tool/assets/icons/photo_size_select_small-white-18dp.svg" id="7"]
+[ext_resource type="Texture2D" uid="uid://d1uver224k3px" path="res://addons/ui_design_tool/assets/icons/folder_open-white-18dp.svg" id="8"]
+[ext_resource type="Texture2D" uid="uid://dn7q7grbfr7kh" path="res://addons/ui_design_tool/assets/icons/refresh-white-18dp.svg" id="9"]
+[ext_resource type="Texture2D" uid="uid://d1rj7h72swjhn" path="res://addons/ui_design_tool/assets/icons/marker.png" id="10"]
+[ext_resource type="Texture2D" uid="uid://xnn5xt6piaat" path="res://addons/ui_design_tool/assets/icons/format_clear-white-18dp.svg" id="11"]
+[ext_resource type="Texture2D" uid="uid://d0t8qupuaoigg" path="res://addons/ui_design_tool/assets/icons/format_align_right-white-18dp.svg" id="12"]
+[ext_resource type="Texture2D" uid="uid://i11r3de57bc3" path="res://addons/ui_design_tool/assets/icons/format_align_center-white-18dp.svg" id="13"]
+[ext_resource type="Texture2D" uid="uid://dtsld0omp3fy0" path="res://addons/ui_design_tool/assets/icons/format_align_left-white-18dp.svg" id="14"]
+[ext_resource type="Texture2D" uid="uid://rpjhdv5qake3" path="res://addons/ui_design_tool/assets/icons/vertical_align_bottom-white-18dp.svg" id="15"]
+[ext_resource type="Texture2D" uid="uid://cjan2dq5nvdvk" path="res://addons/ui_design_tool/assets/icons/vertical_align_top-white-18dp.svg" id="16"]
+[ext_resource type="Texture2D" uid="uid://ckriw8d4yelu" path="res://addons/ui_design_tool/assets/icons/vertical_align_center-white-18dp.svg" id="17"]
+[ext_resource type="Texture2D" uid="uid://crte1qj0ftynh" path="res://addons/ui_design_tool/assets/icons/more_vert-white-18dp.svg" id="18"]
+[ext_resource type="Texture2D" uid="uid://cm5d77b25dgjc" path="res://addons/ui_design_tool/assets/icons/more_horiz-white-18dp.svg" id="19"]
+
+[node name="Toolbar" type="HBoxContainer"]
+visible = false
+script = ExtResource("1")
+
+[node name="FontFamily" type="OptionButton" parent="."]
+custom_minimum_size = Vector2i(99, 0)
+layout_mode = 2
+offset_right = 99.0
+offset_bottom = 31.0
+size_flags_vertical = 4
+tooltip_text = "Font Family"
+clip_text = true
+item_count = 9
+selected = 0
+popup/item_0/text = "Alata"
+popup/item_0/id = 0
+popup/item_1/text = "Bungee"
+popup/item_1/id = 1
+popup/item_2/text = "Concert_One"
+popup/item_2/id = 2
+popup/item_3/text = "Fredoka_One"
+popup/item_3/id = 3
+popup/item_4/text = "Neuton"
+popup/item_4/id = 4
+popup/item_5/text = "Nunito"
+popup/item_5/id = 5
+popup/item_6/text = "Roboto"
+popup/item_6/id = 6
+popup/item_7/text = "Space_Mono"
+popup/item_7/id = 7
+popup/item_8/text = "None"
+popup/item_8/id = 8
+
+[node name="FontFamilyOptions" type="Button" parent="."]
+layout_mode = 2
+offset_left = 103.0
+offset_right = 129.0
+offset_bottom = 31.0
+tooltip_text = "Font Family Options"
+icon = ExtResource("18")
+flat = true
+
+[node name="PopupMenu" type="PopupMenu" parent="FontFamilyOptions"]
+item_count = 2
+item_0/text = "Load Fonts"
+item_0/icon = ExtResource("8")
+item_0/id = 0
+item_1/text = "Refresh Fonts"
+item_1/icon = ExtResource("9")
+item_1/id = 1
+
+[node name="FontFamilyFileDialog" type="FileDialog" parent="."]
+title = "Open a Directory"
+size = Vector2i(400, 300)
+min_size = Vector2i(300, 200)
+ok_button_text = "Select This Folder"
+file_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="."]
+layout_mode = 2
+offset_left = 133.0
+offset_right = 137.0
+offset_bottom = 31.0
+
+[node name="FontSize" type="LineEdit" parent="."]
+layout_mode = 2
+offset_left = 141.0
+offset_right = 208.0
+offset_bottom = 31.0
+tooltip_text = "Font Size"
+
+[node name="FontSizePreset" type="OptionButton" parent="FontSize"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 27.0
+offset_right = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Font Size Presets"
+disabled = true
+item_count = 17
+popup/item_0/text = "8"
+popup/item_0/id = 0
+popup/item_1/text = "9"
+popup/item_1/id = 1
+popup/item_2/text = "10"
+popup/item_2/id = 2
+popup/item_3/text = "11"
+popup/item_3/id = 3
+popup/item_4/text = "12"
+popup/item_4/id = 4
+popup/item_5/text = "14"
+popup/item_5/id = 5
+popup/item_6/text = "16"
+popup/item_6/id = 6
+popup/item_7/text = "18"
+popup/item_7/id = 7
+popup/item_8/text = "24"
+popup/item_8/id = 8
+popup/item_9/text = "30"
+popup/item_9/id = 9
+popup/item_10/text = "36"
+popup/item_10/id = 10
+popup/item_11/text = "48"
+popup/item_11/id = 11
+popup/item_12/text = "60"
+popup/item_12/id = 12
+popup/item_13/text = "72"
+popup/item_13/id = 13
+popup/item_14/text = "96"
+popup/item_14/id = 14
+popup/item_15/text = "128"
+popup/item_15/id = 15
+popup/item_16/text = "256"
+popup/item_16/id = 16
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+offset_left = 212.0
+offset_right = 212.0
+offset_bottom = 31.0
+mouse_filter = 2
+
+[node name="Bold" type="Button" parent="."]
+layout_mode = 2
+offset_left = 216.0
+offset_right = 242.0
+offset_bottom = 31.0
+tooltip_text = "Bold"
+disabled = true
+icon = ExtResource("2")
+flat = true
+
+[node name="PopupMenu" type="PopupMenu" parent="Bold"]
+item_count = 9
+item_0/text = "Thin"
+item_0/id = 0
+item_1/text = "Extra-Light"
+item_1/id = 1
+item_2/text = "Light"
+item_2/id = 2
+item_3/text = "Regular"
+item_3/id = 3
+item_4/text = "Medium"
+item_4/id = 4
+item_5/text = "Semi-Bold"
+item_5/id = 5
+item_6/text = "Bold"
+item_6/id = 6
+item_7/text = "Extra-Bold"
+item_7/id = 7
+item_8/text = "Black"
+item_8/id = 8
+
+[node name="Italic" type="Button" parent="."]
+layout_mode = 2
+offset_left = 246.0
+offset_right = 272.0
+offset_bottom = 31.0
+tooltip_text = "Italic"
+disabled = true
+toggle_mode = true
+icon = ExtResource("3")
+flat = true
+
+[node name="Underline" type="Button" parent="."]
+layout_mode = 2
+offset_left = 276.0
+offset_right = 302.0
+offset_bottom = 31.0
+tooltip_text = "Underline
+*Only supported in RichTextLabel"
+disabled = true
+toggle_mode = true
+icon = ExtResource("4")
+flat = true
+
+[node name="FontColor" type="Button" parent="."]
+layout_mode = 2
+offset_left = 306.0
+offset_right = 332.0
+offset_bottom = 31.0
+tooltip_text = "Font Color"
+icon = ExtResource("5")
+flat = true
+
+[node name="PopupPanel" type="PopupPanel" parent="FontColor"]
+size = Vector2i(116, 227)
+
+[node name="ColorPicker" type="ColorPicker" parent="FontColor/PopupPanel"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 294.0
+offset_bottom = 511.0
+
+[node name="ColorRect" type="ColorRect" parent="FontColor"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = 8.0
+offset_right = 9.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Highlight" type="Button" parent="."]
+layout_mode = 2
+offset_left = 336.0
+offset_right = 362.0
+offset_bottom = 31.0
+tooltip_text = "Highlight Color"
+icon = ExtResource("10")
+flat = true
+
+[node name="PopupPanel" type="PopupPanel" parent="Highlight"]
+size = Vector2i(116, 227)
+
+[node name="ColorPicker" type="ColorPicker" parent="Highlight/PopupPanel"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 294.0
+offset_bottom = 511.0
+
+[node name="ColorRect" type="ColorRect" parent="Highlight"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = 8.0
+offset_right = 9.0
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VSeparator2" type="VSeparator" parent="."]
+layout_mode = 2
+offset_left = 366.0
+offset_right = 370.0
+offset_bottom = 31.0
+
+[node name="HorizontalAlign" type="Button" parent="."]
+layout_mode = 2
+offset_left = 374.0
+offset_right = 400.0
+offset_bottom = 31.0
+tooltip_text = "Horizontal Align"
+toggle_mode = true
+icon = ExtResource("14")
+flat = true
+
+[node name="PopupMenu" type="PopupMenu" parent="HorizontalAlign"]
+item_count = 3
+item_0/text = ""
+item_0/icon = ExtResource("14")
+item_0/id = 0
+item_1/text = ""
+item_1/icon = ExtResource("13")
+item_1/id = 1
+item_2/text = ""
+item_2/icon = ExtResource("12")
+item_2/id = 2
+
+[node name="VerticalAlign" type="Button" parent="."]
+layout_mode = 2
+offset_left = 404.0
+offset_right = 430.0
+offset_bottom = 31.0
+tooltip_text = "Vertical Align"
+toggle_mode = true
+icon = ExtResource("16")
+flat = true
+
+[node name="PopupMenu" type="PopupMenu" parent="VerticalAlign"]
+item_count = 3
+item_0/text = ""
+item_0/icon = ExtResource("16")
+item_0/id = 0
+item_1/text = ""
+item_1/icon = ExtResource("17")
+item_1/id = 1
+item_2/text = ""
+item_2/icon = ExtResource("15")
+item_2/id = 2
+
+[node name="VSeparator3" type="VSeparator" parent="."]
+layout_mode = 2
+offset_left = 434.0
+offset_right = 438.0
+offset_bottom = 31.0
+
+[node name="FontFormatting" type="OptionButton" parent="."]
+custom_minimum_size = Vector2i(112, 0)
+layout_mode = 2
+offset_left = 442.0
+offset_right = 554.0
+offset_bottom = 31.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Font Formatting"
+clip_text = true
+item_count = 13
+selected = -1
+popup/item_0/text = "Heading 1"
+popup/item_0/id = 0
+popup/item_1/text = "Heading 2"
+popup/item_1/id = 1
+popup/item_2/text = "Heading 3"
+popup/item_2/id = 2
+popup/item_3/text = "Heading 4"
+popup/item_3/id = 3
+popup/item_4/text = "Heading 5"
+popup/item_4/id = 4
+popup/item_5/text = "Heading 6"
+popup/item_5/id = 5
+popup/item_6/text = "Subtitle 1"
+popup/item_6/id = 6
+popup/item_7/text = "Subtitle 2"
+popup/item_7/id = 7
+popup/item_8/text = "Body 1"
+popup/item_8/id = 8
+popup/item_9/text = "Body 2"
+popup/item_9/id = 9
+popup/item_10/text = "Button"
+popup/item_10/id = 10
+popup/item_11/text = "Caption"
+popup/item_11/id = 11
+popup/item_12/text = "Overline"
+popup/item_12/id = 12
+
+[node name="Tools" type="Button" parent="."]
+layout_mode = 2
+offset_left = 558.0
+offset_right = 584.0
+offset_bottom = 31.0
+tooltip_text = "Tools"
+icon = ExtResource("19")
+flat = true
+
+[node name="PopupMenu" type="PopupMenu" parent="Tools"]
+item_count = 3
+item_0/text = "Font Clear"
+item_0/icon = ExtResource("11")
+item_0/id = 0
+item_1/text = "Color Clear"
+item_1/icon = ExtResource("6")
+item_1/id = 1
+item_2/text = "Rect Size Refresh"
+item_2/icon = ExtResource("7")
+item_2/id = 2
