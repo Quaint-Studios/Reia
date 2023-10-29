@@ -60,6 +60,7 @@ func create_inventory():
 		.add_category(keys[Tab.QUEST_ITEMS]))
 
 	inventory.add_item(keys[Tab.WEAPONS], load("res://scripts/items/1000_wooden_sword.tres"))
+	inventory.add_item("Fart", load("res://scripts/items/1000_wooden_sword.tres"))
 
 func setup_ui():
 	setup_header_tabs()
@@ -67,10 +68,9 @@ func setup_ui():
 
 func update_inventory_items():
 	var keys = Tab.keys()
-	var items: Array[SlotData] = inventory.get_category(keys[current_tab]).slots
+	var items: Dictionary = inventory.get_category(keys[current_tab]).items
 
-	for slot in items:
-		var item = slot.item
+	for item in items.values():
 		var node = inventory_item.instantiate() as Control
 		var label = node.get_node("Label") as Label
 		label.text = item.name

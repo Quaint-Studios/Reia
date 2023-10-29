@@ -1,13 +1,31 @@
 class_name CategoryData extends Resource
-# Weapon, Soulstones, Consumables (Food, Potions, etc), Quest, Equipment, Materials
+# Weapon, Equipment, Soulstones, Consumables (Food, Potions, etc), Materials, Quest
 
 @export var name: String = ""
-@export var slots: Array[SlotData]
+@export var items: Dictionary # [ItemData]
 
 func add_item(item: ItemData):
-	var new_slot = SlotData.new()
-	new_slot.item = item
-	new_slot.quantity = 1
+	items[item.name] = item
+	return self
 
-	slots.append(new_slot)
+func get_item(item_name: String):
+	if !items.has(item_name):
+		return false # Item doesn't exist
+
+	return items[item_name]
+
+func increment_item(item_name: String, quantity:= 1):
+	var item = get_item(item_name)
+
+	if item == false:
+		return false
+
+	if !is_instance_of(item, StackableItemData):
+		return false # Item isn't stackable
+
+	(item as StackableItemData).increment_item(quantity)
+	return self
+
+func decrement_item(item_name: String, quantity:= -1):
+	increment_item(item_name, quantity) # Hehe lazy
 	return self
