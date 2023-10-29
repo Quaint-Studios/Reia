@@ -26,6 +26,11 @@ buses/default_bus_layout="res://assets/audio/default_bus_layout.tres"
 Managers="*res://scenes/managers/managers.tscn"
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
 
+[debug]
+
+file_logging/enable_file_logging=true
+file_logging/log_path="user://logs/reia_debug_logs.log"
+
 [display]
 
 window/size/mode=3
