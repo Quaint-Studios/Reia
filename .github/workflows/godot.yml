@@ -1,7 +1,6 @@
 name: Godot Builder
 
 on:
-  pull_request: {}
   push:
     tags:
       - 'v*'
