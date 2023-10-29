@@ -59,8 +59,7 @@ func create_inventory():
 		.add_category(keys[Tab.MATERIALS])
 		.add_category(keys[Tab.QUEST_ITEMS]))
 
-	inventory.add_item(keys[Tab.WEAPONS], load("res://scripts/items/1000_wooden_sword.tres"))
-	inventory.add_item("Fart", load("res://scripts/items/1000_wooden_sword.tres"))
+	inventory.add_item(keys[Tab.WEAPONS], load(WeaponIndex.WOODEN_SWORD))
 
 func setup_ui():
 	setup_header_tabs()
