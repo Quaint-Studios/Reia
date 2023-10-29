@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://mnb51x6xo73p"]
 
 [ext_resource type="FontFile" uid="uid://csid2dfym77r7" path="res://fonts/Nunito/static/Nunito-Bold.ttf" id="1_r5ffr"]
-[ext_resource type="Texture2D" uid="uid://d7eyaepxetvj" path="res://scripts/items/1000_wooden_sword_atlas.tres" id="2_aa0ph"]
+[ext_resource type="Texture2D" uid="uid://d7eyaepxetvj" path="res://scripts/items/weapons/1000_wooden_sword_atlas.tres" id="2_aa0ph"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2aphv"]
 bg_color = Color(0.0803, 0.448463, 0.73, 1)
