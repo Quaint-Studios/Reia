@@ -20,10 +20,9 @@ corner_radius_bottom_left = 8
 bg_color = Color(0.078125, 0.445313, 0.726563, 1)
 corner_radius_bottom_left = 12
 
-[node name="InventoryItem" type="Control"]
+[node name="InventoryItem" type="Button"]
+self_modulate = Color(1, 1, 1, 0)
 custom_minimum_size = Vector2(96, 120)
-layout_mode = 3
-anchors_preset = 0
 offset_right = 96.0
 offset_bottom = 120.0
 
