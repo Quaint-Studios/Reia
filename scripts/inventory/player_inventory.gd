@@ -24,6 +24,8 @@ func _ready():
 	create_inventory()
 	setup_ui()
 
+	UIManager.instance.close_ui.connect(hide_inventory_ui)
+
 func _input(event: InputEvent):
 	# TODO: You'll eventually run into an issue where you need to hide all UI.
 	if GameManager.current_ui == GameManager.UI_TYPES.PLAY:
@@ -33,14 +35,16 @@ func _input(event: InputEvent):
 
 	if GameManager.current_ui == GameManager.UI_TYPES.INVENTORY:
 		if event.is_action_pressed("inventory") || event.is_action_pressed("quit"):
-			hide_inventory_ui()
+			hide_inventory_ui(UIManager.UI_TYPES.GAME)
 		return
 
 func show_inventory_ui():
 	GameManager.current_ui = GameManager.UI_TYPES.INVENTORY
 	self.visible = true
 
-func hide_inventory_ui():
+func hide_inventory_ui(ui: UIManager.UI_TYPES):
+	if ui == UIManager.UI_TYPES.INVENTORY:
+		return
 	GameManager.current_ui = GameManager.UI_TYPES.PLAY
 	self.visible = false
 
@@ -59,23 +63,27 @@ func create_inventory():
 		.add_category(keys[Tab.MATERIALS])
 		.add_category(keys[Tab.QUEST_ITEMS]))
 
-	inventory.add_item(keys[Tab.WEAPONS], load("res://scripts/items/1000_wooden_sword.tres"))
-	inventory.add_item("Fart", load("res://scripts/items/1000_wooden_sword.tres"))
+	inventory.add_item(keys[Tab.WEAPONS], load(WeaponIndex.WOODEN_SWORD))
 
 func setup_ui():
 	setup_header_tabs()
 	update_inventory_items()
+
+func _select_inventory_item(category_name: String, item_name: String):
+	print("Category: %s and Item: %s" % [category_name, item_name])
 
 func update_inventory_items():
 	var keys = Tab.keys()
 	var items: Dictionary = inventory.get_category(keys[current_tab]).items
 
 	for item in items.values():
-		var node = inventory_item.instantiate() as Control
+		var node := inventory_item.instantiate() as Button
 		var label = node.get_node("Label") as Label
 		label.text = item.name
 		var icon = node.get_node("Icon") as TextureRect
 		icon.texture = item.texture
+
+		node.pressed.connect(_select_inventory_item.bind(keys[current_tab], item.name))
 
 		%CurrentItems.add_child(node)
 
