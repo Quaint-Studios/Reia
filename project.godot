@@ -37,7 +37,7 @@ window/size/mode=3
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/sound_manager/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg")
+enabled=PackedStringArray("res://addons/gut/plugin.cfg", "res://addons/sound_manager/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg")
 
 [filesystem]
 
