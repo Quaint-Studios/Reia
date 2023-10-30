@@ -25,6 +25,7 @@ buses/default_bus_layout="res://assets/audio/default_bus_layout.tres"
 
 Managers="*res://scenes/managers/managers.tscn"
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
+DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
 
 [debug]
 
@@ -37,7 +38,7 @@ window/size/mode=3
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gut/plugin.cfg", "res://addons/sound_manager/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg")
+enabled=PackedStringArray("res://addons/discord-sdk-gd/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/sound_manager/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg")
 
 [filesystem]
 
