@@ -24,6 +24,8 @@ func _ready():
 	create_inventory()
 	setup_ui()
 
+	UIManager.instance.close_ui.connect(hide_inventory_ui)
+
 func _input(event: InputEvent):
 	# TODO: You'll eventually run into an issue where you need to hide all UI.
 	if GameManager.current_ui == GameManager.UI_TYPES.PLAY:
@@ -33,14 +35,16 @@ func _input(event: InputEvent):
 
 	if GameManager.current_ui == GameManager.UI_TYPES.INVENTORY:
 		if event.is_action_pressed("inventory") || event.is_action_pressed("quit"):
-			hide_inventory_ui()
+			hide_inventory_ui(UIManager.UI_TYPES.GAME)
 		return
 
 func show_inventory_ui():
 	GameManager.current_ui = GameManager.UI_TYPES.INVENTORY
 	self.visible = true
 
-func hide_inventory_ui():
+func hide_inventory_ui(ui: UIManager.UI_TYPES):
+	if ui == UIManager.UI_TYPES.INVENTORY:
+		return
 	GameManager.current_ui = GameManager.UI_TYPES.PLAY
 	self.visible = false
 
