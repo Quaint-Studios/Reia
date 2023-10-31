@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c03x7cx3t0083" path="res://scripts/mob/attackable/player/minimap_markers/map_marker.tscn" id="3_aj2dj"]
 [ext_resource type="Script" path="res://scripts/mob/attackable/player/abilities/combat/pyro/fireball.gd" id="3_jyvxa"]
 [ext_resource type="Script" path="res://scripts/mob/attackable/player/abilities/combat/pyro/explosion.gd" id="3_myfqk"]
-[ext_resource type="Texture2D" uid="uid://mfj02y3po58g" path="res://scripts/items/textures/items_atlas.png" id="4_qds30"]
+[ext_resource type="Texture2D" uid="uid://mfj02y3po58g" path="res://scripts/items/weapons/textures/items_atlas.png" id="4_qds30"]
 [ext_resource type="PackedScene" uid="uid://dud8gf6n8gvk" path="res://scripts/inventory/ui/player_inventory.tscn" id="4_tvn1c"]
 [ext_resource type="Script" path="res://scripts/mob/attackable/player/player_hud.gd" id="5_gmuxt"]
 [ext_resource type="PackedScene" uid="uid://gm47ucg1gegr" path="res://scripts/mob/attackable/player/player_minimap.tscn" id="5_vfast"]
