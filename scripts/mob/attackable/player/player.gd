@@ -99,11 +99,11 @@ func handle_attack():
 			))
 		var collision := space.intersect_ray(query)
 		if collision:
-			print("Attacked:", collision.collider.name)
 			if collision.collider is Attackable:
+				print("Attacked:", collision.collider.name)
 				attack(collision.collider)
-		else:
-			print("Collide with:", "nuthin")
+				return
+		print("Collide with:", "nuthin")
 
 func handle_skills():
 	if Input.is_action_just_pressed("skill_2"):
