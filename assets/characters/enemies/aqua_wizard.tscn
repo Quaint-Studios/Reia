@@ -42,21 +42,19 @@ script = ExtResource("1_2xua2")
 stats = SubResource("Resource_kt3dt")
 status = SubResource("Resource_6ayws")
 
-[node name="Components" type="Node3D" parent="."]
-
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29, 0)
 shape = SubResource("CapsuleShape3D_jxymx")
 
 [node name="Visuals" type="Node3D" parent="."]
 
-[node name="MapMarker" parent="Visuals" instance=ExtResource("2_dbpwl")]
-transform = Transform3D(1.53209, 0, -1.28558, 0, 2, 0, 1.28558, 0, 1.53209, 0, 0, 0)
-texture = SubResource("AtlasTexture_4ia4g")
+[node name="AquaWizard" parent="Visuals" instance=ExtResource("1_hf2bh")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
 
 [node name="Health" parent="Visuals" node_paths=PackedStringArray("attackable") instance=ExtResource("1_051d3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.59677, 0)
 attackable = NodePath("../..")
 
-[node name="AquaWizard" parent="Visuals" instance=ExtResource("1_hf2bh")]
-transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+[node name="MapMarker" parent="Visuals" instance=ExtResource("2_dbpwl")]
+transform = Transform3D(1.53209, 0, -1.28558, 0, 2, 0, 1.28558, 0, 1.53209, 0, 0, 0)
+texture = SubResource("AtlasTexture_4ia4g")
