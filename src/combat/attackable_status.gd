@@ -1,4 +1,4 @@
-class_name StatusComponent extends Resource
+class_name AttackableStatus extends Resource
 
 @export var curr_status: Status = Status.ALIVE
 enum Status { ALIVE, DEAD, RESPAWNING }
