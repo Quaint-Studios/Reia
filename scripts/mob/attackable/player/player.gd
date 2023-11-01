@@ -101,7 +101,7 @@ func handle_attack():
 		if collision:
 			print("Attacked:", collision.collider.name)
 			if collision.collider is Attackable:
-				_attack(collision.collider)
+				attack(collision.collider)
 		else:
 			print("Collide with:", "nuthin")
 

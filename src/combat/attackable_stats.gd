@@ -1,17 +1,30 @@
-class_name StatsComponent extends Resource
+class_name AttackableStats extends Resource
 
+###
+### Signals
+###
+signal health_changed(value: int, max_health: int)
+signal stats_changed(attackable_stats: AttackableStats)
+func _emit_all():
+	health_changed.emit(health, max_health)
+	stats_changed.emit(self)
+
+###
+### Variables
+###
 @export var health := 100:
 	set(value):
 		health = _set_health(value)
+		_emit_all()
 	get:
 		return health
 @export var max_health := 100:
 	set(value):
 		max_health = _set_health(value)
+		_emit_all()
 	get:
 		return max_health
 func _set_health(value: int) -> int:
-	# health_manager.set_health(value, max_health)
 	return value
 
 @export var melee_power := 10
@@ -31,6 +44,9 @@ func _set_health(value: int) -> int:
 
 enum WeaponType { Melee, Bow, Spell }
 
+###
+### Functionality
+###
 func damage(attacker: Attackable, ability: Ability = null):
 	var attacker_power = attacker.stats.get_power()
 	attacker_power += attacker.stats.weapon_damage
