@@ -1,6 +1,6 @@
 [gd_scene load_steps=30 format=3 uid="uid://eicmer2kdgy"]
 
-[ext_resource type="Script" path="res://scripts/mob/attackable/player/player.gd" id="1_fl81d"]
+[ext_resource type="Script" path="res://src/mob/attackable/player.gd" id="1_xki7i"]
 [ext_resource type="Script" path="res://scripts/mob/attackable/player/abilities/ability_manager.gd" id="2_fdbkp"]
 [ext_resource type="PackedScene" uid="uid://cykr5gmvdm7xf" path="res://assets/characters/player/female_player.glb" id="2_s3eb4"]
 [ext_resource type="Script" path="res://scripts/camera/tps_camera.gd" id="3_0ip71"]
@@ -111,7 +111,7 @@ region = Rect2(128, 512, 128, 128)
 [node name="MyPlayer" type="CharacterBody3D"]
 collision_layer = 6
 collision_mask = 273
-script = ExtResource("1_fl81d")
+script = ExtResource("1_xki7i")
 abilities = SubResource("Resource_rkqow")
 stats = SubResource("Resource_qndf3")
 status = SubResource("Resource_f5xpj")
