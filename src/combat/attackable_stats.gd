@@ -1,10 +1,9 @@
-class_name AttackableStats extends Resource
+class_name AttackableStats extends BaseStats
 
 ###
 ### Signals
 ###
 signal health_changed(value: int, max_health: int)
-signal stats_changed(attackable_stats: AttackableStats)
 func _emit_all():
 	health_changed.emit(health, max_health)
 	stats_changed.emit(self)
@@ -27,22 +26,8 @@ func _emit_all():
 func _set_health(value: int) -> int:
 	return value
 
-@export var melee_power := 10
-@export var bow_power := 10
-@export var spell_power := 10
-
-@export var melee_defense := 10
-@export var bow_defense := 10
-@export var spell_defense := 10
-
-@export var crit_chance := 0.0
-@export var crit_damage := 0.0
-
-@export var weapon_damage := 5
-@export var armor_defense := 3
-@export var weapon_type := WeaponType.Melee
-
-enum WeaponType { Melee, Bow, Spell }
+@export var weapon_stats := WeaponStats.new()
+@export var equipment_stats := EquipmentStats.new()
 
 ###
 ### Functionality

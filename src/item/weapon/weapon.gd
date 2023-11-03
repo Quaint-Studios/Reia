@@ -1,4 +1,4 @@
-class_name WeaponData extends ItemData
+class_name Weapon extends Item
 
 @export var soulstones: Array[SoulstoneSlot]
 # Experience increases everytime a weapon of the same type drops.
