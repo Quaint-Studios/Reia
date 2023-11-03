@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponData" load_steps=3 format=3 uid="uid://de4lkn8yj68de"]
 
-[ext_resource type="Script" path="res://scripts/items/data/types/weapon_data.gd" id="1_2sdpr"]
+[ext_resource type="Script" path="res://src/item/weapon/weapon.gd" id="1_2sdpr"]
 [ext_resource type="Texture2D" uid="uid://d7eyaepxetvj" path="res://scripts/items/weapons/1000_wooden_sword_atlas.tres" id="2_6k37s"]
 
 [resource]
