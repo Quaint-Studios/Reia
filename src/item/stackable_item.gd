@@ -1,4 +1,4 @@
-class_name StackableItemData extends ItemData
+class_name StackableItem extends Item
 
 @export var quantity := 0
 
