@@ -1,1 +1,1 @@
-class_name SoulstoneData extends ItemData
+class_name SoulstoneData extends Item

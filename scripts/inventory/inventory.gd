@@ -10,7 +10,7 @@ func add_category(name: String, items: Dictionary = {}): # Dictionary[ItemData]
 	categories[name] = new_category
 	return self
 
-func add_item(category_name: String, item: ItemData):
+func add_item(category_name: String, item: Item):
 	var category := get_category(category_name)
 
 	if category == null:
