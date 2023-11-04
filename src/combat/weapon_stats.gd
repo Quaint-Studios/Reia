@@ -1,6 +1,4 @@
 class_name WeaponStats extends BaseStats
 
-@export var weapon_type := WeaponType.Melee
-enum WeaponType { Melee, Bow, Spell }
-
-@export var damage_type: Enums.Element.Affinity
+@export var weapon_type: Enums.Weapon_Type
+@export var damage_type: Enums.Element_Affinity

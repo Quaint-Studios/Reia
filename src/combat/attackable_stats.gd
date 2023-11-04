@@ -1,4 +1,6 @@
 class_name AttackableStats extends BaseStats
+## The stats for an attackable. Generally just their raw stats.
+## Use the extensions instead: PlayerStats & EnemeyStats
 
 ###
 ### Signals
@@ -13,54 +15,47 @@ func _emit_all():
 ###
 @export var health := 100:
 	set(value):
-		health = _set_health(value)
+		if value < 0:
+			health = 0
+		else:
+			health = value
 		_emit_all()
 	get:
 		return health
 @export var max_health := 100:
 	set(value):
-		max_health = _set_health(value)
+		if value < 1:
+			max_health = 1
+		else:
+			max_health = value
 		_emit_all()
 	get:
 		return max_health
-func _set_health(value: int) -> int:
-	return value
 
-@export var weapon_stats := WeaponStats.new()
-@export var equipment_stats := EquipmentStats.new()
 
 ###
 ### Functionality
 ###
 func damage(attacker: Attackable, ability: Ability = null):
-	var attacker_power = attacker.stats.get_power()
-	attacker_power += attacker.stats.weapon_damage
+	var attacker_power := attacker.stats.get_power()
 	if ability != null:
 		attacker_power = ability.get_damage(attacker_power)
 
-	var defense = get_defense(attacker.stats.weapon_type)
-	defense += armor_defense
+	var defense := get_defense(attacker.stats.get_weapon_type())
 
-	health -= attacker_power - defense
+	var attack_damage := attacker_power - defense
+	if attack_damage < 0: attack_damage = 0
+
+	health -= attack_damage
+
+func get_weapon_type() -> Enums.Weapon_Type:
+	#Override
+	return Enums.Weapon_Type.MELEE
 
 func get_power() -> int:
-	match weapon_type:
-		WeaponType.Melee:
-			return melee_power
-		WeaponType.Bow:
-			return bow_power
-		WeaponType.Spell:
-			return spell_power
-		_:
-			return 0
+	# Override
+	return 0
 
-func get_defense(attack_type: WeaponType) -> int:
-	match attack_type:
-		WeaponType.Melee:
-			return melee_defense
-		WeaponType.Bow:
-			return bow_defense
-		WeaponType.Spell:
-			return spell_defense
-		_:
-			return 0
+func get_defense(weapon_type: Enums.Weapon_Type) -> int:
+	# Override
+	return 0
