@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://njgkawiv7sdy"]
+[gd_scene load_steps=16 format=3 uid="uid://njgkawiv7sdy"]
 
 [ext_resource type="LightmapGIData" uid="uid://bog8vgj034dhh" path="res://scenes/reia/reia.lmbake" id="1_6htgl"]
 [ext_resource type="PackedScene" uid="uid://c28gkmhvhs58v" path="res://scenes/ui/game_ui.tscn" id="1_ttgxx"]
@@ -6,9 +6,6 @@
 [ext_resource type="PackedScene" uid="uid://op561o2k0d4o" path="res://assets/characters/enemies/aqua_wizard.tscn" id="3_jgoiv"]
 [ext_resource type="PackedScene" uid="uid://eicmer2kdgy" path="res://scripts/mob/attackable/player/my_player.tscn" id="3_m63h2"]
 [ext_resource type="PackedScene" uid="uid://bm6j14ip2oywr" path="res://assets/world/rocks/collections/stylized_rocks.glb" id="5_glpdm"]
-[ext_resource type="Script" path="res://src/combat/equipment_stats.gd" id="5_hvrw0"]
-[ext_resource type="Script" path="res://src/combat/enemy_stats.gd" id="6_vhqti"]
-[ext_resource type="Script" path="res://src/combat/weapon_stats.gd" id="7_pp4yv"]
 [ext_resource type="PackedScene" uid="uid://bj7e34l2ty1yt" path="res://assets/world/trees/compositions/stylized_tree.glb" id="8_bup5i"]
 [ext_resource type="PackedScene" uid="uid://bvb75kmlbcbav" path="res://assets/world/fountains/stylized_fountain.glb" id="9_ksg1v"]
 [ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="11_d2pml"]
@@ -17,45 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://ce72x7shwqq2l" path="res://assets/world/forest/trees/forest_large_tree.glb" id="13_la4es"]
 [ext_resource type="PackedScene" uid="uid://cslscakiyp5gs" path="res://assets/world/sky/islands/floating_island.glb" id="14_r436h"]
 [ext_resource type="PackedScene" uid="uid://bo1vtvp2wnp6f" path="res://shaders/water/stylized_water_blue.tscn" id="15_wrhli"]
-
-[sub_resource type="Resource" id="Resource_setwf"]
-script = ExtResource("5_hvrw0")
-melee_power = 10
-bow_power = 10
-spell_power = 10
-melee_defense = 10
-bow_defense = 10
-spell_defense = 10
-crit_chance = 0.0
-crit_damage = 0.0
-
-[sub_resource type="Resource" id="Resource_75q1u"]
-script = ExtResource("7_pp4yv")
-weapon_type = 0
-damage_type = 0
-melee_power = 10
-bow_power = 10
-spell_power = 10
-melee_defense = 10
-bow_defense = 10
-spell_defense = 10
-crit_chance = 0.0
-crit_damage = 0.0
-
-[sub_resource type="Resource" id="Resource_5v5w4"]
-script = ExtResource("6_vhqti")
-weapon_stats = SubResource("Resource_75q1u")
-equipment_stats = SubResource("Resource_setwf")
-health = 100
-max_health = 100
-melee_power = 10
-bow_power = 10
-spell_power = 10
-melee_defense = 10
-bow_defense = 10
-spell_defense = 10
-crit_chance = 0.0
-crit_damage = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epo51"]
 albedo_color = Color(0.265625, 0.898438, 0.4375, 1)
@@ -84,7 +42,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57933, -0.75015, 1.28274)
 transform = Transform3D(-0.351793, 0, 0.936078, 0, 1, 0, -0.936078, 0, -0.351793, -5.80119, 0, 2.76315)
 collision_layer = 18
 collision_mask = 287
-stats = SubResource("Resource_5v5w4")
 
 [node name="Terrain" type="Node" parent="."]
 
