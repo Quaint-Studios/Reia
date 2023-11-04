@@ -20,9 +20,6 @@ bow_defense = 10
 spell_defense = 10
 crit_chance = 0.0
 crit_damage = 0.0
-weapon_damage = 5
-armor_defense = 3
-weapon_type = 0
 
 [sub_resource type="Resource" id="Resource_xjm7q"]
 script = ExtResource("3_v2rwg")

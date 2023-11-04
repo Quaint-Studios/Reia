@@ -5,7 +5,7 @@ enum Status { ALIVE, DEAD, RESPAWNING }
 
 func revive():
 	pass
-func die(attacker: Attackable): # , history: AttackHistory -> incoming/outgoing -> [ability | damage]
+func die(attacker: Attackable):
 	pass
 func respawn():
 	pass

@@ -3,29 +3,25 @@
 [ext_resource type="Script" path="res://src/mob/attackable/enemy/aqua_wizard.gd" id="1_1cd28"]
 [ext_resource type="PackedScene" uid="uid://bqpe013mgarni" path="res://scripts/mob/attackable/attackable_health.tscn" id="1_051d3"]
 [ext_resource type="PackedScene" uid="uid://b3p21o2ljivu2" path="res://assets/characters/npcs/aqua_wizard.glb" id="1_hf2bh"]
-[ext_resource type="Script" path="res://src/combat/attackable_stats.gd" id="2_7egtk"]
 [ext_resource type="PackedScene" uid="uid://c03x7cx3t0083" path="res://scripts/mob/attackable/player/minimap_markers/map_marker.tscn" id="2_dbpwl"]
+[ext_resource type="Script" path="res://src/combat/attackable_stats.gd" id="2_dsgh0"]
 [ext_resource type="Script" path="res://src/combat/attackable_status.gd" id="3_23pr2"]
 [ext_resource type="Texture2D" uid="uid://mfj02y3po58g" path="res://scripts/items/weapons/textures/items_atlas.png" id="4_clhl8"]
 
-[sub_resource type="Resource" id="Resource_kt3dt"]
-resource_local_to_scene = true
-script = ExtResource("2_7egtk")
-health = null
-max_health = null
-melee_power = null
-bow_power = null
-spell_power = null
-melee_defense = null
-bow_defense = null
-spell_defense = null
-crit_chance = null
-crit_damage = null
-weapon_damage = null
-armor_defense = null
-weapon_type = null
+[sub_resource type="Resource" id="Resource_ww44q"]
+script = ExtResource("2_dsgh0")
+health = 100
+max_health = 100
+melee_power = 10
+bow_power = 10
+spell_power = 10
+melee_defense = 10
+bow_defense = 10
+spell_defense = 10
+crit_chance = 0.0
+crit_damage = 0.0
 
-[sub_resource type="Resource" id="Resource_6ayws"]
+[sub_resource type="Resource" id="Resource_sxuwf"]
 script = ExtResource("3_23pr2")
 curr_status = 0
 
@@ -39,8 +35,8 @@ region = Rect2(0, 512, 128, 128)
 
 [node name="AquaWizard" type="CharacterBody3D"]
 script = ExtResource("1_1cd28")
-stats = SubResource("Resource_kt3dt")
-status = SubResource("Resource_6ayws")
+stats = SubResource("Resource_ww44q")
+status = SubResource("Resource_sxuwf")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29, 0)

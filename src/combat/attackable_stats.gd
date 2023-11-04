@@ -32,6 +32,7 @@ func _emit_all():
 	get:
 		return max_health
 
+# history: AttackHistory -> incoming/outgoing -> Array[<ability & damage struct>]
 
 ###
 ### Functionality

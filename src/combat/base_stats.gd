@@ -1,4 +1,5 @@
 class_name BaseStats extends Resource
+## The base for all things that will ever have stats.
 
 signal stats_changed(stats: BaseStats)
 
@@ -13,6 +14,5 @@ signal stats_changed(stats: BaseStats)
 @export var crit_chance := 0.0
 @export var crit_damage := 0.0
 
-func _set(property: StringName, value: Variant) -> bool:
-	stats_changed.emit(self)
-	return super(property, value)
+func update():
+	stats_changed.emit()
