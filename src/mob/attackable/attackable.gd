@@ -1,5 +1,6 @@
 class_name Attackable extends CharacterBody3D
 
+@export_category("Attackable Stats")
 @export var stats := AttackableStats.new()
 @export var status := AttackableStatus.new()
 

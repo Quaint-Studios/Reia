@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://eicmer2kdgy"]
+[gd_scene load_steps=34 format=3 uid="uid://eicmer2kdgy"]
 
 [ext_resource type="Script" path="res://src/mob/attackable/player.gd" id="1_xki7i"]
 [ext_resource type="Script" path="res://scripts/mob/attackable/player/abilities/ability_manager.gd" id="2_fdbkp"]
@@ -10,10 +10,12 @@
 [ext_resource type="Texture2D" uid="uid://mfj02y3po58g" path="res://scripts/items/weapons/textures/items_atlas.png" id="4_qds30"]
 [ext_resource type="PackedScene" uid="uid://dud8gf6n8gvk" path="res://scripts/inventory/ui/player_inventory.tscn" id="4_tvn1c"]
 [ext_resource type="Script" path="res://scripts/mob/attackable/player/player_hud.gd" id="5_gmuxt"]
-[ext_resource type="Script" path="res://src/combat/attackable_stats.gd" id="5_qyyi6"]
 [ext_resource type="PackedScene" uid="uid://gm47ucg1gegr" path="res://scripts/mob/attackable/player/player_minimap.tscn" id="5_vfast"]
+[ext_resource type="Script" path="res://src/combat/player_stats.gd" id="6_6k4vg"]
 [ext_resource type="Script" path="res://src/combat/attackable_status.gd" id="6_xud1i"]
 [ext_resource type="PackedScene" uid="uid://inny187m6t4r" path="res://scripts/mob/attackable/player/abilities/combat/pyro/fireball/Ball.glb" id="6_ymcpu"]
+[ext_resource type="Script" path="res://src/combat/spirit_stats.gd" id="7_xyxlv"]
+[ext_resource type="Script" path="res://src/combat/weapon_stats.gd" id="8_lalsr"]
 
 [sub_resource type="Resource" id="Resource_q15dm"]
 script = ExtResource("3_myfqk")
@@ -26,8 +28,41 @@ script = ExtResource("2_fdbkp")
 skill_1 = SubResource("Resource_q15dm")
 skill_2 = SubResource("Resource_t5xeo")
 
-[sub_resource type="Resource" id="Resource_qndf3"]
-script = ExtResource("5_qyyi6")
+[sub_resource type="Resource" id="Resource_f08nr"]
+script = ExtResource("8_lalsr")
+weapon_type = 0
+damage_type = 0
+melee_power = 10
+bow_power = 10
+spell_power = 10
+melee_defense = 10
+bow_defense = 10
+spell_defense = 10
+crit_chance = 0.0
+crit_damage = 0.0
+
+[sub_resource type="Resource" id="Resource_ymnrx"]
+script = ExtResource("7_xyxlv")
+weapon_stats = SubResource("Resource_f08nr")
+ether = 100
+max_ether = 100
+health = 200
+max_health = 200
+melee_power = 10
+bow_power = 10
+spell_power = 10
+melee_defense = 10
+bow_defense = 10
+spell_defense = 10
+crit_chance = 0.0
+crit_damage = 0.0
+
+[sub_resource type="Resource" id="Resource_dusif"]
+script = ExtResource("6_6k4vg")
+spirits = Array[Object]([SubResource("Resource_ymnrx")])
+current_spirit = -1
+ether = 100
+max_ether = 100
 health = 100
 max_health = 100
 melee_power = 10
@@ -38,11 +73,8 @@ bow_defense = 10
 spell_defense = 10
 crit_chance = 0.0
 crit_damage = 0.0
-weapon_damage = 5
-armor_defense = 3
-weapon_type = 0
 
-[sub_resource type="Resource" id="Resource_f5xpj"]
+[sub_resource type="Resource" id="Resource_pwlnj"]
 script = ExtResource("6_xud1i")
 curr_status = 0
 
@@ -113,8 +145,8 @@ collision_layer = 6
 collision_mask = 273
 script = ExtResource("1_xki7i")
 abilities = SubResource("Resource_rkqow")
-stats = SubResource("Resource_qndf3")
-status = SubResource("Resource_f5xpj")
+stats = SubResource("Resource_dusif")
+status = SubResource("Resource_pwlnj")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.825, 0)

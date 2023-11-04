@@ -13,6 +13,11 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera: Camera3D = $CameraPivot/Camera
 
+func _init() -> void:
+	if stats != PlayerStats:
+		print_debug("Bug: The stats of %s is not of type PlayerStats" % name)
+		# TODO: Handle conversion in the future.
+
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	%AnimationTree.active = true

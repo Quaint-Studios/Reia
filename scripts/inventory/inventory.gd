@@ -34,7 +34,7 @@ func get_category(category_name: String) -> CategoryData:
 
 	return category
 
-func remove_item(category_name: String, item: ItemData):
+func remove_item(category_name: String, item: Item):
 	# Category doesn't exist
 	if !categories.has(category_name):
 		return
