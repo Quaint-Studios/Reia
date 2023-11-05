@@ -49,6 +49,9 @@ func damage(attacker: Attackable, ability: Ability = null):
 
 	health -= attack_damage
 
+	if health < 0:
+		health = 0
+
 func get_weapon_type() -> Enums.Weapon_Type:
 	#Override
 	return Enums.Weapon_Type.MELEE

@@ -8,10 +8,14 @@ func init(_name = "Attackable"):
 	name = _name # + _uuid
 
 func hit(attacker: Attackable):
+	if status.state != AttackableStatus.Status.ALIVE:
+		return
+
 	stats.damage(attacker)
 
 	if stats.health == 0:
 		status.die(attacker)
+		print_debug("%s has killed %s" % [attacker.get_name(), get_name()])
 		return
 
 func attack(attackable: Attackable): # , ability: Ability

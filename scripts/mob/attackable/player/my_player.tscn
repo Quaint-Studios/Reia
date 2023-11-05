@@ -76,7 +76,7 @@ crit_damage = 0.0
 
 [sub_resource type="Resource" id="Resource_pwlnj"]
 script = ExtResource("6_xud1i")
-curr_status = 0
+state = 0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_o0wyg"]
 radius = 0.25

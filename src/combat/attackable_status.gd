@@ -1,11 +1,18 @@
 class_name AttackableStatus extends Resource
 
-@export var curr_status: Status = Status.ALIVE
+signal state_changed(state: Status)
+
+@export var state := Status.ALIVE:
+	set(value):
+		state = value
+		state_changed.emit(value)
 enum Status { ALIVE, DEAD, RESPAWNING }
 
 func revive():
-	pass
+	state = Status.ALIVE
+
 func die(attacker: Attackable):
-	pass
+	state = Status.DEAD
+
 func respawn():
-	pass
+	state = Status.RESPAWNING
