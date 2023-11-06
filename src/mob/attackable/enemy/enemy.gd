@@ -7,8 +7,9 @@ func _init():
 	status.state_changed.connect(_on_died)
 
 func _on_died():
+	pass
 	# Spawn Item
-	var dropped_items := DroppedItems.new(loot)
+	# var dropped_items := DroppedItems.new(loot)
 
 	# attach a new timer.
 	# dissolve and delete this enemy.

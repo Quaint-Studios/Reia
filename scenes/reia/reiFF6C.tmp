@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://njgkawiv7sdy"]
+[gd_scene load_steps=24 format=3 uid="uid://njgkawiv7sdy"]
 
 [ext_resource type="LightmapGIData" uid="uid://bog8vgj034dhh" path="res://scenes/reia/reia.lmbake" id="1_6htgl"]
 [ext_resource type="PackedScene" uid="uid://c28gkmhvhs58v" path="res://scenes/ui/game_ui.tscn" id="1_ttgxx"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://src/combat/weapon_stats.gd" id="7_pp4yv"]
 [ext_resource type="PackedScene" uid="uid://bj7e34l2ty1yt" path="res://assets/world/trees/compositions/stylized_tree.glb" id="8_bup5i"]
 [ext_resource type="PackedScene" uid="uid://dtyekwmou34bm" path="res://rsc/models/dropped_items/dropped_items.tscn" id="8_x6olo"]
+[ext_resource type="Script" path="res://src/item/dropped_items.gd" id="9_ilr3e"]
 [ext_resource type="PackedScene" uid="uid://bvb75kmlbcbav" path="res://assets/world/fountains/stylized_fountain.glb" id="9_ksg1v"]
 [ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="11_d2pml"]
 [ext_resource type="PackedScene" uid="uid://dgpnu1i4wpcpm" path="res://scenes/managers/managers.tscn" id="12_n0e80"]
@@ -91,6 +92,7 @@ stats = SubResource("Resource_5v5w4")
 
 [node name="DroppedItems" parent="Terrain" instance=ExtResource("8_x6olo")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.09299)
+script = ExtResource("9_ilr3e")
 
 [node name="Uncatagorized" type="Node3D" parent="Terrain"]
 
