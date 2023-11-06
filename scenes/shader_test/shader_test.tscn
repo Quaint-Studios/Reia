@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://ci8xxveoikhj1"]
+[gd_scene load_steps=12 format=3 uid="uid://ci8xxveoikhj1"]
 
 [ext_resource type="PackedScene" uid="uid://bu0tke3h67pf4" path="res://shaders/water/stylized_water.tscn" id="1_153o6"]
 [ext_resource type="Shader" uid="uid://bt8b5swyqde5g" path="res://shaders/water/assets/water_mask.tres" id="2_nc2q7"]
 [ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="4_8l1uh"]
+[ext_resource type="PackedScene" uid="uid://dtyekwmou34bm" path="res://rsc/models/dropped_items/dropped_items.tscn" id="4_i3iij"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_835ng"]
 render_priority = 0
@@ -111,3 +112,6 @@ mesh = SubResource("SphereMesh_4txsv")
 libraries = {
 "": SubResource("AnimationLibrary_ei3ge")
 }
+
+[node name="DroppedItems" parent="." instance=ExtResource("4_i3iij")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.13538, 4.91442, 0.819642)

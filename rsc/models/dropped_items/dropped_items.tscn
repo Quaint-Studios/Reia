@@ -1,0 +1,75 @@
+[gd_scene load_steps=6 format=3 uid="uid://dtyekwmou34bm"]
+
+[ext_resource type="Script" path="res://src/item/dropped_items.gd" id="1_wa4pg"]
+[ext_resource type="Material" uid="uid://d2tnumcmyd5rs" path="res://rsc/models/dropped_items/dropped_items_core.material" id="2_r4chk"]
+[ext_resource type="Material" uid="uid://si08ecuxm63k" path="res://rsc/models/dropped_items/dropped_items_loot.material" id="3_gb32i"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_0nf4n"]
+material = ExtResource("2_r4chk")
+radial_segments = 32
+rings = 16
+
+[sub_resource type="SphereMesh" id="SphereMesh_t1q3i"]
+material = ExtResource("3_gb32i")
+radial_segments = 16
+rings = 8
+
+[node name="DroppedItems" type="Node3D"]
+script = ExtResource("1_wa4pg")
+
+[node name="Core" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+mesh = SubResource("SphereMesh_0nf4n")
+
+[node name="LootPivot" type="Node3D" parent="Core"]
+unique_name_in_owner = true
+
+[node name="Loot" type="MeshInstance3D" parent="Core/LootPivot"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.69, 0, 0)
+mesh = SubResource("SphereMesh_t1q3i")
+skeleton = NodePath("../../..")
+
+[node name="Loot2" type="MeshInstance3D" parent="Core/LootPivot"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.69, 0, 0)
+mesh = SubResource("SphereMesh_t1q3i")
+skeleton = NodePath("../../..")
+
+[node name="Loot3" type="MeshInstance3D" parent="Core/LootPivot"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.69, 0, 0)
+mesh = SubResource("SphereMesh_t1q3i")
+skeleton = NodePath("../../..")
+
+[node name="Loot4" type="MeshInstance3D" parent="Core/LootPivot"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.69, 0, 0)
+mesh = SubResource("SphereMesh_t1q3i")
+skeleton = NodePath("../../..")
+
+[node name="Loot5" type="MeshInstance3D" parent="Core/LootPivot"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.69, 0, 0)
+mesh = SubResource("SphereMesh_t1q3i")
+skeleton = NodePath("../../..")
+
+[node name="Loot6" type="MeshInstance3D" parent="Core/LootPivot"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.69, 0, 0)
+mesh = SubResource("SphereMesh_t1q3i")
+skeleton = NodePath("../../..")
+
+[node name="Loot7" type="MeshInstance3D" parent="Core/LootPivot"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.69, 0, 0)
+mesh = SubResource("SphereMesh_t1q3i")
+skeleton = NodePath("../../..")
+
+[node name="Loot8" type="MeshInstance3D" parent="Core/LootPivot"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.69, 0, 0)
+mesh = SubResource("SphereMesh_t1q3i")
+skeleton = NodePath("../../..")
+
+[node name="Loot9" type="MeshInstance3D" parent="Core/LootPivot"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.69, 0, 0)
+mesh = SubResource("SphereMesh_t1q3i")
+skeleton = NodePath("../../..")
+
+[node name="Loot10" type="MeshInstance3D" parent="Core/LootPivot"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.69, 0, 0)
+mesh = SubResource("SphereMesh_t1q3i")
+skeleton = NodePath("../../..")
