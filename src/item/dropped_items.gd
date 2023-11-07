@@ -16,6 +16,7 @@ func _ready():
 		loot_model = preload("res://rsc/models/dropped_items/loot.tscn")
 
 	update_pos()
+	update_scale()
 	update_count()
 
 func evenly_rotate_around(index: int, count: int, radius: float):
@@ -40,6 +41,7 @@ func update_count():
 	var items_size := items.size()
 
 	if child_count == items_size:
+		deleting = items.size() == 0 # TODO: Simplify this whole function?
 		return
 
 	if child_count > items_size:
@@ -59,6 +61,8 @@ func update_count():
 		loot.name = "Loot_%s_%s" % ["Legendary", i]
 		# TODO: Set color as well
 
+	# There's no way this could ever be true? Because item.size() has to be positive to get down here...?
+	# Consider being more efficient and just setting it to false and not using a statement.
 	deleting = items.size() == 0 # If empty, queue for deletion the next time the node updates.
 
 func update_scale():
@@ -68,6 +72,7 @@ func update_scale():
 	pass
 
 func update_pos():
+	# TODO: Use sin() to animate the core.
 	var children = loot_pivot.get_children()
 	var index = -1
 	for loot in children:

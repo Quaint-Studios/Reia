@@ -1,13 +1,15 @@
-[gd_scene load_steps=28 format=3 uid="uid://njgkawiv7sdy"]
+[gd_scene load_steps=36 format=3 uid="uid://njgkawiv7sdy"]
 
 [ext_resource type="LightmapGIData" uid="uid://bog8vgj034dhh" path="res://scenes/reia/reia.lmbake" id="1_6htgl"]
 [ext_resource type="PackedScene" uid="uid://c28gkmhvhs58v" path="res://scenes/ui/game_ui.tscn" id="1_ttgxx"]
 [ext_resource type="PackedScene" uid="uid://bmicgu6inl8e5" path="res://assets/characters/npcs/larry.tscn" id="2_w4lqh"]
-[ext_resource type="Script" path="res://src/combat/player_base_stats.gd" id="3_3lnry"]
 [ext_resource type="PackedScene" uid="uid://op561o2k0d4o" path="res://assets/characters/enemies/aqua_wizard.tscn" id="3_jgoiv"]
 [ext_resource type="PackedScene" uid="uid://eicmer2kdgy" path="res://scripts/mob/attackable/player/my_player.tscn" id="3_m63h2"]
+[ext_resource type="Script" path="res://src/combat/human_stats.gd" id="4_t015h"]
 [ext_resource type="PackedScene" uid="uid://bm6j14ip2oywr" path="res://assets/world/rocks/collections/stylized_rocks.glb" id="5_glpdm"]
 [ext_resource type="Script" path="res://src/combat/equipment_stats.gd" id="5_hvrw0"]
+[ext_resource type="Script" path="res://src/combat/player_stats.gd" id="5_r7h1h"]
+[ext_resource type="Script" path="res://src/combat/spirit_stats.gd" id="6_feg1l"]
 [ext_resource type="Script" path="res://src/combat/enemy_stats.gd" id="6_vhqti"]
 [ext_resource type="Script" path="res://src/combat/weapon_stats.gd" id="7_pp4yv"]
 [ext_resource type="PackedScene" uid="uid://bj7e34l2ty1yt" path="res://assets/world/trees/compositions/stylized_tree.glb" id="8_bup5i"]
@@ -16,14 +18,76 @@
 [ext_resource type="PackedScene" uid="uid://dtyekwmou34bm" path="res://rsc/models/dropped_items/dropped_items.tscn" id="8_x6olo"]
 [ext_resource type="PackedScene" uid="uid://bvb75kmlbcbav" path="res://assets/world/fountains/stylized_fountain.glb" id="9_ksg1v"]
 [ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="11_d2pml"]
+[ext_resource type="Resource" uid="uid://de4lkn8yj68de" path="res://scripts/items/weapons/1000_wooden_sword.tres" id="11_jk0g2"]
 [ext_resource type="PackedScene" uid="uid://dgpnu1i4wpcpm" path="res://scenes/managers/managers.tscn" id="12_n0e80"]
+[ext_resource type="Resource" uid="uid://bl33wnqg6dxmq" path="res://scripts/items/weapons/1001_iron_sword.tres" id="12_w56ju"]
 [ext_resource type="PackedScene" uid="uid://cmnfswjhhgkfd" path="res://assets/world/sky/islands/floating_house.glb" id="12_x2unh"]
 [ext_resource type="PackedScene" uid="uid://ce72x7shwqq2l" path="res://assets/world/forest/trees/forest_large_tree.glb" id="13_la4es"]
 [ext_resource type="PackedScene" uid="uid://cslscakiyp5gs" path="res://assets/world/sky/islands/floating_island.glb" id="14_r436h"]
 [ext_resource type="PackedScene" uid="uid://bo1vtvp2wnp6f" path="res://shaders/water/stylized_water_blue.tscn" id="15_wrhli"]
 
-[sub_resource type="Resource" id="Resource_mx7ie"]
-script = ExtResource("3_3lnry")
+[sub_resource type="Resource" id="Resource_ifdwj"]
+script = ExtResource("5_hvrw0")
+melee_power = 10
+bow_power = 10
+spell_power = 10
+melee_defense = 10
+bow_defense = 10
+spell_defense = 10
+crit_chance = 0.0
+crit_damage = 0.0
+
+[sub_resource type="Resource" id="Resource_6uydj"]
+script = ExtResource("4_t015h")
+equipment_stats = SubResource("Resource_ifdwj")
+combat_mode = 0
+ether = 100
+max_ether = 100
+health = 100
+max_health = 100
+melee_power = 10
+bow_power = 10
+spell_power = 10
+melee_defense = 10
+bow_defense = 10
+spell_defense = 10
+crit_chance = 0.0
+crit_damage = 0.0
+
+[sub_resource type="Resource" id="Resource_tude2"]
+script = ExtResource("7_pp4yv")
+weapon_type = 0
+damage_type = 0
+melee_power = 10
+bow_power = 10
+spell_power = 10
+melee_defense = 10
+bow_defense = 10
+spell_defense = 10
+crit_chance = 0.0
+crit_damage = 0.0
+
+[sub_resource type="Resource" id="Resource_ldjrf"]
+script = ExtResource("6_feg1l")
+weapon_stats = SubResource("Resource_tude2")
+ether = 100
+max_ether = 100
+health = 100
+max_health = 100
+melee_power = 10
+bow_power = 10
+spell_power = 10
+melee_defense = 10
+bow_defense = 10
+spell_defense = 10
+crit_chance = 0.0
+crit_damage = 0.0
+
+[sub_resource type="Resource" id="Resource_34n83"]
+script = ExtResource("5_r7h1h")
+human = SubResource("Resource_6uydj")
+spirits = Array[Object]([SubResource("Resource_ldjrf")])
+current_spirit = -1
 ether = 100
 max_ether = 100
 health = 100
@@ -93,7 +157,7 @@ light_data = ExtResource("1_6htgl")
 
 [node name="MyPlayer" parent="Players" instance=ExtResource("3_m63h2")]
 transform = Transform3D(0.998268, 0, -0.0588184, 0, 1, 0, 0.0588184, 0, 0.998268, 1.26472, -0.756826, 3.37216)
-stats = SubResource("Resource_mx7ie")
+stats = SubResource("Resource_34n83")
 status = SubResource("Resource_pm15j")
 
 [node name="NPCs" type="Node3D" parent="."]
@@ -109,6 +173,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57933, -0.75015, 1.28274)
 transform = Transform3D(-0.351793, 0, 0.936078, 0, 1, 0, -0.936078, 0, -0.351793, -5.80119, 0, 2.76315)
 collision_layer = 18
 collision_mask = 287
+loot = Array[Resource("res://src/item/item.gd")]([ExtResource("11_jk0g2"), ExtResource("12_w56ju"), ExtResource("11_jk0g2"), ExtResource("11_jk0g2"), ExtResource("11_jk0g2"), ExtResource("11_jk0g2"), ExtResource("11_jk0g2")])
 stats = SubResource("Resource_5v5w4")
 
 [node name="LootSpawner" type="Node3D" parent="."]
