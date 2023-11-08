@@ -1,7 +1,7 @@
 class_name Enemy extends Attackable
 
 # Add things like pathfinding and AI
-@export var loot: Array[Item] = [] # TODO: Instead of Array[Item], use a Resource of type LootTable
+@export var loot: LootTable = LootTable.new() # TODO: Instead of Array[Item], use a Resource of type LootTable
 #  LootTable should have the items: Array[Item] in it. This way it can be used
 # in things like Bestiaries to get the loot the enemy drops specifically.
 
@@ -23,7 +23,7 @@ func _on_died():
 		return
 
 	if loot.size() > 0:
-		loot_spawner.spawn(loot, position)
+		loot_spawner.spawn(loot.items, position)
 
 	despawn()
 
