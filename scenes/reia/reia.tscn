@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://njgkawiv7sdy"]
+[gd_scene load_steps=34 format=3 uid="uid://njgkawiv7sdy"]
 
 [ext_resource type="LightmapGIData" uid="uid://bog8vgj034dhh" path="res://scenes/reia/reia.lmbake" id="1_6htgl"]
 [ext_resource type="PackedScene" uid="uid://c28gkmhvhs58v" path="res://scenes/ui/game_ui.tscn" id="1_ttgxx"]
@@ -18,9 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dtyekwmou34bm" path="res://rsc/models/dropped_items/dropped_items.tscn" id="8_x6olo"]
 [ext_resource type="PackedScene" uid="uid://bvb75kmlbcbav" path="res://assets/world/fountains/stylized_fountain.glb" id="9_ksg1v"]
 [ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="11_d2pml"]
-[ext_resource type="Resource" uid="uid://de4lkn8yj68de" path="res://scripts/items/weapons/1000_wooden_sword.tres" id="11_jk0g2"]
 [ext_resource type="PackedScene" uid="uid://dgpnu1i4wpcpm" path="res://scenes/managers/managers.tscn" id="12_n0e80"]
-[ext_resource type="Resource" uid="uid://bl33wnqg6dxmq" path="res://scripts/items/weapons/1001_iron_sword.tres" id="12_w56ju"]
 [ext_resource type="PackedScene" uid="uid://cmnfswjhhgkfd" path="res://assets/world/sky/islands/floating_house.glb" id="12_x2unh"]
 [ext_resource type="PackedScene" uid="uid://ce72x7shwqq2l" path="res://assets/world/forest/trees/forest_large_tree.glb" id="13_la4es"]
 [ext_resource type="PackedScene" uid="uid://cslscakiyp5gs" path="res://assets/world/sky/islands/floating_island.glb" id="14_r436h"]
@@ -173,7 +171,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57933, -0.75015, 1.28274)
 transform = Transform3D(-0.351793, 0, 0.936078, 0, 1, 0, -0.936078, 0, -0.351793, -5.80119, 0, 2.76315)
 collision_layer = 18
 collision_mask = 287
-loot = Array[Resource("res://src/item/item.gd")]([ExtResource("11_jk0g2"), ExtResource("12_w56ju"), ExtResource("11_jk0g2"), ExtResource("11_jk0g2"), ExtResource("11_jk0g2"), ExtResource("11_jk0g2"), ExtResource("11_jk0g2")])
 stats = SubResource("Resource_5v5w4")
 
 [node name="LootSpawner" type="Node3D" parent="."]
