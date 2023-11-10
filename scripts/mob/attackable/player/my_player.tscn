@@ -1,6 +1,6 @@
 [gd_scene load_steps=34 format=3 uid="uid://eicmer2kdgy"]
 
-[ext_resource type="Script" path="res://src/mob/attackable/player.gd" id="1_xki7i"]
+[ext_resource type="Script" path="res://src/mob/attackable/player/player.gd" id="1_oof1h"]
 [ext_resource type="Script" path="res://scripts/mob/attackable/player/abilities/ability_manager.gd" id="2_fdbkp"]
 [ext_resource type="PackedScene" uid="uid://cykr5gmvdm7xf" path="res://assets/characters/player/female_player.glb" id="2_s3eb4"]
 [ext_resource type="Script" path="res://scripts/camera/tps_camera.gd" id="3_0ip71"]
@@ -143,7 +143,7 @@ region = Rect2(128, 512, 128, 128)
 [node name="MyPlayer" type="CharacterBody3D"]
 collision_layer = 6
 collision_mask = 273
-script = ExtResource("1_xki7i")
+script = ExtResource("1_oof1h")
 abilities = SubResource("Resource_rkqow")
 stats = SubResource("Resource_dusif")
 status = SubResource("Resource_pwlnj")
@@ -356,6 +356,10 @@ follow_point = NodePath("../CameraPoints/FollowPoint")
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 2)
 cull_mask = 1047551
 fov = 70.0
+
+[node name="RayCast3D" type="RayCast3D" parent="CameraPivot/Camera"]
+target_position = Vector3(0, 0, -1)
+collision_mask = 64
 
 [node name="UI" type="Node" parent="."]
 
