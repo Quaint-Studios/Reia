@@ -1,4 +1,4 @@
-class_name DroppedItems extends Node3D
+class_name DroppedItems extends Node3D # Extends Interactable (a base with an interact() method)
 
 @export var loot_model: PackedScene
 @export var loot_pivot: Node3D
