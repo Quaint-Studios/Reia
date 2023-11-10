@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://cqxplnocmdh0f"]
 
-[ext_resource type="Texture2D" uid="uid://dw8dxdsi60dw6" path="res://assets/ui/logos/Reia_LOGO.png" id="1_6ljrg"]
 [ext_resource type="LightmapGIData" uid="uid://hhl6lqi7s8us" path="res://scenes/main_menu/main_menu.lmbake" id="1_28juw"]
 [ext_resource type="Script" path="res://scenes/main_menu/main_menu.gd" id="1_3638y"]
 [ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="2_ofhs3"]
 [ext_resource type="AudioStream" uid="uid://bjmsfaw5a1nh5" path="res://assets/audio/menu/forest_theme_v1.wav" id="3_3o1dl"]
 [ext_resource type="Theme" uid="uid://cvudtn0hd6gap" path="res://scenes/main_menu/main_menu.tres" id="4_r7mv3"]
+[ext_resource type="Texture2D" uid="uid://cxl6rabxncc8r" path="res://rsc/icons/logo_a_banner.png" id="6_kiyks"]
 [ext_resource type="PackedScene" uid="uid://cykr5gmvdm7xf" path="res://assets/characters/player/female_player.glb" id="7_g5ofp"]
 [ext_resource type="Script" path="res://scripts/misc/changelog.gd" id="8_6sbgs"]
 
@@ -128,13 +128,14 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -460.0
-offset_right = 460.0
-offset_bottom = 430.0
+offset_left = -640.0
+offset_right = 640.0
+offset_bottom = 640.0
 grow_horizontal = 2
-scale = Vector2(0.36, 0.36)
-pivot_offset = Vector2(460, 0)
-texture = ExtResource("1_6ljrg")
+scale = Vector2(0.25, 0.25)
+pivot_offset = Vector2(640, 0)
+texture = ExtResource("6_kiyks")
+stretch_mode = 4
 
 [node name="Selectors" type="Control" parent="UI/Control"]
 layout_mode = 1
@@ -143,6 +144,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_lock_ = true
 
 [node name="Margins" type="MarginContainer" parent="UI/Control/Selectors"]
 layout_mode = 1
@@ -386,6 +388,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("8_6sbgs")
+metadata/_edit_lock_ = true
 
 [node name="Margin" type="MarginContainer" parent="UI/Changelog"]
 layout_mode = 1
