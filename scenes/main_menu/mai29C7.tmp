@@ -128,14 +128,13 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -640.0
-offset_right = 640.0
+offset_left = -576.0
+offset_right = 704.0
 offset_bottom = 640.0
 grow_horizontal = 2
 scale = Vector2(0.25, 0.25)
 pivot_offset = Vector2(640, 0)
 texture = ExtResource("6_kiyks")
-stretch_mode = 4
 
 [node name="Selectors" type="Control" parent="UI/Control"]
 layout_mode = 1
@@ -144,7 +143,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_lock_ = true
 
 [node name="Margins" type="MarginContainer" parent="UI/Control/Selectors"]
 layout_mode = 1
@@ -388,7 +386,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("8_6sbgs")
-metadata/_edit_lock_ = true
 
 [node name="Margin" type="MarginContainer" parent="UI/Changelog"]
 layout_mode = 1
