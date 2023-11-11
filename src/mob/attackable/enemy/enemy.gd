@@ -6,6 +6,8 @@ class_name Enemy extends Attackable
 # in things like Bestiaries to get the loot the enemy drops specifically.
 
 func _ready():
+	add_to_group("enemy")
+
 	status.is_dead.connect(_on_died)
 	pass
 
