@@ -14,6 +14,8 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera: Camera3D = $CameraPivot/Camera
 
 func _ready():
+	add_to_group("player")
+
 	if !stats is PlayerStats:
 		print_debug("Bug: The stats of %s is not of type PlayerStats" % name)
 		# TODO: Handle conversion in the future.
