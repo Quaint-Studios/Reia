@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://eicmer2kdgy"]
+[gd_scene load_steps=36 format=3 uid="uid://eicmer2kdgy"]
 
 [ext_resource type="Script" path="res://src/mob/attackable/player/player.gd" id="1_oof1h"]
 [ext_resource type="Script" path="res://scripts/mob/attackable/player/abilities/ability_manager.gd" id="2_fdbkp"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://inny187m6t4r" path="res://scripts/mob/attackable/player/abilities/combat/pyro/fireball/Ball.glb" id="6_ymcpu"]
 [ext_resource type="Script" path="res://src/combat/spirit_stats.gd" id="7_xyxlv"]
 [ext_resource type="Script" path="res://src/combat/weapon_stats.gd" id="8_lalsr"]
+[ext_resource type="Theme" uid="uid://cvudtn0hd6gap" path="res://scenes/main_menu/main_menu.tres" id="17_1fko2"]
 
 [sub_resource type="Resource" id="Resource_q15dm"]
 script = ExtResource("3_myfqk")
@@ -139,6 +140,8 @@ node_connections = [&"output", 0, &"died", &"died", 0, &"in_air", &"died", 1, &"
 [sub_resource type="AtlasTexture" id="AtlasTexture_4oa3t"]
 atlas = ExtResource("4_qds30")
 region = Rect2(128, 512, 128, 128)
+
+[sub_resource type="Theme" id="Theme_f4sma"]
 
 [node name="MyPlayer" type="CharacterBody3D"]
 collision_layer = 6
@@ -357,10 +360,6 @@ transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 
 cull_mask = 1047551
 fov = 70.0
 
-[node name="RayCast3D" type="RayCast3D" parent="CameraPivot/Camera"]
-target_position = Vector3(0, 0, -1)
-collision_mask = 64
-
 [node name="UI" type="Node" parent="."]
 
 [node name="PlayerInventory" parent="UI" instance=ExtResource("4_tvn1c")]
@@ -378,6 +377,63 @@ theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 40
 theme_override_constants/margin_bottom = 0
 script = ExtResource("5_gmuxt")
+
+[node name="Interactor" type="Control" parent="UI/HUD"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/HUD/Interactor"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 68.0
+offset_top = 2.0
+offset_right = 156.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/HUD/Interactor/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Background" type="Panel" parent="UI/HUD/Interactor/HBoxContainer/CenterContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+theme = SubResource("Theme_f4sma")
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/HUD/Interactor/HBoxContainer/CenterContainer/Background"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Keybind" type="Label" parent="UI/HUD/Interactor/HBoxContainer/CenterContainer/Background/CenterContainer"]
+layout_mode = 2
+theme = ExtResource("17_1fko2")
+text = "F"
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/HUD/Interactor/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("17_1fko2")
+text = "Loot"
 
 [node name="PlayerMinimap" parent="UI/HUD" instance=ExtResource("5_vfast")]
 layout_mode = 2
