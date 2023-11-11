@@ -13,8 +13,8 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4eypw"]
 shader = ExtResource("6_7rsuc")
 shader_parameter/background_color = Color(1, 1, 1, 1)
-shader_parameter/shadow_color = Color(0.196078, 0.196078, 0.196078, 1)
-shader_parameter/offset_in_pixels = Vector2(2, 3)
+shader_parameter/shadow_color = Color(0.196078, 0.196078, 0.196078, 0.356863)
+shader_parameter/offset_in_pixels = Vector2(4, 6)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxt2h"]
 bg_color = Color(0.984314, 0.980392, 0.960784, 0.784314)
