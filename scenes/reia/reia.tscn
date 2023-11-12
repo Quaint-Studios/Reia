@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://njgkawiv7sdy"]
+[gd_scene load_steps=34 format=3 uid="uid://njgkawiv7sdy"]
 
 [ext_resource type="LightmapGIData" uid="uid://bog8vgj034dhh" path="res://scenes/reia/reia.lmbake" id="1_6htgl"]
 [ext_resource type="PackedScene" uid="uid://bmicgu6inl8e5" path="res://assets/characters/npcs/larry.tscn" id="2_w4lqh"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://ce72x7shwqq2l" path="res://assets/world/forest/trees/forest_large_tree.glb" id="13_la4es"]
 [ext_resource type="PackedScene" uid="uid://cslscakiyp5gs" path="res://assets/world/sky/islands/floating_island.glb" id="14_r436h"]
 [ext_resource type="PackedScene" uid="uid://bo1vtvp2wnp6f" path="res://shaders/water/stylized_water_blue.tscn" id="15_wrhli"]
+[ext_resource type="PackedScene" uid="uid://budrpsd0s04es" path="res://rsc/models/trees/fluffy_tree/fluffy_tree.glb" id="23_aw0vu"]
 
 [sub_resource type="Resource" id="Resource_ifdwj"]
 script = ExtResource("5_hvrw0")
@@ -142,7 +143,7 @@ crit_chance = 0.0
 crit_damage = 0.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epo51"]
-albedo_color = Color(0.265625, 0.898438, 0.4375, 1)
+albedo_color = Color(0.266667, 1, 0.12549, 1)
 
 [node name="Map_Reia" type="Node"]
 
@@ -244,3 +245,6 @@ light_energy = 0.01
 environment = ExtResource("11_d2pml")
 
 [node name="Managers" parent="." instance=ExtResource("12_n0e80")]
+
+[node name="fluffy_tree" parent="." instance=ExtResource("23_aw0vu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.10809, -0.757559, -8.13153)
