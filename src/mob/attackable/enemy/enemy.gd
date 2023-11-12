@@ -24,7 +24,7 @@ func _on_died():
 		# Or Map.setup() so all maps always have the proper root setups?
 		return
 
-	if loot.size() > 0:
+	if loot != null && loot.items != null && loot.items.size() > 0:
 		loot_spawner.spawn(loot.items, position)
 
 	despawn()

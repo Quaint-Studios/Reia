@@ -1,4 +1,4 @@
-class_name DroppedItems extends Interactable # Extends Interactable (a base with an interact() method)
+class_name DroppedItems extends Interactable
 
 @export var loot_model: PackedScene
 @export var loot_pivot: Node3D
@@ -9,6 +9,8 @@ var offset := 0.69
 var deleting := false
 
 func _ready():
+	super()
+
 	if loot_pivot == null:
 		loot_pivot = %LootPivot
 

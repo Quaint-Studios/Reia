@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=3 uid="uid://c28gkmhvhs58v"]
 
-[ext_resource type="Script" path="res://scenes/ui/game_ui.gd" id="1_7m06n"]
-[ext_resource type="PackedScene" uid="uid://dg5choqce8gn3" path="res://scenes/ui/status_bars/ether_bar.tscn" id="1_xup2a"]
-[ext_resource type="PackedScene" uid="uid://bb6pl2i42qjqf" path="res://scenes/ui/status_bars/health_bar.tscn" id="1_y6hwk"]
+[ext_resource type="Script" path="res://scenes/ui/player_status_bars.gd" id="1_aeql3"]
+[ext_resource type="PackedScene" uid="uid://bb6pl2i42qjqf" path="res://scenes/ui/status_bars/health_bar.tscn" id="2_ln5vs"]
+[ext_resource type="PackedScene" uid="uid://dg5choqce8gn3" path="res://scenes/ui/status_bars/ether_bar.tscn" id="3_geupo"]
 
-[node name="GameUI" type="Control"]
+[node name="PlayerStatusBars" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,9 +13,9 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_vertical = 8
 mouse_filter = 2
-script = ExtResource("1_7m06n")
+script = ExtResource("1_aeql3")
 
-[node name="HealthBar" parent="." instance=ExtResource("1_y6hwk")]
+[node name="HealthBar" parent="." instance=ExtResource("2_ln5vs")]
 layout_mode = 1
 anchors_preset = 7
 anchor_top = 1.0
@@ -26,7 +26,7 @@ grow_vertical = 0
 scale = Vector2(0.2, 0.2)
 metadata/_edit_lock_ = true
 
-[node name="EtherBar" parent="." instance=ExtResource("1_xup2a")]
+[node name="EtherBar" parent="." instance=ExtResource("3_geupo")]
 layout_mode = 1
 anchors_preset = 7
 anchor_top = 1.0

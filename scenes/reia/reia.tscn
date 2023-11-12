@@ -1,7 +1,6 @@
-[gd_scene load_steps=34 format=3 uid="uid://njgkawiv7sdy"]
+[gd_scene load_steps=33 format=3 uid="uid://njgkawiv7sdy"]
 
 [ext_resource type="LightmapGIData" uid="uid://bog8vgj034dhh" path="res://scenes/reia/reia.lmbake" id="1_6htgl"]
-[ext_resource type="PackedScene" uid="uid://c28gkmhvhs58v" path="res://scenes/ui/game_ui.tscn" id="1_ttgxx"]
 [ext_resource type="PackedScene" uid="uid://bmicgu6inl8e5" path="res://assets/characters/npcs/larry.tscn" id="2_w4lqh"]
 [ext_resource type="PackedScene" uid="uid://op561o2k0d4o" path="res://assets/characters/enemies/aqua_wizard.tscn" id="3_jgoiv"]
 [ext_resource type="PackedScene" uid="uid://eicmer2kdgy" path="res://scripts/mob/attackable/player/my_player.tscn" id="3_m63h2"]
@@ -222,8 +221,6 @@ transform = Transform3D(0.528438, 0, -0.848972, 0, 1, 0, 0.848972, 0, 0.528438, 
 transform = Transform3D(-0.759271, 0, -0.650774, 0, 1, 0, 0.650774, 0, -0.759271, -195.998, 62.915, -391.051)
 
 [node name="UI" type="Node" parent="."]
-
-[node name="GameUI" parent="UI" instance=ExtResource("1_ttgxx")]
 
 [node name="World" type="Node" parent="."]
 

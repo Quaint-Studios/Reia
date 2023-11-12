@@ -97,7 +97,7 @@ func set_anim(node_name: String, param_name: String):
 ###
 func handle_attack():
 	if Input.is_action_just_pressed("attack"):
-		# GameUI.instance.status_bars.set_health(72, 100)
+		UIManager.player_ui.hud.status_bars.set_health(72, 100)
 		var space := get_world_3d().direct_space_state
 		var query := PhysicsRayQueryParameters3D.create(camera.global_position,
 			camera.global_position - camera.global_transform.basis.z * 100, PhysicsUtils.arr_to_collision_mask(
