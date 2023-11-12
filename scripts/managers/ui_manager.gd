@@ -7,6 +7,8 @@ static var instance: UIManager
 
 static var is_ui_open := false
 
+static var player_ui: PlayerUI
+
 func _init():
 	if instance == null:
 		instance = self

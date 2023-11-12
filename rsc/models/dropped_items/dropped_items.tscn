@@ -18,6 +18,7 @@ collision_mask = 0
 script = ExtResource("1_wa4pg")
 loot_model = ExtResource("2_mdr7v")
 loot_pivot = NodePath("Core/LootPivot")
+interact_name = "Loot"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("BoxShape3D_biu23")
