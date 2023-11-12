@@ -5,7 +5,6 @@
 [ext_resource type="Material" uid="uid://d2tnumcmyd5rs" path="res://rsc/models/dropped_items/dropped_items_core.material" id="2_r4chk"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_biu23"]
-size = Vector3(0.35, 0.35, 0.35)
 
 [sub_resource type="SphereMesh" id="SphereMesh_0nf4n"]
 material = ExtResource("2_r4chk")
