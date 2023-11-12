@@ -46,19 +46,19 @@ func _physics_process(delta: float):
 		velocity.y -= gravity * delta
 
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		_handle_inputs()
+		_handle_inputs(delta)
 
 	move_and_slide()
 
-func _handle_inputs():
+func _handle_inputs(delta: float):
 	handle_attack()
 	handle_skills()
-	handle_movement()
+	handle_movement(delta)
 
 ###
 ### Movement
 ###
-func handle_movement():
+func handle_movement(delta: float):
 	# Handle jump.
 	if is_on_floor():
 		if Input.is_action_just_pressed("jump"):
@@ -79,9 +79,15 @@ func handle_movement():
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 
+		var old_rot = visuals.rotation
+
 		visuals.look_at(position + direction)
 		visuals.rotation.x = 0
 		visuals.rotation.z = 0
+
+		var new_rot = visuals.rotation
+
+		visuals.rotation.y = lerp_angle(old_rot.y, new_rot.y, sin(delta * 20))
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
