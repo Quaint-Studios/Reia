@@ -236,7 +236,7 @@ new_wavePos = ((VERTEX + (NORMAL * (texture(simulation, UV).r * sim_amplitude)))
 
 [resource]
 code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, shadows_disabled;
 
 
 // Varyings
@@ -466,6 +466,7 @@ void fragment() {
 
 }
 "
+flags/shadows_disabled = true
 varyings/new_pos = "0,4"
 varyings/old_pos = "0,4"
 nodes/vertex/0/position = Vector2(-1480, 140)
