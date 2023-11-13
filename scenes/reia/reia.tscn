@@ -169,8 +169,8 @@ noise = SubResource("FastNoiseLite_a12ng")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bkqo5"]
 render_priority = 0
 shader = ExtResource("20_cnfik")
-shader_parameter/gradient_color = Color(0.340688, 0.383792, 0.001336, 1)
-shader_parameter/grass_color = Color(0.075133, 0.92, 0.046, 1)
+shader_parameter/gradient_color = Color(0.172549, 0.2, 0.0196078, 1)
+shader_parameter/grass_color = Color(0.058824, 0.831373, 0.211765, 1)
 shader_parameter/wind_noise = SubResource("NoiseTexture2D_tmu53")
 
 [sub_resource type="MultiMesh" id="MultiMesh_jh7l7"]
@@ -252,6 +252,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.687701, 13.6147)
 mesh = SubResource("PlaneMesh_fgwgw")
 
 [node name="StylizedGrass" parent="Terrain/Groundings/StylizedGrassBase" instance=ExtResource("19_7p6sc")]
+process_mode = 4
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 visible = false
 mesh = ExtResource("20_1rsvi")
@@ -295,4 +296,4 @@ environment = ExtResource("11_d2pml")
 [node name="Managers" parent="." instance=ExtResource("12_n0e80")]
 
 [node name="fluffy_tree" parent="." instance=ExtResource("23_aw0vu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.10809, -0.757559, -8.13153)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.42284, -0.757559, 11.8945)
