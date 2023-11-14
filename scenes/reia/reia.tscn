@@ -16,7 +16,6 @@
 [ext_resource type="Script" path="res://src/item/loot_spawner.gd" id="8_k5h4v"]
 [ext_resource type="PackedScene" uid="uid://dtyekwmou34bm" path="res://rsc/models/dropped_items/dropped_items.tscn" id="8_x6olo"]
 [ext_resource type="PackedScene" uid="uid://bvb75kmlbcbav" path="res://assets/world/fountains/stylized_fountain.glb" id="9_ksg1v"]
-[ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="11_d2pml"]
 [ext_resource type="PackedScene" uid="uid://cmnfswjhhgkfd" path="res://assets/world/sky/islands/floating_house.glb" id="12_x2unh"]
 [ext_resource type="PackedScene" uid="uid://ce72x7shwqq2l" path="res://assets/world/forest/trees/forest_large_tree.glb" id="13_la4es"]
 [ext_resource type="PackedScene" uid="uid://cslscakiyp5gs" path="res://assets/world/sky/islands/floating_island.glb" id="14_r436h"]
@@ -30,6 +29,7 @@
 [ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/offset_position.gd" id="28_vk0p2"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/offset_scale.gd" id="29_n5ttu"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="29_xa4mj"]
+[ext_resource type="Environment" uid="uid://bf8wpnbq18xeu" path="res://scenes/reia/reia_night.tres" id="31_vu615"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="32_j5p2l"]
 
 [sub_resource type="Resource" id="Resource_ifdwj"]
@@ -298,6 +298,7 @@ transform = Transform3D(-0.759271, 0, -0.650774, 0, 1, 0, 0.650774, 0, -0.759271
 
 [node name="Day_DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(0.866025, -0.353553, 0.353554, 0, 0.707107, 0.707106, -0.5, -0.612372, 0.612373, 8.0816, 7.32544, 14.4232)
+visible = false
 light_energy = 0.5
 shadow_enabled = true
 shadow_bias = 0.025
@@ -310,8 +311,9 @@ directional_shadow_pancake_size = 4.0
 
 [node name="Night_DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(0.707107, 0.5, 0.5, 0, -0.707107, 0.707107, 0.707107, -0.5, -0.5, 0, 10.2533, 0)
-visible = false
-light_energy = 0.01
+light_color = Color(0.0666667, 0.596078, 0.968627, 1)
+light_energy = 0.1
+shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
-environment = ExtResource("11_d2pml")
+environment = ExtResource("31_vu615")
