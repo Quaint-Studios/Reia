@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c8dk3vf8h22ha"]
+
+[ext_resource type="ArrayMesh" uid="uid://dpy3lcjon63wg" path="res://rsc/models/grass/stylized_grass_4_mesh.res" id="1_y3c8e"]
+
+[node name="StylizedGrass4Mesh" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.82533, -0.0698585, -1.75195)
+visible = false
+mesh = ExtResource("1_y3c8e")
+skeleton = NodePath("../../../..")
