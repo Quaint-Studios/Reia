@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://m0tleaeg1b5s"]
-
-[ext_resource type="ArrayMesh" uid="uid://bfdb087i4q4i4" path="res://rsc/models/grass/stylized_grass_5_mesh.res" id="1_5iw2a"]
-
-[node name="StylizedGrass5Mesh" type="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.2232, -0.757559, 2.75582)
-mesh = ExtResource("1_5iw2a")
