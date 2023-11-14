@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=32 format=3 uid="uid://crpd8s4isacuu"]
+[gd_resource type="VisualShader" load_steps=29 format=3 uid="uid://crpd8s4isacuu"]
 
 [sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_pigui"]
 parameter_name = "grass_color"
@@ -21,25 +21,14 @@ op_type = 3
 [sub_resource type="VisualShaderNodeColorOp" id="VisualShaderNodeColorOp_gg0s0"]
 operator = 7
 
-[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_i4y3h"]
-default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0.5, 0.5, 0.5)]
-op_type = 3
-
 [sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_v1oc4"]
 operator = 2
 
 [sub_resource type="VisualShaderNodeFloatConstant" id="VisualShaderNodeFloatConstant_52f5q"]
-constant = 1.5
+constant = 3.0
 
 [sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_c4qrs"]
 input_name = "uv"
-
-[sub_resource type="VisualShaderNodeFloatFunc" id="VisualShaderNodeFloatFunc_pvifl"]
-function = 31
-
-[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_iywvp"]
-default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0.5, 0.5, 0.5)]
-op_type = 3
 
 [sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_papi5"]
 default_input_values = [0, Vector2(0, 0)]
@@ -112,7 +101,7 @@ varying vec3 world_position;
 
 uniform sampler2D wind_noise;
 uniform vec4 gradient_color : source_color = vec4(0.172549, 0.200000, 0.019608, 1.000000);
-uniform vec4 grass_color : source_color = vec4(0.058824, 0.831373, 0.211765, 1.000000);
+uniform vec4 grass_color : source_color = vec4(0.058823, 0.831373, 0.211765, 1.000000);
 
 
 
@@ -210,34 +199,22 @@ void fragment() {
 	vec3 n_out4p0 = mix(vec3(n_out3p0.xyz), vec3(n_out2p0.xyz), vec3(n_out8p0));
 
 
-// FloatFunc:50
-	float n_out50p0 = 1.0 - n_out8p0;
-
-
-// Mix:51
-	vec3 n_out51p0 = mix(n_out4p0, vec3(n_out3p0.xyz), vec3(n_out50p0));
-
-
 // VaryingGetter:39
 	vec3 n_out39p0 = world_position;
 
 
-// Mix:45
-	vec3 n_out45p0 = mix(vec3(n_out3p0.xyz), vec3(n_out2p0.xyz), n_out39p0);
-
-
 // FloatConstant:47
-	float n_out47p0 = 1.500000;
+	float n_out47p0 = 3.000000;
 
 
 // VectorOp:46
-	vec3 n_out46p0 = n_out45p0 * vec3(n_out47p0);
+	vec3 n_out46p0 = n_out39p0 * vec3(n_out47p0);
 
 
 	vec3 n_out44p0;
 // ColorOp:44
 	{
-		float base = n_out51p0.x;
+		float base = n_out4p0.x;
 		float blend = n_out46p0.x;
 		if (base < 0.5) {
 			n_out44p0.x = (base * (blend + 0.5));
@@ -246,7 +223,7 @@ void fragment() {
 		}
 	}
 	{
-		float base = n_out51p0.y;
+		float base = n_out4p0.y;
 		float blend = n_out46p0.y;
 		if (base < 0.5) {
 			n_out44p0.y = (base * (blend + 0.5));
@@ -255,7 +232,7 @@ void fragment() {
 		}
 	}
 	{
-		float base = n_out51p0.z;
+		float base = n_out4p0.z;
 		float blend = n_out46p0.z;
 		if (base < 0.5) {
 			n_out44p0.z = (base * (blend + 0.5));
@@ -270,27 +247,8 @@ void fragment() {
 
 
 }
-
-void light() {
-// Input:5
-	vec3 n_out5p0 = LIGHT;
-
-
-// Input:4
-	vec3 n_out4p0 = VIEW;
-
-
-// VectorOp:6
-	vec3 n_out6p0 = n_out5p0 + n_out4p0;
-
-
-// Output:0
-	DIFFUSE_LIGHT = n_out6p0;
-
-
-}
 "
-graph_offset = Vector2(12.938, 144.816)
+graph_offset = Vector2(-295.653, -41.153)
 modes/cull = 2
 varyings/world_position = "0,4"
 nodes/vertex/0/position = Vector2(1280, 180)
@@ -331,7 +289,7 @@ nodes/fragment/2/position = Vector2(-80, 360)
 nodes/fragment/3/node = SubResource("VisualShaderNodeColorParameter_leq0e")
 nodes/fragment/3/position = Vector2(-80, 160)
 nodes/fragment/4/node = SubResource("VisualShaderNodeMix_gabbc")
-nodes/fragment/4/position = Vector2(420, 140)
+nodes/fragment/4/position = Vector2(760, 200)
 nodes/fragment/5/node = SubResource("VisualShaderNodeInput_c4qrs")
 nodes/fragment/5/position = Vector2(-580, 640)
 nodes/fragment/6/node = SubResource("VisualShaderNodeVectorDecompose_papi5")
@@ -339,25 +297,19 @@ nodes/fragment/6/position = Vector2(-240, 580)
 nodes/fragment/8/node = SubResource("VisualShaderNodeFloatFunc_m7ktf")
 nodes/fragment/8/position = Vector2(0, 560)
 nodes/fragment/39/node = SubResource("VisualShaderNodeVaryingGetter_ksnci")
-nodes/fragment/39/position = Vector2(140, 700)
+nodes/fragment/39/position = Vector2(160, 800)
 nodes/fragment/44/node = SubResource("VisualShaderNodeColorOp_gg0s0")
-nodes/fragment/44/position = Vector2(920, 300)
-nodes/fragment/45/node = SubResource("VisualShaderNodeMix_i4y3h")
-nodes/fragment/45/position = Vector2(380, 580)
+nodes/fragment/44/position = Vector2(960, 280)
 nodes/fragment/46/node = SubResource("VisualShaderNodeVectorOp_v1oc4")
-nodes/fragment/46/position = Vector2(740, 400)
+nodes/fragment/46/position = Vector2(460, 760)
 nodes/fragment/47/node = SubResource("VisualShaderNodeFloatConstant_52f5q")
-nodes/fragment/47/position = Vector2(380, 740)
-nodes/fragment/50/node = SubResource("VisualShaderNodeFloatFunc_pvifl")
-nodes/fragment/50/position = Vector2(320, 440)
-nodes/fragment/51/node = SubResource("VisualShaderNodeMix_iywvp")
-nodes/fragment/51/position = Vector2(700, 200)
-nodes/fragment/connections = PackedInt32Array(5, 0, 6, 0, 2, 0, 4, 1, 3, 0, 4, 0, 3, 0, 45, 0, 2, 0, 45, 1, 39, 0, 45, 2, 45, 0, 46, 0, 46, 0, 44, 1, 6, 1, 8, 0, 47, 0, 46, 1, 44, 0, 0, 0, 8, 0, 50, 0, 8, 0, 4, 2, 4, 0, 51, 0, 3, 0, 51, 1, 50, 0, 51, 2, 51, 0, 44, 0)
+nodes/fragment/47/position = Vector2(200, 900)
+nodes/fragment/connections = PackedInt32Array(5, 0, 6, 0, 2, 0, 4, 1, 3, 0, 4, 0, 46, 0, 44, 1, 6, 1, 8, 0, 47, 0, 46, 1, 39, 0, 46, 0, 4, 0, 44, 0, 8, 0, 4, 2, 44, 0, 0, 0)
 nodes/light/0/position = Vector2(480, 340)
 nodes/light/4/node = SubResource("VisualShaderNodeInput_faest")
 nodes/light/4/position = Vector2(-160, 500)
 nodes/light/5/node = SubResource("VisualShaderNodeInput_fqijr")
 nodes/light/5/position = Vector2(-160, 420)
 nodes/light/6/node = SubResource("VisualShaderNodeVectorOp_rtft6")
-nodes/light/6/position = Vector2(260, 280)
-nodes/light/connections = PackedInt32Array(5, 0, 6, 0, 4, 0, 6, 1, 6, 0, 0, 0)
+nodes/light/6/position = Vector2(260, 480)
+nodes/light/connections = PackedInt32Array(4, 0, 6, 1, 5, 0, 6, 0)
