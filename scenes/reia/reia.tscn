@@ -29,7 +29,7 @@
 [ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/offset_position.gd" id="28_vk0p2"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/offset_scale.gd" id="29_n5ttu"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="29_xa4mj"]
-[ext_resource type="Environment" uid="uid://bf8wpnbq18xeu" path="res://scenes/reia/reia_night.tres" id="31_vu615"]
+[ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="31_5e1if"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="32_j5p2l"]
 
 [sub_resource type="Resource" id="Resource_ifdwj"]
@@ -150,17 +150,17 @@ spell_defense = 10
 crit_chance = 0.0
 crit_damage = 0.0
 
-[sub_resource type="Resource" id="Resource_4pmha"]
+[sub_resource type="Resource" id="Resource_qxyxl"]
 script = ExtResource("27_c0ur8")
-radius = 0.25
-samples_before_rejection = 20
+radius = 0.18
+samples_before_rejection = 10
 enabled = true
 override_global_seed = false
 custom_seed = 0
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_8oh33"]
+[sub_resource type="Resource" id="Resource_fyrv8"]
 script = ExtResource("28_vk0p2")
 operation = 0
 position = Vector3(0, -0.425, 0)
@@ -170,7 +170,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_4csiu"]
+[sub_resource type="Resource" id="Resource_5t5fu"]
 script = ExtResource("29_n5ttu")
 operation = 1
 scale = Vector3(1, 1, 1)
@@ -180,9 +180,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_0gpro"]
+[sub_resource type="Resource" id="Resource_adrex"]
 script = ExtResource("26_gpakv")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_4pmha"), SubResource("Resource_8oh33"), SubResource("Resource_4csiu")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_qxyxl"), SubResource("Resource_fyrv8"), SubResource("Resource_5t5fu")])
 
 [sub_resource type="Resource" id="Resource_ncy2b"]
 script = ExtResource("32_j5p2l")
@@ -256,7 +256,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.59507, -0.757559, 11.8945)
 [node name="ProtonScatter" type="Node3D" parent="Terrain/Groundings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2259, -0.330719, 13.0612)
 script = ExtResource("25_dy2rl")
-modifier_stack = SubResource("Resource_0gpro")
+modifier_stack = SubResource("Resource_adrex")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(1, 1, 1)
 
@@ -298,7 +298,6 @@ transform = Transform3D(-0.759271, 0, -0.650774, 0, 1, 0, 0.650774, 0, -0.759271
 
 [node name="Day_DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(0.866025, -0.353553, 0.353554, 0, 0.707107, 0.707106, -0.5, -0.612372, 0.612373, 8.0816, 7.32544, 14.4232)
-visible = false
 light_energy = 0.5
 shadow_enabled = true
 shadow_bias = 0.025
@@ -311,9 +310,10 @@ directional_shadow_pancake_size = 4.0
 
 [node name="Night_DirectionalLight3D" type="DirectionalLight3D" parent="World"]
 transform = Transform3D(0.707107, 0.5, 0.5, 0, -0.707107, 0.707107, 0.707107, -0.5, -0.5, 0, 10.2533, 0)
+visible = false
 light_color = Color(0.0666667, 0.596078, 0.968627, 1)
 light_energy = 0.1
 shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
-environment = ExtResource("31_vu615")
+environment = ExtResource("31_5e1if")
