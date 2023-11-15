@@ -43,6 +43,10 @@ enabled=PackedStringArray("res://addons/discord-sdk-gd/plugin.cfg", "res://addon
 
 import/fbx/enabled=false
 
+[gui]
+
+theme/custom="res://rsc/themes/main_theme.tres"
+
 [input]
 
 left={
