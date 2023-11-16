@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://eicmer2kdgy"]
+[gd_scene load_steps=43 format=3 uid="uid://eicmer2kdgy"]
 
 [ext_resource type="Script" path="res://src/mob/attackable/player/player.gd" id="1_oof1h"]
 [ext_resource type="Script" path="res://scripts/mob/attackable/player/abilities/ability_manager.gd" id="2_fdbkp"]
@@ -22,6 +22,8 @@
 [ext_resource type="PackedScene" uid="uid://c28gkmhvhs58v" path="res://scenes/ui/player_status_bars.tscn" id="17_mshjy"]
 [ext_resource type="Script" path="res://src/mob/attackable/player/interactor_ui.gd" id="18_wnyd8"]
 [ext_resource type="Script" path="res://src/mob/attackable/player/player_minimap.gd" id="19_42o6f"]
+[ext_resource type="Theme" uid="uid://kwq64glpweie" path="res://rsc/themes/main_theme.tres" id="21_3mdk8"]
+[ext_resource type="PackedScene" uid="uid://mnb51x6xo73p" path="res://scripts/inventory/ui/inventory_item.tscn" id="22_r30rl"]
 
 [sub_resource type="Resource" id="Resource_q15dm"]
 script = ExtResource("3_myfqk")
@@ -398,13 +400,13 @@ minimap = NodePath("PlayerMinimap")
 [node name="PlayerStatusBars" parent="PlayerUI/PlayerHUD" instance=ExtResource("17_mshjy")]
 layout_mode = 2
 
-[node name="PlayerInteractor" type="Control" parent="PlayerUI/PlayerHUD"]
-visible = false
+[node name="PlayerInteractor" type="Control" parent="PlayerUI/PlayerHUD" node_paths=PackedStringArray("object_name")]
 layout_mode = 2
 mouse_filter = 2
 script = ExtResource("18_wnyd8")
+object_name = NodePath("Prompt/ObjectName")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="PlayerUI/PlayerHUD/PlayerInteractor"]
+[node name="Prompt" type="HBoxContainer" parent="PlayerUI/PlayerHUD/PlayerInteractor"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -419,18 +421,18 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="PlayerUI/PlayerHUD/PlayerInteractor/HBoxContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="PlayerUI/PlayerHUD/PlayerInteractor/Prompt"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Background" type="Panel" parent="PlayerUI/PlayerHUD/PlayerInteractor/HBoxContainer/CenterContainer"]
+[node name="Background" type="Panel" parent="PlayerUI/PlayerHUD/PlayerInteractor/Prompt/CenterContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 theme = SubResource("Theme_f4sma")
 
-[node name="CenterContainer" type="CenterContainer" parent="PlayerUI/PlayerHUD/PlayerInteractor/HBoxContainer/CenterContainer/Background"]
+[node name="CenterContainer" type="CenterContainer" parent="PlayerUI/PlayerHUD/PlayerInteractor/Prompt/CenterContainer/Background"]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 1
 anchors_preset = 8
@@ -446,16 +448,73 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Keybind" type="Label" parent="PlayerUI/PlayerHUD/PlayerInteractor/HBoxContainer/CenterContainer/Background/CenterContainer"]
+[node name="Keybind" type="Label" parent="PlayerUI/PlayerHUD/PlayerInteractor/Prompt/CenterContainer/Background/CenterContainer"]
 layout_mode = 2
 theme = ExtResource("17_1fko2")
 text = "F"
 vertical_alignment = 1
 
-[node name="ObjectName" type="Label" parent="PlayerUI/PlayerHUD/PlayerInteractor/HBoxContainer"]
+[node name="ObjectName" type="Label" parent="PlayerUI/PlayerHUD/PlayerInteractor/Prompt"]
 layout_mode = 2
 theme = ExtResource("17_1fko2")
 text = "Loot"
+
+[node name="LootWindow" type="Panel" parent="PlayerUI/PlayerHUD/PlayerInteractor"]
+layout_mode = 0
+offset_left = 693.0
+offset_top = 246.0
+offset_right = 903.0
+offset_bottom = 511.0
+theme = ExtResource("21_3mdk8")
+
+[node name="Background" type="Panel" parent="PlayerUI/PlayerHUD/PlayerInteractor/LootWindow"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 202.0
+offset_bottom = 257.0
+theme = ExtResource("21_3mdk8")
+theme_type_variation = &"BluePanel"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PlayerUI/PlayerHUD/PlayerInteractor/LootWindow"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+horizontal_scroll_mode = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="PlayerUI/PlayerHUD/PlayerInteractor/LootWindow/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="GridContainer" type="GridContainer" parent="PlayerUI/PlayerHUD/PlayerInteractor/LootWindow/ScrollContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 4
+columns = 2
+
+[node name="InventoryItem" parent="PlayerUI/PlayerHUD/PlayerInteractor/LootWindow/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("22_r30rl")]
+layout_mode = 2
+
+[node name="InventoryItem2" parent="PlayerUI/PlayerHUD/PlayerInteractor/LootWindow/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("22_r30rl")]
+layout_mode = 2
+
+[node name="InventoryItem3" parent="PlayerUI/PlayerHUD/PlayerInteractor/LootWindow/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("22_r30rl")]
+layout_mode = 2
+
+[node name="InventoryItem4" parent="PlayerUI/PlayerHUD/PlayerInteractor/LootWindow/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("22_r30rl")]
+layout_mode = 2
+
+[node name="InventoryItem5" parent="PlayerUI/PlayerHUD/PlayerInteractor/LootWindow/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("22_r30rl")]
+layout_mode = 2
+
+[node name="InventoryItem6" parent="PlayerUI/PlayerHUD/PlayerInteractor/LootWindow/ScrollContainer/MarginContainer/GridContainer" instance=ExtResource("22_r30rl")]
+layout_mode = 2
 
 [node name="PlayerMinimap" parent="PlayerUI/PlayerHUD" instance=ExtResource("5_vfast")]
 layout_mode = 2

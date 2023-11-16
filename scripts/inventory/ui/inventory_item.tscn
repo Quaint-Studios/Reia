@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://d7eyaepxetvj" path="res://scripts/items/weapons/1000_wooden_sword_atlas.tres" id="2_aa0ph"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2aphv"]
-bg_color = Color(0.0803, 0.448463, 0.73, 1)
+bg_color = Color(0.0784314, 0.447059, 0.729412, 1)
 corner_radius_top_left = 8
 corner_radius_top_right = 8
 corner_radius_bottom_right = 8

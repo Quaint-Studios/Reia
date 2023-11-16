@@ -4,4 +4,4 @@ class_name InteractorUI extends Control
 
 func _ready() -> void:
 	if object_name == null:
-		object_name = get_node("HBoxContainer/ObjectName") as Label
+		object_name = get_node("Prompt/ObjectName") as Label
