@@ -1,0 +1,34 @@
+[gd_scene load_steps=3 format=3 uid="uid://qdlreq6lc3bu"]
+
+[ext_resource type="Theme" uid="uid://cvudtn0hd6gap" path="res://scenes/main_menu/main_menu.tres" id="1_jwtmf"]
+[ext_resource type="Texture2D" uid="uid://d7eyaepxetvj" path="res://scripts/items/weapons/1000_wooden_sword_atlas.tres" id="2_nhulx"]
+
+[node name="LootItem" type="Panel"]
+custom_minimum_size = Vector2(176, 36)
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 41.0
+offset_bottom = 35.0
+
+[node name="ItemPreview" type="Panel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(34, 34)
+layout_mode = 2
+theme = ExtResource("1_jwtmf")
+theme_type_variation = &"BluePanel"
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/ItemPreview"]
+layout_mode = 2
+offset_right = 34.0
+offset_bottom = 34.0
+texture = ExtResource("2_nhulx")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Sunflow Tears"
+autowrap_mode = 2
