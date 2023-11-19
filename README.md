@@ -55,4 +55,35 @@ You play as an occupant of Reia's realm. One of your main tasks is to find spiri
 
 ## Roadmap
 
-...
+__Pre-Alpha__
+- ~~Animation~~
+- ~~Attack system~~ / ~~Death system~~ / Respawn
+- Abilities ((Dash, Double Jump, Teleport) | (Fireball, Explosion | Lightning Strike, Storm | Aqua-Infusion [melee punching], Bubble Shield)
+- Stats + UI
+- Map (~~Minimap~~)
+- Quest System
+- ~~Item System~~
+- Inventory System
+-- Make a popout version where it's just on the side of the screen and you can still move + attack. On mobile screens this may mean no usable attacks and only movement. Testing needed.
+- Pause Screen
+- Main Menu
+--~~Volume~~
+-- Controls
+-- Display
+- Particle Effects
+- ~~Water Shader~~
+- Sky Shader
+- Multiplayer (Add friend via account name, but they have their own display name, and you can invite them to play with you and you can progress storylines together if you're on the same quest)
+- Fade healthbar timer
+- Improve Camera
+-- Smoothing
+- ~~Changelog~~
+
+__Alpha__
+-
+
+__Beta__
+-
+
+__Release__
+-
