@@ -1,6 +1,9 @@
 # Universal
 - ![#181a18](https://placehold.co/15x15/181a18/181a18.png) `#181a18` - Soft Black
 - ![#fbfaf5](https://placehold.co/15x15/fbfaf5/fbfaf5.png) `#fbfaf5` - Soft White
+- #f9f3e5 - Creamy White
+- #ffcf0b - Hotdog Yellow
+
 
 # Inventory
 - ![#1472ba](https://placehold.co/15x15/07263d/1472ba.png) `#1472ba` - Light Blue Jelly

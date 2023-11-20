@@ -459,7 +459,7 @@ theme_type_variation = &"WhiteLabel"
 text = "Loot"
 
 [node name="LootWindow" type="Panel" parent="PlayerUI/PlayerHUD/PlayerInteractor"]
-visible = false
+self_modulate = Color(1, 1, 1, 0.392157)
 layout_mode = 0
 offset_left = 693.0
 offset_top = 246.0
@@ -468,6 +468,7 @@ offset_bottom = 526.0
 theme = ExtResource("21_3mdk8")
 
 [node name="Background" type="Panel" parent="PlayerUI/PlayerHUD/PlayerInteractor/LootWindow"]
+self_modulate = Color(1, 1, 1, 0.392157)
 clip_contents = true
 layout_mode = 0
 offset_left = 8.0
