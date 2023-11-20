@@ -80,7 +80,8 @@ __Pre-Alpha__
 - ~~Changelog~~
 
 __Alpha__
--
+- Create a launcher to update the app independent of distributors.
+- Polish UI and gameplay.
 
 __Beta__
 -
