@@ -33,6 +33,8 @@ file_logging/log_path="user://logs/reia_debug_logs.log"
 
 [display]
 
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/size/mode=3
 
 [editor_plugins]
