@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=6 format=3 uid="uid://kwq64glpweie"]
 
 [ext_resource type="FontFile" uid="uid://cvl0migkjbg2m" path="res://fonts/Nunito/static/Nunito-Black.ttf" id="1_kmgp1"]
-[ext_resource type="FontFile" uid="uid://csid2dfym77r7" path="res://fonts/Nunito/static/Nunito-Bold.ttf" id="2_omrqu"]
+[ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="2_s1tsk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ua4w4"]
 bg_color = Color(0.0941176, 0.101961, 0.0941176, 1)
@@ -25,7 +25,7 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [resource]
-default_font = ExtResource("2_omrqu")
+default_font = ExtResource("2_s1tsk")
 default_font_size = 16
 BlackPanel/base_type = &"Panel"
 BlackPanel/styles/panel = SubResource("StyleBoxFlat_ua4w4")
@@ -39,3 +39,6 @@ Panel/styles/panel = SubResource("StyleBoxFlat_2ckeq")
 WhiteLabel/base_type = &"Label"
 WhiteLabel/colors/font_color = Color(0.984314, 0.980392, 0.960784, 1)
 WhiteLabel/fonts/font = ExtResource("1_kmgp1")
+WhiteLabelSans/base_type = &"Label"
+WhiteLabelSans/colors/font_color = Color(1, 1, 1, 1)
+WhiteLabelSans/fonts/font = ExtResource("2_s1tsk")
