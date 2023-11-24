@@ -1,0 +1,228 @@
+[gd_scene load_steps=12 format=3 uid="uid://bgui6d70qmbu1"]
+
+[ext_resource type="Shader" path="res://shaders/screen_space/blur.gdshader" id="1_5pek2"]
+[ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/icons/logo_a_flat_white_68.svg" id="2_i2528"]
+[ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="3_b7ukm"]
+[ext_resource type="PackedScene" uid="uid://dripboa48oo8w" path="res://rsc/interface/inventory/tab.tscn" id="4_ph1fb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ddyyk"]
+shader = ExtResource("1_5pek2")
+shader_parameter/amount = 2.0
+
+[sub_resource type="Gradient" id="Gradient_64ut1"]
+colors = PackedColorArray(0, 0, 0, 0.301961, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ku7ej"]
+gradient = SubResource("Gradient_64ut1")
+width = 128
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gryqn"]
+bg_color = Color(1, 1, 1, 0.0509804)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+corner_detail = 12
+
+[sub_resource type="Gradient" id="Gradient_u4ede"]
+offsets = PackedFloat32Array(0, 0.755208, 0.911458, 1)
+colors = PackedColorArray(0.219608, 0.352941, 0.65098, 0.65098, 0.219608, 0.352941, 0.65098, 0.65098, 0.219608, 0.352941, 0.65098, 0.0666667, 0.219608, 0.352941, 0.65098, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5yrvl"]
+gradient = SubResource("Gradient_u4ede")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_nby4a"]
+base_font = ExtResource("3_b7ukm")
+spacing_glyph = 1
+
+[node name="Inventory" type="Control"]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Blur" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ddyyk")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="White" type="ColorRect" parent="Blur"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.301961)
+
+[node name="Gradient" type="TextureRect" parent="Blur"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_ku7ej")
+
+[node name="Content" type="Panel" parent="."]
+custom_minimum_size = Vector2(1568, 838)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -419.0
+offset_right = 928.0
+offset_bottom = 419.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gryqn")
+
+[node name="Topbar" type="Control" parent="."]
+custom_minimum_size = Vector2(1620, 121)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1620.0
+offset_bottom = 121.0
+grow_horizontal = 0
+mouse_filter = 2
+
+[node name="Sidebar" type="Control" parent="."]
+custom_minimum_size = Vector2(300, 1080)
+layout_mode = 1
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="Background" type="TextureRect" parent="Sidebar"]
+custom_minimum_size = Vector2(300, 1080)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_5yrvl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Sidebar"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Header" type="MarginContainer" parent="Sidebar/VBoxContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 11
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 11
+
+[node name="HBox" type="HBoxContainer" parent="Sidebar/VBoxContainer/Header"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="Icon" type="TextureRect" parent="Sidebar/VBoxContainer/Header/HBox"]
+custom_minimum_size = Vector2(68, 68)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_i2528")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Sidebar/VBoxContainer/Header/HBox"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_fonts/font = SubResource("FontVariation_nby4a")
+theme_override_font_sizes/font_size = 32
+text = "Inventory"
+vertical_alignment = 1
+
+[node name="Tabs" type="VBoxContainer" parent="Sidebar/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Tab_Weapons" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+layout_mode = 2
+
+[node name="Background" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons/Selection" index="0"]
+visible = true
+
+[node name="TabIcon" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons/Selection/HBoxContainer" index="0"]
+self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
+
+[node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons/Selection/HBoxContainer" index="1"]
+theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
+text = "Weapons"
+
+[node name="Tab_Equipment" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+layout_mode = 2
+
+[node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_Equipment/Selection/HBoxContainer" index="1"]
+text = "Equipment"
+
+[node name="Tab_Soulstones" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+layout_mode = 2
+
+[node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_Soulstones/Selection/HBoxContainer" index="1"]
+text = "Soulstones"
+
+[node name="Tab_Consumables" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+layout_mode = 2
+
+[node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_Consumables/Selection/HBoxContainer" index="1"]
+text = "Consumables"
+
+[node name="Tab_Materials" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+layout_mode = 2
+
+[node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_Materials/Selection/HBoxContainer" index="1"]
+text = "Materials"
+
+[node name="Tab_QuestItems" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+layout_mode = 2
+
+[node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_QuestItems/Selection/HBoxContainer" index="1"]
+text = "Quest Items"
+
+[node name="Bottombar" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1620.0
+offset_top = -150.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[editable path="Sidebar/VBoxContainer/Tabs/Tab_Weapons"]
+[editable path="Sidebar/VBoxContainer/Tabs/Tab_Equipment"]
+[editable path="Sidebar/VBoxContainer/Tabs/Tab_Soulstones"]
+[editable path="Sidebar/VBoxContainer/Tabs/Tab_Consumables"]
+[editable path="Sidebar/VBoxContainer/Tabs/Tab_Materials"]
+[editable path="Sidebar/VBoxContainer/Tabs/Tab_QuestItems"]
