@@ -6,15 +6,15 @@
 [ext_resource type="AudioStream" uid="uid://bjmsfaw5a1nh5" path="res://assets/audio/menu/forest_theme_v1.wav" id="3_3o1dl"]
 [ext_resource type="Theme" uid="uid://cvudtn0hd6gap" path="res://scenes/main_menu/main_menu.tres" id="4_r7mv3"]
 [ext_resource type="Shader" path="res://rsc/shaders/drop_shadow.gdshader" id="6_7rsuc"]
-[ext_resource type="Texture2D" uid="uid://ubonrngbwp4s" path="res://rsc/icons/logo_a_flat_white_banner.png" id="6_8fvre"]
 [ext_resource type="PackedScene" uid="uid://cykr5gmvdm7xf" path="res://assets/characters/player/female_player.glb" id="7_g5ofp"]
+[ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/icons/logo_a_flat_white_68.svg" id="7_p8u4n"]
 [ext_resource type="Script" path="res://scripts/misc/changelog.gd" id="8_6sbgs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4eypw"]
 shader = ExtResource("6_7rsuc")
 shader_parameter/background_color = Color(1, 1, 1, 1)
 shader_parameter/shadow_color = Color(0.196078, 0.196078, 0.196078, 0.356863)
-shader_parameter/offset_in_pixels = Vector2(4, 6)
+shader_parameter/offset_in_pixels = Vector2(4, 8)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxt2h"]
 bg_color = Color(0.984314, 0.980392, 0.960784, 0.784314)
@@ -136,14 +136,13 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -640.0
-offset_right = 640.0
-offset_bottom = 640.0
+offset_left = -320.0
+offset_right = 320.0
+offset_bottom = 160.0
 grow_horizontal = 2
-scale = Vector2(0.25, 0.25)
-pivot_offset = Vector2(640, 0)
-texture = ExtResource("6_8fvre")
-stretch_mode = 4
+texture = ExtResource("7_p8u4n")
+expand_mode = 3
+stretch_mode = 5
 
 [node name="Selectors" type="Control" parent="UI/Control"]
 layout_mode = 1
