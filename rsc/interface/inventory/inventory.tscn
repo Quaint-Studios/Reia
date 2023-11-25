@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://bgui6d70qmbu1"]
+[gd_scene load_steps=32 format=3 uid="uid://bgui6d70qmbu1"]
 
 [ext_resource type="Shader" path="res://shaders/screen_space/blur.gdshader" id="1_5pek2"]
 [ext_resource type="PackedScene" uid="uid://jsgmocccagip" path="res://rsc/interface/inventory/sub_category.tscn" id="2_f6ox2"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://vytb7l0x77ml" path="res://rsc/icons/inventory/dropdown_icon_84.svg" id="4_kneal"]
 [ext_resource type="PackedScene" uid="uid://dripboa48oo8w" path="res://rsc/interface/inventory/tab.tscn" id="4_ph1fb"]
 [ext_resource type="Texture2D" uid="uid://bmi7ixsxitcpw" path="res://rsc/icons/inventory/exit_icon_84.svg" id="4_x4vpx"]
+[ext_resource type="Texture2D" uid="uid://dnqp10u8o4xik" path="res://rsc/icons/star_icon_84.svg" id="5_0we6y"]
 [ext_resource type="Theme" uid="uid://kwq64glpweie" path="res://rsc/themes/main_theme.tres" id="5_ff7kn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ddyyk"]
@@ -41,6 +42,21 @@ colors = PackedColorArray(0.976471, 0.952941, 0.898039, 1, 0.976471, 0.952941, 0
 gradient = SubResource("Gradient_1ykm1")
 fill_from = Vector2(0.5, 0)
 metadata/_snap_enabled = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxx5s"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h75of"]
+bg_color = Color(0.203922, 0.2, 0.247059, 0.501961)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+
+[sub_resource type="FontVariation" id="FontVariation_o5dn7"]
+base_font = ExtResource("3_l1es0")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ocjd"]
 bg_color = Color(0.333333, 0.556863, 0.866667, 1)
@@ -231,8 +247,93 @@ theme_override_constants/margin_right = 28
 theme_override_constants/margin_bottom = 28
 
 [node name="ItemPreview" type="Panel" parent="Content/Content_Weapons/MarginContainer"]
+clip_contents = true
 custom_minimum_size = Vector2(482, 782)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_kxx5s")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/Content_Weapons/MarginContainer/ItemPreview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Header" type="Panel" parent="Content/Content_Weapons/MarginContainer/ItemPreview/VBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h75of")
+
+[node name="CenterContainer" type="CenterContainer" parent="Content/Content_Weapons/MarginContainer/ItemPreview/VBoxContainer/Header"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Content/Content_Weapons/MarginContainer/ItemPreview/VBoxContainer/Header/CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.980392, 0.992157, 1, 1)
+theme_override_fonts/font = SubResource("FontVariation_o5dn7")
+theme_override_font_sizes/font_size = 34
+text = "Starlit Sword"
+
+[node name="Watermark" type="Control" parent="Content/Content_Weapons/MarginContainer/ItemPreview/VBoxContainer/Header"]
+modulate = Color(1, 1, 1, 0.101961)
+custom_minimum_size = Vector2(128, 128)
+anchors_preset = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 96.0
+offset_bottom = 96.0
+
+[node name="WatermarkLogo" type="TextureRect" parent="Content/Content_Weapons/MarginContainer/ItemPreview/VBoxContainer/Header/Watermark"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_i2528")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="WatermarkStar1" type="TextureRect" parent="Content/Content_Weapons/MarginContainer/ItemPreview/VBoxContainer/Header/Watermark"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 52.0
+texture = ExtResource("5_0we6y")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="WatermarkStar2" type="TextureRect" parent="Content/Content_Weapons/MarginContainer/ItemPreview/VBoxContainer/Header/Watermark"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 0
+offset_left = 82.33
+offset_top = 62.6
+offset_right = 106.33
+offset_bottom = 86.6
+texture = ExtResource("5_0we6y")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="WatermarkStar3" type="TextureRect" parent="Content/Content_Weapons/MarginContainer/ItemPreview/VBoxContainer/Header/Watermark"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 0
+offset_left = 56.33
+offset_top = 96.6
+offset_right = 68.33
+offset_bottom = 108.6
+texture = ExtResource("5_0we6y")
+expand_mode = 4
+stretch_mode = 5
 
 [node name="Topbar" type="Control" parent="."]
 custom_minimum_size = Vector2(1620, 121)
