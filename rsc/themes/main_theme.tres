@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=6 format=3 uid="uid://kwq64glpweie"]
+[gd_resource type="Theme" load_steps=7 format=3 uid="uid://kwq64glpweie"]
 
 [ext_resource type="FontFile" uid="uid://cvl0migkjbg2m" path="res://fonts/Nunito/static/Nunito-Black.ttf" id="1_kmgp1"]
 [ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="2_s1tsk"]
@@ -17,6 +17,13 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ypbr8"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2ckeq"]
 bg_color = Color(0.984314, 0.980392, 0.960784, 1)
 corner_radius_top_left = 8
@@ -31,6 +38,8 @@ BlackPanel/base_type = &"Panel"
 BlackPanel/styles/panel = SubResource("StyleBoxFlat_ua4w4")
 BluePanel/base_type = &"Panel"
 BluePanel/styles/panel = SubResource("StyleBoxFlat_jd5mb")
+Chip/base_type = &"Panel"
+Chip/styles/panel = SubResource("StyleBoxFlat_ypbr8")
 Label/colors/font_color = Color(0.0941176, 0.101961, 0.0941176, 1)
 Label/constants/line_spacing = 0
 Label/font_sizes/font_size = 10

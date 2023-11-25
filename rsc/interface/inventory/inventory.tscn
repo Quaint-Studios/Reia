@@ -1,9 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://bgui6d70qmbu1"]
+[gd_scene load_steps=19 format=3 uid="uid://bgui6d70qmbu1"]
 
 [ext_resource type="Shader" path="res://shaders/screen_space/blur.gdshader" id="1_5pek2"]
+[ext_resource type="Texture2D" uid="uid://b5e3in4j2d35n" path="res://rsc/icons/inventory/gradient_orb.svg" id="2_gjblk"]
 [ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/icons/logo_a_flat_white_68.svg" id="2_i2528"]
 [ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="3_b7ukm"]
+[ext_resource type="FontFile" uid="uid://cnk30iahnvsd2" path="res://rsc/fonts/Roboto/Roboto-Black.ttf" id="3_l1es0"]
 [ext_resource type="PackedScene" uid="uid://dripboa48oo8w" path="res://rsc/interface/inventory/tab.tscn" id="4_ph1fb"]
+[ext_resource type="Texture2D" uid="uid://bmi7ixsxitcpw" path="res://rsc/icons/inventory/exit_icon_84.svg" id="4_x4vpx"]
+[ext_resource type="Theme" uid="uid://kwq64glpweie" path="res://rsc/themes/main_theme.tres" id="5_ff7kn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ddyyk"]
 shader = ExtResource("1_5pek2")
@@ -25,6 +29,26 @@ corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
+corner_detail = 12
+
+[sub_resource type="FontVariation" id="FontVariation_cpuan"]
+base_font = ExtResource("3_l1es0")
+spacing_glyph = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_npvx6"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 0.2)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+corner_detail = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_osjhp"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
 corner_detail = 12
 
 [sub_resource type="Gradient" id="Gradient_u4ede"]
@@ -106,6 +130,115 @@ offset_bottom = 121.0
 grow_horizontal = 0
 mouse_filter = 2
 
+[node name="MarginContainer" type="MarginContainer" parent="Topbar"]
+layout_mode = 2
+offset_right = 1620.0
+offset_bottom = 121.0
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="CurrencySection" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection"]
+layout_mode = 2
+
+[node name="CurrencyGroup" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer"]
+self_modulate = Color(0.101961, 0.101961, 0.101961, 0.2)
+custom_minimum_size = Vector2(148, 50)
+layout_mode = 2
+theme_type_variation = &"Chip"
+
+[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/CurrencyGroup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 9
+theme_override_constants/margin_bottom = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/CurrencyGroup/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_gjblk")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_fonts/font = SubResource("FontVariation_cpuan")
+theme_override_font_sizes/font_size = 20
+text = "13.3m"
+
+[node name="PremiumCurrencyGroup" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer"]
+self_modulate = Color(0.101961, 0.101961, 0.101961, 0.2)
+custom_minimum_size = Vector2(148, 50)
+layout_mode = 2
+theme_type_variation = &"Chip"
+
+[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/PremiumCurrencyGroup"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 9
+theme_override_constants/margin_bottom = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/PremiumCurrencyGroup/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_gjblk")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_fonts/font = SubResource("FontVariation_cpuan")
+theme_override_font_sizes/font_size = 20
+text = "10,000"
+
+[node name="ExitButton" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="ExitBackground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/ExitButton"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_npvx6")
+
+[node name="ExitForeground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/ExitButton"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_osjhp")
+
+[node name="ExitIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/ExitButton"]
+self_modulate = Color(0.372549, 0.564706, 0.592157, 1)
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+texture = ExtResource("4_x4vpx")
+expand_mode = 4
+
 [node name="Sidebar" type="Control" parent="."]
 custom_minimum_size = Vector2(300, 1080)
 layout_mode = 1
@@ -127,8 +260,8 @@ texture = SubResource("GradientTexture2D_5yrvl")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Sidebar"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 300.0
+offset_bottom = 1080.0
 
 [node name="Header" type="MarginContainer" parent="Sidebar/VBoxContainer"]
 custom_minimum_size = Vector2(300, 100)
@@ -206,6 +339,38 @@ layout_mode = 2
 
 [node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_QuestItems/Selection/HBoxContainer" index="1"]
 text = "Quest Items"
+
+[node name="SidebarFooter" type="VBoxContainer" parent="Sidebar/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Sidebar/VBoxContainer/SidebarFooter"]
+layout_mode = 2
+
+[node name="FilterCounter" type="Panel" parent="Sidebar/VBoxContainer/SidebarFooter/CenterContainer"]
+self_modulate = Color(0.976471, 0.952941, 0.898039, 1)
+custom_minimum_size = Vector2(148, 50)
+layout_mode = 2
+theme = ExtResource("5_ff7kn")
+theme_type_variation = &"Chip"
+
+[node name="CenterContainer" type="CenterContainer" parent="Sidebar/VBoxContainer/SidebarFooter/CenterContainer/FilterCounter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Sidebar/VBoxContainer/SidebarFooter/CenterContainer/FilterCounter/CenterContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_colors/font_color = Color(0.203922, 0.2, 0.247059, 1)
+theme_override_font_sizes/font_size = 20
+text = "17 Items"
 
 [node name="Bottombar" type="Control" parent="."]
 layout_mode = 1
