@@ -1,10 +1,12 @@
-[gd_scene load_steps=19 format=3 uid="uid://bgui6d70qmbu1"]
+[gd_scene load_steps=23 format=3 uid="uid://bgui6d70qmbu1"]
 
 [ext_resource type="Shader" path="res://shaders/screen_space/blur.gdshader" id="1_5pek2"]
 [ext_resource type="Texture2D" uid="uid://b5e3in4j2d35n" path="res://rsc/icons/inventory/gradient_orb.svg" id="2_gjblk"]
 [ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/icons/logo_a_flat_white_68.svg" id="2_i2528"]
+[ext_resource type="Texture2D" uid="uid://dm1q0jbofjvsx" path="res://rsc/icons/inventory/filter_icon_84.svg" id="2_k344c"]
 [ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="3_b7ukm"]
 [ext_resource type="FontFile" uid="uid://cnk30iahnvsd2" path="res://rsc/fonts/Roboto/Roboto-Black.ttf" id="3_l1es0"]
+[ext_resource type="Texture2D" uid="uid://vytb7l0x77ml" path="res://rsc/icons/inventory/dropdown_icon_84.svg" id="4_kneal"]
 [ext_resource type="PackedScene" uid="uid://dripboa48oo8w" path="res://rsc/interface/inventory/tab.tscn" id="4_ph1fb"]
 [ext_resource type="Texture2D" uid="uid://bmi7ixsxitcpw" path="res://rsc/icons/inventory/exit_icon_84.svg" id="4_x4vpx"]
 [ext_resource type="Theme" uid="uid://kwq64glpweie" path="res://rsc/themes/main_theme.tres" id="5_ff7kn"]
@@ -30,6 +32,17 @@ corner_radius_top_right = 32
 corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 corner_detail = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ocjd"]
+bg_color = Color(0.333333, 0.556863, 0.866667, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+corner_detail = 12
+
+[sub_resource type="FontVariation" id="FontVariation_u7qxi"]
+base_font = ExtResource("3_l1es0")
 
 [sub_resource type="FontVariation" id="FontVariation_cpuan"]
 base_font = ExtResource("3_l1es0")
@@ -141,6 +154,189 @@ theme_override_constants/margin_right = 32
 layout_mode = 2
 alignment = 2
 
+[node name="FilterSection" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="SaveFilter" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
+custom_minimum_size = Vector2(268, 50)
+layout_mode = 2
+theme_type_variation = &"Chip"
+
+[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 19
+theme_override_constants/margin_bottom = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="IconContainer" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="IconBackground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer/IconContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
+
+[node name="FilterIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer/IconContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("2_k344c")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
+theme_override_fonts/font = SubResource("FontVariation_u7qxi")
+theme_override_font_sizes/font_size = 20
+text = "Save Filter"
+
+[node name="Spacer" type="Control" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DropdownIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
+self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("4_kneal")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Filter" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
+custom_minimum_size = Vector2(340, 50)
+layout_mode = 2
+theme_type_variation = &"Chip"
+
+[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 19
+theme_override_constants/margin_bottom = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="IconContainer" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="IconBackground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer/IconContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
+
+[node name="FilterIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer/IconContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("2_k344c")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
+theme_override_fonts/font = SubResource("FontVariation_u7qxi")
+theme_override_font_sizes/font_size = 20
+text = "Filter: Rarity, Level, C..."
+
+[node name="Spacer" type="Control" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DropdownIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
+self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("4_kneal")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Sort" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
+custom_minimum_size = Vector2(340, 50)
+layout_mode = 2
+theme_type_variation = &"Chip"
+
+[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 19
+theme_override_constants/margin_bottom = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="IconContainer" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+
+[node name="IconBackground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer/IconContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
+
+[node name="FilterIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer/IconContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("2_k344c")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
+theme_override_fonts/font = SubResource("FontVariation_u7qxi")
+theme_override_font_sizes/font_size = 20
+text = "Sort: Power, Melee Atk..."
+
+[node name="Spacer" type="Control" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DropdownIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
+self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("4_kneal")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Spacer" type="Control" parent="Topbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
 [node name="CurrencySection" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
@@ -238,6 +434,7 @@ custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
 texture = ExtResource("4_x4vpx")
 expand_mode = 4
+stretch_mode = 5
 
 [node name="Sidebar" type="Control" parent="."]
 custom_minimum_size = Vector2(300, 1080)
