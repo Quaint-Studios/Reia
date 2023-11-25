@@ -13,10 +13,10 @@ shader_parameter/color = Color(0.976471, 0.952941, 0.898039, 1)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ityoi"]
 bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 70
-corner_radius_top_right = 70
-corner_radius_bottom_right = 70
-corner_radius_bottom_left = 70
+corner_radius_top_left = 35
+corner_radius_top_right = 35
+corner_radius_bottom_right = 35
+corner_radius_bottom_left = 35
 corner_detail = 12
 
 [node name="Tab_Weapons" type="Control"]
