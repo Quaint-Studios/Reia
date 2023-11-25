@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://bgui6d70qmbu1"]
+[gd_scene load_steps=28 format=3 uid="uid://bgui6d70qmbu1"]
 
 [ext_resource type="Shader" path="res://shaders/screen_space/blur.gdshader" id="1_5pek2"]
+[ext_resource type="PackedScene" uid="uid://jsgmocccagip" path="res://rsc/interface/inventory/sub_category.tscn" id="2_f6ox2"]
 [ext_resource type="Texture2D" uid="uid://b5e3in4j2d35n" path="res://rsc/icons/inventory/gradient_orb.svg" id="2_gjblk"]
 [ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/icons/logo_a_flat_white_68.svg" id="2_i2528"]
 [ext_resource type="Texture2D" uid="uid://dm1q0jbofjvsx" path="res://rsc/icons/inventory/filter_icon_84.svg" id="2_k344c"]
@@ -33,12 +34,20 @@ corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 corner_detail = 12
 
+[sub_resource type="Gradient" id="Gradient_1ykm1"]
+colors = PackedColorArray(0.976471, 0.952941, 0.898039, 1, 0.976471, 0.952941, 0.898039, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0ufkp"]
+gradient = SubResource("Gradient_1ykm1")
+fill_from = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ocjd"]
 bg_color = Color(0.333333, 0.556863, 0.866667, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 corner_detail = 12
 
 [sub_resource type="FontVariation" id="FontVariation_u7qxi"]
@@ -56,13 +65,13 @@ corner_radius_bottom_right = 64
 corner_radius_bottom_left = 64
 corner_detail = 12
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_osjhp"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phdh3"]
 bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 64
-corner_radius_top_right = 64
-corner_radius_bottom_right = 64
-corner_radius_bottom_left = 64
-corner_detail = 12
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+corner_detail = 14
 
 [sub_resource type="Gradient" id="Gradient_u4ede"]
 offsets = PackedFloat32Array(0, 0.755208, 0.911458, 1)
@@ -78,10 +87,18 @@ spacing_glyph = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_umn41"]
 bg_color = Color(0.976471, 0.384314, 0.184314, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
+corner_radius_top_left = 23
+corner_radius_top_right = 23
+corner_radius_bottom_right = 23
+corner_radius_bottom_left = 23
+corner_detail = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7nm8"]
+bg_color = Color(0.333333, 0.556863, 0.866667, 1)
+corner_radius_top_left = 23
+corner_radius_top_right = 23
+corner_radius_bottom_right = 23
+corner_radius_bottom_left = 23
 corner_detail = 12
 
 [node name="Inventory" type="Control"]
@@ -141,6 +158,81 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gryqn")
+
+[node name="Content_Weapons" type="Control" parent="Content"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/Content_Weapons"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 72.0
+offset_bottom = 56.0
+theme_override_constants/separation = 16
+
+[node name="SubCategoryRow" type="HBoxContainer" parent="Content/Content_Weapons/VBoxContainer"]
+custom_minimum_size = Vector2(686, 112)
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="SubCategory_All" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
+layout_mode = 2
+
+[node name="Orb" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_All" index="0"]
+visible = true
+
+[node name="Label" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_All" index="1"]
+theme_override_colors/font_color = Color(0.333333, 0.494118, 0.866667, 1)
+
+[node name="SubCategory_Melee" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
+layout_mode = 2
+
+[node name="Label" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Melee" index="1"]
+text = "Melee"
+
+[node name="SubCategory_Bow" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
+layout_mode = 2
+
+[node name="Label" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Bow" index="1"]
+text = "Bow"
+
+[node name="SubCategory_Spell" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
+layout_mode = 2
+
+[node name="Label" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Spell" index="1"]
+text = "Spell"
+
+[node name="Control" type="Control" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HorizontalDivider" type="TextureRect" parent="Content/Content_Weapons/VBoxContainer"]
+custom_minimum_size = Vector2(800, 0.5)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_0ufkp")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Content/Content_Weapons"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -482.0
+offset_bottom = 782.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 28
+
+[node name="ItemPreview" type="Panel" parent="Content/Content_Weapons/MarginContainer"]
+custom_minimum_size = Vector2(482, 782)
+layout_mode = 2
 
 [node name="Topbar" type="Control" parent="."]
 custom_minimum_size = Vector2(1620, 121)
@@ -482,7 +574,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_npvx6")
 custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_osjhp")
+theme_override_styles/panel = SubResource("StyleBoxFlat_phdh3")
 
 [node name="ExitIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/ExitButton"]
 self_modulate = Color(0.372549, 0.564706, 0.592157, 1)
@@ -861,7 +953,7 @@ mouse_filter = 2
 custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
 mouse_filter = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
+theme_override_styles/panel = SubResource("StyleBoxFlat_j7nm8")
 
 [node name="Label" type="Label" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -876,6 +968,10 @@ layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
+[editable path="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_All"]
+[editable path="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Melee"]
+[editable path="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Bow"]
+[editable path="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Spell"]
 [editable path="Sidebar/VBoxContainer/Tabs/Tab_Weapons"]
 [editable path="Sidebar/VBoxContainer/Tabs/Tab_Equipment"]
 [editable path="Sidebar/VBoxContainer/Tabs/Tab_Soulstones"]

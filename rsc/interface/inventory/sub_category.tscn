@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://jsgmocccagip"]
+
+[ext_resource type="FontFile" uid="uid://cnk30iahnvsd2" path="res://rsc/fonts/Roboto/Roboto-Black.ttf" id="1_1hftt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_osjhp"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 56
+corner_radius_top_right = 56
+corner_radius_bottom_right = 56
+corner_radius_bottom_left = 56
+corner_detail = 14
+
+[sub_resource type="FontVariation" id="FontVariation_nlfur"]
+base_font = ExtResource("1_1hftt")
+spacing_glyph = 1
+
+[node name="SubCategory_All" type="CenterContainer"]
+
+[node name="Orb" type="Panel" parent="."]
+visible = false
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_osjhp")
+
+[node name="Label" type="Label" parent="."]
+custom_minimum_size = Vector2(112, 112)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.976471, 0.952941, 0.898039, 1)
+theme_override_fonts/font = SubResource("FontVariation_nlfur")
+theme_override_font_sizes/font_size = 24
+text = "All"
+horizontal_alignment = 1
+vertical_alignment = 1
