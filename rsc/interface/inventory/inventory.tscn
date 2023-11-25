@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://bgui6d70qmbu1"]
+[gd_scene load_steps=24 format=3 uid="uid://bgui6d70qmbu1"]
 
 [ext_resource type="Shader" path="res://shaders/screen_space/blur.gdshader" id="1_5pek2"]
 [ext_resource type="Texture2D" uid="uid://b5e3in4j2d35n" path="res://rsc/icons/inventory/gradient_orb.svg" id="2_gjblk"]
@@ -16,7 +16,7 @@ shader = ExtResource("1_5pek2")
 shader_parameter/amount = 2.0
 
 [sub_resource type="Gradient" id="Gradient_64ut1"]
-colors = PackedColorArray(0, 0, 0, 0.301961, 0, 0, 0, 0)
+colors = PackedColorArray(0.498039, 0.498039, 0.498039, 0.301961, 0, 0, 0, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ku7ej"]
 gradient = SubResource("Gradient_64ut1")
@@ -76,6 +76,14 @@ fill_to = Vector2(0, 1)
 base_font = ExtResource("3_b7ukm")
 spacing_glyph = 1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_umn41"]
+bg_color = Color(0.976471, 0.384314, 0.184314, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+corner_detail = 12
+
 [node name="Inventory" type="Control"]
 clip_contents = true
 layout_mode = 3
@@ -97,6 +105,7 @@ grow_vertical = 2
 mouse_filter = 2
 
 [node name="White" type="ColorRect" parent="Blur"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -130,6 +139,7 @@ offset_right = 928.0
 offset_bottom = 419.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gryqn")
 
 [node name="Topbar" type="Control" parent="."]
@@ -147,24 +157,29 @@ mouse_filter = 2
 layout_mode = 2
 offset_right = 1620.0
 offset_bottom = 121.0
+mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 32
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 alignment = 2
 
 [node name="FilterSection" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 16
 
 [node name="SaveFilter" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
 custom_minimum_size = Vector2(268, 50)
 layout_mode = 2
+mouse_filter = 2
 theme_type_variation = &"Chip"
 
 [node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter"]
@@ -174,6 +189,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 9
 theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 19
@@ -181,20 +197,24 @@ theme_override_constants/margin_bottom = 9
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 12
 
 [node name="IconContainer" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="IconBackground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
 
 [node name="FilterIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_k344c")
 expand_mode = 2
 stretch_mode = 5
@@ -210,11 +230,13 @@ text = "Save Filter"
 [node name="Spacer" type="Control" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="DropdownIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
 self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("4_kneal")
 expand_mode = 4
 stretch_mode = 5
@@ -222,6 +244,7 @@ stretch_mode = 5
 [node name="Filter" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
 custom_minimum_size = Vector2(340, 50)
 layout_mode = 2
+mouse_filter = 2
 theme_type_variation = &"Chip"
 
 [node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter"]
@@ -231,6 +254,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 9
 theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 19
@@ -238,20 +262,24 @@ theme_override_constants/margin_bottom = 9
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 12
 
 [node name="IconContainer" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="IconBackground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
 
 [node name="FilterIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_k344c")
 expand_mode = 2
 stretch_mode = 5
@@ -267,11 +295,13 @@ text = "Filter: Rarity, Level, C..."
 [node name="Spacer" type="Control" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="DropdownIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
 self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("4_kneal")
 expand_mode = 4
 stretch_mode = 5
@@ -279,6 +309,7 @@ stretch_mode = 5
 [node name="Sort" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
 custom_minimum_size = Vector2(340, 50)
 layout_mode = 2
+mouse_filter = 2
 theme_type_variation = &"Chip"
 
 [node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort"]
@@ -288,6 +319,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 9
 theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 19
@@ -295,20 +327,24 @@ theme_override_constants/margin_bottom = 9
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 12
 
 [node name="IconContainer" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="IconBackground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
 
 [node name="FilterIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_k344c")
 expand_mode = 2
 stretch_mode = 5
@@ -324,11 +360,13 @@ text = "Sort: Power, Melee Atk..."
 [node name="Spacer" type="Control" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="DropdownIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
 self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("4_kneal")
 expand_mode = 4
 stretch_mode = 5
@@ -336,18 +374,22 @@ stretch_mode = 5
 [node name="Spacer" type="Control" parent="Topbar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 2
 
 [node name="CurrencySection" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="CurrencyGroup" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer"]
 self_modulate = Color(0.101961, 0.101961, 0.101961, 0.2)
 custom_minimum_size = Vector2(148, 50)
 layout_mode = 2
+mouse_filter = 2
 theme_type_variation = &"Chip"
 
 [node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/CurrencyGroup"]
@@ -357,6 +399,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 9
 theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 9
@@ -364,11 +407,13 @@ theme_override_constants/margin_bottom = 9
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/CurrencyGroup/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 12
 
 [node name="TextureRect" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_gjblk")
 stretch_mode = 5
 
@@ -383,6 +428,7 @@ text = "13.3m"
 self_modulate = Color(0.101961, 0.101961, 0.101961, 0.2)
 custom_minimum_size = Vector2(148, 50)
 layout_mode = 2
+mouse_filter = 2
 theme_type_variation = &"Chip"
 
 [node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/PremiumCurrencyGroup"]
@@ -392,6 +438,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 9
 theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 9
@@ -399,11 +446,13 @@ theme_override_constants/margin_bottom = 9
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/PremiumCurrencyGroup/MarginContainer"]
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 12
 
 [node name="TextureRect" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("2_gjblk")
 stretch_mode = 5
 
@@ -417,21 +466,25 @@ text = "10,000"
 [node name="ExitButton" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 2
 
 [node name="ExitBackground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/ExitButton"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_npvx6")
 
 [node name="ExitForeground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/ExitButton"]
 custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_osjhp")
 
 [node name="ExitIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/ExitButton"]
 self_modulate = Color(0.372549, 0.564706, 0.592157, 1)
 custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
+mouse_filter = 2
 texture = ExtResource("4_x4vpx")
 expand_mode = 4
 stretch_mode = 5
@@ -459,6 +512,7 @@ texture = SubResource("GradientTexture2D_5yrvl")
 layout_mode = 0
 offset_right = 300.0
 offset_bottom = 1080.0
+mouse_filter = 2
 
 [node name="Header" type="MarginContainer" parent="Sidebar/VBoxContainer"]
 custom_minimum_size = Vector2(300, 100)
@@ -496,12 +550,27 @@ theme_override_constants/separation = 8
 
 [node name="Tab_Weapons" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
+mouse_filter = 2
+
+[node name="Selection" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons" index="0"]
+mouse_filter = 2
 
 [node name="Background" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons/Selection" index="0"]
 visible = true
+mouse_filter = 2
+
+[node name="Ornaments" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons/Selection/Background" index="0"]
+mouse_filter = 2
+
+[node name="SelectorCircle" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons/Selection/Background" index="1"]
+mouse_filter = 2
+
+[node name="HBoxContainer" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons/Selection" index="1"]
+mouse_filter = 2
 
 [node name="TabIcon" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons/Selection/HBoxContainer" index="0"]
 self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
+mouse_filter = 2
 
 [node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons/Selection/HBoxContainer" index="1"]
 theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
@@ -509,30 +578,125 @@ text = "Weapons"
 
 [node name="Tab_Equipment" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
+mouse_filter = 2
+
+[node name="Selection" parent="Sidebar/VBoxContainer/Tabs/Tab_Equipment" index="0"]
+mouse_filter = 2
+
+[node name="Background" parent="Sidebar/VBoxContainer/Tabs/Tab_Equipment/Selection" index="0"]
+mouse_filter = 2
+
+[node name="Ornaments" parent="Sidebar/VBoxContainer/Tabs/Tab_Equipment/Selection/Background" index="0"]
+mouse_filter = 2
+
+[node name="SelectorCircle" parent="Sidebar/VBoxContainer/Tabs/Tab_Equipment/Selection/Background" index="1"]
+mouse_filter = 2
+
+[node name="HBoxContainer" parent="Sidebar/VBoxContainer/Tabs/Tab_Equipment/Selection" index="1"]
+mouse_filter = 2
+
+[node name="TabIcon" parent="Sidebar/VBoxContainer/Tabs/Tab_Equipment/Selection/HBoxContainer" index="0"]
+mouse_filter = 2
 
 [node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_Equipment/Selection/HBoxContainer" index="1"]
 text = "Equipment"
 
 [node name="Tab_Soulstones" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
+mouse_filter = 2
+
+[node name="Selection" parent="Sidebar/VBoxContainer/Tabs/Tab_Soulstones" index="0"]
+mouse_filter = 2
+
+[node name="Background" parent="Sidebar/VBoxContainer/Tabs/Tab_Soulstones/Selection" index="0"]
+mouse_filter = 2
+
+[node name="Ornaments" parent="Sidebar/VBoxContainer/Tabs/Tab_Soulstones/Selection/Background" index="0"]
+mouse_filter = 2
+
+[node name="SelectorCircle" parent="Sidebar/VBoxContainer/Tabs/Tab_Soulstones/Selection/Background" index="1"]
+mouse_filter = 2
+
+[node name="HBoxContainer" parent="Sidebar/VBoxContainer/Tabs/Tab_Soulstones/Selection" index="1"]
+mouse_filter = 2
+
+[node name="TabIcon" parent="Sidebar/VBoxContainer/Tabs/Tab_Soulstones/Selection/HBoxContainer" index="0"]
+mouse_filter = 2
 
 [node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_Soulstones/Selection/HBoxContainer" index="1"]
 text = "Soulstones"
 
 [node name="Tab_Consumables" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
+mouse_filter = 2
+
+[node name="Selection" parent="Sidebar/VBoxContainer/Tabs/Tab_Consumables" index="0"]
+mouse_filter = 2
+
+[node name="Background" parent="Sidebar/VBoxContainer/Tabs/Tab_Consumables/Selection" index="0"]
+mouse_filter = 2
+
+[node name="Ornaments" parent="Sidebar/VBoxContainer/Tabs/Tab_Consumables/Selection/Background" index="0"]
+mouse_filter = 2
+
+[node name="SelectorCircle" parent="Sidebar/VBoxContainer/Tabs/Tab_Consumables/Selection/Background" index="1"]
+mouse_filter = 2
+
+[node name="HBoxContainer" parent="Sidebar/VBoxContainer/Tabs/Tab_Consumables/Selection" index="1"]
+mouse_filter = 2
+
+[node name="TabIcon" parent="Sidebar/VBoxContainer/Tabs/Tab_Consumables/Selection/HBoxContainer" index="0"]
+mouse_filter = 2
 
 [node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_Consumables/Selection/HBoxContainer" index="1"]
 text = "Consumables"
 
 [node name="Tab_Materials" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
+mouse_filter = 2
+
+[node name="Selection" parent="Sidebar/VBoxContainer/Tabs/Tab_Materials" index="0"]
+mouse_filter = 2
+
+[node name="Background" parent="Sidebar/VBoxContainer/Tabs/Tab_Materials/Selection" index="0"]
+mouse_filter = 2
+
+[node name="Ornaments" parent="Sidebar/VBoxContainer/Tabs/Tab_Materials/Selection/Background" index="0"]
+mouse_filter = 2
+
+[node name="SelectorCircle" parent="Sidebar/VBoxContainer/Tabs/Tab_Materials/Selection/Background" index="1"]
+mouse_filter = 2
+
+[node name="HBoxContainer" parent="Sidebar/VBoxContainer/Tabs/Tab_Materials/Selection" index="1"]
+mouse_filter = 2
+
+[node name="TabIcon" parent="Sidebar/VBoxContainer/Tabs/Tab_Materials/Selection/HBoxContainer" index="0"]
+mouse_filter = 2
 
 [node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_Materials/Selection/HBoxContainer" index="1"]
 text = "Materials"
 
 [node name="Tab_QuestItems" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
+mouse_filter = 2
+
+[node name="Selection" parent="Sidebar/VBoxContainer/Tabs/Tab_QuestItems" index="0"]
+mouse_filter = 2
+
+[node name="Background" parent="Sidebar/VBoxContainer/Tabs/Tab_QuestItems/Selection" index="0"]
+mouse_filter = 2
+
+[node name="Ornaments" parent="Sidebar/VBoxContainer/Tabs/Tab_QuestItems/Selection/Background" index="0"]
+mouse_filter = 2
+
+[node name="SelectorCircle" parent="Sidebar/VBoxContainer/Tabs/Tab_QuestItems/Selection/Background" index="1"]
+mouse_filter = 2
+
+[node name="HBoxContainer" parent="Sidebar/VBoxContainer/Tabs/Tab_QuestItems/Selection" index="1"]
+mouse_filter = 2
+
+[node name="TabIcon" parent="Sidebar/VBoxContainer/Tabs/Tab_QuestItems/Selection/HBoxContainer" index="0"]
+mouse_filter = 2
 
 [node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_QuestItems/Selection/HBoxContainer" index="1"]
 text = "Quest Items"
@@ -546,11 +710,13 @@ alignment = 1
 
 [node name="CenterContainer" type="CenterContainer" parent="Sidebar/VBoxContainer/SidebarFooter"]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="FilterCounter" type="Panel" parent="Sidebar/VBoxContainer/SidebarFooter/CenterContainer"]
 self_modulate = Color(0.976471, 0.952941, 0.898039, 1)
 custom_minimum_size = Vector2(148, 50)
 layout_mode = 2
+mouse_filter = 2
 theme = ExtResource("5_ff7kn")
 theme_type_variation = &"Chip"
 
@@ -561,6 +727,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="Label" type="Label" parent="Sidebar/VBoxContainer/SidebarFooter/CenterContainer/FilterCounter/CenterContainer"]
 layout_mode = 2
@@ -580,6 +747,128 @@ offset_left = -1620.0
 offset_top = -150.0
 grow_horizontal = 0
 grow_vertical = 0
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Bottombar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 45
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bottombar/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="ActionButtons" type="CenterContainer" parent="Bottombar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="DeleteButton" type="Panel" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer"]
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"Chip"
+
+[node name="MarginContainer" type="MarginContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 19
+theme_override_constants/margin_bottom = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="IconContainer" type="CenterContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="IconBackground" type="Panel" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer/IconContainer"]
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_umn41")
+
+[node name="Label" type="Label" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_colors/font_color = Color(0.976471, 0.384314, 0.184314, 1)
+theme_override_fonts/font = SubResource("FontVariation_u7qxi")
+theme_override_font_sizes/font_size = 20
+text = "Delete"
+
+[node name="Spacer" type="Control" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="SelectButton" type="Panel" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer"]
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"Chip"
+
+[node name="MarginContainer" type="MarginContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 19
+theme_override_constants/margin_bottom = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="IconContainer" type="CenterContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="IconBackground" type="Panel" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer/IconContainer"]
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
+
+[node name="Label" type="Label" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
+theme_override_fonts/font = SubResource("FontVariation_u7qxi")
+theme_override_font_sizes/font_size = 20
+text = "Select"
+
+[node name="Spacer" type="Control" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
 mouse_filter = 2
 
 [editable path="Sidebar/VBoxContainer/Tabs/Tab_Weapons"]
