@@ -377,86 +377,90 @@ size_flags_horizontal = 3
 mouse_filter = 2
 
 [node name="CurrencySection" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
+custom_minimum_size = Vector2(300, 121)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection"]
+[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 16
 
-[node name="CurrencyGroup" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer"]
+[node name="CurrencyGroup" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Background" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup"]
 self_modulate = Color(0.101961, 0.101961, 0.101961, 0.2)
 custom_minimum_size = Vector2(148, 50)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"Chip"
 
-[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/CurrencyGroup"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup"]
+layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 9
 theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 9
 theme_override_constants/margin_bottom = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/CurrencyGroup/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="TextureRect" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2_gjblk")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_fonts/font = SubResource("FontVariation_cpuan")
 theme_override_font_sizes/font_size = 20
 text = "13.3m"
 
-[node name="PremiumCurrencyGroup" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer"]
+[node name="PremiumCurrencyGroup" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Background" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup"]
 self_modulate = Color(0.101961, 0.101961, 0.101961, 0.2)
 custom_minimum_size = Vector2(148, 50)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"Chip"
 
-[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/PremiumCurrencyGroup"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup"]
+layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 9
 theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 9
 theme_override_constants/margin_bottom = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/PremiumCurrencyGroup/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="TextureRect" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2_gjblk")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_fonts/font = SubResource("FontVariation_cpuan")
@@ -774,6 +778,7 @@ mouse_filter = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons"]
 layout_mode = 2
 mouse_filter = 2
+theme_override_constants/separation = 16
 
 [node name="DeleteButton" type="Panel" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer"]
 custom_minimum_size = Vector2(180, 60)
