@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bgui6d70qmbu1"]
+[gd_scene load_steps=42 format=3 uid="uid://bgui6d70qmbu1"]
 
 [ext_resource type="Shader" path="res://shaders/screen_space/blur.gdshader" id="1_5pek2"]
 [ext_resource type="PackedScene" uid="uid://jsgmocccagip" path="res://rsc/interface/inventory/sub_category.tscn" id="2_f6ox2"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://bmi7ixsxitcpw" path="res://rsc/icons/inventory/exit_icon_84.svg" id="4_x4vpx"]
 [ext_resource type="Texture2D" uid="uid://dnqp10u8o4xik" path="res://rsc/icons/star_icon_84.svg" id="5_0we6y"]
 [ext_resource type="Theme" uid="uid://kwq64glpweie" path="res://rsc/themes/main_theme.tres" id="5_ff7kn"]
+[ext_resource type="FontFile" uid="uid://dpo6v8cknqaqu" path="res://rsc/fonts/Roboto/Roboto-Bold.ttf" id="6_yhrwj"]
+[ext_resource type="FontFile" uid="uid://byn6716m0s6qx" path="res://rsc/fonts/Roboto/Roboto-Italic.ttf" id="7_53n1y"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ddyyk"]
 shader = ExtResource("1_5pek2")
@@ -43,13 +45,6 @@ gradient = SubResource("Gradient_1ykm1")
 fill_from = Vector2(0.5, 0)
 metadata/_snap_enabled = true
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kxx5s"]
-bg_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h75of"]
 bg_color = Color(0.203922, 0.2, 0.247059, 0.501961)
 corner_radius_top_left = 5
@@ -57,6 +52,44 @@ corner_radius_top_right = 5
 
 [sub_resource type="FontVariation" id="FontVariation_o5dn7"]
 base_font = ExtResource("3_l1es0")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mfud"]
+bg_color = Color(0.976471, 0.952941, 0.898039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0yfi3"]
+bg_color = Color(0, 0, 0, 0.121569)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 15
+
+[sub_resource type="FontVariation" id="FontVariation_6eb88"]
+base_font = ExtResource("3_l1es0")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjuhp"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="FontVariation" id="FontVariation_44ke8"]
+base_font = ExtResource("3_l1es0")
+
+[sub_resource type="FontVariation" id="FontVariation_pyu88"]
+base_font = ExtResource("3_l1es0")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5a4e"]
+bg_color = Color(1, 0.996078, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="FontVariation" id="FontVariation_xne32"]
+base_font = ExtResource("6_yhrwj")
+
+[sub_resource type="FontVariation" id="FontVariation_xeept"]
+base_font = ExtResource("7_53n1y")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ocjd"]
 bg_color = Color(0.333333, 0.556863, 0.866667, 1)
@@ -233,64 +266,44 @@ layout_mode = 2
 texture = SubResource("GradientTexture2D_0ufkp")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Content/Content_Weapons"]
+[node name="ItemPreview" type="MarginContainer" parent="Content/Content_Weapons"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -482.0
-offset_bottom = 782.0
+offset_left = -536.0
+offset_bottom = 842.0
 grow_horizontal = 0
 theme_override_constants/margin_left = 28
 theme_override_constants/margin_top = 28
 theme_override_constants/margin_right = 28
 theme_override_constants/margin_bottom = 28
 
-[node name="ItemPreview" type="Panel" parent="Content/Content_Weapons/MarginContainer"]
-clip_contents = true
-custom_minimum_size = Vector2(482, 782)
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/Content_Weapons/ItemPreview"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_kxx5s")
+theme_override_constants/separation = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Content/Content_Weapons/MarginContainer/ItemPreview"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="HeaderSection" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer"]
+layout_mode = 2
+metadata/_edit_lock_ = true
 
-[node name="Header" type="Panel" parent="Content/Content_Weapons/MarginContainer/ItemPreview/VBoxContainer"]
+[node name="Background" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection"]
 clip_contents = true
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h75of")
 
-[node name="CenterContainer" type="CenterContainer" parent="Content/Content_Weapons/MarginContainer/ItemPreview/VBoxContainer/Header"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="Content/Content_Weapons/MarginContainer/ItemPreview/VBoxContainer/Header/CenterContainer"]
-layout_mode = 2
-theme_override_colors/font_color = Color(0.980392, 0.992157, 1, 1)
-theme_override_fonts/font = SubResource("FontVariation_o5dn7")
-theme_override_font_sizes/font_size = 34
-text = "Starlit Sword"
-
-[node name="Watermark" type="Control" parent="Content/Content_Weapons/MarginContainer/ItemPreview/VBoxContainer/Header"]
+[node name="Watermark" type="Control" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background"]
 modulate = Color(1, 1, 1, 0.101961)
 custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
 anchors_preset = 0
 offset_left = -32.0
 offset_top = -32.0
 offset_right = 96.0
 offset_bottom = 96.0
 
-[node name="WatermarkLogo" type="TextureRect" parent="Content/Content_Weapons/MarginContainer/ItemPreview/VBoxContainer/Header/Watermark"]
+[node name="WatermarkLogo" type="TextureRect" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background/Watermark"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
 offset_right = 40.0
@@ -299,7 +312,7 @@ texture = ExtResource("2_i2528")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="WatermarkStar1" type="TextureRect" parent="Content/Content_Weapons/MarginContainer/ItemPreview/VBoxContainer/Header/Watermark"]
+[node name="WatermarkStar1" type="TextureRect" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background/Watermark"]
 self_modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(36, 36)
 layout_mode = 0
@@ -311,7 +324,7 @@ texture = ExtResource("5_0we6y")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="WatermarkStar2" type="TextureRect" parent="Content/Content_Weapons/MarginContainer/ItemPreview/VBoxContainer/Header/Watermark"]
+[node name="WatermarkStar2" type="TextureRect" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background/Watermark"]
 self_modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 0
@@ -323,7 +336,7 @@ texture = ExtResource("5_0we6y")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="WatermarkStar3" type="TextureRect" parent="Content/Content_Weapons/MarginContainer/ItemPreview/VBoxContainer/Header/Watermark"]
+[node name="WatermarkStar3" type="TextureRect" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background/Watermark"]
 self_modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(12, 12)
 layout_mode = 0
@@ -334,6 +347,276 @@ offset_bottom = 108.6
 texture = ExtResource("5_0we6y")
 expand_mode = 4
 stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/MarginContainer/CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.980392, 0.992157, 1, 1)
+theme_override_fonts/font = SubResource("FontVariation_o5dn7")
+theme_override_font_sizes/font_size = 34
+text = "Starlit Sword"
+
+[node name="ImageSection" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer"]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="Background" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 233)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2mfud")
+
+[node name="CenterContainer" type="CenterContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemImage" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/Background/CenterContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
+
+[node name="MarginContainer" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection"]
+layout_mode = 2
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 11
+
+[node name="ImageInfoSection" type="VBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemPower" type="CenterContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower"]
+layout_mode = 2
+
+[node name="Background" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer"]
+self_modulate = Color(0, 0, 0, 0.0509804)
+custom_minimum_size = Vector2(145, 48)
+layout_mode = 2
+
+[node name="Labels" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 11
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 11
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer/Labels"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer/Labels/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_6eb88")
+theme_override_font_sizes/font_size = 24
+text = "Item Power"
+
+[node name="Value" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer/Labels/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_6eb88")
+theme_override_font_sizes/font_size = 14
+text = "1,920"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Minor1" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
+
+[node name="Major1" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
+
+[node name="Core" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
+
+[node name="Major2" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
+
+[node name="Minor2" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
+
+[node name="InfoSection" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer"]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="Background" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hjuhp")
+
+[node name="MarginContainer" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection"]
+layout_mode = 2
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 18
+
+[node name="InfoSection" type="CenterContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer"]
+layout_mode = 2
+
+[node name="ItemInfo" type="VBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Stats" type="HBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo"]
+custom_minimum_size = Vector2(0, 225)
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="StatsSection" type="VBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/Stats"]
+custom_minimum_size = Vector2(210, 200)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/Stats/StatsSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.862745, 0.752941, 0.192157, 1)
+theme_override_fonts/font = SubResource("FontVariation_44ke8")
+theme_override_font_sizes/font_size = 24
+text = "Item Stats"
+
+[node name="SoulstoneStatsSection" type="VBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/Stats"]
+custom_minimum_size = Vector2(210, 200)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/Stats/SoulstoneStatsSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.862745, 0.752941, 0.192157, 1)
+theme_override_fonts/font = SubResource("FontVariation_44ke8")
+theme_override_font_sizes/font_size = 24
+text = "Item Stats"
+
+[node name="HorizontalDivider" type="Control" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Line" type="TextureRect" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/HorizontalDivider"]
+custom_minimum_size = Vector2(800, 0.5)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -222.0
+offset_top = -0.75
+offset_right = 578.0
+offset_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.56, 1)
+texture = SubResource("GradientTexture2D_0ufkp")
+expand_mode = 1
+
+[node name="SetDescription" type="VBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SetPieces" type="HBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.133333, 0.666667, 0.188235, 1)
+theme_override_fonts/font = SubResource("FontVariation_pyu88")
+theme_override_font_sizes/font_size = 24
+text = "Star Shower:"
+vertical_alignment = 1
+
+[node name="1PieceI" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
+self_modulate = Color(0.145098, 0.956863, 0.227451, 1)
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_j5a4e")
+
+[node name="2PieceI" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
+self_modulate = Color(0.145098, 0.956863, 0.227451, 1)
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_j5a4e")
+
+[node name="3PieceI" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
+self_modulate = Color(0.145098, 0.956863, 0.227451, 1)
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_j5a4e")
+
+[node name="4PieceI" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
+self_modulate = Color(0.615686, 0.690196, 0.580392, 1)
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_j5a4e")
+
+[node name="SetEffects" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetEffects"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Effect1" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetEffects/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.541176, 0.4, 1)
+theme_override_fonts/font = SubResource("FontVariation_xne32")
+theme_override_font_sizes/font_size = 16
+text = "2-Piece: Attacking generates a cosmic ball that follows you. It will attack nearby enemies when you’re in combat. Each attack will drain one stack from it."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Effect2" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetEffects/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.541176, 0.4, 1)
+theme_override_fonts/font = SubResource("FontVariation_xne32")
+theme_override_font_sizes/font_size = 16
+text = "4-Piece: Generated stacks increased from 2 to 4. Each attack will bounce to one additional target."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Description" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription"]
+custom_minimum_size = Vector2(414, 60)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.541176, 0.4, 1)
+theme_override_fonts/font = SubResource("FontVariation_xeept")
+theme_override_font_sizes/font_size = 16
+text = "Made from the heart of Reia. This was one of the remnants found after she dispersed her energy throughout her world."
+vertical_alignment = 2
+autowrap_mode = 2
 
 [node name="Topbar" type="Control" parent="."]
 custom_minimum_size = Vector2(1620, 121)
@@ -730,6 +1013,7 @@ custom_minimum_size = Vector2(68, 68)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2_i2528")
+expand_mode = 4
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="Sidebar/VBoxContainer/Header/HBox"]
