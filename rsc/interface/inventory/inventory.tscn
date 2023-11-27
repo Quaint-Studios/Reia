@@ -30,7 +30,7 @@ fill_to = Vector2(0.5, 1)
 metadata/_snap_enabled = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gryqn"]
-bg_color = Color(1, 1, 1, 0.0509804)
+bg_color = Color(1, 1, 1, 0.101961)
 corner_radius_top_left = 32
 corner_radius_top_right = 32
 corner_radius_bottom_right = 32
@@ -156,6 +156,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 16.0
+offset_right = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -215,6 +217,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Content/Content_Weapons"]
 layout_mode = 0
@@ -222,15 +225,18 @@ offset_left = 32.0
 offset_top = 16.0
 offset_right = 72.0
 offset_bottom = 56.0
+mouse_filter = 2
 theme_override_constants/separation = 16
 
 [node name="SubCategoryRow" type="HBoxContainer" parent="Content/Content_Weapons/VBoxContainer"]
 custom_minimum_size = Vector2(686, 112)
 layout_mode = 2
+mouse_filter = 2
 theme_override_constants/separation = 80
 
 [node name="SubCategory_All" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Orb" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_All" index="0"]
 visible = true
@@ -240,18 +246,21 @@ theme_override_colors/font_color = Color(0.333333, 0.494118, 0.866667, 1)
 
 [node name="SubCategory_Melee" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Label" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Melee" index="1"]
 text = "Melee"
 
 [node name="SubCategory_Bow" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Label" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Bow" index="1"]
 text = "Bow"
 
 [node name="SubCategory_Spell" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
 layout_mode = 2
+mouse_filter = 2
 
 [node name="Label" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Spell" index="1"]
 text = "Spell"
@@ -263,6 +272,7 @@ size_flags_horizontal = 3
 [node name="HorizontalDivider" type="TextureRect" parent="Content/Content_Weapons/VBoxContainer"]
 custom_minimum_size = Vector2(800, 0.5)
 layout_mode = 2
+mouse_filter = 2
 texture = SubResource("GradientTexture2D_0ufkp")
 expand_mode = 1
 
@@ -474,9 +484,9 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_hjuhp")
 
 [node name="MarginContainer" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection"]
 layout_mode = 2
-theme_override_constants/margin_left = 18
+theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 18
-theme_override_constants/margin_right = 18
+theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 18
 
 [node name="InfoSection" type="CenterContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer"]
@@ -513,7 +523,7 @@ layout_mode = 2
 theme_override_colors/font_color = Color(0.862745, 0.752941, 0.192157, 1)
 theme_override_fonts/font = SubResource("FontVariation_44ke8")
 theme_override_font_sizes/font_size = 24
-text = "Item Stats"
+text = "Soulstone Stats"
 
 [node name="HorizontalDivider" type="Control" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo"]
 custom_minimum_size = Vector2(0, 20)
