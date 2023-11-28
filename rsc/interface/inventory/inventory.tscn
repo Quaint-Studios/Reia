@@ -1,10 +1,11 @@
-[gd_scene load_steps=42 format=3 uid="uid://bgui6d70qmbu1"]
+[gd_scene load_steps=43 format=3 uid="uid://bgui6d70qmbu1"]
 
 [ext_resource type="Shader" path="res://shaders/screen_space/blur.gdshader" id="1_5pek2"]
 [ext_resource type="PackedScene" uid="uid://jsgmocccagip" path="res://rsc/interface/inventory/sub_category.tscn" id="2_f6ox2"]
 [ext_resource type="Texture2D" uid="uid://b5e3in4j2d35n" path="res://rsc/icons/inventory/gradient_orb.svg" id="2_gjblk"]
 [ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/icons/logo_a_flat_white_68.svg" id="2_i2528"]
 [ext_resource type="Texture2D" uid="uid://dm1q0jbofjvsx" path="res://rsc/icons/inventory/filter_icon_84.svg" id="2_k344c"]
+[ext_resource type="PackedScene" uid="uid://wgv40a1vxert" path="res://rsc/interface/inventory/item.tscn" id="3_21nmv"]
 [ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="3_b7ukm"]
 [ext_resource type="FontFile" uid="uid://cnk30iahnvsd2" path="res://rsc/fonts/Roboto/Roboto-Black.ttf" id="3_l1es0"]
 [ext_resource type="Texture2D" uid="uid://vytb7l0x77ml" path="res://rsc/icons/inventory/dropdown_icon_84.svg" id="4_kneal"]
@@ -156,8 +157,6 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
-offset_right = 16.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
@@ -275,6 +274,70 @@ layout_mode = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_0ufkp")
 expand_mode = 1
+
+[node name="HFlowContainer" type="HFlowContainer" parent="Content/Content_Weapons"]
+custom_minimum_size = Vector2(1030, 638)
+layout_mode = 2
+offset_left = 28.0
+offset_top = 160.0
+offset_right = 1058.0
+offset_bottom = 340.0
+theme_override_constants/h_separation = 28
+theme_override_constants/v_separation = 28
+
+[node name="Item" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item2" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item3" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item4" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item5" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item6" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item7" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item8" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item9" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item10" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item11" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item12" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item13" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item14" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item15" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item16" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item17" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+
+[node name="Item18" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
 
 [node name="ItemPreview" type="MarginContainer" parent="Content/Content_Weapons"]
 layout_mode = 1

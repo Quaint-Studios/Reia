@@ -1,0 +1,79 @@
+[gd_scene load_steps=6 format=3 uid="uid://wgv40a1vxert"]
+
+[ext_resource type="Texture2D" uid="uid://coo3226ej4yv6" path="res://rsc/icons/inventory/item_card_shadow_common.svg" id="1_3ljpk"]
+[ext_resource type="Texture2D" uid="uid://cnpnpjqcyreh1" path="res://rsc/icons/inventory/item_card_base.svg" id="2_hf3p2"]
+[ext_resource type="FontFile" uid="uid://cnk30iahnvsd2" path="res://rsc/fonts/Roboto/Roboto-Black.ttf" id="3_evxfs"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6nx02"]
+bg_color = Color(0.333333, 0.866667, 0.388235, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="FontVariation" id="FontVariation_6c0e0"]
+base_font = ExtResource("3_evxfs")
+
+[node name="Item" type="MarginContainer"]
+clip_contents = true
+
+[node name="Control" type="Control" parent="."]
+clip_contents = true
+custom_minimum_size = Vector2(140, 180)
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Control"]
+custom_minimum_size = Vector2(140, 180)
+layout_mode = 2
+offset_right = 140.0
+offset_bottom = 180.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6nx02")
+
+[node name="TextureRect2" type="TextureRect" parent="Control"]
+layout_mode = 2
+offset_right = 140.0
+offset_bottom = 180.0
+texture = ExtResource("1_3ljpk")
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -70.0
+offset_top = -102.0
+offset_right = 70.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("2_hf3p2")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="Control/TextureRect"]
+layout_mode = 2
+offset_left = 6.0
+offset_top = 46.0
+offset_right = 134.0
+offset_bottom = 97.0
+theme_type_variation = &"WhiteLabelSans"
+theme_override_colors/font_color = Color(0.980392, 0.992157, 1, 1)
+theme_override_fonts/font = SubResource("FontVariation_6c0e0")
+theme_override_font_sizes/font_size = 20
+text = "Wooden Sword"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -65.0
+offset_top = -64.0
+offset_right = 65.0
+grow_horizontal = 2
+grow_vertical = 0
