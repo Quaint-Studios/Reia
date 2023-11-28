@@ -406,6 +406,7 @@ script = ExtResource("18_wnyd8")
 object_name = NodePath("Prompt/ObjectName")
 
 [node name="Prompt" type="HBoxContainer" parent="PlayerUI/PlayerHUD/PlayerInteractor"]
+visible = false
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -459,6 +460,7 @@ theme_type_variation = &"WhiteLabel"
 text = "Loot"
 
 [node name="LootWindow" type="Panel" parent="PlayerUI/PlayerHUD/PlayerInteractor"]
+visible = false
 self_modulate = Color(1, 1, 1, 0.392157)
 layout_mode = 0
 offset_left = 693.0
