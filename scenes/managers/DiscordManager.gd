@@ -1,6 +1,8 @@
 extends Node
 
 func _ready():
+	return
+"""
 	discord_sdk.app_id = 688581385639952418 # Application ID
 	discord_sdk.details = "Roaming the world..."
 	discord_sdk.state = "Playing Solo"
@@ -17,3 +19,4 @@ func _ready():
 	# discord_sdk.end_timestamp = int(Time.get_unix_time_from_system()) + 3600 # +1 hour in unix time / "01:00 remaining"
 
 	discord_sdk.refresh() # Always refresh after changing the values!
+"""
