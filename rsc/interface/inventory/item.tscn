@@ -1,39 +1,158 @@
-[gd_scene load_steps=6 format=3 uid="uid://wgv40a1vxert"]
+[gd_scene load_steps=20 format=3 uid="uid://wgv40a1vxert"]
 
 [ext_resource type="Texture2D" uid="uid://coo3226ej4yv6" path="res://rsc/icons/inventory/item_card_shadow_common.svg" id="1_3ljpk"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_item.gd" id="1_7chtt"]
 [ext_resource type="Texture2D" uid="uid://cnpnpjqcyreh1" path="res://rsc/icons/inventory/item_card_base.svg" id="2_hf3p2"]
+[ext_resource type="Texture2D" uid="uid://bruw722fp4u3x" path="res://rsc/icons/inventory/item_card_shadow_uncommon.svg" id="3_8d3mr"]
 [ext_resource type="FontFile" uid="uid://cnk30iahnvsd2" path="res://rsc/fonts/Roboto/Roboto-Black.ttf" id="3_evxfs"]
+[ext_resource type="Texture2D" uid="uid://bkfxxmf77igas" path="res://rsc/icons/inventory/item_card_shadow_rare.svg" id="4_kjcqi"]
+[ext_resource type="Texture2D" uid="uid://dy3yvallrkydi" path="res://rsc/icons/inventory/item_card_shadow_sacred.svg" id="5_46xaq"]
+[ext_resource type="Shader" path="res://rsc/shaders/panel_gradient.gdshader" id="6_k4pwx"]
+[ext_resource type="Shader" path="res://rsc/shaders/panel_gradient_overlay_sincos.gdshader" id="7_js4w8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6nx02"]
-bg_color = Color(0.333333, 0.866667, 0.388235, 1)
+bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
+
+[sub_resource type="Gradient" id="Gradient_7y616"]
+colors = PackedColorArray(0.972549, 0.341176, 0.12549, 1, 0.980392, 0.501961, 0.341176, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hqias"]
+gradient = SubResource("Gradient_7y616")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_w5d6a"]
+shader = ExtResource("6_k4pwx")
+shader_parameter/gradient_a = SubResource("GradientTexture2D_hqias")
+
+[sub_resource type="Gradient" id="Gradient_u8oj5"]
+offsets = PackedFloat32Array(0, 0.50625, 1)
+colors = PackedColorArray(0.941176, 0.827451, 0.258824, 1, 0.968627, 0.901961, 0.584314, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f1fod"]
+gradient = SubResource("Gradient_u8oj5")
+fill_to = Vector2(1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_vhaib"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.572549, 0.403922, 0.913725, 1, 0.721569, 0.592157, 0.980392, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8rnum"]
+gradient = SubResource("Gradient_vhaib")
+fill_to = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_e10i6"]
+shader = ExtResource("7_js4w8")
+shader_parameter/gradient_a = SubResource("GradientTexture2D_f1fod")
+shader_parameter/gradient_b = SubResource("GradientTexture2D_8rnum")
 
 [sub_resource type="FontVariation" id="FontVariation_6c0e0"]
 base_font = ExtResource("3_evxfs")
 
 [node name="Item" type="MarginContainer"]
 clip_contents = true
+script = ExtResource("1_7chtt")
 
 [node name="Control" type="Control" parent="."]
 clip_contents = true
 custom_minimum_size = Vector2(140, 180)
 layout_mode = 2
 
-[node name="Panel" type="Panel" parent="Control"]
+[node name="GradeBGs" type="Control" parent="Control"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Common" type="Panel" parent="Control/GradeBGs"]
+unique_name_in_owner = true
+self_modulate = Color(0.333333, 0.866667, 0.388235, 1)
 custom_minimum_size = Vector2(140, 180)
 layout_mode = 2
 offset_right = 140.0
 offset_bottom = 180.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6nx02")
 
-[node name="TextureRect2" type="TextureRect" parent="Control"]
+[node name="Shadow" type="TextureRect" parent="Control/GradeBGs/Common"]
 layout_mode = 2
 offset_right = 140.0
 offset_bottom = 180.0
 texture = ExtResource("1_3ljpk")
+
+[node name="Uncommon" type="Panel" parent="Control/GradeBGs"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.333333, 0.494118, 0.866667, 1)
+custom_minimum_size = Vector2(140, 180)
+layout_mode = 2
+offset_right = 140.0
+offset_bottom = 180.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6nx02")
+
+[node name="Shadow" type="TextureRect" parent="Control/GradeBGs/Uncommon"]
+layout_mode = 2
+offset_right = 140.0
+offset_bottom = 180.0
+texture = ExtResource("3_8d3mr")
+
+[node name="Rare" type="Panel" parent="Control/GradeBGs"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.968627, 0.929412, 0.729412, 1)
+custom_minimum_size = Vector2(140, 180)
+layout_mode = 2
+offset_right = 140.0
+offset_bottom = 180.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6nx02")
+
+[node name="Shadow" type="TextureRect" parent="Control/GradeBGs/Rare"]
+layout_mode = 2
+offset_right = 140.0
+offset_bottom = 180.0
+texture = ExtResource("4_kjcqi")
+
+[node name="Sacred" type="Panel" parent="Control/GradeBGs"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.729412, 0.329412, 0.972549, 1)
+custom_minimum_size = Vector2(140, 180)
+layout_mode = 2
+offset_right = 140.0
+offset_bottom = 180.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6nx02")
+
+[node name="Shadow" type="TextureRect" parent="Control/GradeBGs/Sacred"]
+layout_mode = 2
+offset_right = 140.0
+offset_bottom = 180.0
+texture = ExtResource("5_46xaq")
+
+[node name="Arcane" type="Panel" parent="Control/GradeBGs"]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_w5d6a")
+custom_minimum_size = Vector2(140, 180)
+layout_mode = 2
+offset_right = 140.0
+offset_bottom = 180.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6nx02")
+
+[node name="Radiant" type="Panel" parent="Control/GradeBGs"]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_e10i6")
+custom_minimum_size = Vector2(140, 180)
+layout_mode = 2
+offset_right = 140.0
+offset_bottom = 180.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_6nx02")
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 layout_mode = 1
@@ -51,6 +170,7 @@ texture = ExtResource("2_hf3p2")
 stretch_mode = 4
 
 [node name="Label" type="Label" parent="Control/TextureRect"]
+unique_name_in_owner = true
 layout_mode = 2
 offset_left = 6.0
 offset_top = 46.0
