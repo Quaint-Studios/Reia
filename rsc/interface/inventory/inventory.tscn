@@ -302,42 +302,51 @@ layout_mode = 2
 
 [node name="Item6" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
+grade = 1
 
 [node name="Item7" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
+grade = 1
 
 [node name="Item8" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
+grade = 1
 
 [node name="Item9" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
+grade = 1
 
 [node name="Item10" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
+grade = 2
 
 [node name="Item11" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
+grade = 2
 
 [node name="Item12" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
+grade = 2
 
 [node name="Item13" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
+grade = 3
 
 [node name="Item14" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
+grade = 3
 
 [node name="Item15" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
+grade = 4
 
 [node name="Item16" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
+grade = 4
 
 [node name="Item17" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
-
-[node name="Item18" parent="Content/Content_Weapons/HFlowContainer" instance=ExtResource("3_21nmv")]
-layout_mode = 2
+grade = 5
 
 [node name="ItemPreview" type="MarginContainer" parent="Content/Content_Weapons"]
 layout_mode = 1
