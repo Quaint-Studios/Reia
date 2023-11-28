@@ -8,4 +8,4 @@ var item_type: ItemType
 @export var item_grade: ItemGrade
 
 enum ItemType { WEAPON, EQUIPMENT, MATERIAL, SOULSTONE }
-enum ItemGrade { COMMON, UNCOMMON, RARE, ARCANE, RADIANT }
+enum ItemGrade { COMMON, UNCOMMON, RARE, SACRED, ARCANE, RADIANT }
