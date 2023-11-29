@@ -3,15 +3,15 @@
 	"stage": "pre-alpha",
 	"date": {
 		"month": "9",
-		"day": "25",
+		"day": "29",
 		"year": "2023",
-		"hour": 02,
-		"minute": 00
+		"hour": 21,
+		"minute": 40
 	},
 	"description": "Items and Inventory system, better lighting, better ui, papa-- oh.",
 	"changes": {
 		"add": [
-			"Oooo... Music! There's not a sound manager so you can have volume for sound effects, music, dialogue, and your interface! Sorry, no volume for your face yet.",
+			"Oooo... Music! There's now a sound manager so you can have volume for sound effects, music, dialogue, and your interface! Sorry, no volume for your face yet.",
 			"The main menu has a temporary logo finally. Programmer art, am I right? It gets the job done.",
 			"Your mouse now gets eaten by the game when you're playing. It's okay. Just press escape and it'll spit it back out.",
 			"There's an inventory system now! It can hold items. That's about it. Press I to see some wonderful programmer art. Some effort was actually put into this one."
