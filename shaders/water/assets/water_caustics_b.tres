@@ -6,7 +6,6 @@ seed = 7331
 frequency = 0.035
 fractal_type = 0
 cellular_distance_function = 1
-cellular_jitter = 1.0
 
 [resource]
 width = 1024

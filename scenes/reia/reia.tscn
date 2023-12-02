@@ -151,7 +151,7 @@ spell_defense = 10
 crit_chance = 0.0
 crit_damage = 0.0
 
-[sub_resource type="Resource" id="Resource_ssuan"]
+[sub_resource type="Resource" id="Resource_83w4k"]
 script = ExtResource("27_c0ur8")
 radius = 0.18
 samples_before_rejection = 10
@@ -161,7 +161,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_wdacg"]
+[sub_resource type="Resource" id="Resource_x7tib"]
 script = ExtResource("28_vk0p2")
 operation = 0
 position = Vector3(0, -0.425, 0)
@@ -171,7 +171,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_euxla"]
+[sub_resource type="Resource" id="Resource_x2bb4"]
 script = ExtResource("29_n5ttu")
 operation = 1
 scale = Vector3(1, 1, 1)
@@ -181,9 +181,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_586cj"]
+[sub_resource type="Resource" id="Resource_5but0"]
 script = ExtResource("26_gpakv")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_ssuan"), SubResource("Resource_wdacg"), SubResource("Resource_euxla")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_83w4k"), SubResource("Resource_x7tib"), SubResource("Resource_x2bb4")])
 
 [sub_resource type="Resource" id="Resource_ncy2b"]
 script = ExtResource("32_j5p2l")
@@ -257,7 +257,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.59507, -0.757559, 11.8945)
 [node name="ProtonScatter" type="Node3D" parent="Terrain/Groundings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2259, -0.330719, 13.0612)
 script = ExtResource("25_dy2rl")
-modifier_stack = SubResource("Resource_586cj")
+modifier_stack = SubResource("Resource_5but0")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(1, 1, 1)
 
