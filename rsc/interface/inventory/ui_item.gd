@@ -1,4 +1,4 @@
-@tool extends MarginContainer
+@tool class_name UI_Item extends MarginContainer
 
 @export var item_name = "Wooden Sword":
 	set(value):
