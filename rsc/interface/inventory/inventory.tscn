@@ -1,6 +1,7 @@
-[gd_scene load_steps=44 format=3 uid="uid://bgui6d70qmbu1"]
+[gd_scene load_steps=49 format=3 uid="uid://bgui6d70qmbu1"]
 
 [ext_resource type="Shader" path="res://shaders/screen_space/blur.gdshader" id="1_5pek2"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_inventory.gd" id="1_b67wi"]
 [ext_resource type="PackedScene" uid="uid://jsgmocccagip" path="res://rsc/interface/inventory/sub_category.tscn" id="2_f6ox2"]
 [ext_resource type="Texture2D" uid="uid://b5e3in4j2d35n" path="res://rsc/icons/inventory/gradient_orb.svg" id="2_gjblk"]
 [ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/icons/logo_a_flat_white_68.svg" id="2_i2528"]
@@ -9,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="3_b7ukm"]
 [ext_resource type="FontFile" uid="uid://cnk30iahnvsd2" path="res://rsc/fonts/Roboto/Roboto-Black.ttf" id="3_l1es0"]
 [ext_resource type="Script" path="res://rsc/interface/inventory/ui_item_container.gd" id="3_r64ix"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_content.gd" id="3_vjye7"]
 [ext_resource type="Texture2D" uid="uid://vytb7l0x77ml" path="res://rsc/icons/inventory/dropdown_icon_84.svg" id="4_kneal"]
 [ext_resource type="PackedScene" uid="uid://dripboa48oo8w" path="res://rsc/interface/inventory/tab.tscn" id="4_ph1fb"]
 [ext_resource type="Texture2D" uid="uid://bmi7ixsxitcpw" path="res://rsc/icons/inventory/exit_icon_84.svg" id="4_x4vpx"]
@@ -16,6 +18,9 @@
 [ext_resource type="Theme" uid="uid://kwq64glpweie" path="res://rsc/themes/main_theme.tres" id="5_ff7kn"]
 [ext_resource type="FontFile" uid="uid://dpo6v8cknqaqu" path="res://rsc/fonts/Roboto/Roboto-Bold.ttf" id="6_yhrwj"]
 [ext_resource type="FontFile" uid="uid://byn6716m0s6qx" path="res://rsc/fonts/Roboto/Roboto-Italic.ttf" id="7_53n1y"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_topbar.gd" id="11_j6yph"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_sidebar.gd" id="16_v465c"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_bottombar.gd" id="20_j36ox"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ddyyk"]
 shader = ExtResource("1_5pek2")
@@ -161,6 +166,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("1_b67wi")
 
 [node name="Blur" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_ddyyk")
@@ -209,6 +215,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gryqn")
+script = ExtResource("3_vjye7")
 
 [node name="Content_Weapons" type="Control" parent="Content"]
 layout_mode = 1
@@ -712,6 +719,7 @@ offset_left = -1620.0
 offset_bottom = 121.0
 grow_horizontal = 0
 mouse_filter = 2
+script = ExtResource("11_j6yph")
 
 [node name="MarginContainer" type="MarginContainer" parent="Topbar"]
 layout_mode = 2
@@ -1060,6 +1068,7 @@ anchors_preset = 0
 offset_right = 300.0
 offset_bottom = 1080.0
 mouse_filter = 2
+script = ExtResource("16_v465c")
 
 [node name="Background" type="TextureRect" parent="Sidebar"]
 custom_minimum_size = Vector2(300, 1080)
@@ -1115,156 +1124,28 @@ theme_override_constants/separation = 8
 
 [node name="Tab_Weapons" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
-mouse_filter = 2
-
-[node name="Selection" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons" index="0"]
-mouse_filter = 2
-
-[node name="Background" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons/Selection" index="0"]
-visible = true
-mouse_filter = 2
-
-[node name="Ornaments" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons/Selection/Background" index="0"]
-mouse_filter = 2
-
-[node name="SelectorCircle" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons/Selection/Background" index="1"]
-mouse_filter = 2
-
-[node name="HBoxContainer" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons/Selection" index="1"]
-mouse_filter = 2
-
-[node name="TabIcon" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons/Selection/HBoxContainer" index="0"]
-self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
-mouse_filter = 2
-
-[node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_Weapons/Selection/HBoxContainer" index="1"]
-theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
-text = "Weapons"
+category_name = "Weapons"
+selected = true
 
 [node name="Tab_Equipment" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
-mouse_filter = 2
-
-[node name="Selection" parent="Sidebar/VBoxContainer/Tabs/Tab_Equipment" index="0"]
-mouse_filter = 2
-
-[node name="Background" parent="Sidebar/VBoxContainer/Tabs/Tab_Equipment/Selection" index="0"]
-mouse_filter = 2
-
-[node name="Ornaments" parent="Sidebar/VBoxContainer/Tabs/Tab_Equipment/Selection/Background" index="0"]
-mouse_filter = 2
-
-[node name="SelectorCircle" parent="Sidebar/VBoxContainer/Tabs/Tab_Equipment/Selection/Background" index="1"]
-mouse_filter = 2
-
-[node name="HBoxContainer" parent="Sidebar/VBoxContainer/Tabs/Tab_Equipment/Selection" index="1"]
-mouse_filter = 2
-
-[node name="TabIcon" parent="Sidebar/VBoxContainer/Tabs/Tab_Equipment/Selection/HBoxContainer" index="0"]
-mouse_filter = 2
-
-[node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_Equipment/Selection/HBoxContainer" index="1"]
-text = "Equipment"
+category_name = "Equipment"
 
 [node name="Tab_Soulstones" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
-mouse_filter = 2
-
-[node name="Selection" parent="Sidebar/VBoxContainer/Tabs/Tab_Soulstones" index="0"]
-mouse_filter = 2
-
-[node name="Background" parent="Sidebar/VBoxContainer/Tabs/Tab_Soulstones/Selection" index="0"]
-mouse_filter = 2
-
-[node name="Ornaments" parent="Sidebar/VBoxContainer/Tabs/Tab_Soulstones/Selection/Background" index="0"]
-mouse_filter = 2
-
-[node name="SelectorCircle" parent="Sidebar/VBoxContainer/Tabs/Tab_Soulstones/Selection/Background" index="1"]
-mouse_filter = 2
-
-[node name="HBoxContainer" parent="Sidebar/VBoxContainer/Tabs/Tab_Soulstones/Selection" index="1"]
-mouse_filter = 2
-
-[node name="TabIcon" parent="Sidebar/VBoxContainer/Tabs/Tab_Soulstones/Selection/HBoxContainer" index="0"]
-mouse_filter = 2
-
-[node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_Soulstones/Selection/HBoxContainer" index="1"]
-text = "Soulstones"
+category_name = "Soulstones"
 
 [node name="Tab_Consumables" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
-mouse_filter = 2
-
-[node name="Selection" parent="Sidebar/VBoxContainer/Tabs/Tab_Consumables" index="0"]
-mouse_filter = 2
-
-[node name="Background" parent="Sidebar/VBoxContainer/Tabs/Tab_Consumables/Selection" index="0"]
-mouse_filter = 2
-
-[node name="Ornaments" parent="Sidebar/VBoxContainer/Tabs/Tab_Consumables/Selection/Background" index="0"]
-mouse_filter = 2
-
-[node name="SelectorCircle" parent="Sidebar/VBoxContainer/Tabs/Tab_Consumables/Selection/Background" index="1"]
-mouse_filter = 2
-
-[node name="HBoxContainer" parent="Sidebar/VBoxContainer/Tabs/Tab_Consumables/Selection" index="1"]
-mouse_filter = 2
-
-[node name="TabIcon" parent="Sidebar/VBoxContainer/Tabs/Tab_Consumables/Selection/HBoxContainer" index="0"]
-mouse_filter = 2
-
-[node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_Consumables/Selection/HBoxContainer" index="1"]
-text = "Consumables"
+category_name = "Consumables"
 
 [node name="Tab_Materials" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
-mouse_filter = 2
-
-[node name="Selection" parent="Sidebar/VBoxContainer/Tabs/Tab_Materials" index="0"]
-mouse_filter = 2
-
-[node name="Background" parent="Sidebar/VBoxContainer/Tabs/Tab_Materials/Selection" index="0"]
-mouse_filter = 2
-
-[node name="Ornaments" parent="Sidebar/VBoxContainer/Tabs/Tab_Materials/Selection/Background" index="0"]
-mouse_filter = 2
-
-[node name="SelectorCircle" parent="Sidebar/VBoxContainer/Tabs/Tab_Materials/Selection/Background" index="1"]
-mouse_filter = 2
-
-[node name="HBoxContainer" parent="Sidebar/VBoxContainer/Tabs/Tab_Materials/Selection" index="1"]
-mouse_filter = 2
-
-[node name="TabIcon" parent="Sidebar/VBoxContainer/Tabs/Tab_Materials/Selection/HBoxContainer" index="0"]
-mouse_filter = 2
-
-[node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_Materials/Selection/HBoxContainer" index="1"]
-text = "Materials"
+category_name = "Materials"
 
 [node name="Tab_QuestItems" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
-mouse_filter = 2
-
-[node name="Selection" parent="Sidebar/VBoxContainer/Tabs/Tab_QuestItems" index="0"]
-mouse_filter = 2
-
-[node name="Background" parent="Sidebar/VBoxContainer/Tabs/Tab_QuestItems/Selection" index="0"]
-mouse_filter = 2
-
-[node name="Ornaments" parent="Sidebar/VBoxContainer/Tabs/Tab_QuestItems/Selection/Background" index="0"]
-mouse_filter = 2
-
-[node name="SelectorCircle" parent="Sidebar/VBoxContainer/Tabs/Tab_QuestItems/Selection/Background" index="1"]
-mouse_filter = 2
-
-[node name="HBoxContainer" parent="Sidebar/VBoxContainer/Tabs/Tab_QuestItems/Selection" index="1"]
-mouse_filter = 2
-
-[node name="TabIcon" parent="Sidebar/VBoxContainer/Tabs/Tab_QuestItems/Selection/HBoxContainer" index="0"]
-mouse_filter = 2
-
-[node name="Label" parent="Sidebar/VBoxContainer/Tabs/Tab_QuestItems/Selection/HBoxContainer" index="1"]
-text = "Quest Items"
+category_name = "Quest Items"
 
 [node name="SidebarFooter" type="VBoxContainer" parent="Sidebar/VBoxContainer"]
 layout_mode = 2
@@ -1313,6 +1194,7 @@ offset_top = -150.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
+script = ExtResource("20_j36ox")
 
 [node name="MarginContainer" type="MarginContainer" parent="Bottombar"]
 layout_mode = 1
@@ -1459,9 +1341,3 @@ mouse_filter = 2
 [editable path="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Melee"]
 [editable path="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Bow"]
 [editable path="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Spell"]
-[editable path="Sidebar/VBoxContainer/Tabs/Tab_Weapons"]
-[editable path="Sidebar/VBoxContainer/Tabs/Tab_Equipment"]
-[editable path="Sidebar/VBoxContainer/Tabs/Tab_Soulstones"]
-[editable path="Sidebar/VBoxContainer/Tabs/Tab_Consumables"]
-[editable path="Sidebar/VBoxContainer/Tabs/Tab_Materials"]
-[editable path="Sidebar/VBoxContainer/Tabs/Tab_QuestItems"]
