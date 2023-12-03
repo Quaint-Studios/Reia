@@ -34,10 +34,16 @@ func _select():
 	background.show()
 	tab_icon.self_modulate = CHIP_BLUE
 	label.self_modulate = CHIP_BLUE
+	
+	if UI_Inventory.instance == null:
+		return
+	
+	var current_tab = PlayerInventory.Tab[category_name.replace(" ", "_").to_upper()]
+	
+	UI_Inventory.instance.tab_changed.emit(current_tab)
 
 func update():
 	selected = button_group.get_pressed_button() == self
-	print("%s is now %s" % [name, selected])
 
 func _on_pressed():
 	for button in (button_group.get_buttons() as Array[UI_Tab]):
