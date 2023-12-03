@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://bgui6d70qmbu1"]
+[gd_scene load_steps=50 format=3 uid="uid://bgui6d70qmbu1"]
 
 [ext_resource type="Shader" path="res://shaders/screen_space/blur.gdshader" id="1_5pek2"]
 [ext_resource type="Script" path="res://rsc/interface/inventory/ui_inventory.gd" id="1_b67wi"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" path="res://rsc/interface/inventory/ui_item_container.gd" id="3_r64ix"]
 [ext_resource type="Script" path="res://rsc/interface/inventory/ui_content.gd" id="3_vjye7"]
 [ext_resource type="Texture2D" uid="uid://vytb7l0x77ml" path="res://rsc/icons/inventory/dropdown_icon_84.svg" id="4_kneal"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_content_weapons.gd" id="4_mtge3"]
 [ext_resource type="PackedScene" uid="uid://dripboa48oo8w" path="res://rsc/interface/inventory/tab.tscn" id="4_ph1fb"]
 [ext_resource type="Texture2D" uid="uid://bmi7ixsxitcpw" path="res://rsc/icons/inventory/exit_icon_84.svg" id="4_x4vpx"]
 [ext_resource type="Texture2D" uid="uid://dnqp10u8o4xik" path="res://rsc/icons/star_icon_84.svg" id="5_0we6y"]
@@ -217,7 +218,7 @@ mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gryqn")
 script = ExtResource("3_vjye7")
 
-[node name="Content_Weapons" type="Control" parent="Content"]
+[node name="Content_Weapons" type="Control" parent="Content" node_paths=PackedStringArray("item_container")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -225,6 +226,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+script = ExtResource("4_mtge3")
+item_container = NodePath("ItemContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Content/Content_Weapons"]
 layout_mode = 0
@@ -709,19 +712,24 @@ text = "Made from the heart of Reia. This was one of the remnants found after sh
 vertical_alignment = 2
 autowrap_mode = 2
 
-[node name="Topbar" type="Control" parent="."]
+[node name="UI" type="Control" parent="."]
+anchors_preset = 0
+mouse_filter = 2
+
+[node name="Topbar" type="Control" parent="UI"]
 custom_minimum_size = Vector2(1620, 121)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -1620.0
+offset_left = 300.0
+offset_right = 1920.0
 offset_bottom = 121.0
 grow_horizontal = 0
 mouse_filter = 2
 script = ExtResource("11_j6yph")
 
-[node name="MarginContainer" type="MarginContainer" parent="Topbar"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Topbar"]
 layout_mode = 2
 offset_right = 1620.0
 offset_bottom = 121.0
@@ -729,28 +737,28 @@ mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 32
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Topbar/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 2
 
-[node name="FilterSection" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer"]
+[node name="FilterSection" type="CenterContainer" parent="UI/Topbar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 16
 
-[node name="SaveFilter" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
+[node name="SaveFilter" type="Panel" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
 custom_minimum_size = Vector2(268, 50)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"Chip"
 
-[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -763,23 +771,23 @@ theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 19
 theme_override_constants/margin_bottom = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="IconContainer" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
+[node name="IconContainer" type="CenterContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="IconBackground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer/IconContainer"]
+[node name="IconBackground" type="Panel" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
 
-[node name="FilterIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer/IconContainer"]
+[node name="FilterIcon" type="TextureRect" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_filter = 2
@@ -787,7 +795,7 @@ texture = ExtResource("2_k344c")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
@@ -795,12 +803,12 @@ theme_override_fonts/font = SubResource("FontVariation_u7qxi")
 theme_override_font_sizes/font_size = 20
 text = "Save Filter"
 
-[node name="Spacer" type="Control" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="DropdownIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
+[node name="DropdownIcon" type="TextureRect" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
 self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -809,13 +817,13 @@ texture = ExtResource("4_kneal")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Filter" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
+[node name="Filter" type="Panel" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
 custom_minimum_size = Vector2(340, 50)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"Chip"
 
-[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -828,23 +836,23 @@ theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 19
 theme_override_constants/margin_bottom = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="IconContainer" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
+[node name="IconContainer" type="CenterContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="IconBackground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer/IconContainer"]
+[node name="IconBackground" type="Panel" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
 
-[node name="FilterIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer/IconContainer"]
+[node name="FilterIcon" type="TextureRect" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_filter = 2
@@ -852,7 +860,7 @@ texture = ExtResource("2_k344c")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
@@ -860,12 +868,12 @@ theme_override_fonts/font = SubResource("FontVariation_u7qxi")
 theme_override_font_sizes/font_size = 20
 text = "Filter: Rarity, Level, C..."
 
-[node name="Spacer" type="Control" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="DropdownIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
+[node name="DropdownIcon" type="TextureRect" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
 self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -874,13 +882,13 @@ texture = ExtResource("4_kneal")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Sort" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
+[node name="Sort" type="Panel" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
 custom_minimum_size = Vector2(340, 50)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"Chip"
 
-[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -893,23 +901,23 @@ theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 19
 theme_override_constants/margin_bottom = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="IconContainer" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
+[node name="IconContainer" type="CenterContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="IconBackground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer/IconContainer"]
+[node name="IconBackground" type="Panel" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
 
-[node name="FilterIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer/IconContainer"]
+[node name="FilterIcon" type="TextureRect" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_filter = 2
@@ -917,7 +925,7 @@ texture = ExtResource("2_k344c")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
@@ -925,12 +933,12 @@ theme_override_fonts/font = SubResource("FontVariation_u7qxi")
 theme_override_font_sizes/font_size = 20
 text = "Sort: Power, Melee Atk..."
 
-[node name="Spacer" type="Control" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="DropdownIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
+[node name="DropdownIcon" type="TextureRect" parent="UI/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
 self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -939,39 +947,39 @@ texture = ExtResource("4_kneal")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Spacer" type="Control" parent="Topbar/MarginContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="UI/Topbar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="CurrencySection" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer"]
+[node name="CurrencySection" type="CenterContainer" parent="UI/Topbar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(300, 121)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/CurrencySection"]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 25
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 16
 
-[node name="CurrencyGroup" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer"]
+[node name="CurrencyGroup" type="MarginContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Background" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup"]
+[node name="Background" type="Panel" parent="UI/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup"]
 self_modulate = Color(0.101961, 0.101961, 0.101961, 0.2)
 custom_minimum_size = Vector2(148, 50)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"Chip"
 
-[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 9
@@ -979,36 +987,36 @@ theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 9
 theme_override_constants/margin_bottom = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="TextureRect" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="UI/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2_gjblk")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="UI/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_fonts/font = SubResource("FontVariation_cpuan")
 theme_override_font_sizes/font_size = 20
 text = "13.3m"
 
-[node name="PremiumCurrencyGroup" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer"]
+[node name="PremiumCurrencyGroup" type="MarginContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Background" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup"]
+[node name="Background" type="Panel" parent="UI/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup"]
 self_modulate = Color(0.101961, 0.101961, 0.101961, 0.2)
 custom_minimum_size = Vector2(148, 50)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"Chip"
 
-[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 9
@@ -1016,43 +1024,43 @@ theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 9
 theme_override_constants/margin_bottom = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="TextureRect" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="UI/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2_gjblk")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="UI/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_fonts/font = SubResource("FontVariation_cpuan")
 theme_override_font_sizes/font_size = 20
 text = "10,000"
 
-[node name="ExitButton" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer"]
+[node name="ExitButton" type="CenterContainer" parent="UI/Topbar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ExitBackground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/ExitButton"]
+[node name="ExitBackground" type="Panel" parent="UI/Topbar/MarginContainer/HBoxContainer/ExitButton"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_npvx6")
 
-[node name="ExitForeground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/ExitButton"]
+[node name="ExitForeground" type="Panel" parent="UI/Topbar/MarginContainer/HBoxContainer/ExitButton"]
 custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_phdh3")
 
-[node name="ExitIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/ExitButton"]
+[node name="ExitIcon" type="TextureRect" parent="UI/Topbar/MarginContainer/HBoxContainer/ExitButton"]
 self_modulate = Color(0.372549, 0.564706, 0.592157, 1)
 custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
@@ -1061,7 +1069,7 @@ texture = ExtResource("4_x4vpx")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Sidebar" type="Control" parent="."]
+[node name="Sidebar" type="Control" parent="UI"]
 custom_minimum_size = Vector2(300, 1080)
 layout_mode = 1
 anchors_preset = 0
@@ -1070,7 +1078,7 @@ offset_bottom = 1080.0
 mouse_filter = 2
 script = ExtResource("16_v465c")
 
-[node name="Background" type="TextureRect" parent="Sidebar"]
+[node name="Background" type="TextureRect" parent="UI/Sidebar"]
 custom_minimum_size = Vector2(300, 1080)
 layout_mode = 1
 anchors_preset = 15
@@ -1081,13 +1089,13 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_5yrvl")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Sidebar"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Sidebar"]
 layout_mode = 0
 offset_right = 300.0
 offset_bottom = 1080.0
 mouse_filter = 2
 
-[node name="Header" type="MarginContainer" parent="Sidebar/VBoxContainer"]
+[node name="Header" type="MarginContainer" parent="UI/Sidebar/VBoxContainer"]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 mouse_filter = 2
@@ -1096,12 +1104,12 @@ theme_override_constants/margin_top = 11
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 11
 
-[node name="HBox" type="HBoxContainer" parent="Sidebar/VBoxContainer/Header"]
+[node name="HBox" type="HBoxContainer" parent="UI/Sidebar/VBoxContainer/Header"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 16
 
-[node name="Icon" type="TextureRect" parent="Sidebar/VBoxContainer/Header/HBox"]
+[node name="Icon" type="TextureRect" parent="UI/Sidebar/VBoxContainer/Header/HBox"]
 custom_minimum_size = Vector2(68, 68)
 layout_mode = 2
 mouse_filter = 2
@@ -1109,7 +1117,7 @@ texture = ExtResource("2_i2528")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Sidebar/VBoxContainer/Header/HBox"]
+[node name="Label" type="Label" parent="UI/Sidebar/VBoxContainer/Header/HBox"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_fonts/font = SubResource("FontVariation_nby4a")
@@ -1117,48 +1125,48 @@ theme_override_font_sizes/font_size = 32
 text = "Inventory"
 vertical_alignment = 1
 
-[node name="Tabs" type="VBoxContainer" parent="Sidebar/VBoxContainer"]
+[node name="Tabs" type="VBoxContainer" parent="UI/Sidebar/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 8
 
-[node name="Tab_Weapons" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+[node name="Tab_Weapons" parent="UI/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Weapons"
 selected = true
 
-[node name="Tab_Equipment" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+[node name="Tab_Equipment" parent="UI/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Equipment"
 
-[node name="Tab_Soulstones" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+[node name="Tab_Soulstones" parent="UI/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Soulstones"
 
-[node name="Tab_Consumables" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+[node name="Tab_Consumables" parent="UI/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Consumables"
 
-[node name="Tab_Materials" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+[node name="Tab_Materials" parent="UI/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Materials"
 
-[node name="Tab_QuestItems" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+[node name="Tab_QuestItems" parent="UI/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Quest Items"
 
-[node name="SidebarFooter" type="VBoxContainer" parent="Sidebar/VBoxContainer"]
+[node name="SidebarFooter" type="VBoxContainer" parent="UI/Sidebar/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="Sidebar/VBoxContainer/SidebarFooter"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Sidebar/VBoxContainer/SidebarFooter"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="FilterCounter" type="Panel" parent="Sidebar/VBoxContainer/SidebarFooter/CenterContainer"]
+[node name="FilterCounter" type="Panel" parent="UI/Sidebar/VBoxContainer/SidebarFooter/CenterContainer"]
 self_modulate = Color(0.976471, 0.952941, 0.898039, 1)
 custom_minimum_size = Vector2(148, 50)
 layout_mode = 2
@@ -1166,7 +1174,7 @@ mouse_filter = 2
 theme = ExtResource("5_ff7kn")
 theme_type_variation = &"Chip"
 
-[node name="CenterContainer" type="CenterContainer" parent="Sidebar/VBoxContainer/SidebarFooter/CenterContainer/FilterCounter"]
+[node name="CenterContainer" type="CenterContainer" parent="UI/Sidebar/VBoxContainer/SidebarFooter/CenterContainer/FilterCounter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1175,28 +1183,30 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="Sidebar/VBoxContainer/SidebarFooter/CenterContainer/FilterCounter/CenterContainer"]
+[node name="Label" type="Label" parent="UI/Sidebar/VBoxContainer/SidebarFooter/CenterContainer/FilterCounter/CenterContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_colors/font_color = Color(0.203922, 0.2, 0.247059, 1)
 theme_override_font_sizes/font_size = 20
 text = "17 Items"
 
-[node name="Bottombar" type="Control" parent="."]
+[node name="Bottombar" type="Control" parent="UI"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1620.0
-offset_top = -150.0
+offset_left = 300.0
+offset_top = 930.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 script = ExtResource("20_j36ox")
 
-[node name="MarginContainer" type="MarginContainer" parent="Bottombar"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Bottombar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1209,27 +1219,27 @@ theme_override_constants/margin_top = 45
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 45
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Bottombar/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Bottombar/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 2
 
-[node name="ActionButtons" type="CenterContainer" parent="Bottombar/MarginContainer/HBoxContainer"]
+[node name="ActionButtons" type="CenterContainer" parent="UI/Bottombar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 16
 
-[node name="DeleteButton" type="Panel" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer"]
+[node name="DeleteButton" type="Panel" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer"]
 custom_minimum_size = Vector2(180, 60)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"Chip"
 
-[node name="MarginContainer" type="MarginContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1242,23 +1252,23 @@ theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 19
 theme_override_constants/margin_bottom = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="IconContainer" type="CenterContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
+[node name="IconContainer" type="CenterContainer" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="IconBackground" type="Panel" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer/IconContainer"]
+[node name="IconBackground" type="Panel" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_umn41")
 
-[node name="Label" type="Label" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_colors/font_color = Color(0.976471, 0.384314, 0.184314, 1)
@@ -1266,12 +1276,12 @@ theme_override_fonts/font = SubResource("FontVariation_u7qxi")
 theme_override_font_sizes/font_size = 20
 text = "Delete"
 
-[node name="Spacer" type="Control" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Button" type="Button" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton"]
+[node name="Button" type="Button" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1280,13 +1290,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SelectButton" type="Panel" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer"]
+[node name="SelectButton" type="Panel" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer"]
 custom_minimum_size = Vector2(180, 60)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"Chip"
 
-[node name="Button" type="Button" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton"]
+[node name="Button" type="Button" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1295,7 +1305,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton"]
+[node name="MarginContainer" type="MarginContainer" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1308,23 +1318,23 @@ theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 19
 theme_override_constants/margin_bottom = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="IconContainer" type="CenterContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
+[node name="IconContainer" type="CenterContainer" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="IconBackground" type="Panel" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer/IconContainer"]
+[node name="IconBackground" type="Panel" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_j7nm8")
 
-[node name="Label" type="Label" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
@@ -1332,10 +1342,12 @@ theme_override_fonts/font = SubResource("FontVariation_u7qxi")
 theme_override_font_sizes/font_size = 20
 text = "Select"
 
-[node name="Spacer" type="Control" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="UI/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
+
+[connection signal="tab_changed" from="." to="." method="_on_tab_changed"]
 
 [editable path="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_All"]
 [editable path="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Melee"]
