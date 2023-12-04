@@ -38,7 +38,7 @@ func _select():
 	if UI_Inventory.instance == null:
 		return
 	
-	var current_tab = PlayerInventory.Tab[category_name.replace(" ", "_").to_upper()]
+	var current_tab = UI_Inventory.Tab[category_name.replace(" ", "_").to_upper()]
 	
 	UI_Inventory.instance.tab_changed.emit(current_tab)
 

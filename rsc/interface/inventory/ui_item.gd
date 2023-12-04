@@ -5,7 +5,6 @@
 		item_name = value
 		if is_node_ready():
 			update_name()
-		print("New name is %s" % value)
 	get:
 		return item_name
 
@@ -14,7 +13,6 @@
 		grade = value
 		if is_node_ready():
 			update_grade()
-		print("New grade is %s" % value)
 	get:
 		return grade
 
