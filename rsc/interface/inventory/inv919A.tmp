@@ -158,7 +158,7 @@ corner_radius_bottom_right = 23
 corner_radius_bottom_left = 23
 corner_detail = 12
 
-[node name="Inventory" type="Control" node_paths=PackedStringArray("topbar", "sidebar", "bottombar", "content")]
+[node name="Inventory" type="Control"]
 clip_contents = true
 layout_mode = 3
 anchors_preset = 15
@@ -168,10 +168,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_b67wi")
-topbar = NodePath("Topbar")
-sidebar = NodePath("Sidebar")
-bottombar = NodePath("Bottombar")
-content = NodePath("Content")
+topbar = null
+sidebar = null
+bottombar = null
+content = null
 
 [node name="Blur" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_ddyyk")

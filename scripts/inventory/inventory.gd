@@ -1,5 +1,7 @@
 class_name Inventory extends Resource
 
+@export var compressed_essence: int
+@export var glowing_essence: int
 @export var categories: Dictionary # [CategoryData]
 
 func add_category(name: String, items: Dictionary = {}): # Dictionary[ItemData]
@@ -10,7 +12,7 @@ func add_category(name: String, items: Dictionary = {}): # Dictionary[ItemData]
 	categories[name] = new_category
 	return self
 
-func add_item(category_name: String, item: Item):
+func add_item(category_name: String, item: Item) -> Inventory:
 	var category := get_category(category_name)
 
 	if category == null:
