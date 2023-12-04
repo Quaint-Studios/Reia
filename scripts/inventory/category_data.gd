@@ -4,8 +4,8 @@ class_name CategoryData extends Resource
 @export var name: String = ""
 @export var items: Dictionary # [Item]
 
-func add_item(item: Item):
-	items[item.name] = item
+func add_item(item: Item) -> CategoryData:
+	items[item.name] = item # TODO: Append experience to existing item
 	return self
 
 func get_item(item_name: String) -> Item:
