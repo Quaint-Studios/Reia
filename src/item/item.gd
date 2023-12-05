@@ -7,5 +7,6 @@ class_name Item extends Resource
 var item_type: ItemType
 @export var item_grade: ItemGrade
 
+
 enum ItemType { WEAPON, EQUIPMENT, MATERIAL, SOULSTONE }
 enum ItemGrade { COMMON, UNCOMMON, RARE, SACRED, ARCANE, RADIANT }
