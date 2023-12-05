@@ -7,6 +7,7 @@ static var instance: UI_Inventory
 @export var last_category: Tab
 enum Tab { WEAPONS, SOULSTONES, CONSUMABLES, QUEST_ITEMS, EQUIPMENT, MATERIALS }
 
+@export var exit_button: Button
 @export var topbar: UI_Topbar # Filter Saves, Filter, and Sort | Currency and Premium Currency | Exit\
 @export var sidebar: UI_Sidebar # Categories (selected and unselected)
 @export var bottombar: UI_Bottombar # Search | Delete and Select
@@ -37,6 +38,7 @@ func _ready():
 
 func _input(event: InputEvent):
 	# TODO: You'll eventually run into an issue where you need to hide all UI.
+	
 	if GameManager.current_ui == GameManager.UI_TYPES.PLAY:
 		if event.is_action_pressed("inventory"):
 			show_inventory_ui()
@@ -114,3 +116,6 @@ func _on_tab_changed(tab: Tab):
 	content.change_tab(tab)
 	last_category = tab
 	pass
+
+func _on_exit():
+	UIManager.emit_open_ui(UIManager.UI_TYPES.GAME)
