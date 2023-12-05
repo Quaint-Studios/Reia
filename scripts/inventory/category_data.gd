@@ -5,6 +5,12 @@ class_name CategoryData extends Resource
 @export var items: Dictionary # [Item]
 
 func add_item(item: Item) -> CategoryData:
+	if item is Weapon and items.has(item.name):
+		const a: int = 100
+		var b: int = item.item_grade
+		var level = pow(log(pow(a, b)), b) * (b * a)
+
+		print("Item is a duplicate, adding ")
 	items[item.name] = item # TODO: Append experience to existing item
 	return self
 
