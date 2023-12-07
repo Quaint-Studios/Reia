@@ -1,5 +1,18 @@
 @tool class_name UI_Item extends MarginContainer
 
+@export var selected: bool:
+	set(value):
+		selected = value
+		if is_node_ready():
+			%OutlinePanel.visible = value
+			focused = focused
+
+@export var focused: bool:
+	set(value):
+		focused = value
+		if is_node_ready():
+			%FocusPanel.visible = value and !selected
+
 @export var item_name = "Wooden Sword":
 	set(value):
 		item_name = value
@@ -15,6 +28,7 @@
 			update_grade()
 	get:
 		return grade
+
 
 func update_all():
 	update_name()
@@ -55,3 +69,24 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
+
+
+
+func _on_button_pressed():
+	selected = true
+
+func _on_button_focus_entered():
+	focused = true
+
+func _on_button_focus_exited():
+	focused = false
+
+func _on_button_toggled(toggled_on):
+	print("%s is now %s" % [name, toggled_on])
+	selected = toggled_on
+
+func _on_button_mouse_entered():
+	focused = true
+
+func _on_button_mouse_exited():
+	focused = false
