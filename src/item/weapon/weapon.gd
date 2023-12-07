@@ -14,7 +14,6 @@ func _init(_experience := 0.0, _level := 1):
 
 func level_up():
 	xp_to_level(level, experience)
-	pass
 
 func xp_to_level(current_level: int, current_xp: float):
 	const multiplier = 100
