@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://wgv40a1vxert"]
+[gd_scene load_steps=25 format=3 uid="uid://wgv40a1vxert"]
 
 [ext_resource type="Texture2D" uid="uid://coo3226ej4yv6" path="res://rsc/icons/inventory/item_card_shadow_common.svg" id="1_3ljpk"]
+[ext_resource type="Shader" path="res://rsc/shaders/canvas_glow.gdshader" id="1_5cceg"]
 [ext_resource type="Script" path="res://rsc/interface/inventory/ui_item.gd" id="1_7chtt"]
 [ext_resource type="Texture2D" uid="uid://cnpnpjqcyreh1" path="res://rsc/icons/inventory/item_card_base.svg" id="2_hf3p2"]
 [ext_resource type="Texture2D" uid="uid://bruw722fp4u3x" path="res://rsc/icons/inventory/item_card_shadow_uncommon.svg" id="3_8d3mr"]
@@ -9,6 +10,37 @@
 [ext_resource type="Texture2D" uid="uid://dy3yvallrkydi" path="res://rsc/icons/inventory/item_card_shadow_sacred.svg" id="5_46xaq"]
 [ext_resource type="Shader" path="res://rsc/shaders/panel_gradient.gdshader" id="6_k4pwx"]
 [ext_resource type="Shader" path="res://rsc/shaders/panel_gradient_overlay_sincos.gdshader" id="7_js4w8"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xcqk4"]
+shader = ExtResource("1_5cceg")
+shader_parameter/color1 = Color(0.333333, 0.866667, 0.388235, 1)
+shader_parameter/color2 = Color(0.203922, 0.2, 0.247059, 1)
+shader_parameter/threshold = 0.5
+shader_parameter/intensity = 10.0
+shader_parameter/opacity = 1.0
+shader_parameter/glow_color = Color(0.0666667, 0.654902, 0.721569, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bpya8"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0.960784, 0.960784, 0.960784, 0.0588235)
+shadow_size = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qq0mw"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.203922, 0.2, 0.247059, 0.203922)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6nx02"]
 bg_color = Color(1, 1, 1, 1)
@@ -53,17 +85,68 @@ shader_parameter/gradient_b = SubResource("GradientTexture2D_8rnum")
 [sub_resource type="FontVariation" id="FontVariation_6c0e0"]
 base_font = ExtResource("3_evxfs")
 
-[node name="Item" type="MarginContainer"]
-clip_contents = true
-script = ExtResource("1_7chtt")
+[sub_resource type="ButtonGroup" id="ButtonGroup_h63rk"]
+resource_local_to_scene = false
 
-[node name="Control" type="Control" parent="."]
+[node name="Item" type="MarginContainer"]
+material = SubResource("ShaderMaterial_xcqk4")
+script = ExtResource("1_7chtt")
+focused = null
+
+[node name="Panels" type="Control" parent="."]
+custom_minimum_size = Vector2(140, 180)
+layout_mode = 2
+
+[node name="OutlinePanel" type="Panel" parent="Panels"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.960784, 0.960784, 0.960784, 1)
+custom_minimum_size = Vector2(140, 180)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -90.0
+offset_right = 70.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.03, 1.03)
+pivot_offset = Vector2(70, 90)
+theme_override_styles/panel = SubResource("StyleBoxFlat_bpya8")
+
+[node name="FocusPanel" type="Panel" parent="Panels"]
+unique_name_in_owner = true
+visible = false
+self_modulate = Color(0.960784, 0.960784, 0.960784, 1)
+custom_minimum_size = Vector2(140, 180)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -70.0
+offset_top = -90.0
+offset_right = 70.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.03, 1.03)
+pivot_offset = Vector2(70, 90)
+theme_override_styles/panel = SubResource("StyleBoxFlat_qq0mw")
+
+[node name="Info" type="Control" parent="."]
 clip_contents = true
 custom_minimum_size = Vector2(140, 180)
 layout_mode = 2
 
-[node name="GradeBGs" type="Control" parent="Control"]
+[node name="GradeBGs" type="Control" parent="Info"]
 unique_name_in_owner = true
+clip_contents = true
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -71,22 +154,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Common" type="Panel" parent="Control/GradeBGs"]
+[node name="Common" type="Panel" parent="Info/GradeBGs"]
 unique_name_in_owner = true
 self_modulate = Color(0.333333, 0.866667, 0.388235, 1)
 custom_minimum_size = Vector2(140, 180)
 layout_mode = 2
 offset_right = 140.0
 offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_6nx02")
 
-[node name="Shadow" type="TextureRect" parent="Control/GradeBGs/Common"]
+[node name="Shadow" type="TextureRect" parent="Info/GradeBGs/Common"]
 layout_mode = 2
 offset_right = 140.0
 offset_bottom = 180.0
 texture = ExtResource("1_3ljpk")
 
-[node name="Uncommon" type="Panel" parent="Control/GradeBGs"]
+[node name="Uncommon" type="Panel" parent="Info/GradeBGs"]
 unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.333333, 0.494118, 0.866667, 1)
@@ -96,13 +181,13 @@ offset_right = 140.0
 offset_bottom = 180.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6nx02")
 
-[node name="Shadow" type="TextureRect" parent="Control/GradeBGs/Uncommon"]
+[node name="Shadow" type="TextureRect" parent="Info/GradeBGs/Uncommon"]
 layout_mode = 2
 offset_right = 140.0
 offset_bottom = 180.0
 texture = ExtResource("3_8d3mr")
 
-[node name="Rare" type="Panel" parent="Control/GradeBGs"]
+[node name="Rare" type="Panel" parent="Info/GradeBGs"]
 unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.968627, 0.929412, 0.729412, 1)
@@ -112,13 +197,13 @@ offset_right = 140.0
 offset_bottom = 180.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6nx02")
 
-[node name="Shadow" type="TextureRect" parent="Control/GradeBGs/Rare"]
+[node name="Shadow" type="TextureRect" parent="Info/GradeBGs/Rare"]
 layout_mode = 2
 offset_right = 140.0
 offset_bottom = 180.0
 texture = ExtResource("4_kjcqi")
 
-[node name="Sacred" type="Panel" parent="Control/GradeBGs"]
+[node name="Sacred" type="Panel" parent="Info/GradeBGs"]
 unique_name_in_owner = true
 visible = false
 self_modulate = Color(0.729412, 0.329412, 0.972549, 1)
@@ -128,13 +213,13 @@ offset_right = 140.0
 offset_bottom = 180.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6nx02")
 
-[node name="Shadow" type="TextureRect" parent="Control/GradeBGs/Sacred"]
+[node name="Shadow" type="TextureRect" parent="Info/GradeBGs/Sacred"]
 layout_mode = 2
 offset_right = 140.0
 offset_bottom = 180.0
 texture = ExtResource("5_46xaq")
 
-[node name="Arcane" type="Panel" parent="Control/GradeBGs"]
+[node name="Arcane" type="Panel" parent="Info/GradeBGs"]
 unique_name_in_owner = true
 visible = false
 material = SubResource("ShaderMaterial_w5d6a")
@@ -144,7 +229,7 @@ offset_right = 140.0
 offset_bottom = 180.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6nx02")
 
-[node name="Radiant" type="Panel" parent="Control/GradeBGs"]
+[node name="Radiant" type="Panel" parent="Info/GradeBGs"]
 unique_name_in_owner = true
 visible = false
 material = SubResource("ShaderMaterial_e10i6")
@@ -154,7 +239,7 @@ offset_right = 140.0
 offset_bottom = 180.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_6nx02")
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
+[node name="TextureRect" type="TextureRect" parent="Info"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -169,7 +254,7 @@ grow_vertical = 0
 texture = ExtResource("2_hf3p2")
 stretch_mode = 4
 
-[node name="Label" type="Label" parent="Control/TextureRect"]
+[node name="Label" type="Label" parent="Info/TextureRect"]
 unique_name_in_owner = true
 layout_mode = 2
 offset_left = 6.0
@@ -185,7 +270,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="Control"]
+[node name="CenterContainer" type="CenterContainer" parent="Info"]
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -197,3 +282,16 @@ offset_top = -64.0
 offset_right = 65.0
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="Button" type="Button" parent="."]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+toggle_mode = true
+button_group = SubResource("ButtonGroup_h63rk")
+
+[connection signal="focus_entered" from="Button" to="." method="_on_button_focus_entered"]
+[connection signal="focus_exited" from="Button" to="." method="_on_button_focus_exited"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="toggled" from="Button" to="." method="_on_button_toggled"]
