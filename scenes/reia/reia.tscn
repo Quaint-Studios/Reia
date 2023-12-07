@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://njgkawiv7sdy"]
+[gd_scene load_steps=47 format=3 uid="uid://njgkawiv7sdy"]
 
 [ext_resource type="LightmapGIData" uid="uid://bog8vgj034dhh" path="res://scenes/reia/reia.lmbake" id="1_6htgl"]
 [ext_resource type="PackedScene" uid="uid://bmicgu6inl8e5" path="res://assets/characters/npcs/larry.tscn" id="2_w4lqh"]
@@ -30,7 +30,6 @@
 [ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/offset_scale.gd" id="29_n5ttu"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="29_xa4mj"]
 [ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="31_5e1if"]
-[ext_resource type="PackedScene" uid="uid://bgui6d70qmbu1" path="res://rsc/interface/inventory/inventory.tscn" id="32_4fh7a"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="32_j5p2l"]
 
 [sub_resource type="Resource" id="Resource_ifdwj"]
@@ -151,7 +150,7 @@ spell_defense = 10
 crit_chance = 0.0
 crit_damage = 0.0
 
-[sub_resource type="Resource" id="Resource_702ov"]
+[sub_resource type="Resource" id="Resource_dnvj7"]
 script = ExtResource("27_c0ur8")
 radius = 0.18
 samples_before_rejection = 10
@@ -161,7 +160,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_0c4rk"]
+[sub_resource type="Resource" id="Resource_ojo56"]
 script = ExtResource("28_vk0p2")
 operation = 0
 position = Vector3(0, -0.425, 0)
@@ -171,7 +170,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_gl2n7"]
+[sub_resource type="Resource" id="Resource_2oa76"]
 script = ExtResource("29_n5ttu")
 operation = 1
 scale = Vector3(1, 1, 1)
@@ -181,9 +180,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_mr13k"]
+[sub_resource type="Resource" id="Resource_nr8jg"]
 script = ExtResource("26_gpakv")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_702ov"), SubResource("Resource_0c4rk"), SubResource("Resource_gl2n7")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_dnvj7"), SubResource("Resource_ojo56"), SubResource("Resource_2oa76")])
 
 [sub_resource type="Resource" id="Resource_ncy2b"]
 script = ExtResource("32_j5p2l")
@@ -257,7 +256,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.59507, -0.757559, 11.8945)
 [node name="ProtonScatter" type="Node3D" parent="Terrain/Groundings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2259, -0.330719, 13.0612)
 script = ExtResource("25_dy2rl")
-modifier_stack = SubResource("Resource_mr13k")
+modifier_stack = SubResource("Resource_nr8jg")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(1, 1, 1)
 
@@ -316,10 +315,3 @@ shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
 environment = ExtResource("31_5e1if")
-
-[node name="Inventory" parent="." node_paths=PackedStringArray("topbar", "sidebar", "bottombar", "content") instance=ExtResource("32_4fh7a")]
-visible = false
-topbar = NodePath("")
-sidebar = NodePath("")
-bottombar = NodePath("")
-content = NodePath("")
