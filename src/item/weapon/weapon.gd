@@ -5,18 +5,26 @@ class_name Weapon extends Item
 # It also increase slightly everytime the weapon is used.
 # And it increases moderately everytime the weapon attacks.
 var level := 1 # Caps out at 19, the 19th level is for upgrading the tier
-var experience := 0.0
+var experience := 0.0 # TODO: Swap to int
 
 func _init(_experience := 0.0, _level := 1):
 	item_type = ItemType.WEAPON
 	level = _level
 	experience = _experience
 
+static func calc_xp(grade: ItemGrade, level: int, xp: int):
+	const multiplier := 100
+	var new_xp = 0
+	
+	for i in ItemGrade.keys().size():
+		new_xp = pow(log(pow(multiplier, i)), i) * (i * multiplier)
+		# TODO: needs better calculations
+
 func level_up():
 	xp_to_level(level, experience)
 
 func xp_to_level(current_level: int, current_xp: float):
-	const multiplier = 100
+	const multiplier := 100
 	# log(100^x)^x*(x*100)
 	# TODO: simplify function
 	var required_xp = pow(
