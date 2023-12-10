@@ -10,6 +10,5 @@
 ### 	 mixed together.
 ### 	Quest Items can be inspected to give clues to the quest.
 
-
 func load_item(item: Item):
 	pass
