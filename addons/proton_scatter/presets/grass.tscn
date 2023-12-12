@@ -38,6 +38,7 @@ remove_points_on_miss = false
 align_with_collision_normal = false
 max_slope = 90.0
 collision_mask = 1
+exclude_mask = 0
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -46,7 +47,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_mv17r"]
 script = ExtResource("2_84xri")
-stack = Array[Resource]([SubResource("Resource_mu1a8"), SubResource("Resource_8361b"), SubResource("Resource_14cyx")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_mu1a8"), SubResource("Resource_8361b"), SubResource("Resource_14cyx")])
 
 [sub_resource type="Resource" id="Resource_gaw40"]
 script = ExtResource("9_w0igc")

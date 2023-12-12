@@ -8,7 +8,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource( "1_f6puy" )
+script = ExtResource("1_f6puy")
 
 [node name="Button" type="Button" parent="."]
 offset_right = 40.0
@@ -16,4 +16,4 @@ offset_bottom = 40.0
 focus_mode = 0
 toggle_mode = true
 icon_alignment = 1
-script = ExtResource( "2_167vc" )
+script = ExtResource("2_167vc")

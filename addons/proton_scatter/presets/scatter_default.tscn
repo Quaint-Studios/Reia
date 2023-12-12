@@ -35,6 +35,7 @@ script = ExtResource("5_n2in0")
 iterations = 3
 offset_step = 0.2
 consecutive_step_multiplier = 0.75
+use_computeshader = true
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -50,6 +51,7 @@ remove_points_on_miss = false
 align_with_collision_normal = false
 max_slope = 90.0
 collision_mask = 1
+exclude_mask = 0
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -58,7 +60,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_xqhqc"]
 script = ExtResource("2_lt5xy")
-stack = Array[Resource]([SubResource("Resource_jbxru"), SubResource("Resource_0oyil"), SubResource("Resource_ogw66"), SubResource("Resource_awufl")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_jbxru"), SubResource("Resource_0oyil"), SubResource("Resource_ogw66"), SubResource("Resource_awufl")])
 
 [sub_resource type="Resource" id="Resource_g8bsm"]
 script = ExtResource("8_gnbkw")

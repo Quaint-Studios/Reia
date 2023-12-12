@@ -1,6 +1,6 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene load_steps=3 format=3 uid="uid://1s4e3j617f7v"]
 
-[ext_resource type="Texture" uid="uid://dahwdjl2er75o" path="res://addons/proton_scatter/icons/close.svg" id="1"]
+[ext_resource type="Texture2D" uid="uid://dahwdjl2er75o" path="res://addons/proton_scatter/icons/close.svg" id="1"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/presets/preset.gd" id="2"]
 
 [node name="Preset" type="Button"]
@@ -9,9 +9,9 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 margin_top = -10.0
 margin_bottom = 29.0
-rect_min_size = Vector2( 0, 40 )
+rect_min_size = Vector2(0, 40)
 focus_mode = 0
-script = ExtResource( 2 )
+script = ExtResource("2")
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -48,7 +48,7 @@ __meta__ = {
 margin_left = 1240.0
 margin_right = 1268.0
 margin_bottom = 28.0
-icon = ExtResource( 1 )
+icon = ExtResource("1")
 
 [connection signal="pressed" from="." to="." method="_on_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/Delete" to="." method="_on_delete"]

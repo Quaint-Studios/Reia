@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://ct2xabhdsvlbj"]
 
 [ext_resource type="Script" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/presets/save_preset.gd" id="1"]
 
@@ -16,7 +16,7 @@ size_flags_horizontal = 5
 size_flags_vertical = 5
 window_title = "Save Preset"
 resizable = true
-script = ExtResource( 1 )
+script = ExtResource("1")
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -44,7 +44,7 @@ __meta__ = {
 }
 
 [node name="Warning" type="Label" parent="MarginContainer/VBoxContainer"]
-modulate = Color( 1, 0.513726, 0.278431, 1 )
+modulate = Color(1, 0.513726, 0.278431, 1)
 margin_right = 312.0
 margin_bottom = 48.0
 text = "Preset name must be a valid file name.
