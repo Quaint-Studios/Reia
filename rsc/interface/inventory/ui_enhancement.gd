@@ -10,7 +10,11 @@
 ### 	 mixed together.
 ### 	Quest Items can be inspected to give clues to the quest.
 
+# Loads basic information for all items.
+func load_all_items(category: CategoryData):
+	for item in category.items:
+		pass
 
-
+# Loads detailed information about a specific item.
 func load_item(item: Item):
 	pass
