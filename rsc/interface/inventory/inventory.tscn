@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://bgui6d70qmbu1"]
+[gd_scene load_steps=55 format=3 uid="uid://bgui6d70qmbu1"]
 
 [ext_resource type="Shader" path="res://shaders/screen_space/blur.gdshader" id="1_5pek2"]
 [ext_resource type="Script" path="res://rsc/interface/inventory/ui_inventory.gd" id="1_b67wi"]
@@ -17,6 +17,7 @@
 [ext_resource type="Texture2D" uid="uid://bmi7ixsxitcpw" path="res://rsc/icons/inventory/exit_icon_84.svg" id="4_x4vpx"]
 [ext_resource type="Texture2D" uid="uid://dnqp10u8o4xik" path="res://rsc/icons/star_icon_84.svg" id="5_0we6y"]
 [ext_resource type="Theme" uid="uid://kwq64glpweie" path="res://rsc/themes/main_theme.tres" id="5_ff7kn"]
+[ext_resource type="PackedScene" uid="uid://ci8se4nk3fut2" path="res://rsc/interface/inventory/horizontal_divider.tscn" id="6_6pd7h"]
 [ext_resource type="FontFile" uid="uid://dpo6v8cknqaqu" path="res://rsc/fonts/Roboto/Roboto-Bold.ttf" id="6_yhrwj"]
 [ext_resource type="FontFile" uid="uid://byn6716m0s6qx" path="res://rsc/fonts/Roboto/Roboto-Italic.ttf" id="7_53n1y"]
 [ext_resource type="Script" path="res://rsc/interface/inventory/ui_topbar.gd" id="11_j6yph"]
@@ -47,14 +48,6 @@ corner_radius_bottom_right = 32
 corner_radius_bottom_left = 32
 corner_detail = 12
 
-[sub_resource type="Gradient" id="Gradient_1ykm1"]
-colors = PackedColorArray(0.976471, 0.952941, 0.898039, 1, 0.976471, 0.952941, 0.898039, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_0ufkp"]
-gradient = SubResource("Gradient_1ykm1")
-fill_from = Vector2(0.5, 0)
-metadata/_snap_enabled = true
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h75of"]
 bg_color = Color(0.203922, 0.2, 0.247059, 0.501961)
 corner_radius_top_left = 5
@@ -84,6 +77,14 @@ corner_radius_bottom_left = 5
 
 [sub_resource type="FontVariation" id="FontVariation_44ke8"]
 base_font = ExtResource("3_l1es0")
+
+[sub_resource type="Gradient" id="Gradient_1ykm1"]
+colors = PackedColorArray(0.976471, 0.952941, 0.898039, 1, 0.976471, 0.952941, 0.898039, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0ufkp"]
+gradient = SubResource("Gradient_1ykm1")
+fill_from = Vector2(0.5, 0)
+metadata/_snap_enabled = true
 
 [sub_resource type="FontVariation" id="FontVariation_pyu88"]
 base_font = ExtResource("3_l1es0")
@@ -160,8 +161,16 @@ corner_radius_bottom_right = 23
 corner_radius_bottom_left = 23
 corner_detail = 12
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0avwm"]
+bg_color = Color(0.6, 0.6, 0.6, 0.541176)
+corner_radius_top_left = 80
+corner_radius_top_right = 80
+corner_radius_bottom_right = 80
+corner_radius_bottom_left = 80
+corner_detail = 12
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_5q0nw"]
-viewport_path = NodePath("Pages/Enhancement/Panel/ItemPreview/SubViewport")
+viewport_path = NodePath("Pages/Enhancement/ItemPreview/SubViewport")
 
 [node name="Inventory" type="Control" node_paths=PackedStringArray("topbar", "sidebar", "bottombar", "content")]
 clip_contents = true
@@ -303,12 +312,8 @@ text = "Spell"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HorizontalDivider" type="TextureRect" parent="Pages/Main/Content/Content_Weapons/VBoxContainer"]
-custom_minimum_size = Vector2(800, 0.5)
+[node name="HorizontalDivider" parent="Pages/Main/Content/Content_Weapons/VBoxContainer" instance=ExtResource("6_6pd7h")]
 layout_mode = 2
-mouse_filter = 2
-texture = SubResource("GradientTexture2D_0ufkp")
-expand_mode = 1
 
 [node name="ItemContainer" type="HFlowContainer" parent="Pages/Main/Content/Content_Weapons"]
 custom_minimum_size = Vector2(1030, 638)
@@ -1393,9 +1398,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("23_aj5fo")
 
-[node name="Panel" type="Panel" parent="Pages/Enhancement"]
-self_modulate = Color(0.364706, 0.529412, 1, 1)
-top_level = true
+[node name="Background" type="Panel" parent="Pages/Enhancement"]
+self_modulate = Color(0.364706, 0.529412, 1, 0.501961)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1403,7 +1407,66 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ItemPreview" type="Control" parent="Pages/Enhancement/Panel"]
+[node name="Tabs" type="Control" parent="Pages/Enhancement"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1100.0
+offset_bottom = -900.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HorizontalDivider" parent="Pages/Enhancement/Tabs" instance=ExtResource("6_6pd7h")]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 172.0
+offset_right = 820.0
+offset_bottom = 172.5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Enhancement/Tabs"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Control" type="Control" parent="Pages/Enhancement/Tabs/HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Enhancement/Tabs/HBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Selected" type="Panel" parent="Pages/Enhancement/Tabs/HBoxContainer/Control/CenterContainer"]
+self_modulate = Color(0.447059, 0.447059, 0.447059, 1)
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0avwm")
+
+[node name="Label" type="Label" parent="Pages/Enhancement/Tabs/HBoxContainer/Control/CenterContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_font_sizes/font_size = 24
+text = "Equipment"
+
+[node name="UI_ItemContainer" type="HFlowContainer" parent="Pages/Enhancement"]
+layout_mode = 0
+offset_top = 180.0
+offset_right = 820.0
+offset_bottom = 1080.0
+script = ExtResource("3_r64ix")
+
+[node name="ItemPreview" type="Control" parent="Pages/Enhancement"]
 layout_mode = 1
 anchor_left = 0.212
 anchor_right = 0.787
@@ -1413,16 +1476,16 @@ offset_right = 0.959839
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewport" type="SubViewport" parent="Pages/Enhancement/Panel/ItemPreview"]
+[node name="SubViewport" type="SubViewport" parent="Pages/Enhancement/ItemPreview"]
 transparent_bg = true
 size = Vector2i(1280, 1280)
 
-[node name="AquaWizard" parent="Pages/Enhancement/Panel/ItemPreview/SubViewport" instance=ExtResource("14_guich")]
+[node name="AquaWizard" parent="Pages/Enhancement/ItemPreview/SubViewport" instance=ExtResource("14_guich")]
 
-[node name="Camera3D" type="Camera3D" parent="Pages/Enhancement/Panel/ItemPreview/SubViewport"]
+[node name="Camera3D" type="Camera3D" parent="Pages/Enhancement/ItemPreview/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70415, 2.45289)
 
-[node name="TextureRect" type="TextureRect" parent="Pages/Enhancement/Panel/ItemPreview"]
+[node name="TextureRect" type="TextureRect" parent="Pages/Enhancement/ItemPreview"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
