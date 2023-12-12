@@ -7,7 +7,7 @@ offset_right = 83.0625
 offset_bottom = 31.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
-script = ExtResource( "1_f0oq6" )
+script = ExtResource("1_f0oq6")
 
 [node name="SpinBox" type="SpinBox" parent="."]
 offset_right = 83.0
