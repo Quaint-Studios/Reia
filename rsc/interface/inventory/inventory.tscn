@@ -20,10 +20,10 @@
 [ext_resource type="FontFile" uid="uid://dpo6v8cknqaqu" path="res://rsc/fonts/Roboto/Roboto-Bold.ttf" id="6_yhrwj"]
 [ext_resource type="FontFile" uid="uid://byn6716m0s6qx" path="res://rsc/fonts/Roboto/Roboto-Italic.ttf" id="7_53n1y"]
 [ext_resource type="Script" path="res://rsc/interface/inventory/ui_topbar.gd" id="11_j6yph"]
-[ext_resource type="Script" path="res://rsc/interface/inventory/ui_content_configure.gd" id="13_c7puv"]
 [ext_resource type="PackedScene" uid="uid://op561o2k0d4o" path="res://assets/characters/enemies/aqua_wizard.tscn" id="14_guich"]
 [ext_resource type="Script" path="res://rsc/interface/inventory/ui_sidebar.gd" id="16_v465c"]
 [ext_resource type="Script" path="res://rsc/interface/inventory/ui_bottombar.gd" id="20_j36ox"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_enhancement.gd" id="23_aj5fo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ddyyk"]
 shader = ExtResource("1_5pek2")
@@ -101,9 +101,6 @@ base_font = ExtResource("6_yhrwj")
 [sub_resource type="FontVariation" id="FontVariation_xeept"]
 base_font = ExtResource("7_53n1y")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_5q0nw"]
-viewport_path = NodePath("Content/Content_Configure/Panel/ItemPreview/SubViewport")
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ocjd"]
 bg_color = Color(0.333333, 0.556863, 0.866667, 1)
 corner_radius_top_left = 16
@@ -163,6 +160,9 @@ corner_radius_bottom_right = 23
 corner_radius_bottom_left = 23
 corner_detail = 12
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_5q0nw"]
+viewport_path = NodePath("Pages/Enhancement/Panel/ItemPreview/SubViewport")
+
 [node name="Inventory" type="Control" node_paths=PackedStringArray("topbar", "sidebar", "bottombar", "content")]
 clip_contents = true
 layout_mode = 3
@@ -173,10 +173,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_b67wi")
-topbar = NodePath("Topbar")
-sidebar = NodePath("Sidebar")
-bottombar = NodePath("Bottombar")
-content = NodePath("Content")
+topbar = NodePath("Pages/Main/Topbar")
+sidebar = NodePath("Pages/Main/Sidebar")
+bottombar = NodePath("Pages/Main/Bottombar")
+content = NodePath("Pages/Main/Content")
 
 [node name="Blur" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_ddyyk")
@@ -209,7 +209,21 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_ku7ej")
 
-[node name="Content" type="Panel" parent="."]
+[node name="Pages" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Main" type="Control" parent="Pages"]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Content" type="Panel" parent="Pages/Main"]
 custom_minimum_size = Vector2(1568, 838)
 layout_mode = 1
 anchors_preset = 8
@@ -217,17 +231,17 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -640.0
-offset_top = -419.0
-offset_right = 928.0
-offset_bottom = 419.0
+offset_left = 300.0
+offset_top = 101.0
+offset_right = 1868.0
+offset_bottom = 939.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gryqn")
 script = ExtResource("3_vjye7")
 
-[node name="Content_Weapons" type="Control" parent="Content" node_paths=PackedStringArray("item_container")]
+[node name="Content_Weapons" type="Control" parent="Pages/Main/Content" node_paths=PackedStringArray("item_container")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -239,7 +253,7 @@ mouse_filter = 2
 script = ExtResource("4_mtge3")
 item_container = NodePath("ItemContainer")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Content/Content_Weapons"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons"]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 16.0
@@ -248,55 +262,55 @@ offset_bottom = 56.0
 mouse_filter = 2
 theme_override_constants/separation = 16
 
-[node name="SubCategoryRow" type="HBoxContainer" parent="Content/Content_Weapons/VBoxContainer"]
+[node name="SubCategoryRow" type="HBoxContainer" parent="Pages/Main/Content/Content_Weapons/VBoxContainer"]
 custom_minimum_size = Vector2(686, 112)
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 80
 
-[node name="SubCategory_All" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
+[node name="SubCategory_All" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Orb" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_All" index="0"]
+[node name="Orb" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_All" index="0"]
 visible = true
 
-[node name="Label" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_All" index="1"]
+[node name="Label" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_All" index="1"]
 theme_override_colors/font_color = Color(0.333333, 0.494118, 0.866667, 1)
 
-[node name="SubCategory_Melee" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
+[node name="SubCategory_Melee" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Melee" index="1"]
+[node name="Label" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Melee" index="1"]
 text = "Melee"
 
-[node name="SubCategory_Bow" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
+[node name="SubCategory_Bow" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Bow" index="1"]
+[node name="Label" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Bow" index="1"]
 text = "Bow"
 
-[node name="SubCategory_Spell" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
+[node name="SubCategory_Spell" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="Label" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Spell" index="1"]
+[node name="Label" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Spell" index="1"]
 text = "Spell"
 
-[node name="Control" type="Control" parent="Content/Content_Weapons/VBoxContainer/SubCategoryRow"]
+[node name="Control" type="Control" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HorizontalDivider" type="TextureRect" parent="Content/Content_Weapons/VBoxContainer"]
+[node name="HorizontalDivider" type="TextureRect" parent="Pages/Main/Content/Content_Weapons/VBoxContainer"]
 custom_minimum_size = Vector2(800, 0.5)
 layout_mode = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_0ufkp")
 expand_mode = 1
 
-[node name="ItemContainer" type="HFlowContainer" parent="Content/Content_Weapons"]
+[node name="ItemContainer" type="HFlowContainer" parent="Pages/Main/Content/Content_Weapons"]
 custom_minimum_size = Vector2(1030, 638)
 layout_mode = 2
 offset_left = 28.0
@@ -307,87 +321,87 @@ theme_override_constants/h_separation = 28
 theme_override_constants/v_separation = 28
 script = ExtResource("3_r64ix")
 
-[node name="Item" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+[node name="Item" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 
-[node name="Item2" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+[node name="Item2" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 
-[node name="Item3" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+[node name="Item3" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 
-[node name="Item4" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+[node name="Item4" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 
-[node name="Item5" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+[node name="Item5" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 
-[node name="Item6" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
-layout_mode = 2
-focused = false
-grade = 1
-
-[node name="Item7" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+[node name="Item6" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 1
 
-[node name="Item8" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+[node name="Item7" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 1
 
-[node name="Item9" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+[node name="Item8" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 1
 
-[node name="Item10" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+[node name="Item9" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+grade = 1
+
+[node name="Item10" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 2
 
-[node name="Item11" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+[node name="Item11" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 2
 
-[node name="Item12" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+[node name="Item12" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 2
 
-[node name="Item13" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+[node name="Item13" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 3
 
-[node name="Item14" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+[node name="Item14" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 3
 
-[node name="Item15" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+[node name="Item15" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 4
 
-[node name="Item16" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+[node name="Item16" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 4
 
-[node name="Item17" parent="Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+[node name="Item17" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 5
 
-[node name="ItemPreview" type="MarginContainer" parent="Content/Content_Weapons"]
+[node name="ItemPreview" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -400,21 +414,21 @@ theme_override_constants/margin_top = 28
 theme_override_constants/margin_right = 28
 theme_override_constants/margin_bottom = 28
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Content/Content_Weapons/ItemPreview"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="HeaderSection" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer"]
+[node name="HeaderSection" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer"]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Background" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection"]
+[node name="Background" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection"]
 clip_contents = true
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_h75of")
 
-[node name="Watermark" type="Control" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background"]
+[node name="Watermark" type="Control" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background"]
 modulate = Color(1, 1, 1, 0.101961)
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
@@ -424,7 +438,7 @@ offset_top = -32.0
 offset_right = 96.0
 offset_bottom = 96.0
 
-[node name="WatermarkLogo" type="TextureRect" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background/Watermark"]
+[node name="WatermarkLogo" type="TextureRect" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background/Watermark"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
 offset_right = 40.0
@@ -433,7 +447,7 @@ texture = ExtResource("2_i2528")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="WatermarkStar1" type="TextureRect" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background/Watermark"]
+[node name="WatermarkStar1" type="TextureRect" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background/Watermark"]
 self_modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(36, 36)
 layout_mode = 0
@@ -445,7 +459,7 @@ texture = ExtResource("5_0we6y")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="WatermarkStar2" type="TextureRect" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background/Watermark"]
+[node name="WatermarkStar2" type="TextureRect" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background/Watermark"]
 self_modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 0
@@ -457,7 +471,7 @@ texture = ExtResource("5_0we6y")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="WatermarkStar3" type="TextureRect" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background/Watermark"]
+[node name="WatermarkStar3" type="TextureRect" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background/Watermark"]
 self_modulate = Color(0, 0, 0, 1)
 custom_minimum_size = Vector2(12, 12)
 layout_mode = 0
@@ -469,30 +483,30 @@ texture = ExtResource("5_0we6y")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="MarginContainer" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection"]
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection"]
 layout_mode = 2
 
-[node name="CenterContainer" type="CenterContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/MarginContainer"]
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/MarginContainer"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/MarginContainer/CenterContainer"]
+[node name="Label" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/MarginContainer/CenterContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.980392, 0.992157, 1, 1)
 theme_override_fonts/font = SubResource("FontVariation_o5dn7")
 theme_override_font_sizes/font_size = 34
 text = "Starlit Sword"
 
-[node name="ImageSection" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer"]
+[node name="ImageSection" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer"]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Background" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection"]
+[node name="Background" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection"]
 clip_contents = true
 custom_minimum_size = Vector2(0, 233)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_2mfud")
 
-[node name="CenterContainer" type="CenterContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/Background"]
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/Background"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -500,48 +514,48 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ItemImage" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/Background/CenterContainer"]
+[node name="ItemImage" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/Background/CenterContainer"]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
 
-[node name="MarginContainer" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection"]
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection"]
 layout_mode = 2
 theme_override_constants/margin_top = 4
 theme_override_constants/margin_bottom = 11
 
-[node name="ImageInfoSection" type="VBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer"]
+[node name="ImageInfoSection" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="ItemPower" type="CenterContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection"]
+[node name="ItemPower" type="CenterContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection"]
 layout_mode = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower"]
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower"]
 layout_mode = 2
 
-[node name="Background" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer"]
+[node name="Background" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer"]
 self_modulate = Color(0, 0, 0, 0.0509804)
 custom_minimum_size = Vector2(145, 48)
 layout_mode = 2
 
-[node name="Labels" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer"]
+[node name="Labels" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 11
 theme_override_constants/margin_top = 2
 theme_override_constants/margin_right = 11
 theme_override_constants/margin_bottom = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer/Labels"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer/Labels"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer/Labels/VBoxContainer"]
+[node name="Label" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer/Labels/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_6eb88")
 theme_override_font_sizes/font_size = 24
 text = "Item Power"
 
-[node name="Value" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer/Labels/VBoxContainer"]
+[node name="Value" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer/Labels/VBoxContainer"]
 layout_mode = 2
 theme_override_fonts/font = SubResource("FontVariation_6eb88")
 theme_override_font_sizes/font_size = 14
@@ -549,98 +563,98 @@ text = "1,920"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Spacer" type="Control" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection"]
+[node name="Spacer" type="Control" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="CenterContainer" type="CenterContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection"]
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer"]
 layout_mode = 2
 theme_override_constants/separation = 8
 
-[node name="Minor1" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
+[node name="Minor1" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
 
-[node name="Major1" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
+[node name="Major1" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
 
-[node name="Core" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
+[node name="Core" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
 
-[node name="Major2" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
+[node name="Major2" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
 
-[node name="Minor2" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
+[node name="Minor2" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
 
-[node name="InfoSection" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer"]
+[node name="InfoSection" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer"]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Background" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection"]
+[node name="Background" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection"]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_hjuhp")
 
-[node name="MarginContainer" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection"]
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection"]
 layout_mode = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_top = 18
 theme_override_constants/margin_right = 20
 theme_override_constants/margin_bottom = 18
 
-[node name="InfoSection" type="CenterContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer"]
+[node name="InfoSection" type="CenterContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer"]
 layout_mode = 2
 
-[node name="ItemInfo" type="VBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection"]
+[node name="ItemInfo" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Stats" type="HBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo"]
+[node name="Stats" type="HBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo"]
 custom_minimum_size = Vector2(0, 225)
 layout_mode = 2
 theme_override_constants/separation = 24
 
-[node name="StatsSection" type="VBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/Stats"]
+[node name="StatsSection" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/Stats"]
 custom_minimum_size = Vector2(210, 200)
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/Stats/StatsSection"]
+[node name="Label" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/Stats/StatsSection"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.862745, 0.752941, 0.192157, 1)
 theme_override_fonts/font = SubResource("FontVariation_44ke8")
 theme_override_font_sizes/font_size = 24
 text = "Item Stats"
 
-[node name="SoulstoneStatsSection" type="VBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/Stats"]
+[node name="SoulstoneStatsSection" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/Stats"]
 custom_minimum_size = Vector2(210, 200)
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="Label" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/Stats/SoulstoneStatsSection"]
+[node name="Label" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/Stats/SoulstoneStatsSection"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.862745, 0.752941, 0.192157, 1)
 theme_override_fonts/font = SubResource("FontVariation_44ke8")
 theme_override_font_sizes/font_size = 24
 text = "Soulstone Stats"
 
-[node name="HorizontalDivider" type="Control" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo"]
+[node name="HorizontalDivider" type="Control" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo"]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
 
-[node name="Line" type="TextureRect" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/HorizontalDivider"]
+[node name="Line" type="TextureRect" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/HorizontalDivider"]
 custom_minimum_size = Vector2(800, 0.5)
 layout_mode = 1
 anchors_preset = 8
@@ -658,15 +672,15 @@ scale = Vector2(0.56, 1)
 texture = SubResource("GradientTexture2D_0ufkp")
 expand_mode = 1
 
-[node name="SetDescription" type="VBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo"]
+[node name="SetDescription" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo"]
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="SetPieces" type="HBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription"]
+[node name="SetPieces" type="HBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="Label" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
+[node name="Label" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.133333, 0.666667, 0.188235, 1)
 theme_override_fonts/font = SubResource("FontVariation_pyu88")
@@ -674,44 +688,44 @@ theme_override_font_sizes/font_size = 24
 text = "Star Shower:"
 vertical_alignment = 1
 
-[node name="1PieceI" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
+[node name="1PieceI" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
 self_modulate = Color(0.145098, 0.956863, 0.227451, 1)
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_j5a4e")
 
-[node name="2PieceI" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
+[node name="2PieceI" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
 self_modulate = Color(0.145098, 0.956863, 0.227451, 1)
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_j5a4e")
 
-[node name="3PieceI" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
+[node name="3PieceI" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
 self_modulate = Color(0.145098, 0.956863, 0.227451, 1)
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_j5a4e")
 
-[node name="4PieceI" type="Panel" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
+[node name="4PieceI" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
 self_modulate = Color(0.615686, 0.690196, 0.580392, 1)
 custom_minimum_size = Vector2(16, 16)
 layout_mode = 2
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_j5a4e")
 
-[node name="SetEffects" type="MarginContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription"]
+[node name="SetEffects" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription"]
 layout_mode = 2
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_right = 8
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetEffects"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetEffects"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Effect1" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetEffects/VBoxContainer"]
+[node name="Effect1" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetEffects/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.541176, 0.4, 1)
 theme_override_fonts/font = SubResource("FontVariation_xne32")
@@ -720,7 +734,7 @@ text = "2-Piece: Attacking generates a cosmic ball that follows you. It will att
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Effect2" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetEffects/VBoxContainer"]
+[node name="Effect2" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetEffects/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.541176, 0.4, 1)
 theme_override_fonts/font = SubResource("FontVariation_xne32")
@@ -729,7 +743,7 @@ text = "4-Piece: Generated stacks increased from 2 to 4. Each attack will bounce
 vertical_alignment = 1
 autowrap_mode = 2
 
-[node name="Description" type="Label" parent="Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription"]
+[node name="Description" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription"]
 custom_minimum_size = Vector2(414, 60)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.6, 0.541176, 0.4, 1)
@@ -739,64 +753,20 @@ text = "Made from the heart of Reia. This was one of the remnants found after sh
 vertical_alignment = 2
 autowrap_mode = 2
 
-[node name="Content_Configure" type="Control" parent="Content"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("13_c7puv")
-
-[node name="Panel" type="Panel" parent="Content/Content_Configure"]
-self_modulate = Color(0.364706, 0.529412, 1, 1)
-top_level = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ItemPreview" type="Control" parent="Content/Content_Configure/Panel"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 687.0
-grow_vertical = 2
-
-[node name="SubViewport" type="SubViewport" parent="Content/Content_Configure/Panel/ItemPreview"]
-transparent_bg = true
-size = Vector2i(1280, 1280)
-
-[node name="AquaWizard" parent="Content/Content_Configure/Panel/ItemPreview/SubViewport" instance=ExtResource("14_guich")]
-
-[node name="Camera3D" type="Camera3D" parent="Content/Content_Configure/Panel/ItemPreview/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70415, 2.45289)
-
-[node name="TextureRect" type="TextureRect" parent="Content/Content_Configure/Panel/ItemPreview"]
-layout_mode = 1
-anchors_preset = 9
-anchor_bottom = 1.0
-offset_right = 687.0
-grow_vertical = 2
-texture = SubResource("ViewportTexture_5q0nw")
-expand_mode = 1
-stretch_mode = 5
-
-[node name="Topbar" type="Control" parent="."]
+[node name="Topbar" type="Control" parent="Pages/Main"]
 custom_minimum_size = Vector2(1620, 121)
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -1620.0
+offset_left = 260.0
+offset_right = 1880.0
 offset_bottom = 121.0
 grow_horizontal = 0
 mouse_filter = 2
 script = ExtResource("11_j6yph")
 
-[node name="MarginContainer" type="MarginContainer" parent="Topbar"]
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Topbar"]
 layout_mode = 2
 offset_right = 1620.0
 offset_bottom = 121.0
@@ -804,28 +774,28 @@ mouse_filter = 2
 theme_override_constants/margin_left = 20
 theme_override_constants/margin_right = 32
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Topbar/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 2
 
-[node name="FilterSection" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer"]
+[node name="FilterSection" type="CenterContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 16
 
-[node name="SaveFilter" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
+[node name="SaveFilter" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
 custom_minimum_size = Vector2(268, 50)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"Chip"
 
-[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter"]
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -838,23 +808,23 @@ theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 19
 theme_override_constants/margin_bottom = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="IconContainer" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
+[node name="IconContainer" type="CenterContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="IconBackground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer/IconContainer"]
+[node name="IconBackground" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
 
-[node name="FilterIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer/IconContainer"]
+[node name="FilterIcon" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_filter = 2
@@ -862,7 +832,7 @@ texture = ExtResource("2_k344c")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
@@ -870,12 +840,12 @@ theme_override_fonts/font = SubResource("FontVariation_u7qxi")
 theme_override_font_sizes/font_size = 20
 text = "Save Filter"
 
-[node name="Spacer" type="Control" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="DropdownIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
+[node name="DropdownIcon" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
 self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -884,13 +854,13 @@ texture = ExtResource("4_kneal")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Filter" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
+[node name="Filter" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
 custom_minimum_size = Vector2(340, 50)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"Chip"
 
-[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter"]
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -903,23 +873,23 @@ theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 19
 theme_override_constants/margin_bottom = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="IconContainer" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
+[node name="IconContainer" type="CenterContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="IconBackground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer/IconContainer"]
+[node name="IconBackground" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
 
-[node name="FilterIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer/IconContainer"]
+[node name="FilterIcon" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_filter = 2
@@ -927,7 +897,7 @@ texture = ExtResource("2_k344c")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
@@ -935,12 +905,12 @@ theme_override_fonts/font = SubResource("FontVariation_u7qxi")
 theme_override_font_sizes/font_size = 20
 text = "Filter: Rarity, Level, C..."
 
-[node name="Spacer" type="Control" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="DropdownIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
+[node name="DropdownIcon" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
 self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -949,13 +919,13 @@ texture = ExtResource("4_kneal")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Sort" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
+[node name="Sort" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
 custom_minimum_size = Vector2(340, 50)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"Chip"
 
-[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort"]
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -968,23 +938,23 @@ theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 19
 theme_override_constants/margin_bottom = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="IconContainer" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
+[node name="IconContainer" type="CenterContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="IconBackground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer/IconContainer"]
+[node name="IconBackground" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
 
-[node name="FilterIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer/IconContainer"]
+[node name="FilterIcon" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_filter = 2
@@ -992,7 +962,7 @@ texture = ExtResource("2_k344c")
 expand_mode = 2
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
@@ -1000,12 +970,12 @@ theme_override_fonts/font = SubResource("FontVariation_u7qxi")
 theme_override_font_sizes/font_size = 20
 text = "Sort: Power, Melee Atk..."
 
-[node name="Spacer" type="Control" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="DropdownIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
+[node name="DropdownIcon" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
 self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
@@ -1014,39 +984,39 @@ texture = ExtResource("4_kneal")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Spacer" type="Control" parent="Topbar/MarginContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="CurrencySection" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer"]
+[node name="CurrencySection" type="CenterContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(300, 121)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection"]
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection"]
 layout_mode = 2
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 25
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 25
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 16
 
-[node name="CurrencyGroup" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer"]
+[node name="CurrencyGroup" type="MarginContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Background" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup"]
+[node name="Background" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup"]
 self_modulate = Color(0.101961, 0.101961, 0.101961, 0.2)
 custom_minimum_size = Vector2(148, 50)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"Chip"
 
-[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup"]
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 9
@@ -1054,36 +1024,36 @@ theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 9
 theme_override_constants/margin_bottom = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="TextureRect" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2_gjblk")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_fonts/font = SubResource("FontVariation_cpuan")
 theme_override_font_sizes/font_size = 20
 text = "13.3m"
 
-[node name="PremiumCurrencyGroup" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer"]
+[node name="PremiumCurrencyGroup" type="MarginContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer"]
 layout_mode = 2
 
-[node name="Background" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup"]
+[node name="Background" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup"]
 self_modulate = Color(0.101961, 0.101961, 0.101961, 0.2)
 custom_minimum_size = Vector2(148, 50)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"Chip"
 
-[node name="MarginContainer" type="MarginContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup"]
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/margin_left = 9
@@ -1091,43 +1061,43 @@ theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 9
 theme_override_constants/margin_bottom = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="TextureRect" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
+[node name="TextureRect" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 texture = ExtResource("2_gjblk")
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_fonts/font = SubResource("FontVariation_cpuan")
 theme_override_font_sizes/font_size = 20
 text = "10,000"
 
-[node name="ExitButton" type="CenterContainer" parent="Topbar/MarginContainer/HBoxContainer"]
+[node name="ExitButton" type="CenterContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="ExitBackground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/ExitButton"]
+[node name="ExitBackground" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/ExitButton"]
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_npvx6")
 
-[node name="ExitForeground" type="Panel" parent="Topbar/MarginContainer/HBoxContainer/ExitButton"]
+[node name="ExitForeground" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/ExitButton"]
 custom_minimum_size = Vector2(56, 56)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_phdh3")
 
-[node name="ExitIcon" type="TextureRect" parent="Topbar/MarginContainer/HBoxContainer/ExitButton"]
+[node name="ExitIcon" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/ExitButton"]
 self_modulate = Color(0.372549, 0.564706, 0.592157, 1)
 custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
@@ -1136,7 +1106,7 @@ texture = ExtResource("4_x4vpx")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Sidebar" type="Control" parent="."]
+[node name="Sidebar" type="Control" parent="Pages/Main"]
 custom_minimum_size = Vector2(300, 1080)
 layout_mode = 1
 anchors_preset = 0
@@ -1145,7 +1115,7 @@ offset_bottom = 1080.0
 mouse_filter = 2
 script = ExtResource("16_v465c")
 
-[node name="Background" type="TextureRect" parent="Sidebar"]
+[node name="Background" type="TextureRect" parent="Pages/Main/Sidebar"]
 custom_minimum_size = Vector2(300, 1080)
 layout_mode = 1
 anchors_preset = 15
@@ -1156,13 +1126,13 @@ grow_vertical = 2
 mouse_filter = 2
 texture = SubResource("GradientTexture2D_5yrvl")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Sidebar"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Pages/Main/Sidebar"]
 layout_mode = 0
 offset_right = 300.0
 offset_bottom = 1080.0
 mouse_filter = 2
 
-[node name="Header" type="MarginContainer" parent="Sidebar/VBoxContainer"]
+[node name="Header" type="MarginContainer" parent="Pages/Main/Sidebar/VBoxContainer"]
 custom_minimum_size = Vector2(300, 100)
 layout_mode = 2
 mouse_filter = 2
@@ -1171,12 +1141,12 @@ theme_override_constants/margin_top = 11
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 11
 
-[node name="HBox" type="HBoxContainer" parent="Sidebar/VBoxContainer/Header"]
+[node name="HBox" type="HBoxContainer" parent="Pages/Main/Sidebar/VBoxContainer/Header"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 16
 
-[node name="Icon" type="TextureRect" parent="Sidebar/VBoxContainer/Header/HBox"]
+[node name="Icon" type="TextureRect" parent="Pages/Main/Sidebar/VBoxContainer/Header/HBox"]
 custom_minimum_size = Vector2(68, 68)
 layout_mode = 2
 mouse_filter = 2
@@ -1184,7 +1154,7 @@ texture = ExtResource("2_i2528")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="Sidebar/VBoxContainer/Header/HBox"]
+[node name="Label" type="Label" parent="Pages/Main/Sidebar/VBoxContainer/Header/HBox"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_fonts/font = SubResource("FontVariation_nby4a")
@@ -1192,48 +1162,48 @@ theme_override_font_sizes/font_size = 32
 text = "Inventory"
 vertical_alignment = 1
 
-[node name="Tabs" type="VBoxContainer" parent="Sidebar/VBoxContainer"]
+[node name="Tabs" type="VBoxContainer" parent="Pages/Main/Sidebar/VBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 8
 
-[node name="Tab_Weapons" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+[node name="Tab_Weapons" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Weapons"
 selected = true
 
-[node name="Tab_Equipment" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+[node name="Tab_Equipment" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Equipment"
 
-[node name="Tab_Soulstones" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+[node name="Tab_Soulstones" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Soulstones"
 
-[node name="Tab_Consumables" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+[node name="Tab_Consumables" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Consumables"
 
-[node name="Tab_Materials" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+[node name="Tab_Materials" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Materials"
 
-[node name="Tab_QuestItems" parent="Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+[node name="Tab_QuestItems" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Quest Items"
 
-[node name="SidebarFooter" type="VBoxContainer" parent="Sidebar/VBoxContainer"]
+[node name="SidebarFooter" type="VBoxContainer" parent="Pages/Main/Sidebar/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 mouse_filter = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="CenterContainer" type="CenterContainer" parent="Sidebar/VBoxContainer/SidebarFooter"]
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Main/Sidebar/VBoxContainer/SidebarFooter"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="FilterCounter" type="Panel" parent="Sidebar/VBoxContainer/SidebarFooter/CenterContainer"]
+[node name="FilterCounter" type="Panel" parent="Pages/Main/Sidebar/VBoxContainer/SidebarFooter/CenterContainer"]
 self_modulate = Color(0.976471, 0.952941, 0.898039, 1)
 custom_minimum_size = Vector2(148, 50)
 layout_mode = 2
@@ -1241,7 +1211,7 @@ mouse_filter = 2
 theme = ExtResource("5_ff7kn")
 theme_type_variation = &"Chip"
 
-[node name="CenterContainer" type="CenterContainer" parent="Sidebar/VBoxContainer/SidebarFooter/CenterContainer/FilterCounter"]
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Main/Sidebar/VBoxContainer/SidebarFooter/CenterContainer/FilterCounter"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1250,28 +1220,30 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Label" type="Label" parent="Sidebar/VBoxContainer/SidebarFooter/CenterContainer/FilterCounter/CenterContainer"]
+[node name="Label" type="Label" parent="Pages/Main/Sidebar/VBoxContainer/SidebarFooter/CenterContainer/FilterCounter/CenterContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_colors/font_color = Color(0.203922, 0.2, 0.247059, 1)
 theme_override_font_sizes/font_size = 20
 text = "17 Items"
 
-[node name="Bottombar" type="Control" parent="."]
+[node name="Bottombar" type="Control" parent="Pages/Main"]
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -1620.0
-offset_top = -150.0
+offset_left = 260.0
+offset_top = 890.0
+offset_right = 1880.0
+offset_bottom = 1040.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
 script = ExtResource("20_j36ox")
 
-[node name="MarginContainer" type="MarginContainer" parent="Bottombar"]
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Bottombar"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1284,27 +1256,27 @@ theme_override_constants/margin_top = 45
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 45
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Bottombar/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Bottombar/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 alignment = 2
 
-[node name="ActionButtons" type="CenterContainer" parent="Bottombar/MarginContainer/HBoxContainer"]
+[node name="ActionButtons" type="CenterContainer" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer"]
 layout_mode = 2
 mouse_filter = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 16
 
-[node name="DeleteButton" type="Panel" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer"]
+[node name="DeleteButton" type="Panel" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer"]
 custom_minimum_size = Vector2(180, 60)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"Chip"
 
-[node name="MarginContainer" type="MarginContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton"]
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1317,23 +1289,23 @@ theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 19
 theme_override_constants/margin_bottom = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="IconContainer" type="CenterContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
+[node name="IconContainer" type="CenterContainer" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="IconBackground" type="Panel" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer/IconContainer"]
+[node name="IconBackground" type="Panel" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_umn41")
 
-[node name="Label" type="Label" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_colors/font_color = Color(0.976471, 0.384314, 0.184314, 1)
@@ -1341,12 +1313,12 @@ theme_override_fonts/font = SubResource("FontVariation_u7qxi")
 theme_override_font_sizes/font_size = 20
 text = "Delete"
 
-[node name="Spacer" type="Control" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
-[node name="Button" type="Button" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton"]
+[node name="Button" type="Button" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1355,13 +1327,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SelectButton" type="Panel" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer"]
+[node name="SelectButton" type="Panel" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer"]
 custom_minimum_size = Vector2(180, 60)
 layout_mode = 2
 mouse_filter = 2
 theme_type_variation = &"Chip"
 
-[node name="Button" type="Button" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton"]
+[node name="Button" type="Button" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton"]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -1370,7 +1342,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="MarginContainer" type="MarginContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton"]
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1383,23 +1355,23 @@ theme_override_constants/margin_top = 9
 theme_override_constants/margin_right = 19
 theme_override_constants/margin_bottom = 9
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer"]
 layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 12
 
-[node name="IconContainer" type="CenterContainer" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
+[node name="IconContainer" type="CenterContainer" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
 
-[node name="IconBackground" type="Panel" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer/IconContainer"]
+[node name="IconBackground" type="Panel" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer/IconContainer"]
 custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_j7nm8")
 
-[node name="Label" type="Label" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
+[node name="Label" type="Label" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
@@ -1407,14 +1379,63 @@ theme_override_fonts/font = SubResource("FontVariation_u7qxi")
 theme_override_font_sizes/font_size = 20
 text = "Select"
 
-[node name="Spacer" type="Control" parent="Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
+[node name="Spacer" type="Control" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 mouse_filter = 2
 
+[node name="Enhancement" type="Control" parent="Pages"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("23_aj5fo")
+
+[node name="Panel" type="Panel" parent="Pages/Enhancement"]
+self_modulate = Color(0.364706, 0.529412, 1, 1)
+top_level = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemPreview" type="Control" parent="Pages/Enhancement/Panel"]
+layout_mode = 1
+anchor_left = 0.212
+anchor_right = 0.787
+anchor_bottom = 1.0
+offset_left = 0.959961
+offset_right = 0.959839
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Pages/Enhancement/Panel/ItemPreview"]
+transparent_bg = true
+size = Vector2i(1280, 1280)
+
+[node name="AquaWizard" parent="Pages/Enhancement/Panel/ItemPreview/SubViewport" instance=ExtResource("14_guich")]
+
+[node name="Camera3D" type="Camera3D" parent="Pages/Enhancement/Panel/ItemPreview/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70415, 2.45289)
+
+[node name="TextureRect" type="TextureRect" parent="Pages/Enhancement/Panel/ItemPreview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_5q0nw")
+expand_mode = 1
+stretch_mode = 5
+
 [connection signal="tab_changed" from="." to="." method="_on_tab_changed"]
 
-[editable path="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_All"]
-[editable path="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Melee"]
-[editable path="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Bow"]
-[editable path="Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Spell"]
+[editable path="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_All"]
+[editable path="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Melee"]
+[editable path="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Bow"]
+[editable path="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Spell"]

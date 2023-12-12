@@ -1,6 +1,6 @@
-@tool extends UI_ContentType
+@tool class_name UI_Enhancement
 ###
-###  ui_content_configure.gdscript
+###  ui_configure.gd
 ### 	This content type is opened by selecting any sort of enhancable or craftable item.
 ### 	Weapons and Equipment can be enhanced and given soulstones.
 ### 	Soulstones can be upgraded and can have their set effects evolve by mixing two soulstones
@@ -9,6 +9,8 @@
 ### 	Consumables can be used to craft better consumables. Herbs and such can be eaten raw or
 ### 	 mixed together.
 ### 	Quest Items can be inspected to give clues to the quest.
+
+
 
 func load_item(item: Item):
 	pass
