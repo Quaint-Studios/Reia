@@ -1,5 +1,7 @@
 class_name GameManager extends Node
 
+static var player: Player
+
 static var current_ui: UI_TYPES = UI_TYPES.MAIN_MENU :
 	set(value):
 		current_ui = _on_current_ui_change(value)

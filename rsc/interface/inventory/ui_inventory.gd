@@ -88,29 +88,31 @@ func create_inventory():
 func populate_test_data():
 	var keys = Tab.keys()
 	
+	var weapons_tab = keys[Tab.WEAPONS]
+	
 	inventory\
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.WOODEN_SWORD))\
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.WOODEN_SWORD))\
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.WOODEN_SWORD))\
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.WOODEN_SWORD))\
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.WOODEN_SWORD))\
+	.add_item(weapons_tab, load(WeaponIndex.WOODEN_SWORD))\
+	.add_item(weapons_tab, load(WeaponIndex.WOODEN_SWORD))\
+	.add_item(weapons_tab, load(WeaponIndex.WOODEN_SWORD))\
+	.add_item(weapons_tab, load(WeaponIndex.WOODEN_SWORD))\
+	.add_item(weapons_tab, load(WeaponIndex.WOODEN_SWORD))\
 
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.SAPPHIRITE_WHIP))\
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.SAPPHIRITE_WHIP))\
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.SAPPHIRITE_WHIP))\
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.SAPPHIRITE_WHIP))\
+	.add_item(weapons_tab, load(WeaponIndex.SAPPHIRITE_WHIP))\
+	.add_item(weapons_tab, load(WeaponIndex.SAPPHIRITE_WHIP))\
+	.add_item(weapons_tab, load(WeaponIndex.SAPPHIRITE_WHIP))\
+	.add_item(weapons_tab, load(WeaponIndex.SAPPHIRITE_WHIP))\
 
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.PYROMANCERS_WAND))\
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.PYROMANCERS_WAND))\
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.PYROMANCERS_WAND))\
+	.add_item(weapons_tab, load(WeaponIndex.PYROMANCERS_WAND))\
+	.add_item(weapons_tab, load(WeaponIndex.PYROMANCERS_WAND))\
+	.add_item(weapons_tab, load(WeaponIndex.PYROMANCERS_WAND))\
 
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.ROBINS_BOW))\
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.ROBINS_BOW))\
+	.add_item(weapons_tab, load(WeaponIndex.ROBINS_BOW))\
+	.add_item(weapons_tab, load(WeaponIndex.ROBINS_BOW))\
 
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.ETHEREAL_BOW))\
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.ETHEREAL_BOW))\
+	.add_item(weapons_tab, load(WeaponIndex.ETHEREAL_BOW))\
+	.add_item(weapons_tab, load(WeaponIndex.ETHEREAL_BOW))\
 
-	.add_item(keys[Tab.WEAPONS], load(WeaponIndex.STARLIT_SWORD))
+	.add_item(weapons_tab, load(WeaponIndex.STARLIT_SWORD))
 
 func _on_tab_changed(tab: Tab):
 	content.change_tab(tab)
