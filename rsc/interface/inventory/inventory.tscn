@@ -1481,9 +1481,11 @@ transparent_bg = true
 size = Vector2i(1280, 1280)
 
 [node name="AquaWizard" parent="Pages/Enhancement/ItemPreview/SubViewport" instance=ExtResource("14_guich")]
+visible = false
 
 [node name="Camera3D" type="Camera3D" parent="Pages/Enhancement/ItemPreview/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70415, 2.45289)
+visible = false
 
 [node name="TextureRect" type="TextureRect" parent="Pages/Enhancement/ItemPreview"]
 layout_mode = 1
