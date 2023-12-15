@@ -4,6 +4,8 @@ class_name Inventory extends Resource
 @export var glowing_essence: int
 @export var categories: Dictionary # [CategoryData]
 
+enum Tab { WEAPONS, SOULSTONES, CONSUMABLES, QUEST_ITEMS, EQUIPMENT, MATERIALS }
+
 func add_category(name: String, items: Dictionary = {}): # Dictionary[ItemData]
 	var new_category := CategoryData.new()
 	new_category.name = name
@@ -42,3 +44,13 @@ func remove_item(category_name: String, item: Item):
 		return
 
 	var category = categories[category_name]
+
+func toJSON() -> Dictionary:
+	var data := {
+		"compressed_essence": compressed_essence,
+		"glowing_essence": glowing_essence,
+		"categories": {}
+	}
+	categories.keys().all(func(key): data["categories"].merge({ "%s" % key: categories[key].toJSON() }))
+	
+	return data

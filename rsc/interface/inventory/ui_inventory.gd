@@ -2,10 +2,7 @@
 
 static var instance: UI_Inventory
 
-@export var inventory: Inventory
-
-@export var last_category: Tab
-enum Tab { WEAPONS, SOULSTONES, CONSUMABLES, QUEST_ITEMS, EQUIPMENT, MATERIALS }
+@export var last_category: Inventory.Tab
 
 @export var exit_button: Button
 @export var topbar: UI_Topbar # Filter Saves, Filter, and Sort | Currency and Premium Currency | Exit\
@@ -13,7 +10,7 @@ enum Tab { WEAPONS, SOULSTONES, CONSUMABLES, QUEST_ITEMS, EQUIPMENT, MATERIALS }
 @export var bottombar: UI_Bottombar # Search | Delete and Select
 @export var content: UI_Content # current_content (extends ContentType)
 
-signal tab_changed(tab: Tab)
+signal tab_changed(tab: Inventory.Tab)
 
 func _ready():
 	if topbar == null:
@@ -34,7 +31,7 @@ func _ready():
 		else:
 			queue_free()
 		
-		setup_inventory()
+		setup_ui()
 
 func _input(event: InputEvent):
 	# TODO: You'll eventually run into an issue where you need to hide all UI.
@@ -59,62 +56,13 @@ func hide_inventory_ui(ui: UIManager.UI_TYPES):
 	GameManager.current_ui = GameManager.UI_TYPES.PLAY
 	self.visible = false
 
-func setup_inventory():
+func setup_ui():
 	UIManager.instance.close_ui.connect(hide_inventory_ui)
 	
-	if inventory == null:
-		create_inventory()
-	pass
+	if GameManager.player.inventory != null:
+		content.change_tab(last_category)
 
-func create_inventory():
-	if inventory != null:
-		print("An inventory already exists here.")
-		return
-
-	var keys = Tab.keys()
-	inventory = Inventory.new()
-	(inventory
-		.add_category(keys[Tab.WEAPONS])
-		.add_category(keys[Tab.SOULSTONES])
-		.add_category(keys[Tab.CONSUMABLES])
-		.add_category(keys[Tab.EQUIPMENT])
-		.add_category(keys[Tab.MATERIALS])
-		.add_category(keys[Tab.QUEST_ITEMS]))
-
-	populate_test_data()
-	
-	content.change_tab(last_category)
-
-func populate_test_data():
-	var keys = Tab.keys()
-	
-	var weapons_tab = keys[Tab.WEAPONS]
-	
-	inventory\
-	.add_item(weapons_tab, load(WeaponIndex.WOODEN_SWORD))\
-	.add_item(weapons_tab, load(WeaponIndex.WOODEN_SWORD))\
-	.add_item(weapons_tab, load(WeaponIndex.WOODEN_SWORD))\
-	.add_item(weapons_tab, load(WeaponIndex.WOODEN_SWORD))\
-	.add_item(weapons_tab, load(WeaponIndex.WOODEN_SWORD))\
-
-	.add_item(weapons_tab, load(WeaponIndex.SAPPHIRITE_WHIP))\
-	.add_item(weapons_tab, load(WeaponIndex.SAPPHIRITE_WHIP))\
-	.add_item(weapons_tab, load(WeaponIndex.SAPPHIRITE_WHIP))\
-	.add_item(weapons_tab, load(WeaponIndex.SAPPHIRITE_WHIP))\
-
-	.add_item(weapons_tab, load(WeaponIndex.PYROMANCERS_WAND))\
-	.add_item(weapons_tab, load(WeaponIndex.PYROMANCERS_WAND))\
-	.add_item(weapons_tab, load(WeaponIndex.PYROMANCERS_WAND))\
-
-	.add_item(weapons_tab, load(WeaponIndex.ROBINS_BOW))\
-	.add_item(weapons_tab, load(WeaponIndex.ROBINS_BOW))\
-
-	.add_item(weapons_tab, load(WeaponIndex.ETHEREAL_BOW))\
-	.add_item(weapons_tab, load(WeaponIndex.ETHEREAL_BOW))\
-
-	.add_item(weapons_tab, load(WeaponIndex.STARLIT_SWORD))
-
-func _on_tab_changed(tab: Tab):
+func _on_tab_changed(tab: Inventory.Tab):
 	content.change_tab(tab)
 	last_category = tab
 	pass

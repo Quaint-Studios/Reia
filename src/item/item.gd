@@ -10,3 +10,19 @@ var item_type: ItemType
 
 enum ItemType { WEAPON, EQUIPMENT, MATERIAL, SOULSTONE }
 enum ItemGrade { COMMON, UNCOMMON, RARE, SACRED, ARCANE, RADIANT }
+
+func _toJSON_EXT():
+	return {}
+
+func toJSON() -> Dictionary:
+	var data = {
+		"id": id,
+		"name": name,
+		"description": description,
+		"texture": texture.resource_path,
+		"item_type": ItemType.keys()[item_type],
+		"item_grade": ItemGrade.keys()[item_grade],
+	}
+	data.merge(_toJSON_EXT())
+
+	return data

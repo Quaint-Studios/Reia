@@ -43,3 +43,11 @@ func level_to_grade(current_level: int):
 	
 	item_grade = Item.ItemGrade.keys()[new_grade]
 	level = new_level
+
+func _toJSON_EXT():
+	return {
+		"type": "weapon",
+		"soulstones": soulstones,
+		"level": level,
+		"experience": experience
+	}
