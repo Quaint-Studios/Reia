@@ -1,4 +1,4 @@
-@tool class_name UI_Enhancement
+@tool class_name UI_Enhancement extends Control
 ###
 ###  ui_configure.gd
 ### 	This content type is opened by selecting any sort of enhancable or craftable item.
