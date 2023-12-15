@@ -5,14 +5,14 @@ class_name CategoryData extends Resource
 @export var items: Dictionary # [Item]
 
 func add_item(item: Item) -> CategoryData:
-	if name == UI_Inventory.Tab.keys()[UI_Inventory.Tab.WEAPONS]\
-	and item is Weapon\
-	and items.has(item.name):
+	if (name == Inventory.Tab.keys()[Inventory.Tab.WEAPONS]
+	and item is Weapon
+	and items.has(item.name)):
 		const a: int = 100
 		var b: int = item.item_grade
 		var level = pow(log(pow(a, b)), b) * (b * a)
 
-		
+
 		print("Item is a duplicate, adding exp")
 		(items[item.name] as Weapon)#.enhance(wea)
 	items[item.name] = item # TODO: Append experience to existing item
@@ -41,3 +41,12 @@ func increment_item(item_name: String, quantity:= 1):
 func decrement_item(item_name: String, quantity:= -1):
 	increment_item(item_name, quantity) # Hehe lazy
 	return self
+
+func toJSON() -> Dictionary:
+	var data = {
+		"name": name,
+		"items": {}
+	}
+	items.keys().all(func(key): data["items"].merge({ "%s" % key: items[key].toJSON() }))
+
+	return data

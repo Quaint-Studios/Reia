@@ -1,6 +1,8 @@
-class_name Player extends Attackable
+@tool class_name Player extends Attackable
 
-@export var abilities: AbilityManager
+@export var inventory := PlayerInventory.new(true)
+@export var abilities := AbilityManager.new().debug_create()
+var map_name := SceneSelector.Maps.REIA
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
@@ -15,13 +17,17 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func _ready():
 	add_to_group("player")
+	#if GameManager.player == null:
+	GameManager.player = self
 
 	if !stats is PlayerStats:
 		print_debug("Bug: The stats of %s is not of type PlayerStats" % name)
 		# TODO: Handle conversion in the future.
 
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	%AnimationTree.active = true
+	if not Engine.is_editor_hint():
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+		
+		%AnimationTree.active = true
 
 func _process(_delta):
 	if position.y <= -10: # handle falling off the map for now
@@ -130,3 +136,13 @@ func handle_skills():
 			abilities.skill_2.cast_on_target(self, collision.collider.position)
 		else:
 			print("Collide with:", "nuthin")
+
+func toJSON() -> Dictionary:
+	return {
+		"version": 1,
+		"name": name,
+		"global_position": global_position,
+		"global_rotation": global_rotation,
+		"map_name": SceneSelector.Maps.keys()[map_name],
+		"inventory": inventory.toJSON()
+	}
