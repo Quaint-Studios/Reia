@@ -4,9 +4,15 @@ Explore endless worlds and embark on a magical adventure of a lifetime! Reia is 
 [![Godot Builder](https://github.com/Quaint-Studios/Reia/actions/workflows/godot.yml/badge.svg)](https://github.com/Quaint-Studios/Reia/actions/workflows/godot.yml)
 
 ## About This Project
-### Overview
-Reia is an open-source oRPG where four of an Ethereal's, a deity, offspring have a conflict. One of the children is Reia herself. This universe is a world where magic is capable, that includes your standard elements and more. Every Ethereal can create their own realm, what would be the equivalent of a giant planet that continues to grow in size as they consume ether from their surroundings & other realms. Player-owned floating islands, raids of varying sizes (even server-wide raids), Bosses, PvP zones, and custom mini-games!
 
+> Visit the website over at [https://www.playreia.com](https://www.playreia.com).
+
+### Overview
+
+Reia is an open-source oRPG where four Ethereals, the deities of this world have a conflict. One of them, their sister, is Reia herself. This universe is a world where magic is capable, that includes your standard elements and more. Every Ethereal can create their own realm, what would be the equivalent of a giant planet that continues to grow in size as they consume ether from their surroundings & other realms. Player-owned floating islands, raids of varying sizes (even server-wide raids), Bosses, PvP zones, and custom mini-games!
+
+### Play the way you want
+We want you to be able to focus on whatever sort of content you choose to. Whether that's the story, the combat, playing or the economy and getting rich. And it doesn't end there. Customize your own Island, explore Infinite Dungeons, and do so much more! That's the vision.
 
 ### Lore
 #### Realms
