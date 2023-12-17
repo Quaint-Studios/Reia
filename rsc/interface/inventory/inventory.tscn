@@ -1457,6 +1457,81 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_0avwm")
 layout_mode = 2
 theme_type_variation = &"WhiteLabelSans"
 theme_override_font_sizes/font_size = 24
+text = "Weapons"
+
+[node name="Control2" type="Control" parent="Pages/Enhancement/Tabs/HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Enhancement/Tabs/HBoxContainer/Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Selected" type="Panel" parent="Pages/Enhancement/Tabs/HBoxContainer/Control2/CenterContainer"]
+self_modulate = Color(0.447059, 0.447059, 0.447059, 1)
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0avwm")
+
+[node name="Label" type="Label" parent="Pages/Enhancement/Tabs/HBoxContainer/Control2/CenterContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_font_sizes/font_size = 24
+text = "Equipment"
+
+[node name="Control3" type="Control" parent="Pages/Enhancement/Tabs/HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Enhancement/Tabs/HBoxContainer/Control3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Selected" type="Panel" parent="Pages/Enhancement/Tabs/HBoxContainer/Control3/CenterContainer"]
+self_modulate = Color(0.447059, 0.447059, 0.447059, 1)
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0avwm")
+
+[node name="Label" type="Label" parent="Pages/Enhancement/Tabs/HBoxContainer/Control3/CenterContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_font_sizes/font_size = 24
+text = "Equipment"
+
+[node name="Control4" type="Control" parent="Pages/Enhancement/Tabs/HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Enhancement/Tabs/HBoxContainer/Control4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Selected" type="Panel" parent="Pages/Enhancement/Tabs/HBoxContainer/Control4/CenterContainer"]
+self_modulate = Color(0.447059, 0.447059, 0.447059, 1)
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0avwm")
+
+[node name="Label" type="Label" parent="Pages/Enhancement/Tabs/HBoxContainer/Control4/CenterContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_font_sizes/font_size = 24
 text = "Equipment"
 
 [node name="UI_ItemContainer" type="HFlowContainer" parent="Pages/Enhancement"]
