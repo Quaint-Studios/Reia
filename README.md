@@ -14,6 +14,10 @@ Reia is an open-source oRPG where four Ethereals, the deities of this world have
 ### Play the way you want
 We want you to be able to focus on whatever sort of content you choose to. Whether that's the story, the combat, playing or the economy and getting rich. And it doesn't end there. Customize your own Island, explore Infinite Dungeons, and do so much more! That's the vision.
 
+### Why this project was created
+
+One of the main reasons why this project exists is to provide you with a game that you can have fun in. Another reason is a way to get myself outside of my 20 years of experience in programming. Migrating from Unity into Godot head first was definitely an experience. And making shaders, scripts, and art have all been an enjoyable process in the Godot engine. I'll have to say, going forward will be a fun ride. Wish both me and this project luck! And be sure to check out the [https://www.playreia.com](website).
+
 ### Lore
 #### Realms
 In this world are the Ethereals. These entities are the equivalent of deities. They create their own realms and govern them according to their unique gifts. When a realm is created, the Ethereal that rules over it can use the energy within the realm to form occupants. These occupants can becomie anything; mindless zombies or being of free will -- including a love or hate for their creator.
