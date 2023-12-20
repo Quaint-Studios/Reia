@@ -6,6 +6,11 @@ class_name ServerManager extends Node
 ## Except when a consumer wants to host their own unofficial
 ## private game.
 
+signal initialized
+signal started
+signal stopped
+# signal restarted
+
 
 #region Variables
 var players := []
@@ -29,6 +34,6 @@ func stop_server():
   pass
 
 #
-# func reconnect_server():
+# func restart_server():
 #   pass
 #
