@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://brvo0ncx4d071"]
+
+[node name="MultiplayerManager" type="Node"]
+
+[node name="ServerManager" type="Node" parent="."]
