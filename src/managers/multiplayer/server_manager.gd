@@ -6,13 +6,22 @@ class_name ServerManager extends MultiplayerAPI
 ## Except when a consumer wants to host their own unofficial
 ## private game.
 
+#region Signals
 signal initialized
 signal started
 signal stopped
 # signal restarted
-
+#endregion
 
 #region Variables
+#region Configs
+## Default port.
+const DEF_PORT = 4337
+
+## Our WebSocketServer instance.
+var _server := WebSocketMultiplayerPeer.new()
+#endregion
+
 var players := []
 #endregion
 
