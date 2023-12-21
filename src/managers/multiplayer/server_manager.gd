@@ -1,4 +1,4 @@
-class_name ServerManager extends Node
+class_name ServerManager extends MultiplayerAPI
 ## Creates a server and handles how many people can join it.
 ##
 ## The ServerManager is a part of the Multiplayer namespace.
