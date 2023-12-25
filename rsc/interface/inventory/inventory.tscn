@@ -1,33 +1,33 @@
 [gd_scene load_steps=55 format=3 uid="uid://bgui6d70qmbu1"]
 
-[ext_resource type="Script" path="res://rsc/interface/inventory/ui_inventory.gd" id="1_rqp2b"]
-[ext_resource type="Shader" path="res://shaders/screen_space/blur.gdshader" id="2_uwval"]
-[ext_resource type="Script" path="res://rsc/interface/inventory/ui_content.gd" id="3_lxeh0"]
-[ext_resource type="Script" path="res://rsc/interface/inventory/ui_content_weapons.gd" id="4_bcnma"]
-[ext_resource type="PackedScene" uid="uid://jsgmocccagip" path="res://rsc/interface/inventory/sub_category.tscn" id="5_oidnp"]
-[ext_resource type="PackedScene" uid="uid://ci8se4nk3fut2" path="res://rsc/interface/inventory/horizontal_divider.tscn" id="6_5egtb"]
-[ext_resource type="Script" path="res://rsc/interface/inventory/ui_item_container.gd" id="7_1kv63"]
-[ext_resource type="PackedScene" uid="uid://wgv40a1vxert" path="res://rsc/interface/inventory/item.tscn" id="8_rlon8"]
-[ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/icons/logo_a_flat_white_68.svg" id="9_nbptq"]
-[ext_resource type="Texture2D" uid="uid://dnqp10u8o4xik" path="res://rsc/icons/star_icon_84.svg" id="10_rl3ll"]
-[ext_resource type="FontFile" uid="uid://cnk30iahnvsd2" path="res://rsc/fonts/Roboto/Roboto-Black.ttf" id="11_6kglw"]
-[ext_resource type="FontFile" uid="uid://dpo6v8cknqaqu" path="res://rsc/fonts/Roboto/Roboto-Bold.ttf" id="12_xcge3"]
-[ext_resource type="FontFile" uid="uid://byn6716m0s6qx" path="res://rsc/fonts/Roboto/Roboto-Italic.ttf" id="13_gneox"]
-[ext_resource type="Script" path="res://rsc/interface/inventory/ui_topbar.gd" id="14_02d64"]
-[ext_resource type="Texture2D" uid="uid://dm1q0jbofjvsx" path="res://rsc/icons/inventory/filter_icon_84.svg" id="15_t60qd"]
-[ext_resource type="Texture2D" uid="uid://vytb7l0x77ml" path="res://rsc/icons/inventory/dropdown_icon_84.svg" id="16_i4sti"]
-[ext_resource type="Texture2D" uid="uid://b5e3in4j2d35n" path="res://rsc/icons/inventory/gradient_orb.svg" id="17_7ubph"]
-[ext_resource type="Texture2D" uid="uid://bmi7ixsxitcpw" path="res://rsc/icons/inventory/exit_icon_84.svg" id="18_l0kfl"]
-[ext_resource type="Script" path="res://rsc/interface/inventory/ui_sidebar.gd" id="19_lrdun"]
-[ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="20_pd02u"]
-[ext_resource type="PackedScene" uid="uid://dripboa48oo8w" path="res://rsc/interface/inventory/tab.tscn" id="21_rb8ef"]
-[ext_resource type="Theme" uid="uid://kwq64glpweie" path="res://rsc/themes/main_theme.tres" id="22_ki3bb"]
-[ext_resource type="Script" path="res://rsc/interface/inventory/ui_bottombar.gd" id="23_k6brw"]
-[ext_resource type="Script" path="res://rsc/interface/inventory/ui_enhancement.gd" id="24_xoyl1"]
-[ext_resource type="PackedScene" uid="uid://op561o2k0d4o" path="res://assets/characters/enemies/aqua_wizard.tscn" id="25_2d1qm"]
+[ext_resource type="Shader" path="res://shaders/screen_space/blur.gdshader" id="1_5pek2"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_inventory.gd" id="1_b67wi"]
+[ext_resource type="PackedScene" uid="uid://jsgmocccagip" path="res://rsc/interface/inventory/sub_category.tscn" id="2_f6ox2"]
+[ext_resource type="Texture2D" uid="uid://b5e3in4j2d35n" path="res://rsc/icons/inventory/gradient_orb.svg" id="2_gjblk"]
+[ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/icons/logo_a_flat_white_68.svg" id="2_i2528"]
+[ext_resource type="Texture2D" uid="uid://dm1q0jbofjvsx" path="res://rsc/icons/inventory/filter_icon_84.svg" id="2_k344c"]
+[ext_resource type="PackedScene" uid="uid://wgv40a1vxert" path="res://rsc/interface/inventory/item.tscn" id="3_21nmv"]
+[ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="3_b7ukm"]
+[ext_resource type="FontFile" uid="uid://cnk30iahnvsd2" path="res://rsc/fonts/Roboto/Roboto-Black.ttf" id="3_l1es0"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_item_container.gd" id="3_r64ix"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_content.gd" id="3_vjye7"]
+[ext_resource type="Texture2D" uid="uid://vytb7l0x77ml" path="res://rsc/icons/inventory/dropdown_icon_84.svg" id="4_kneal"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_content_weapons.gd" id="4_mtge3"]
+[ext_resource type="PackedScene" uid="uid://dripboa48oo8w" path="res://rsc/interface/inventory/tab.tscn" id="4_ph1fb"]
+[ext_resource type="Texture2D" uid="uid://bmi7ixsxitcpw" path="res://rsc/icons/inventory/exit_icon_84.svg" id="4_x4vpx"]
+[ext_resource type="Texture2D" uid="uid://dnqp10u8o4xik" path="res://rsc/icons/star_icon_84.svg" id="5_0we6y"]
+[ext_resource type="Theme" uid="uid://kwq64glpweie" path="res://rsc/themes/main_theme.tres" id="5_ff7kn"]
+[ext_resource type="PackedScene" uid="uid://ci8se4nk3fut2" path="res://rsc/interface/inventory/horizontal_divider.tscn" id="6_6pd7h"]
+[ext_resource type="FontFile" uid="uid://dpo6v8cknqaqu" path="res://rsc/fonts/Roboto/Roboto-Bold.ttf" id="6_yhrwj"]
+[ext_resource type="FontFile" uid="uid://byn6716m0s6qx" path="res://rsc/fonts/Roboto/Roboto-Italic.ttf" id="7_53n1y"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_topbar.gd" id="11_j6yph"]
+[ext_resource type="PackedScene" uid="uid://op561o2k0d4o" path="res://assets/characters/enemies/aqua_wizard.tscn" id="14_guich"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_sidebar.gd" id="16_v465c"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_bottombar.gd" id="20_j36ox"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_enhancement.gd" id="23_aj5fo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ddyyk"]
-shader = ExtResource("2_uwval")
+shader = ExtResource("1_5pek2")
 shader_parameter/amount = 2.0
 
 [sub_resource type="Gradient" id="Gradient_64ut1"]
@@ -54,7 +54,7 @@ corner_radius_top_left = 5
 corner_radius_top_right = 5
 
 [sub_resource type="FontVariation" id="FontVariation_o5dn7"]
-base_font = ExtResource("11_6kglw")
+base_font = ExtResource("3_l1es0")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mfud"]
 bg_color = Color(0.976471, 0.952941, 0.898039, 1)
@@ -68,7 +68,7 @@ corner_radius_bottom_left = 100
 corner_detail = 15
 
 [sub_resource type="FontVariation" id="FontVariation_6eb88"]
-base_font = ExtResource("11_6kglw")
+base_font = ExtResource("3_l1es0")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjuhp"]
 bg_color = Color(1, 1, 1, 1)
@@ -76,7 +76,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [sub_resource type="FontVariation" id="FontVariation_44ke8"]
-base_font = ExtResource("11_6kglw")
+base_font = ExtResource("3_l1es0")
 
 [sub_resource type="Gradient" id="Gradient_1ykm1"]
 colors = PackedColorArray(0.976471, 0.952941, 0.898039, 1, 0.976471, 0.952941, 0.898039, 0)
@@ -87,7 +87,7 @@ fill_from = Vector2(0.5, 0)
 metadata/_snap_enabled = true
 
 [sub_resource type="FontVariation" id="FontVariation_pyu88"]
-base_font = ExtResource("11_6kglw")
+base_font = ExtResource("3_l1es0")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5a4e"]
 bg_color = Color(1, 0.996078, 1, 1)
@@ -97,10 +97,10 @@ corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
 [sub_resource type="FontVariation" id="FontVariation_xne32"]
-base_font = ExtResource("12_xcge3")
+base_font = ExtResource("6_yhrwj")
 
 [sub_resource type="FontVariation" id="FontVariation_xeept"]
-base_font = ExtResource("13_gneox")
+base_font = ExtResource("7_53n1y")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ocjd"]
 bg_color = Color(0.333333, 0.556863, 0.866667, 1)
@@ -111,10 +111,10 @@ corner_radius_bottom_left = 16
 corner_detail = 12
 
 [sub_resource type="FontVariation" id="FontVariation_u7qxi"]
-base_font = ExtResource("11_6kglw")
+base_font = ExtResource("3_l1es0")
 
 [sub_resource type="FontVariation" id="FontVariation_cpuan"]
-base_font = ExtResource("11_6kglw")
+base_font = ExtResource("3_l1es0")
 spacing_glyph = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_npvx6"]
@@ -142,7 +142,7 @@ gradient = SubResource("Gradient_u4ede")
 fill_to = Vector2(0, 1)
 
 [sub_resource type="FontVariation" id="FontVariation_nby4a"]
-base_font = ExtResource("20_pd02u")
+base_font = ExtResource("3_b7ukm")
 spacing_glyph = 1
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_umn41"]
@@ -181,7 +181,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("1_rqp2b")
+script = ExtResource("1_b67wi")
 topbar = NodePath("Pages/Main/Topbar")
 sidebar = NodePath("Pages/Main/Sidebar")
 bottombar = NodePath("Pages/Main/Bottombar")
@@ -248,7 +248,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_gryqn")
-script = ExtResource("3_lxeh0")
+script = ExtResource("3_vjye7")
 
 [node name="Content_Weapons" type="Control" parent="Pages/Main/Content" node_paths=PackedStringArray("item_container")]
 visible = false
@@ -259,7 +259,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
-script = ExtResource("4_bcnma")
+script = ExtResource("4_mtge3")
 item_container = NodePath("ItemContainer")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons"]
@@ -277,7 +277,7 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 80
 
-[node name="SubCategory_All" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("5_oidnp")]
+[node name="SubCategory_All" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
 layout_mode = 2
 mouse_filter = 2
 
@@ -287,21 +287,21 @@ visible = true
 [node name="Label" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_All" index="1"]
 theme_override_colors/font_color = Color(0.333333, 0.494118, 0.866667, 1)
 
-[node name="SubCategory_Melee" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("5_oidnp")]
+[node name="SubCategory_Melee" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
 layout_mode = 2
 mouse_filter = 2
 
 [node name="Label" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Melee" index="1"]
 text = "Melee"
 
-[node name="SubCategory_Bow" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("5_oidnp")]
+[node name="SubCategory_Bow" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
 layout_mode = 2
 mouse_filter = 2
 
 [node name="Label" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Bow" index="1"]
 text = "Bow"
 
-[node name="SubCategory_Spell" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("5_oidnp")]
+[node name="SubCategory_Spell" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
 layout_mode = 2
 mouse_filter = 2
 
@@ -312,7 +312,7 @@ text = "Spell"
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HorizontalDivider" parent="Pages/Main/Content/Content_Weapons/VBoxContainer" instance=ExtResource("6_5egtb")]
+[node name="HorizontalDivider" parent="Pages/Main/Content/Content_Weapons/VBoxContainer" instance=ExtResource("6_6pd7h")]
 layout_mode = 2
 
 [node name="ItemContainer" type="HFlowContainer" parent="Pages/Main/Content/Content_Weapons"]
@@ -324,84 +324,84 @@ offset_right = 1058.0
 offset_bottom = 340.0
 theme_override_constants/h_separation = 28
 theme_override_constants/v_separation = 28
-script = ExtResource("7_1kv63")
+script = ExtResource("3_r64ix")
 
-[node name="Item" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
+[node name="Item" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 
-[node name="Item2" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
+[node name="Item2" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 
-[node name="Item3" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
+[node name="Item3" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 
-[node name="Item4" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
+[node name="Item4" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 
-[node name="Item5" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
+[node name="Item5" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 
-[node name="Item6" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
-layout_mode = 2
-focused = false
-grade = 1
-
-[node name="Item7" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
+[node name="Item6" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 1
 
-[node name="Item8" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
+[node name="Item7" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 1
 
-[node name="Item9" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
+[node name="Item8" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 1
 
-[node name="Item10" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
+[node name="Item9" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+grade = 1
+
+[node name="Item10" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 2
 
-[node name="Item11" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
+[node name="Item11" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 2
 
-[node name="Item12" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
+[node name="Item12" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 2
 
-[node name="Item13" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
+[node name="Item13" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 3
 
-[node name="Item14" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
+[node name="Item14" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 3
 
-[node name="Item15" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
+[node name="Item15" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 4
 
-[node name="Item16" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
+[node name="Item16" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 4
 
-[node name="Item17" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("8_rlon8")]
+[node name="Item17" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
 layout_mode = 2
 focused = false
 grade = 5
@@ -448,7 +448,7 @@ custom_minimum_size = Vector2(128, 128)
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("9_nbptq")
+texture = ExtResource("2_i2528")
 expand_mode = 4
 stretch_mode = 5
 
@@ -460,7 +460,7 @@ offset_left = 12.0
 offset_top = 16.0
 offset_right = 48.0
 offset_bottom = 52.0
-texture = ExtResource("10_rl3ll")
+texture = ExtResource("5_0we6y")
 expand_mode = 4
 stretch_mode = 5
 
@@ -472,7 +472,7 @@ offset_left = 82.33
 offset_top = 62.6
 offset_right = 106.33
 offset_bottom = 86.6
-texture = ExtResource("10_rl3ll")
+texture = ExtResource("5_0we6y")
 expand_mode = 4
 stretch_mode = 5
 
@@ -484,7 +484,7 @@ offset_left = 56.33
 offset_top = 96.6
 offset_right = 68.33
 offset_bottom = 108.6
-texture = ExtResource("10_rl3ll")
+texture = ExtResource("5_0we6y")
 expand_mode = 4
 stretch_mode = 5
 
@@ -769,7 +769,7 @@ offset_right = 1880.0
 offset_bottom = 121.0
 grow_horizontal = 0
 mouse_filter = 2
-script = ExtResource("14_02d64")
+script = ExtResource("11_j6yph")
 
 [node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Topbar"]
 layout_mode = 2
@@ -833,7 +833,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("15_t60qd")
+texture = ExtResource("2_k344c")
 expand_mode = 2
 stretch_mode = 5
 
@@ -855,7 +855,7 @@ self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("16_i4sti")
+texture = ExtResource("4_kneal")
 expand_mode = 4
 stretch_mode = 5
 
@@ -898,7 +898,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("15_t60qd")
+texture = ExtResource("2_k344c")
 expand_mode = 2
 stretch_mode = 5
 
@@ -920,7 +920,7 @@ self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("16_i4sti")
+texture = ExtResource("4_kneal")
 expand_mode = 4
 stretch_mode = 5
 
@@ -963,7 +963,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("15_t60qd")
+texture = ExtResource("2_k344c")
 expand_mode = 2
 stretch_mode = 5
 
@@ -985,7 +985,7 @@ self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("16_i4sti")
+texture = ExtResource("4_kneal")
 expand_mode = 4
 stretch_mode = 5
 
@@ -1038,7 +1038,7 @@ theme_override_constants/separation = 12
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("17_7ubph")
+texture = ExtResource("2_gjblk")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
@@ -1075,7 +1075,7 @@ theme_override_constants/separation = 12
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("17_7ubph")
+texture = ExtResource("2_gjblk")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
@@ -1107,7 +1107,7 @@ self_modulate = Color(0.372549, 0.564706, 0.592157, 1)
 custom_minimum_size = Vector2(46, 46)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("18_l0kfl")
+texture = ExtResource("4_x4vpx")
 expand_mode = 4
 stretch_mode = 5
 
@@ -1118,7 +1118,7 @@ anchors_preset = 0
 offset_right = 300.0
 offset_bottom = 1080.0
 mouse_filter = 2
-script = ExtResource("19_lrdun")
+script = ExtResource("16_v465c")
 
 [node name="Background" type="TextureRect" parent="Pages/Main/Sidebar"]
 custom_minimum_size = Vector2(300, 1080)
@@ -1155,7 +1155,7 @@ theme_override_constants/separation = 16
 custom_minimum_size = Vector2(68, 68)
 layout_mode = 2
 mouse_filter = 2
-texture = ExtResource("9_nbptq")
+texture = ExtResource("2_i2528")
 expand_mode = 4
 stretch_mode = 5
 
@@ -1172,28 +1172,28 @@ layout_mode = 2
 mouse_filter = 2
 theme_override_constants/separation = 8
 
-[node name="Tab_Weapons" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("21_rb8ef")]
+[node name="Tab_Weapons" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Weapons"
 selected = true
 
-[node name="Tab_Equipment" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("21_rb8ef")]
+[node name="Tab_Equipment" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Equipment"
 
-[node name="Tab_Soulstones" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("21_rb8ef")]
+[node name="Tab_Soulstones" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Soulstones"
 
-[node name="Tab_Consumables" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("21_rb8ef")]
+[node name="Tab_Consumables" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Consumables"
 
-[node name="Tab_Materials" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("21_rb8ef")]
+[node name="Tab_Materials" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Materials"
 
-[node name="Tab_QuestItems" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("21_rb8ef")]
+[node name="Tab_QuestItems" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
 layout_mode = 2
 category_name = "Quest Items"
 
@@ -1213,7 +1213,7 @@ self_modulate = Color(0.976471, 0.952941, 0.898039, 1)
 custom_minimum_size = Vector2(148, 50)
 layout_mode = 2
 mouse_filter = 2
-theme = ExtResource("22_ki3bb")
+theme = ExtResource("5_ff7kn")
 theme_type_variation = &"Chip"
 
 [node name="CenterContainer" type="CenterContainer" parent="Pages/Main/Sidebar/VBoxContainer/SidebarFooter/CenterContainer/FilterCounter"]
@@ -1246,7 +1246,7 @@ offset_bottom = 1040.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
-script = ExtResource("23_k6brw")
+script = ExtResource("20_j36ox")
 
 [node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Bottombar"]
 layout_mode = 1
@@ -1396,7 +1396,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("24_xoyl1")
+script = ExtResource("23_aj5fo")
 
 [node name="Background" type="Panel" parent="Pages/Enhancement"]
 self_modulate = Color(0.364706, 0.529412, 1, 0.501961)
@@ -1417,7 +1417,7 @@ offset_bottom = -900.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HorizontalDivider" parent="Pages/Enhancement/Tabs" instance=ExtResource("6_5egtb")]
+[node name="HorizontalDivider" parent="Pages/Enhancement/Tabs" instance=ExtResource("6_6pd7h")]
 layout_mode = 0
 offset_left = 20.0
 offset_top = 172.0
@@ -1539,7 +1539,7 @@ layout_mode = 0
 offset_top = 180.0
 offset_right = 820.0
 offset_bottom = 1080.0
-script = ExtResource("7_1kv63")
+script = ExtResource("3_r64ix")
 
 [node name="ItemPreview" type="Control" parent="Pages/Enhancement"]
 layout_mode = 1
@@ -1555,7 +1555,7 @@ grow_vertical = 2
 transparent_bg = true
 size = Vector2i(1280, 1280)
 
-[node name="AquaWizard" parent="Pages/Enhancement/ItemPreview/SubViewport" instance=ExtResource("25_2d1qm")]
+[node name="AquaWizard" parent="Pages/Enhancement/ItemPreview/SubViewport" instance=ExtResource("14_guich")]
 visible = false
 
 [node name="Camera3D" type="Camera3D" parent="Pages/Enhancement/ItemPreview/SubViewport"]
