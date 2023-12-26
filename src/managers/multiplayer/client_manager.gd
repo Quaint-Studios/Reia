@@ -26,25 +26,25 @@ var players := []
 
 ## Sets up the server.
 func _ready():
-  setup_signals()
-  start_client()
+	setup_signals()
+	start_client()
 
 ## Sets up the client connected and disconnected signals.
 func setup_signals():
-  multiplayer.peer_connected.connect(_on_client_connected)
-  multiplayer.peer_disconnected.connect(_on_client_disconnected)
-  multiplayer.server_disconnected.connect(_on_server_disconnected)
+	multiplayer.peer_connected.connect(_on_client_connected)
+	multiplayer.peer_disconnected.connect(_on_client_disconnected)
+	multiplayer.server_disconnected.connect(_on_server_disconnected)
 
 ## Starts the server and updates the peer.
 func start_client():
-  multiplayer.multiplayer_peer = null
-  _client.create_client("ws://" + host + ":" + str(DEF_PORT))
-  multiplayer.multiplayer_peer = _client
-  print("Server Started")
+	multiplayer.multiplayer_peer = null
+	_client.create_client("ws://" + host + ":" + str(DEF_PORT))
+	multiplayer.multiplayer_peer = _client
+	print("Server Started")
 
 ## Stops the server and cleans up.
 func stop_server():
-  print("Server Stopped")
+	print("Server Stopped")
 
 #
 # func restart_server():
@@ -53,11 +53,11 @@ func stop_server():
 
 #region Signal Handlers
 func _on_client_connected(id: int):
-  print("Client (%d) Connected" % id)
+	print("Client (%d) Connected" % id)
 
 func _on_client_disconnected(id: int):
-  print("Client (%d) Disconnected" % id)
+	print("Client (%d) Disconnected" % id)
 
 func _on_server_disconnected():
-  print("Server Connection Lost")
+	print("Server Connection Lost")
 #endregion
