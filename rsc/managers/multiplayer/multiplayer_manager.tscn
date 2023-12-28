@@ -41,3 +41,6 @@ text = "Connect"
 [node name="Host" type="Button" parent="Control/MarginContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
 text = "Host"
+
+[connection signal="pressed" from="Control/MarginContainer/CenterContainer/VBoxContainer/Connect" to="ServerManager" method="start_server"]
+[connection signal="pressed" from="Control/MarginContainer/CenterContainer/VBoxContainer/Host" to="ClientManager" method="start_client"]
