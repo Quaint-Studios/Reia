@@ -43,7 +43,8 @@ func start_client():
 	print("Server Started")
 
 ## Stops the server and cleans up.
-func stop_server():
+func stop_client():
+	multiplayer.multiplayer_peer.close()
 	print("Server Stopped")
 
 #
