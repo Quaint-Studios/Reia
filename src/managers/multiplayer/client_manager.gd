@@ -37,9 +37,12 @@ func setup_signals():
 ## Starts the server and updates the peer.
 func start_client():
 	multiplayer.multiplayer_peer = null
-	_client.create_client("ws://" + host + ":" + str(DEF_PORT))
-	multiplayer.multiplayer_peer = _client
-	print_c("Client Started")
+	var err = _client.create_client("ws://" + host + ":" + str(DEF_PORT))
+	if err == Error.OK:
+		multiplayer.multiplayer_peer = _client
+		print_c("Client Started")
+	else:
+		print_c("Error: %s" % Error_EXT.get_error(err))
 
 ## Stops the server and cleans up.
 func stop_client():
