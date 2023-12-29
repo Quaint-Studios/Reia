@@ -64,6 +64,9 @@ func _on_client_disconnected(id: int):
 
 func _on_server_disconnected():
 	print_c("Server Connection Lost")
+
+func _on_host_ip_text_changed():
+	host = (%HostIP as TextEdit).text
 #endregion
 
 func print_c(msg: String, id: int = -1) -> void:
