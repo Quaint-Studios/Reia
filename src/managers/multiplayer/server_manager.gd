@@ -41,9 +41,12 @@ func initialize_server():
 
 ## Starts the server and updates the peer.
 func start_server():
-	_server.create_server(DEF_PORT)
-	multiplayer.multiplayer_peer = _server
-	print_s("Server Started")
+	var err := _server.create_server(DEF_PORT)
+	if err == Error.OK:
+		multiplayer.multiplayer_peer = _server
+		print_s("Server Started")
+	else:
+		print_s("Error: %s" % Error_EXT.get_error(err))
 
 ## Stops the server and cleans up.
 func stop_server():
