@@ -66,4 +66,5 @@ func _on_server_disconnected():
 #endregion
 
 func print_c(msg: String, id: int = -1) -> void:
+	(%Status as Label).text = msg
 	print("Client (%s): %s" % [id, msg])
