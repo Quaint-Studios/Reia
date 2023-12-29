@@ -35,12 +35,9 @@ func setup_signals():
 	multiplayer.peer_connected.connect(_on_client_connected)
 	multiplayer.peer_disconnected.connect(_on_client_disconnected)
 
-## Cleans up the peer.
-func initialize_server():
-	multiplayer.multiplayer_peer = null
-
 ## Starts the server and updates the peer.
 func start_server():
+	multiplayer.multiplayer_peer = null
 	var err := _server.create_server(DEF_PORT)
 	if err == Error.OK:
 		multiplayer.multiplayer_peer = _server
