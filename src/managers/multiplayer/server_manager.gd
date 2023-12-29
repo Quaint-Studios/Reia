@@ -28,7 +28,6 @@ var players := []
 ## Sets up the server.
 func _ready():
 	setup_signals()
-	start_server()
 
 ## Sets up the client connected and disconnected signals.
 func setup_signals():
