@@ -40,12 +40,12 @@ func start_client():
 	multiplayer.multiplayer_peer = null
 	_client.create_client("ws://" + host + ":" + str(DEF_PORT))
 	multiplayer.multiplayer_peer = _client
-	print("Server Started")
+	print_c("Client Started")
 
 ## Stops the server and cleans up.
 func stop_client():
 	multiplayer.multiplayer_peer.close()
-	print("Server Stopped")
+	print_c("Server Stopped")
 
 #
 # func restart_server():
@@ -54,11 +54,14 @@ func stop_client():
 
 #region Signal Handlers
 func _on_client_connected(id: int):
-	print("Client (%d) Connected" % id)
+	print_c("Client (%d) Connected" % id, id)
 
 func _on_client_disconnected(id: int):
-	print("Client (%d) Disconnected" % id)
+	print_c("Client (%d) Disconnected" % id, id)
 
 func _on_server_disconnected():
-	print("Server Connection Lost")
+	print_c("Server Connection Lost")
 #endregion
+
+func print_c(msg: String, id: int = -1) -> void:
+	print("Client (%s): %s" % [id, msg])

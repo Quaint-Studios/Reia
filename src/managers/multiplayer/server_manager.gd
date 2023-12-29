@@ -43,12 +43,12 @@ func initialize_server():
 ## Starts the server and updates the peer.
 func start_server():
 	_server.create_server(DEF_PORT)
-	print("Server Started")
 	multiplayer.multiplayer_peer = _server
+	print_s("Server Started")
 
 ## Stops the server and cleans up.
 func stop_server():
-	print("Server Stopped")
+	print_s("Server Stopped")
 
 #
 # func restart_server():
@@ -62,3 +62,6 @@ func _on_client_connected(id: int):
 func _on_client_disconnected(id: int):
 	print("Client (%d) Disconnected" % id)
 #endregion
+
+func print_s(msg: String) -> void:
+	print("Server: %s" % msg)
