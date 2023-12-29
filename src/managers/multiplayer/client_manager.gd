@@ -33,7 +33,10 @@ func _ready():
 func setup_signals():
 	multiplayer.peer_connected.connect(_on_client_connected)
 	multiplayer.peer_disconnected.connect(_on_client_disconnected)
+
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
+	multiplayer.connection_failed.connect(_on_connection_failed)
+	multiplayer.connected_to_server.connect(_on_connected_to_server)
 
 ## Starts the server and updates the peer.
 func start_client():
@@ -47,7 +50,8 @@ func start_client():
 
 ## Stops the server and cleans up.
 func stop_client():
-	multiplayer.multiplayer_peer.close()
+	multiplayer.multiplayer_peer = null
+	_client.close()
 	print_c("Client Stopped")
 
 #
@@ -63,7 +67,15 @@ func _on_client_disconnected(id: int):
 	print_c("Client (%d) Disconnected" % id, id)
 
 func _on_server_disconnected():
+	stop_client()
 	print_c("Server Connection Lost")
+
+func _on_connection_failed():
+	stop_client()
+	print_c("Connection Failed")
+
+func _on_connected_to_server():
+	print_c("Connected to %s:%s" % [host, DEF_PORT])
 
 func _on_host_ip_text_changed():
 	host = (%HostIP as TextEdit).text
