@@ -26,6 +26,7 @@ var players := []
 
 ## Sets up the server.
 func _ready():
+	_client.supported_protocols = ['ludus']
 	setup_signals()
 
 ## Sets up the client connected and disconnected signals.
