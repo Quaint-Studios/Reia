@@ -47,7 +47,7 @@ func start_client():
 ## Stops the server and cleans up.
 func stop_client():
 	multiplayer.multiplayer_peer.close()
-	print_c("Server Stopped")
+	print_c("Client Stopped")
 
 #
 # func restart_server():
