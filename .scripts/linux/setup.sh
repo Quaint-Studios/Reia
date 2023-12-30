@@ -16,7 +16,7 @@ FILE=$PREFIX$VERSION$SUFFIX
 
 
 # Get Files
-# wget ${URL}/${VERSION}/${FILE}${EXT}
+wget ${URL}/${VERSION}/${FILE}${EXT}
 
 # Generate Checksum for new version of Godot if you need to add it above.
 # sha256sum ./Godot_v${VERSION}_linux.x86_64.zip
