@@ -15,6 +15,9 @@ var _players = {}
 #region Core Funcs
 class TestPlayer:
 	var name: String
+
+	func _init(_name: String):
+		name = _name
 #endregion
 
 
@@ -22,8 +25,8 @@ class TestPlayer:
 ## When a player connects, tell all of the other players
 ## their information.
 @rpc("authority", "reliable")
-func register_player(player: TestPlayer):
+func register_player(player_name: String):
 	var player_id = multiplayer.get_remote_sender_id()
-	_players[player_id] = player
+	_players[player_id] = TestPlayer.new(player_name)
 	player_connected.emit()
 #endregion
