@@ -29,12 +29,19 @@ var players := []
 func _ready():
 	_server.supported_protocols = ['ludus']
 	setup_signals()
+	setup_handlers()
 
 ## Sets up the client connected and disconnected signals.
 func setup_signals():
 	get_tree().set_multiplayer(MultiplayerAPI.create_default_interface(), get_path())
 	multiplayer.peer_connected.connect(_on_client_connected)
 	multiplayer.peer_disconnected.connect(_on_client_disconnected)
+
+func setup_handlers():
+	# for in [MultiplayerHandler, ...]
+	var node = MultiplayerHandler.new()
+	node.name = "MultiplayerHandler"
+	add_child(node)
 
 ## Starts the server and updates the peer.
 func start_server():
