@@ -1,5 +1,5 @@
 class_name ClientManager extends Node
-## Connects to a server.`
+## Connects to a server.
 ##
 ## The ClientManager is a part of the Multiplayer namespace.
 ## It runs on all client devices and handles all client-side
