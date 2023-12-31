@@ -1,0 +1,9 @@
+services:
+  app:
+    image: quaint-studios/reia
+    command: ./builds/server/run
+    ports:
+      - 127.0.0.1:4337:4337
+    working_dir: /app
+    volumes:
+      - ./builds/server:/app
