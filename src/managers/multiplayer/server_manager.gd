@@ -16,7 +16,9 @@ signal stopped
 #region Variables
 #region Configs
 ## Default port.
-const DEF_PORT = 4337
+const DEF_PORT := 4337
+
+var autostart := false
 
 ## Our WebSocketServer instance.
 var _server := WebSocketMultiplayerPeer.new()
@@ -30,6 +32,9 @@ func _ready():
 	_server.supported_protocols = ['ludus']
 	setup_signals()
 	setup_handlers()
+	
+	if autostart:
+		start_server()
 
 ## Sets up the client connected and disconnected signals.
 func setup_signals():
@@ -52,6 +57,9 @@ func start_server():
 		print_s("Server Started")
 	else:
 		print_s("Error: %s" % Error_EXT.get_error(err))
+
+		if autostart:
+			get_tree().quit()
 
 ## Stops the server and cleans up.
 func stop_server():
