@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dgpnu1i4wpcpm"]
+[gd_scene load_steps=6 format=3 uid="uid://dgpnu1i4wpcpm"]
 
 [ext_resource type="Script" path="res://scripts/managers/game_manager.gd" id="1_scrx5"]
 [ext_resource type="Script" path="res://scripts/managers/ui_manager.gd" id="2_ebcnw"]
 [ext_resource type="Script" path="res://scripts/managers/debug_manager.gd" id="2_h5l7x"]
 [ext_resource type="Script" path="res://scenes/managers/DiscordManager.gd" id="4_gpq3t"]
+[ext_resource type="Script" path="res://src/managers/multiplayer/multiplayer_manager.gd" id="5_rbwhc"]
 
 [node name="Managers" type="Node"]
 
@@ -24,3 +25,6 @@ text = "FPS: N/A"
 
 [node name="DiscordManager" type="Node" parent="."]
 script = ExtResource("4_gpq3t")
+
+[node name="MultiplayerManager" type="Node" parent="."]
+script = ExtResource("5_rbwhc")
