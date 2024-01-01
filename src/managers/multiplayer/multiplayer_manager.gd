@@ -3,6 +3,7 @@ class_name MultiplayerManager extends Node
 var myClient : ClientManager
 var myServer : ServerManager
 var handler : MultiplayerHandler
+var player_name : String
 
 enum Status { UNSET, CLIENT, SERVER, BOTH, OFFLINE }
 var status = Status.UNSET
