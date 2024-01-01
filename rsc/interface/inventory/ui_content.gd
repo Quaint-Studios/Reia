@@ -8,7 +8,7 @@ func change_tab(tab: Inventory.Tab):
 		content.hide()
 
 	var current_content: UI_ContentType = get_node("Content_%s" % current_tab_node) as UI_ContentType
-	var category_data := GameManager.player.inventory.get_category(current_tab)
+	var category_data := GameManager.instance.player.inventory.get_category(current_tab)
 	if current_content != null:
 		current_content.show()
 		current_content.load_content(category_data)

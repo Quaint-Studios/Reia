@@ -3,7 +3,7 @@
 @export var save_my_player := false:
 	set(value):
 		print("saving player (1)...")
-		SaveManager.save_player(GameManager.player)
+		SaveManager.save_player(GameManager.instance.player)
 		print("player saved.")
 		save_my_player = false
 

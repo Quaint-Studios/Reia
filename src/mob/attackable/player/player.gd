@@ -28,8 +28,8 @@ func _ready():
 		%AnimationTree.active = true
 
 func _exit_tree():
-	if !Engine.is_editor_hint() && GameManager.player == self:
-		GameManager.player = null
+	if !Engine.is_editor_hint() && GameManager.instance.player == self:
+		GameManager.instance.player = null
 
 func _process(_delta):
 	if position.y <= -10: # handle falling off the map for now
