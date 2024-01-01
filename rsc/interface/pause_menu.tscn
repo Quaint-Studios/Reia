@@ -9,7 +9,7 @@ func _input(event: InputEvent):
 	if GameManager.current_ui == GameManager.UI_TYPES.PLAY:
 		if event.is_action_pressed(\"quit\"):
 			GameManager.instance.player.paused = true
-			GameManager.current_ui == GameManager.UI_TYPES.PAUSE
+			GameManager.current_ui = GameManager.UI_TYPES.PAUSE
 		return
 
 	if GameManager.current_ui == GameManager.UI_TYPES.PAUSE:
@@ -19,6 +19,7 @@ func _input(event: InputEvent):
 func resume():
 	GameManager.instance.player.paused = false
 	GameManager.current_ui = GameManager.UI_TYPES.PLAY
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _on_resume_pressed():
 	GameManager.instance.player.paused = false
