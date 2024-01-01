@@ -15,10 +15,12 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera: Camera3D = $CameraPivot/Camera
 
+func _init():
+	if !Engine.is_editor_hint() && GameManager.player == null:
+		GameManager.player = self
+
 func _ready():
 	add_to_group("player")
-	#if GameManager.player == null:
-	GameManager.player = self
 
 	if !stats is PlayerStats:
 		print_debug("Bug: The stats of %s is not of type PlayerStats" % name)
@@ -28,6 +30,10 @@ func _ready():
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 		
 		%AnimationTree.active = true
+
+func _exit_tree():
+	if !Engine.is_editor_hint() && GameManager.player == self:
+		GameManager.player = null
 
 func _process(_delta):
 	if position.y <= -10: # handle falling off the map for now
