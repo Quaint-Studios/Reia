@@ -8,6 +8,6 @@ enum Maps { REIA }
 
 func _ready():
 	if OS.has_feature("dedicated_server") || DisplayServer.get_name() == "headless" ||  "--server" in OS.get_cmdline_user_args():
-		get_tree().change_scene_to_file(SceneSelector.REIA)
+		get_tree().change_scene_to_file.call_deferred(SceneSelector.REIA)
 	else:
-		get_tree().change_scene_to_file(SceneSelector.MAIN_MENU)
+		get_tree().change_scene_to_file.call_deferred(SceneSelector.MAIN_MENU)
