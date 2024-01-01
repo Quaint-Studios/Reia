@@ -59,7 +59,7 @@ func hide_inventory_ui(ui: UIManager.UI_TYPES):
 func setup_ui():
 	UIManager.instance.close_ui.connect(hide_inventory_ui)
 	
-	if GameManager.player.inventory != null:
+	if GameManager.instance.player.inventory != null:
 		content.change_tab(last_category)
 
 func _on_tab_changed(tab: Inventory.Tab):
