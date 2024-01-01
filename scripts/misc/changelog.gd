@@ -4,7 +4,9 @@ const fs = preload("res://scripts/utils/fs.gd")
 const changelog_prefab = preload("res://changelogs/changelog.tscn")
 const h_divider_prefab = preload("res://changelogs/h_divider.tscn")
 
-@onready var changelog_holder = $Margin/Panel/Margin/Scroll/List
+@onready var changelog_holder := %ChangelogHolder as VBoxContainer
+@onready var changelog_panel := %ChangelogPanel as Panel
+
 
 func _ready() -> void:
 	get_changelogs()
@@ -115,3 +117,7 @@ func array_to_listtext(arr: Array):
 		final_string += "• " + item + "\n"
 
 	return final_string
+
+
+func _on_toggle_changelogs_toggled(toggled_on):
+	changelog_panel.visible = toggled_on

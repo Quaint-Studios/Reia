@@ -1,30 +1,19 @@
-[gd_scene load_steps=13 format=3 uid="uid://cqxplnocmdh0f"]
+[gd_scene load_steps=10 format=3 uid="uid://cqxplnocmdh0f"]
 
 [ext_resource type="LightmapGIData" uid="uid://hhl6lqi7s8us" path="res://scenes/main_menu/main_menu.lmbake" id="1_28juw"]
 [ext_resource type="Script" path="res://scenes/main_menu/main_menu.gd" id="1_3638y"]
 [ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="2_ofhs3"]
 [ext_resource type="AudioStream" uid="uid://bjmsfaw5a1nh5" path="res://assets/audio/menu/forest_theme_v1.wav" id="3_3o1dl"]
-[ext_resource type="Theme" uid="uid://cvudtn0hd6gap" path="res://scenes/main_menu/main_menu.tres" id="4_r7mv3"]
 [ext_resource type="Shader" path="res://rsc/shaders/drop_shadow.gdshader" id="6_7rsuc"]
 [ext_resource type="PackedScene" uid="uid://cykr5gmvdm7xf" path="res://assets/characters/player/female_player.glb" id="7_g5ofp"]
 [ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/icons/logo_a_flat_white_68.svg" id="7_p8u4n"]
-[ext_resource type="Script" path="res://scripts/misc/changelog.gd" id="8_6sbgs"]
+[ext_resource type="PackedScene" uid="uid://ci266clm01pqr" path="res://rsc/scenes/1_main_menu/changelog.tscn" id="9_haptq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4eypw"]
 shader = ExtResource("6_7rsuc")
 shader_parameter/background_color = Color(1, 1, 1, 1)
 shader_parameter/shadow_color = Color(0.196078, 0.196078, 0.196078, 0.356863)
 shader_parameter/offset_in_pixels = Vector2(4, 8)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxt2h"]
-bg_color = Color(0.984314, 0.980392, 0.960784, 0.784314)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
-
-[sub_resource type="Theme" id="Theme_mb7q1"]
-Panel/styles/panel = SubResource("StyleBoxFlat_nxt2h")
 
 [node name="Map_MainMenu" type="Node"]
 script = ExtResource("1_3638y")
@@ -122,7 +111,7 @@ omni_range = 10.0
 
 [node name="UI" type="Node" parent="."]
 
-[node name="Control" type="Control" parent="UI"]
+[node name="Menu" type="Control" parent="UI"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -130,7 +119,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="UI/Control"]
+[node name="TextureRect" type="TextureRect" parent="UI/Menu"]
 material = SubResource("ShaderMaterial_4eypw")
 layout_mode = 1
 anchors_preset = 5
@@ -144,7 +133,7 @@ texture = ExtResource("7_p8u4n")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Selectors" type="Control" parent="UI/Control"]
+[node name="Selectors" type="Control" parent="UI/Menu"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -153,7 +142,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_lock_ = true
 
-[node name="Margins" type="MarginContainer" parent="UI/Control/Selectors"]
+[node name="Margins" type="MarginContainer" parent="UI/Menu/Selectors"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -164,102 +153,115 @@ grow_vertical = 0
 theme_override_constants/margin_left = 48
 theme_override_constants/margin_bottom = 64
 
-[node name="Main" type="VBoxContainer" parent="UI/Control/Selectors/Margins"]
+[node name="Main" type="VBoxContainer" parent="UI/Menu/Selectors/Margins"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="Play" type="Button" parent="UI/Control/Selectors/Margins/Main"]
+[node name="Play" type="Button" parent="UI/Menu/Selectors/Margins/Main"]
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 32
 text = "Play"
+flat = true
 alignment = 0
 
-[node name="Settings" type="Button" parent="UI/Control/Selectors/Margins/Main"]
+[node name="Settings" type="Button" parent="UI/Menu/Selectors/Margins/Main"]
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 32
 text = "Settings"
+flat = true
 alignment = 0
 
-[node name="Exit" type="Button" parent="UI/Control/Selectors/Margins/Main"]
+[node name="Exit" type="Button" parent="UI/Menu/Selectors/Margins/Main"]
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 32
 text = "Exit"
+flat = true
 alignment = 0
 
-[node name="Settings" type="VBoxContainer" parent="UI/Control/Selectors/Margins"]
+[node name="Settings" type="VBoxContainer" parent="UI/Menu/Selectors/Margins"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="ContainerLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Settings"]
+[node name="ContainerLabel" type="Label" parent="UI/Menu/Selectors/Margins/Settings"]
 custom_minimum_size = Vector2(180, 50.18)
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
-bbcode_enabled = true
-text = "[font_size=36]Settings"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 42
+text = "Settings"
 
-[node name="Controls" type="Button" parent="UI/Control/Selectors/Margins/Settings"]
+[node name="Controls" type="Button" parent="UI/Menu/Selectors/Margins/Settings"]
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 32
 text = "Controls"
 alignment = 0
 
-[node name="Volume" type="Button" parent="UI/Control/Selectors/Margins/Settings"]
+[node name="Volume" type="Button" parent="UI/Menu/Selectors/Margins/Settings"]
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 32
 text = "Volume"
 alignment = 0
 
-[node name="Back" type="Button" parent="UI/Control/Selectors/Margins/Settings"]
+[node name="Back" type="Button" parent="UI/Menu/Selectors/Margins/Settings"]
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 32
 text = "Back"
 alignment = 0
 
-[node name="Controls" type="VBoxContainer" parent="UI/Control/Selectors/Margins"]
+[node name="Controls" type="VBoxContainer" parent="UI/Menu/Selectors/Margins"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="ContainerLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Controls"]
+[node name="ContainerLabel" type="Label" parent="UI/Menu/Selectors/Margins/Controls"]
 custom_minimum_size = Vector2(180, 50.18)
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
-bbcode_enabled = true
-text = "[font_size=36]Controls"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 42
+text = "Controls"
 
-[node name="Back" type="Button" parent="UI/Control/Selectors/Margins/Controls"]
+[node name="Back" type="Button" parent="UI/Menu/Selectors/Margins/Controls"]
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 32
 text = "Back"
+flat = true
 alignment = 0
 
-[node name="Volume" type="VBoxContainer" parent="UI/Control/Selectors/Margins"]
+[node name="Volume" type="VBoxContainer" parent="UI/Menu/Selectors/Margins"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="ContainerLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume"]
+[node name="ContainerLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume"]
 custom_minimum_size = Vector2(180, 50.18)
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
-bbcode_enabled = true
-text = "[font_size=36]Volumes"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
+text = "Volumes"
 
-[node name="MasterContainer" type="HBoxContainer" parent="UI/Control/Selectors/Margins/Volume"]
+[node name="MasterContainer" type="HBoxContainer" parent="UI/Menu/Selectors/Margins/Volume"]
 layout_mode = 2
 
-[node name="MasterLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/MasterContainer"]
-custom_minimum_size = Vector2(180, 34)
+[node name="MasterLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/MasterContainer"]
+custom_minimum_size = Vector2(220.76, 34)
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
 text = "Master"
+vertical_alignment = 1
 
-[node name="MasterVolume" type="HSlider" parent="UI/Control/Selectors/Margins/Volume/MasterContainer"]
+[node name="MasterVolume" type="HSlider" parent="UI/Menu/Selectors/Margins/Volume/MasterContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
@@ -268,24 +270,28 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
-[node name="MasterVolumeLabel" type="Label" parent="UI/Control/Selectors/Margins/Volume/MasterContainer"]
+[node name="MasterVolumeLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/MasterContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 34)
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
 text = "100%"
 horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="Music Container" type="HBoxContainer" parent="UI/Control/Selectors/Margins/Volume"]
+[node name="Music Container" type="HBoxContainer" parent="UI/Menu/Selectors/Margins/Volume"]
 layout_mode = 2
 
-[node name="MusicLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/Music Container"]
-custom_minimum_size = Vector2(180, 34)
+[node name="MusicLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/Music Container"]
+custom_minimum_size = Vector2(220.76, 34)
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
 text = "Music"
+vertical_alignment = 1
 
-[node name="MusicVolume" type="HSlider" parent="UI/Control/Selectors/Margins/Volume/Music Container"]
+[node name="MusicVolume" type="HSlider" parent="UI/Menu/Selectors/Margins/Volume/Music Container"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
@@ -294,24 +300,28 @@ max_value = 1.0
 step = 0.01
 value = 0.5
 
-[node name="MusicVolumeLabel" type="Label" parent="UI/Control/Selectors/Margins/Volume/Music Container"]
+[node name="MusicVolumeLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/Music Container"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 34)
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
 text = "50%"
 horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="SFXContainer" type="HBoxContainer" parent="UI/Control/Selectors/Margins/Volume"]
+[node name="SFXContainer" type="HBoxContainer" parent="UI/Menu/Selectors/Margins/Volume"]
 layout_mode = 2
 
-[node name="SFXLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/SFXContainer"]
-custom_minimum_size = Vector2(180, 34)
+[node name="SFXLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/SFXContainer"]
+custom_minimum_size = Vector2(220.76, 34)
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
 text = "Sound Effects"
+vertical_alignment = 1
 
-[node name="SFXVolume" type="HSlider" parent="UI/Control/Selectors/Margins/Volume/SFXContainer"]
+[node name="SFXVolume" type="HSlider" parent="UI/Menu/Selectors/Margins/Volume/SFXContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
@@ -320,24 +330,28 @@ max_value = 1.0
 step = 0.01
 value = 0.5
 
-[node name="SFXVolumeLabel" type="Label" parent="UI/Control/Selectors/Margins/Volume/SFXContainer"]
+[node name="SFXVolumeLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/SFXContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 34)
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
 text = "50%"
 horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="UIContainer" type="HBoxContainer" parent="UI/Control/Selectors/Margins/Volume"]
+[node name="UIContainer" type="HBoxContainer" parent="UI/Menu/Selectors/Margins/Volume"]
 layout_mode = 2
 
-[node name="UILabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/UIContainer"]
-custom_minimum_size = Vector2(180, 34)
+[node name="UILabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/UIContainer"]
+custom_minimum_size = Vector2(220.76, 34)
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
 text = "UI Volume"
+vertical_alignment = 1
 
-[node name="UIVolume" type="HSlider" parent="UI/Control/Selectors/Margins/Volume/UIContainer"]
+[node name="UIVolume" type="HSlider" parent="UI/Menu/Selectors/Margins/Volume/UIContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
@@ -346,24 +360,28 @@ max_value = 1.0
 step = 0.01
 value = 0.6
 
-[node name="UIVolumeLabel" type="Label" parent="UI/Control/Selectors/Margins/Volume/UIContainer"]
+[node name="UIVolumeLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/UIContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 34)
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
 text = "60%"
 horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="DialogueContainer" type="HBoxContainer" parent="UI/Control/Selectors/Margins/Volume"]
+[node name="DialogueContainer" type="HBoxContainer" parent="UI/Menu/Selectors/Margins/Volume"]
 layout_mode = 2
 
-[node name="DialogueLabel" type="RichTextLabel" parent="UI/Control/Selectors/Margins/Volume/DialogueContainer"]
-custom_minimum_size = Vector2(180, 34)
+[node name="DialogueLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/DialogueContainer"]
+custom_minimum_size = Vector2(220.76, 34)
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
 text = "Dialogue"
+vertical_alignment = 1
 
-[node name="DialogueVolume" type="HSlider" parent="UI/Control/Selectors/Margins/Volume/DialogueContainer"]
+[node name="DialogueVolume" type="HSlider" parent="UI/Menu/Selectors/Margins/Volume/DialogueContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 34)
 layout_mode = 2
@@ -372,79 +390,34 @@ max_value = 1.0
 step = 0.01
 value = 0.75
 
-[node name="DialogueVolumeLabel" type="Label" parent="UI/Control/Selectors/Margins/Volume/DialogueContainer"]
+[node name="DialogueVolumeLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/DialogueContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(90, 34)
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
 text = "75%"
 horizontal_alignment = 2
+vertical_alignment = 1
 
-[node name="Back" type="Button" parent="UI/Control/Selectors/Margins/Volume"]
+[node name="Back" type="Button" parent="UI/Menu/Selectors/Margins/Volume"]
 layout_mode = 2
-theme = ExtResource("4_r7mv3")
+theme_override_font_sizes/font_size = 32
 text = "Back"
 alignment = 0
 
-[node name="Changelog" type="Control" parent="UI"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-script = ExtResource("8_6sbgs")
-metadata/_edit_lock_ = true
+[node name="Changelog" parent="UI" instance=ExtResource("9_haptq")]
 
-[node name="Margin" type="MarginContainer" parent="UI/Changelog"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 0.827
-offset_left = -424.0
-offset_bottom = 0.104004
-grow_horizontal = 0
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-
-[node name="Panel" type="Panel" parent="UI/Changelog/Margin"]
-custom_minimum_size = Vector2(400, 512)
-layout_mode = 2
-mouse_filter = 2
-theme = SubResource("Theme_mb7q1")
-
-[node name="Margin" type="MarginContainer" parent="UI/Changelog/Margin/Panel"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 12
-theme_override_constants/margin_top = 12
-theme_override_constants/margin_right = 12
-theme_override_constants/margin_bottom = 12
-
-[node name="Scroll" type="ScrollContainer" parent="UI/Changelog/Margin/Panel/Margin"]
-layout_mode = 2
-horizontal_scroll_mode = 0
-
-[node name="List" type="VBoxContainer" parent="UI/Changelog/Margin/Panel/Margin/Scroll"]
-layout_mode = 2
-theme_override_constants/separation = 36
-
-[connection signal="pressed" from="UI/Control/Selectors/Margins/Main/Play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="UI/Control/Selectors/Margins/Main/Settings" to="." method="_on_settings_pressed"]
-[connection signal="pressed" from="UI/Control/Selectors/Margins/Main/Exit" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="UI/Control/Selectors/Margins/Settings/Controls" to="." method="_on_controls_pressed"]
-[connection signal="pressed" from="UI/Control/Selectors/Margins/Settings/Volume" to="." method="_on_volume_pressed"]
-[connection signal="pressed" from="UI/Control/Selectors/Margins/Settings/Back" to="." method="_on_back_pressed"]
-[connection signal="pressed" from="UI/Control/Selectors/Margins/Controls/Back" to="." method="_on_back_pressed"]
-[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/MasterContainer/MasterVolume" to="." method="_on_master_volume_changed"]
-[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/Music Container/MusicVolume" to="." method="_on_music_volume_changed"]
-[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/SFXContainer/SFXVolume" to="." method="_on_sfx_volume_changed"]
-[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/UIContainer/UIVolume" to="." method="_on_ui_volume_changed"]
-[connection signal="value_changed" from="UI/Control/Selectors/Margins/Volume/DialogueContainer/DialogueVolume" to="." method="_on_dialogue_volume_changed"]
-[connection signal="pressed" from="UI/Control/Selectors/Margins/Volume/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/Margins/Main/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/Margins/Main/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/Margins/Main/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/Margins/Settings/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/Margins/Settings/Volume" to="." method="_on_volume_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/Margins/Settings/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/Margins/Controls/Back" to="." method="_on_back_pressed"]
+[connection signal="value_changed" from="UI/Menu/Selectors/Margins/Volume/MasterContainer/MasterVolume" to="." method="_on_master_volume_changed"]
+[connection signal="value_changed" from="UI/Menu/Selectors/Margins/Volume/Music Container/MusicVolume" to="." method="_on_music_volume_changed"]
+[connection signal="value_changed" from="UI/Menu/Selectors/Margins/Volume/SFXContainer/SFXVolume" to="." method="_on_sfx_volume_changed"]
+[connection signal="value_changed" from="UI/Menu/Selectors/Margins/Volume/UIContainer/UIVolume" to="." method="_on_ui_volume_changed"]
+[connection signal="value_changed" from="UI/Menu/Selectors/Margins/Volume/DialogueContainer/DialogueVolume" to="." method="_on_dialogue_volume_changed"]
+[connection signal="pressed" from="UI/Menu/Selectors/Margins/Volume/Back" to="." method="_on_back_pressed"]
