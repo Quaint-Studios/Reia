@@ -15,6 +15,12 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera: Camera3D = $CameraPivot/Camera
 
+var paused := false:
+	set(value):
+		if is_node_ready() && %PauseMenu != null:
+			%PauseMenu.visible = value
+		paused = value
+
 func _ready():
 	add_to_group("player")
 
@@ -31,7 +37,13 @@ func _exit_tree():
 	if !Engine.is_editor_hint() && GameManager.instance.player == self:
 		GameManager.instance.player = null
 
+func should_move() -> bool:
+	return GameManager.instance.player == self
+
 func _process(_delta):
+	if !should_move():
+		return
+	
 	if position.y <= -10: # handle falling off the map for now
 		position.y = 1
 		velocity = Vector3.ZERO
@@ -41,6 +53,9 @@ func _process(_delta):
 		# and break the game lol.
 
 func _unhandled_input(event: InputEvent):
+	if !should_move():
+		return
+
 	if event is InputEventMouseButton:
 		print("Mouse Click/Unclick at: ", event.position)
 		pass
@@ -49,6 +64,9 @@ func _unhandled_input(event: InputEvent):
 		pass
 
 func _physics_process(delta: float):
+	if !should_move():
+		return
+
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y -= gravity * delta
