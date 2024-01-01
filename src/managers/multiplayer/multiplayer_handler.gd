@@ -13,11 +13,7 @@ var _players = {}
 #endregion
 
 #region Core Funcs
-class TestPlayer:
-	var name: String
-
-	func _init(_name: String):
-		name = _name
+# ...
 #endregion
 
 
@@ -25,9 +21,9 @@ class TestPlayer:
 ## When a player connects, tell all of the other players
 ## their information.
 @rpc("authority", "reliable")
-func register_player(player_name: String):
+func register_player(id: int, player_name: String):
 	var player_id = multiplayer.get_remote_sender_id()
-	_players[player_id] = TestPlayer.new(player_name)
+	_players[player_id] = player_name # Store the ID and name and spawn a player with the ID to match.
 	player_connected.emit()
 #endregion
 
@@ -35,4 +31,8 @@ func register_player(player_name: String):
 @rpc("any_peer", "call_local", "reliable")
 func update_name(player_name: String):
 	if multiplayer.is_server():
-		register_player.rpc_id(1, player_name) # Tell the server... SAY MY NAME!
+		var player_id = multiplayer.get_remote_sender_id()
+		register_player.rpc(player_id, player_name)
+	else:
+		update_name.rpc_id(1, player_name) # Tell the server... SAY MY NAME!
+#endregion
