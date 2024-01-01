@@ -17,13 +17,13 @@ static func save_player(player: Player):
 	var save_path := get_player_path(player.name)
 
 	var data := player.toJSON()
-	
+
 	var json_string = JSON.stringify(data)
-	
+
 	print(json_string)
 
 static func load_player(player_name: String):
 	var save_path := get_player_path(player_name)
-	
+
 	if ResourceLoader.has_cached(save_path):
 		return ResourceLoader.load(save_path, "", ResourceLoader.CACHE_MODE_REUSE)
