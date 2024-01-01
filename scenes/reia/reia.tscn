@@ -1,18 +1,14 @@
-[gd_scene load_steps=47 format=3 uid="uid://njgkawiv7sdy"]
+[gd_scene load_steps=37 format=3 uid="uid://njgkawiv7sdy"]
 
 [ext_resource type="LightmapGIData" uid="uid://bog8vgj034dhh" path="res://scenes/reia/reia.lmbake" id="1_6htgl"]
+[ext_resource type="Script" path="res://src/map_handler.gd" id="1_ey6tk"]
 [ext_resource type="PackedScene" uid="uid://bmicgu6inl8e5" path="res://assets/characters/npcs/larry.tscn" id="2_w4lqh"]
 [ext_resource type="PackedScene" uid="uid://op561o2k0d4o" path="res://assets/characters/enemies/aqua_wizard.tscn" id="3_jgoiv"]
-[ext_resource type="PackedScene" uid="uid://eicmer2kdgy" path="res://scripts/mob/attackable/player/my_player.tscn" id="3_m63h2"]
-[ext_resource type="Script" path="res://src/combat/human_stats.gd" id="4_t015h"]
 [ext_resource type="PackedScene" uid="uid://bm6j14ip2oywr" path="res://assets/world/rocks/collections/stylized_rocks.glb" id="5_glpdm"]
 [ext_resource type="Script" path="res://src/combat/equipment_stats.gd" id="5_hvrw0"]
-[ext_resource type="Script" path="res://src/combat/player_stats.gd" id="5_r7h1h"]
-[ext_resource type="Script" path="res://src/combat/spirit_stats.gd" id="6_feg1l"]
 [ext_resource type="Script" path="res://src/combat/enemy_stats.gd" id="6_vhqti"]
 [ext_resource type="Script" path="res://src/combat/weapon_stats.gd" id="7_pp4yv"]
 [ext_resource type="PackedScene" uid="uid://bj7e34l2ty1yt" path="res://assets/world/trees/compositions/stylized_tree.glb" id="8_bup5i"]
-[ext_resource type="Script" path="res://src/combat/attackable_status.gd" id="8_iaf0c"]
 [ext_resource type="Script" path="res://src/item/loot_spawner.gd" id="8_k5h4v"]
 [ext_resource type="PackedScene" uid="uid://dtyekwmou34bm" path="res://rsc/models/dropped_items/dropped_items.tscn" id="8_x6olo"]
 [ext_resource type="PackedScene" uid="uid://bvb75kmlbcbav" path="res://assets/world/fountains/stylized_fountain.glb" id="9_ksg1v"]
@@ -31,85 +27,6 @@
 [ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="29_xa4mj"]
 [ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="31_5e1if"]
 [ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="32_j5p2l"]
-
-[sub_resource type="Resource" id="Resource_ifdwj"]
-script = ExtResource("5_hvrw0")
-melee_power = 10
-bow_power = 10
-spell_power = 10
-melee_defense = 10
-bow_defense = 10
-spell_defense = 10
-crit_chance = 0.0
-crit_damage = 0.0
-
-[sub_resource type="Resource" id="Resource_6uydj"]
-script = ExtResource("4_t015h")
-equipment_stats = SubResource("Resource_ifdwj")
-combat_mode = 0
-ether = 100
-max_ether = 100
-health = 100
-max_health = 100
-melee_power = 10
-bow_power = 10
-spell_power = 10
-melee_defense = 10
-bow_defense = 10
-spell_defense = 10
-crit_chance = 0.0
-crit_damage = 0.0
-
-[sub_resource type="Resource" id="Resource_tude2"]
-script = ExtResource("7_pp4yv")
-weapon_type = 0
-damage_type = 0
-melee_power = 10
-bow_power = 10
-spell_power = 10
-melee_defense = 10
-bow_defense = 10
-spell_defense = 10
-crit_chance = 0.0
-crit_damage = 0.0
-
-[sub_resource type="Resource" id="Resource_ldjrf"]
-script = ExtResource("6_feg1l")
-weapon_stats = SubResource("Resource_tude2")
-ether = 100
-max_ether = 100
-health = 100
-max_health = 100
-melee_power = 10
-bow_power = 10
-spell_power = 10
-melee_defense = 10
-bow_defense = 10
-spell_defense = 10
-crit_chance = 0.0
-crit_damage = 0.0
-
-[sub_resource type="Resource" id="Resource_34n83"]
-script = ExtResource("5_r7h1h")
-human = SubResource("Resource_6uydj")
-spirits = Array[Object]([SubResource("Resource_ldjrf")])
-current_spirit = -1
-ether = 100
-max_ether = 100
-health = 100
-max_health = 100
-melee_power = 10
-bow_power = 10
-spell_power = 10
-melee_defense = 10
-bow_defense = 10
-spell_defense = 10
-crit_chance = 0.0
-crit_damage = 0.0
-
-[sub_resource type="Resource" id="Resource_pm15j"]
-script = ExtResource("8_iaf0c")
-state = 0
 
 [sub_resource type="Resource" id="Resource_setwf"]
 script = ExtResource("5_hvrw0")
@@ -150,7 +67,7 @@ spell_defense = 10
 crit_chance = 0.0
 crit_damage = 0.0
 
-[sub_resource type="Resource" id="Resource_dnvj7"]
+[sub_resource type="Resource" id="Resource_wk7bs"]
 script = ExtResource("27_c0ur8")
 radius = 0.18
 samples_before_rejection = 10
@@ -160,7 +77,7 @@ custom_seed = 0
 restrict_height = true
 reference_frame = 1
 
-[sub_resource type="Resource" id="Resource_ojo56"]
+[sub_resource type="Resource" id="Resource_xvll2"]
 script = ExtResource("28_vk0p2")
 operation = 0
 position = Vector3(0, -0.425, 0)
@@ -170,7 +87,7 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 0
 
-[sub_resource type="Resource" id="Resource_2oa76"]
+[sub_resource type="Resource" id="Resource_3j0mq"]
 script = ExtResource("29_n5ttu")
 operation = 1
 scale = Vector3(1, 1, 1)
@@ -180,9 +97,9 @@ custom_seed = 0
 restrict_height = false
 reference_frame = 2
 
-[sub_resource type="Resource" id="Resource_nr8jg"]
+[sub_resource type="Resource" id="Resource_chsjo"]
 script = ExtResource("26_gpakv")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_dnvj7"), SubResource("Resource_ojo56"), SubResource("Resource_2oa76")])
+stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_wk7bs"), SubResource("Resource_xvll2"), SubResource("Resource_3j0mq")])
 
 [sub_resource type="Resource" id="Resource_ncy2b"]
 script = ExtResource("32_j5p2l")
@@ -191,18 +108,15 @@ radius = 4.0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epo51"]
 albedo_color = Color(0.266667, 1, 0.12549, 1)
 
-[node name="Map_Reia" type="Node"]
+[node name="Map_Reia" type="Node" groups=["map"]]
+script = ExtResource("1_ey6tk")
 
 [node name="LightmapGI" type="LightmapGI" parent="."]
 directional = true
 light_data = ExtResource("1_6htgl")
 
 [node name="Players" type="Node" parent="."]
-
-[node name="MyPlayer" parent="Players" instance=ExtResource("3_m63h2")]
-transform = Transform3D(0.998268, 0, -0.0588184, 0, 1, 0, 0.0588184, 0, 0.998268, 1.26472, -0.756826, 3.37216)
-stats = SubResource("Resource_34n83")
-status = SubResource("Resource_pm15j")
+unique_name_in_owner = true
 
 [node name="NPCs" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.57933, -0.75015, 1.28274)
@@ -256,7 +170,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.59507, -0.757559, 11.8945)
 [node name="ProtonScatter" type="Node3D" parent="Terrain/Groundings"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2259, -0.330719, 13.0612)
 script = ExtResource("25_dy2rl")
-modifier_stack = SubResource("Resource_nr8jg")
+modifier_stack = SubResource("Resource_chsjo")
 Performance/use_chunks = true
 Performance/chunk_dimensions = Vector3(1, 1, 1)
 

@@ -1,5 +1,6 @@
 class_name GameManager extends Node
 
+static var myPlayer = preload("res://scripts/mob/attackable/player/my_player.tscn")
 static var player: Player
 
 static var current_ui: UI_TYPES = UI_TYPES.MAIN_MENU :
@@ -17,10 +18,33 @@ static var current_ui: UI_TYPES = UI_TYPES.MAIN_MENU :
 static func _on_current_ui_change(value: UI_TYPES) -> UI_TYPES: return value
 enum UI_TYPES { PLAY, PAUSE, MAIN_MENU, INVENTORY }
 
+static var instance: GameManager
+
+func _init():
+	if instance == null:
+		instance = self
+	else:
+		self.queue_free()
+
 func _ready():
 	GameManager.update_fps()
 	GameManager.setup_sound_manager()
 	GameManager.set_window_size()
+
+func load_player():
+	print(get_node("/root/Map_Reia"))
+	
+	if !get_tree().get_current_scene().is_in_group("map"):
+		print("The current scene is not a map. Can't load the player.")
+
+	var map = get_tree().get_current_scene() as MapHandler
+	
+	var newPlayer := myPlayer.instantiate() as Player
+	
+	if !Engine.is_editor_hint() && GameManager.player == null:
+		print("Setting player")
+		GameManager.player = newPlayer
+	map.players.add_child(newPlayer)
 
 func _input(_event: InputEvent):
 	# Let the UI handle the rest
