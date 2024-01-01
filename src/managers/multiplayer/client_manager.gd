@@ -6,7 +6,9 @@ class_name ClientManager extends Node
 ## functionality.
 
 #region Signals
-# ...
+signal connecting
+signal connected
+signal disconnected
 #endregion
 
 #region Variables
@@ -23,7 +25,15 @@ var _client := WebSocketMultiplayerPeer.new()
 
 enum Status { DISCONNECTED, CONNECTED, CONNECTING }
 
-var status := Status.DISCONNECTED
+var status := Status.DISCONNECTED:
+	set(value):
+		match value:
+			Status.CONNECTING:
+				connecting.emit()
+			Status.CONNECTED:
+				connected.emit()
+			Status.DISCONNECTED:
+				disconnected.emit()
 
 var players := []
 #endregion
