@@ -1,11 +1,11 @@
-[gd_scene load_steps=55 format=3 uid="uid://bgui6d70qmbu1"]
+[gd_scene load_steps=52 format=3 uid="uid://bgui6d70qmbu1"]
 
-[ext_resource type="Shader" path="res://shaders/screen_space/blur.gdshader" id="1_5pek2"]
 [ext_resource type="Script" path="res://rsc/interface/inventory/ui_inventory.gd" id="1_b67wi"]
 [ext_resource type="PackedScene" uid="uid://jsgmocccagip" path="res://rsc/interface/inventory/sub_category.tscn" id="2_f6ox2"]
 [ext_resource type="Texture2D" uid="uid://b5e3in4j2d35n" path="res://rsc/icons/inventory/gradient_orb.svg" id="2_gjblk"]
 [ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/icons/logo_a_flat_white_68.svg" id="2_i2528"]
 [ext_resource type="Texture2D" uid="uid://dm1q0jbofjvsx" path="res://rsc/icons/inventory/filter_icon_84.svg" id="2_k344c"]
+[ext_resource type="PackedScene" uid="uid://dsy7bxowv7qkc" path="res://rsc/interface/blur.tscn" id="2_r7ryb"]
 [ext_resource type="PackedScene" uid="uid://wgv40a1vxert" path="res://rsc/interface/inventory/item.tscn" id="3_21nmv"]
 [ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="3_b7ukm"]
 [ext_resource type="FontFile" uid="uid://cnk30iahnvsd2" path="res://rsc/fonts/Roboto/Roboto-Black.ttf" id="3_l1es0"]
@@ -25,20 +25,6 @@
 [ext_resource type="Script" path="res://rsc/interface/inventory/ui_sidebar.gd" id="16_v465c"]
 [ext_resource type="Script" path="res://rsc/interface/inventory/ui_bottombar.gd" id="20_j36ox"]
 [ext_resource type="Script" path="res://rsc/interface/inventory/ui_enhancement.gd" id="23_aj5fo"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ddyyk"]
-shader = ExtResource("1_5pek2")
-shader_parameter/amount = 2.0
-
-[sub_resource type="Gradient" id="Gradient_64ut1"]
-colors = PackedColorArray(0.498039, 0.498039, 0.498039, 0.301961, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ku7ej"]
-gradient = SubResource("Gradient_64ut1")
-width = 128
-fill_from = Vector2(0.5, 0)
-fill_to = Vector2(0.5, 1)
-metadata/_snap_enabled = true
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gryqn"]
 bg_color = Color(1, 1, 1, 0.101961)
@@ -187,36 +173,9 @@ sidebar = NodePath("Pages/Main/Sidebar")
 bottombar = NodePath("Pages/Main/Bottombar")
 content = NodePath("Pages/Main/Content")
 
-[node name="Blur" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_ddyyk")
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="White" type="ColorRect" parent="Blur"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(1, 1, 1, 0.301961)
-
-[node name="Gradient" type="TextureRect" parent="Blur"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-texture = SubResource("GradientTexture2D_ku7ej")
+[node name="Blur" parent="." instance=ExtResource("2_r7ryb")]
+layout_mode = 0
+anchors_preset = 0
 
 [node name="Pages" type="Control" parent="."]
 layout_mode = 1
