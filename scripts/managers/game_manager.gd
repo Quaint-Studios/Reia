@@ -54,6 +54,7 @@ func _input(_event: InputEvent):
 	if Input.is_action_just_pressed("quit"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			
 		print("quit")
 
 	if Input.is_action_just_pressed("click"):
