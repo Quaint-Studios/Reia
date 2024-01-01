@@ -14,16 +14,16 @@ signal tab_changed(tab: Inventory.Tab)
 
 func _ready():
 	if topbar == null:
-		topbar = get_node("Topbar")
+		topbar = %Topbar
 	
 	if sidebar == null:
-		sidebar = get_node("Sidebar")
+		sidebar = %Sidebar
 	
 	if bottombar == null:
-		bottombar = get_node("Bottombar")
+		bottombar = %Bottombar
 	
 	if content == null:
-		content = get_node("Content")
+		content = %Content
 
 	if !Engine.is_editor_hint():
 		if instance == null:

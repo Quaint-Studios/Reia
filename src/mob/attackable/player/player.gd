@@ -15,10 +15,6 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 @onready var camera_pivot: Node3D = $CameraPivot
 @onready var camera: Camera3D = $CameraPivot/Camera
 
-func _init():
-	if !Engine.is_editor_hint() && GameManager.player == null:
-		GameManager.player = self
-
 func _ready():
 	add_to_group("player")
 

@@ -2,7 +2,7 @@ extends Node
 
 @export var menu_music: AudioStream
 
-@onready var packed_scene_reia = preload(SceneSelector.REIA)
+@onready var packed_scene_reia := preload(SceneSelector.REIA)
 
 func _ready():
 	_prepare_background()
@@ -25,7 +25,11 @@ func _prepare_sound():
 ###
 func _on_play_pressed():
 	GameManager.current_ui = GameManager.UI_TYPES.PLAY
-	get_tree().change_scene_to_file(SceneSelector.REIA)
+	var err = get_tree().change_scene_to_packed(packed_scene_reia)
+	
+	if err != Error.OK:
+		print("There was a problem loading the scene.")
+	
 
 func _on_settings_pressed():
 	%Main.visible = false
