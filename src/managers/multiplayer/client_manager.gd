@@ -93,5 +93,5 @@ func _on_host_ip_text_changed():
 #endregion
 
 func print_c(msg: String, id: int = -1) -> void:
-	(%Status as Label).text = msg
+	# (%Status as Label).text = msg
 	print("Client (%s): %s" % [id, msg])
