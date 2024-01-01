@@ -21,6 +21,10 @@ const DEF_PORT = 4337
 var _client := WebSocketMultiplayerPeer.new()
 #endregion
 
+enum Status { DISCONNECTED, CONNECTED, CONNECTING }
+
+var status := Status.DISCONNECTED
+
 var players := []
 #endregion
 
@@ -40,24 +44,31 @@ func setup_signals():
 
 ## Starts the server and updates the peer.
 func start_client():
+	if status != Status.DISCONNECTED:
+		print("Client already connecting or connecting, aborting new connection.")
+		return
+
+	status = Status.CONNECTING
 	multiplayer.multiplayer_peer = null
 	var err = _client.create_client("ws://" + host + ":" + str(DEF_PORT))
 	if err == Error.OK:
 		multiplayer.multiplayer_peer = _client
 		print_c("Client Started")
+		status = Status.CONNECTED
 	else:
 		print_c("Error: %s" % Error_EXT.get_error(err))
+		status = Status.DISCONNECTED
 
 ## Stops the server and cleans up.
-func stop_client():
+func stop_client(graceful := false):
 	multiplayer.multiplayer_peer = null
 	_client.close()
 	print_c("Client Stopped")
 
-#
-# func restart_server():
-#   pass
-#
+	if !graceful:
+		# Give it one more try.
+		# TODO: In the future, this should be done repeatedly with increaing intervals.
+		start_client()
 
 #region Signal Handlers
 func _on_client_connected(id: int):
