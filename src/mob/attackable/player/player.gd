@@ -38,6 +38,9 @@ func _exit_tree():
 		GameManager.instance.player = null
 
 func should_move() -> bool:
+	if GameManager.instance == null:
+		return false
+	
 	return GameManager.instance.player == self
 
 func _process(_delta):
