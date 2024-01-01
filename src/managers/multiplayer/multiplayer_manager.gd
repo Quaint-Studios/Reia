@@ -32,3 +32,13 @@ func setup_handlers():
 	var node = MultiplayerHandler.new()
 	node.name = "MultiplayerHandler"
 	add_child(node)
+
+func show_status():
+	%Status.show()
+	%StatusContainer.show()
+
+func hide_status():
+	%Status.hide()
+
+func minimize_status():
+	%StatusContainer.hide()
