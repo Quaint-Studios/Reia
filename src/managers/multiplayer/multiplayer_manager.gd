@@ -1,9 +1,21 @@
 class_name MultiplayerManager extends Node
 
-static var myClient : ClientManager
-static var myServer : ServerManager
+var myClient : ClientManager
+var myServer : ServerManager
+var handler : MultiplayerHandler
+
+enum Status { UNSET, CLIENT, SERVER, BOTH, OFFLINE }
+var status = Status.UNSET
+
+static var instance : MultiplayerManager
+
+func _init():
+	if instance == null:
+		instance = self
 
 func _ready():
+	setup_handlers()
+
 	if OS.has_feature("dedicated_server") || DisplayServer.get_name() == "headless" ||  "--server" in OS.get_cmdline_user_args():
 		myServer = ServerManager.new()
 		myServer.name = "ServerManager"
@@ -13,3 +25,9 @@ func _ready():
 		myClient = ClientManager.new()
 		myClient.name = "ClientManager"
 		add_child(myClient)
+
+func setup_handlers():
+	# for in [MultiplayerHandler, ...]
+	var node = MultiplayerHandler.new()
+	node.name = "MultiplayerHandler"
+	add_child(node)
