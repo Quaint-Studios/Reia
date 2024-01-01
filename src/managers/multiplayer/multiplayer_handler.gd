@@ -30,3 +30,9 @@ func register_player(player_name: String):
 	_players[player_id] = TestPlayer.new(player_name)
 	player_connected.emit()
 #endregion
+
+#region Client -> Server
+@rpc("any_peer", "call_local", "reliable")
+func update_name(player_name: String):
+	if multiplayer.is_server():
+		register_player.rpc_id(1, player_name) # Tell the server... SAY MY NAME!
