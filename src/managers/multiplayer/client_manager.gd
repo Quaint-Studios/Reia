@@ -97,6 +97,7 @@ func _on_connection_failed():
 
 func _on_connected_to_server():
 	print_c("Connected to %s:%s" % [host, DEF_PORT])
+	MultiplayerManager.instance.handler.update_name(MultiplayerManager.instance.player_name)
 
 func _on_host_ip_text_changed():
 	host = (%HostIP as TextEdit).text
