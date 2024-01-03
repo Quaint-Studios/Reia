@@ -23,7 +23,7 @@ RUN bash .scripts/linux/setup.sh
 
 VOLUME .builds/server
 
-# COPY .builds/server/Reia /server
+COPY .builds/server/Reia.x86_64 /server
 VOLUME .builds/server
 
 ENV PORT=4337
@@ -31,4 +31,4 @@ EXPOSE 4337
 
 # In the future we might want to pass params.
 # Or grab secure files using a ssh key and move them there.
-CMD ['./builds/server/Reia']
+CMD ['./builds/server/Reia.x86_64']
