@@ -33,14 +33,14 @@ func _ready():
 
 func load_player():
 	print(get_node("/root/Map_Reia"))
-	
+
 	if !get_tree().get_current_scene().is_in_group("map"):
 		print("The current scene is not a map. Can't load the player.")
 
 	var map = get_tree().get_current_scene() as MapHandler
-	
+
 	var newPlayer := myPlayer.instantiate() as Player
-	
+
 	if !Engine.is_editor_hint() && GameManager.instance.player == null:
 		print("Setting player")
 		GameManager.instance.player = newPlayer
@@ -54,7 +54,7 @@ func _input(_event: InputEvent):
 	if Input.is_action_just_pressed("quit"):
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 			Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			
+
 		print("quit")
 
 	if Input.is_action_just_pressed("click"):

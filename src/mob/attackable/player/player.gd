@@ -30,7 +30,7 @@ func _ready():
 
 	if not Engine.is_editor_hint():
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-		
+
 		%AnimationTree.active = true
 
 func _exit_tree():
@@ -40,13 +40,13 @@ func _exit_tree():
 func should_move() -> bool:
 	if GameManager.instance == null:
 		return false
-	
+
 	return GameManager.instance.player == self
 
 func _process(_delta):
 	if !should_move():
 		return
-	
+
 	if position.y <= -10: # handle falling off the map for now
 		position.y = 1
 		velocity = Vector3.ZERO
@@ -65,6 +65,14 @@ func _unhandled_input(event: InputEvent):
 
 	if event is InputEventMouseMotion:
 		pass
+
+@rpc("any_peer", "call_local")
+func _movement_test():
+	# Call the movement on the server.
+	# Server sends it to all others peers.
+	# Other peers verifies it's only coming from the server.
+	pass
+
 
 func _physics_process(delta: float):
 	if !should_move():

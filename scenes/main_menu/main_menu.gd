@@ -137,9 +137,9 @@ func _on_player_name_text_changed():
 	player_name.text = final_text
 	player_name.set_caret_column(player_name.text.length())
 	MultiplayerManager.instance.player_name = player_name.text
-	
+
 	var cnb = (%ConfirmNameButton as Button)
-	
+
 	if player_name.text.length() <= 0:
 		cnb.disabled = true
 	else:
