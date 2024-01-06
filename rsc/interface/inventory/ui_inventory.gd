@@ -15,13 +15,13 @@ signal tab_changed(tab: Inventory.Tab)
 func _ready():
 	if topbar == null:
 		topbar = %Topbar
-	
+
 	if sidebar == null:
 		sidebar = %Sidebar
-	
+
 	if bottombar == null:
 		bottombar = %Bottombar
-	
+
 	if content == null:
 		content = %Content
 
@@ -30,12 +30,12 @@ func _ready():
 			instance = self
 		else:
 			queue_free()
-		
+
 		setup_ui()
 
 func _input(event: InputEvent):
 	# TODO: You'll eventually run into an issue where you need to hide all UI.
-	
+
 	if GameManager.current_ui == GameManager.UI_TYPES.PLAY:
 		if event.is_action_pressed("inventory"):
 			show_inventory_ui()
@@ -58,7 +58,7 @@ func hide_inventory_ui(ui: UIManager.UI_TYPES):
 
 func setup_ui():
 	UIManager.instance.close_ui.connect(hide_inventory_ui)
-	
+
 	if GameManager.instance.player.inventory != null:
 		content.change_tab(last_category)
 

@@ -52,5 +52,5 @@ func toJSON() -> Dictionary:
 		"categories": {}
 	}
 	categories.keys().all(func(key): data["categories"].merge({ "%s" % key: categories[key].toJSON() }))
-	
+
 	return data
