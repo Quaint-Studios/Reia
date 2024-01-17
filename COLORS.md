@@ -1,3 +1,5 @@
+**! This document will eventually be migrated into a custom addon that will store all colors, sizes, and fonts.**
+
 # Universal
 - ![#181a18](https://placehold.co/15x15/181a18/181a18.png) `#181a18` - Soft Black
 - ![#fbfaf5](https://placehold.co/15x15/fbfaf5/fbfaf5.png) `#fbfaf5` - Soft White
