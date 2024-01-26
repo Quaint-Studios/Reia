@@ -1,0 +1,45 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://budrpsd0s04es"
+path="res://.godot/imported/fluffy_tree.glb-22ae31cf15145af7f99fd41e6d426713.scn"
+
+[deps]
+
+source_file="res://todo/rsc/models/trees/fluffy_tree/fluffy_tree.glb"
+dest_files=["res://.godot/imported/fluffy_tree.glb-22ae31cf15145af7f99fd41e6d426713.scn"]
+
+[params]
+
+nodes/root_type="Node3D"
+nodes/root_name="Scene Root"
+nodes/apply_root_scale=true
+nodes/root_scale=0.025
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"materials": {
+"material_0": {
+"use_external/enabled": true,
+"use_external/path": "res://rsc/models/trees/fluffy_tree/material_0.tres"
+},
+"material_1": {
+"use_external/enabled": true,
+"use_external/path": "res://rsc/models/trees/fluffy_tree/material_1.tres"
+}
+}
+}
+gltf/naming_version=0
+gltf/embedded_image_handling=1
