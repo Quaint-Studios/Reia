@@ -47,6 +47,9 @@ enabled=PackedStringArray()
 
 folder_colors={
 "res://addons/": "yellow",
+"res://rsc/": "green",
+"res://scenes/": "purple",
+"res://src/": "blue",
 "res://todo/": "red"
 }
 
