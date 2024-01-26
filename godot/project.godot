@@ -13,7 +13,7 @@ config_version=5
 config/name="Reia"
 config/description="Explore endless worlds and embark on a magical adventure of a lifetime! Choose the way you want to play."
 config/version="1.0.0.9"
-run/main_scene="res://rsc/scenes/0_scene_selector.tscn"
+run/main_scene="res://scenes/0_scene_selector.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://rsc/icons/logo_a.png"
 
