@@ -1,3 +1,4 @@
+## Used to create
 class_name SceneSelector extends Node
 
 const SCENE_FOLDER = "res://scenes/"
