@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://nfqy00u5e1bb"]
-
-[ext_resource type="Script" path="res://src/scene_selector.gd" id="1_dgqa2"]
-
-[node name="SceneSelector" type="Node"]
-script = ExtResource("1_dgqa2")
