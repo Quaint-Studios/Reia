@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=8 format=3 uid="uid://cvudtn0hd6gap"]
 
-[ext_resource type="FontFile" uid="uid://cvl0migkjbg2m" path="res://fonts/Nunito/static/Nunito-Black.ttf" id="1_28yde"]
+[ext_resource type="FontFile" uid="uid://cvl0migkjbg2m" path="res://todo/fonts/Nunito/static/Nunito-Black.ttf" id="1_28yde"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_488ou"]
 bg_color = Color(0, 0, 0, 0)

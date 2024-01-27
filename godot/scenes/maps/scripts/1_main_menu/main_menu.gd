@@ -2,7 +2,7 @@ extends Node
 
 @export var menu_music: AudioStream
 
-@onready var packed_scene_reia := preload(SceneSelector.REIA)
+@onready var packed_scene_reia := preload(SceneSelector.JADEWATER_FALLS)
 
 func _ready():
 	_prepare_background()

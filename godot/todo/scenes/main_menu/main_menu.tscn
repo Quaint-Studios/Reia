@@ -1,14 +1,14 @@
 [gd_scene load_steps=11 format=3 uid="uid://cqxplnocmdh0f"]
 
-[ext_resource type="LightmapGIData" uid="uid://hhl6lqi7s8us" path="res://scenes/main_menu/main_menu.lmbake" id="1_28juw"]
-[ext_resource type="Script" path="res://scenes/main_menu/main_menu.gd" id="1_3638y"]
-[ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/reia/reia_day.tres" id="2_ofhs3"]
-[ext_resource type="AudioStream" uid="uid://bjmsfaw5a1nh5" path="res://assets/audio/menu/forest_theme_v1.wav" id="3_3o1dl"]
-[ext_resource type="Shader" path="res://rsc/shaders/drop_shadow.gdshader" id="6_7rsuc"]
-[ext_resource type="PackedScene" uid="uid://dsy7bxowv7qkc" path="res://rsc/interface/blur.tscn" id="6_f0shj"]
-[ext_resource type="PackedScene" uid="uid://cykr5gmvdm7xf" path="res://assets/characters/player/female_player.glb" id="7_g5ofp"]
-[ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/icons/logo_a_flat_white_68.svg" id="7_p8u4n"]
-[ext_resource type="PackedScene" uid="uid://ci266clm01pqr" path="res://rsc/scenes/1_main_menu/changelog.tscn" id="9_haptq"]
+[ext_resource type="LightmapGIData" uid="uid://hhl6lqi7s8us" path="res://todo/scenes/main_menu/main_menu.lmbake" id="1_28juw"]
+[ext_resource type="Script" path="res://scenes/maps/scripts/1_main_menu/main_menu.gd" id="1_3638y"]
+[ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://todo/scenes/reia/reia_day.tres" id="2_ofhs3"]
+[ext_resource type="AudioStream" uid="uid://bjmsfaw5a1nh5" path="res://todo/assets/audio/menu/forest_theme_v1.wav" id="3_3o1dl"]
+[ext_resource type="Shader" path="res://todo/rsc/shaders/drop_shadow.gdshader" id="6_7rsuc"]
+[ext_resource type="PackedScene" uid="uid://dsy7bxowv7qkc" path="res://todo/rsc/interface/blur.tscn" id="6_f0shj"]
+[ext_resource type="PackedScene" uid="uid://cykr5gmvdm7xf" path="res://todo/assets/characters/player/female_player.glb" id="7_g5ofp"]
+[ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://todo/rsc/icons/logo_a_flat_white_68.svg" id="7_p8u4n"]
+[ext_resource type="PackedScene" uid="uid://ci266clm01pqr" path="res://todo/rsc/scenes/1_main_menu/changelog.tscn" id="9_haptq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4eypw"]
 shader = ExtResource("6_7rsuc")
