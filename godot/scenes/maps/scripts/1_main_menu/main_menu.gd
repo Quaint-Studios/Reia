@@ -20,8 +20,8 @@ func _prepare_background():
 	%Character.get_node("AnimationPlayer").play("IdleR")
 
 func _prepare_sound():
-	SoundManager.set_sound_volume(0.5)
-	SoundManager.set_music_volume(0.5)
+	SoundManager.set_sound_volume(0.4)
+	SoundManager.set_music_volume(0.4)
 
 	SoundManager.play_music(menu_music, 1.0)
 
