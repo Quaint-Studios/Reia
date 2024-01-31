@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=20 format=3 uid="uid://kwq64glpweie"]
 
-[ext_resource type="FontFile" uid="uid://cvl0migkjbg2m" path="res://fonts/Nunito/static/Nunito-Black.ttf" id="1_kmgp1"]
-[ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="2_s1tsk"]
-[ext_resource type="FontFile" uid="uid://cnk30iahnvsd2" path="res://rsc/fonts/Roboto/Roboto-Black.ttf" id="3_s2rtc"]
+[ext_resource type="FontFile" uid="uid://cvl0migkjbg2m" path="res://todo/fonts/Nunito/static/Nunito-Black.ttf" id="1_kmgp1"]
+[ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://todo/rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="2_s1tsk"]
+[ext_resource type="FontFile" uid="uid://cnk30iahnvsd2" path="res://todo/rsc/fonts/Roboto/Roboto-Black.ttf" id="3_s2rtc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ua4w4"]
 bg_color = Color(0.0941176, 0.101961, 0.0941176, 1)
