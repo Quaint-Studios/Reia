@@ -23,7 +23,7 @@ buses/default_bus_layout="res://assets/audio/default_bus_layout.tres"
 
 [autoload]
 
-Managers="*res://scenes/managers/managers.tscn"
+Managers="*res://scenes/misc/managers.tscn"
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
 
 [debug]
