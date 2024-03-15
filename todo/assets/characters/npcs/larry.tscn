@@ -1,0 +1,55 @@
+[gd_scene load_steps=12 format=3 uid="uid://bmicgu6inl8e5"]
+
+[ext_resource type="Script" path="res://scripts/mob/attackable/npc/larry.gd" id="1_mma82"]
+[ext_resource type="PackedScene" uid="uid://b3p21o2ljivu2" path="res://assets/characters/npcs/aqua_wizard.glb" id="1_perw3"]
+[ext_resource type="Script" path="res://src/combat/attackable_stats.gd" id="2_7p8dn"]
+[ext_resource type="PackedScene" uid="uid://bqpe013mgarni" path="res://scripts/mob/attackable/attackable_health.tscn" id="2_8ta6c"]
+[ext_resource type="Script" path="res://src/combat/attackable_status.gd" id="3_v2rwg"]
+[ext_resource type="PackedScene" uid="uid://c03x7cx3t0083" path="res://scripts/mob/attackable/player/minimap_markers/map_marker.tscn" id="4_f2fn6"]
+[ext_resource type="Texture2D" uid="uid://mfj02y3po58g" path="res://scripts/items/weapons/textures/items_atlas.png" id="5_l14u6"]
+
+[sub_resource type="Resource" id="Resource_1p1r6"]
+script = ExtResource("2_7p8dn")
+health = 100
+max_health = 100
+melee_power = 10
+bow_power = 10
+spell_power = 10
+melee_defense = 10
+bow_defense = 10
+spell_defense = 10
+crit_chance = 0.0
+crit_damage = 0.0
+
+[sub_resource type="Resource" id="Resource_xjm7q"]
+script = ExtResource("3_v2rwg")
+state = 0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tslik"]
+radius = 0.376215
+height = 1.77435
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lmisf"]
+atlas = ExtResource("5_l14u6")
+region = Rect2(256, 512, 128, 128)
+
+[node name="Larry" type="CharacterBody3D"]
+script = ExtResource("1_mma82")
+stats = SubResource("Resource_1p1r6")
+status = SubResource("Resource_xjm7q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.88408, 0)
+shape = SubResource("CapsuleShape3D_tslik")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="Larry" parent="Visuals" instance=ExtResource("1_perw3")]
+metadata/_edit_lock_ = true
+
+[node name="Health" parent="Visuals" node_paths=PackedStringArray("attackable") instance=ExtResource("2_8ta6c")]
+attackable = NodePath("../..")
+
+[node name="MapMarker" parent="Visuals" instance=ExtResource("4_f2fn6")]
+transform = Transform3D(1.6383, 0, -1.14715, 0, 2, 0, 1.14715, 0, 1.6383, 0, 0, 0)
+texture = SubResource("AtlasTexture_lmisf")

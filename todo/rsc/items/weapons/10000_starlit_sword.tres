@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://dksrsq1po1eii"]
+
+[ext_resource type="Script" path="res://src/item/weapon/weapon.gd" id="1_t8lqq"]
+[ext_resource type="Texture2D" uid="uid://d7eyaepxetvj" path="res://scripts/items/weapons/1000_wooden_sword_atlas.tres" id="2_gjvhb"]
+
+[resource]
+script = ExtResource("1_t8lqq")
+soulstones = Array[Resource("res://scripts/items/data/soulstone_slot.gd")]([])
+id = 10000
+name = "Starlit Sword"
+description = "Made from the heart of Reia. This was one of the remnants found after she dispersed her energy throughout her world."
+texture = ExtResource("2_gjvhb")
+item_grade = 5

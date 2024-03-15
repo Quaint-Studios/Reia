@@ -1,0 +1,75 @@
+[gd_scene load_steps=4 format=3 uid="uid://ci266clm01pqr"]
+
+[ext_resource type="Script" path="res://todo/scripts/misc/changelog.gd" id="1_tqfcr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nxt2h"]
+bg_color = Color(0.984314, 0.980392, 0.960784, 0.784314)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="Theme" id="Theme_mb7q1"]
+Panel/styles/panel = SubResource("StyleBoxFlat_nxt2h")
+
+[node name="Changelog" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_tqfcr")
+
+[node name="Margin" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -424.0
+offset_bottom = 893.264
+grow_horizontal = 0
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Margin"]
+custom_minimum_size = Vector2(424, 0)
+layout_mode = 2
+
+[node name="ToggleChangelogs" type="Button" parent="Margin/VBoxContainer"]
+custom_minimum_size = Vector2(0, 60)
+layout_mode = 2
+toggle_mode = true
+text = "View Changelogs"
+
+[node name="ChangelogPanel" type="Panel" parent="Margin/VBoxContainer"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(424, 869)
+layout_mode = 2
+mouse_filter = 2
+theme = SubResource("Theme_mb7q1")
+
+[node name="Margin" type="MarginContainer" parent="Margin/VBoxContainer/ChangelogPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="Scroll" type="ScrollContainer" parent="Margin/VBoxContainer/ChangelogPanel/Margin"]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="ChangelogHolder" type="VBoxContainer" parent="Margin/VBoxContainer/ChangelogPanel/Margin/Scroll"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 36
+
+[connection signal="toggled" from="Margin/VBoxContainer/ToggleChangelogs" to="." method="_on_toggle_changelogs_toggled"]

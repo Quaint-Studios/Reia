@@ -1,7 +1,7 @@
 class_name GameManager extends Node
 
 # var myPlayer = preload("res://scripts/mob/attackable/player/my_player.tscn")
-var player: Player
+# var player: Player
 
 static var current_ui: UI_TYPES = UI_TYPES.MAIN_MENU :
 	set(value):
@@ -37,7 +37,7 @@ func load_player():
 	if !get_tree().get_current_scene().is_in_group("map"):
 		print("The current scene is not a map. Can't load the player.")
 
-	var map = get_tree().get_current_scene() as MapHandler
+	# var map = get_tree().get_current_scene() as MapHandler
 
 	# var newPlayer := myPlayer.instantiate() as Player
 

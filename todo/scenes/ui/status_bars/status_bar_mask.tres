@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://d0ge2uxot3buf"]
+
+[ext_resource type="Shader" path="res://scenes/ui/status_bars/status_bar_mask.gdshader" id="1_5qgxu"]
+[ext_resource type="Texture2D" uid="uid://dd1wyjsf7uas0" path="res://assets/ui/bars/player_underlay_bar.png" id="2_cwbtc"]
+
+[resource]
+shader = ExtResource("1_5qgxu")
+shader_parameter/mask = ExtResource("2_cwbtc")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://bl33wnqg6dxmq"]
+
+[ext_resource type="Script" path="res://src/item/weapon/weapon.gd" id="1_g1qw8"]
+
+[resource]
+script = ExtResource("1_g1qw8")
+soulstones = Array[Resource("res://scripts/items/data/soulstone_slot.gd")]([])
+id = 0
+name = "Iron Sword"
+description = "TBD"
+item_grade = 1

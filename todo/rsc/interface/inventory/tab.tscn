@@ -1,0 +1,160 @@
+[gd_scene load_steps=9 format=3 uid="uid://dripboa48oo8w"]
+
+[ext_resource type="Shader" path="res://rsc/shaders/canvas_color.gdshader" id="1_bgams"]
+[ext_resource type="ButtonGroup" uid="uid://486j0gl758yt" path="res://rsc/interface/inventory/inventory_tab_button_group.tres" id="1_l1562"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_tab.gd" id="1_t4mk6"]
+[ext_resource type="Texture2D" uid="uid://dnqp10u8o4xik" path="res://rsc/icons/star_icon_84.svg" id="2_fft44"]
+[ext_resource type="Texture2D" uid="uid://bmh46y8fg1xd3" path="res://rsc/icons/inventory/consumable_icon_84.svg" id="3_wd87u"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4u122"]
+bg_color = Color(0.976471, 0.952941, 0.898039, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3ff5w"]
+shader = ExtResource("1_bgams")
+shader_parameter/color = Color(0.976471, 0.952941, 0.898039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ityoi"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 35
+corner_radius_top_right = 35
+corner_radius_bottom_right = 35
+corner_radius_bottom_left = 35
+corner_detail = 12
+
+[node name="Tab_Weapons" type="Button" node_paths=PackedStringArray("background", "tab_icon", "label")]
+self_modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(300, 126.27)
+toggle_mode = true
+button_group = ExtResource("1_l1562")
+script = ExtResource("1_t4mk6")
+background = NodePath("Selection/Background")
+tab_icon = NodePath("Selection/HBoxContainer/TabIcon")
+label = NodePath("Selection/HBoxContainer/Label")
+
+[node name="Selection" type="Control" parent="."]
+custom_minimum_size = Vector2(300, 104)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -52.0
+offset_right = 150.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="Panel" parent="Selection"]
+visible = false
+custom_minimum_size = Vector2(300, 104)
+layout_mode = 2
+offset_right = 300.0
+offset_bottom = 104.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4u122")
+
+[node name="Ornaments" type="Control" parent="Selection/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StarIcon" type="TextureRect" parent="Selection/Background/Ornaments"]
+modulate = Color(0.976471, 0.952941, 0.898039, 1)
+self_modulate = Color(0.976471, 0.952941, 0.898039, 1)
+material = SubResource("ShaderMaterial_3ff5w")
+layout_mode = 0
+offset_left = -1.0
+offset_top = -11.0
+offset_right = 14.75
+offset_bottom = 4.75
+rotation = 0.785398
+mouse_filter = 2
+texture = ExtResource("2_fft44")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="StarIcon2" type="TextureRect" parent="Selection/Background/Ornaments"]
+modulate = Color(0.976471, 0.952941, 0.898039, 1)
+self_modulate = Color(0.976471, 0.952941, 0.898039, 1)
+material = SubResource("ShaderMaterial_3ff5w")
+layout_mode = 0
+offset_left = -1.0
+offset_top = 93.0
+offset_right = 14.75
+offset_bottom = 108.75
+rotation = 0.785398
+mouse_filter = 2
+texture = ExtResource("2_fft44")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="StarIcon3" type="TextureRect" parent="Selection/Background/Ornaments"]
+modulate = Color(0.976471, 0.952941, 0.898039, 1)
+self_modulate = Color(0.976471, 0.952941, 0.898039, 1)
+material = SubResource("ShaderMaterial_3ff5w")
+layout_mode = 0
+offset_left = 300.0
+offset_top = -11.0
+offset_right = 315.75
+offset_bottom = 4.75
+rotation = 0.785398
+mouse_filter = 2
+texture = ExtResource("2_fft44")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="StarIcon4" type="TextureRect" parent="Selection/Background/Ornaments"]
+modulate = Color(0.976471, 0.952941, 0.898039, 1)
+self_modulate = Color(0.976471, 0.952941, 0.898039, 1)
+material = SubResource("ShaderMaterial_3ff5w")
+layout_mode = 0
+offset_left = 300.0
+offset_top = 93.0
+offset_right = 315.75
+offset_bottom = 108.75
+rotation = 0.785398
+mouse_filter = 2
+texture = ExtResource("2_fft44")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="SelectorCircle" type="Panel" parent="Selection/Background"]
+custom_minimum_size = Vector2(70, 70)
+layout_mode = 2
+offset_left = 18.0
+offset_top = 16.0
+offset_right = 88.0
+offset_bottom = 86.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ityoi")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Selection"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 9.0
+offset_right = 51.0
+offset_bottom = 49.0
+mouse_filter = 2
+
+[node name="TabIcon" type="TextureRect" parent="Selection/HBoxContainer"]
+self_modulate = Color(0.976471, 0.952941, 0.898039, 1)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_wd87u")
+
+[node name="Label" type="Label" parent="Selection/HBoxContainer"]
+self_modulate = Color(0.976471, 0.952941, 0.898039, 1)
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_colors/font_color = Color(0.976471, 0.952941, 0.898039, 1)
+theme_override_font_sizes/font_size = 22
+text = "Tab"
+vertical_alignment = 1
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

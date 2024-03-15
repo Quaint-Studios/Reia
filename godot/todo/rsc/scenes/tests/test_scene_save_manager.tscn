@@ -1,9 +1,0 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckjxq6cm3l1cd"]
-
-[ext_resource type="Script" path="res://src/managers/save_manager/save_manager.gd" id="1_bofw8"]
-[ext_resource type="PackedScene" uid="uid://eicmer2kdgy" path="res://scripts/mob/attackable/player/my_player.tscn" id="2_cry4a"]
-
-[node name="Node" type="Node3D"]
-script = ExtResource("1_bofw8")
-
-[node name="MyPlayer" parent="." instance=ExtResource("2_cry4a")]
