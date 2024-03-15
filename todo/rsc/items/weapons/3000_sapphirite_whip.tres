@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://cemo6r01h2t0y"]
+
+[ext_resource type="Script" path="res://src/item/weapon/weapon.gd" id="1_epd8p"]
+[ext_resource type="Texture2D" uid="uid://d7eyaepxetvj" path="res://scripts/items/weapons/1000_wooden_sword_atlas.tres" id="2_81bmy"]
+
+[resource]
+script = ExtResource("1_epd8p")
+soulstones = Array[Resource("res://scripts/items/data/soulstone_slot.gd")]([])
+id = 3000
+name = "Sapphirite Whip"
+description = ""
+texture = ExtResource("2_81bmy")
+item_grade = 1

@@ -1,0 +1,531 @@
+[gd_scene load_steps=11 format=3 uid="uid://cqxplnocmdh0f"]
+
+[ext_resource type="LightmapGIData" uid="uid://hhl6lqi7s8us" path="res://todo/scenes/main_menu/main_menu.lmbake" id="1_28juw"]
+[ext_resource type="Script" path="res://scenes/maps/scripts/1_main_menu/main_menu.gd" id="1_3638y"]
+[ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://todo/scenes/reia/reia_day.tres" id="2_ofhs3"]
+[ext_resource type="AudioStream" uid="uid://bjmsfaw5a1nh5" path="res://todo/assets/audio/menu/forest_theme_v1.wav" id="3_3o1dl"]
+[ext_resource type="Shader" path="res://todo/rsc/shaders/drop_shadow.gdshader" id="6_7rsuc"]
+[ext_resource type="PackedScene" uid="uid://dsy7bxowv7qkc" path="res://todo/rsc/interface/blur.tscn" id="6_f0shj"]
+[ext_resource type="PackedScene" uid="uid://cykr5gmvdm7xf" path="res://todo/assets/characters/player/female_player.glb" id="7_g5ofp"]
+[ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://todo/rsc/icons/logo_a_flat_white_68.svg" id="7_p8u4n"]
+[ext_resource type="PackedScene" uid="uid://ci266clm01pqr" path="res://todo/rsc/scenes/1_main_menu/changelog.tscn" id="9_haptq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4eypw"]
+shader = ExtResource("6_7rsuc")
+shader_parameter/background_color = Color(1, 1, 1, 1)
+shader_parameter/shadow_color = Color(0.196078, 0.196078, 0.196078, 0.356863)
+shader_parameter/offset_in_pixels = Vector2(4, 8)
+
+[node name="Map_MainMenu" type="Node"]
+script = ExtResource("1_3638y")
+menu_music = ExtResource("3_3o1dl")
+
+[node name="LightmapGI" type="LightmapGI" parent="."]
+visible = false
+directional = true
+light_data = ExtResource("1_28juw")
+
+[node name="Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555218, 2.42893)
+keep_aspect = 0
+
+[node name="World" type="Node" parent="."]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="World"]
+transform = Transform3D(0.866025, -0.353553, 0.353554, 0, 0.707107, 0.707106, -0.5, -0.612372, 0.612373, 8.0816, 7.32544, 14.4232)
+light_energy = 1.5
+shadow_enabled = true
+shadow_bias = 0.025
+directional_shadow_split_1 = 0.02
+directional_shadow_split_2 = 0.04
+directional_shadow_split_3 = 0.08
+directional_shadow_blend_splits = true
+directional_shadow_max_distance = 300.0
+directional_shadow_pancake_size = 4.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World"]
+environment = ExtResource("2_ofhs3")
+
+[node name="Terrain" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.283048, 0, 0)
+
+[node name="Character" parent="Terrain" instance=ExtResource("7_g5ofp")]
+unique_name_in_owner = true
+transform = Transform3D(-0.895567, -0.190233, -0.426465, -0.265899, 0.965995, 0.127482, 0.383873, 0.225312, -0.906629, 6.4156, 1.14787, -13.0171)
+
+[node name="Island" type="CSGCombiner3D" parent="Terrain"]
+
+[node name="Platform" type="CSGBox3D" parent="Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 12.2363, 0.382106, -11.1734)
+size = Vector3(10.8091, 2.42282, 7.15466)
+
+[node name="Step1" type="CSGBox3D" parent="Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 9.15864, 0.607557, -14.0449)
+size = Vector3(4.16089, 2.42282, 7.15466)
+
+[node name="Step2" type="CSGBox3D" parent="Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 11.5095, -0.162072, -11.3907)
+size = Vector3(1.85288, 2.42282, 7.15466)
+
+[node name="Step3" type="CSGBox3D" parent="Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 8.98438, -0.789562, -12.8018)
+size = Vector3(4.16089, 2.42282, 7.15466)
+
+[node name="StepSide1" type="CSGBox3D" parent="Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 6.64233, 1.72907, -14.9291)
+size = Vector3(0.76106, 0.950864, 2.99416)
+
+[node name="StepSide2" type="CSGBox3D" parent="Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 8.90233, 0.300174, -10.049)
+size = Vector3(0.76106, 0.950864, 1.38939)
+
+[node name="LandSide1" type="CSGBox3D" parent="Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 7.42625, -1.80222, -10.3994)
+size = Vector3(0.76106, 0.950864, 1.38939)
+
+[node name="LandSide2" type="CSGBox3D" parent="Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 6.07915, -1.41872, -11.9968)
+size = Vector3(2.68199, 0.950864, 1.38939)
+
+[node name="Pillar" type="CSGBox3D" parent="Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 8.70396, 1.0012, -15.0641)
+size = Vector3(0.5, 20, 0.5)
+
+[node name="Pillar2" type="CSGBox3D" parent="Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 13.63, 3.23547, -14.8049)
+size = Vector3(0.5, 20, 0.5)
+
+[node name="Pillar3" type="CSGBox3D" parent="Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 14.6659, 3.76244, -6.39355)
+size = Vector3(0.5, 16.2409, 0.5)
+
+[node name="Pillar4" type="CSGBox3D" parent="Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 10.9947, 1.69928, -6.61443)
+size = Vector3(0.5, 20, 0.5)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.90437, -0.613201, -11.8416)
+light_energy = 0.1
+light_specular = 14.676
+light_bake_mode = 1
+omni_range = 10.0
+
+[node name="UI" type="Node" parent="."]
+
+[node name="Blur" parent="UI" instance=ExtResource("6_f0shj")]
+unique_name_in_owner = true
+
+[node name="Menu" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="UI/Menu"]
+material = SubResource("ShaderMaterial_4eypw")
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -320.0
+offset_right = 320.0
+offset_bottom = 160.0
+grow_horizontal = 2
+texture = ExtResource("7_p8u4n")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Selectors" type="Control" parent="UI/Menu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="PlayChoice" type="Control" parent="UI/Menu/Selectors"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Menu/Selectors/PlayChoice"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Menu/Selectors/PlayChoice/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 80
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Menu/Selectors/PlayChoice/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="OnlineButton" type="Button" parent="UI/Menu/Selectors/PlayChoice/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 40
+text = "Multiplayer (Online)"
+
+[node name="OfflineButton" type="Button" parent="UI/Menu/Selectors/PlayChoice/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 40
+text = "Singleplayer (Offline)"
+
+[node name="PlayChoiceBackButton" type="Button" parent="UI/Menu/Selectors/PlayChoice/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 40
+text = "Back"
+
+[node name="OnlineForm" type="Control" parent="UI/Menu/Selectors"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="UI/Menu/Selectors/OnlineForm"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/Menu/Selectors/OnlineForm/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Label" type="Label" parent="UI/Menu/Selectors/OnlineForm/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Enter a name to Play Online"
+
+[node name="PlayerName" type="TextEdit" parent="UI/Menu/Selectors/OnlineForm/CenterContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "Player name"
+scroll_smooth = true
+scroll_fit_content_height = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Menu/Selectors/OnlineForm/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="OnlineFormBackButton" type="Button" parent="UI/Menu/Selectors/OnlineForm/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 32
+text = "Back"
+
+[node name="ConfirmNameButton" type="Button" parent="UI/Menu/Selectors/OnlineForm/CenterContainer/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+theme_override_font_sizes/font_size = 32
+text = "Confirm"
+
+[node name="Margins" type="MarginContainer" parent="UI/Menu/Selectors"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -256.0
+offset_right = 185.0
+grow_vertical = 0
+theme_override_constants/margin_left = 48
+theme_override_constants/margin_bottom = 64
+
+[node name="Main" type="VBoxContainer" parent="UI/Menu/Selectors/Margins"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Play" type="Button" parent="UI/Menu/Selectors/Margins/Main"]
+layout_mode = 2
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 32
+text = "Play"
+flat = true
+alignment = 0
+
+[node name="Settings" type="Button" parent="UI/Menu/Selectors/Margins/Main"]
+layout_mode = 2
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+flat = true
+alignment = 0
+
+[node name="Exit" type="Button" parent="UI/Menu/Selectors/Margins/Main"]
+layout_mode = 2
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 32
+text = "Exit"
+flat = true
+alignment = 0
+
+[node name="Settings" type="VBoxContainer" parent="UI/Menu/Selectors/Margins"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ContainerLabel" type="Label" parent="UI/Menu/Selectors/Margins/Settings"]
+custom_minimum_size = Vector2(180, 50.18)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 42
+text = "Settings"
+
+[node name="Controls" type="Button" parent="UI/Menu/Selectors/Margins/Settings"]
+layout_mode = 2
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 32
+text = "Controls"
+alignment = 0
+
+[node name="Volume" type="Button" parent="UI/Menu/Selectors/Margins/Settings"]
+layout_mode = 2
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 32
+text = "Volume"
+alignment = 0
+
+[node name="Back" type="Button" parent="UI/Menu/Selectors/Margins/Settings"]
+layout_mode = 2
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 32
+text = "Back"
+alignment = 0
+
+[node name="Controls" type="VBoxContainer" parent="UI/Menu/Selectors/Margins"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ContainerLabel" type="Label" parent="UI/Menu/Selectors/Margins/Controls"]
+custom_minimum_size = Vector2(180, 50.18)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 42
+text = "Controls"
+
+[node name="Back" type="Button" parent="UI/Menu/Selectors/Margins/Controls"]
+layout_mode = 2
+theme_type_variation = &"FlatWhiteButton"
+theme_override_font_sizes/font_size = 32
+text = "Back"
+flat = true
+alignment = 0
+
+[node name="Volume" type="VBoxContainer" parent="UI/Menu/Selectors/Margins"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="ContainerLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume"]
+custom_minimum_size = Vector2(180, 50.18)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
+text = "Volumes"
+
+[node name="MasterContainer" type="HBoxContainer" parent="UI/Menu/Selectors/Margins/Volume"]
+layout_mode = 2
+
+[node name="MasterLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/MasterContainer"]
+custom_minimum_size = Vector2(220.76, 34)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Master"
+vertical_alignment = 1
+
+[node name="MasterVolume" type="HSlider" parent="UI/Menu/Selectors/Margins/Volume/MasterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 34)
+layout_mode = 2
+size_flags_horizontal = 8
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MasterVolumeLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/MasterContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 34)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "100%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Music Container" type="HBoxContainer" parent="UI/Menu/Selectors/Margins/Volume"]
+layout_mode = 2
+
+[node name="MusicLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/Music Container"]
+custom_minimum_size = Vector2(220.76, 34)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Music"
+vertical_alignment = 1
+
+[node name="MusicVolume" type="HSlider" parent="UI/Menu/Selectors/Margins/Volume/Music Container"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 34)
+layout_mode = 2
+size_flags_horizontal = 8
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="MusicVolumeLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/Music Container"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 34)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "50%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="SFXContainer" type="HBoxContainer" parent="UI/Menu/Selectors/Margins/Volume"]
+layout_mode = 2
+
+[node name="SFXLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/SFXContainer"]
+custom_minimum_size = Vector2(220.76, 34)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Sound Effects"
+vertical_alignment = 1
+
+[node name="SFXVolume" type="HSlider" parent="UI/Menu/Selectors/Margins/Volume/SFXContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 34)
+layout_mode = 2
+size_flags_horizontal = 8
+max_value = 1.0
+step = 0.01
+value = 0.5
+
+[node name="SFXVolumeLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/SFXContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 34)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "50%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="UIContainer" type="HBoxContainer" parent="UI/Menu/Selectors/Margins/Volume"]
+layout_mode = 2
+
+[node name="UILabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/UIContainer"]
+custom_minimum_size = Vector2(220.76, 34)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "UI Volume"
+vertical_alignment = 1
+
+[node name="UIVolume" type="HSlider" parent="UI/Menu/Selectors/Margins/Volume/UIContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 34)
+layout_mode = 2
+size_flags_horizontal = 8
+max_value = 1.0
+step = 0.01
+value = 0.6
+
+[node name="UIVolumeLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/UIContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 34)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "60%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="DialogueContainer" type="HBoxContainer" parent="UI/Menu/Selectors/Margins/Volume"]
+layout_mode = 2
+
+[node name="DialogueLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/DialogueContainer"]
+custom_minimum_size = Vector2(220.76, 34)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "Dialogue"
+vertical_alignment = 1
+
+[node name="DialogueVolume" type="HSlider" parent="UI/Menu/Selectors/Margins/Volume/DialogueContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 34)
+layout_mode = 2
+size_flags_horizontal = 8
+max_value = 1.0
+step = 0.01
+value = 0.75
+
+[node name="DialogueVolumeLabel" type="Label" parent="UI/Menu/Selectors/Margins/Volume/DialogueContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 34)
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "75%"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Back" type="Button" parent="UI/Menu/Selectors/Margins/Volume"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Back"
+alignment = 0
+
+[node name="Changelog" parent="UI" instance=ExtResource("9_haptq")]
+
+[connection signal="pressed" from="UI/Menu/Selectors/PlayChoice/CenterContainer/VBoxContainer/HBoxContainer/OnlineButton" to="." method="_on_online_button_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/PlayChoice/CenterContainer/VBoxContainer/HBoxContainer/OfflineButton" to="." method="_on_offline_button_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/PlayChoice/CenterContainer/VBoxContainer/PlayChoiceBackButton" to="." method="_on_play_choice_back_button_pressed"]
+[connection signal="text_changed" from="UI/Menu/Selectors/OnlineForm/CenterContainer/VBoxContainer/PlayerName" to="." method="_on_player_name_text_changed"]
+[connection signal="pressed" from="UI/Menu/Selectors/OnlineForm/CenterContainer/VBoxContainer/HBoxContainer/OnlineFormBackButton" to="." method="_on_online_form_back_button_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/OnlineForm/CenterContainer/VBoxContainer/HBoxContainer/ConfirmNameButton" to="." method="_on_confirm_name_button_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/Margins/Main/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/Margins/Main/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/Margins/Main/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/Margins/Settings/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/Margins/Settings/Volume" to="." method="_on_volume_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/Margins/Settings/Back" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="UI/Menu/Selectors/Margins/Controls/Back" to="." method="_on_back_pressed"]
+[connection signal="value_changed" from="UI/Menu/Selectors/Margins/Volume/MasterContainer/MasterVolume" to="." method="_on_master_volume_changed"]
+[connection signal="value_changed" from="UI/Menu/Selectors/Margins/Volume/Music Container/MusicVolume" to="." method="_on_music_volume_changed"]
+[connection signal="value_changed" from="UI/Menu/Selectors/Margins/Volume/SFXContainer/SFXVolume" to="." method="_on_sfx_volume_changed"]
+[connection signal="value_changed" from="UI/Menu/Selectors/Margins/Volume/UIContainer/UIVolume" to="." method="_on_ui_volume_changed"]
+[connection signal="value_changed" from="UI/Menu/Selectors/Margins/Volume/DialogueContainer/DialogueVolume" to="." method="_on_dialogue_volume_changed"]
+[connection signal="pressed" from="UI/Menu/Selectors/Margins/Volume/Back" to="." method="_on_back_pressed"]

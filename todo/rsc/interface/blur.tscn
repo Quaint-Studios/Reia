@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://dsy7bxowv7qkc"]
+
+[ext_resource type="Shader" path="res://todo/shaders/screen_space/blur.gdshader" id="1_08rpp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ddyyk"]
+shader = ExtResource("1_08rpp")
+shader_parameter/amount = 2.0
+
+[sub_resource type="Gradient" id="Gradient_64ut1"]
+colors = PackedColorArray(0.498039, 0.498039, 0.498039, 0.301961, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ku7ej"]
+gradient = SubResource("Gradient_64ut1")
+width = 128
+fill_from = Vector2(0.5, 0)
+fill_to = Vector2(0.5, 1)
+metadata/_snap_enabled = true
+
+[node name="Blur" type="ColorRect"]
+material = SubResource("ShaderMaterial_ddyyk")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="White" type="ColorRect" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0.301961)
+
+[node name="Gradient" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_ku7ej")

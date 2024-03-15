@@ -1,0 +1,1548 @@
+[gd_scene load_steps=52 format=3 uid="uid://bgui6d70qmbu1"]
+
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_inventory.gd" id="1_b67wi"]
+[ext_resource type="PackedScene" uid="uid://jsgmocccagip" path="res://todo/rsc/interface/inventory/sub_category.tscn" id="2_f6ox2"]
+[ext_resource type="Texture2D" uid="uid://b5e3in4j2d35n" path="res://todo/rsc/icons/inventory/gradient_orb.svg" id="2_gjblk"]
+[ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://todo/rsc/icons/logo_a_flat_white_68.svg" id="2_i2528"]
+[ext_resource type="Texture2D" uid="uid://dm1q0jbofjvsx" path="res://todo/rsc/icons/inventory/filter_icon_84.svg" id="2_k344c"]
+[ext_resource type="PackedScene" uid="uid://dsy7bxowv7qkc" path="res://todo/rsc/interface/blur.tscn" id="2_r7ryb"]
+[ext_resource type="PackedScene" uid="uid://wgv40a1vxert" path="res://todo/rsc/interface/inventory/item.tscn" id="3_21nmv"]
+[ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://todo/rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="3_b7ukm"]
+[ext_resource type="FontFile" uid="uid://cnk30iahnvsd2" path="res://todo/rsc/fonts/Roboto/Roboto-Black.ttf" id="3_l1es0"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_item_container.gd" id="3_r64ix"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_content.gd" id="3_vjye7"]
+[ext_resource type="Texture2D" uid="uid://vytb7l0x77ml" path="res://todo/rsc/icons/inventory/dropdown_icon_84.svg" id="4_kneal"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_content_weapons.gd" id="4_mtge3"]
+[ext_resource type="PackedScene" uid="uid://dripboa48oo8w" path="res://todo/rsc/interface/inventory/tab.tscn" id="4_ph1fb"]
+[ext_resource type="Texture2D" uid="uid://bmi7ixsxitcpw" path="res://todo/rsc/icons/inventory/exit_icon_84.svg" id="4_x4vpx"]
+[ext_resource type="Texture2D" uid="uid://dnqp10u8o4xik" path="res://todo/rsc/icons/star_icon_84.svg" id="5_0we6y"]
+[ext_resource type="Theme" uid="uid://kwq64glpweie" path="res://rsc/themes/main_theme.tres" id="5_ff7kn"]
+[ext_resource type="PackedScene" uid="uid://ci8se4nk3fut2" path="res://todo/rsc/interface/inventory/horizontal_divider.tscn" id="6_6pd7h"]
+[ext_resource type="FontFile" uid="uid://dpo6v8cknqaqu" path="res://todo/rsc/fonts/Roboto/Roboto-Bold.ttf" id="6_yhrwj"]
+[ext_resource type="FontFile" uid="uid://byn6716m0s6qx" path="res://todo/rsc/fonts/Roboto/Roboto-Italic.ttf" id="7_53n1y"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_topbar.gd" id="11_j6yph"]
+[ext_resource type="PackedScene" uid="uid://op561o2k0d4o" path="res://todo/assets/characters/enemies/aqua_wizard.tscn" id="14_guich"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_sidebar.gd" id="16_v465c"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_bottombar.gd" id="20_j36ox"]
+[ext_resource type="Script" path="res://rsc/interface/inventory/ui_enhancement.gd" id="23_aj5fo"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gryqn"]
+bg_color = Color(1, 1, 1, 0.101961)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+corner_detail = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h75of"]
+bg_color = Color(0.203922, 0.2, 0.247059, 0.501961)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+
+[sub_resource type="FontVariation" id="FontVariation_o5dn7"]
+base_font = ExtResource("3_l1es0")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2mfud"]
+bg_color = Color(0.976471, 0.952941, 0.898039, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0yfi3"]
+bg_color = Color(0, 0, 0, 0.121569)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+corner_detail = 15
+
+[sub_resource type="FontVariation" id="FontVariation_6eb88"]
+base_font = ExtResource("3_l1es0")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hjuhp"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="FontVariation" id="FontVariation_44ke8"]
+base_font = ExtResource("3_l1es0")
+
+[sub_resource type="Gradient" id="Gradient_1ykm1"]
+colors = PackedColorArray(0.976471, 0.952941, 0.898039, 1, 0.976471, 0.952941, 0.898039, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0ufkp"]
+gradient = SubResource("Gradient_1ykm1")
+fill_from = Vector2(0.5, 0)
+metadata/_snap_enabled = true
+
+[sub_resource type="FontVariation" id="FontVariation_pyu88"]
+base_font = ExtResource("3_l1es0")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j5a4e"]
+bg_color = Color(1, 0.996078, 1, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="FontVariation" id="FontVariation_xne32"]
+base_font = ExtResource("6_yhrwj")
+
+[sub_resource type="FontVariation" id="FontVariation_xeept"]
+base_font = ExtResource("7_53n1y")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ocjd"]
+bg_color = Color(0.333333, 0.556863, 0.866667, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+corner_detail = 12
+
+[sub_resource type="FontVariation" id="FontVariation_u7qxi"]
+base_font = ExtResource("3_l1es0")
+
+[sub_resource type="FontVariation" id="FontVariation_cpuan"]
+base_font = ExtResource("3_l1es0")
+spacing_glyph = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_npvx6"]
+bg_color = Color(0.101961, 0.101961, 0.101961, 0.2)
+corner_radius_top_left = 64
+corner_radius_top_right = 64
+corner_radius_bottom_right = 64
+corner_radius_bottom_left = 64
+corner_detail = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_phdh3"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 28
+corner_radius_top_right = 28
+corner_radius_bottom_right = 28
+corner_radius_bottom_left = 28
+corner_detail = 14
+
+[sub_resource type="Gradient" id="Gradient_u4ede"]
+offsets = PackedFloat32Array(0, 0.755208, 0.911458, 1)
+colors = PackedColorArray(0.219608, 0.352941, 0.65098, 0.65098, 0.219608, 0.352941, 0.65098, 0.65098, 0.219608, 0.352941, 0.65098, 0.0666667, 0.219608, 0.352941, 0.65098, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5yrvl"]
+gradient = SubResource("Gradient_u4ede")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_nby4a"]
+base_font = ExtResource("3_b7ukm")
+spacing_glyph = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_umn41"]
+bg_color = Color(0.976471, 0.384314, 0.184314, 1)
+corner_radius_top_left = 23
+corner_radius_top_right = 23
+corner_radius_bottom_right = 23
+corner_radius_bottom_left = 23
+corner_detail = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_j7nm8"]
+bg_color = Color(0.333333, 0.556863, 0.866667, 1)
+corner_radius_top_left = 23
+corner_radius_top_right = 23
+corner_radius_bottom_right = 23
+corner_radius_bottom_left = 23
+corner_detail = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0avwm"]
+bg_color = Color(0.6, 0.6, 0.6, 0.541176)
+corner_radius_top_left = 80
+corner_radius_top_right = 80
+corner_radius_bottom_right = 80
+corner_radius_bottom_left = 80
+corner_detail = 12
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5q0nw"]
+viewport_path = NodePath("Pages/Enhancement/ItemPreview/SubViewport")
+
+[node name="Inventory" type="Control" node_paths=PackedStringArray("topbar", "sidebar", "bottombar", "content")]
+clip_contents = true
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_b67wi")
+topbar = NodePath("Pages/Main/Topbar")
+sidebar = NodePath("Pages/Main/Sidebar")
+bottombar = NodePath("Pages/Main/Bottombar")
+content = NodePath("Pages/Main/Content")
+
+[node name="Blur" parent="." instance=ExtResource("2_r7ryb")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+
+[node name="Pages" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Main" type="Control" parent="Pages"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Content" type="Panel" parent="Pages/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1568, 838)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 300.0
+offset_top = 101.0
+offset_right = 1868.0
+offset_bottom = 939.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_gryqn")
+script = ExtResource("3_vjye7")
+
+[node name="Content_Weapons" type="Control" parent="Pages/Main/Content" node_paths=PackedStringArray("item_container")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_mtge3")
+item_container = NodePath("ItemContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 16.0
+offset_right = 72.0
+offset_bottom = 56.0
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="SubCategoryRow" type="HBoxContainer" parent="Pages/Main/Content/Content_Weapons/VBoxContainer"]
+custom_minimum_size = Vector2(686, 112)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 80
+
+[node name="SubCategory_All" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Orb" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_All" index="0"]
+visible = true
+
+[node name="Label" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_All" index="1"]
+theme_override_colors/font_color = Color(0.333333, 0.494118, 0.866667, 1)
+
+[node name="SubCategory_Melee" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Melee" index="1"]
+text = "Melee"
+
+[node name="SubCategory_Bow" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Bow" index="1"]
+text = "Bow"
+
+[node name="SubCategory_Spell" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow" instance=ExtResource("2_f6ox2")]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Spell" index="1"]
+text = "Spell"
+
+[node name="Control" type="Control" parent="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HorizontalDivider" parent="Pages/Main/Content/Content_Weapons/VBoxContainer" instance=ExtResource("6_6pd7h")]
+layout_mode = 2
+
+[node name="ItemContainer" type="HFlowContainer" parent="Pages/Main/Content/Content_Weapons"]
+custom_minimum_size = Vector2(1030, 638)
+layout_mode = 2
+offset_left = 28.0
+offset_top = 160.0
+offset_right = 1058.0
+offset_bottom = 340.0
+theme_override_constants/h_separation = 28
+theme_override_constants/v_separation = 28
+script = ExtResource("3_r64ix")
+
+[node name="Item" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+
+[node name="Item2" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+
+[node name="Item3" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+
+[node name="Item4" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+
+[node name="Item5" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+
+[node name="Item6" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+grade = 1
+
+[node name="Item7" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+grade = 1
+
+[node name="Item8" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+grade = 1
+
+[node name="Item9" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+grade = 1
+
+[node name="Item10" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+grade = 2
+
+[node name="Item11" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+grade = 2
+
+[node name="Item12" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+grade = 2
+
+[node name="Item13" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+grade = 3
+
+[node name="Item14" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+grade = 3
+
+[node name="Item15" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+grade = 4
+
+[node name="Item16" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+grade = 4
+
+[node name="Item17" parent="Pages/Main/Content/Content_Weapons/ItemContainer" instance=ExtResource("3_21nmv")]
+layout_mode = 2
+focused = false
+grade = 5
+
+[node name="ItemPreview" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -536.0
+offset_bottom = 842.0
+grow_horizontal = 0
+theme_override_constants/margin_left = 28
+theme_override_constants/margin_top = 28
+theme_override_constants/margin_right = 28
+theme_override_constants/margin_bottom = 28
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="HeaderSection" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer"]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="Background" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 64)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_h75of")
+
+[node name="Watermark" type="Control" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background"]
+modulate = Color(1, 1, 1, 0.101961)
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+anchors_preset = 0
+offset_left = -32.0
+offset_top = -32.0
+offset_right = 96.0
+offset_bottom = 96.0
+
+[node name="WatermarkLogo" type="TextureRect" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background/Watermark"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_i2528")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="WatermarkStar1" type="TextureRect" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background/Watermark"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 16.0
+offset_right = 48.0
+offset_bottom = 52.0
+texture = ExtResource("5_0we6y")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="WatermarkStar2" type="TextureRect" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background/Watermark"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 0
+offset_left = 82.33
+offset_top = 62.6
+offset_right = 106.33
+offset_bottom = 86.6
+texture = ExtResource("5_0we6y")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="WatermarkStar3" type="TextureRect" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/Background/Watermark"]
+self_modulate = Color(0, 0, 0, 1)
+custom_minimum_size = Vector2(12, 12)
+layout_mode = 0
+offset_left = 56.33
+offset_top = 96.6
+offset_right = 68.33
+offset_bottom = 108.6
+texture = ExtResource("5_0we6y")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection"]
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/HeaderSection/MarginContainer/CenterContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.980392, 0.992157, 1, 1)
+theme_override_fonts/font = SubResource("FontVariation_o5dn7")
+theme_override_font_sizes/font_size = 34
+text = "Starlit Sword"
+
+[node name="ImageSection" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer"]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="Background" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection"]
+clip_contents = true
+custom_minimum_size = Vector2(0, 233)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2mfud")
+
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ItemImage" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/Background/CenterContainer"]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
+
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection"]
+layout_mode = 2
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_bottom = 11
+
+[node name="ImageInfoSection" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="ItemPower" type="CenterContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower"]
+layout_mode = 2
+
+[node name="Background" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer"]
+self_modulate = Color(0, 0, 0, 0.0509804)
+custom_minimum_size = Vector2(145, 48)
+layout_mode = 2
+
+[node name="Labels" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 11
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 11
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer/Labels"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer/Labels/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_6eb88")
+theme_override_font_sizes/font_size = 24
+text = "Item Power"
+
+[node name="Value" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/ItemPower/MarginContainer/Labels/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = SubResource("FontVariation_6eb88")
+theme_override_font_sizes/font_size = 14
+text = "1,920"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer" type="Control" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Minor1" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
+
+[node name="Major1" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
+
+[node name="Core" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
+
+[node name="Major2" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
+
+[node name="Minor2" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/ImageSection/MarginContainer/ImageInfoSection/CenterContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0yfi3")
+
+[node name="InfoSection" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer"]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="Background" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection"]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_hjuhp")
+
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection"]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 18
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 18
+
+[node name="InfoSection" type="CenterContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer"]
+layout_mode = 2
+
+[node name="ItemInfo" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Stats" type="HBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo"]
+custom_minimum_size = Vector2(0, 225)
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="StatsSection" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/Stats"]
+custom_minimum_size = Vector2(210, 200)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/Stats/StatsSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.862745, 0.752941, 0.192157, 1)
+theme_override_fonts/font = SubResource("FontVariation_44ke8")
+theme_override_font_sizes/font_size = 24
+text = "Item Stats"
+
+[node name="SoulstoneStatsSection" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/Stats"]
+custom_minimum_size = Vector2(210, 200)
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/Stats/SoulstoneStatsSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.862745, 0.752941, 0.192157, 1)
+theme_override_fonts/font = SubResource("FontVariation_44ke8")
+theme_override_font_sizes/font_size = 24
+text = "Soulstone Stats"
+
+[node name="HorizontalDivider" type="Control" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Line" type="TextureRect" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/HorizontalDivider"]
+custom_minimum_size = Vector2(800, 0.5)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -222.0
+offset_top = -0.75
+offset_right = 578.0
+offset_bottom = 0.75
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.56, 1)
+texture = SubResource("GradientTexture2D_0ufkp")
+expand_mode = 1
+
+[node name="SetDescription" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="SetPieces" type="HBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.133333, 0.666667, 0.188235, 1)
+theme_override_fonts/font = SubResource("FontVariation_pyu88")
+theme_override_font_sizes/font_size = 24
+text = "Star Shower:"
+vertical_alignment = 1
+
+[node name="1PieceI" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
+self_modulate = Color(0.145098, 0.956863, 0.227451, 1)
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_j5a4e")
+
+[node name="2PieceI" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
+self_modulate = Color(0.145098, 0.956863, 0.227451, 1)
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_j5a4e")
+
+[node name="3PieceI" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
+self_modulate = Color(0.145098, 0.956863, 0.227451, 1)
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_j5a4e")
+
+[node name="4PieceI" type="Panel" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetPieces"]
+self_modulate = Color(0.615686, 0.690196, 0.580392, 1)
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_j5a4e")
+
+[node name="SetEffects" type="MarginContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription"]
+layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_right = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetEffects"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Effect1" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetEffects/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.541176, 0.4, 1)
+theme_override_fonts/font = SubResource("FontVariation_xne32")
+theme_override_font_sizes/font_size = 16
+text = "2-Piece: Attacking generates a cosmic ball that follows you. It will attack nearby enemies when you’re in combat. Each attack will drain one stack from it."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Effect2" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription/SetEffects/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.541176, 0.4, 1)
+theme_override_fonts/font = SubResource("FontVariation_xne32")
+theme_override_font_sizes/font_size = 16
+text = "4-Piece: Generated stacks increased from 2 to 4. Each attack will bounce to one additional target."
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="Description" type="Label" parent="Pages/Main/Content/Content_Weapons/ItemPreview/VBoxContainer/InfoSection/MarginContainer/InfoSection/ItemInfo/SetDescription"]
+custom_minimum_size = Vector2(414, 60)
+layout_mode = 2
+theme_override_colors/font_color = Color(0.6, 0.541176, 0.4, 1)
+theme_override_fonts/font = SubResource("FontVariation_xeept")
+theme_override_font_sizes/font_size = 16
+text = "Made from the heart of Reia. This was one of the remnants found after she dispersed her energy throughout her world."
+vertical_alignment = 2
+autowrap_mode = 2
+
+[node name="Topbar" type="Control" parent="Pages/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1620, 121)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 260.0
+offset_right = 1880.0
+offset_bottom = 121.0
+grow_horizontal = 0
+mouse_filter = 2
+script = ExtResource("11_j6yph")
+
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Topbar"]
+layout_mode = 2
+offset_right = 1620.0
+offset_bottom = 121.0
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_right = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Topbar/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="FilterSection" type="CenterContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="SaveFilter" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
+custom_minimum_size = Vector2(268, 50)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"Chip"
+
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 19
+theme_override_constants/margin_bottom = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="IconContainer" type="CenterContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="IconBackground" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer/IconContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
+
+[node name="FilterIcon" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer/IconContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_k344c")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
+theme_override_fonts/font = SubResource("FontVariation_u7qxi")
+theme_override_font_sizes/font_size = 20
+text = "Save Filter"
+
+[node name="Spacer" type="Control" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="DropdownIcon" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/SaveFilter/MarginContainer/HBoxContainer"]
+self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_kneal")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Filter" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
+custom_minimum_size = Vector2(340, 50)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"Chip"
+
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 19
+theme_override_constants/margin_bottom = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="IconContainer" type="CenterContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="IconBackground" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer/IconContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
+
+[node name="FilterIcon" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer/IconContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_k344c")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
+theme_override_fonts/font = SubResource("FontVariation_u7qxi")
+theme_override_font_sizes/font_size = 20
+text = "Filter: Rarity, Level, C..."
+
+[node name="Spacer" type="Control" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="DropdownIcon" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Filter/MarginContainer/HBoxContainer"]
+self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_kneal")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Sort" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer"]
+custom_minimum_size = Vector2(340, 50)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"Chip"
+
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 19
+theme_override_constants/margin_bottom = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="IconContainer" type="CenterContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="IconBackground" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer/IconContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5ocjd")
+
+[node name="FilterIcon" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer/IconContainer"]
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_k344c")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
+theme_override_fonts/font = SubResource("FontVariation_u7qxi")
+theme_override_font_sizes/font_size = 20
+text = "Sort: Power, Melee Atk..."
+
+[node name="Spacer" type="Control" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="DropdownIcon" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/FilterSection/HBoxContainer/Sort/MarginContainer/HBoxContainer"]
+self_modulate = Color(0.333333, 0.556863, 0.866667, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_kneal")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Spacer" type="Control" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="CurrencySection" type="CenterContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(300, 121)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 25
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="CurrencyGroup" type="MarginContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Background" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup"]
+self_modulate = Color(0.101961, 0.101961, 0.101961, 0.2)
+custom_minimum_size = Vector2(148, 50)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"Chip"
+
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 9
+theme_override_constants/margin_bottom = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_gjblk")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/CurrencyGroup/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_fonts/font = SubResource("FontVariation_cpuan")
+theme_override_font_sizes/font_size = 20
+text = "13.3m"
+
+[node name="PremiumCurrencyGroup" type="MarginContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Background" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup"]
+self_modulate = Color(0.101961, 0.101961, 0.101961, 0.2)
+custom_minimum_size = Vector2(148, 50)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"Chip"
+
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 9
+theme_override_constants/margin_bottom = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="TextureRect" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_gjblk")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/CurrencySection/MarginContainer/HBoxContainer/PremiumCurrencyGroup/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_fonts/font = SubResource("FontVariation_cpuan")
+theme_override_font_sizes/font_size = 20
+text = "10,000"
+
+[node name="ExitButton" type="CenterContainer" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ExitBackground" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/ExitButton"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_npvx6")
+
+[node name="ExitForeground" type="Panel" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/ExitButton"]
+custom_minimum_size = Vector2(56, 56)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_phdh3")
+
+[node name="ExitIcon" type="TextureRect" parent="Pages/Main/Topbar/MarginContainer/HBoxContainer/ExitButton"]
+self_modulate = Color(0.372549, 0.564706, 0.592157, 1)
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_x4vpx")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Sidebar" type="Control" parent="Pages/Main"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(300, 1080)
+layout_mode = 1
+anchors_preset = 0
+offset_right = 300.0
+offset_bottom = 1080.0
+mouse_filter = 2
+script = ExtResource("16_v465c")
+
+[node name="Background" type="TextureRect" parent="Pages/Main/Sidebar"]
+custom_minimum_size = Vector2(300, 1080)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture2D_5yrvl")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Pages/Main/Sidebar"]
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 1080.0
+mouse_filter = 2
+
+[node name="Header" type="MarginContainer" parent="Pages/Main/Sidebar/VBoxContainer"]
+custom_minimum_size = Vector2(300, 100)
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 11
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 11
+
+[node name="HBox" type="HBoxContainer" parent="Pages/Main/Sidebar/VBoxContainer/Header"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="Icon" type="TextureRect" parent="Pages/Main/Sidebar/VBoxContainer/Header/HBox"]
+custom_minimum_size = Vector2(68, 68)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("2_i2528")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Pages/Main/Sidebar/VBoxContainer/Header/HBox"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_fonts/font = SubResource("FontVariation_nby4a")
+theme_override_font_sizes/font_size = 32
+text = "Inventory"
+vertical_alignment = 1
+
+[node name="Tabs" type="VBoxContainer" parent="Pages/Main/Sidebar/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 8
+
+[node name="Tab_Weapons" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+layout_mode = 2
+category_name = "Weapons"
+selected = true
+
+[node name="Tab_Equipment" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+layout_mode = 2
+category_name = "Equipment"
+
+[node name="Tab_Soulstones" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+layout_mode = 2
+category_name = "Soulstones"
+
+[node name="Tab_Consumables" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+layout_mode = 2
+category_name = "Consumables"
+
+[node name="Tab_Materials" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+layout_mode = 2
+category_name = "Materials"
+
+[node name="Tab_QuestItems" parent="Pages/Main/Sidebar/VBoxContainer/Tabs" instance=ExtResource("4_ph1fb")]
+layout_mode = 2
+category_name = "Quest Items"
+
+[node name="SidebarFooter" type="VBoxContainer" parent="Pages/Main/Sidebar/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Main/Sidebar/VBoxContainer/SidebarFooter"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="FilterCounter" type="Panel" parent="Pages/Main/Sidebar/VBoxContainer/SidebarFooter/CenterContainer"]
+self_modulate = Color(0.976471, 0.952941, 0.898039, 1)
+custom_minimum_size = Vector2(148, 50)
+layout_mode = 2
+mouse_filter = 2
+theme = ExtResource("5_ff7kn")
+theme_type_variation = &"Chip"
+
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Main/Sidebar/VBoxContainer/SidebarFooter/CenterContainer/FilterCounter"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Pages/Main/Sidebar/VBoxContainer/SidebarFooter/CenterContainer/FilterCounter/CenterContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_colors/font_color = Color(0.203922, 0.2, 0.247059, 1)
+theme_override_font_sizes/font_size = 20
+text = "17 Items"
+
+[node name="Bottombar" type="Control" parent="Pages/Main"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 260.0
+offset_top = 890.0
+offset_right = 1880.0
+offset_bottom = 1040.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+script = ExtResource("20_j36ox")
+
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Bottombar"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 45
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 45
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Bottombar/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+alignment = 2
+
+[node name="ActionButtons" type="CenterContainer" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="DeleteButton" type="Panel" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer"]
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"Chip"
+
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 19
+theme_override_constants/margin_bottom = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="IconContainer" type="CenterContainer" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="IconBackground" type="Panel" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer/IconContainer"]
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_umn41")
+
+[node name="Label" type="Label" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_colors/font_color = Color(0.976471, 0.384314, 0.184314, 1)
+theme_override_fonts/font = SubResource("FontVariation_u7qxi")
+theme_override_font_sizes/font_size = 20
+text = "Delete"
+
+[node name="Spacer" type="Control" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Button" type="Button" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/DeleteButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SelectButton" type="Panel" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer"]
+custom_minimum_size = Vector2(180, 60)
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"Chip"
+
+[node name="Button" type="Button" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton"]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 9
+theme_override_constants/margin_top = 9
+theme_override_constants/margin_right = 19
+theme_override_constants/margin_bottom = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="IconContainer" type="CenterContainer" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="IconBackground" type="Panel" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer/IconContainer"]
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_j7nm8")
+
+[node name="Label" type="Label" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_colors/font_color = Color(0.333333, 0.556863, 0.866667, 1)
+theme_override_fonts/font = SubResource("FontVariation_u7qxi")
+theme_override_font_sizes/font_size = 20
+text = "Select"
+
+[node name="Spacer" type="Control" parent="Pages/Main/Bottombar/MarginContainer/HBoxContainer/ActionButtons/HBoxContainer/SelectButton/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="Enhancement" type="Control" parent="Pages"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("23_aj5fo")
+
+[node name="Background" type="Panel" parent="Pages/Enhancement"]
+self_modulate = Color(0.364706, 0.529412, 1, 0.501961)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Tabs" type="Control" parent="Pages/Enhancement"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -1100.0
+offset_bottom = -900.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HorizontalDivider" parent="Pages/Enhancement/Tabs" instance=ExtResource("6_6pd7h")]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 172.0
+offset_right = 820.0
+offset_bottom = 172.5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Pages/Enhancement/Tabs"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Control" type="Control" parent="Pages/Enhancement/Tabs/HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Enhancement/Tabs/HBoxContainer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Selected" type="Panel" parent="Pages/Enhancement/Tabs/HBoxContainer/Control/CenterContainer"]
+self_modulate = Color(0.447059, 0.447059, 0.447059, 1)
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0avwm")
+
+[node name="Label" type="Label" parent="Pages/Enhancement/Tabs/HBoxContainer/Control/CenterContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_font_sizes/font_size = 24
+text = "Weapons"
+
+[node name="Control2" type="Control" parent="Pages/Enhancement/Tabs/HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Enhancement/Tabs/HBoxContainer/Control2"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Selected" type="Panel" parent="Pages/Enhancement/Tabs/HBoxContainer/Control2/CenterContainer"]
+self_modulate = Color(0.447059, 0.447059, 0.447059, 1)
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0avwm")
+
+[node name="Label" type="Label" parent="Pages/Enhancement/Tabs/HBoxContainer/Control2/CenterContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_font_sizes/font_size = 24
+text = "Equipment"
+
+[node name="Control3" type="Control" parent="Pages/Enhancement/Tabs/HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Enhancement/Tabs/HBoxContainer/Control3"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Selected" type="Panel" parent="Pages/Enhancement/Tabs/HBoxContainer/Control3/CenterContainer"]
+self_modulate = Color(0.447059, 0.447059, 0.447059, 1)
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0avwm")
+
+[node name="Label" type="Label" parent="Pages/Enhancement/Tabs/HBoxContainer/Control3/CenterContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_font_sizes/font_size = 24
+text = "Equipment"
+
+[node name="Control4" type="Control" parent="Pages/Enhancement/Tabs/HBoxContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="Pages/Enhancement/Tabs/HBoxContainer/Control4"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Selected" type="Panel" parent="Pages/Enhancement/Tabs/HBoxContainer/Control4/CenterContainer"]
+self_modulate = Color(0.447059, 0.447059, 0.447059, 1)
+custom_minimum_size = Vector2(160, 160)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_0avwm")
+
+[node name="Label" type="Label" parent="Pages/Enhancement/Tabs/HBoxContainer/Control4/CenterContainer"]
+layout_mode = 2
+theme_type_variation = &"WhiteLabelSans"
+theme_override_font_sizes/font_size = 24
+text = "Equipment"
+
+[node name="UI_ItemContainer" type="HFlowContainer" parent="Pages/Enhancement"]
+layout_mode = 0
+offset_top = 180.0
+offset_right = 820.0
+offset_bottom = 1080.0
+script = ExtResource("3_r64ix")
+
+[node name="ItemPreview" type="Control" parent="Pages/Enhancement"]
+layout_mode = 1
+anchor_left = 0.212
+anchor_right = 0.787
+anchor_bottom = 1.0
+offset_left = 0.959961
+offset_right = 0.959839
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Pages/Enhancement/ItemPreview"]
+transparent_bg = true
+size = Vector2i(1280, 1280)
+
+[node name="AquaWizard" parent="Pages/Enhancement/ItemPreview/SubViewport" instance=ExtResource("14_guich")]
+visible = false
+
+[node name="Camera3D" type="Camera3D" parent="Pages/Enhancement/ItemPreview/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.70415, 2.45289)
+visible = false
+
+[node name="TextureRect" type="TextureRect" parent="Pages/Enhancement/ItemPreview"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("ViewportTexture_5q0nw")
+expand_mode = 1
+stretch_mode = 5
+
+[connection signal="tab_changed" from="." to="." method="_on_tab_changed"]
+
+[editable path="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_All"]
+[editable path="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Melee"]
+[editable path="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Bow"]
+[editable path="Pages/Main/Content/Content_Weapons/VBoxContainer/SubCategoryRow/SubCategory_Spell"]

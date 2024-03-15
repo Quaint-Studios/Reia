@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://b3lk6ke733jgf"]
+
+[ext_resource type="Script" path="res://src/item/weapon/weapon.gd" id="1_ygf2t"]
+[ext_resource type="Texture2D" uid="uid://d7eyaepxetvj" path="res://scripts/items/weapons/1000_wooden_sword_atlas.tres" id="2_yo5x8"]
+
+[resource]
+script = ExtResource("1_ygf2t")
+soulstones = Array[Resource("res://scripts/items/data/soulstone_slot.gd")]([])
+id = 9000
+name = "Ethereal Bow"
+description = ""
+texture = ExtResource("2_yo5x8")
+item_grade = 4

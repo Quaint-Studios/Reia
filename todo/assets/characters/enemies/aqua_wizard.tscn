@@ -1,0 +1,65 @@
+[gd_scene load_steps=17 format=3 uid="uid://op561o2k0d4o"]
+
+[ext_resource type="Script" path="res://src/mob/attackable/enemy/aqua_wizard.gd" id="1_1cd28"]
+[ext_resource type="PackedScene" uid="uid://bqpe013mgarni" path="res://scripts/mob/attackable/attackable_health.tscn" id="1_051d3"]
+[ext_resource type="PackedScene" uid="uid://b3p21o2ljivu2" path="res://assets/characters/npcs/aqua_wizard.glb" id="1_hf2bh"]
+[ext_resource type="Resource" uid="uid://de4lkn8yj68de" path="res://scripts/items/weapons/1000_wooden_sword.tres" id="2_a6meg"]
+[ext_resource type="PackedScene" uid="uid://c03x7cx3t0083" path="res://scripts/mob/attackable/player/minimap_markers/map_marker.tscn" id="2_dbpwl"]
+[ext_resource type="Script" path="res://src/combat/attackable_stats.gd" id="2_dsgh0"]
+[ext_resource type="Script" path="res://src/item/loot_table.gd" id="2_xhov5"]
+[ext_resource type="Script" path="res://src/combat/attackable_status.gd" id="3_23pr2"]
+[ext_resource type="Resource" uid="uid://bl33wnqg6dxmq" path="res://scripts/items/weapons/1001_iron_sword.tres" id="3_u2caa"]
+[ext_resource type="Resource" uid="uid://obtmyan5qr2a" path="res://scripts/items/weapons/1002_iron_helmet.tres" id="4_17o2o"]
+[ext_resource type="Texture2D" uid="uid://mfj02y3po58g" path="res://scripts/items/weapons/textures/items_atlas.png" id="4_clhl8"]
+
+[sub_resource type="Resource" id="Resource_i26bh"]
+script = ExtResource("2_xhov5")
+items = Array[Resource("res://src/item/item.gd")]([ExtResource("2_a6meg"), ExtResource("3_u2caa"), ExtResource("4_17o2o")])
+
+[sub_resource type="Resource" id="Resource_ww44q"]
+script = ExtResource("2_dsgh0")
+health = 100
+max_health = 100
+melee_power = 10
+bow_power = 10
+spell_power = 10
+melee_defense = 10
+bow_defense = 10
+spell_defense = 10
+crit_chance = 0.0
+crit_damage = 0.0
+
+[sub_resource type="Resource" id="Resource_sxuwf"]
+script = ExtResource("3_23pr2")
+state = 0
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jxymx"]
+radius = 0.573225
+height = 2.59712
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ia4g"]
+atlas = ExtResource("4_clhl8")
+region = Rect2(0, 512, 128, 128)
+
+[node name="AquaWizard" type="CharacterBody3D"]
+script = ExtResource("1_1cd28")
+loot = SubResource("Resource_i26bh")
+stats = SubResource("Resource_ww44q")
+status = SubResource("Resource_sxuwf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29, 0)
+shape = SubResource("CapsuleShape3D_jxymx")
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="AquaWizard" parent="Visuals" instance=ExtResource("1_hf2bh")]
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 0, 0)
+
+[node name="Health" parent="Visuals" node_paths=PackedStringArray("attackable") instance=ExtResource("1_051d3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.59677, 0)
+attackable = NodePath("../..")
+
+[node name="MapMarker" parent="Visuals" instance=ExtResource("2_dbpwl")]
+transform = Transform3D(1.53209, 0, -1.28558, 0, 2, 0, 1.28558, 0, 1.53209, 0, 0, 0)
+texture = SubResource("AtlasTexture_4ia4g")

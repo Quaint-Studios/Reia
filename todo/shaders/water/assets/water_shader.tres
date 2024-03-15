@@ -1,0 +1,677 @@
+[gd_resource type="VisualShader" load_steps=38 format=3 uid="uid://be1vq213btatp"]
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_rdeqo"]
+size = Vector2(748.053, 300.574)
+expression = "// Add Refraction to Water Color
+vec4 refraction_color = texture(screen_tex, (refraction * duv_normal).xy + SCREEN_UV);
+new_water_color = mix(refraction_color, water_color, color_factor);"
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_lt4hd"]
+size = Vector2(725.731, 445.817)
+expression = "// UV Panning
+vec2 scale = vec2(1.0, 1.0);
+vec2 uv_a = vec2(sin(TIME * caustic_speed_a)) * scale + UV;
+vec2 uv_b = vec2(cos(TIME * caustic_speed_b)) * scale + UV;
+
+vec4 amped_caustic_a = vec4(texture(caustic_a, uv_a)) * vec4(caustic_strength_a);
+vec4 amped_caustic_b = vec4(texture(caustic_b, uv_b)) * vec4(caustic_strength_b);
+
+add_caustics = pow(vec4(amped_caustic_a + amped_caustic_b), vec4(caustic_power));
+mul_caustics = pow(vec4(amped_caustic_a * amped_caustic_b), vec4(caustic_power));
+caustic_type_out = caustic_type;"
+
+[sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_hnjcy"]
+size = Vector2(1042.83, 598.945)
+title = "Surface Caustics"
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_8b5mu"]
+size = Vector2(301.827, 287.878)
+expression = "metallic_out = metallic;
+roughness_out = roughness;
+specular_out = specular;"
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_tmvf3"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(0.5, 0.5, 0.5)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_qwx2n"]
+size = Vector2(1032.49, 427.76)
+expression = "// Proximity Fade
+float depth_tex_r = texture(depth_tex, SCREEN_UV).r;
+vec4 depth_world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, depth_tex_r, 1.0);
+depth_world_pos.xyz /= depth_world_pos.w;
+float proximity_fade = clamp(1.0 - smoothstep(depth_world_pos.z + foam_size, depth_world_pos.z, VERTEX.z), 0.0, 1.0);
+
+// Water Foam
+float foam_step = abs(sin(fma(TIME, foam_step_speed, 1.0 - proximity_fade) * foam_step_size));
+float foam_noise = step(proximity_fade, texture(foam_texture, vec2(TIME * foam_speed) * vec2(1.0, 1.0) + UV).x);
+foam = (foam_step * foam_noise) + (pow(foam_noise, foam_depth));
+foam_color_out = foam_color;"
+
+[sub_resource type="VisualShaderNodeLinearSceneDepth" id="VisualShaderNodeLinearSceneDepth_smas1"]
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_r6qke"]
+size = Vector2(526.859, 318.915)
+expression = "// Get Water Color
+float d = linear_depth;
+d = d + VERTEX.z;
+float depth = exp(-d * murkiness);
+water_color = mix(deep_water, shallow_water, depth);
+alpha = water_color.a;"
+
+[sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_bmq3b"]
+size = Vector2(1689.23, 857.826)
+title = "Water Color"
+description = "Controls the shallow and deep color of the water."
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_nmiy7"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_vb2cc"]
+size = Vector2(579.566, 319.382)
+expression = "// Delta UV Normal
+vec3 duv = vec3(4.0 / viewport_size.x, 4.0 / viewport_size.x, 0);
+float v1 = texture(simulation, UV - duv.xz).y;
+float v2 = texture(simulation, UV + duv.xz).y;
+float v3 = texture(simulation, UV - duv.zy).y;
+float v4 = texture(simulation, UV + duv.zy).y;
+
+duv_normal = normalize(vec3(v1 - v2, v3 - v4, 0.3));"
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_m0unj"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(1, 1, 1, 1), 2, Quaternion(0.5, 0.5, 0.5, 0.5)]
+op_type = 5
+
+[sub_resource type="VisualShaderNodeGlobalExpression" id="VisualShaderNodeGlobalExpression_evmiw"]
+size = Vector2(951.648, 926.43)
+expression = "uniform sampler2D screen_tex : hint_screen_texture;
+uniform sampler2D depth_tex : hint_depth_texture;
+
+uniform float metallic : hint_range(0, 1) = 0;
+uniform float roughness : hint_range(0, 1) = 0.00999999977648;
+uniform float specular : hint_range(0, 5) = 2;
+
+// Water
+uniform vec4 deep_water : source_color = vec4(0.556863, 0.819608, 0.890196, 0.333333);
+uniform vec4 shallow_water : source_color = vec4(0.811765, 0.956863, 0.996078, 0.333333);
+
+uniform float murkiness = 0.3;
+uniform float refraction = 0.1;
+uniform vec4 color_factor = vec4(0.5, 0.5, 0.5, 0.5);
+
+// Foam
+uniform vec4 foam_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform float foam_depth : hint_range(0, 16) = 4.0;
+uniform float foam_size : hint_range(0, 16) = 0.5;
+uniform float foam_speed : hint_range(0, 5) = 0.01;
+uniform float foam_step_size : hint_range(0, 20) = 4.0;
+uniform float foam_step_speed : hint_range(-1, 1) = 0.2;
+uniform sampler2D foam_texture;
+
+
+// Caustics
+uniform sampler2D caustic_a;
+uniform sampler2D caustic_b;
+uniform float caustic_speed_a : hint_range(-4, 4) = 0.00499999988824;
+uniform float caustic_speed_b : hint_range(-4, 4) = 0.02500000037253;
+uniform float caustic_strength_a : hint_range(-4, 4) = 1;
+uniform float caustic_strength_b : hint_range(-4, 4) = 1.5;
+uniform float caustic_power = 3;
+uniform float caustic_type : hint_range(0, 1) = 1;
+
+// Simulations
+uniform sampler2D simulation;
+uniform vec2 viewport_size = vec2(1024, 1024);
+
+// Vertex Waves
+uniform float wave_speed : hint_range(-50, 50) = 1;
+uniform float wave_frequency : hint_range(-10, 10) = 0.80000001192093;
+uniform float wave_scale : hint_range(-1, 1) = 0.20000000298023;
+uniform float sim_amplitude = 0.5;"
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_nnj7m"]
+operator = 3
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_x6d5p"]
+default_input_values = [0, 0.0, 1, 0.2]
+operator = 2
+
+[sub_resource type="VisualShaderNodeDerivativeFunc" id="VisualShaderNodeDerivativeFunc_fc7sm"]
+default_input_values = [0, Vector3(0, 0, 0)]
+op_type = 2
+function = 1
+
+[sub_resource type="VisualShaderNodeDerivativeFunc" id="VisualShaderNodeDerivativeFunc_buax0"]
+default_input_values = [0, Vector3(0, 0, 0)]
+op_type = 2
+function = 2
+
+[sub_resource type="VisualShaderNodeDerivativeFunc" id="VisualShaderNodeDerivativeFunc_c1kbf"]
+default_input_values = [0, Vector3(0, 0, 0)]
+op_type = 2
+function = 1
+
+[sub_resource type="VisualShaderNodeDerivativeFunc" id="VisualShaderNodeDerivativeFunc_grufm"]
+default_input_values = [0, Vector3(0, 0, 0)]
+op_type = 2
+function = 2
+
+[sub_resource type="VisualShaderNodeVectorCompose" id="VisualShaderNodeVectorCompose_8s5t6"]
+default_input_values = [0, 0.0, 1, 0.0, 2, 0.0, 3, 0.0]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_vigwm"]
+input_name = "light_is_directional"
+
+[sub_resource type="VisualShaderNodeVectorRefract" id="VisualShaderNodeVectorRefract_gb8ua"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(0, 1, 0), 2, 0.0]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_vjei6"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_otxw7"]
+default_input_values = [0, 1.0, 1, 3.0]
+operator = 3
+
+[sub_resource type="VisualShaderNodeVaryingGetter" id="VisualShaderNodeVaryingGetter_3jre1"]
+varying_name = "old_pos"
+varying_type = 4
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_jp288"]
+operator = 2
+
+[sub_resource type="VisualShaderNodeVaryingGetter" id="VisualShaderNodeVaryingGetter_ttvcu"]
+varying_name = "new_pos"
+varying_type = 4
+
+[sub_resource type="VisualShaderNodeVectorLen" id="VisualShaderNodeVectorLen_o183s"]
+
+[sub_resource type="VisualShaderNodeVectorLen" id="VisualShaderNodeVectorLen_wbgob"]
+default_input_values = [0, Vector2(0, 0)]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeVectorLen" id="VisualShaderNodeVectorLen_ygiml"]
+default_input_values = [0, Vector2(0, 0)]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeVectorLen" id="VisualShaderNodeVectorLen_xdcoh"]
+default_input_values = [0, Vector2(0, 0)]
+op_type = 0
+
+[sub_resource type="VisualShaderNodeComment" id="VisualShaderNodeComment_ciotf"]
+size = Vector2(2360.68, 551.858)
+title = "Water Wave"
+description = "Handles the sin/cos wave, amplitude, and more."
+
+[sub_resource type="VisualShaderNodeVaryingSetter" id="VisualShaderNodeVaryingSetter_uf6hk"]
+varying_name = "new_pos"
+varying_type = 4
+
+[sub_resource type="VisualShaderNodeVaryingSetter" id="VisualShaderNodeVaryingSetter_mtip5"]
+varying_name = "old_pos"
+varying_type = 4
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_jl60i"]
+input_name = "vertex"
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_x0sq7"]
+size = Vector2(1033.52, 414.092)
+expression = "// Wave Generation
+vec3 modelVertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+float waveTime = wave_speed * TIME;
+
+float frequency = sin(waveTime + (wave_frequency * modelVertex.x)) + cos(waveTime + (modelVertex.z * wave_frequency));
+
+wavePos = vec3(
+	modelVertex.x,
+	modelVertex.y + (step(0.5, modelVertex.y) * (frequency * wave_scale)),
+	modelVertex.z
+);"
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_mwsg6"]
+size = Vector2(1147.66, 286.295)
+expression = "// Ripple Simulation
+new_wavePos = ((VERTEX + (NORMAL * (texture(simulation, UV).r * sim_amplitude))) + wavePos) / vec3(2.0, 4.0, 2.0);"
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx, shadows_disabled;
+
+
+// Varyings
+varying vec3 new_pos;
+varying vec3 old_pos;
+
+uniform sampler2D depth_tex_frg_18 : hint_depth_texture;
+
+
+// GlobalExpression:0
+	uniform sampler2D screen_tex : hint_screen_texture;
+	uniform sampler2D depth_tex : hint_depth_texture;
+	
+	uniform float metallic : hint_range(0, 1) = 0;
+	uniform float roughness : hint_range(0, 1) = 0.00999999977648;
+	uniform float specular : hint_range(0, 5) = 2;
+	
+	// Water
+	uniform vec4 deep_water : source_color = vec4(0.556863, 0.819608, 0.890196, 0.333333);
+	uniform vec4 shallow_water : source_color = vec4(0.811765, 0.956863, 0.996078, 0.333333);
+	
+	uniform float murkiness = 0.3;
+	uniform float refraction = 0.1;
+	uniform vec4 color_factor = vec4(0.5, 0.5, 0.5, 0.5);
+	
+	// Foam
+	uniform vec4 foam_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+	uniform float foam_depth : hint_range(0, 16) = 4.0;
+	uniform float foam_size : hint_range(0, 16) = 0.5;
+	uniform float foam_speed : hint_range(0, 5) = 0.01;
+	uniform float foam_step_size : hint_range(0, 20) = 4.0;
+	uniform float foam_step_speed : hint_range(-1, 1) = 0.2;
+	uniform sampler2D foam_texture;
+	
+	
+	// Caustics
+	uniform sampler2D caustic_a;
+	uniform sampler2D caustic_b;
+	uniform float caustic_speed_a : hint_range(-4, 4) = 0.00499999988824;
+	uniform float caustic_speed_b : hint_range(-4, 4) = 0.02500000037253;
+	uniform float caustic_strength_a : hint_range(-4, 4) = 1;
+	uniform float caustic_strength_b : hint_range(-4, 4) = 1.5;
+	uniform float caustic_power = 3;
+	uniform float caustic_type : hint_range(0, 1) = 1;
+	
+	// Simulations
+	uniform sampler2D simulation;
+	uniform vec2 viewport_size = vec2(1024, 1024);
+	
+	// Vertex Waves
+	uniform float wave_speed : hint_range(-50, 50) = 1;
+	uniform float wave_frequency : hint_range(-10, 10) = 0.80000001192093;
+	uniform float wave_scale : hint_range(-1, 1) = 0.20000000298023;
+	uniform float sim_amplitude = 0.5;
+
+void vertex() {
+	vec3 n_out79p0;
+// Expression:79
+	n_out79p0 = vec3(0.0, 0.0, 0.0);
+	{
+		// Wave Generation
+		vec3 modelVertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+		float waveTime = wave_speed * TIME;
+		
+		float frequency = sin(waveTime + (wave_frequency * modelVertex.x)) + cos(waveTime + (modelVertex.z * wave_frequency));
+		
+		n_out79p0 = vec3(
+			modelVertex.x,
+			modelVertex.y + (step(0.5, modelVertex.y) * (frequency * wave_scale)),
+			modelVertex.z
+		);
+	}
+
+
+	vec3 n_out81p0;
+// Expression:81
+	n_out81p0 = vec3(0.0, 0.0, 0.0);
+	{
+		// Ripple Simulation
+		n_out81p0 = ((VERTEX + (NORMAL * (texture(simulation, UV).r * sim_amplitude))) + n_out79p0) / vec3(2.0, 4.0, 2.0);
+	}
+
+
+// Output:0
+	VERTEX = n_out81p0;
+
+
+// VaryingSetter:75
+	new_pos = n_out81p0;
+
+
+// Input:77
+	vec3 n_out77p0 = VERTEX;
+
+
+// VaryingSetter:76
+	old_pos = n_out77p0;
+
+
+}
+
+void fragment() {
+	vec4 n_out105p0;
+	vec4 n_out105p1;
+	float n_out105p2;
+// Expression:105
+	n_out105p0 = vec4(0.0, 0.0, 0.0, 0.0);
+	n_out105p1 = vec4(0.0, 0.0, 0.0, 0.0);
+	n_out105p2 = 0.0;
+	{
+		// UV Panning
+		vec2 scale = vec2(1.0, 1.0);
+		vec2 uv_a = vec2(sin(TIME * caustic_speed_a)) * scale + UV;
+		vec2 uv_b = vec2(cos(TIME * caustic_speed_b)) * scale + UV;
+		
+		vec4 amped_caustic_a = vec4(texture(caustic_a, uv_a)) * vec4(caustic_strength_a);
+		vec4 amped_caustic_b = vec4(texture(caustic_b, uv_b)) * vec4(caustic_strength_b);
+		
+		n_out105p0 = pow(vec4(amped_caustic_a + amped_caustic_b), vec4(caustic_power));
+		n_out105p1 = pow(vec4(amped_caustic_a * amped_caustic_b), vec4(caustic_power));
+		n_out105p2 = caustic_type;
+	}
+
+
+// Mix:72
+	vec4 n_out72p0 = mix(n_out105p0, n_out105p1, vec4(n_out105p2));
+
+
+	vec3 n_out6p0;
+// Expression:6
+	n_out6p0 = vec3(0.0, 0.0, 0.0);
+	{
+		// Delta UV Normal
+		vec3 duv = vec3(4.0 / viewport_size.x, 4.0 / viewport_size.x, 0);
+		float v1 = texture(simulation, UV - duv.xz).y;
+		float v2 = texture(simulation, UV + duv.xz).y;
+		float v3 = texture(simulation, UV - duv.zy).y;
+		float v4 = texture(simulation, UV + duv.zy).y;
+		
+		n_out6p0 = normalize(vec3(v1 - v2, v3 - v4, 0.3));
+	}
+
+
+	float n_out18p0;
+// LinearSceneDepth:18
+	{
+		float __log_depth = textureLod(depth_tex_frg_18, SCREEN_UV, 0.0).x;
+	vec4 __depth_view = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, __log_depth, 1.0);
+		__depth_view.xyz /= __depth_view.w;
+		n_out18p0 = -__depth_view.z;
+	}
+
+
+	vec4 n_out19p0;
+	float n_out19p1;
+// Expression:19
+	n_out19p0 = vec4(0.0, 0.0, 0.0, 0.0);
+	n_out19p1 = 0.0;
+	{
+		// Get Water Color
+		float d = n_out18p0;
+		d = d + VERTEX.z;
+		float depth = exp(-d * murkiness);
+		n_out19p0 = mix(deep_water, shallow_water, depth);
+		n_out19p1 = n_out19p0.a;
+	}
+
+
+	vec4 n_out102p0;
+// Expression:102
+	n_out102p0 = vec4(0.0, 0.0, 0.0, 0.0);
+	{
+		// Add Refraction to Water Color
+		vec4 refraction_color = texture(screen_tex, (refraction * n_out6p0).xy + SCREEN_UV);
+		n_out102p0 = mix(refraction_color, n_out19p0, color_factor);
+	}
+
+
+// VectorOp:42
+	vec4 n_out42p0 = n_out72p0 + n_out102p0;
+
+
+	vec4 n_out128p0;
+	float n_out128p1;
+// Expression:128
+	n_out128p0 = vec4(0.0, 0.0, 0.0, 0.0);
+	n_out128p1 = 0.0;
+	{
+		// Proximity Fade
+		float depth_tex_r = texture(depth_tex, SCREEN_UV).r;
+		vec4 depth_world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, depth_tex_r, 1.0);
+		depth_world_pos.xyz /= depth_world_pos.w;
+		float proximity_fade = clamp(1.0 - smoothstep(depth_world_pos.z + foam_size, depth_world_pos.z, VERTEX.z), 0.0, 1.0);
+		
+		// Water Foam
+		float foam_step = abs(sin(fma(TIME, foam_step_speed, 1.0 - proximity_fade) * foam_step_size));
+		float foam_noise = step(proximity_fade, texture(foam_texture, vec2(TIME * foam_speed) * vec2(1.0, 1.0) + UV).x);
+		n_out128p1 = (foam_step * foam_noise) + (pow(foam_noise, foam_depth));
+		n_out128p0 = foam_color;
+	}
+
+
+// Mix:119
+	vec3 n_out119p0 = mix(vec3(n_out42p0.xyz), vec3(n_out128p0.xyz), vec3(n_out128p1));
+
+
+	float n_out107p0;
+	float n_out107p1;
+	float n_out107p2;
+// Expression:107
+	n_out107p0 = 0.0;
+	n_out107p1 = 0.0;
+	n_out107p2 = 0.0;
+	{
+		n_out107p0 = metallic;
+		n_out107p1 = roughness;
+		n_out107p2 = specular;
+	}
+
+
+// Output:0
+	ALBEDO = n_out119p0;
+	ALPHA = n_out19p1;
+	METALLIC = n_out107p0;
+	ROUGHNESS = n_out107p1;
+
+
+}
+"
+flags/shadows_disabled = true
+varyings/new_pos = "0,4"
+varyings/old_pos = "0,4"
+nodes/vertex/0/position = Vector2(-1480, 140)
+nodes/vertex/35/node = SubResource("VisualShaderNodeComment_ciotf")
+nodes/vertex/35/position = Vector2(-3960, -40)
+nodes/vertex/75/node = SubResource("VisualShaderNodeVaryingSetter_uf6hk")
+nodes/vertex/75/position = Vector2(-1480, -60)
+nodes/vertex/76/node = SubResource("VisualShaderNodeVaryingSetter_mtip5")
+nodes/vertex/76/position = Vector2(-1480, -140)
+nodes/vertex/77/node = SubResource("VisualShaderNodeInput_jl60i")
+nodes/vertex/77/position = Vector2(-1800, -180)
+nodes/vertex/79/node = SubResource("VisualShaderNodeExpression_x0sq7")
+nodes/vertex/79/position = Vector2(-3940, 40)
+nodes/vertex/79/size = Vector2(1033.52, 414.092)
+nodes/vertex/79/input_ports = ""
+nodes/vertex/79/output_ports = "0,4,wavePos;"
+nodes/vertex/79/expression = "// Wave Generation
+vec3 modelVertex = (MODEL_MATRIX * vec4(VERTEX, 1.0)).xyz;
+float waveTime = wave_speed * TIME;
+
+float frequency = sin(waveTime + (wave_frequency * modelVertex.x)) + cos(waveTime + (modelVertex.z * wave_frequency));
+
+wavePos = vec3(
+	modelVertex.x,
+	modelVertex.y + (step(0.5, modelVertex.y) * (frequency * wave_scale)),
+	modelVertex.z
+);"
+nodes/vertex/81/node = SubResource("VisualShaderNodeExpression_mwsg6")
+nodes/vertex/81/position = Vector2(-2800, 40)
+nodes/vertex/81/size = Vector2(1147.66, 286.295)
+nodes/vertex/81/input_ports = "0,4,wavePos;"
+nodes/vertex/81/output_ports = "0,4,new_wavePos;"
+nodes/vertex/81/expression = "// Ripple Simulation
+new_wavePos = ((VERTEX + (NORMAL * (texture(simulation, UV).r * sim_amplitude))) + wavePos) / vec3(2.0, 4.0, 2.0);"
+nodes/vertex/connections = PackedInt32Array(77, 0, 76, 0, 79, 0, 81, 0, 81, 0, 75, 0, 81, 0, 0, 0)
+nodes/fragment/0/position = Vector2(1020, -160)
+nodes/fragment/6/node = SubResource("VisualShaderNodeExpression_vb2cc")
+nodes/fragment/6/position = Vector2(-1220, -360)
+nodes/fragment/6/size = Vector2(579.566, 319.382)
+nodes/fragment/6/input_ports = ""
+nodes/fragment/6/output_ports = "0,4,duv_normal;"
+nodes/fragment/6/expression = "// Delta UV Normal
+vec3 duv = vec3(4.0 / viewport_size.x, 4.0 / viewport_size.x, 0);
+float v1 = texture(simulation, UV - duv.xz).y;
+float v2 = texture(simulation, UV + duv.xz).y;
+float v3 = texture(simulation, UV - duv.zy).y;
+float v4 = texture(simulation, UV + duv.zy).y;
+
+duv_normal = normalize(vec3(v1 - v2, v3 - v4, 0.3));"
+nodes/fragment/18/node = SubResource("VisualShaderNodeLinearSceneDepth_smas1")
+nodes/fragment/18/position = Vector2(-1240, 160)
+nodes/fragment/19/node = SubResource("VisualShaderNodeExpression_r6qke")
+nodes/fragment/19/position = Vector2(-1020, 40)
+nodes/fragment/19/size = Vector2(526.859, 318.915)
+nodes/fragment/19/input_ports = "0,0,linear_depth;"
+nodes/fragment/19/output_ports = "0,5,water_color;1,0,alpha;"
+nodes/fragment/19/expression = "// Get Water Color
+float d = linear_depth;
+d = d + VERTEX.z;
+float depth = exp(-d * murkiness);
+water_color = mix(deep_water, shallow_water, depth);
+alpha = water_color.a;"
+nodes/fragment/23/node = SubResource("VisualShaderNodeComment_bmq3b")
+nodes/fragment/23/position = Vector2(-1260, -440)
+nodes/fragment/42/node = SubResource("VisualShaderNodeVectorOp_nmiy7")
+nodes/fragment/42/position = Vector2(520, -560)
+nodes/fragment/72/node = SubResource("VisualShaderNodeMix_m0unj")
+nodes/fragment/72/position = Vector2(260, -840)
+nodes/fragment/96/node = SubResource("VisualShaderNodeGlobalExpression_evmiw")
+nodes/fragment/96/position = Vector2(-2460, -380)
+nodes/fragment/96/size = Vector2(951.648, 926.43)
+nodes/fragment/96/input_ports = ""
+nodes/fragment/96/output_ports = ""
+nodes/fragment/96/expression = "uniform sampler2D screen_tex : hint_screen_texture;
+uniform sampler2D depth_tex : hint_depth_texture;
+
+uniform float metallic : hint_range(0, 1) = 0;
+uniform float roughness : hint_range(0, 1) = 0.00999999977648;
+uniform float specular : hint_range(0, 5) = 2;
+
+// Water
+uniform vec4 deep_water : source_color = vec4(0.556863, 0.819608, 0.890196, 0.333333);
+uniform vec4 shallow_water : source_color = vec4(0.811765, 0.956863, 0.996078, 0.333333);
+
+uniform float murkiness = 0.3;
+uniform float refraction = 0.1;
+uniform vec4 color_factor = vec4(0.5, 0.5, 0.5, 0.5);
+
+// Foam
+uniform vec4 foam_color : source_color = vec4(1.0, 1.0, 1.0, 1.0);
+uniform float foam_depth : hint_range(0, 16) = 4.0;
+uniform float foam_size : hint_range(0, 16) = 0.5;
+uniform float foam_speed : hint_range(0, 5) = 0.01;
+uniform float foam_step_size : hint_range(0, 20) = 4.0;
+uniform float foam_step_speed : hint_range(-1, 1) = 0.2;
+uniform sampler2D foam_texture;
+
+
+// Caustics
+uniform sampler2D caustic_a;
+uniform sampler2D caustic_b;
+uniform float caustic_speed_a : hint_range(-4, 4) = 0.00499999988824;
+uniform float caustic_speed_b : hint_range(-4, 4) = 0.02500000037253;
+uniform float caustic_strength_a : hint_range(-4, 4) = 1;
+uniform float caustic_strength_b : hint_range(-4, 4) = 1.5;
+uniform float caustic_power = 3;
+uniform float caustic_type : hint_range(0, 1) = 1;
+
+// Simulations
+uniform sampler2D simulation;
+uniform vec2 viewport_size = vec2(1024, 1024);
+
+// Vertex Waves
+uniform float wave_speed : hint_range(-50, 50) = 1;
+uniform float wave_frequency : hint_range(-10, 10) = 0.80000001192093;
+uniform float wave_scale : hint_range(-1, 1) = 0.20000000298023;
+uniform float sim_amplitude = 0.5;"
+nodes/fragment/102/node = SubResource("VisualShaderNodeExpression_rdeqo")
+nodes/fragment/102/position = Vector2(-400, -240)
+nodes/fragment/102/size = Vector2(748.053, 300.574)
+nodes/fragment/102/input_ports = "0,4,duv_normal;1,5,water_color;"
+nodes/fragment/102/output_ports = "0,5,new_water_color;"
+nodes/fragment/102/expression = "// Add Refraction to Water Color
+vec4 refraction_color = texture(screen_tex, (refraction * duv_normal).xy + SCREEN_UV);
+new_water_color = mix(refraction_color, water_color, color_factor);"
+nodes/fragment/105/node = SubResource("VisualShaderNodeExpression_lt4hd")
+nodes/fragment/105/position = Vector2(-580, -980)
+nodes/fragment/105/size = Vector2(725.731, 445.817)
+nodes/fragment/105/input_ports = ""
+nodes/fragment/105/output_ports = "0,5,add_caustics;1,5,mul_caustics;2,0,caustic_type_out;"
+nodes/fragment/105/expression = "// UV Panning
+vec2 scale = vec2(1.0, 1.0);
+vec2 uv_a = vec2(sin(TIME * caustic_speed_a)) * scale + UV;
+vec2 uv_b = vec2(cos(TIME * caustic_speed_b)) * scale + UV;
+
+vec4 amped_caustic_a = vec4(texture(caustic_a, uv_a)) * vec4(caustic_strength_a);
+vec4 amped_caustic_b = vec4(texture(caustic_b, uv_b)) * vec4(caustic_strength_b);
+
+add_caustics = pow(vec4(amped_caustic_a + amped_caustic_b), vec4(caustic_power));
+mul_caustics = pow(vec4(amped_caustic_a * amped_caustic_b), vec4(caustic_power));
+caustic_type_out = caustic_type;"
+nodes/fragment/106/node = SubResource("VisualShaderNodeComment_hnjcy")
+nodes/fragment/106/position = Vector2(-600, -1060)
+nodes/fragment/107/node = SubResource("VisualShaderNodeExpression_8b5mu")
+nodes/fragment/107/position = Vector2(460, 0)
+nodes/fragment/107/size = Vector2(301.827, 287.878)
+nodes/fragment/107/input_ports = ""
+nodes/fragment/107/output_ports = "0,0,metallic_out;1,0,roughness_out;2,0,specular_out;"
+nodes/fragment/107/expression = "metallic_out = metallic;
+roughness_out = roughness;
+specular_out = specular;"
+nodes/fragment/119/node = SubResource("VisualShaderNodeMix_tmvf3")
+nodes/fragment/119/position = Vector2(760, -340)
+nodes/fragment/128/node = SubResource("VisualShaderNodeExpression_qwx2n")
+nodes/fragment/128/position = Vector2(-920, 520)
+nodes/fragment/128/size = Vector2(1032.49, 427.76)
+nodes/fragment/128/input_ports = ""
+nodes/fragment/128/output_ports = "0,5,foam_color_out;1,0,foam;"
+nodes/fragment/128/expression = "// Proximity Fade
+float depth_tex_r = texture(depth_tex, SCREEN_UV).r;
+vec4 depth_world_pos = INV_PROJECTION_MATRIX * vec4(SCREEN_UV * 2.0 - 1.0, depth_tex_r, 1.0);
+depth_world_pos.xyz /= depth_world_pos.w;
+float proximity_fade = clamp(1.0 - smoothstep(depth_world_pos.z + foam_size, depth_world_pos.z, VERTEX.z), 0.0, 1.0);
+
+// Water Foam
+float foam_step = abs(sin(fma(TIME, foam_step_speed, 1.0 - proximity_fade) * foam_step_size));
+float foam_noise = step(proximity_fade, texture(foam_texture, vec2(TIME * foam_speed) * vec2(1.0, 1.0) + UV).x);
+foam = (foam_step * foam_noise) + (pow(foam_noise, foam_depth));
+foam_color_out = foam_color;"
+nodes/fragment/connections = PackedInt32Array(72, 0, 42, 0, 18, 0, 19, 0, 105, 0, 72, 0, 105, 1, 72, 1, 105, 2, 72, 2, 6, 0, 102, 0, 19, 0, 102, 1, 102, 0, 42, 1, 19, 1, 0, 1, 107, 0, 0, 2, 107, 1, 0, 3, 42, 0, 119, 0, 119, 0, 0, 0, 128, 1, 119, 2, 128, 0, 119, 1)
+nodes/light/0/position = Vector2(560, 60)
+nodes/light/2/node = SubResource("VisualShaderNodeFloatOp_vjei6")
+nodes/light/2/position = Vector2(-206.048, -109.944)
+nodes/light/3/node = SubResource("VisualShaderNodeVaryingGetter_3jre1")
+nodes/light/3/position = Vector2(-746.048, -69.9439)
+nodes/light/4/node = SubResource("VisualShaderNodeFloatOp_jp288")
+nodes/light/4/position = Vector2(-206.048, 230.056)
+nodes/light/5/node = SubResource("VisualShaderNodeVaryingGetter_ttvcu")
+nodes/light/5/position = Vector2(-746.048, 270.056)
+nodes/light/6/node = SubResource("VisualShaderNodeVectorLen_o183s")
+nodes/light/6/position = Vector2(-366.048, 190.056)
+nodes/light/7/node = SubResource("VisualShaderNodeVectorLen_wbgob")
+nodes/light/7/position = Vector2(-366.048, -49.9439)
+nodes/light/8/node = SubResource("VisualShaderNodeVectorLen_ygiml")
+nodes/light/8/position = Vector2(-366.048, 290.056)
+nodes/light/9/node = SubResource("VisualShaderNodeVectorLen_xdcoh")
+nodes/light/9/position = Vector2(-366.048, -149.944)
+nodes/light/10/node = SubResource("VisualShaderNodeFloatOp_nnj7m")
+nodes/light/10/position = Vector2(-6.04785, 50.0561)
+nodes/light/11/node = SubResource("VisualShaderNodeFloatOp_x6d5p")
+nodes/light/11/position = Vector2(153.952, 50.0561)
+nodes/light/12/node = SubResource("VisualShaderNodeDerivativeFunc_fc7sm")
+nodes/light/12/position = Vector2(-546.048, -229.944)
+nodes/light/13/node = SubResource("VisualShaderNodeDerivativeFunc_buax0")
+nodes/light/13/position = Vector2(-546.048, -69.9439)
+nodes/light/14/node = SubResource("VisualShaderNodeDerivativeFunc_c1kbf")
+nodes/light/14/position = Vector2(-546.048, 110.056)
+nodes/light/15/node = SubResource("VisualShaderNodeDerivativeFunc_grufm")
+nodes/light/15/position = Vector2(-546.048, 270.056)
+nodes/light/16/node = SubResource("VisualShaderNodeVectorCompose_8s5t6")
+nodes/light/16/position = Vector2(332.722, 9.48407)
+nodes/light/17/node = SubResource("VisualShaderNodeInput_vigwm")
+nodes/light/17/position = Vector2(-40, 500)
+nodes/light/18/node = SubResource("VisualShaderNodeVectorRefract_gb8ua")
+nodes/light/18/position = Vector2(300, 460)
+nodes/light/20/node = SubResource("VisualShaderNodeFloatOp_otxw7")
+nodes/light/20/position = Vector2(-140, 640)
+nodes/light/connections = PackedInt32Array(12, 0, 9, 0, 13, 0, 7, 0, 7, 0, 2, 1, 9, 0, 2, 0, 3, 0, 12, 0, 3, 0, 13, 0, 14, 0, 6, 0, 15, 0, 8, 0, 8, 0, 4, 1, 6, 0, 4, 0, 5, 0, 14, 0, 5, 0, 15, 0, 2, 0, 10, 0, 4, 0, 10, 1, 10, 0, 11, 0, 11, 0, 16, 0, 11, 0, 16, 1, 11, 0, 16, 2, 11, 0, 16, 3, 17, 0, 18, 0, 20, 0, 18, 2)
