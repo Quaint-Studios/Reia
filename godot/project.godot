@@ -15,7 +15,7 @@ config/description="Explore endless worlds and embark on a magical adventure of 
 config/version="1.0.0.9"
 run/main_scene="res://scenes/maps/0_scene_selector.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://rsc/icons/logo_a.png"
+config/icon="res://rsc/images/logo_a.png"
 
 [audio]
 
