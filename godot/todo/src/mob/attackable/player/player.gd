@@ -2,7 +2,7 @@
 
 @export var inventory := PlayerInventory.new(true)
 @export var abilities := AbilityManager.new().debug_create()
-var map_name := SceneSelector.Maps.REIA
+var map_name := SceneSelector.Maps.JADEWATER_FALLS
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5

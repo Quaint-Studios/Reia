@@ -1,6 +1,6 @@
 class_name GameManager extends Node
 
-var myPlayer = preload("res://scripts/mob/attackable/player/my_player.tscn")
+# var myPlayer = preload("res://scripts/mob/attackable/player/my_player.tscn")
 var player: Player
 
 static var current_ui: UI_TYPES = UI_TYPES.MAIN_MENU :
@@ -39,12 +39,12 @@ func load_player():
 
 	var map = get_tree().get_current_scene() as MapHandler
 
-	var newPlayer := myPlayer.instantiate() as Player
+	# var newPlayer := myPlayer.instantiate() as Player
 
 	if !Engine.is_editor_hint() && GameManager.instance.player == null:
 		print("Setting player")
-		GameManager.instance.player = newPlayer
-	map.players.add_child(newPlayer)
+		## GameManager.instance.player = newPlayer
+	## map.players.add_child(newPlayer)
 
 func _input(_event: InputEvent):
 	# Let the UI handle the rest
