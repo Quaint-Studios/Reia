@@ -1,0 +1,33 @@
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://dnuqyglxuhws4"]
+
+[sub_resource type="AudioEffectLimiter" id="AudioEffectLimiter_naxu8"]
+resource_name = "Limiter"
+
+[resource]
+bus/0/volume_db = -10.5236
+bus/0/effect/0/effect = SubResource("AudioEffectLimiter_naxu8")
+bus/0/effect/0/enabled = true
+bus/1/name = &"Music"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = 0.0
+bus/1/send = &"Master"
+bus/2/name = &"SFX"
+bus/2/solo = false
+bus/2/mute = false
+bus/2/bypass_fx = false
+bus/2/volume_db = 0.0
+bus/2/send = &"Master"
+bus/3/name = &"Interface"
+bus/3/solo = false
+bus/3/mute = false
+bus/3/bypass_fx = false
+bus/3/volume_db = 0.0
+bus/3/send = &"Master"
+bus/4/name = &"Dialogue"
+bus/4/solo = false
+bus/4/mute = false
+bus/4/bypass_fx = false
+bus/4/volume_db = 0.0
+bus/4/send = &"Master"

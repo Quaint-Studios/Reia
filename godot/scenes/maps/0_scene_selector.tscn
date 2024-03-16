@@ -1,3 +1,6 @@
-[gd_scene format=3 uid="uid://cykrsunnvj3w5"]
+[gd_scene load_steps=2 format=3 uid="uid://cykrsunnvj3w5"]
+
+[ext_resource type="Script" path="res://scenes/maps/scripts/0_scene_selector/scene_selector.gd" id="1_ba5hv"]
 
 [node name="SceneSelector" type="Node"]
+script = ExtResource("1_ba5hv")

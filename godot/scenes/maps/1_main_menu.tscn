@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://owljyf5nq8mf"]
+[gd_scene load_steps=10 format=3 uid="uid://owljyf5nq8mf"]
 
-[ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://todo/scenes/reia/reia_day.tres" id="1_gpa1r"]
+[ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/maps/data/2_jadewater_falls/jadewater_falls_day.tres" id="1_gpa1r"]
 [ext_resource type="Script" path="res://scenes/maps/scripts/1_main_menu/main_menu.gd" id="1_uc18m"]
-[ext_resource type="PackedScene" uid="uid://cykr5gmvdm7xf" path="res://todo/assets/characters/player/female_player.glb" id="2_h05gn"]
-[ext_resource type="PackedScene" uid="uid://dsy7bxowv7qkc" path="res://todo/rsc/interface/blur.tscn" id="3_gvduh"]
-[ext_resource type="Shader" path="res://todo/rsc/shaders/drop_shadow.gdshader" id="4_4etnk"]
-[ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://todo/rsc/icons/logo_a_flat_white_68.svg" id="5_rk8je"]
-[ext_resource type="PackedScene" uid="uid://ci266clm01pqr" path="res://todo/rsc/scenes/1_main_menu/changelog.tscn" id="6_wulfs"]
+[ext_resource type="PackedScene" uid="uid://cykr5gmvdm7xf" path="res://rsc/models/characters/player/female_player.glb" id="2_h05gn"]
+[ext_resource type="AudioStream" uid="uid://bjmsfaw5a1nh5" path="res://rsc/audio/menu/forest_theme_v1.wav" id="2_t5ufm"]
+[ext_resource type="PackedScene" uid="uid://dsy7bxowv7qkc" path="res://scenes/interface/blur.tscn" id="3_gvduh"]
+[ext_resource type="Shader" path="res://rsc/shaders/drop_shadow.gdshader" id="4_4etnk"]
+[ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/images/logos/logo_a_flat_white_68.svg" id="5_rk8je"]
+[ext_resource type="PackedScene" uid="uid://ci266clm01pqr" path="res://scenes/interface/changelogs/changelog.tscn" id="6_wulfs"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4eypw"]
 shader = ExtResource("4_4etnk")
@@ -16,6 +17,7 @@ shader_parameter/offset_in_pixels = Vector2(4, 8)
 
 [node name="MainMenu" type="Node"]
 script = ExtResource("1_uc18m")
+menu_music = ExtResource("2_t5ufm")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("1_gpa1r")
