@@ -1,0 +1,31 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://bf8wpnbq18xeu"]
+
+[ext_resource type="Texture2D" uid="uid://dpfxc3l0e871g" path="res://todo/assets/skyboxes/mountain_skybox_0_night.png" id="1_kom0y"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_g567a"]
+panorama = ExtResource("1_kom0y")
+
+[sub_resource type="Sky" id="Sky_6upcg"]
+sky_material = SubResource("PanoramaSkyMaterial_g567a")
+
+[resource]
+background_mode = 2
+background_color = Color(0, 0.0666667, 0.12549, 1)
+background_energy_multiplier = 0.61
+sky = SubResource("Sky_6upcg")
+sky_rotation = Vector3(3.14159, 0, 0)
+ambient_light_source = 3
+ambient_light_color = Color(0, 0.0666667, 0.12549, 1)
+reflected_light_source = 2
+tonemap_mode = 2
+tonemap_white = 1.61
+glow_enabled = true
+glow_normalized = true
+glow_intensity = 2.84
+glow_strength = 1.22
+glow_bloom = 0.13
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.005
+volumetric_fog_albedo = Color(0.4, 0.4, 0.4, 1)
+volumetric_fog_emission = Color(0, 0.0666667, 0.12549, 1)
+adjustment_enabled = true

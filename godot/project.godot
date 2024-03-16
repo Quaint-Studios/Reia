@@ -15,16 +15,18 @@ config/description="Explore endless worlds and embark on a magical adventure of 
 config/version="1.0.0.9"
 run/main_scene="res://scenes/maps/0_scene_selector.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://rsc/images/logo_a.png"
+config/icon="res://rsc/images/logos/logo_a.png"
 
 [audio]
 
-buses/default_bus_layout="res://assets/audio/default_bus_layout.tres"
+buses/default_bus_layout="res://rsc/audio/main_bus_layout.tres"
 
 [autoload]
 
 Managers="*res://scenes/misc/managers.tscn"
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
+DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
+DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 
 [debug]
 
@@ -41,7 +43,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/discord-sdk-gd/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/sound_manager/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg")
 
 [file_customization]
 

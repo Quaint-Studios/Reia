@@ -21,7 +21,7 @@ var _players = {}
 ## When a player connects, tell all of the other players
 ## their information.
 @rpc("authority", "reliable")
-func register_player(id: int, player_name: String):
+func register_player(_id: int, player_name: String):
 	var player_id = multiplayer.get_remote_sender_id()
 	_players[player_id] = player_name # Store the ID and name and spawn a player with the ID to match.
 	player_connected.emit()
