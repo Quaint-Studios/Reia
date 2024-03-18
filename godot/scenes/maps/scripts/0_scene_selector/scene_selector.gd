@@ -1,5 +1,8 @@
-## Used to create
 class_name SceneSelector extends Node
+## An organized collection of all possible scenes.
+##
+## Sends the user to the Main Menu or Jadewater Falls if they're a server,
+## and also contains an enum of possible maps.
 
 const SCENE_FOLDER = "res://scenes/"
 const MAIN_MENU = SCENE_FOLDER + "maps/1_main_menu.tscn"
