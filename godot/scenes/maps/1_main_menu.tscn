@@ -1,0 +1,108 @@
+[gd_scene load_steps=2 format=3 uid="uid://80iqs38fd27c"]
+
+[ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/images/logos/logo_a_flat_white_68.svg" id="5_rk8je"]
+
+[node name="MainMenu" type="Node3D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TopSection" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 380.0
+
+[node name="Logo" type="TextureRect" parent="CanvasLayer/TopSection"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -136.0
+offset_top = 64.0
+offset_right = 136.0
+offset_bottom = 336.0
+grow_horizontal = 2
+texture = ExtResource("5_rk8je")
+
+[node name="Label" type="Label" parent="CanvasLayer/TopSection"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 118.0
+offset_bottom = 45.0
+text = "v1.0.1.0-pre-alpha"
+
+[node name="MiddleSection" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 380.0
+offset_right = 1920.0
+offset_bottom = 916.0
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/MiddleSection"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MiddleSection/CenterContainer"]
+layout_mode = 2
+
+[node name="PlayLabel" type="Label" parent="CanvasLayer/MiddleSection/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Play"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsLabel" type="Label" parent="CanvasLayer/MiddleSection/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditsLabel" type="Label" parent="CanvasLayer/MiddleSection/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Credits"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitLabel" type="Label" parent="CanvasLayer/MiddleSection/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Quit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BottomSection" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 916.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="ReleaseNotes" type="Button" parent="CanvasLayer/BottomSection"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -323.0
+offset_top = -111.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/BottomSection/ReleaseNotes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/BottomSection/ReleaseNotes/CenterContainer"]
+layout_mode = 2
+text = "Release Notes"
