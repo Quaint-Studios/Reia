@@ -11,7 +11,7 @@
 	"description": "This is the beginning! Migrating from Unity to Godot.",
 	"changes": {
 		"add": [
-			"A basic level was created to test some features of the project.",
+			"A basic level was created to test some features of the project."
 		],
 		"remove": [
 			"All Unity-related assets have been removed."
