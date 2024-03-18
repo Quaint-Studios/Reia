@@ -1,10 +1,19 @@
-[gd_scene load_steps=2 format=3 uid="uid://80iqs38fd27c"]
+[gd_scene load_steps=3 format=3 uid="uid://80iqs38fd27c"]
 
+[ext_resource type="Texture2D" uid="uid://djgot8q3vyudk" path="res://rsc/images/ui/frames/starred_frame.svg" id="2_btf71"]
 [ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/images/logos/logo_a_flat_white_68.svg" id="5_rk8je"]
 
 [node name="MainMenu" type="Node3D"]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Dimmer" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.203922, 0.2, 0.247059, 0.2)
 
 [node name="TopSection" type="Control" parent="CanvasLayer"]
 layout_mode = 3
@@ -30,6 +39,8 @@ offset_left = 32.0
 offset_top = 32.0
 offset_right = 118.0
 offset_bottom = 45.0
+theme_override_colors/font_color = Color(0.027451, 0.14902, 0.239216, 0.501961)
+theme_override_font_sizes/font_size = 18
 text = "v1.0.1.0-pre-alpha"
 
 [node name="MiddleSection" type="Control" parent="CanvasLayer"]
@@ -52,24 +63,36 @@ layout_mode = 2
 
 [node name="PlayLabel" type="Label" parent="CanvasLayer/MiddleSection/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"LabelBold"
+theme_override_colors/font_color = Color(0.976471, 0.952941, 0.898039, 1)
+theme_override_font_sizes/font_size = 32
 text = "Play"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SettingsLabel" type="Label" parent="CanvasLayer/MiddleSection/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"LabelBold"
+theme_override_colors/font_color = Color(0.976471, 0.952941, 0.898039, 1)
+theme_override_font_sizes/font_size = 32
 text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CreditsLabel" type="Label" parent="CanvasLayer/MiddleSection/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"LabelBold"
+theme_override_colors/font_color = Color(0.976471, 0.952941, 0.898039, 1)
+theme_override_font_sizes/font_size = 32
 text = "Credits"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="QuitLabel" type="Label" parent="CanvasLayer/MiddleSection/CenterContainer/VBoxContainer"]
 layout_mode = 2
+theme_type_variation = &"LabelBold"
+theme_override_colors/font_color = Color(0.976471, 0.952941, 0.898039, 1)
+theme_override_font_sizes/font_size = 32
 text = "Quit"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -95,6 +118,22 @@ offset_bottom = -24.0
 grow_horizontal = 0
 grow_vertical = 0
 
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/BottomSection/ReleaseNotes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2696.0
+offset_bottom = 788.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_btf71")
+patch_margin_left = 340
+patch_margin_top = 340
+patch_margin_right = 338
+patch_margin_bottom = 338
+
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/BottomSection/ReleaseNotes"]
 layout_mode = 1
 anchors_preset = 15
@@ -105,4 +144,7 @@ grow_vertical = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/BottomSection/ReleaseNotes/CenterContainer"]
 layout_mode = 2
+theme_type_variation = &"LabelBold"
+theme_override_colors/font_color = Color(0.0666667, 0.145098, 0.333333, 1)
+theme_override_font_sizes/font_size = 18
 text = "Release Notes"
