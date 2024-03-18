@@ -1,7 +1,9 @@
-[gd_resource type="Theme" load_steps=20 format=3 uid="uid://kwq64glpweie"]
+[gd_resource type="Theme" load_steps=22 format=3 uid="uid://kwq64glpweie"]
 
+[ext_resource type="FontFile" uid="uid://bdjiniqtldlmm" path="res://rsc/fonts/Poppins/Poppins-Medium.ttf" id="1_iisjn"]
 [ext_resource type="FontFile" uid="uid://cvl0migkjbg2m" path="res://rsc/fonts/Nunito/static/Nunito-Black.ttf" id="1_kmgp1"]
 [ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="2_s1tsk"]
+[ext_resource type="FontFile" uid="uid://b57eptmj7k12i" path="res://rsc/fonts/Poppins/Poppins-Bold.ttf" id="2_t72cr"]
 [ext_resource type="FontFile" uid="uid://cnk30iahnvsd2" path="res://rsc/fonts/Roboto/Roboto-Black.ttf" id="3_s2rtc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ua4w4"]
@@ -156,7 +158,9 @@ HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_n22t0")
 Label/colors/font_color = Color(0.0941176, 0.101961, 0.0941176, 1)
 Label/constants/line_spacing = 0
 Label/font_sizes/font_size = 10
-Label/fonts/font = ExtResource("3_s2rtc")
+Label/fonts/font = ExtResource("1_iisjn")
+LabelBold/base_type = &"Label"
+LabelBold/fonts/font = ExtResource("2_t72cr")
 Panel/styles/panel = SubResource("StyleBoxFlat_2ckeq")
 WhiteLabel/base_type = &"Label"
 WhiteLabel/colors/font_color = Color(0.984314, 0.980392, 0.960784, 1)
