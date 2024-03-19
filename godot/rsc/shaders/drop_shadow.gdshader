@@ -9,7 +9,6 @@ uniform vec2 offset_in_pixels;
 uniform sampler2D SCREEN_TEXTURE: hint_screen_texture, filter_linear_mipmap;
 
 void fragment() {
-
 	// Read screen texture
 	vec4 current_color = textureLod(TEXTURE, UV, 0.0);
 	vec4 offset_color = textureLod (TEXTURE, UV - (offset_in_pixels  * SCREEN_PIXEL_SIZE), 0.0);

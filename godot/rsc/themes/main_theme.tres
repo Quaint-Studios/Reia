@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=22 format=3 uid="uid://kwq64glpweie"]
 
-[ext_resource type="FontFile" uid="uid://bdjiniqtldlmm" path="res://rsc/fonts/Poppins/Poppins-Medium.ttf" id="1_iisjn"]
 [ext_resource type="FontFile" uid="uid://cvl0migkjbg2m" path="res://rsc/fonts/Nunito/static/Nunito-Black.ttf" id="1_kmgp1"]
+[ext_resource type="FontFile" uid="uid://hf5rdg67jcwc" path="res://addons/gut/fonts/AnonymousPro-Italic.ttf" id="2_53iq4"]
 [ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="2_s1tsk"]
 [ext_resource type="FontFile" uid="uid://b57eptmj7k12i" path="res://rsc/fonts/Poppins/Poppins-Bold.ttf" id="2_t72cr"]
 [ext_resource type="FontFile" uid="uid://cnk30iahnvsd2" path="res://rsc/fonts/Roboto/Roboto-Black.ttf" id="3_s2rtc"]
@@ -132,7 +132,8 @@ Button/colors/font_focus_color = Color(0.137255, 0.443137, 0.870588, 1)
 Button/colors/font_hover_color = Color(0.137255, 0.443137, 0.870588, 1)
 Button/colors/font_hover_pressed_color = Color(0.658824, 0.792157, 0.992157, 1)
 Button/colors/font_pressed_color = Color(0.0431373, 0.196078, 0.431373, 1)
-Button/font_sizes/font_size = 20
+Button/font_sizes/font_size = 18
+Button/fonts/font = ExtResource("2_t72cr")
 Button/styles/disabled = SubResource("StyleBoxFlat_plrsk")
 Button/styles/focus = SubResource("StyleBoxFlat_kiurd")
 Button/styles/hover = SubResource("StyleBoxFlat_plmh4")
@@ -158,7 +159,7 @@ HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_n22t0")
 Label/colors/font_color = Color(0.0941176, 0.101961, 0.0941176, 1)
 Label/constants/line_spacing = 0
 Label/font_sizes/font_size = 10
-Label/fonts/font = ExtResource("1_iisjn")
+Label/fonts/font = ExtResource("2_53iq4")
 LabelBold/base_type = &"Label"
 LabelBold/fonts/font = ExtResource("2_t72cr")
 Panel/styles/panel = SubResource("StyleBoxFlat_2ckeq")
