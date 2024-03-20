@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://80iqs38fd27c"]
+[gd_scene load_steps=6 format=3 uid="uid://80iqs38fd27c"]
 
 [ext_resource type="Texture2D" uid="uid://djgot8q3vyudk" path="res://rsc/images/ui/frames/starred_frame.svg" id="2_btf71"]
+[ext_resource type="Texture2D" uid="uid://dnqp10u8o4xik" path="res://rsc/icons/star_icon_84.svg" id="3_xir2b"]
 [ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/images/logos/logo_a_flat_white_68.svg" id="5_rk8je"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_sxxuf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wbvkm"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
 [node name="MainMenu" type="Node3D"]
 
@@ -61,14 +71,51 @@ grow_vertical = 2
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MiddleSection/CenterContainer"]
 layout_mode = 2
 
-[node name="PlayLabel" type="Label" parent="CanvasLayer/MiddleSection/CenterContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/MiddleSection/CenterContainer/VBoxContainer"]
+material = SubResource("ShaderMaterial_sxxuf")
+layout_mode = 2
+alignment = 1
+
+[node name="EllipseL" type="Panel" parent="CanvasLayer/MiddleSection/CenterContainer/VBoxContainer/HBoxContainer"]
+use_parent_material = true
+custom_minimum_size = Vector2(6, 6)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_wbvkm")
+
+[node name="StarL" type="TextureRect" parent="CanvasLayer/MiddleSection/CenterContainer/VBoxContainer/HBoxContainer"]
+use_parent_material = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("3_xir2b")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="PlayLabel" type="Label" parent="CanvasLayer/MiddleSection/CenterContainer/VBoxContainer/HBoxContainer"]
+modulate = Color(0.976471, 0.952941, 0.898039, 1)
+use_parent_material = true
 layout_mode = 2
 theme_type_variation = &"LabelBold"
-theme_override_colors/font_color = Color(0.976471, 0.952941, 0.898039, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 40
 text = "Play"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="StarR" type="TextureRect" parent="CanvasLayer/MiddleSection/CenterContainer/VBoxContainer/HBoxContainer"]
+use_parent_material = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("3_xir2b")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EllipseR" type="Panel" parent="CanvasLayer/MiddleSection/CenterContainer/VBoxContainer/HBoxContainer"]
+use_parent_material = true
+custom_minimum_size = Vector2(6, 6)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_wbvkm")
 
 [node name="SettingsLabel" type="Label" parent="CanvasLayer/MiddleSection/CenterContainer/VBoxContainer"]
 layout_mode = 2
@@ -105,20 +152,25 @@ offset_right = 1920.0
 offset_bottom = 1080.0
 
 [node name="ReleaseNotes" type="Button" parent="CanvasLayer/BottomSection"]
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -323.0
-offset_top = -111.0
-offset_right = -24.0
+offset_left = -287.0
+offset_top = -106.0
+offset_right = -23.0
 offset_bottom = -24.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_override_colors/font_color = Color(0.0666667, 0.145098, 0.333333, 1)
+theme_override_font_sizes/font_size = 18
+text = "Release Notes"
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/BottomSection/ReleaseNotes"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -143,6 +195,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="CanvasLayer/BottomSection/ReleaseNotes/CenterContainer"]
+visible = false
 layout_mode = 2
 theme_type_variation = &"LabelBold"
 theme_override_colors/font_color = Color(0.0666667, 0.145098, 0.333333, 1)
