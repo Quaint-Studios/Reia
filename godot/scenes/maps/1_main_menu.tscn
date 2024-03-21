@@ -165,26 +165,10 @@ offset_right = -23.0
 offset_bottom = -24.0
 grow_horizontal = 0
 grow_vertical = 0
+theme_type_variation = &"ButtonBorder"
 theme_override_colors/font_color = Color(0.0666667, 0.145098, 0.333333, 1)
 theme_override_font_sizes/font_size = 18
 text = "Release Notes"
-
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/BottomSection/ReleaseNotes"]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 2696.0
-offset_bottom = 788.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_btf71")
-patch_margin_left = 340
-patch_margin_top = 340
-patch_margin_right = 338
-patch_margin_bottom = 338
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/BottomSection/ReleaseNotes"]
 layout_mode = 1
@@ -201,3 +185,28 @@ theme_type_variation = &"LabelBold"
 theme_override_colors/font_color = Color(0.0666667, 0.145098, 0.333333, 1)
 theme_override_font_sizes/font_size = 18
 text = "Release Notes"
+
+[node name="Decorations" type="Control" parent="CanvasLayer/BottomSection/ReleaseNotes"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/BottomSection/ReleaseNotes/Decorations"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 2696.0
+offset_bottom = 788.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("2_btf71")
+patch_margin_left = 340
+patch_margin_top = 340
+patch_margin_right = 338
+patch_margin_bottom = 338

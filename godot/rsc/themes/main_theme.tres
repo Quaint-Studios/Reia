@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=22 format=3 uid="uid://kwq64glpweie"]
+[gd_resource type="Theme" load_steps=27 format=3 uid="uid://kwq64glpweie"]
 
 [ext_resource type="FontFile" uid="uid://cvl0migkjbg2m" path="res://rsc/fonts/Nunito/static/Nunito-Black.ttf" id="1_kmgp1"]
 [ext_resource type="FontFile" uid="uid://hf5rdg67jcwc" path="res://addons/gut/fonts/AnonymousPro-Italic.ttf" id="2_53iq4"]
@@ -81,6 +81,72 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7v40o"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 0.847059)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7ddjs"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.980392, 0.980392, 0.980392, 0.980392)
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+shadow_color = Color(1, 1, 1, 0.6)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3nbon"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.980392, 0.980392, 0.980392, 0.980392)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vxws7"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.290196, 0.34902, 0.490196, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_o0ra0"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ypbr8"]
 bg_color = Color(1, 1, 1, 1)
 corner_radius_top_left = 10
@@ -139,6 +205,14 @@ Button/styles/focus = SubResource("StyleBoxFlat_kiurd")
 Button/styles/hover = SubResource("StyleBoxFlat_plmh4")
 Button/styles/normal = SubResource("StyleBoxFlat_7qv5m")
 Button/styles/pressed = SubResource("StyleBoxFlat_hvq3g")
+ButtonBorder/base_type = &"Button"
+ButtonBorder/font_sizes/font_size = 18
+ButtonBorder/fonts/font = ExtResource("2_t72cr")
+ButtonBorder/styles/disabled = SubResource("StyleBoxFlat_7v40o")
+ButtonBorder/styles/focus = SubResource("StyleBoxFlat_7ddjs")
+ButtonBorder/styles/hover = SubResource("StyleBoxFlat_3nbon")
+ButtonBorder/styles/normal = SubResource("StyleBoxFlat_vxws7")
+ButtonBorder/styles/pressed = SubResource("StyleBoxFlat_o0ra0")
 Chip/base_type = &"Panel"
 Chip/styles/panel = SubResource("StyleBoxFlat_ypbr8")
 FlatWhiteButton/base_type = &"Button"
