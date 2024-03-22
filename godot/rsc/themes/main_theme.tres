@@ -1,7 +1,6 @@
-[gd_resource type="Theme" load_steps=27 format=3 uid="uid://kwq64glpweie"]
+[gd_resource type="Theme" load_steps=26 format=3 uid="uid://kwq64glpweie"]
 
 [ext_resource type="FontFile" uid="uid://cvl0migkjbg2m" path="res://rsc/fonts/Nunito/static/Nunito-Black.ttf" id="1_kmgp1"]
-[ext_resource type="FontFile" uid="uid://hf5rdg67jcwc" path="res://addons/gut/fonts/AnonymousPro-Italic.ttf" id="2_53iq4"]
 [ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="2_s1tsk"]
 [ext_resource type="FontFile" uid="uid://b57eptmj7k12i" path="res://rsc/fonts/Poppins/Poppins-Bold.ttf" id="2_t72cr"]
 [ext_resource type="FontFile" uid="uid://cnk30iahnvsd2" path="res://rsc/fonts/Roboto/Roboto-Black.ttf" id="3_s2rtc"]
@@ -125,11 +124,11 @@ content_margin_left = 10.0
 content_margin_top = 10.0
 content_margin_right = 10.0
 content_margin_bottom = 10.0
-bg_color = Color(1, 1, 1, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
 border_color = Color(0.290196, 0.34902, 0.490196, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
@@ -233,7 +232,7 @@ HSlider/styles/grabber_area_highlight = SubResource("StyleBoxFlat_n22t0")
 Label/colors/font_color = Color(0.0941176, 0.101961, 0.0941176, 1)
 Label/constants/line_spacing = 0
 Label/font_sizes/font_size = 10
-Label/fonts/font = ExtResource("2_53iq4")
+Label/fonts/font = ExtResource("2_t72cr")
 LabelBold/base_type = &"Label"
 LabelBold/fonts/font = ExtResource("2_t72cr")
 Panel/styles/panel = SubResource("StyleBoxFlat_2ckeq")
