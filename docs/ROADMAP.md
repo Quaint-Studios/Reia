@@ -6,7 +6,7 @@ Alpha:
 - [x] Animation
 - [ ] Combat Systems
   - [ ] Health System
-    - Fade Health Bar Timer
+    - [ ] Fade Health Bar Timer
   - [x] Attack System
   - [x] Death System
   - [ ] Respawn
