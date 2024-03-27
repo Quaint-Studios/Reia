@@ -7,6 +7,9 @@ Explore endless worlds and embark on a magical adventure of a lifetime! Reia is 
 
 > Visit the website over at [https://www.playreia.com](https://www.playreia.com).
 
+### Docs
+1. [Roadmap](/docs/ROADMAP.md)
+
 ### Overview
 
 Reia is an open-source oRPG where four Ethereals, the deities of this world have a conflict. One of them, their sister, is Reia herself. This universe is a world where magic is capable, that includes your standard elements and more. Every Ethereal can create their own realm, what would be the equivalent of a giant planet that continues to grow in size as they consume ether from their surroundings & other realms. Player-owned floating islands, raids of varying sizes (even server-wide raids), Bosses, PvP zones, and custom mini-games!
