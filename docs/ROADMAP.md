@@ -57,7 +57,28 @@ Alpha:
   - [ ] Optional: Create a system for easily tracking changes.
 
 ## Alpha
+This phase will be about polishing and introducing complex features.
+
+- [ ] Programming
+- [ ] Art
+- [ ] Sound
+- [ ] Marketing
+- [ ] Community
 
 ## Beta
+This phase targets bugs and potentially features that would enhance existing gameplay.
+
+- [ ] Additions
+- [ ] Updates
+- [ ] Fixes
+- [ ] Removals
+- [ ] Marketing
+- [ ] Community
 
 ## Release
+The final stretch. This targets final marketing, trailers, and listening to player feedback and concerns. This feedback should be addressed before launch date.
+- [ ] Questions
+- [ ] Comments
+- [ ] Concerns
+- [ ] Marketing
+- [ ] Community
