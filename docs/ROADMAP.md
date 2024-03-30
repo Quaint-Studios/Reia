@@ -60,6 +60,30 @@ Alpha:
 This phase will be about polishing and introducing complex features.
 
 - [ ] Programming
+  - [ ] Spirit
+    - [ ] Locating
+    - [ ] Unlocking
+    - [ ] Deeper Integration with Combat
+  - [ ] Islands
+    - [ ] Building Customization
+    - [ ] Manufacturing
+      - [ ] Gathering
+        - [ ] Wood
+        - [ ] Stone
+        - [ ] Water
+        - [ ] Ores
+      - [ ] Production
+        - [ ] Consumables
+        - [ ] Soulstones
+        - [ ] Wages for other players
+        - [ ] More...
+    - [ ] NPC
+      - [ ] Hiring & Wages
+      - [ ] Setting tasks
+    - [ ] Expeditions
+      - [ ] Zone types
+      - [ ] Enemy scaling
+      - [ ] Risk/Reward progression
 - [ ] Art
 - [ ] Sound
 - [ ] Marketing
