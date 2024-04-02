@@ -84,6 +84,40 @@ This phase will be about polishing and introducing complex features.
       - [ ] Zone types
       - [ ] Enemy scaling
       - [ ] Risk/Reward progression
+  - [ ] Economy
+    - [ ] Currency System
+      - [ ] Base Currency Usage
+        - [ ] Upgrades
+        - [ ] Consumables
+        - [ ] Island & Hiring
+        - [ ] Expeditions
+      - [ ] Premium Currency Usage
+        - [ ] Skins
+        - [ ] QoL (minimal, like extra backed up slots even though you can have unlimited local slots)
+      - [ ] Island Marketplace
+      - [ ] Pricing Dynamics (rarity, demand, etc)
+  - [ ] Infinite City
+    - [ ] Basic procedural generation
+      - [ ] Implement open world generation
+      - [ ] Open world resource gathering and enemies spawning in dedicated zones based on elements
+    - [ ] Advanced procedural generation
+      - [ ] Dungeons that can be easily regenerated
+      - [ ] Dungeons that can be custom created and turned into a seed later
+    - [ ] Maps and storing dungeons on maps for resale
+  - [ ] Social Systems
+    - [ ] Guilds
+    - [ ] Island Fleets
+    - [ ] Friends
+    - [ ] Events
+    - [ ] Listening to Music Together
+  - [ ] Accessibility
+    - [ ] Color Blind Mode
+    - [ ] Control Adjustment
+  - [ ] Difficulty
+    - [ ] Global difficulty
+    - [ ] Boss difficulty
+    - [ ] Event difficulty
+    - [ ] Expedition difficulty
 - [ ] Art
 - [ ] Sound
 - [ ] Marketing
