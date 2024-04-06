@@ -2,7 +2,8 @@
 Below you'll find a list of things needed to be accomplished before we can hit the next milestone. This list is still being put together.
 
 ## Pre-Alpha
-Alpha:
+This phase focuses on getting some of the core functionalities implemented for Reia.
+
 - [x] Animation
 - [ ] Combat Systems
   - [ ] Health System
@@ -55,6 +56,9 @@ Alpha:
   - [ ] Smoothing
 - [x] Changelog
   - [ ] Optional: Create a system for easily tracking changes.
+- [ ] Saving
+  - [ ] MongoDB for Online Environments
+  - [ ] PoloDB for Local Environments
 
 ## Alpha
 This phase will be about polishing and introducing complex features.
@@ -161,6 +165,7 @@ This phase targets bugs and potentially features that would enhance existing gam
 
 ## Release
 The final stretch. This targets final marketing, trailers, and listening to player feedback and concerns. This feedback should be addressed before launch date.
+
 - [ ] Questions
 - [ ] Comments
 - [ ] Concerns
