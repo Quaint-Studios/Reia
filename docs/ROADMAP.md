@@ -113,15 +113,41 @@ This phase will be about polishing and introducing complex features.
   - [ ] Accessibility
     - [ ] Color Blind Mode
     - [ ] Control Adjustment
+    - [ ] Subtitles/Closed Captioning
+    - [ ] Adjustable Text Size
+    - [ ] High Contrast Mode
   - [ ] Difficulty
     - [ ] Global difficulty
     - [ ] Boss difficulty
     - [ ] Event difficulty
     - [ ] Expedition difficulty
 - [ ] Art
+  - [ ] Animation
+  - [ ] Concept Art
+  - [ ] Promotional Art
+  - [ ] Character Design
+  - [ ] Environment Design
+  - [ ] UI/UX Design
 - [ ] Sound
+  - [ ] Ambient Sounds
+  - [ ] Sound Effects
+  - [ ] Background Music
+  - [ ] Voice Acting
+  - [ ] Dialogue Recording
 - [ ] Marketing
+  - [X] Email Marketing
+  - [X] SEO Optimization
+  - [ ] Content Marketing (Blogs, Articles)
+  - [ ] Social Media Campaigns
+  - [ ] Partnerships
+  - [ ] Press Kit / Releases
 - [ ] Community
+  - [ ] Community Events & Contests
+  - [ ] Regular Community Updates
+  - [ ] Community Guidelines
+  - [ ] Player Feedback System
+  - [ ] Community Moderation
+  - [ ] Open the Discord Server
 
 ## Beta
 This phase targets bugs and potentially features that would enhance existing gameplay.
