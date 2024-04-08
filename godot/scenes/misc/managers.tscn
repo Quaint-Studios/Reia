@@ -18,6 +18,7 @@ offset_bottom = 40.0
 text = "FPS: N/A"
 
 [node name="GameManager" type="Node" parent="."]
+process_mode = 4
 script = ExtResource("1_scrx5")
 
 [node name="UIManager" type="Node" parent="."]
