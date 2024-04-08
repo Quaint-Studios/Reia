@@ -2,7 +2,7 @@ class_name DebugManager extends Node
 
 var debugging = true # debug option
 
-const FPS_TIMER_LIMIT = 2.0
+const FPS_TIMER_LIMIT = 2.0 # delay for FPS update
 var fps_debug = true # debug option
 var fps_timer = 0.0
 @onready var fps_counter = $"FPSCounter";
@@ -22,9 +22,12 @@ func _process(delta):
 
 		fps_counter.set_text("FPS: " + str(Engine.get_frames_per_second()).pad_decimals(2))
 
-###
-### Toggles
-###
+## Toggles debugging and the process mode.
+func debug():
+	debugging = !debugging
+	process_mode = Node.PROCESS_MODE_DISABLED if !debugging else Node.PROCESS_MODE_INHERIT
+
+### Toggles the FPS counter.
 func debug_fps():
 	fps_debug = !fps_debug
 	fps_counter.visible = fps_debug

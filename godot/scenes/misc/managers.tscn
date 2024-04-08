@@ -8,12 +8,6 @@
 
 [node name="Managers" type="Node"]
 
-[node name="GameManager" type="Node" parent="."]
-script = ExtResource("1_scrx5")
-
-[node name="UIManager" type="Node" parent="."]
-script = ExtResource("2_ebcnw")
-
 [node name="DebugManager" type="Node" parent="."]
 script = ExtResource("2_h5l7x")
 
@@ -22,6 +16,12 @@ visible = false
 offset_right = 113.0
 offset_bottom = 40.0
 text = "FPS: N/A"
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_scrx5")
+
+[node name="UIManager" type="Node" parent="."]
+script = ExtResource("2_ebcnw")
 
 [node name="DiscordManager" type="Node" parent="."]
 script = ExtResource("4_gpq3t")
