@@ -10,13 +10,14 @@ static var is_ui_open := false
 # TODO: Re-enable
 # static var player_ui: PlayerUI
 
+enum UI_TYPES { GAME, INVENTORY }
+
 func _init():
 	if instance == null:
 		instance = self
 	else:
-		self.queue_free()
-
-enum UI_TYPES { GAME, INVENTORY }
+		queue_free()
+		free()
 
 static func emit_open_ui(ui: UI_TYPES):
 	print("open")
