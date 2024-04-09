@@ -1,12 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://dgpnu1i4wpcpm"]
+[gd_scene load_steps=7 format=3 uid="uid://dgpnu1i4wpcpm"]
 
 [ext_resource type="Script" path="res://scenes/misc/scripts/managers/game_manager.gd" id="1_scrx5"]
 [ext_resource type="Script" path="res://scenes/misc/scripts/managers/ui_manager.gd" id="2_ebcnw"]
 [ext_resource type="Script" path="res://scenes/misc/scripts/managers/debug_manager.gd" id="2_h5l7x"]
 [ext_resource type="Script" path="res://scenes/misc/scripts/managers/discord_manager.gd" id="4_gpq3t"]
 [ext_resource type="Script" path="res://src/managers/multiplayer/multiplayer_manager.gd" id="5_rbwhc"]
+[ext_resource type="Script" path="res://scenes/misc/scripts/managers/player_manager.gd" id="6_ywc70"]
 
 [node name="Managers" type="Node"]
+
+[node name="DiscordManager" type="Node" parent="."]
+script = ExtResource("4_gpq3t")
 
 [node name="DebugManager" type="Node" parent="."]
 script = ExtResource("2_h5l7x")
@@ -16,16 +20,6 @@ visible = false
 offset_right = 113.0
 offset_bottom = 40.0
 text = "FPS: N/A"
-
-[node name="GameManager" type="Node" parent="."]
-process_mode = 4
-script = ExtResource("1_scrx5")
-
-[node name="UIManager" type="Node" parent="."]
-script = ExtResource("2_ebcnw")
-
-[node name="DiscordManager" type="Node" parent="."]
-script = ExtResource("4_gpq3t")
 
 [node name="MultiplayerManager" type="Node" parent="."]
 script = ExtResource("5_rbwhc")
@@ -69,3 +63,21 @@ text = "Reconnect"
 unique_name_in_owner = true
 layout_mode = 2
 text = "Hide"
+
+[node name="GameManager" type="Node" parent="."]
+process_mode = 4
+script = ExtResource("1_scrx5")
+
+[node name="UIManager" type="Node" parent="."]
+script = ExtResource("2_ebcnw")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="UIManager"]
+
+[node name="Inventory" type="Control" parent="UIManager/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PlayerManager" type="Node" parent="."]
+script = ExtResource("6_ywc70")
