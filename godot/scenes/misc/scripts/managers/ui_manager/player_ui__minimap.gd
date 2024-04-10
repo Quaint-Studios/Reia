@@ -1,4 +1,5 @@
 class_name PlayerUI_Minimap extends Control
+## This script keeps the minimap in sync with the player.
 
 @export var camera: Camera3D
 

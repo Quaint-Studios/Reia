@@ -1,4 +1,7 @@
 class_name PlayerUI_Interactor extends RayCast3D
+## Handles the player's interaction with the world.
+
+# Shows a UI element when the player is close to an interactable object.
 
 @export var max_interactable_range := 100.0
 

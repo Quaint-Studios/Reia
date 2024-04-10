@@ -1,4 +1,5 @@
 class_name UIManager extends Node
+## Handles all UI elements
 
 signal open_ui
 signal close_ui(ui: UI_TYPES)

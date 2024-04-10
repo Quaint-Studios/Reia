@@ -1,4 +1,5 @@
 class_name PlayerUI_HUD extends Control
+## Handles the status bar, interactor and minimap.
 
 @onready var status_bars: PlayerUI_StatusBars = %StatusBars
 @onready var interactor: PlayerUI_Interactor = %Interactor

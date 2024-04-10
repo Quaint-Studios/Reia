@@ -1,4 +1,5 @@
 class_name DebugManager extends Node
+## This script is used to toggle debugging and the FPS counter.
 
 var debugging = true # debug option
 
