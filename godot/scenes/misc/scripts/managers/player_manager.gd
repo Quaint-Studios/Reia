@@ -1,10 +1,10 @@
-extends Node
+class_name PlayerManager extends Node
 ## This should be scrapped and instead placed in the Player script itself.
 ## More designing is required.
 
 # TODO: Re-enable
 # var myPlayer = preload("res://scripts/mob/attackable/player/my_player.tscn")
-# var player: Player
+var player: Player
 
 func load_player():
 	print(get_node("/root/Map_Reia"))
