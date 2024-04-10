@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://bjhhsbwnxor3v"]
+
+[ext_resource type="PackedScene" uid="uid://d0w6r3gjp8si3" path="res://scenes/misc/mob/attackable/player/mesh_female_player.tscn" id="1_m20i3"]
+[ext_resource type="Script" path="res://src/mob/attackable/player/components/player_camera_tps.gd" id="2_qee25"]
+[ext_resource type="Script" path="res://src/mob/attackable/player/player_interactor.gd" id="3_0g0c3"]
+
+[node name="Player" type="Node3D"]
+
+[node name="Visuals" type="Node3D" parent="."]
+
+[node name="Mesh" parent="Visuals" instance=ExtResource("1_m20i3")]
+
+[node name="CameraPoints" type="Node3D" parent="."]
+
+[node name="LookPoint" type="Node3D" parent="CameraPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="FollowPoint" type="Node3D" parent="CameraPoints"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2149, 0)
+
+[node name="CameraPivot" type="Node3D" parent="." node_paths=PackedStringArray("look_point", "follow_point")]
+script = ExtResource("2_qee25")
+look_point = NodePath("../CameraPoints/LookPoint")
+follow_point = NodePath("../CameraPoints/FollowPoint")
+
+[node name="Camera" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 2, 2)
+cull_mask = 1047551
+fov = 70.0
+
+[node name="Interactor" type="RayCast3D" parent="CameraPivot/Camera"]
+target_position = Vector3(0, 0, -8)
+collision_mask = 64
+collide_with_areas = true
+script = ExtResource("3_0g0c3")

@@ -88,5 +88,10 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="Minimap" type="Control" parent="UIManager/PlayerUI/CanvasLayer/HUD"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [node name="PlayerManager" type="Node" parent="."]
 script = ExtResource("6_ywc70")

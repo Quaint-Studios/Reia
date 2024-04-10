@@ -1,11 +1,7 @@
 class_name PlayerUI_Minimap extends Control
 ## This script keeps the minimap in sync with the player.
 
-@export var camera: Camera3D
-
-func _ready() -> void:
-	if camera == null:
-		camera = get_node("MapContainer/MapViewport/MinimapCamera") as Camera3D
+@onready var camera: Camera3D = %MinimapCamera
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float):
