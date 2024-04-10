@@ -2,10 +2,30 @@ class_name PlayerManager extends Node
 ## This should be scrapped and instead placed in the Player script itself.
 ## More designing is required.
 
+static var instance: PlayerManager
+
 # TODO: Re-enable
 # var myPlayer = preload("res://scripts/mob/attackable/player/my_player.tscn")
-var player: Player
+var player: Player:
+	set(value):
+		player = value
+		if player != null:
+			UIManager.instance.enable()
+		else:
+			UIManager.instance.disable()
+	get:
+		return player
 
+
+func _init():
+	if instance == null:
+		instance = self
+	else:
+		print("PlayerManager already exists. Deleting this instance.")
+		queue_free()
+		free()
+
+# Loads the player into the current map.
 func load_player():
 	print(get_node("/root/Map_Reia"))
 
@@ -14,9 +34,10 @@ func load_player():
 
 	var map = get_tree().get_current_scene() as MapHandler
 
-	# var newPlayer := myPlayer.instantiate() as Player
+	var newPlayer := Player.new() # TODO: Change this to the player scene.
 
-	if !Engine.is_editor_hint()&&GameManager.instance.player == null:
+	## Add the player to the map if not running in the editor.
+	if !Engine.is_editor_hint()&&player == null:
 		print("Setting player")
-		## GameManager.instance.player = newPlayer
-	## map.players.add_child(newPlayer)
+		player = newPlayer
+	map.players.add_child(newPlayer)

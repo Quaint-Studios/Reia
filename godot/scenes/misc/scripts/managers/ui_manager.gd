@@ -5,6 +5,8 @@ signal close_ui(ui: UI_TYPES)
 
 static var instance: UIManager
 
+var player: PlayerUI
+
 static var is_ui_open := false
 
 # TODO: Re-enable

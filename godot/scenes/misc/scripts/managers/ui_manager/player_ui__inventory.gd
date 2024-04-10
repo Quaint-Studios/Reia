@@ -1,0 +1,1 @@
+class_name PlayerUI_Inventory extends Control
