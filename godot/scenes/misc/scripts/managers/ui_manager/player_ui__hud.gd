@@ -5,6 +5,7 @@ class_name PlayerUI_HUD extends Control
 @onready var interactor: PlayerUI_Interactor = %Interactor
 var is_showing_interactor := false
 @onready var minimap: PlayerUI_Minimap = %Minimap
+@onready var pause_menu: PlayerUI_PauseMenu = %PauseMenu
 
 func hide_all():
 	status_bars.hide()
