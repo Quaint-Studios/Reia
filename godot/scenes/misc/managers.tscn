@@ -71,9 +71,18 @@ script = ExtResource("1_scrx5")
 [node name="UIManager" type="Node" parent="."]
 script = ExtResource("2_ebcnw")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="UIManager"]
+[node name="PlayerUI" type="Node" parent="UIManager"]
+unique_name_in_owner = true
 
-[node name="Inventory" type="Control" parent="UIManager/CanvasLayer"]
+[node name="CanvasLayer" type="CanvasLayer" parent="UIManager/PlayerUI"]
+
+[node name="Inventory" type="Control" parent="UIManager/PlayerUI/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HUD" type="Control" parent="UIManager/PlayerUI/CanvasLayer"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
