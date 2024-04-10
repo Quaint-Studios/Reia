@@ -1,4 +1,5 @@
 class_name PlayerUI extends Control
+## The entrypoint for the player UI, which manages the inventory and HUD
 
 @onready var inventory: PlayerUI_Inventory = %Inventory
 @onready var hud: PlayerUI_HUD = %HUD

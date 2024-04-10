@@ -1,6 +1,8 @@
 class_name PlayerManager extends Node
-## This should be scrapped and instead placed in the Player script itself.
-## More designing is required.
+## The PlayerManager class is responsible for managing the player object.
+##
+## It is responsible for loading the player into the current map and
+## keeping track of the player object.
 
 static var instance: PlayerManager
 
