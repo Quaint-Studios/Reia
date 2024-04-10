@@ -1,0 +1,1 @@
+class_name PlayerUI_PauseMenu extends Control
