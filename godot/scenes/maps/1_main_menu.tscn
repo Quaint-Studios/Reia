@@ -26,8 +26,10 @@ color = Color(0.203922, 0.2, 0.247059, 0.2)
 
 [node name="TopSection" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 1920.0
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -960.0
+offset_right = 960.0
 offset_bottom = 380.0
 
 [node name="Logo" type="TextureRect" parent="CanvasLayer/TopSection"]
@@ -54,10 +56,14 @@ text = "v1.0.1.0-pre-alpha"
 
 [node name="MiddleSection" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 0
-offset_top = 380.0
-offset_right = 1920.0
-offset_bottom = 916.0
+anchor_left = 0.5
+anchor_top = 0.6
+anchor_right = 0.5
+anchor_bottom = 0.6
+offset_left = -960.0
+offset_top = -268.0
+offset_right = 960.0
+offset_bottom = 268.0
 
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/MiddleSection"]
 layout_mode = 1
@@ -149,10 +155,13 @@ vertical_alignment = 1
 
 [node name="BottomSection" type="Control" parent="CanvasLayer"]
 layout_mode = 3
-anchors_preset = 0
-offset_top = 916.0
-offset_right = 1920.0
-offset_bottom = 1080.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -960.0
+offset_top = -164.0
+offset_right = 960.0
 
 [node name="ReleaseNotes" type="Button" parent="CanvasLayer/BottomSection"]
 modulate = Color(0.960784, 0.960784, 0.960784, 1)
