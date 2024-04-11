@@ -29,10 +29,23 @@ func _ready():
 # On mouse entered for, change the size of the adjacent Label
 func _on_mouse_entered(labelName: String, btn: TextureButton):
 	var label := btn.get_node("../HBoxContainer/%sLabel" % labelName) as Label
+	var decorations : Array[Control] = [
+		btn.get_node("../HBoxContainer/EllipseL") as Control,
+		btn.get_node("../HBoxContainer/StarL") as Control,
+	 	btn.get_node("../HBoxContainer/EllipseR") as Control,
+	 	btn.get_node("../HBoxContainer/StarR") as Control
+	]
+
+	if decorations.has(null):
+		print("One decoration not found.")
+		return
 
 	if label == null:
 		print("Label not found.")
 		return
+
+	for decoration in decorations:
+		decoration.show()
 
 	label.set("theme_override_font_sizes/font_size", 40)
 	label.set("theme_override_font_colors/font_color", Color.from_string("#f5f5f5", Color(0.96, 0.96, 0.96, 1)))
@@ -40,9 +53,23 @@ func _on_mouse_entered(labelName: String, btn: TextureButton):
 func _on_mouse_exited(labelName: String, btn: TextureButton):
 	var label := btn.get_node("../HBoxContainer/%sLabel" % labelName) as Label
 
+	var decorations : Array[Control] = [
+		btn.get_node("../HBoxContainer/EllipseL") as Control,
+		btn.get_node("../HBoxContainer/StarL") as Control,
+	 	btn.get_node("../HBoxContainer/EllipseR") as Control,
+	 	btn.get_node("../HBoxContainer/StarR") as Control
+	]
+
+	if decorations.has(null):
+		print("One decoration not found.")
+		return
+
 	if label == null:
 		print("Label not found.")
 		return
+	
+	for decoration in decorations:
+		decoration.hide()
 
 	label.set("theme_override_font_sizes/font_size", 32)
 	label.set("theme_override_font_colors/font_color", Color.from_string("#f9f3e5", Color(0.98, 0.95, 0.9, 1)))

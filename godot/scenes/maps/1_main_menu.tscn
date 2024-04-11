@@ -105,6 +105,7 @@ layout_mode = 2
 alignment = 1
 
 [node name="EllipseL" type="Panel" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Play/HBoxContainer"]
+visible = false
 modulate = Color(0.960784, 0.960784, 0.960784, 1)
 use_parent_material = true
 custom_minimum_size = Vector2(6, 6)
@@ -113,6 +114,7 @@ size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_wbvkm")
 
 [node name="StarL" type="TextureRect" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Play/HBoxContainer"]
+visible = false
 modulate = Color(0.960784, 0.960784, 0.960784, 1)
 use_parent_material = true
 custom_minimum_size = Vector2(24, 24)
@@ -132,6 +134,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="StarR" type="TextureRect" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Play/HBoxContainer"]
+visible = false
 modulate = Color(0.960784, 0.960784, 0.960784, 1)
 use_parent_material = true
 custom_minimum_size = Vector2(24, 24)
@@ -141,6 +144,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="EllipseR" type="Panel" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Play/HBoxContainer"]
+visible = false
 modulate = Color(0.960784, 0.960784, 0.960784, 1)
 use_parent_material = true
 custom_minimum_size = Vector2(6, 6)
@@ -160,6 +164,25 @@ layout_mode = 2
 layout_mode = 2
 alignment = 1
 
+[node name="EllipseL" type="Panel" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Settings/HBoxContainer"]
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+use_parent_material = true
+custom_minimum_size = Vector2(6, 6)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_wbvkm")
+
+[node name="StarL" type="TextureRect" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Settings/HBoxContainer"]
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+use_parent_material = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("3_xir2b")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="SettingsLabel" type="Label" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Settings/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"LabelBold"
@@ -168,6 +191,25 @@ theme_override_font_sizes/font_size = 32
 text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="StarR" type="TextureRect" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Settings/HBoxContainer"]
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+use_parent_material = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("3_xir2b")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EllipseR" type="Panel" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Settings/HBoxContainer"]
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+use_parent_material = true
+custom_minimum_size = Vector2(6, 6)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_wbvkm")
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Settings"]
 layout_mode = 2
@@ -181,6 +223,25 @@ layout_mode = 2
 layout_mode = 2
 alignment = 1
 
+[node name="EllipseL" type="Panel" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Credits/HBoxContainer"]
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+use_parent_material = true
+custom_minimum_size = Vector2(6, 6)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_wbvkm")
+
+[node name="StarL" type="TextureRect" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Credits/HBoxContainer"]
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+use_parent_material = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("3_xir2b")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="CreditsLabel" type="Label" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Credits/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"LabelBold"
@@ -189,6 +250,25 @@ theme_override_font_sizes/font_size = 32
 text = "Credits"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="StarR" type="TextureRect" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Credits/HBoxContainer"]
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+use_parent_material = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("3_xir2b")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EllipseR" type="Panel" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Credits/HBoxContainer"]
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+use_parent_material = true
+custom_minimum_size = Vector2(6, 6)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_wbvkm")
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Credits"]
 layout_mode = 2
@@ -202,6 +282,25 @@ layout_mode = 2
 layout_mode = 2
 alignment = 1
 
+[node name="EllipseL" type="Panel" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Quit/HBoxContainer"]
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+use_parent_material = true
+custom_minimum_size = Vector2(6, 6)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_wbvkm")
+
+[node name="StarL" type="TextureRect" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Quit/HBoxContainer"]
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+use_parent_material = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("3_xir2b")
+expand_mode = 1
+stretch_mode = 5
+
 [node name="QuitLabel" type="Label" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Quit/HBoxContainer"]
 layout_mode = 2
 theme_type_variation = &"LabelBold"
@@ -210,6 +309,25 @@ theme_override_font_sizes/font_size = 32
 text = "Quit"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="StarR" type="TextureRect" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Quit/HBoxContainer"]
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+use_parent_material = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+texture = ExtResource("3_xir2b")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="EllipseR" type="Panel" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Quit/HBoxContainer"]
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+use_parent_material = true
+custom_minimum_size = Vector2(6, 6)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_wbvkm")
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Quit"]
 layout_mode = 2
