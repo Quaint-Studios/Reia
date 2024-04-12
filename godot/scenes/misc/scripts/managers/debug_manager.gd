@@ -1,22 +1,27 @@
 class_name DebugManager extends Node
 ## This script is used to toggle debugging and the FPS counter.
 
-var debugging = true # debug option
+@export var debugging = true # debug option
 
 const FPS_TIMER_LIMIT = 2.0 # delay for FPS update
-var fps_debug = true # debug option
+@export var fps_debug = true # debug option
 var fps_timer = 0.0
-@onready var fps_counter = $"FPSCounter";
+@onready var fps_counter = $CanvasLayer/FPSCounter
+@onready var version_label = $CanvasLayer/Version
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	fps_counter.visible = debugging && fps_debug
 
+	# Get the version from the Project Settings
+	assert(ProjectSettings.has_setting("application/config/version"), "Version setting not found in Project Settings.")
+	version_label.text = "v" + ProjectSettings.get_setting("application/config/version")
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(!debugging): return
+	if (!debugging): return
 
-	if(fps_debug):
+	if (fps_debug):
 		fps_timer += delta
 		if fps_timer > FPS_TIMER_LIMIT: # Prints every 2 seconds
 			fps_timer = 0.0

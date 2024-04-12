@@ -15,11 +15,24 @@ script = ExtResource("4_gpq3t")
 [node name="DebugManager" type="Node" parent="."]
 script = ExtResource("2_h5l7x")
 
-[node name="FPSCounter" type="RichTextLabel" parent="DebugManager"]
+[node name="CanvasLayer" type="CanvasLayer" parent="DebugManager"]
+
+[node name="FPSCounter" type="RichTextLabel" parent="DebugManager/CanvasLayer"]
 visible = false
-offset_right = 113.0
-offset_bottom = 40.0
+offset_left = 32.0
+offset_top = 7.0
+offset_right = 202.0
+offset_bottom = 33.0
 text = "FPS: N/A"
+
+[node name="Version" type="Label" parent="DebugManager/CanvasLayer"]
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 202.0
+offset_bottom = 58.0
+theme_override_colors/font_color = Color(0.027451, 0.14902, 0.239216, 0.501961)
+theme_override_font_sizes/font_size = 18
+text = "v1.0.1.0-pre-alpha"
 
 [node name="MultiplayerManager" type="Node" parent="."]
 script = ExtResource("5_rbwhc")
