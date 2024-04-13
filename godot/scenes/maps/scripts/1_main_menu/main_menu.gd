@@ -9,15 +9,44 @@ func _ready():
 	_prepare_sound()
 	pass
 
+func hide_all_screens():
+	%Title.hide()
+	%Play.hide()
+	%Settings.hide()
+	%Credits.hide()
+
+## Handles where to go when a nav button is pressed.
+##
+## @param to: The screen to go back to.
+func _on_screen_change(to: String):
+	match to:
+		"title":
+			hide_all_screens()
+			%Title.show()
+		"play":
+			hide_all_screens()
+			%Play.show()
+		"settings":
+			hide_all_screens()
+			%Settings.show()
+		"credits":
+			hide_all_screens()
+			%Credits.show()
+		"quit":
+			hide_all_screens()
+			%Quit.show()
+
+# old code below
+
 func play_game():
-	GameManager.current_ui = GameManager.UI_TYPES.PLAY
+	GameManager.state = GameManager.GAME_STATES.PLAY
 	var err = get_tree().change_scene_to_packed(packed_scene_reia)
 
-	if err != Error.OK:
-		print("There was a problem loading the scene.")
+	assert(err == Error.OK, "There was a problem loading the scene.")
 
 func _prepare_background():
-	%Character.get_node("AnimationPlayer").play("IdleR")
+	# %Character.get_node("AnimationPlayer").play("IdleR")
+	pass
 
 func _prepare_sound():
 	SoundManager.set_sound_volume(0.4)
@@ -25,7 +54,7 @@ func _prepare_sound():
 
 	SoundManager.play_music(menu_music, 1.0)
 
-	update_volumes()
+	#update_volumes()
 
 ###
 ### Main Functions
@@ -72,38 +101,38 @@ func disable_all_roots():
 	%OnlineForm.visible = false
 	%Blur.visible = false
 
-
-func _on_master_volume_changed(value: float):
-	SoundManager.set_master_volume(value)
-	update_volumes()
-func _on_music_volume_changed(value: float):
-	SoundManager.set_music_volume(value)
-	update_volumes()
-func _on_sfx_volume_changed(value: float):
-	SoundManager.set_sound_volume(value)
-	update_volumes()
-func _on_ui_volume_changed(value: float):
-	SoundManager.set_ui_sound_volume(value)
-	update_volumes()
-func _on_dialogue_volume_changed(value: float):
-	SoundManager.set_dialogue_volume(value)
-	update_volumes()
+#
+#func _on_master_volume_changed(value: float):
+	#SoundManager.set_master_volume(value)
+	#update_volumes()
+#func _on_music_volume_changed(value: float):
+	#SoundManager.set_music_volume(value)
+	#update_volumes()
+#func _on_sfx_volume_changed(value: float):
+	#SoundManager.set_sound_volume(value)
+	#update_volumes()
+#func _on_ui_volume_changed(value: float):
+	#SoundManager.set_ui_sound_volume(value)
+	#update_volumes()
+#func _on_dialogue_volume_changed(value: float):
+	#SoundManager.set_dialogue_volume(value)
+	#update_volumes()
 
 func volume_to_perc(vol: float) -> String:
 	var perc: int = clamp(int(vol * 100), 0, 100)
 	return str(perc) + "%"
 
-func update_volumes():
-	%MasterVolume.value = SoundManager.get_master_volume()
-	%MasterVolumeLabel.text = volume_to_perc(SoundManager.get_master_volume())
-	%MusicVolume.value = SoundManager.get_music_volume()
-	%MusicVolumeLabel.text = volume_to_perc(SoundManager.get_music_volume())
-	%SFXVolume.value = SoundManager.get_sound_volume()
-	%SFXVolumeLabel.text = volume_to_perc(SoundManager.get_sound_volume())
-	%UIVolume.value = SoundManager.get_ui_sound_volume()
-	%UIVolumeLabel.text = volume_to_perc(SoundManager.get_ui_sound_volume())
-	%DialogueVolume.value = SoundManager.get_dialogue_volume()
-	%DialogueVolumeLabel.text = volume_to_perc(SoundManager.get_dialogue_volume())
+#func update_volumes():
+	#%MasterVolume.value = SoundManager.get_master_volume()
+	#%MasterVolumeLabel.text = volume_to_perc(SoundManager.get_master_volume())
+	#%MusicVolume.value = SoundManager.get_music_volume()
+	#%MusicVolumeLabel.text = volume_to_perc(SoundManager.get_music_volume())
+	#%SFXVolume.value = SoundManager.get_sound_volume()
+	#%SFXVolumeLabel.text = volume_to_perc(SoundManager.get_sound_volume())
+	#%UIVolume.value = SoundManager.get_ui_sound_volume()
+	#%UIVolumeLabel.text = volume_to_perc(SoundManager.get_ui_sound_volume())
+	#%DialogueVolume.value = SoundManager.get_dialogue_volume()
+	#%DialogueVolumeLabel.text = volume_to_perc(SoundManager.get_dialogue_volume())
 
 
 #region Play Choice
@@ -157,3 +186,7 @@ func _on_online_form_back_button_pressed():
 	%PlayChoice.show()
 	%Blur.show()
 #endregion
+
+
+func _on_texture_button_pressed(extra_arg_0):
+	pass # Replace with function body.
