@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://blfb1epv5qnn4"]
+
+[ext_resource type="Texture2D" uid="uid://bko0kv7up2n7" path="res://rsc/icons/back.svg" id="1_yi05q"]
+
+[node name="BackLabel" type="HBoxContainer"]
+modulate = Color(1, 1, 1, 0.6)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(42, 42)
+layout_mode = 2
+texture = ExtResource("1_yi05q")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.960784, 0.960784, 0.960784, 1)
+theme_override_font_sizes/font_size = 32
+text = "Back"
