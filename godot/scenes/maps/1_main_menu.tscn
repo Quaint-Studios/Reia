@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://80iqs38fd27c"]
+[gd_scene load_steps=11 format=3 uid="uid://80iqs38fd27c"]
 
 [ext_resource type="Script" path="res://scenes/maps/scripts/1_main_menu/main_menu.gd" id="1_10ukw"]
 [ext_resource type="Script" path="res://scenes/maps/scripts/1_main_menu/main_menu_title.gd" id="2_5dgoh"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://blfb1epv5qnn4" path="res://scenes/interface/back_label.tscn" id="5_d7wdc"]
 [ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/images/logos/logo_a_flat_white_68.svg" id="5_rk8je"]
 [ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/maps/data/2_jadewater_falls/jadewater_falls_day.tres" id="7_wc4pi"]
+[ext_resource type="PackedScene" uid="uid://c5yv8pbq5j6sq" path="res://rsc/models/characters/reia/reia.tscn" id="7_y3qpj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sxxuf"]
 
@@ -512,6 +513,7 @@ text = "TODO: More buttons! These should link to Display, Graphics, Audio, Contr
 
 [node name="Back" type="MarginContainer" parent="CanvasLayer/Screens/Settings"]
 modulate = Color(1, 1, 1, 0.6)
+layout_mode = 0
 offset_right = 144.0
 offset_bottom = 70.0
 theme_override_constants/margin_left = 16
@@ -543,6 +545,7 @@ Also have an option to copy the credits to the clipboard or save to a file."
 
 [node name="Back" type="MarginContainer" parent="CanvasLayer/Screens/Credits"]
 modulate = Color(1, 1, 1, 0.6)
+layout_mode = 0
 offset_right = 144.0
 offset_bottom = 70.0
 theme_override_constants/margin_left = 16
@@ -576,6 +579,7 @@ No should be selected by default."
 
 [node name="Back" type="MarginContainer" parent="CanvasLayer/Screens/Quit"]
 modulate = Color(1, 1, 1, 0.6)
+layout_mode = 0
 offset_right = 144.0
 offset_bottom = 70.0
 theme_override_constants/margin_left = 16
@@ -605,6 +609,7 @@ text = "TODO: Reimplement the release notes setup but make it take up the center
 
 [node name="Back" type="MarginContainer" parent="CanvasLayer/Screens/ReleaseNotes"]
 modulate = Color(1, 1, 1, 0.6)
+layout_mode = 0
 offset_right = 144.0
 offset_bottom = 70.0
 theme_override_constants/margin_left = 16
@@ -616,8 +621,79 @@ layout_mode = 2
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/Screens/ReleaseNotes/Back"]
 layout_mode = 2
 
+[node name="World" type="Node3D" parent="."]
+
+[node name="Camera" type="Camera3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555218, 2.42893)
+keep_aspect = 0
+
+[node name="Terrain" type="Node3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.283048, 0, 0)
+
+[node name="Reia" parent="World/Terrain" instance=ExtResource("7_y3qpj")]
+
+[node name="Island" type="CSGCombiner3D" parent="World/Terrain"]
+
+[node name="Platform" type="CSGBox3D" parent="World/Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 12.2363, 0.382106, -11.1734)
+size = Vector3(10.8091, 2.42282, 7.15466)
+
+[node name="Step1" type="CSGBox3D" parent="World/Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 9.15864, 0.607557, -14.0449)
+size = Vector3(4.16089, 2.42282, 7.15466)
+
+[node name="Step2" type="CSGBox3D" parent="World/Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 11.5095, -0.162072, -11.3907)
+size = Vector3(1.85288, 2.42282, 7.15466)
+
+[node name="Step3" type="CSGBox3D" parent="World/Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 8.98438, -0.789562, -12.8018)
+size = Vector3(4.16089, 2.42282, 7.15466)
+
+[node name="StepSide1" type="CSGBox3D" parent="World/Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 6.64233, 1.72907, -14.9291)
+size = Vector3(0.76106, 0.950864, 2.99416)
+
+[node name="StepSide2" type="CSGBox3D" parent="World/Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 8.90233, 0.300174, -10.049)
+size = Vector3(0.76106, 0.950864, 1.38939)
+
+[node name="LandSide1" type="CSGBox3D" parent="World/Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 7.42625, -1.80222, -10.3994)
+size = Vector3(0.76106, 0.950864, 1.38939)
+
+[node name="LandSide2" type="CSGBox3D" parent="World/Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 6.07915, -1.41872, -11.9968)
+size = Vector3(2.68199, 0.950864, 1.38939)
+
+[node name="Pillar" type="CSGBox3D" parent="World/Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 8.70396, 1.0012, -15.0641)
+size = Vector3(0.5, 20, 0.5)
+
+[node name="Pillar2" type="CSGBox3D" parent="World/Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 13.63, 3.23547, -14.8049)
+size = Vector3(0.5, 20, 0.5)
+
+[node name="Pillar3" type="CSGBox3D" parent="World/Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 14.6659, 3.76244, -6.39355)
+size = Vector3(0.5, 16.2409, 0.5)
+
+[node name="Pillar4" type="CSGBox3D" parent="World/Terrain/Island"]
+transform = Transform3D(0.21156, -0.129501, -0.968748, -0.302476, 0.933846, -0.190892, 0.929382, 0.333408, 0.158394, 10.9947, 1.69928, -6.61443)
+size = Vector3(0.5, 20, 0.5)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="World/Terrain"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.90437, -0.613201, -11.8416)
+light_energy = 0.1
+light_specular = 14.676
+light_bake_mode = 1
+omni_range = 10.0
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("7_wc4pi")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.781379, -0.297228, -0.548728, 0.624057, 0.372158, 0.68706, 0, -0.879291, 0.476284, 0, 0, 0)
 
 [connection signal="pressed" from="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Play/TextureButton" to="." method="_on_screen_change" binds= ["play"]]
 [connection signal="pressed" from="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Settings/TextureButton" to="." method="_on_screen_change" binds= ["settings"]]
