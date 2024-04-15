@@ -26,10 +26,14 @@ offset_bottom = 33.0
 text = "FPS: N/A"
 
 [node name="Version" type="Label" parent="DebugManager/CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
 offset_left = 32.0
-offset_top = 32.0
+offset_top = -58.0
 offset_right = 202.0
-offset_bottom = 58.0
+offset_bottom = -32.0
+grow_vertical = 0
 theme_override_colors/font_color = Color(0.027451, 0.14902, 0.239216, 0.501961)
 theme_override_font_sizes/font_size = 18
 text = "v1.0.1.0-pre-alpha"
