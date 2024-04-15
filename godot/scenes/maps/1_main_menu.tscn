@@ -25,6 +25,7 @@ menu_music = ExtResource("2_iaiqa")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Dimmer" type="ColorRect" parent="CanvasLayer"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -626,6 +627,7 @@ layout_mode = 2
 [node name="Camera" type="Camera3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555218, 2.42893)
 keep_aspect = 0
+far = 50.0
 
 [node name="Terrain" type="Node3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.283048, 0, 0)
@@ -694,6 +696,7 @@ environment = ExtResource("7_wc4pi")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.781379, -0.297228, -0.548728, 0.624057, 0.372158, 0.68706, 0, -0.879291, 0.476284, 0, 0, 0)
+shadow_enabled = true
 
 [connection signal="pressed" from="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Play/TextureButton" to="." method="_on_screen_change" binds= ["play"]]
 [connection signal="pressed" from="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Settings/TextureButton" to="." method="_on_screen_change" binds= ["settings"]]
