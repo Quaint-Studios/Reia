@@ -2,15 +2,60 @@
 	"version": "1.0.0.5",
 	"stage": "pre-alpha",
 	"date": {
-		"month": "9",
-		"day": "21",
-		"year": "2023",
-		"hour": 00,
-		"minute": 00
+		"month": "1",
+		"day": "1",
+		"year": "2024",
+		"hour": 12,
+		"minute": 02
 	},
 	"description": "Changelogs are finally here!",
 	"changes": {
-
+		"add": [
+			"Finalized the changelog system's overall design. Now you can see all the neat things accomplished here!",
+			"Items now have a texture tied to them. Now you can look at something pretty while sorting your items for hours!",
+			"Hey, listen to this. The main menu now has a temporary background to give it a bit of a feeling. A full city of water is coming soon.",
+			"Added a temporary tree! Now you can hide from the sun for a while.",
+			"We're starting to get into VFX. Glowing & night time added. Sparkles and fairies soon!",
+			"Created a prototype explosion skill. You can't use it quite yet. But it's there. Waiting. Watching.",
+			"Implement a water shader. This was fun to make! It's also interactable. More improvements to come. It even has an \"anti-shader\" that allows me to create illusion holes...! You'll see eventually.",
+			"The inventory system got some updates: Soulstone Slots, Soulstone / Equipment / Material / Weapon Data, and a slight functionality change.",
+			"Debugging messages are now logged on your computer. So if something breaks for you, you have evidence and can report it so it can get fixed.",
+			"Discord's Game SDK was implemented. Reia now has Discord Rich Presence. Now your friends can spy on you.",
+			"Added dropped items. You walk up to it, interact with it, and you can loot it. If you attack the enemy nearby by clicking them, it'll drop items.",
+			"Enemies can now actually die.",
+			"A loot spawner now exists and a dropped loot system too. Oh, and a loot table.",
+			"Interacting now has a keybind. Press F! Controller support soon.",
+			"Started adding and using logos for Reia. Programmer art!",
+			"Grass! And wind with it too! This one was also great to make. I hope it doesn't ruin anyone's PC. But yeah, a lot of blades of grass exist now. Eventually I'll add a way to limit the amount of grass for performance.",
+			"Crafting items and potions are now in the works. You can't fully craft yet. But, the UI is there! Soon.",
+			"Enhancing things is also another UI feature that's being worked on.",
+			"Added a somewhat of a save system. In the future, you'll be able to edit your saves and it'll save more things.",
+			"Multiplayer is here and so is Server hosting! It connects and sends data. So the next step is allowing people to join and play together. You can also set your name currently. Account creation is also in development."
+		],
+		"change": [
+			"The minimap camera now renders 30 times per second. It doesn't need to render at 60+ FPS. So let's prevent the toasters from melting. For now.",
+			"The minimap has more of a blended feel around the border. This'll be improved later but it feels like a step in the right direction.",
+			"Changed the tint for the minimap to be blue and made it slightly transparent.",
+			"Something you can't see but is important is that the player now has a spot to attach weapons and items to in their hand! So look forward to swords, bows, and staves soon.",
+			"Combat has been improved and has become more intricate.",
+			"There are more stats now. Health, Melee/Bow/Spell have both Power and Defense stats, Critical Chance and Danage, Weapon Damage, and Armor Defense.",
+			"There are also different weapon types and the combat also tracks your death, alive, or other statuses. So, yeah, big update!",
+			"Another combat update, even abilities utilize the previous changes change.",
+			"And there's more! Spirits also have their own stats that combine with base stats. These combat changes really deserves its own section.",
+			"Added affinity types to Combat. In the future this will be used for weaknesses and strengths.",
+			"Enemies now get their own individual stats type. It's no longer shared with the player.",
+			"The Third-Person camera has its movement and rotation dampened with the player's movement. It's subtle but it feels much better.",
+			"The size the game window is now 1080p by default. It scales up and down from there.",
+			"The inventory has been redesigned in Figma and implemented in Godot. It's much cleaner than before.",
+			"Changed up a ton of the fonts.",
+			"XP is calculated properly somewhat now. It needs some more development since it has to also track a bunch of other things since you can use items to level up other items.",
+			"Each item grade caps out at level 19 now."
+		],
+		"fix": [
+			"Player velocity now resets when falling off the map. Previously, whenever you run off of the map and start falling, the game will reset your vertical position back. So you can just explore further out. It was funny for a bit to see how fast you'd fall. That might be added back in later for some laughs.",
+			"Preload the map now. So you wait 1 second less! Yay! This also fixes a weird bug that didn't break anything but... Red text is scaaaary. The yellow warning texts are gone too!",
+			"The billboard health was causing errors both visually and behind the scenes. It's fixed now. Another weird error that required rewriting the shader. Nerd stuff."
+		]
 	},
-	"extra": "Still in development..."
+	"extra": "Pre-alpha is coming along nicely! I'm excited to see where this goes. I hope you are too!"
 }
