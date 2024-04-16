@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://bko0kv7up2n7" path="res://rsc/icons/back.svg" id="1_yi05q"]
 
 [node name="BackLabel" type="HBoxContainer"]
-modulate = Color(1, 1, 1, 0.6)
+modulate = Color(0.976471, 0.952941, 0.898039, 0.784314)
 
 [node name="TextureRect" type="TextureRect" parent="."]
 custom_minimum_size = Vector2(42, 42)
