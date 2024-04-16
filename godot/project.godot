@@ -25,8 +25,8 @@ buses/default_bus_layout="res://rsc/audio/main_bus_layout.tres"
 
 Managers="*res://scenes/misc/managers.tscn"
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
-DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
 DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
+DiscordRPCLoader="*res://addons/discord-rpc-gd/nodes/discord_autoload.gd"
 
 [debug]
 
@@ -37,13 +37,12 @@ file_logging/log_path="user://logs/reia_debug_logs.log"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/discord-sdk-gd/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/sound_manager/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg", "res://addons/discord-rpc-gd/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/sound_manager/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg")
 
 [file_customization]
 

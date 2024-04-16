@@ -1,18 +1,18 @@
 [gd_scene load_steps=9 format=3 uid="uid://c1slhdnlsv2qt"]
 
-[ext_resource type="Texture2D" uid="uid://dnfq6kug4x6o2" path="res://addons/discord-sdk-gd/nodes/assets/Checked.svg" id="2_q6tao"]
-[ext_resource type="Texture2D" uid="uid://compmm3kviqqe" path="res://addons/discord-sdk-gd/nodes/assets/Unchecked.svg" id="3_5cyem"]
-[ext_resource type="Texture2D" uid="uid://dtc6ckladq0td" path="res://addons/discord-sdk-gd/nodes/assets/circle.svg" id="3_goflf"]
+[ext_resource type="Texture2D" uid="uid://dnfq6kug4x6o2" path="res://addons/discord-rpc-gd/nodes/assets/Checked.svg" id="2_q6tao"]
+[ext_resource type="Texture2D" uid="uid://compmm3kviqqe" path="res://addons/discord-rpc-gd/nodes/assets/Unchecked.svg" id="3_5cyem"]
+[ext_resource type="Texture2D" uid="uid://dtc6ckladq0td" path="res://addons/discord-rpc-gd/nodes/assets/circle.svg" id="3_goflf"]
 
 [sub_resource type="GDScript" id="GDScript_ak1tp"]
 resource_name = "Debug"
 script/source = "extends Node
 
 func _ready():
-	discord_sdk.connect(\"activity_join_request\",_on_activity_join_request)
+	DiscordRPC.connect(\"activity_join_request\",_on_activity_join_request)
 
 func _process(_delta):
-	if(discord_sdk.get_is_discord_working()):
+	if(DiscordRPC.get_is_discord_working()):
 		$Panel/TextureRect.self_modulate = Color(\"#3eff8d\")
 		$Panel/TextureRect/AnimationPlayer.play(\"pulsate\")
 		debug_text_update()
@@ -20,6 +20,7 @@ func _process(_delta):
 		$Panel/TextureRect.self_modulate = Color(\"#797979\")
 		$Panel/TextureRect/AnimationPlayer.stop()
 		debug_text_update()
+		
 
 func debug_text_update():
 	$Panel/Info.text = \"Application ID : {id}
@@ -44,7 +45,7 @@ Is party public: {ppublic} (needs to be activated in Discord client settings)
 
 Is instanced: {instanced}
 \"
-	$Panel/Info.text = $Panel/Info.text.replace(\"{ppublic}\",str(discord_sdk.is_public_party)).replace(\"{instanced}\",str(discord_sdk.instanced)).replace(\"{ssecret}\",discord_sdk.spectate_secret).replace(\"{jsecret}\",discord_sdk.join_secret).replace(\"{msecret}\",discord_sdk.match_secret).replace(\"{mpartysize}\",str(discord_sdk.max_party_size)).replace(\"{cpartysize}\",str(discord_sdk.current_party_size)).replace(\"{partyid}\",discord_sdk.party_id).replace(\"{id}\",str(discord_sdk.app_id)).replace(\"{details}\",discord_sdk.details).replace(\"{state}\",discord_sdk.state).replace(\"{lkey}\",discord_sdk.large_image).replace(\"{ltext}\",discord_sdk.large_image_text).replace(\"{skey}\",discord_sdk.small_image).replace(\"{stext}\",discord_sdk.small_image_text).replace(\"{stimestamp}\",str(discord_sdk.start_timestamp)).replace(\"{etimestamp}\",str(discord_sdk.end_timestamp))
+	$Panel/Info.text = $Panel/Info.text.replace(\"{ppublic}\",str(DiscordRPC.is_public_party)).replace(\"{instanced}\",str(DiscordRPC.instanced)).replace(\"{ssecret}\",DiscordRPC.spectate_secret).replace(\"{jsecret}\",DiscordRPC.join_secret).replace(\"{msecret}\",DiscordRPC.match_secret).replace(\"{mpartysize}\",str(DiscordRPC.max_party_size)).replace(\"{cpartysize}\",str(DiscordRPC.current_party_size)).replace(\"{partyid}\",DiscordRPC.party_id).replace(\"{id}\",str(DiscordRPC.app_id)).replace(\"{details}\",DiscordRPC.details).replace(\"{state}\",DiscordRPC.state).replace(\"{lkey}\",DiscordRPC.large_image).replace(\"{ltext}\",DiscordRPC.large_image_text).replace(\"{skey}\",DiscordRPC.small_image).replace(\"{stext}\",DiscordRPC.small_image_text).replace(\"{stimestamp}\",str(DiscordRPC.start_timestamp)).replace(\"{etimestamp}\",str(DiscordRPC.end_timestamp))
 
 var user_request = {};
 
@@ -54,25 +55,25 @@ func _on_activity_join_request(user_requesting):
 
 func _on_accept_join_request_pressed():
 	if(!user_request.is_empty()):
-		discord_sdk.accept_join_request(user_request.id)
+		DiscordRPC.accept_join_request(user_request.id)
 
 func _on_invite_with_user_id_text_submitted(new_text):
-	discord_sdk.send_invite(int(new_text),true,\"this is a test invite sent from godot\")
+	DiscordRPC.send_invite(int(new_text),true,\"this is a test invite sent from godot\")
 
 func _on_accept_with_user_id_text_submitted(new_text):
-	discord_sdk.accept_invite(int(new_text))
+	DiscordRPC.accept_invite(int(new_text))
 
 func _on_print_current_user_on_console_pressed():
-	print(discord_sdk.get_current_user())
+	print(DiscordRPC.get_current_user())
 
 func _on_toggle_sdk_toggled(button_pressed):
 	if(button_pressed):
-		discord_sdk.unclear()
+		DiscordRPC.unclear()
 	else:
-		discord_sdk.clear()
+		DiscordRPC.clear(false)
 
 func _on_print_friends_pressed():
-	print(discord_sdk.get_all_relationships())
+	print(DiscordRPC.get_all_relationships())
 "
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8abo6"]

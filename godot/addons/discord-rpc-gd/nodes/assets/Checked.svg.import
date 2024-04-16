@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dtc6ckladq0td"
-path="res://.godot/imported/circle.svg-ca71b895eb1c5e7e6f2f2afe081d28dd.ctex"
+uid="uid://dnfq6kug4x6o2"
+path="res://.godot/imported/Checked.svg-80704e37f30c24e2ec3dfc0955f5f21c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://addons/discord-sdk-gd/nodes/assets/circle.svg"
-dest_files=["res://.godot/imported/circle.svg-ca71b895eb1c5e7e6f2f2afe081d28dd.ctex"]
+source_file="res://addons/discord-rpc-gd/nodes/assets/Checked.svg"
+dest_files=["res://.godot/imported/Checked.svg-80704e37f30c24e2ec3dfc0955f5f21c.ctex"]
 
 [params]
 
