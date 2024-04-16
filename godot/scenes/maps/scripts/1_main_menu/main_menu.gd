@@ -5,9 +5,14 @@ extends Node
 @onready var packed_scene_reia := preload(SceneSelector.JADEWATER_FALLS)
 
 func _ready():
+	_prepare_screens()
 	_prepare_background()
 	_prepare_sound()
 	pass
+
+func _prepare_screens():
+	hide_all_screens()
+	_on_screen_change("title")
 
 func hide_all_screens():
 	%Title.hide()
