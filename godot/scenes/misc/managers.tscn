@@ -16,6 +16,7 @@ script = ExtResource("4_gpq3t")
 script = ExtResource("2_h5l7x")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="DebugManager"]
+layer = 2
 
 [node name="FPSCounter" type="RichTextLabel" parent="DebugManager/CanvasLayer"]
 visible = false
