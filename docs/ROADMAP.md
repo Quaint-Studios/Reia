@@ -59,6 +59,10 @@ This phase focuses on getting some of the core functionalities implemented for R
 - [ ] Saving
   - [ ] MongoDB for Online Environments
   - [ ] PoloDB for Local Environments
+- [ ] Update
+  - [ ] Discord SDK Version
+  - [ ] GitHub Actions for automatically building the game
+  - [ ] ...
 
 ## Alpha
 This phase will be about polishing and introducing complex features.
