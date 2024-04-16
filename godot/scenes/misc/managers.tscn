@@ -24,6 +24,7 @@ offset_left = 32.0
 offset_top = 7.0
 offset_right = 202.0
 offset_bottom = 33.0
+mouse_filter = 2
 text = "FPS: N/A"
 
 [node name="Version" type="Label" parent="DebugManager/CanvasLayer"]
