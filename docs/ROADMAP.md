@@ -39,11 +39,36 @@ This phase focuses on getting some of the core functionalities implemented for R
 - [x] Inventory System
   - [ ] Make a popout version where it's just on the side of the screen and you can still move + attack. On mobile screens this may mean no usable attacks and only movement. Testing needed.
 - [x] Pause Screen
-- [x] Main Menu
-- [ ] Settings
-  - [x] Volume
-  - [ ] Controls
-  - [ ] Display
+- [ ] Main Menu
+  - [x] Screens
+    - [x] Title
+    - [ ] Play
+      - [x] Offline
+      - [x] Online
+      - [ ] Confirmation "Play" button that pops up and takes focus when you select one.
+    - [ ] Settings
+      - [x] Audio
+        - [x] Dialogue
+        - [x] Music
+        - [x] Sound Effects
+        - [x] UI Sound
+        - [x] Master Volume
+      - [ ] Keybindings
+        - [ ] Core
+        - [ ] Combat
+        - [ ] UI
+        - [ ] Companion
+      - [ ] Graphics
+        - [ ] Display Size
+        - [ ] Performance
+    - [ ] Credits
+      - [ ] Fonts
+      - [ ] Art
+      - [ ] Code
+      - [ ] License
+    - [ ] Quit
+      - [x] Functionality
+      - [ ] Confirmation "No / Yes"
 - [ ] Particle Effects
 - [x] Water Shader
 - [ ] Sky Shader
@@ -60,7 +85,7 @@ This phase focuses on getting some of the core functionalities implemented for R
   - [ ] MongoDB for Online Environments
   - [ ] PoloDB for Local Environments
 - [ ] Update
-  - [ ] Discord SDK Version
+  - [x] Discord SDK Version
   - [ ] GitHub Actions for automatically building the game
   - [ ] ...
 
