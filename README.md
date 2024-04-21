@@ -65,39 +65,3 @@ It should be noted that every outcome can be replayed and alternate choices can 
 ### Gameplay
 #### Overview
 You play as an occupant of Reia's realm. One of your main tasks is to find spirits that are fragments of Reia. They possess unique elements and can be leveled up. Your individual levels and your spirit level are separate. But your individual levels can have an impact on your spirit form. There are player-owned floating islands where you can customize them & govern them with trainable NPCs. Upgradeable gear with replacable parts is also a feature for versaility in combat. Players can sell books, music, and in-game goods (skins) in a marketplace. This allows people to have a way to creatively express themselves and gives their island a way to act as an actual store. There are endless open-world areas that are procedurally generated. Puzzles and mini-games are also included, with mini-games potentially being player-created. Day night cycles & regions means that certain cities will have different time zones. This overview is very roughly written, but more will be added eventually.
-
-## Roadmap
-
-__Pre-Alpha__
-- ~~Animation~~
-- ~~Attack system~~ / ~~Death system~~ / Respawn
-- Abilities ((Dash, Double Jump, Teleport) | (Fireball, Explosion | Lightning Strike, Storm | Aqua-Infusion [melee punching], Bubble Shield)
-- Stats + UI
-- Map (~~Minimap~~)
-- Quest System
-- ~~Item System~~
-- Inventory System
--- Make a popout version where it's just on the side of the screen and you can still move + attack. On mobile screens this may mean no usable attacks and only movement. Testing needed.
-- Pause Screen
-- Main Menu
---~~Volume~~
--- Controls
--- Display
-- Particle Effects
-- ~~Water Shader~~
-- Sky Shader
-- Multiplayer (Add friend via account name, but they have their own display name, and you can invite them to play with you and you can progress storylines together if you're on the same quest)
-- Fade healthbar timer
-- Improve Camera
--- Smoothing
-- ~~Changelog~~
-
-__Alpha__
-- Create a launcher to update the app independent of distributors.
-- Polish UI and gameplay.
-
-__Beta__
--
-
-__Release__
--
