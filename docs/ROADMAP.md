@@ -8,6 +8,7 @@ This phase focuses on getting some of the core functionalities implemented for R
 - [ ] Combat Systems
   - [ ] Health System
     - [ ] Fade Health Bar Timer
+    - [ ] Mini/Boss Health Bar
   - [x] Attack System
   - [x] Death System
   - [ ] Respawn
