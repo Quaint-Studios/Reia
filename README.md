@@ -3,12 +3,60 @@ Explore endless worlds and embark on a magical adventure of a lifetime! Reia is 
 
 [![Godot Builder](https://github.com/Quaint-Studios/Reia/actions/workflows/godot.yml/badge.svg)](https://github.com/Quaint-Studios/Reia/actions/workflows/godot.yml)
 
-## About This Project
+## Info
 
 > Visit the website over at [https://www.playreia.com](https://www.playreia.com).
 
-### Docs
-1. [Roadmap](/docs/ROADMAP.md)
+> **Discord:** Private for now but available if you request it.
+
+## Table of Contents
+<ol>
+  <li><a href="/docs/ROADMAP.md">Roadmap</a></li>
+  <li><a href="#contributing">Contributing</a></li>
+  <li><a href="#about-this-project">About this Project</a>
+    <ol>
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#play-the-way-you-want">Play the way you want</a></li>
+      <li><a href="#why-this-project-was-created">Why this project was created</a></li>
+      <li><a href="#lore">Lore</a>
+        <ol>
+          <li><a href="#realms">Realms</a></li>
+          <li><a href="#combat-statuses">Combat Statuses</a></li>
+          <li><a href="#ascension">Ascension</a></li>
+          <li><a href="#rough-story">Rough Story</a></li>
+        </ol>
+      </li>
+      <li><a href="#gameplay">Gameplay</a>
+        <ol>
+          <li><a href="#overview-1">Overview</a></li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+
+## Contributing
+If there's anything in the Roadmap you wnat to work on then here's how you can help.
+
+1. Create an issue specifically for that task.
+2. Fork the repository.
+3. Create a branch with the following format:
+     - ❌ makosai
+     - ❌ makosai/change-the-layout-of-buttons
+     - ✔️ makosai/main-menu
+     - ✔️ makosai/keybindings
+     - ✔️ makosai/multiplayer
+     - ✔️ makosai/art
+
+    > **a.** Your username/the-root-focus where the root focus is something that you could build upon in the future.
+    > 
+    > **b.** You can add more art, you can improve the multiplayer, there will sometimes be more keybindings, and the main-menu may change over time.
+    > 
+    > **c.** It shouldn't be overly specific either.
+4. Create a pull-request and done!
+
+## About this Project
 
 ### Overview
 
