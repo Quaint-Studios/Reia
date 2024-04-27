@@ -7,7 +7,7 @@ Explore endless worlds and embark on a magical adventure of a lifetime! Reia is 
 
 > Visit the website over at [https://www.playreia.com](https://www.playreia.com).
 
-> **Discord:** Private for now but available if you request it.
+> **Discord:** Private for now but available if you request it. Just add `makosai` on Discord and ask for an invite! ❤️
 
 ## Table of Contents
 <ol>
