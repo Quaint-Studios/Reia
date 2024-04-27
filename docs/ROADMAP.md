@@ -76,6 +76,10 @@ This phase focuses on getting some of the core functionalities implemented for R
   - [ ] Day/Night
   - [ ] Clouds
   - [ ] Rain
+- [ ] Rust
+  - [ ] Implement Rust with Godot so some backend services can take advantage of the performance.
+  - [ ] Database
+  - [ ] Multiplayer Migration
 - [ ] Multiplayer
   - [ ] (Add friend via account name, but they have their own display name, and you can invite them to play with you and you can progress storylines together if you're on the same quest)
 - [ ] Improve Camera
