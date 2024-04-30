@@ -37,7 +37,7 @@ Explore endless worlds and embark on a magical adventure of a lifetime! Reia is 
 
 
 ## Contributing
-If there's anything in the Roadmap you wnat to work on then here's how you can help.
+If there's anything in the Roadmap you want to work on then here's how you can help.
 
 1. Create an issue specifically for that task.
 2. Fork the repository.
