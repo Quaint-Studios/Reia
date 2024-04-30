@@ -1,6 +1,6 @@
 # Contributing
 
-If there's anything in the Roadmap you want to work on then here's how you can help.
+If there's anything in the [Roadmap](/docs/ROADMAP.md) you want to work on then here's how you can help.
 
 1. Create an issue specifically for that task.
 2. Fork the repository.
