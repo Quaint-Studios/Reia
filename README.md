@@ -54,7 +54,17 @@ If there's anything in the Roadmap you want to work on then here's how you can h
     > **b.** You can add more art, you can improve the multiplayer, there will sometimes be more keybindings, and the main-menu may change over time.
     > 
     > **c.** It shouldn't be overly specific either.
-4. Create a pull-request and done!
+3. Follow the existing commit patterns:
+     - ❌ fix the attack state
+     - ❌ Fixed the attack state
+     - ❌ Fix the attack state (missing period)
+     - ✔️ Fix the attack state.
+     - ✔️ Update the Main Menu UI.
+     - ✔️ Change the player speed.
+     - ✔️ Read the player position on load.
+     - ✔️ Remove the ability to walk.
+  The length of the commit doesn't matter. Just don't go overboard. If it's a long commit the summarize it and then put the rest of the information in the description of the commit.
+5. Create a pull-request and done!
 
 ## About this Project
 
