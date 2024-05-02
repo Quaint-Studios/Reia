@@ -92,6 +92,7 @@ This phase focuses on getting some of the core functionalities implemented for R
 - [ ] Update
   - [x] Discord SDK Version
   - [ ] GitHub Actions for automatically building the game
+  - [ ] Use Zig for GDExtension
   - [ ] ...
 
 ## Alpha
