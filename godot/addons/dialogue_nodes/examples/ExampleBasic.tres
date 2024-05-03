@@ -1,0 +1,37 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3 uid="uid://dj818hys8f3u8"]
+
+[ext_resource type="Script" path="res://addons/dialogue_nodes/objects/DialogueData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+starts = {
+"START": &"0_1"
+}
+nodes = {
+"0_1": {
+"link": &"1_1",
+"offset": Vector2(0, 0),
+"start_id": "START"
+},
+"1_1": {
+"dialogue": "Hey there!",
+"offset": Vector2(220, 0),
+"options": {
+0: {
+"condition": {},
+"link": "END",
+"text": ""
+}
+},
+"size": Vector2(300, 209),
+"speaker": "Greg"
+},
+"2_1": {
+"comment": "A basic example",
+"offset": Vector2(-20, 100),
+"size": Vector2(200, 100)
+}
+}
+variables = {}
+strays = Array[String](["2_1"])
+characters = ""

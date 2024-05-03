@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://cwpppcdavkgcq"]
+
+[ext_resource type="Script" path="res://addons/dialogue_nodes/editor/variableItem.gd" id="1_o70cd"]
+[ext_resource type="Texture2D" uid="uid://dmqyuf4427yvx" path="res://addons/dialogue_nodes/icons/String.svg" id="2_7c0mf"]
+[ext_resource type="Texture2D" uid="uid://b8o81rn8q8a43" path="res://addons/dialogue_nodes/icons/Remove.svg" id="2_uy2mf"]
+[ext_resource type="Texture2D" uid="uid://kp1pbk80apuh" path="res://addons/dialogue_nodes/icons/int.svg" id="3_o0u21"]
+[ext_resource type="Texture2D" uid="uid://dlx1ii3oc506a" path="res://addons/dialogue_nodes/icons/float.svg" id="4_xgufq"]
+[ext_resource type="Texture2D" uid="uid://bvx0t8yu4vne8" path="res://addons/dialogue_nodes/icons/bool.svg" id="5_fyv4x"]
+
+[node name="Variable0" type="HBoxContainer"]
+offset_right = 320.0
+offset_bottom = 40.0
+script = ExtResource("1_o70cd")
+
+[node name="Name" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Variable Name"
+
+[node name="Type" type="OptionButton" parent="."]
+layout_mode = 2
+item_count = 4
+selected = 0
+popup/item_0/text = ""
+popup/item_0/icon = ExtResource("2_7c0mf")
+popup/item_0/id = 4
+popup/item_1/text = ""
+popup/item_1/icon = ExtResource("3_o0u21")
+popup/item_1/id = 2
+popup/item_2/text = ""
+popup/item_2/icon = ExtResource("4_xgufq")
+popup/item_2/id = 3
+popup/item_3/text = ""
+popup/item_3/icon = ExtResource("5_fyv4x")
+popup/item_3/id = 1
+
+[node name="StringValue" type="LineEdit" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Value"
+
+[node name="IntValue" type="SpinBox" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+allow_greater = true
+allow_lesser = true
+
+[node name="FloatValue" type="SpinBox" parent="."]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+step = 0.01
+allow_greater = true
+allow_lesser = true
+
+[node name="BoolValue" type="CheckBox" parent="."]
+visible = false
+layout_mode = 2
+
+[node name="DeleteButton" type="Button" parent="."]
+layout_mode = 2
+icon = ExtResource("2_uy2mf")
+
+[connection signal="text_changed" from="Name" to="." method="_on_name_changed"]
+[connection signal="item_selected" from="Type" to="." method="_on_type_changed"]
+[connection signal="text_changed" from="StringValue" to="." method="_on_value_changed"]
+[connection signal="value_changed" from="IntValue" to="." method="_on_value_changed"]
+[connection signal="value_changed" from="FloatValue" to="." method="_on_value_changed"]
+[connection signal="toggled" from="BoolValue" to="." method="_on_value_changed"]
+[connection signal="pressed" from="DeleteButton" to="." method="_on_delete_pressed"]

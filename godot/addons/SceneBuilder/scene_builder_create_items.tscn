@@ -1,0 +1,187 @@
+[gd_scene load_steps=2 format=3 uid="uid://x8g21udghd81"]
+
+[ext_resource type="Theme" uid="uid://vtossrqqyvig" path="res://addons/SceneBuilder/addons/SceneBuilder/scene_builder_ui_theme.tres" id="1_vnax4"]
+
+
+[node name="SceneBuilderCreateItems" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -768.0
+offset_bottom = -439.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_vnax4")
+
+[node name="Collection" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_vnax4")
+
+[node name="Label" type="Label" parent="Collection"]
+layout_mode = 2
+theme = ExtResource("1_vnax4")
+text = "Collection:"
+
+[node name="LineEdit" type="LineEdit" parent="Collection"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_vnax4")
+placeholder_text = "Furniture"
+alignment = 1
+
+[node name="Boolean" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_vnax4")
+
+[node name="Label" type="Label" parent="Boolean"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_vnax4")
+text = "Randomize"
+
+[node name="Rotation" type="CheckButton" parent="Boolean"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_vnax4")
+text = "Rotation"
+
+[node name="Scale" type="CheckButton" parent="Boolean"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_vnax4")
+text = "Scale"
+
+[node name="VerticalOffset" type="CheckButton" parent="Boolean"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_vnax4")
+text = "Vertical Offset"
+
+[node name="Headers" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_vnax4")
+
+[node name="Label" type="Label" parent="Headers"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_vnax4")
+
+[node name="x" type="Label" parent="Headers"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_vnax4")
+text = "x"
+
+[node name="y" type="Label" parent="Headers"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_vnax4")
+text = "y"
+
+[node name="z" type="Label" parent="Headers"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_vnax4")
+text = "z"
+
+[node name="Rotation" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_vnax4")
+
+[node name="Label" type="Label" parent="Rotation"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_vnax4")
+text = "Rotation"
+
+[node name="x" type="HSlider" parent="Rotation"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_vnax4")
+max_value = 360.0
+
+[node name="y" type="HSlider" parent="Rotation"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_vnax4")
+max_value = 360.0
+
+[node name="z" type="HSlider" parent="Rotation"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_vnax4")
+max_value = 360.0
+
+[node name="Scale" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_vnax4")
+
+[node name="lbl_Scale" type="Label" parent="Scale"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_vnax4")
+text = "Scale"
+
+[node name="min" type="SpinBox" parent="Scale"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("1_vnax4")
+min_value = 0.01
+step = 0.01
+value = 0.9
+custom_arrow_step = 0.02
+
+[node name="lbl_to" type="Label" parent="Scale"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_vnax4")
+text = "to"
+
+[node name="max" type="SpinBox" parent="Scale"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("1_vnax4")
+min_value = 0.01
+step = 0.01
+value = 1.1
+custom_arrow_step = 0.02
+
+[node name="VerticalOffset" type="HBoxContainer" parent="."]
+layout_mode = 2
+theme = ExtResource("1_vnax4")
+
+[node name="lbl_offset" type="Label" parent="VerticalOffset"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_vnax4")
+text = "Vertical offset"
+
+[node name="min" type="SpinBox" parent="VerticalOffset"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("1_vnax4")
+step = 0.001
+value = 0.02
+custom_arrow_step = 0.001
+
+[node name="lbl_to" type="Label" parent="VerticalOffset"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_vnax4")
+text = "to"
+
+[node name="max" type="SpinBox" parent="VerticalOffset"]
+layout_mode = 2
+size_flags_horizontal = 6
+theme = ExtResource("1_vnax4")
+min_value = 0.001
+step = 0.001
+value = 0.05
+custom_arrow_step = 0.001
+
+[node name="Okay" type="Button" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_vnax4")
+text = "Create scene builder items with icons"

@@ -1,0 +1,95 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3 uid="uid://btriowhsx04c2"]
+
+[ext_resource type="Script" path="res://addons/dialogue_nodes/objects/DialogueData.gd" id="1"]
+
+[resource]
+script = ExtResource("1")
+starts = {
+"START": &"0_1"
+}
+nodes = {
+"0_1": {
+"link": &"1_1",
+"offset": Vector2(0, 0),
+"start_id": "START"
+},
+"1_1": {
+"dialogue": "Wanna learn about [u]bbcodes[/u]?",
+"offset": Vector2(220, 0),
+"options": {
+0: {
+"condition": {},
+"link": &"1_3",
+"text": "Yeah!"
+},
+1: {
+"condition": {},
+"link": &"1_2",
+"text": "Nah"
+}
+},
+"size": Vector2(300, 349.5),
+"speaker": "Greg"
+},
+"1_2": {
+"dialogue": "[shake]Oh... too bad...[/shake]",
+"offset": Vector2(560, 300),
+"options": {
+0: {
+"condition": {},
+"link": "END",
+"text": "..."
+}
+},
+"size": Vector2(300, 312.5),
+"speaker": "Greg"
+},
+"1_3": {
+"dialogue": "You can write special keywords between [ ] for different effects.",
+"offset": Vector2(560, 0),
+"options": {
+0: {
+"condition": {},
+"link": &"1_4",
+"text": ""
+}
+},
+"size": Vector2(300, 312.5),
+"speaker": "Greg"
+},
+"1_4": {
+"dialogue": "Like u for [u]underlining[/u] or [fade start=26 length=4]fade[/fade] or [color=red]color=red[/color] or [rainbow]rainbow[/rainbow] or [shake]shake[/shake] or [wave]wave[/wave] or [tornado]tornado[/tornado]",
+"offset": Vector2(900, 0),
+"options": {
+0: {
+"condition": {},
+"link": &"1_5",
+"text": ""
+}
+},
+"size": Vector2(300, 312.5),
+"speaker": "Greg"
+},
+"1_5": {
+"dialogue": "You can even combine two or more effects to create [rainbow][wave]EVEN MORE AWESOME EFFECTS![/wave][/rainbow]
+Usage: [effect1] [effect2] text goes here [/effect2] [/effect1]",
+"offset": Vector2(1240, 0),
+"options": {
+0: {
+"condition": {},
+"link": &"1_3",
+"text": "One more time?"
+},
+1: {
+"condition": {},
+"link": "END",
+"text": "Got it!"
+}
+},
+"size": Vector2(300, 349.5),
+"speaker": "Greg"
+}
+}
+variables = {}
+strays = Array[String]([])
+characters = ""
