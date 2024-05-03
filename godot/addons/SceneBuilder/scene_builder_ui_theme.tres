@@ -1,0 +1,8 @@
+[gd_resource type="Theme" format=3 uid="uid://vtossrqqyvig"]
+
+[resource]
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 10
+CheckButton/font_sizes/font_size = 10
+Label/font_sizes/font_size = 12
+TabContainer/font_sizes/font_size = 10

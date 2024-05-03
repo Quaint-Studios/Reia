@@ -1,0 +1,72 @@
+[gd_resource type="Resource" script_class="DialogueData" load_steps=2 format=3 uid="uid://c4ay241u6mexj"]
+
+[ext_resource type="Script" path="res://addons/dialogue_nodes/objects/DialogueData.gd" id="1_0oio0"]
+
+[resource]
+script = ExtResource("1_0oio0")
+starts = {
+"START": &"0_1"
+}
+nodes = {
+"0_1": {
+"link": &"1_1",
+"offset": Vector2(0, 0),
+"start_id": "START"
+},
+"1_1": {
+"dialogue": "Oh hey!",
+"offset": Vector2(220, 0),
+"options": {
+0: {
+"condition": {},
+"link": &"1_2",
+"text": ""
+}
+},
+"size": Vector2(300, 240),
+"speaker": 1
+},
+"1_2": {
+"dialogue": "This is an example of setting up audio to play when a dialogue is playing.",
+"offset": Vector2(560, 0),
+"options": {
+0: {
+"condition": {},
+"link": &"1_3",
+"text": ""
+}
+},
+"size": Vector2(300, 240),
+"speaker": 1
+},
+"1_3": {
+"dialogue": "[wait]Funny thing is, you don't have to do anything in the dialogue editor.[/wait]
+[wait time=1]Its just the signal connected in the scene's script[/wait]",
+"offset": Vector2(900, 0),
+"options": {
+0: {
+"condition": {},
+"link": &"1_4",
+"text": ""
+}
+},
+"size": Vector2(300, 241),
+"speaker": 1
+},
+"1_4": {
+"dialogue": "[wait speed=4]Also...[/wait][wait time=2] you can mess around with the wait speed and time and the sound plays accordingly![/wait]",
+"offset": Vector2(1240, 0),
+"options": {
+0: {
+"condition": {},
+"link": "END",
+"text": ""
+}
+},
+"size": Vector2(300, 241),
+"speaker": 1
+}
+}
+variables = {}
+strays = Array[String]([])
+characters = "res://examples/Characters.tres"
