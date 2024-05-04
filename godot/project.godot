@@ -41,7 +41,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogue_nodes/plugin.cfg", "res://addons/discord-rpc-gd/plugin.cfg", "res://addons/game_manager/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/sound_manager/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg")
+enabled=PackedStringArray("res://addons/discord-rpc-gd/plugin.cfg", "res://addons/game_manager/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/sound_manager/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg")
 
 [file_customization]
 

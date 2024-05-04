@@ -1,0 +1,9 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://58qnuw0igyna"]
+
+[ext_resource type="FontFile" uid="uid://daf8ykaf1466s" path="res://addons/game_manager/themes/fonts/Poppins-Bold.ttf" id="1_riwqe"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nb840"]
+
+[resource]
+Button/fonts/font = ExtResource("1_riwqe")
+Button/styles/focus = SubResource("StyleBoxEmpty_nb840")
