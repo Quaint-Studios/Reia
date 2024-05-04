@@ -1,0 +1,113 @@
+[gd_scene load_steps=7 format=3 uid="uid://b2jlruki5q8g0"]
+
+[ext_resource type="Script" path="res://addons/game_manager/components/core/core.gd" id="1_kcyk4"]
+[ext_resource type="Theme" uid="uid://58qnuw0igyna" path="res://addons/game_manager/components/core/core_theme.tres" id="2_hw2d2"]
+[ext_resource type="FontFile" uid="uid://daf8ykaf1466s" path="res://addons/game_manager/themes/fonts/Poppins-Bold.ttf" id="2_xfmva"]
+[ext_resource type="Script" path="res://addons/game_manager/components/core/toolbar.gd" id="3_bbh6n"]
+[ext_resource type="ButtonGroup" uid="uid://cieij32dxfcee" path="res://addons/game_manager/components/core/toolbar_button_group.tres" id="3_v75j6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28rqc"]
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+
+[node name="Core" type="Control"]
+custom_minimum_size = Vector2(0, 300)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("2_hw2d2")
+script = ExtResource("1_kcyk4")
+
+[node name="Main" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_hw2d2")
+
+[node name="Toolbar" type="MarginContainer" parent="Main"]
+layout_mode = 2
+theme = ExtResource("2_hw2d2")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+script = ExtResource("3_bbh6n")
+
+[node name="Layout" type="HBoxContainer" parent="Main/Toolbar"]
+layout_mode = 2
+theme = ExtResource("2_hw2d2")
+
+[node name="Dialogue" type="Button" parent="Main/Toolbar/Layout"]
+layout_mode = 2
+theme = ExtResource("2_hw2d2")
+toggle_mode = true
+button_group = ExtResource("3_v75j6")
+text = "Dialogue"
+flat = true
+
+[node name="Quest" type="Button" parent="Main/Toolbar/Layout"]
+layout_mode = 2
+theme = ExtResource("2_hw2d2")
+theme_override_fonts/font = ExtResource("2_xfmva")
+toggle_mode = true
+button_group = ExtResource("3_v75j6")
+text = "Quest"
+flat = true
+
+[node name="Settings" type="Button" parent="Main/Toolbar/Layout"]
+layout_mode = 2
+theme = ExtResource("2_hw2d2")
+theme_override_fonts/font = ExtResource("2_xfmva")
+toggle_mode = true
+button_group = ExtResource("3_v75j6")
+text = "Settings"
+flat = true
+
+[node name="Workspace" type="MarginContainer" parent="Main"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_hw2d2")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 5
+
+[node name="Background" type="Panel" parent="Main/Workspace"]
+layout_mode = 2
+theme = ExtResource("2_hw2d2")
+theme_override_styles/panel = SubResource("StyleBoxFlat_28rqc")
+
+[node name="Layout" type="HSplitContainer" parent="Main/Workspace"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_hw2d2")
+
+[node name="Statusbar" type="MarginContainer" parent="Main"]
+layout_mode = 2
+theme = ExtResource("2_hw2d2")
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Layout" type="HBoxContainer" parent="Main/Statusbar"]
+layout_mode = 2
+theme = ExtResource("2_hw2d2")
+alignment = 2
+
+[node name="VersionNumber" type="LinkButton" parent="Main/Statusbar/Layout"]
+layout_mode = 2
+theme = ExtResource("2_hw2d2")
+theme_override_fonts/font = ExtResource("2_xfmva")
+text = "Version: 0.1"
+underline = 1
