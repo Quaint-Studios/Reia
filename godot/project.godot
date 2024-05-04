@@ -25,7 +25,6 @@ buses/default_bus_layout="res://rsc/audio/main_bus_layout.tres"
 
 Managers="*res://scenes/misc/managers.tscn"
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
 DiscordRPCLoader="*res://addons/discord-rpc-gd/nodes/discord_autoload.gd"
 
 [debug]
@@ -42,7 +41,7 @@ window/stretch/aspect="expand"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/SceneBuilder/plugin.cfg", "res://addons/dialogue_nodes/plugin.cfg", "res://addons/discord-rpc-gd/plugin.cfg", "res://addons/game_manager/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/sound_manager/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogue_nodes/plugin.cfg", "res://addons/discord-rpc-gd/plugin.cfg", "res://addons/game_manager/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/sound_manager/plugin.cfg", "res://addons/ui_design_tool/plugin.cfg")
 
 [file_customization]
 
