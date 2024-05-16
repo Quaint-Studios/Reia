@@ -47,23 +47,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Watermark" type="TextureRect" parent="CanvasLayer/Screens"]
-unique_name_in_owner = true
-modulate = Color(1, 1, 1, 0.0588235)
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -362.0
-offset_top = -362.0
-offset_right = 362.0
-offset_bottom = 362.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("5_rk8je")
-
 [node name="Title" type="Control" parent="CanvasLayer/Screens"]
 unique_name_in_owner = true
 layout_mode = 1
@@ -372,6 +355,7 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/Screens/Title/BottomSection"]
+visible = false
 layout_mode = 0
 offset_left = 1633.0
 offset_top = 58.0
@@ -594,11 +578,89 @@ offset_right = 40.0
 offset_bottom = 15.0
 text = "TODO: More buttons! These should link to Display, Graphics, Audio, Controls, Privacy, Accessibility. They should act as tabs. Where if they're *selected* but not pressed then."
 
+[node name="Title" type="Label" parent="CanvasLayer/Screens/Settings"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -83.5
+offset_top = -455.0
+offset_right = 83.5
+offset_bottom = -403.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_type_variation = &"HeaderMedium"
+theme_override_colors/font_color = Color(0.976471, 0.952941, 0.898039, 1)
+theme_override_font_sizes/font_size = 44
+text = "Settings"
+
+[node name="Window" type="Panel" parent="CanvasLayer/Screens/Settings"]
+self_modulate = Color(0.909804, 0.85098, 0.741176, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -400.0
+offset_right = 600.0
+offset_bottom = 400.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/Screens/Settings/Window"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -212.5
+offset_top = -212.5
+offset_right = 212.5
+offset_bottom = 212.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Screens/Settings/Window/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="CanvasLayer/Screens/Settings/Window/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Graphics"
+
+[node name="Label" type="Label" parent="CanvasLayer/Screens/Settings/Window/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Test"
+
+[node name="Label2" type="Label" parent="CanvasLayer/Screens/Settings/Window/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Test"
+
+[node name="Label3" type="Label" parent="CanvasLayer/Screens/Settings/Window/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "Test"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/Screens/Settings/Window/HBoxContainer"]
+layout_mode = 2
+
 [node name="Back" type="MarginContainer" parent="CanvasLayer/Screens/Settings"]
-modulate = Color(1, 1, 1, 0.6)
-layout_mode = 0
-offset_right = 144.0
-offset_bottom = 70.0
+modulate = Color(1, 1, 1, 0.74902)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -600.0
+offset_top = -398.0
+offset_right = -456.0
+offset_bottom = -328.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 16
 theme_override_constants/margin_top = 24
 
@@ -607,6 +669,7 @@ layout_mode = 2
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/Screens/Settings/Back"]
 layout_mode = 2
+mouse_default_cursor_shape = 2
 
 [node name="Credits" type="Control" parent="CanvasLayer/Screens"]
 unique_name_in_owner = true
@@ -703,6 +766,25 @@ layout_mode = 2
 
 [node name="TextureButton" type="TextureButton" parent="CanvasLayer/Screens/ReleaseNotes/Back"]
 layout_mode = 2
+
+[node name="Watermark" type="TextureRect" parent="CanvasLayer/Screens"]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.0196078)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -362.0
+offset_top = -362.0
+offset_right = 362.0
+offset_bottom = 362.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("5_rk8je")
+metadata/_edit_lock_ = true
 
 [node name="World" type="Node3D" parent="."]
 
