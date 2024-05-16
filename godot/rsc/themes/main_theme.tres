@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=26 format=3 uid="uid://kwq64glpweie"]
+[gd_resource type="Theme" load_steps=27 format=3 uid="uid://kwq64glpweie"]
 
 [ext_resource type="FontFile" uid="uid://cvl0migkjbg2m" path="res://rsc/fonts/Nunito/static/Nunito-Black.ttf" id="1_kmgp1"]
 [ext_resource type="FontFile" uid="uid://cgf4njan0sx6e" path="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-Black.ttf" id="2_s1tsk"]
@@ -153,6 +153,13 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r44hs"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 100
+corner_radius_top_right = 100
+corner_radius_bottom_right = 100
+corner_radius_bottom_left = 100
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fkith"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gvu1i"]
@@ -214,6 +221,8 @@ ButtonBorder/styles/normal = SubResource("StyleBoxFlat_vxws7")
 ButtonBorder/styles/pressed = SubResource("StyleBoxFlat_o0ra0")
 Chip/base_type = &"Panel"
 Chip/styles/panel = SubResource("StyleBoxFlat_ypbr8")
+CirclePanel/base_type = &"Panel"
+CirclePanel/styles/panel = SubResource("StyleBoxFlat_r44hs")
 FlatWhiteButton/base_type = &"Button"
 FlatWhiteButton/colors/font_color = Color(1, 1, 1, 1)
 FlatWhiteButton/colors/font_disabled_color = Color(0.592157, 0.592157, 0.592157, 0.74902)
