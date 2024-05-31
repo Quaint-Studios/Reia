@@ -174,6 +174,9 @@ This phase will be about polishing and introducing complex features.
   - [ ] Voice Acting
   - [ ] Dialogue Recording
 - [ ] Marketing
+  - [ ] Marketing Art
+    - [ ] Social Media
+    - [ ] Steam
   - [X] Email Marketing
   - [X] SEO Optimization
   - [ ] Content Marketing (Blogs, Articles)
