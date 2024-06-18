@@ -1,4 +1,4 @@
-.
+```.
 ├── godot/
 │   ├── addons/
 │   │   ├── game_manager/ # This is an in-house addon that handles a wide-range of tasks for us
@@ -43,3 +43,4 @@
     ├── db/
     ├── networking/
     └── generation/
+```
