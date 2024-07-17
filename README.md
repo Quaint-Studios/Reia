@@ -1,4 +1,7 @@
 [![Godot Builder](https://github.com/Quaint-Studios/Reia/actions/workflows/godot.yml/badge.svg)](https://github.com/Quaint-Studios/Reia/actions/workflows/godot.yml)
+[![Zig Test](https://github.com/Quaint-Studios/Reia/actions/workflows/zig.yml/badge.svg)](https://github.com/Quaint-Studios/Reia/actions/workflows/zig.yml)
+[![Open Collective backers and sponsors](https://img.shields.io/opencollective/all/reia?logo=opencollective)](https://opencollective.com/reia)
+
 
 # Reia
 Explore endless worlds and embark on a magical adventure of a lifetime! Reia is an action-adventure RPG, also open-source. Play offline or online with friends, or login for an MMO experience! Create and explore worlds, manage your own economy and products, and restore Reia's world via the story. Choose the way you want to play.
