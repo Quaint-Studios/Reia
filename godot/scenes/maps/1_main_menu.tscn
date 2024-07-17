@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://80iqs38fd27c"]
+[gd_scene load_steps=13 format=3 uid="uid://80iqs38fd27c"]
 
 [ext_resource type="Script" path="res://scenes/maps/scripts/1_main_menu/main_menu.gd" id="1_10ukw"]
 [ext_resource type="Script" path="res://scenes/maps/scripts/1_main_menu/main_menu_title.gd" id="2_5dgoh"]
@@ -24,6 +24,16 @@ corner_radius_top_left = 30
 corner_radius_top_right = 30
 corner_radius_bottom_right = 30
 corner_radius_bottom_left = 30
+
+[sub_resource type="GDScript" id="GDScript_nmgfx"]
+script/source = "extends WorldEnvironment
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	if OS.has_feature(\"mobile\") || OS.has_feature(\"wasm\"):
+		environment.glow_enabled = false;
+"
 
 [node name="MainMenu" type="Node3D"]
 script = ExtResource("1_10ukw")
@@ -791,6 +801,7 @@ metadata/_edit_lock_ = true
 [node name="Camera" type="Camera3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555218, 2.42893)
 keep_aspect = 0
+current = true
 far = 50.0
 
 [node name="Terrain" type="Node3D" parent="World"]
@@ -857,6 +868,7 @@ omni_range = 10.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("7_wc4pi")
+script = SubResource("GDScript_nmgfx")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.781379, -0.297228, -0.548728, 0.624057, 0.372158, 0.68706, 0, -0.879291, 0.476284, 0, 0, 0)
