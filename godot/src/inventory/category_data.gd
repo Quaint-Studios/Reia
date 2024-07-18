@@ -14,7 +14,7 @@ func add_item(item: Item) -> CategoryData:
 
 
 		print("Item is a duplicate, adding exp")
-		(items[item.name] as Weapon)#.enhance(wea)
+		#(items[item.name] as Weapon)#.enhance(wea)
 	items[item.name] = item # TODO: Append experience to existing item
 	return self
 
