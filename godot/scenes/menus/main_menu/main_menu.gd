@@ -2,7 +2,7 @@ extends Node
 
 @export var menu_music: AudioStream
 
-@onready var packed_scene_reia := preload(SceneSelector.JADEWATER_FALLS)
+@onready var packed_scene_reia := preload(SceneSelector.REGIONS.JADEWATER_FALLS)
 
 func _ready():
 	_prepare_screens()
@@ -191,7 +191,3 @@ func _on_online_form_back_button_pressed():
 	%PlayChoice.show()
 	%Blur.show()
 #endregion
-
-
-func _on_texture_button_pressed(extra_arg_0):
-	pass # Replace with function body.

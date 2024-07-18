@@ -1,12 +1,12 @@
 [gd_scene load_steps=13 format=3 uid="uid://80iqs38fd27c"]
 
-[ext_resource type="Script" path="res://scenes/maps/scripts/1_main_menu/main_menu.gd" id="1_10ukw"]
-[ext_resource type="Script" path="res://scenes/maps/scripts/1_main_menu/main_menu_title.gd" id="2_5dgoh"]
+[ext_resource type="Script" path="res://scenes/menus/main_menu/main_menu.gd" id="1_10ukw"]
+[ext_resource type="Script" path="res://scenes/menus/main_menu/main_menu_title.gd" id="2_5dgoh"]
 [ext_resource type="AudioStream" uid="uid://bjmsfaw5a1nh5" path="res://rsc/audio/menu/forest_theme_v1.wav" id="2_iaiqa"]
 [ext_resource type="Texture2D" uid="uid://dnqp10u8o4xik" path="res://rsc/icons/star_icon_84.svg" id="3_xir2b"]
 [ext_resource type="PackedScene" uid="uid://blfb1epv5qnn4" path="res://scenes/interface/back_label.tscn" id="5_d7wdc"]
 [ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/images/logos/logo_a_flat_white_68.svg" id="5_rk8je"]
-[ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/maps/data/2_jadewater_falls/jadewater_falls_day.tres" id="7_wc4pi"]
+[ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/menus/main_menu/main_menu_day.tres" id="7_wc4pi"]
 [ext_resource type="PackedScene" uid="uid://c5yv8pbq5j6sq" path="res://rsc/models/characters/reia/reia.tscn" id="7_y3qpj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sxxuf"]

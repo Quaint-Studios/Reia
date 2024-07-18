@@ -1,19 +1,19 @@
 [gd_scene load_steps=7 format=3 uid="uid://dgpnu1i4wpcpm"]
 
-[ext_resource type="Script" path="res://scenes/misc/scripts/managers/discord_manager.gd" id="1_5dyyu"]
-[ext_resource type="Script" path="res://scenes/misc/scripts/managers/game_manager.gd" id="1_scrx5"]
-[ext_resource type="Script" path="res://scenes/misc/scripts/managers/ui_manager.gd" id="2_ebcnw"]
-[ext_resource type="Script" path="res://scenes/misc/scripts/managers/debug_manager.gd" id="2_h5l7x"]
-[ext_resource type="Script" path="res://src/managers/multiplayer/multiplayer_manager.gd" id="5_rbwhc"]
-[ext_resource type="Script" path="res://scenes/misc/scripts/managers/player_manager.gd" id="6_ywc70"]
+[ext_resource type="Script" path="res://src/globals/managers/discord_manager.gd" id="1_q4cw6"]
+[ext_resource type="Script" path="res://src/globals/managers/debug_manager.gd" id="2_eoemg"]
+[ext_resource type="Script" path="res://src/globals/managers/multiplayer/multiplayer_manager.gd" id="3_x240j"]
+[ext_resource type="Script" path="res://src/globals/managers/game_manager.gd" id="4_1fsh8"]
+[ext_resource type="Script" path="res://src/globals/managers/ui/ui_manager.gd" id="5_tt3n5"]
+[ext_resource type="Script" path="res://src/globals/managers/player_manager.gd" id="6_ocllo"]
 
 [node name="Managers" type="Node"]
 
 [node name="DiscordManager" type="Node" parent="."]
-script = ExtResource("1_5dyyu")
+script = ExtResource("1_q4cw6")
 
 [node name="DebugManager" type="Node" parent="."]
-script = ExtResource("2_h5l7x")
+script = ExtResource("2_eoemg")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="DebugManager"]
 layer = 2
@@ -41,7 +41,7 @@ theme_override_font_sizes/font_size = 18
 text = "v1.0.1.0-pre-alpha"
 
 [node name="MultiplayerManager" type="Node" parent="."]
-script = ExtResource("5_rbwhc")
+script = ExtResource("3_x240j")
 
 [node name="Status" type="CenterContainer" parent="MultiplayerManager"]
 unique_name_in_owner = true
@@ -84,10 +84,10 @@ layout_mode = 2
 text = "Hide"
 
 [node name="GameManager" type="Node" parent="."]
-script = ExtResource("1_scrx5")
+script = ExtResource("4_1fsh8")
 
 [node name="UIManager" type="Node" parent="."]
-script = ExtResource("2_ebcnw")
+script = ExtResource("5_tt3n5")
 
 [node name="PlayerUI" type="Node" parent="UIManager"]
 unique_name_in_owner = true
@@ -112,4 +112,4 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PlayerManager" type="Node" parent="."]
-script = ExtResource("6_ywc70")
+script = ExtResource("6_ocllo")

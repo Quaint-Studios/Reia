@@ -1,26 +1,26 @@
 [gd_scene load_steps=10 format=3 uid="uid://owljyf5nq8mf"]
 
-[ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/maps/data/2_jadewater_falls/jadewater_falls_day.tres" id="1_gpa1r"]
-[ext_resource type="Script" path="res://scenes/maps/scripts/1_main_menu/main_menu.gd" id="1_uc18m"]
-[ext_resource type="PackedScene" uid="uid://cykr5gmvdm7xf" path="res://rsc/models/characters/player/female_player.glb" id="2_h05gn"]
-[ext_resource type="AudioStream" uid="uid://bjmsfaw5a1nh5" path="res://rsc/audio/menu/forest_theme_v1.wav" id="2_t5ufm"]
-[ext_resource type="PackedScene" uid="uid://dsy7bxowv7qkc" path="res://scenes/interface/blur.tscn" id="3_gvduh"]
-[ext_resource type="Shader" path="res://rsc/shaders/drop_shadow.gdshader" id="4_4etnk"]
-[ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/images/logos/logo_a_flat_white_68.svg" id="5_rk8je"]
-[ext_resource type="PackedScene" uid="uid://ci266clm01pqr" path="res://scenes/interface/changelogs/changelog.tscn" id="6_wulfs"]
+[ext_resource type="Script" path="res://scenes/menus/main_menu/main_menu.gd" id="1_uksap"]
+[ext_resource type="AudioStream" uid="uid://bjmsfaw5a1nh5" path="res://rsc/audio/menu/forest_theme_v1.wav" id="2_yt8fi"]
+[ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/menus/main_menu/main_menu_day.tres" id="3_oqpva"]
+[ext_resource type="PackedScene" uid="uid://cykr5gmvdm7xf" path="res://rsc/models/characters/player/female_player.glb" id="4_xhdmv"]
+[ext_resource type="PackedScene" uid="uid://dsy7bxowv7qkc" path="res://scenes/interface/blur.tscn" id="5_j557d"]
+[ext_resource type="Shader" path="res://rsc/shaders/drop_shadow.gdshader" id="6_w4h21"]
+[ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/images/logos/logo_a_flat_white_68.svg" id="7_k6lrh"]
+[ext_resource type="PackedScene" uid="uid://ci266clm01pqr" path="res://scenes/interface/changelogs/changelog.tscn" id="8_2dtty"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4eypw"]
-shader = ExtResource("4_4etnk")
+shader = ExtResource("6_w4h21")
 shader_parameter/background_color = Color(1, 1, 1, 1)
 shader_parameter/shadow_color = Color(0.196078, 0.196078, 0.196078, 0.356863)
 shader_parameter/offset_in_pixels = Vector2(4, 8)
 
 [node name="MainMenu" type="Node"]
-script = ExtResource("1_uc18m")
-menu_music = ExtResource("2_t5ufm")
+script = ExtResource("1_uksap")
+menu_music = ExtResource("2_yt8fi")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = ExtResource("1_gpa1r")
+environment = ExtResource("3_oqpva")
 
 [node name="World" type="Node3D" parent="."]
 
@@ -31,7 +31,7 @@ keep_aspect = 0
 [node name="Terrain" type="Node3D" parent="World"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.283048, 0, 0)
 
-[node name="Character" parent="World/Terrain" instance=ExtResource("2_h05gn")]
+[node name="Character" parent="World/Terrain" instance=ExtResource("4_xhdmv")]
 unique_name_in_owner = true
 transform = Transform3D(-0.895567, -0.190233, -0.426465, -0.265899, 0.965995, 0.127482, 0.383873, 0.225312, -0.906629, 6.4156, 1.14787, -13.0171)
 
@@ -94,7 +94,7 @@ omni_range = 10.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Blur" parent="CanvasLayer" instance=ExtResource("3_gvduh")]
+[node name="Blur" parent="CanvasLayer" instance=ExtResource("5_j557d")]
 unique_name_in_owner = true
 
 [node name="Menu" type="Control" parent="CanvasLayer"]
@@ -115,7 +115,7 @@ offset_left = -320.0
 offset_right = 320.0
 offset_bottom = 160.0
 grow_horizontal = 2
-texture = ExtResource("5_rk8je")
+texture = ExtResource("7_k6lrh")
 expand_mode = 3
 stretch_mode = 5
 
@@ -490,4 +490,4 @@ theme_override_font_sizes/font_size = 32
 text = "Back"
 alignment = 0
 
-[node name="Changelog" parent="CanvasLayer" instance=ExtResource("6_wulfs")]
+[node name="Changelog" parent="CanvasLayer" instance=ExtResource("8_2dtty")]
