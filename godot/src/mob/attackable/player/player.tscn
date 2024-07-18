@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bjhhsbwnxor3v"]
 
-[ext_resource type="PackedScene" uid="uid://d0w6r3gjp8si3" path="res://scenes/misc/mob/attackable/player/mesh_female_player.tscn" id="1_m20i3"]
+[ext_resource type="PackedScene" uid="uid://d0w6r3gjp8si3" path="res://src/mob/attackable/player/meshes/mesh_female_player.tscn" id="1_m20i3"]
 [ext_resource type="Script" path="res://src/mob/attackable/player/components/player_camera_tps.gd" id="2_qee25"]
 [ext_resource type="Script" path="res://src/mob/attackable/player/player_interactor.gd" id="3_0g0c3"]
 
