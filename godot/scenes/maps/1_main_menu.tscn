@@ -28,7 +28,6 @@ corner_radius_bottom_left = 30
 [sub_resource type="GDScript" id="GDScript_nmgfx"]
 script/source = "extends WorldEnvironment
 
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if OS.has_feature(\"mobile\") || OS.has_feature(\"wasm\"):
