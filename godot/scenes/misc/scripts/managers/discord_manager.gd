@@ -4,6 +4,9 @@ extends Node
 ## This script is used to set the Rich Presence of the Discord SDK.
 
 func _ready():
+	if OS.has_feature("wasm32") || OS.has_feature("wasm") || OS.has_feature("mobile"):
+		return
+
 	DiscordRPC.app_id = 688581385639952418 # Application ID
 	DiscordRPC.details = "Roaming the world..."
 	DiscordRPC.state = "Playing Solo"
