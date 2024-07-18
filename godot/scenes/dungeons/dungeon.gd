@@ -1,5 +1,4 @@
 class_name Dungeon
 
-func load_dungeon() {
-    
-}
+func load_dungeon():
+    pass
