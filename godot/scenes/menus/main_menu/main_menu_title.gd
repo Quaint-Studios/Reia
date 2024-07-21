@@ -67,7 +67,7 @@ func _on_mouse_exited(labelName: String, btn: TextureButton):
 	if label == null:
 		print("Label not found.")
 		return
-	
+
 	for decoration in decorations:
 		decoration.hide()
 

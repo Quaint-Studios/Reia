@@ -1,4 +1,7 @@
 class_name Dungeon
 
-func load_dungeon():
+##
+## TODO IMPLEMENTATION
+##
+func load_dungeon() -> void:
     pass
