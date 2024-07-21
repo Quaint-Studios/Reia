@@ -7,7 +7,7 @@ const HUMAN_SPIRIT = -1
 @export var spirits : Array[SpiritStats] = [ SpiritStats.new() ]
 @export var current_spirit := HUMAN_SPIRIT
 
-func swap(prev: AttackableStats, next: AttackableStats):
+func swap(prev: PlayerBaseStats, next: PlayerBaseStats) -> void:
 	# TODO: Blend the health/max health, ether/max ether, and other values.
 	var new_health := ceili(next.max_health * (float(prev.health) / prev.max_health))
 	new_health = clampi(new_health, 0, next.max_health)
@@ -35,7 +35,7 @@ func get_power() -> int:
 	if current_spirit == HUMAN_SPIRIT:
 		return power
 
-	var spirit = get_current_spirit()
+	var spirit := get_current_spirit()
 
 	if spirit is HumanStats:
 		return power
@@ -47,7 +47,7 @@ func get_defense(weapon_type: Enums.Weapon_Type) -> int:
 	if current_spirit == HUMAN_SPIRIT:
 		return defense
 
-	var spirit = get_current_spirit()
+	var spirit := get_current_spirit()
 
 	if spirit is HumanStats:
 		return defense

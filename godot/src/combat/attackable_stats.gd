@@ -6,7 +6,7 @@ class_name AttackableStats extends BaseStats
 ### Signals
 ###
 signal health_changed(value: int, max_health: int)
-func _emit_all():
+func _emit_all() -> void:
 	health_changed.emit(health, max_health)
 	stats_changed.emit(self)
 
@@ -37,7 +37,7 @@ func _emit_all():
 ###
 ### Functionality
 ###
-func damage(attacker: Attackable, ability: Ability = null):
+func damage(attacker: Attackable, ability: Ability = null) -> void:
 	var attacker_power := attacker.stats.get_power()
 	if ability != null:
 		attacker_power = ability.get_damage(attacker_power)

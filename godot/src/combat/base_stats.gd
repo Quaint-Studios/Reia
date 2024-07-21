@@ -14,5 +14,5 @@ signal stats_changed(stats: BaseStats)
 @export var crit_chance := 0.0
 @export var crit_damage := 0.0
 
-func update():
+func update() -> void:
 	stats_changed.emit()
