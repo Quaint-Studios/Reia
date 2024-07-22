@@ -10,24 +10,40 @@ extends Control
 @onready var creditsButton: TextureButton = $Credits/TextureButton
 @onready var quitButton: TextureButton = $Quit/TextureButton
 
-func _ready():
-	playButton.pressed.connect(_on_play_pressed)
-	settingsButton.pressed.connect(_on_settings_pressed)
-	creditsButton.pressed.connect(_on_credits_pressed)
-	quitButton.pressed.connect(_on_quit_pressed)
+func _ready() -> void:
+	if !playButton.pressed.is_connected(_on_play_pressed):
+		var __ := playButton.pressed.connect(_on_play_pressed)
 
-	playButton.mouse_entered.connect(_on_mouse_entered.bind("Play", playButton))
-	settingsButton.mouse_entered.connect(_on_mouse_entered.bind("Settings", settingsButton))
-	creditsButton.mouse_entered.connect(_on_mouse_entered.bind("Credits", creditsButton))
-	quitButton.mouse_entered.connect(_on_mouse_entered.bind("Quit", quitButton))
+	if !settingsButton.pressed.is_connected(_on_settings_pressed):
+		var __ := settingsButton.pressed.connect(_on_settings_pressed)
 
-	playButton.mouse_exited.connect(_on_mouse_exited.bind("Play", playButton))
-	settingsButton.mouse_exited.connect(_on_mouse_exited.bind("Settings", settingsButton))
-	creditsButton.mouse_exited.connect(_on_mouse_exited.bind("Credits", creditsButton))
-	quitButton.mouse_exited.connect(_on_mouse_exited.bind("Quit", quitButton))
+	if !creditsButton.pressed.is_connected(_on_credits_pressed):
+		var __ := creditsButton.pressed.connect(_on_credits_pressed)
+
+	if !quitButton.pressed.is_connected(_on_quit_pressed):
+		var __ := quitButton.pressed.connect(_on_quit_pressed)
+
+
+	if !playButton.mouse_entered.is_connected(_on_mouse_entered.bind("Play", playButton)):
+		var __ := playButton.mouse_entered.connect(_on_mouse_entered.bind("Play", playButton))
+	if !settingsButton.mouse_entered.is_connected(_on_mouse_entered.bind("Settings", settingsButton)):
+		var __ := settingsButton.mouse_entered.connect(_on_mouse_entered.bind("Settings", settingsButton))
+	if !creditsButton.mouse_entered.is_connected(_on_mouse_entered.bind("Credits", creditsButton)):
+		var __ := creditsButton.mouse_entered.connect(_on_mouse_entered.bind("Credits", creditsButton))
+	if !quitButton.mouse_entered.is_connected(_on_mouse_entered.bind("Quit", quitButton)):
+		var __ := quitButton.mouse_entered.connect(_on_mouse_entered.bind("Quit", quitButton))
+
+	if !playButton.mouse_exited.is_connected(_on_mouse_exited.bind("Play", playButton)):
+		var __ := playButton.mouse_exited.connect(_on_mouse_exited.bind("Play", playButton))
+	if !settingsButton.mouse_exited.is_connected(_on_mouse_exited.bind("Settings", settingsButton)):
+		var __ := settingsButton.mouse_exited.connect(_on_mouse_exited.bind("Settings", settingsButton))
+	if !creditsButton.mouse_exited.is_connected(_on_mouse_exited.bind("Credits", creditsButton)):
+		var __ := creditsButton.mouse_exited.connect(_on_mouse_exited.bind("Credits", creditsButton))
+	if !quitButton.mouse_exited.is_connected(_on_mouse_exited.bind("Quit", quitButton)):
+		var __ := quitButton.mouse_exited.connect(_on_mouse_exited.bind("Quit", quitButton))
 
 # On mouse entered for, change the size of the adjacent Label
-func _on_mouse_entered(labelName: String, btn: TextureButton):
+func _on_mouse_entered(labelName: String, btn: TextureButton) -> void:
 	var label := btn.get_node("../HBoxContainer/%sLabel" % labelName) as Label
 	var decorations : Array[Control] = [
 		btn.get_node("../HBoxContainer/EllipseL") as Control,
@@ -50,7 +66,7 @@ func _on_mouse_entered(labelName: String, btn: TextureButton):
 	label.set("theme_override_font_sizes/font_size", 40)
 	label.set("theme_override_font_colors/font_color", Color.from_string("#f5f5f5", Color(0.96, 0.96, 0.96, 1)))
 
-func _on_mouse_exited(labelName: String, btn: TextureButton):
+func _on_mouse_exited(labelName: String, btn: TextureButton) -> void:
 	var label := btn.get_node("../HBoxContainer/%sLabel" % labelName) as Label
 
 	var decorations : Array[Control] = [
@@ -74,16 +90,16 @@ func _on_mouse_exited(labelName: String, btn: TextureButton):
 	label.set("theme_override_font_sizes/font_size", 32)
 	label.set("theme_override_font_colors/font_color", Color.from_string("#f9f3e5", Color(0.98, 0.95, 0.9, 1)))
 
-func _on_play_pressed():
+func _on_play_pressed() -> void:
 	print("play")
 	pass
 
-func _on_settings_pressed():
+func _on_settings_pressed() -> void:
 	pass
 
-func _on_credits_pressed():
+func _on_credits_pressed() -> void:
 	pass
 
-func _on_quit_pressed():
+func _on_quit_pressed() -> void:
 	# TODO: Verify the quit
 	get_tree().quit()
