@@ -6,15 +6,15 @@ var handler : MultiplayerHandler
 var player_name : String
 
 enum Status { UNSET, CLIENT, SERVER, BOTH, OFFLINE }
-var status = Status.UNSET
+var status := Status.UNSET
 
 static var instance : MultiplayerManager
 
-func _init():
+func _init() -> void:
 	if instance == null:
 		instance = self
 
-func _ready():
+func _ready() -> void:
 	setup_handlers()
 
 	if OS.has_feature("dedicated_server") || DisplayServer.get_name() == "headless" ||  "--server" in OS.get_cmdline_user_args():
@@ -27,18 +27,18 @@ func _ready():
 		myClient.name = "ClientManager"
 		add_child(myClient)
 
-func setup_handlers():
+func setup_handlers() -> void:
 	# for in [MultiplayerHandler, ...]
-	var node = MultiplayerHandler.new()
+	var node := MultiplayerHandler.new()
 	node.name = "MultiplayerHandler"
 	add_child(node)
 
-func show_status():
-	%Status.show()
-	%StatusContainer.show()
+func show_status() -> void:
+	(%Status as Control).show()
+	(%StatusContainer as Control).show()
 
-func hide_status():
-	%Status.hide()
+func hide_status() -> void:
+	(%Status as Control).hide()
 
-func minimize_status():
-	%StatusContainer.hide()
+func minimize_status() -> void:
+	(%StatusContainer as Control).hide()

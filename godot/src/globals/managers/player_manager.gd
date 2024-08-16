@@ -12,14 +12,16 @@ var player: Player:
 	set(value):
 		player = value
 		if player != null:
-			UIManager.instance.enable()
+			# UIManager.instance.player.enable()
+			pass
 		else:
-			UIManager.instance.disable()
+			# UIManager.instance.player.disable()
+			pass
 	get:
 		return player
 
 
-func _init():
+func _init() -> void:
 	if instance == null:
 		instance = self
 	else:
@@ -28,13 +30,13 @@ func _init():
 		free()
 
 # Loads the player into the current map.
-func load_player():
+func load_player() -> void:
 	print(get_node("/root/Map_Reia"))
 
 	if !get_tree().get_current_scene().is_in_group("map"):
 		print("The current scene is not a map. Can't load the player.")
 
-	var map = get_tree().get_current_scene() as MapHandler
+	var map := get_tree().get_current_scene() as MapHandler
 
 	var newPlayer := Player.new() # TODO: Change this to the player scene.
 

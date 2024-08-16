@@ -15,14 +15,14 @@ static var is_ui_open := false
 
 enum UI_TYPES { GAME, INVENTORY }
 
-func _init():
+func _init() -> void:
 	if instance == null:
 		instance = self
 	else:
 		queue_free()
 		free()
 
-static func emit_open_ui(ui: UI_TYPES):
+static func emit_open_ui(ui: UI_TYPES) -> void:
 	print("open")
 	UIManager.instance.close_ui.emit(ui) # Close all other UI first
 	UIManager.instance.open_ui.emit()
@@ -33,7 +33,7 @@ func _input(_event: InputEvent) -> void:
 		UIManager.emit_open_ui(UI_TYPES.GAME)
 		print("closing UI")
 
-static func emit_close_ui():
+static func emit_close_ui() -> void:
 	print("close")
 	UIManager.instance.close_ui.emit()
 	is_ui_open = false

@@ -7,7 +7,7 @@ var map_name := SceneSelector.Maps.JADEWATER_FALLS
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
-var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
+var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var visuals: Node3D = $Visuals
 @onready var camera_points: Node3D = $CameraPoints
@@ -17,11 +17,11 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var paused := false:
 	set(value):
-		if is_node_ready() && %PauseMenu != null:
+		if is_node_ready()&& %PauseMenu != null:
 			%PauseMenu.visible = value
 		paused = value
 
-func _ready():
+func _ready() -> void:
 	add_to_group("player")
 
 	if !stats is PlayerStats:
@@ -31,23 +31,23 @@ func _ready():
 	if not Engine.is_editor_hint():
 		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-		%AnimationTree.active = true
+		(%AnimationTree as AnimationTree).active = true
 
-func _exit_tree():
-	if !Engine.is_editor_hint() && GameManager.instance.player == self:
-		GameManager.instance.player = null
+func _exit_tree() -> void:
+	if !Engine.is_editor_hint()&&PlayerManager.instance.player == self:
+		PlayerManager.instance.player = null
 
 func should_move() -> bool:
-	if GameManager.instance == null:
+	if PlayerManager.instance == null:
 		return false
 
-	return GameManager.instance.player == self
+	return PlayerManager.instance.player == self
 
-func _process(_delta):
+func _process(_delta: float) -> void:
 	if !should_move():
 		return
 
-	if position.y <= -10: # handle falling off the map for now
+	if position.y <= - 10: # handle falling off the map for now
 		position.y = 1
 		velocity = Vector3.ZERO
 		# TODO: For some fun in the future, let's just set a max velocity on reset.
@@ -72,7 +72,6 @@ func _movement_test():
 	# Server sends it to all others peers.
 	# Other peers verifies it's only coming from the server.
 	pass
-
 
 func _physics_process(delta: float):
 	if !should_move():
@@ -138,13 +137,13 @@ func set_anim(node_name: String, param_name: String):
 ###
 ### Combat
 ###
-func handle_attack():
+func handle_attack() -> void:
 	if Input.is_action_just_pressed("attack"):
 		UIManager.instance.player.hud.status_bars.set_health(72, 100)
 		var space := get_world_3d().direct_space_state
 		var query := PhysicsRayQueryParameters3D.create(camera.global_position,
 			camera.global_position - camera.global_transform.basis.z * 100, PhysicsUtils.arr_to_collision_mask(
-				[ PhysicsUtils.ENEMY_MASK ]
+				[PhysicsUtils.ENEMY_MASK]
 			))
 		var collision := space.intersect_ray(query)
 		if collision:
@@ -154,14 +153,14 @@ func handle_attack():
 				return
 		print("Collide with:", "nuthin")
 
-func handle_skills():
+func handle_skills() -> void:
 	if Input.is_action_just_pressed("skill_2"):
 		var space := get_world_3d().direct_space_state
 		var query := PhysicsRayQueryParameters3D.create(camera.global_position,
 			camera.global_position - camera.global_transform.basis.z * 100, PhysicsUtils.arr_to_collision_mask(
-				[ PhysicsUtils.ENEMY_MASK ]
+				[PhysicsUtils.ENEMY_MASK]
 			))
-		var collision = space.intersect_ray(query)
+		var collision := space.intersect_ray(query)
 		if collision:
 			print("Casted on:", collision.collider.name)
 			abilities.skill_2.cast_on_target(self, collision.collider.position)
