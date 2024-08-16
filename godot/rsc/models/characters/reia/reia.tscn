@@ -6,8 +6,8 @@
 resource_name = "Animator"
 script/source = "@tool extends Node3D
 
-func _ready():
-	%Character.get_node(\"AnimationPlayer\").play(\"IdleR\")
+func _ready() -> void:
+	(%Character.get_node(\"AnimationPlayer\") as AnimationPlayer).play(\"IdleR\")
 "
 
 [node name="Reia" type="Node3D"]

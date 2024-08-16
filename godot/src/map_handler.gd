@@ -3,7 +3,7 @@ class_name MapHandler extends Node
 @onready var players : Node = %Players
 @export var load_player := true
 
-func _ready():
+func _ready() -> void:
 	match MultiplayerManager.instance.status:
 		MultiplayerManager.Status.CLIENT:
 			var player_name := MultiplayerManager.instance.player_name
@@ -15,4 +15,4 @@ func _ready():
 			MultiplayerManager.instance.myClient.start_client()
 			return
 
-	GameManager.instance.load_player()
+	PlayerManager.instance.load_player()

@@ -4,10 +4,10 @@ class_name PlayerUI_Minimap extends Control
 @onready var camera: Camera3D = %MinimapCamera
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float):
+func _process(_delta: float) -> void:
 	minimap_follow()
 
-func minimap_follow():
+func minimap_follow() -> void:
 	var player := PlayerManager.instance.player
 
 	camera.global_position.x = player.global_position.x
