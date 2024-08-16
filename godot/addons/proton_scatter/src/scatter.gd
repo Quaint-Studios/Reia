@@ -123,6 +123,7 @@ var output_root: Marker3D
 var transforms: ProtonScatterTransformList
 var editor_plugin # Holds a reference to the EditorPlugin. Used by other parts.
 var is_ready := false
+var build_version := 0
 
 # Internal variables
 var _thread: Thread
@@ -149,11 +150,12 @@ func _ready() -> void:
 
 
 func _exit_tree():
-	_clear_collision_data()
-
 	if is_thread_running():
-		await _thread.wait_to_finish()
+		modifier_stack.stop_update()
+		_thread.wait_to_finish()
 		_thread = null
+	
+	_clear_collision_data()
 
 
 func _get_property_list() -> Array:
@@ -250,12 +252,6 @@ func is_thread_running() -> bool:
 
 # Used by some modifiers to retrieve a physics helper node
 func get_physics_helper() -> ProtonScatterPhysicsHelper:
-	if not is_instance_valid(_physics_helper):
-		_physics_helper = ProtonScatterPhysicsHelper.new()
-		_physics_helper.name = "PhysicsHelper"
-		add_child.bind(_physics_helper, true, INTERNAL_MODE_BACK).call_deferred()
-		await get_tree().process_frame
-
 	return _physics_helper
 
 
@@ -279,7 +275,8 @@ func _clear_collision_data() -> void:
 		_body_rid = RID()
 
 	for rid in _collision_shapes:
-		PhysicsServer3D.free_rid(rid)
+		if rid.is_valid():
+			PhysicsServer3D.free_rid(rid)
 
 	_collision_shapes.clear()
 
@@ -297,7 +294,7 @@ func full_rebuild():
 	if is_thread_running():
 		await _thread.wait_to_finish()
 		_thread = null
-
+	
 	clear_output()
 	_rebuild(true)
 
@@ -309,7 +306,7 @@ func full_rebuild():
 func rebuild(force_discover := false) -> void:
 	update_gizmos()
 
-	if not is_inside_tree():
+	if not is_inside_tree() or not is_ready:
 		return
 
 	if is_thread_running():
@@ -428,6 +425,9 @@ func _update_split_multimeshes() -> void:
 
 	for item in items:
 		var root: Node3D = ProtonScatterUtil.get_or_create_item_root(item)
+		if not is_instance_valid(root):
+			continue
+		
 		# use count number of transforms for this item
 		var count = int(round(float(item.proportion) / total_item_proportion * transforms_count))
 
@@ -459,6 +459,8 @@ func _update_split_multimeshes() -> void:
 
 		static_body.queue_free()
 
+		# Cache the mesh instance to be used for the chunks
+		var mesh_instance: MeshInstance3D = ProtonScatterUtil.get_merged_meshes_from(item)
 		# The relevant transforms are now ordered in chunks
 		for xi in splits.x:
 			for yi in splits.y:
@@ -466,7 +468,11 @@ func _update_split_multimeshes() -> void:
 					var chunk_elements = transform_chunks[xi][yi][zi].size()
 					if chunk_elements == 0:
 						continue
-					var mmi = ProtonScatterUtil.get_or_create_multimesh_chunk(item, Vector3i(xi, yi, zi), chunk_elements)
+					var mmi = ProtonScatterUtil.get_or_create_multimesh_chunk(
+													item, 
+													mesh_instance, 
+													Vector3i(xi, yi, zi), 
+													chunk_elements)
 					if not mmi:
 						continue
 
@@ -481,7 +487,7 @@ func _update_split_multimeshes() -> void:
 						t = transform_chunks[xi][yi][zi][i]
 						t.origin -= center
 						mmi.multimesh.set_instance_transform(i, t)
-
+		mesh_instance.queue_free()
 		offset += count
 
 
@@ -509,6 +515,7 @@ func _update_duplicates() -> void:
 
 			var t: Transform3D = item.process_transform(transforms.list[offset + i])
 			instance.transform = t
+			ProtonScatterUtil.set_visibility_layers(instance, item.visibility_layers)
 
 		# Delete the unused instances left in the pool if any
 		if count < child_count:
@@ -667,14 +674,19 @@ func _perform_sanity_check() -> void:
 
 	domain.discover_shapes(self)
 
+	if not is_instance_valid(_physics_helper):
+		_physics_helper = ProtonScatterPhysicsHelper.new()
+		_physics_helper.name = "PhysicsHelper"
+		add_child(_physics_helper, true, INTERNAL_MODE_BACK)
+
 	# Retrigger the parent setter, in case the parent node no longer exists or changed type.
 	scatter_parent = scatter_parent
 
 
+# Remove output coming from the source node to avoid linked multimeshes or
+# other unwanted side effects
 func _on_node_duplicated() -> void:
-	# Force a full rebuild (which clears the existing outputs), otherwise we get
-	# linked multimeshes or other unwanted side effects
-	full_rebuild.call_deferred()
+	clear_output()
 
 
 func _on_child_exiting_tree(node: Node) -> void:
@@ -714,5 +726,9 @@ func _on_transforms_ready(new_transforms: ProtonScatterTransformList) -> void:
 			_update_particles_system()
 
 	update_gizmos()
-	await get_tree().process_frame
+	build_version += 1
+	
+	if is_inside_tree():
+		await get_tree().process_frame
+
 	build_completed.emit()

@@ -11,11 +11,23 @@ const ProtonScatterShape := preload('../scatter_shape.gd')
 var _scatter_node
 var _ideal_popup_size: Vector2i
 var _editor_file_system: EditorFileSystem
+var _preset_path_to_delete: String
+var _preset_control_to_delete: Control
+
+@onready var _new_preset_button: Button = %NewPresetButton
+@onready var _new_preset_dialog: ConfirmationDialog = %NewPresetDialog
+@onready var _delete_preset_dialog: ConfirmationDialog = %DeleteDialog
+@onready var _delete_warning_label: Label = %DeleteLabel
+@onready var _presets_root: Control = %PresetsRoot
 
 
 func _ready():
-	$%NewPresetButton.pressed.connect(_show_preset_dialog)
-	$%NewPresetDialog.confirmed.connect(_on_new_preset_name_confirmed)
+	_new_preset_button.pressed.connect(_show_preset_dialog)
+	_new_preset_dialog.confirmed.connect(_on_new_preset_name_confirmed)
+	_delete_preset_dialog.confirmed.connect(_on_delete_preset_confirmed)
+	_new_preset_dialog.hide()
+	_delete_preset_dialog.hide()
+	hide()
 
 
 func save_preset(scatter_node: Node3D) -> void:
@@ -24,9 +36,9 @@ func save_preset(scatter_node: Node3D) -> void:
 
 	_populate()
 	_scatter_node = scatter_node
-	$%NewPresetButton.visible = true
+	_new_preset_button.visible = true
 
-	for c in $%PresetsRoot.get_children():
+	for c in _presets_root.get_children():
 		c.show_save_controls()
 
 	popup_centered(_ideal_popup_size)
@@ -38,9 +50,9 @@ func load_preset(scatter_node: Node3D) -> void:
 
 	_populate()
 	_scatter_node = scatter_node
-	$%NewPresetButton.visible = false
+	_new_preset_button.visible = false
 
-	for c in $%PresetsRoot.get_children():
+	for c in _presets_root.get_children():
 		c.show_load_controls()
 
 	popup_centered(_ideal_popup_size)
@@ -59,7 +71,7 @@ func set_editor_plugin(editor_plugin: EditorPlugin) -> void:
 
 
 func _clear():
-	for c in $%PresetsRoot.get_children():
+	for c in _presets_root.get_children():
 		c.queue_free()
 
 
@@ -91,18 +103,18 @@ func _populate() -> void:
 		entry.set_preset_name(file.get_basename())
 		entry.load_full.connect(_on_load_full_preset.bind(full_path))
 		entry.load_stack_only.connect(_on_load_stack_only.bind(full_path))
-		entry.delete.connect(_on_delete_preset.bind(full_path, entry))
+		entry.delete.connect(_on_delete_button_pressed.bind(full_path, entry))
 
-		$%PresetsRoot.add_child(entry)
+		_presets_root.add_child(entry)
 
 	dir.list_dir_end()
-	var full_height = $%PresetsRoot.get_child_count() * 120
+	var full_height = _presets_root.get_child_count() * 120
 	_ideal_popup_size = Vector2i(450, clamp(full_height, 120, 500))
 
 
 func _show_preset_dialog() -> void:
 	$%NewPresetName.set_text("")
-	$%NewPresetDialog.popup_centered()
+	_new_preset_dialog.popup_centered()
 
 
 func _on_new_preset_name_confirmed() -> void:
@@ -135,6 +147,7 @@ func _on_load_full_preset(path: String) -> void:
 		return
 
 	var preset = preset_scene.instantiate()
+
 	if preset:
 		_scatter_node.modifier_stack = preset.modifier_stack.get_copy()
 		preset.global_transform = _scatter_node.get_global_transform()
@@ -151,10 +164,9 @@ func _on_load_full_preset(path: String) -> void:
 			_scatter_node.add_child(c, true)
 
 		ProtonScatterUtil.set_owner_recursive(_scatter_node, get_tree().get_edited_scene_root())
-
-		_scatter_node.full_rebuild.call_deferred()
 		preset.queue_free()
-
+	
+	_scatter_node.rebuild.call_deferred()
 	hide()
 
 
@@ -168,8 +180,17 @@ func _on_load_stack_only(path: String) -> void:
 	hide()
 
 
-func _on_delete_preset(path: String, entry: Control) -> void:
-	DirAccess.remove_absolute(path)
-	$%PresetsRoot.remove_child(entry)
-	entry.queue_free()
+func _on_delete_button_pressed(path: String, entry: Control) -> void:
+	_preset_path_to_delete = path
+	_preset_control_to_delete = entry
+	_delete_warning_label.text = "Are you sure you want to delete the preset [" \
+		+ path.get_file().get_basename().capitalize() + "] ?\n\n" \
+		+ "This operation cannot be undone." 
+	_delete_preset_dialog.popup_centered()
+
+
+func _on_delete_preset_confirmed() -> void:
+	DirAccess.remove_absolute(_preset_path_to_delete)
+	_presets_root.remove_child(_preset_control_to_delete)
+	_preset_control_to_delete.queue_free()
 	_editor_file_system.scan() # Refresh the filesystem view

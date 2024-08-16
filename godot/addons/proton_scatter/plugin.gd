@@ -11,6 +11,7 @@ const PathPanel := preload("./src/shapes/gizmos_plugin/components/path_panel.tsc
 const ScatterCachePlugin := preload("./src/cache/inspector_plugin/scatter_cache_plugin.gd")
 
 const GIZMO_SETTING := "addons/proton_scatter/always_show_gizmos"
+const MAX_PHYSICS_QUERIES_SETTING := "addons/proton_scatter/max_physics_queries_per_frame"
 
 var _modifier_stack_plugin := ModifierStackPlugin.new()
 var _scatter_gizmo_plugin := ScatterGizmoPlugin.new()
@@ -25,10 +26,8 @@ func _get_plugin_name():
 
 
 func _enter_tree():
-	if not ProjectSettings.has_setting(GIZMO_SETTING):
-		ProjectSettings.set_setting(GIZMO_SETTING, false)
-		ProjectSettings.set_initial_value(GIZMO_SETTING, false)
-		ProjectSettings.set_as_basic(GIZMO_SETTING, true)
+	_ensure_setting_exists(GIZMO_SETTING, true)
+	_ensure_setting_exists(MAX_PHYSICS_QUERIES_SETTING, 500)
 
 	add_inspector_plugin(_modifier_stack_plugin)
 	add_inspector_plugin(_scatter_cache_plugin)
@@ -115,7 +114,17 @@ func _refresh_scatter_gizmos(nodes: Array[Node]) -> void:
 		if node is ProtonScatter:
 			node.update_gizmos()
 			for c in node.get_children():
-				c.update_gizmos()
+				if c is Node3D:
+					c.update_gizmos()
+
+
+func _ensure_setting_exists(setting: String, default_value) -> void:
+	if not ProjectSettings.has_setting(setting):
+		ProjectSettings.set_setting(setting, default_value)
+		ProjectSettings.set_initial_value(setting, default_value)
+
+		if ProjectSettings.has_method("set_as_basic"): # 4.0 backward compatibility
+			ProjectSettings.call("set_as_basic", setting, true)
 
 
 func _on_selection_changed() -> void:

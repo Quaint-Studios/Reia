@@ -73,6 +73,8 @@ func _process_transforms(transforms, _domain, _seed) -> void:
 
 	if use_computeshader:
 		for iteration in iterations:
+			if interrupt_update:
+				return
 			var movedir: PackedVector3Array = compute_closest(transforms)
 			for i in transforms.size():
 				var dir = movedir[i]
@@ -87,6 +89,8 @@ func _process_transforms(transforms, _domain, _seed) -> void:
 		# calculate the relax transforms on the cpu
 		for iteration in iterations:
 			for i in transforms.size():
+				if interrupt_update:
+					return
 				var min_vector = Vector3.ONE * 99999.0
 				var threshold := 99999.0
 				var distance := 0.0

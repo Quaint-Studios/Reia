@@ -26,47 +26,26 @@ theme_override_constants/margin_bottom = 12
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 470.0
-offset_bottom = 180.0
 
 [node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-offset_right = 458.0
-offset_bottom = 133.0
 size_flags_vertical = 3
 horizontal_scroll_mode = 0
 
 [node name="PresetsRoot" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_right = 458.0
-offset_bottom = 133.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 alignment = 1
 
 [node name="PresetEntry" parent="MarginContainer/VBoxContainer/ScrollContainer/PresetsRoot" instance=ExtResource("2_orram")]
 layout_mode = 2
-anchors_preset = 0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_top = 6.0
-offset_right = 458.0
-offset_bottom = 126.0
-grow_horizontal = 1
-grow_vertical = 1
 
 [node name="NewPresetButton" type="Button" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
-offset_left = 129.0
-offset_top = 137.0
-offset_right = 329.0
-offset_bottom = 168.0
 size_flags_horizontal = 4
 text = "Create new preset"
 icon = ExtResource("2_j26xt")
@@ -84,10 +63,28 @@ offset_bottom = 51.0
 [node name="NewPresetName" type="LineEdit" parent="NewPresetDialog/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_top = 6.0
-offset_right = 184.0
-offset_bottom = 37.0
-grow_horizontal = 2
-grow_vertical = 2
 size_flags_vertical = 4
 placeholder_text = "New preset name"
+
+[node name="DeleteDialog" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+title = "Delete preset"
+size = Vector2i(250, 184)
+ok_button_text = "Delete"
+dialog_autowrap = true
+
+[node name="MarginContainer" type="MarginContainer" parent="DeleteDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 242.0
+offset_bottom = 395.0
+
+[node name="DeleteLabel" type="Label" parent="DeleteDialog/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+text = "Are you sure you want to delete preset [Preset]?
+
+This operation cannot be undone."
+horizontal_alignment = 1
+autowrap_mode = 2

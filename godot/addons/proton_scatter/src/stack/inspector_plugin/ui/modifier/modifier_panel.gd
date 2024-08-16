@@ -122,8 +122,6 @@ func create_ui_for(modifier) -> void:
 			TYPE_STRING:
 				if property.hint_string == "File" or property.hint_string == "Texture":
 					parameter_ui = ParameterFile.instantiate()
-				elif property.hint_string == "Curve":
-					parameter_ui = ParameterCurve.instantiate()
 				else:
 					parameter_ui = ParameterString.instantiate()
 			TYPE_VECTOR3:
@@ -133,12 +131,16 @@ func create_ui_for(modifier) -> void:
 			TYPE_NODE_PATH:
 				parameter_ui = ParameterNodeSelector.instantiate()
 				parameter_ui.set_root(_scatter)
+			TYPE_OBJECT:
+				if property.class_name == &"Curve":
+					parameter_ui = ParameterCurve.instantiate()
 
 		if parameter_ui:
 			_parameters.add_child(parameter_ui)
 			parameter_ui.set_parameter_name(property.name.capitalize())
 			parameter_ui.set_value(modifier.get(property.name))
 			parameter_ui.set_hint_string(property.hint_string)
+			parameter_ui.set_scatter(_scatter)
 			parameter_ui.value_changed.connect(_on_parameter_value_changed.bind(property.name, parameter_ui))
 
 	_expand.button_pressed = _modifier.expanded
