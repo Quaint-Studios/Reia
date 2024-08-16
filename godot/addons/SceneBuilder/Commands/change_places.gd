@@ -1,23 +1,34 @@
+''' If exactly two Node3Ds are selected in Scene, then swap their positions 
+	and rotations. '''
+
 @tool
 extends EditorPlugin
 
 func execute():
-	var selection = get_editor_interface().get_selection().get_selected_nodes()
 	
-	if selection.size() != 2:
+	var editor : EditorInterface = get_editor_interface()
+	
+	var current_scene : Node = editor.get_edited_scene_root()
+	var selection : EditorSelection = editor.get_selection()
+	var selected_nodes : Array[Node] = selection.get_selected_nodes()
+	
+	if selected_nodes.size() != 2:
 		print("Exactly two nodes must be selected.")
 		return
 	
-	var node_a = selection[0]
-	var node_b = selection[1]
+	var node_a = selected_nodes[0]
+	var node_b = selected_nodes[1]
+	
+	if not node_a is Node3D or not node_b is Node3D:
+		return
 	
 	# Check for parent-child relationship
 	if node_a.get_parent() == node_b or node_b.get_parent() == node_a:
 		print("The selected nodes cannot have a parent-child relationship.")
 		return
 	
-	# Prepare for undo/redo
-	var undo_redo = get_undo_redo()
+	# Set-up undo_redo
+	var undo_redo : EditorUndoRedoManager = get_undo_redo()
 	undo_redo.create_action("Swap Positions and Rotations")
 	
 	# Swap positions

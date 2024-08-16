@@ -42,7 +42,16 @@ func execute():
 	add_child(popup_instance)
 	popup_instance.popup_centered(Vector2(500, 300))
 	
-	create_items = load("res://addons/SceneBuilder/scene_builder_create_items.tscn").instantiate()
+	var create_items_scene
+	if FileAccess.file_exists("res://addons/SceneBuilder/scene_builder_create_items.tscn"):
+		create_items_scene = load("res://addons/SceneBuilder/scene_builder_create_items.tscn")
+	elif FileAccess.file_exists("res://addons/SceneBuilder/addons/SceneBuilder/scene_builder_create_items.tscn"):
+		create_items_scene = load("res://addons/SceneBuilder/addons/SceneBuilder/scene_builder_create_items.tscn")
+	else:
+		printerr("Could not find scene_builder_create_items.tscn")
+		return
+	
+	create_items = create_items_scene.instantiate()
 	popup_instance.add_child(create_items)
 	
 	collection_line_edit = create_items.get_node("Collection/LineEdit")
@@ -62,33 +71,51 @@ func execute():
 
 func _on_ok_pressed():
 	
-	print("User input has been set")
+	print("On okay pressed")
 	
-	var path_to_icon_studio : String = "res://addons/SceneBuilder/icon_studio.tscn"
-	if FileAccess.file_exists(path_to_icon_studio):
-		
-		editor.open_scene_from_path(path_to_icon_studio)
-		
-		icon_studio = editor.get_edited_scene_root() as SubViewport
-		if icon_studio == null:
-			print("Failed to load icon studio")
-			return
-		
-		var selected_paths = editor.get_selected_paths()
-		print("Selected paths: " + str(selected_paths.size()))
-		for path in selected_paths:
-			await _create_resource(path)
-		
+	var path_to_icon_studio : String
+	var path_to_icon_studio_1 : String = "res://addons/SceneBuilder/icon_studio.tscn"
+	var path_to_icon_studio_2 : String = "res://addons/SceneBuilder/addons/SceneBuilder/icon_studio.tscn"
+	
+	if FileAccess.file_exists(path_to_icon_studio_1):
+		path_to_icon_studio = path_to_icon_studio_1
+	if FileAccess.file_exists(path_to_icon_studio_2):
+		path_to_icon_studio = path_to_icon_studio_2
 	else:
 		print("Path to icon studio not found")
 		return 
+	
+	editor.open_scene_from_path(path_to_icon_studio)
+		
+	icon_studio = editor.get_edited_scene_root() as SubViewport
+	if icon_studio == null:
+		print("Failed to load icon studio")
+		return
+	
+	var selected_paths = editor.get_selected_paths()
+	print("Selected paths: " + str(selected_paths.size()))
+	
+	for path in selected_paths:
+		await _create_resource(path)
 	
 	popup_instance.queue_free()
 	emit_signal("done")
 
 func _create_resource(path: String):
 	
-	var resource : SceneBuilderItem = load("res://addons/SceneBuilder/scene_builder_item.gd").new()
+	var scene_builder_item_path : String
+	var scene_builder_item_path1 : String = "res://addons/SceneBuilder/scene_builder_item.gd"
+	var scene_builder_item_path2 : String = "res://addons/SceneBuilder/addons/SceneBuilder/scene_builder_item.gd"
+	
+	if FileAccess.file_exists(scene_builder_item_path1):
+		scene_builder_item_path = scene_builder_item_path1
+	if FileAccess.file_exists(scene_builder_item_path2):
+		scene_builder_item_path = scene_builder_item_path2
+	else:
+		print("Path to scene builder item not found")
+		return 
+	
+	var resource : SceneBuilderItem = load(scene_builder_item_path).new()
 	
 	if ResourceLoader.exists(path) and load(path) is PackedScene:
 		
@@ -132,9 +159,6 @@ func _create_resource(path: String):
 		#region Create icon
 		
 		# Validate
-		if not resource.scene_path.ends_with(".glb") and not resource.scene_path.ends_with(".tscn"):
-			print("Invalid scene file. Must end with .glb or .tscn")
-			return
 		var packed_scene = load(resource.scene_path) as PackedScene
 		if packed_scene == null:
 			print("Failed to load the item scene.")
@@ -191,10 +215,3 @@ func search_for_mesh_instance_3d(node : Node):
 	for child in node.get_children():
 		search_for_mesh_instance_3d(child)
 
-
-
-'''var img_tmp_icon : Image
-var tex_tmp_icon : Texture
-icon_tmp = load("res://addons/SceneBuilder/icon_tmp.png") as Image
-var img_icon : Image = icon_tmp
-var tex_icon : Texture = ImageTexture.create_from_image(img_icon)'''
