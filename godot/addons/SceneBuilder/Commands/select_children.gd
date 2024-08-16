@@ -1,16 +1,22 @@
+''' Used to quickly navigate the scene tree. '''
+
 @tool
 extends EditorPlugin
 
 func execute():
-	var selection = get_editor_interface().get_selection().get_selected_nodes()
 	
-	if selection.is_empty():
+	var editor : EditorInterface = get_editor_interface()
+	
+	var selection : EditorSelection = editor.get_selection()
+	var selected_nodes : Array[Node] = selection.get_selected_nodes()
+	
+	if selected_nodes.is_empty():
 		print("Selection is empty")
 		return
-		
-	get_editor_interface().get_selection().clear()
+	
+	selection.clear()
 
-	for node in selection:
+	for node in selected_nodes:
 		for child in node.get_children():
-			get_editor_interface().get_selection().add_node(child)
+			selection.add_node(child)
 

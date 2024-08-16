@@ -2,7 +2,6 @@
 
 [ext_resource type="Theme" uid="uid://vtossrqqyvig" path="res://addons/SceneBuilder/addons/SceneBuilder/scene_builder_ui_theme.tres" id="1_vnax4"]
 
-
 [node name="SceneBuilderCreateItems" type="VBoxContainer"]
 anchors_preset = 15
 anchor_right = 1.0

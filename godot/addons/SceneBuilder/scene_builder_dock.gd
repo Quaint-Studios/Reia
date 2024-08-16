@@ -1,5 +1,6 @@
 @tool
 extends EditorPlugin
+class_name SceneBuilderDock
 
 # Constant
 var path_root : String = "res://Data/SceneBuilderCollections/"
@@ -17,12 +18,12 @@ var scene_builder_dock : VBoxContainer
 var tab_container : TabContainer
 
 # Options
+#
 var btn_use_surface_normal : CheckButton
 var btn_surface_normal_x : CheckBox
 var btn_surface_normal_y : CheckBox
 var btn_surface_normal_z : CheckBox
 
-var btn_add_to_multi_mesh_instance : CheckButton
 var btn_find_world_3d : Button
 var btn_reload_all_items : Button
 
@@ -76,6 +77,11 @@ var rng : RandomNumberGenerator = RandomNumberGenerator.new()
 
 var btn_group_surface_orientation : ButtonGroup
 
+var input_map
+
+var base_control : Control
+var btn_use_local_space : Button
+
 # ---- Notifications -----------------------------------------------------------
 
 func _enter_tree() -> void:
@@ -83,13 +89,30 @@ func _enter_tree() -> void:
 	#
 	editor = get_editor_interface()
 	toolbox = SceneBuilderToolbox.new()
+	base_control = editor.get_base_control()
+	
+	var main_screen : VBoxContainer = base_control.get_child(0).get_child(1).get_child(1).get_child(1).get_child(0).get_child(0).get_child(0).get_child(0).get_child(1).get_child(0)
+	if main_screen:
+		btn_use_local_space = main_screen.get_child(1).get_child(0).get_child(0).get_child(0).get_child(12)
+		if !btn_use_local_space:
+			printerr("Unable to find use local space button")
+	else:
+		printerr("Unable to find main screen")
 	
 	#
 	update_world_3d()
 	
 	#region Initialize controls
 	
-	scene_builder_dock = load("res://addons/SceneBuilder/scene_builder_dock.tscn").instantiate()
+	if FileAccess.file_exists("res://addons/SceneBuilder/scene_builder_dock.tscn"):
+		scene_builder_dock = load("res://addons/SceneBuilder/scene_builder_dock.tscn").instantiate()
+	elif FileAccess.file_exists("res://addons/SceneBuilder/addons/SceneBuilder/scene_builder_dock.tscn"):
+		# Recursive directories will exist when installing from a submodule
+		scene_builder_dock = load("res://addons/SceneBuilder/addons/SceneBuilder/scene_builder_dock.tscn").instantiate()
+	else:
+		printerr("scene_builder_dock.tscn was not found")
+		return
+	
 	add_control_to_dock(EditorPlugin.DOCK_SLOT_RIGHT_UL, scene_builder_dock)
 	
 	# Tabs
@@ -191,11 +214,20 @@ func forward_3d_gui_input(_camera : Camera3D, event : InputEvent) -> AfterGUIInp
 			relative_motion *= 0.01  # Sensitivity
 			
 			if rotation_mode_x_enabled:
-				preview_instance.rotate_x(relative_motion)
+				if btn_use_local_space.button_pressed:
+					preview_instance.rotate_object_local(Vector3(1, 0, 0), relative_motion) 
+				else:
+					preview_instance.rotate_x(relative_motion)
 			elif rotation_mode_y_enabled:
-				preview_instance.rotate_y(relative_motion)
+				if btn_use_local_space.button_pressed:
+					preview_instance.rotate_object_local(Vector3(0, 1, 0), relative_motion) 
+				else:
+					preview_instance.rotate_y(relative_motion)
 			elif rotation_mode_z_enabled:
-				preview_instance.rotate_z(relative_motion)
+				if btn_use_local_space.button_pressed:
+					preview_instance.rotate_object_local(Vector3(0, 0, 1), relative_motion) 
+				else:
+					preview_instance.rotate_z(relative_motion)
 			elif scale_mode_enabled:
 				var new_scale : Vector3 = preview_instance.scale * (1 + relative_motion)
 				if is_zero_approx(new_scale.x) or is_zero_approx(new_scale.y) or is_zero_approx(new_scale.z):
@@ -207,7 +239,7 @@ func forward_3d_gui_input(_camera : Camera3D, event : InputEvent) -> AfterGUIInp
 			
 			if placement_mode_enabled:
 				var mouse_pos = viewport.get_mouse_position()
-				if mouse_pos.x >= 0 and mouse_pos.y >= 0: 
+				if mouse_pos.x >= 0 and mouse_pos.y >= 0:
 					if mouse_pos.x <= viewport.size.x and mouse_pos.y <= viewport.size.y:
 						
 						if event.button_index == MOUSE_BUTTON_LEFT:
@@ -234,92 +266,82 @@ func forward_3d_gui_input(_camera : Camera3D, event : InputEvent) -> AfterGUIInp
 								viewport.warp_mouse(original_mouse_position)
 								
 								return EditorPlugin.AFTER_GUI_INPUT_STOP
-
-			if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-				
-				if event.shift_pressed or event.ctrl_pressed:
-					
-					if event.shift_pressed and placement_mode_enabled:
-						select_previous_item()
-					elif event.ctrl_pressed:
-						select_previous_collection()
-					
-					return EditorPlugin.AFTER_GUI_INPUT_STOP
-			
-			elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-				
-				if event.shift_pressed or event.ctrl_pressed:
-					
-					if event.shift_pressed and placement_mode_enabled:
-						select_next_item()
-					elif event.ctrl_pressed:
-						select_next_collection()
-					
-					return EditorPlugin.AFTER_GUI_INPUT_STOP
-			
 	
 	elif event is InputEventKey:
 		if event.is_pressed() and !event.is_echo():
 			
+			if !event.alt_pressed and !event.ctrl_pressed and !event.shift_pressed:
+				
+				if event.keycode == KEY_1:
+					if is_transform_mode_enabled():
+						if rotation_mode_x_enabled:
+							end_transform_mode()
+						else:
+							end_transform_mode()
+							start_rotation_mode_x()
+					else:
+						start_rotation_mode_x()
+				
+				elif event.keycode == KEY_2:
+					if is_transform_mode_enabled():
+						if rotation_mode_y_enabled:
+							end_transform_mode()
+						else:
+							end_transform_mode()
+							start_rotation_mode_y()
+					else:
+						start_rotation_mode_y()
+				
+				elif event.keycode == KEY_3:
+					if is_transform_mode_enabled():
+						if rotation_mode_z_enabled:
+							end_transform_mode()
+						else:
+							end_transform_mode()
+							start_rotation_mode_z()
+					else:
+						start_rotation_mode_z()
+				
+				elif event.keycode == KEY_4:
+					if is_transform_mode_enabled():
+						if scale_mode_enabled:
+							end_transform_mode()
+						else:
+							end_transform_mode()
+							start_scale_mode()
+					else:
+						start_scale_mode()
+				
+				elif event.keycode == KEY_5:
+					if is_transform_mode_enabled():
+						end_transform_mode()
+					reroll_preview_instance_transform()
+					
+				elif event.keycode == KEY_ESCAPE:
+					end_placement_mode()
+			
 			if placement_mode_enabled:
+				if event.shift_pressed:
+					if event.keycode == KEY_LEFT:
+						select_previous_item()
+					elif event.keycode == KEY_RIGHT:
+						select_next_item()
 				
 				if event.alt_pressed:
-					if event.keycode == KEY_Q:
-						end_placement_mode()
-				
-				else:
-					
-					if event.keycode == KEY_1:
-						if is_transform_mode_enabled():
-							if rotation_mode_x_enabled:
-								end_transform_mode()
-							else:
-								end_transform_mode()
-								start_rotation_mode_x()
-						else:
-							start_rotation_mode_x()
-					
-					elif event.keycode == KEY_2:
-						if is_transform_mode_enabled():
-							if rotation_mode_y_enabled:
-								end_transform_mode()
-							else:
-								end_transform_mode()
-								start_rotation_mode_y()
-						else:
-							start_rotation_mode_y()
-					
-					elif event.keycode == KEY_3:
-						if is_transform_mode_enabled():
-							if rotation_mode_z_enabled:
-								end_transform_mode()
-							else:
-								end_transform_mode()
-								start_rotation_mode_z()
-						else:
-							start_rotation_mode_z()
-					
-					elif event.keycode == KEY_4:
-						if is_transform_mode_enabled():
-							if scale_mode_enabled:
-								end_transform_mode()
-							else:
-								end_transform_mode()
-								start_scale_mode()
-						else:
-							start_scale_mode()
-					
-					elif event.keycode == KEY_5:
-						if is_transform_mode_enabled():
-							end_transform_mode()
-						
-						reroll_preview_instance_transform()
+					if event.keycode == KEY_LEFT:
+						select_previous_collection()
+					elif event.keycode == KEY_RIGHT:
+						select_next_collection()
 	
 	return EditorPlugin.AFTER_GUI_INPUT_PASS
 
 # ---- Buttons -----------------------------------------------------------------
 
 func select_collection(tab_index: int) -> void:
+	
+	if collection_names.size() == 0:
+		print("Unable to select collection, none exist")
+		return
 	
 	end_placement_mode()
 	
@@ -346,14 +368,12 @@ func on_item_icon_clicked(_button_name: String) -> void:
 	
 	var item_highlighters : Dictionary = item_highlighters_by_collection[selected_collection_name]
 	
-	var previously_selected_item_name = selected_item_name 
+	var previously_selected_item_name = selected_item_name
 	if placement_mode_enabled:
 		end_placement_mode()
 	
 	if previously_selected_item_name != _button_name:
 		select_item(selected_collection_name, _button_name)
-
-
 
 func reload_all_items() -> void:
 	
@@ -495,7 +515,7 @@ func create_preview_instance() -> void:
 		printerr("scene_root is null inside create_preview_item_instance")
 		return
 	
-	clear_preview_instance() 
+	clear_preview_instance()
 	
 	scene_builder_temp = scene_root.get_node_or_null("SceneBuilderTemp")
 	if not scene_builder_temp:
@@ -560,18 +580,19 @@ func get_items_from_collection_folder(_collection_name : String) -> Array:
 		dir.list_dir_begin()
 		var item_filename = dir.get_next()
 		while item_filename != "":
-			if item_filename.ends_with(".tres"):
-				var item_path = path_root + _collection_name + "/Item/" + item_filename
-				var resource = load(item_path)
-				if resource and resource is SceneBuilderItem:
-					var scene_builder_item : SceneBuilderItem = resource
-					
-					print("Loaded item: ", item_filename)
-					
-					_items[scene_builder_item.item_name] = scene_builder_item
-					_ordered_item_keys.append(scene_builder_item.item_name)
-				else:
-					print("The resource is not a SceneBuilderItem or failed to load: ", item_filename)
+			
+			var item_path = path_root + _collection_name + "/Item/" + item_filename
+			var resource = load(item_path)
+			if resource and resource is SceneBuilderItem:
+				var scene_builder_item : SceneBuilderItem = resource
+				
+				print("Loaded item: ", item_filename)
+				
+				_items[scene_builder_item.item_name] = scene_builder_item
+				_ordered_item_keys.append(scene_builder_item.item_name)
+			else:
+				print("The resource is not a SceneBuilderItem or failed to load: ", item_filename)
+				
 			item_filename = dir.get_next()
 
 	return [_items, _ordered_item_keys]
@@ -612,11 +633,9 @@ func instantiate_selected_item_at_position() -> void:
 
 		undo_redo.add_undo_method(scene_root, "remove_child", instance)
 		undo_redo.add_do_reference(instance)  # Ensure instance is not freed when undoing
-		
-		print("Instantiated: " + instance.name + " at " + str(instance.global_transform.origin))
 	
 	else:
-		printerr("Failed to instantiate item, raycast missed")
+		print("Raycast missed, items must be instantiated on a StaticBody with a CollisionShape")
 	
 	undo_redo.commit_action()
 
@@ -627,7 +646,7 @@ func initialize_node_name(node : Node3D, new_name : String) -> void:
 func is_transform_mode_enabled() -> bool:
 	if rotation_mode_x_enabled or rotation_mode_y_enabled or rotation_mode_z_enabled or scale_mode_enabled:
 		return true;
-	else: 
+	else:
 		return false
 
 func perform_raycast_with_exclusion(exclude_rids: Array = []) -> Dictionary:
@@ -649,7 +668,7 @@ func perform_raycast_with_exclusion(exclude_rids: Array = []) -> Dictionary:
 	return space.intersect_ray(query)
 
 func populate_preview_instance_rid_array(instance: Node) -> void:
-	
+	''' This prevents us from trying to raycast against our preview item. '''
 	if instance is PhysicsBody3D:
 		preview_instance_rid_array.append(instance.get_rid())
 	
@@ -659,47 +678,65 @@ func populate_preview_instance_rid_array(instance: Node) -> void:
 func refresh_collection_names() -> void:
 	print("Refreshing collection names")
 	
+	if !DirAccess.dir_exists_absolute(path_root):
+		DirAccess.make_dir_recursive_absolute(path_root)
+		print("Creating a new data folder: ", path_root)
+	
+	if !ResourceLoader.exists(path_to_resource):
+		var _collection_names : CollectionNames = CollectionNames.new()
+		print("path_to_resource: ", path_to_resource)
+		var save_result = ResourceSaver.save(_collection_names, path_to_resource)
+		print("A CollectionNames resource has been created at location: ", path_to_resource)
+		
+		if save_result != OK:
+			printerr("We were unable to create a CollectionNames resource at location: ", path_to_resource)
+			collection_names = ["", "", "", "", "", "", "", "", "", "", "", ""]
+			return
+	
 	var _names : CollectionNames = load(path_to_resource)
 	if _names != null:
-		var new_collection_names : Array[String] = []
-		new_collection_names.append(_names.collection_name_01)
-		new_collection_names.append(_names.collection_name_02)
-		new_collection_names.append(_names.collection_name_03)
-		new_collection_names.append(_names.collection_name_04)
-		new_collection_names.append(_names.collection_name_05)
-		new_collection_names.append(_names.collection_name_06)
-		new_collection_names.append(_names.collection_name_07)
-		new_collection_names.append(_names.collection_name_08)
-		new_collection_names.append(_names.collection_name_09)
-		new_collection_names.append(_names.collection_name_10)
-		new_collection_names.append(_names.collection_name_11)
-		new_collection_names.append(_names.collection_name_12)
-		
-		# Validate
-		for _name in new_collection_names:
-			if _name != "":
-				var dir = DirAccess.open(path_root + _name)
-				if dir:
-					dir.list_dir_begin()
-					var item = dir.get_next()
-					if item != "":
-						print("Collection directory is present and contains items: " + _name)
+			var new_collection_names : Array[String] = []
+			new_collection_names.append(_names.collection_name_01)
+			new_collection_names.append(_names.collection_name_02)
+			new_collection_names.append(_names.collection_name_03)
+			new_collection_names.append(_names.collection_name_04)
+			new_collection_names.append(_names.collection_name_05)
+			new_collection_names.append(_names.collection_name_06)
+			new_collection_names.append(_names.collection_name_07)
+			new_collection_names.append(_names.collection_name_08)
+			new_collection_names.append(_names.collection_name_09)
+			new_collection_names.append(_names.collection_name_10)
+			new_collection_names.append(_names.collection_name_11)
+			new_collection_names.append(_names.collection_name_12)
+			
+			# Validate
+			for _name in new_collection_names:
+				if _name != "":
+					var dir = DirAccess.open(path_root + _name)
+					if dir:
+						dir.list_dir_begin()
+						var item = dir.get_next()
+						if item != "":
+							print("Collection directory is present and contains items: " + _name)
+						else:
+							printerr("Directory exists, but contains no items: " + _name)
 					else:
-						printerr("Directory exists, but contains no items: " + _name)
-				else:
-					printerr("Collection directory does not exist: " + _name)
-		collection_names = new_collection_names
+						printerr("Collection directory does not exist: " + _name)
+			collection_names = new_collection_names
+			
+			for i in range(num_collections):
+				var collection_name = collection_names[i]
+				if collection_name == "":
+					collection_name = " "
+				btns_collection_tabs[i].text = collection_name
 	else:
-		printerr("CollectioNames resource is null")
-		collection_names = []
+		printerr("An unknown file exists at location %s. A resource of type CollectionNames should exist here.".format(path_to_resource))
+		collection_names = ["", "", "", "", "", "", "", "", "", "", "", ""]
 	
 	#endregion
-	
-	for i in range(num_collections):
-		var collection_name = collection_names[i]
-		if collection_name == "":
-			collection_name = " "
-		btns_collection_tabs[i].text = collection_name
+
+func update_input_map(new_input_map) -> void:
+	input_map = new_input_map
 
 # ---- Shortcut ----------------------------------------------------------------
 
@@ -712,14 +749,19 @@ func reroll_preview_instance_transform() -> void:
 		if selected_item.use_random_scale:
 			var random_scale : float = rng.randf_range(selected_item.random_scale_min, selected_item.random_scale_max)
 			original_preview_scale = Vector3(random_scale, random_scale, random_scale)
+		else:
+			original_preview_scale = Vector3(1, 1, 1)
 		
-		original_preview_scale = preview_instance.scale
+		preview_instance.scale = original_preview_scale
 		
-		if selected_item.use_random_scale:
+		if selected_item.use_random_rotation:
 			var x_rot : float = rng.randf_range(0, selected_item.random_rot_x)
 			var y_rot : float = rng.randf_range(0, selected_item.random_rot_y)
 			var z_rot : float = rng.randf_range(0, selected_item.random_rot_z)
 			preview_instance.rotation = Vector3(deg_to_rad(x_rot), deg_to_rad(y_rot), deg_to_rad(z_rot))
+			original_preview_basis = preview_instance.basis
+		else:
+			preview_instance.rotation = Vector3(0, 0, 0)
 			original_preview_basis = preview_instance.basis
 		
 		original_preview_basis = preview_instance.basis
@@ -736,9 +778,15 @@ func select_item(collection_name : String, item_name : String) -> void:
 	placement_mode_enabled = true;
 	create_preview_instance()
 
+func select_first_item() -> void:
+	var _first_item : String = ordered_keys_by_collection[selected_collection_name][0]
+	print(_first_item)
+	select_item(selected_collection_name, _first_item)
+
 func select_next_collection() -> void:
 	end_placement_mode()
 	select_collection((selected_collection_index + num_collections + 1) % num_collections)
+	select_first_item()
 
 func select_next_item() -> void:
 	var ordered_keys : Array = ordered_keys_by_collection[selected_collection_name]
@@ -761,6 +809,7 @@ func select_previous_item() -> void:
 func select_previous_collection() -> void:
 	end_placement_mode()
 	select_collection((selected_collection_index + num_collections - 1) % num_collections)
+	select_first_item()
 
 func start_rotation_mode_x() -> void:
 	original_mouse_position = viewport.get_mouse_position()
@@ -808,17 +857,5 @@ func get_instance_of_selected_item() -> Node3D:
 	else:
 		printerr("Path does not exist: ", selected_item.scene_path)
 	return null
-
-'''
-var print_slowdown_mode_counter : int = 0
-func print_slowdown_mode(message) -> void:
-	print_slowdown_mode_counter += 1
-	if print_slowdown_mode_counter % 180 == 0:
-		print(message)
-
-
-
-'''
-
 
 
