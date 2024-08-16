@@ -13,6 +13,7 @@ func _ready() -> void:
 
 
 func set_preset_name(preset_name: String) -> void:
+	preset_name = preset_name.trim_suffix(".tres")
 	$%Label.set_text(preset_name.capitalize())
 
 

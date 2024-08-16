@@ -47,7 +47,6 @@ size_flags_horizontal = 3
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
-icon = null
 flat = true
 expand_icon = true
 

@@ -27,6 +27,11 @@ func start_update(scatter_node: ProtonScatter, domain):
 	return transforms
 
 
+func stop_update() -> void:
+	for modifier in stack:
+		modifier.interrupt()
+
+
 func add(modifier: BaseModifier) -> void:
 	stack.push_back(modifier)
 	modifier.modifier_changed.connect(_on_modifier_changed)

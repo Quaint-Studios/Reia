@@ -35,6 +35,7 @@ var individual_instances_reference_frame_available := false
 var use_edge_data := false
 var deprecated := false
 var deprecation_message: String
+var interrupt_update: bool = false
 
 
 func get_warning() -> String:
@@ -42,29 +43,34 @@ func get_warning() -> String:
 
 
 func process_transforms(transforms: TransformList, domain: Domain, global_seed: int) -> void:
-	_clear_warning()
-
-	if deprecated:
-		warning += "This modifier is deprecated.\n"
-		warning += deprecation_message + "\n"
-
-	if not enabled:
-		warning_changed.emit()
+	if not domain.get_root().is_inside_tree():
 		return
+	
+	if Engine.is_editor_hint():
+		_clear_warning()
 
-	if domain.is_empty() and not warning_ignore_no_shape:
-		warning += """The Scatter node does not have a shape.
-		Add at least one ScatterShape node as a child.\n"""
+		if deprecated:
+			warning += "This modifier is deprecated.\n"
+			warning += deprecation_message + "\n"
 
-	if transforms.is_empty() and not warning_ignore_no_transforms:
-		warning += """There's no transforms to act on.
-		Make sure you have a Create modifier before this one.\n
-		"""
+		if not enabled:
+			warning_changed.emit()
+			return
 
-	var random_seed = global_seed
+		if domain.is_empty() and not warning_ignore_no_shape:
+			warning += """The Scatter node does not have a shape.
+			Add at least one ScatterShape node as a child.\n"""
+
+		if transforms.is_empty() and not warning_ignore_no_transforms:
+			warning += """There's no transforms to act on.
+			Make sure you have a Create modifier before this one.\n
+			"""
+
+	var random_seed: int = global_seed
 	if can_override_seed and override_global_seed:
 		random_seed = custom_seed
-
+	interrupt_update = false
+	
 	@warning_ignore("redundant_await") # Not redundant as child classes could use the await keyword here.
 	await _process_transforms(transforms, domain, random_seed)
 
@@ -72,12 +78,17 @@ func process_transforms(transforms: TransformList, domain: Domain, global_seed: 
 
 
 func get_copy():
-	var script = get_script()
+	var script: Script = get_script()
 	var copy = script.new()
 	for p in get_property_list():
 		var value = get(p.name)
 		copy.set(p.name, value)
 	return copy
+
+
+## Notify the modifier it should stop updating as soon as it can.
+func interrupt() -> void:
+	interrupt_update = true
 
 
 func is_using_global_space() -> bool:
