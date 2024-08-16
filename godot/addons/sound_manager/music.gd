@@ -1,14 +1,13 @@
-extends "res://addons/sound_manager/abstract_audio_player_pool.gd"
+extends "./abstract_audio_player_pool.gd"
 
 
-var tweens: Dictionary = {}
 var track_history: PackedStringArray = []
 
 
-func play(resource: AudioStream, volume: float = 0.0, crossfade_duration: float = 0.0, override_bus: String = "") -> AudioStreamPlayer:
+func play(resource: AudioStream, position: float = 0.0, volume: float = 0.0, crossfade_duration: float = 0.0, override_bus: String = "") -> AudioStreamPlayer:
 	stop(crossfade_duration * 2)
 
-	var player = _get_player_with_music(resource)
+	var player = get_busy_player_with_resource(resource)
 
 	# If the player already exists then just make sure the volume is right (it might have just been fading in or out)
 	if player != null:
@@ -24,13 +23,13 @@ func play(resource: AudioStream, volume: float = 0.0, crossfade_duration: float 
 	if track_history.size() > 50:
 		track_history.remove_at(50)
 
-	player.call_deferred("play")
+	player.call_deferred("play", position)
 	return player
 
 
 func is_playing(resource: AudioStream) -> bool:
 	if resource != null:
-		return _get_player_with_music(resource) != null
+		return get_busy_player_with_resource(resource) != null
 	else:
 		return busy_players.size() > 0
 
@@ -44,7 +43,7 @@ func stop(fade_out_duration: float = 0.0) -> void:
 
 func pause(resource: AudioStream = null) -> void:
 	if resource != null:
-		var player = _get_player_with_music(resource)
+		var player = get_busy_player_with_resource(resource)
 		if is_instance_valid(player):
 			player.stream_paused = true
 	else:
@@ -54,7 +53,7 @@ func pause(resource: AudioStream = null) -> void:
 
 func resume(resource: AudioStream = null) -> void:
 	if resource != null:
-		var player = _get_player_with_music(resource)
+		var player = get_busy_player_with_resource(resource)
 		if is_instance_valid(player):
 			player.stream_paused = false
 	else:
@@ -69,65 +68,15 @@ func is_track_playing(resource_path: String) -> bool:
 	return false
 
 
-func get_currently_playing() -> Array:
-	var tracks = []
+func get_currently_playing() -> Array[AudioStream]:
+	var tracks: Array[AudioStream] = []
 	for player in busy_players:
 		tracks.append(player.stream)
 	return tracks
 
 
-func get_currently_playing_tracks() -> Array:
-	var tracks = []
+func get_currently_playing_tracks() -> PackedStringArray:
+	var tracks: PackedStringArray = []
 	for player in busy_players:
 		tracks.append(player.stream.resource_path)
 	return tracks
-
-
-func fade_volume(player: AudioStreamPlayer, from_volume: float, to_volume: float, duration: float) -> AudioStreamPlayer:
-	# Remove any tweens that might already be on this player
-	_remove_tween(player)
-
-	# Start a new tween
-	var tween: Tween = get_tree().create_tween()
-
-	player.volume_db = from_volume
-	if from_volume > to_volume:
-		# Fade out
-		tween.tween_property(player, "volume_db", to_volume, duration).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN)
-	else:
-		# Fade in
-		tween.tween_property(player, "volume_db", to_volume, duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-
-	tweens[player] = tween
-	tween.finished.connect(_on_fade_completed.bind(player, tween, from_volume, to_volume, duration))
-
-	return player
-
-
-### Helpers
-
-
-func _get_player_with_music(resource: AudioStream) -> AudioStreamPlayer:
-	for player in busy_players:
-		if player.stream.resource_path == resource.resource_path:
-			return player
-	return null
-
-
-func _remove_tween(player: AudioStreamPlayer) -> void:
-	if tweens.has(player):
-		var fade: Tween = tweens.get(player)
-		fade.kill()
-		tweens.erase(player)
-
-
-### Signals
-
-
-func _on_fade_completed(player: AudioStreamPlayer, tween: Tween, from_volume: float, to_volume: float, duration: float):
-	_remove_tween(player)
-
-	# If we just faded out then our player is now available
-	if to_volume <= -79.0:
-		player.stop()
-		mark_player_as_available(player)
