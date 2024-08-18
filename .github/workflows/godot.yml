@@ -22,7 +22,7 @@ jobs:
           replace-with: '_'
       - uses: actions/checkout@v2
         with:
-          lfs: false
+          lfs: true
       - name: Build
         id: build
         uses: yeslayla/build-godot-action@v1.5.0
