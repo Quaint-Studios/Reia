@@ -2,3 +2,5 @@
 	path = zig/godot-zig
 	url = https://github.com/godot-zig/godot-zig
 	branch = stable
+	ignore = dirty
+	active = false
