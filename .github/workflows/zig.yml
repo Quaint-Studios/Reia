@@ -10,7 +10,9 @@ env:
   VERSION: 0.13.0
 
 jobs:
-  test:
+  zig_test:
+    container:
+      image: barichello/godot-ci:4.3
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest, windows-latest]
@@ -22,30 +24,16 @@ jobs:
       - uses: goto-bus-stop/setup-zig@v2
         with:
           version: ${{env.VERSION}}
+      - name: Generate Godot Project
+        run: godot -e --path ../godot --import --headless
+      - name: Generate Zig Bindings
+        run: zig build bind
       - name: Test
         working-directory: ./zig
         run: zig build test
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: recursive
-      - uses: goto-bus-stop/setup-zig@v2
-        with:
-          version: ${{env.VERSION}}
       - name: Lint
         working-directory: ./zig
         run: zig fmt --check .
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          submodules: recursive
-      - uses: goto-bus-stop/setup-zig@v2
-        with:
-          version: ${{env.VERSION}}
       - name: Build
         working-directory: ./zig
         run: zig build
