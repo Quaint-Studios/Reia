@@ -6,6 +6,9 @@ on:
     paths:
       - zig/**
 
+env:
+  VERSION: 0.13.0
+
 jobs:
   test:
     strategy:
@@ -15,14 +18,22 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: goto-bus-stop/setup-zig@v2
-      - name: Test
-        working-directory: ./zig
-        run: zig build test
+        with:
+          version: ${{env.VERSION}}
+      - run: zig build test
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: goto-bus-stop/setup-zig@v2
-      - name: Lint
-        working-directory: ./zig
-        run: zig fmt --check .
+        with:
+          version: ${{env.VERSION}}
+      - run: zig fmt --check .
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: goto-bus-stop/setup-zig@v2
+        with:
+          version: ${{env.VERSION}}
+      - run: zig build
