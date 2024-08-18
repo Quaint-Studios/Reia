@@ -17,8 +17,8 @@ var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var paused := false:
 	set(value):
-		if is_node_ready()&& %PauseMenu != null:
-			%PauseMenu.visible = value
+		if is_node_ready() && %PauseMenu != null:
+			(%PauseMenu as Control).visible = value
 		paused = value
 
 func _ready() -> void:
@@ -34,7 +34,7 @@ func _ready() -> void:
 		(%AnimationTree as AnimationTree).active = true
 
 func _exit_tree() -> void:
-	if !Engine.is_editor_hint()&&PlayerManager.instance.player == self:
+	if !Engine.is_editor_hint() && PlayerManager.instance.player == self:
 		PlayerManager.instance.player = null
 
 func should_move() -> bool:
@@ -47,7 +47,7 @@ func _process(_delta: float) -> void:
 	if !should_move():
 		return
 
-	if position.y <= - 10: # handle falling off the map for now
+	if position.y <= -10: # handle falling off the map for now
 		position.y = 1
 		velocity = Vector3.ZERO
 		# TODO: For some fun in the future, let's just set a max velocity on reset.
