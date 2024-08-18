@@ -15,10 +15,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: goto-bus-stop/setup-zig@v2
-      - run: zig build test
+      - name: Test
+        working-directory: ./zig
+        run: zig build test
   lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: goto-bus-stop/setup-zig@v2
-      - run: zig fmt --check .
+      - name: Lint
+        working-directory: ./zig
+        run: zig fmt --check .
