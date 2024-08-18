@@ -1,8 +1,8 @@
 # Reia
 ## This section utilizes godot-zig to take advantage of Zig.
 
-Zig version: 0.13.0
-Godot version: 4.3
+Zig version: `0.13.0`
+Godot version: `4.3`
 
 Use cases:
 - Custom NetCode
@@ -29,14 +29,14 @@ Just a heads up. On Windows, your computer won't know to look in that folder for
 Now that you have Godot, you should first try opening the project. I saw some issues when trying to bind *before* opening Reia. But that could just be me.
 
 
-**Working Directory: `Reia/zig`**
+**Working Directory: `./Reia/zig`**
 ```sh
 godot -e --path ../godot
 ```
 
 This will, from the zig folder, go to the parent folder and inside of the godot folder and open the project to generate the proper files.
 
-**Working Directory: `Reia/zig`**
+**Working Directory: `./Reia/zig`**
 ```sh
 zig build bind
 ```
