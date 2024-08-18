@@ -6,6 +6,15 @@
 export.cfg
 # export_presets.cfg
 
+# Godot Zig
+./godot/lib/
+**/.godot/**
+**/*.import
+*code-workspace
+
+!**/.godot/extension_list.cfg
+!**/.godot/global_script_class_cache.cfg
+
 # Imported translations (automatically generated from CSV files)
 *.translation
 

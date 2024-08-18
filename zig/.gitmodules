@@ -1,0 +1,3 @@
+[submodule "godot-zig"]
+	path = godot-zig
+	url = https://github.com/godot-zig/godot-zig
