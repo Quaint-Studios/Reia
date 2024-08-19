@@ -54,9 +54,9 @@ jobs:
       - name: Install Zig
         if: steps.cache-zig.outputs.cache-hit != 'true'
         run: |
-          apt-get update
-          apt-get upgrade -y
-          apt-get install xz-utils -y
+          sudo apt-get update
+          sudo apt-get upgrade -y
+          sudo apt-get install xz-utils -y
           mkdir -p ~/sdk/zig
           mkdir -p /home/downloads
           wget https://ziglang.org/download/${{env.ZIG_VERSION}}/zig-linux-x86_64-${{env.ZIG_VERSION}}.tar.xz -O /home/downloads/zig-linux-x86_64-${{env.ZIG_VERSION}}.tar.xz
