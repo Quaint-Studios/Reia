@@ -7,10 +7,10 @@ on:
       - zig/**
 
 env:
-  VERSION: 0.13.0
+  ZIG_VERSION: 0.13.0
 
 jobs:
-  zig_test:
+  godot_zig:
     container:
       image: barichello/godot-ci:4.3
     strategy:
@@ -21,12 +21,25 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
-      - uses: goto-bus-stop/setup-zig@v2
-        with:
-          version: ${{env.VERSION}}
+          lfs: true
+      - name: Install Zig
+        run: |
+          apt-get update
+          apt-get upgrade -y
+          apt-get install xz-utils -y
+          mkdir -p ~/sdk/zig
+          mkdir -p /home/downloads
+          wget https://ziglang.org/download/${{env.ZIG_VERSION}}/zig-linux-x86_64-${{env.ZIG_VERSION}}.tar.xz -O /home/downloads/zig-linux-x86_64-${{env.ZIG_VERSION}}.tar.xz
+          tar -xf /home/downloads/zig-linux-x86_64-${{env.ZIG_VERSION}}.tar.xz -C ~/sdk/zig
+          cp -r ~/sdk/zig/zig-linux-x86_64-${{env.ZIG_VERSION}}/* ~/sdk/zig
+          rm -rf ~/sdk/zig/zig-linux-x86_64-${{env.ZIG_VERSION}}
+          export PATH=$PATH:~/sdk/zig
+          echo "export PATH=$PATH:~/sdk/zig" >> ~/.bashrc
       - name: Generate Godot Project
         run: godot -e --path ../godot --import --headless
+        working-directory: ./zig
       - name: Generate Zig Bindings
+        working-directory: ./zig
         run: zig build bind
       - name: Test
         working-directory: ./zig
