@@ -8,6 +8,7 @@ on:
 
 env:
   ZIG_VERSION: 0.13.0
+  ZIG_PATH: ~/sdk/zig
 
 jobs:
   godot_zig:
@@ -22,7 +23,28 @@ jobs:
         with:
           submodules: recursive
           lfs: true
+
+      # Cache Godot Imports
+      - name: Cache import assets
+        uses: actions/cache@v3
+        id: cache-import
+        with:
+          path: |
+            godot/.godot/imported/
+          key: import-assets-${{ runner.os }}-${{ github.sha }}
+      
+      # Cache Zig
+      - name: Cache Zig
+        uses: actions/cache@v3
+        id: cache-zig
+        with:
+          path: |
+            ${{env.ZIG_PATH}}
+          key: zig-${{ runner.os }}-${{ github.sha }}
+
+
       - name: Install Zig
+        if: steps.cache-zig.outputs.cache-hit != 'true'
         run: |
           apt-get update
           apt-get upgrade -y
@@ -33,10 +55,11 @@ jobs:
           tar -xf /home/downloads/zig-linux-x86_64-${{env.ZIG_VERSION}}.tar.xz -C ~/sdk/zig
           cp -r ~/sdk/zig/zig-linux-x86_64-${{env.ZIG_VERSION}}/* ~/sdk/zig
           rm -rf ~/sdk/zig/zig-linux-x86_64-${{env.ZIG_VERSION}}
-          export PATH=$PATH:~/sdk/zig
-          echo "export PATH=$PATH:~/sdk/zig" >> ~/.bashrc
+      - name: Add Zig to PATH
+        run: echo ${{env.ZIG_PATH}} >> $GITHUB_PATH
       - name: Generate Godot Project
-        run: godot -e --path ../godot --import --headless
+        if: steps.cache-import.outputs.cache-hit != 'true'
+        run: godot --headless --verbose --editor --quit --rendering-driver opengl3 -e ../godot
         working-directory: ./zig
       - name: Generate Zig Bindings
         working-directory: ./zig
