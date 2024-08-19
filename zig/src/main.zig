@@ -3,8 +3,6 @@ const Godot = @import("godot");
 const builtin = @import("builtin");
 const GPA = std.heap.GeneralPurposeAllocator(.{});
 
-// 3
-
 var gpa = GPA{};
 
 pub export fn my_extension_init(p_get_proc_address: Godot.GDExtensionInterfaceGetProcAddress, p_library: Godot.GDExtensionClassLibraryPtr, r_initialization: [*c]Godot.GDExtensionInitialization) Godot.GDExtensionBool {
