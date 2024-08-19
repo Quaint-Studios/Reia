@@ -40,7 +40,7 @@ jobs:
         with:
           path: |
             ${{env.ZIG_PATH}}
-          key: zig-${{ runner.os }}-${{ github.sha }}
+          key: zig-${{ runner.os }}-${{ env.ZIG_VERSION }}
 
       # Cache Godot
       - name: Cache Godot
@@ -49,7 +49,7 @@ jobs:
         with:
           path: |
             ${{env.GODOT_PATH}}
-          key: godot-${{ runner.os }}-${{ github.sha }}
+          key: godot-${{ runner.os }}-${{ env.GODOT_VERSION }}
 
       - name: Install Zig
         if: steps.cache-zig.outputs.cache-hit != 'true'
