@@ -57,22 +57,22 @@ jobs:
           sudo apt-get update
           sudo apt-get upgrade -y
           sudo apt-get install xz-utils -y
-          mkdir -p ~/sdk/zig
-          mkdir -p /home/downloads
-          wget https://ziglang.org/download/${{env.ZIG_VERSION}}/zig-linux-x86_64-${{env.ZIG_VERSION}}.tar.xz -O /home/downloads/zig-linux-x86_64-${{env.ZIG_VERSION}}.tar.xz
-          tar -xf /home/downloads/zig-linux-x86_64-${{env.ZIG_VERSION}}.tar.xz -C ~/sdk/zig
-          cp -r ~/sdk/zig/zig-linux-x86_64-${{env.ZIG_VERSION}}/* ~/sdk/zig
-          rm -rf ~/sdk/zig/zig-linux-x86_64-${{env.ZIG_VERSION}}
+          sudo mkdir -p ~/sdk/zig
+          sudo mkdir -p /home/downloads
+          sudo wget https://ziglang.org/download/${{env.ZIG_VERSION}}/zig-linux-x86_64-${{env.ZIG_VERSION}}.tar.xz -O /home/downloads/zig-linux-x86_64-${{env.ZIG_VERSION}}.tar.xz
+          sudo tar -xf /home/downloads/zig-linux-x86_64-${{env.ZIG_VERSION}}.tar.xz -C ~/sdk/zig
+          sudo cp -r ~/sdk/zig/zig-linux-x86_64-${{env.ZIG_VERSION}}/* ~/sdk/zig
+          sudo rm -rf ~/sdk/zig/zig-linux-x86_64-${{env.ZIG_VERSION}}
       - name: Add Zig to PATH
         run: echo ${{env.ZIG_PATH}} >> $GITHUB_PATH
       - name: Install Godot
         if: steps.cache-godot.outputs.cache-hit != 'true'
         run: |
-          mkdir -p ~/sdk/godot
-          mkdir -p /home/downloads
-          wget https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip -O /home/downloads/Godot_v4.3-stable_linux.x86_64.zip
-          unzip /home/downloads/Godot_v4.3-stable_linux.x86_64.zip -d ~/sdk/godot
-          mv ~/sdk/godot/Godot_v4.3-stable_linux.x86_64 ~/sdk/godot/godot
+          sudo mkdir -p ~/sdk/godot
+          sudo mkdir -p /home/downloads
+          sudo wget https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip -O /home/downloads/Godot_v4.3-stable_linux.x86_64.zip
+          sudo unzip /home/downloads/Godot_v4.3-stable_linux.x86_64.zip -d ~/sdk/godot
+          sudo mv ~/sdk/godot/Godot_v4.3-stable_linux.x86_64 ~/sdk/godot/godot
       - name: Add Godot to PATH
         run: echo ${{env.GODOT_PATH}} >> $GITHUB_PATH
       - name: Generate Godot Project
