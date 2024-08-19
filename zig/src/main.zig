@@ -3,7 +3,7 @@ const Godot = @import("godot");
 const builtin = @import("builtin");
 const GPA = std.heap.GeneralPurposeAllocator(.{});
 
-// 2
+// 3
 
 var gpa = GPA{};
 

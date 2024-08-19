@@ -404,3 +404,8 @@ $RECYCLE.BIN/
 *.msp
 *.lnk
 *.generated.props
+
+!/godot/addons/**/bin
+!/godot/addons/**/bin/**/*.so
+!/godot/addons/**/bin/**/*.dylib
+!/godot/addons/**/bin/**/*.dll
