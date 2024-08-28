@@ -12,7 +12,7 @@ Explore endless worlds and embark on a magical adventure of a lifetime! Reia is 
 
 > **Discord:** Private for now but available if you request it. Just add `makosai` on Discord and ask for an invite! ❤️
 
-> **Sustenet:** View the netcode designed specifically for this project and made in Zig at [https://github.com/Quaint-Studios/Sustenet](https://github.com/Quaint-Studios/Sustenet).
+> **Sustenet:** Visit [https://github.com/Quaint-Studios/Sustenet](https://github.com/Quaint-Studios/Sustenet) to see the netcode designed specifically for this project and made in Zig.
 
 ## Table of Contents
 <ol>
