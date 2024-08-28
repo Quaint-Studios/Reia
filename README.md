@@ -6,6 +6,7 @@
 # Reia
 Explore endless worlds and embark on a magical adventure of a lifetime! Reia is an action-adventure RPG, also open-source. Play offline or online with friends, or login for an MMO experience! Create and explore worlds, manage your own economy and products, and restore Reia's world via the story. Choose the way you want to play.
 
+
 ## Info
 
 > Visit the website over at [https://www.playreia.com](https://www.playreia.com).
@@ -13,6 +14,8 @@ Explore endless worlds and embark on a magical adventure of a lifetime! Reia is 
 > **Discord:** Private for now but available if you request it. Just add `makosai` on Discord and ask for an invite! ❤️
 
 > **Sustenet:** Visit [https://github.com/Quaint-Studios/Sustenet](https://github.com/Quaint-Studios/Sustenet) to see the netcode designed specifically for this project and made in Zig.
+
+![Reia Game Banner](/docs/images/hero_1.jpeg)
 
 ## Table of Contents
 <ol>
@@ -128,3 +131,7 @@ It should be noted that every outcome can be replayed and alternate choices can 
 ### Gameplay
 #### Overview
 You play as an occupant of Reia's realm. One of your main tasks is to find spirits that are fragments of Reia. They possess unique elements and can be leveled up. Your individual levels and your spirit level are separate. But your individual levels can have an impact on your spirit form. There are player-owned floating islands where you can customize them & govern them with trainable NPCs. Upgradeable gear with replacable parts is also a feature for versaility in combat. Players can sell books, music, and in-game goods (skins) in a marketplace. This allows people to have a way to creatively express themselves and gives their island a way to act as an actual store. There are endless open-world areas that are procedurally generated. Puzzles and mini-games are also included, with mini-games potentially being player-created. Day night cycles & regions means that certain cities will have different time zones. This overview is very roughly written, but more will be added eventually.
+
+## FAQs
+
+...
