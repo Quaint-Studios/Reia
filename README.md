@@ -41,6 +41,7 @@ Explore endless worlds and embark on a magical adventure of a lifetime! Reia is 
       </li>
     </ol>
   </li>
+  <li><a href="#faqs">FAQs</a></li>
 </ol>
 
 
@@ -133,5 +134,81 @@ It should be noted that every outcome can be replayed and alternate choices can 
 You play as an occupant of Reia's realm. One of your main tasks is to find spirits that are fragments of Reia. They possess unique elements and can be leveled up. Your individual levels and your spirit level are separate. But your individual levels can have an impact on your spirit form. There are player-owned floating islands where you can customize them & govern them with trainable NPCs. Upgradeable gear with replacable parts is also a feature for versaility in combat. Players can sell books, music, and in-game goods (skins) in a marketplace. This allows people to have a way to creatively express themselves and gives their island a way to act as an actual store. There are endless open-world areas that are procedurally generated. Puzzles and mini-games are also included, with mini-games potentially being player-created. Day night cycles & regions means that certain cities will have different time zones. This overview is very roughly written, but more will be added eventually.
 
 ## FAQs
+### What's the progress on Reia?
+1. What's left to do?
+    
+    We actually have a [roadmap](/docs/ROADMAP.md)! It's taking time because it's self-funded so we can give it the love and passion it deserves.
 
-...
+2. What features are currently being developed?
+
+    Oh, where do I start?
+    
+    How about the not-so-technical stuff first. We're working on designing new locations for you to explore, drawing pretty art with awesome colors to make you drool, a Map system, a new UI system, and a custom quest system so you get intricate questing much like *Old School Runescape* and other great titles!
+
+    Now for the slightly technical side of things -- our tech stack! We're using Godot-Zig to prepare ourselves for high-performant situations, we're designing our our own [networking solution](https://github.com/Quaint-Studios/Sustenet), we're working on implementing Turso into Zig so we can support Databases both offline and offline, we're also developing and contributing to Godot Supabase for authentication. And obviously, GDScript for the bulk of the game!
+
+3. Are there upcoming alpha or beta tests?
+
+    Yep! There's no date yet. But you can [subscribe](https://www.playreia.com/newsletter?ref=GitHub) to our newsletter to get notified. We know how annoying emails can get. So you can always decide what you want to hear and how frequent! We respect that.
+
+4. Are there any planned expansions or DLCs?
+
+    Ooo... This is something we're excited about. We obviously want to monitize the game but we also want the barrier for entry to be low. You can read more about it in our [Monetization README](/docs/MONETIZATION.md).
+### How is multiplayer and singleplayer handled in Reia?
+1. Will this be online or offline?
+  
+    Reia will be both! You have three options:
+    
+    - Play on the main server with your friends and family, leveling up and questing together or on your own.
+    - Adventure solo, enjoying an offline experience. Start a brand new character locally or clone your online character to your computer, continuing solo.
+    - Use your local characters to host your own private server, playing with a small group of friends. Or join existing private servers to try out modded versions of the game.
+
+2. If I migrate my online character to my local machine, can I migrate it back online?
+
+    Sadly, no. And there's a good reason for this. Once the character is on your local machine, you're free to edit your currency and many other things. This means you're free to cheat. Go ahead! Just do it locally. Have fun.
+
+3. Will migrating from online to offline delete my online character?
+   
+    No. While it's a one-way migration, the migration doesn't delete your online character. So you can take your online progress to offline mode but you can't take your offline progress back to the main online game.
+
+4. Can I use my offline characters on all private servers?
+
+    Private servers are just like the official servers. They can choose whether to force you to use a character that has only ever been online on either their server or the main servers, one that's only ever been on their servers alone, or they can allow all types of characters.
+
+### How will mods work in Reia?
+
+1. What type of mods are there?
+
+    There are two types of mods: Server and Local. Just keep in mind when you're playing offline, you are the server. But there are different categories.
+
+2. So what are the cetegories of mods?
+
+    **Gameplay Mods** (Server): These mods can alter game mechanics, add new features, or change existing ones. Examples include altered combat systems, harder or easier content, additional minigames, or new events.
+    
+    **Visual Mods** (Server, Local): This can These mods focus on the aesthetics of the game. They can include new character skins, improved textures, custom animations, and enhanced visual effects.
+    
+    **Content Mods** (Server): These mods add new content to the game, such as new characters, items, weapons, and locations. They can also include new storylines, quests, or expansions to the existing game world.
+    
+    **Quality of Life Mods** (Server): These mods aim to improve the overall user experience by adding features like better inventory management, enhanced user interfaces, or tracking tools.
+    
+    **Utility Mods** (Local): These mods provide additional tools and functionalities, such as mod management systems, debugging tools, or performance optimizers.
+    
+    **Sound Mods** (Server, Local): These mods can change or enhance the game's audio, including new soundtracks, sound effects, or voiceovers.
+
+    > *This entire mod section is still in progress. So some things may be added and removed. Like a category for lore or other things.*
+
+3. How do I install mods in Reia?
+
+    You can do so via our [Mod.io](https://mod.io/g/playreia?preview=e600acffc6322c61ed44b6464323366e) page or in-game since we integrate Mod.io in the Godot Engine too! It's still under construction so you'll have to login to access it.
+
+4. Are there any restrictions on the type of mods I can use?
+
+    As of right now, no. But, there are some smart people out there. I'm sure someone will find something that needs a rule. Other than that, have fun with the mods. They're locked down in a way that we try not to make them influence other people's gameplay too much.
+
+5. Are theyre any restrictions on the type of modes I can submit?
+
+    Nothing explicit and nothing that infringes on someone else's copyrights. That should cover everything. But, just like the previous question, someone is bound to eventually cause this rule to change.
+
+6. Can mods be used in both online and offline modes?
+
+    In the second FAQ item for this section, it covers where you can use each mod type. So yeah, you can use them in those areas!
