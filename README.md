@@ -15,7 +15,11 @@ Explore endless worlds and embark on a magical adventure of a lifetime! Reia is 
 
 > **Sustenet:** Visit [https://github.com/Quaint-Studios/Sustenet](https://github.com/Quaint-Studios/Sustenet) to see the netcode designed specifically for this project and made in Zig.
 
-![Reia Game Banner](/docs/images/hero_1.jpeg)
+<picture>
+  <source srcset="https://raw.githubusercontent.com/Quaint-Studios/Reia/master/docs/images/hero_1.avif?raw=true" type="image/avif">
+  <source srcset="https://raw.githubusercontent.com/Quaint-Studios/Reia/master/docs/images/hero_1.jpeg?raw=true" type="image/jpeg">
+  <img src="https://raw.githubusercontent.com/Quaint-Studios/Reia/master/docs/images/hero_1.jpeg?raw=true" alt="Reia Game Banner">
+</picture>
 
 ## Table of Contents
 <ol>
