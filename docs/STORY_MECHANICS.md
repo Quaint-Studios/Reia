@@ -10,7 +10,7 @@ You're still locked into your initial choice like normal. The difference here is
 
 When playing with friends, you can join their story progress and play with them.
 
-**Scenario A: You completed the story already and all pre-requisites.**
+### **Scenario A: You completed the story already and all pre-requisites.**
 > Perfect! Just replay the story like normal.
 
 ### **Scenario B: You've done all the pre-requisites but you don't have the story completed.**
@@ -23,13 +23,13 @@ When playing with friends, you can join their story progress and play with them.
 
 ###  **A more technical explanation.**
 
-Host is 10% done with a quest.\
-Guest joins and they're 0% done with the quest.\
-Host is technically still 10% done, but they have to start the quest over because of the guest.
+**Host** is 10% done with a quest.\
+**Guest** joins and they're 0% done with the quest.\
+**Host** is technically still 10% done, but they have to start the quest over because of the guest.
 
-Now let's say the Host is 20% done.\
-The Guest joins with 50% of the quest done. The guest can pick up from the 20% mark.\
-The Guest is still 50% done, but they will start progressing the story once the host reaches their 50%.
+Now let's say the **Host** is 20% done.\
+The **Guest** joins with 50% of the quest done. The guest can pick up from the 20% mark.\
+The **Guest** is still 50% done, but they will start progressing the story once the host reaches their 50%.
 
 As for quests requiring other people, the reason why you'd still need to find someone else is because sometimes quest requirements include items. And those items might not be available to the guest.
 
