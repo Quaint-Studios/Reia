@@ -1,4 +1,4 @@
-# Web Job
+# Web Jobs
 
 - [ ] Web Development
 - [ ] Writing
