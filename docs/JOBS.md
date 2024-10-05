@@ -47,7 +47,7 @@ This is a list of possible roles you can fulfill with a job here. Until they're 
 
 ## Marketing
 
-> [read description](/jobs/MARKETING.md)
+> [read description](./jobs/MARKETING.md)
 
 - [ ] Outreach
 - [ ] Social Media Management
