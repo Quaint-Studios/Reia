@@ -42,6 +42,9 @@ This is a list of possible roles you can fulfill with a job here. Until they're 
 - [ ] GLSL Shader Programming
 
 ## Web
+
+> [read description](./jobs/WEB.md)
+
 - [ ] Web Development
 - [ ] Writing
 
