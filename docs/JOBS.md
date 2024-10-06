@@ -26,6 +26,7 @@ This is a list of possible roles you can fulfill with a job here. Until they're 
 
 ## Modeling
 - [ ] Character Modeling
+- [ ] Weapons Modeling
 - [ ] Enemy Modeling
 - [ ] Props Modeling
 - [ ] Skills Modeling
