@@ -406,6 +406,6 @@ $RECYCLE.BIN/
 *.generated.props
 
 !/godot/addons/**/bin
-!/godot/addons/**/bin/**/*.so
-!/godot/addons/**/bin/**/*.dylib
-!/godot/addons/**/bin/**/*.dll
+!/godot/addons/**/bin/**/[aA-zZ]*.so
+!/godot/addons/**/bin/**/[aA-zZ]*.dylib
+!/godot/addons/**/bin/**/[aA-zZ]*.dll
