@@ -144,7 +144,7 @@ static func get_or_create_multimesh_chunk(item: ProtonScatterItem,
 	mmi.visibility_range_end_margin 	= item.visibility_range_end_margin
 	mmi.visibility_range_fade_mode 		= item.visibility_range_fade_mode
 	mmi.layers = item.visibility_layers
-	
+
 	mmi.multimesh.instance_count = count
 
 	return mmi
@@ -164,7 +164,7 @@ static func get_or_create_particles(item: ProtonScatterItem) -> GPUParticles3D:
 	var mesh_instance: MeshInstance3D = get_merged_meshes_from(item)
 	if not mesh_instance:
 		return
-	
+
 	particles.material_override = get_final_material(item, mesh_instance)
 	particles.set_draw_pass_mesh(0, mesh_instance.mesh)
 	particles.position = Vector3.ZERO
@@ -239,13 +239,13 @@ static func get_all_mesh_instances_from(node: Node) -> Array[MeshInstance3D]:
 static func get_final_material(item: ProtonScatterItem, mi: MeshInstance3D) -> Material:
 	if item.override_material:
 		return item.override_material
-	
+
 	if mi.material_override:
 		return mi.material_override
-	
+
 	if mi.get_surface_override_material(0):
 		return mi.get_surface_override_material(0)
-	
+
 	return null
 
 
@@ -278,21 +278,21 @@ static func get_merged_meshes_from(item: ProtonScatterItem) -> MeshInstance3D:
 
 	if mesh_instances.is_empty():
 		return null
-	
+
 	# If there's only one mesh instance we can reuse it directly if the materials allow it.
 	if mesh_instances.size() == 1:
 		# Duplicate the meshinstance, not the mesh resource
 		var mi: MeshInstance3D = mesh_instances[0].duplicate()
-		
+
 		# MI uses a material override, all surface materials will be ignored
 		if mi.material_override:
 			return mi
-		
+
 		var surface_overrides_count := 0
 		for i in mi.get_surface_override_material_count():
 			if mi.get_surface_override_material(i):
 				surface_overrides_count += 1
-		
+
 		# If there's one material override or less, no duplicate mesh is required.
 		if surface_overrides_count <= 1:
 			return mi
@@ -457,6 +457,7 @@ static func get_collision_data(item: ProtonScatterItem) -> StaticBody3D:
 			if child is CollisionShape3D:
 				# Don't use reparent() here or the child transform gets reset.
 				body.remove_child(child)
+				child.owner = null
 				static_body.add_child(child)
 
 	source.queue_free()

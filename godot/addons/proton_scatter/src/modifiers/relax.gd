@@ -2,7 +2,7 @@
 extends "base_modifier.gd"
 
 
-const shader_file := preload("./compute_shaders/compute_relax.glsl")
+static var shader_file: RDShaderFile
 
 
 @export var iterations : int = 3
@@ -123,7 +123,7 @@ func compute_closest(transforms) -> PackedVector3Array:
 	var padded_num_vecs = ceil(float(transforms.size()) / 64.0) * 64
 	var padded_num_floats = padded_num_vecs * 4
 	var rd := RenderingServer.create_local_rendering_device()
-	var shader_spirv: RDShaderSPIRV = shader_file.get_spirv()
+	var shader_spirv: RDShaderSPIRV = get_shader_file().get_spirv()
 	var shader := rd.shader_create_from_spirv(shader_spirv)
 	# Prepare our data. We use vec4 floats in the shader, so we need 32 bit.
 	var input := PackedFloat32Array()
@@ -183,3 +183,9 @@ func compute_closest(transforms) -> PackedVector3Array:
 		rd.free()
 		rd = null
 	return retval
+
+func get_shader_file() -> RDShaderFile:
+	if shader_file == null:
+		shader_file = load(get_script().resource_path.get_base_dir() + "/compute_shaders/compute_relax.glsl")
+	
+	return shader_file
