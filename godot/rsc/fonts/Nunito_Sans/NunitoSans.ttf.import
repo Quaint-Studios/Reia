@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/NunitoSans.ttf-d57c2a2660f7b8d4671e0ca9397cc5
 Rendering=null
 antialiasing=1
 generate_mipmaps=true
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48

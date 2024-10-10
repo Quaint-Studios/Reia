@@ -15,6 +15,7 @@ dest_files=["res://.godot/imported/Poppins-LightItalic.ttf-81b28cd53f8bd02c652e1
 Rendering=null
 antialiasing=1
 generate_mipmaps=false
+disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
 msdf_size=48
