@@ -9,10 +9,9 @@ signal transforms_ready
 
 const ProtonScatter := preload("../scatter.gd")
 const TransformList := preload("../common/transform_list.gd")
-const BaseModifier := preload("../modifiers/base_modifier.gd")
 
 
-@export var stack: Array[BaseModifier] = []
+@export var stack: Array[ScatterBaseModifier] = []
 
 var just_created := false
 
@@ -32,7 +31,7 @@ func stop_update() -> void:
 		modifier.interrupt()
 
 
-func add(modifier: BaseModifier) -> void:
+func add(modifier: ScatterBaseModifier) -> void:
 	stack.push_back(modifier)
 	modifier.modifier_changed.connect(_on_modifier_changed)
 	stack_changed.emit()
@@ -44,7 +43,7 @@ func move(old_index: int, new_index: int) -> void:
 	stack_changed.emit()
 
 
-func remove(modifier: BaseModifier) -> void:
+func remove(modifier: ScatterBaseModifier) -> void:
 	if stack.has(modifier):
 		stack.erase(modifier)
 		stack_changed.emit()
@@ -56,7 +55,7 @@ func remove_at(index: int) -> void:
 		stack_changed.emit()
 
 
-func duplicate_modifier(modifier: BaseModifier) -> void:
+func duplicate_modifier(modifier: ScatterBaseModifier) -> void:
 	var index: int = stack.find(modifier)
 	if index != -1:
 		var copy = modifier.get_copy()
@@ -71,7 +70,7 @@ func get_copy():
 	return copy
 
 
-func get_index(modifier: BaseModifier) -> int:
+func get_index(modifier: ScatterBaseModifier) -> int:
 	return stack.find(modifier)
 
 

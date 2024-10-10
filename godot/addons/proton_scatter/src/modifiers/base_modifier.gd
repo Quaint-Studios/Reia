@@ -1,4 +1,5 @@
 @tool
+class_name ScatterBaseModifier
 extends Resource
 
 # Modifiers place transforms. They create, edit or remove transforms in a list,
@@ -45,7 +46,7 @@ func get_warning() -> String:
 func process_transforms(transforms: TransformList, domain: Domain, global_seed: int) -> void:
 	if not domain.get_root().is_inside_tree():
 		return
-	
+
 	if Engine.is_editor_hint():
 		_clear_warning()
 
@@ -70,7 +71,7 @@ func process_transforms(transforms: TransformList, domain: Domain, global_seed: 
 	if can_override_seed and override_global_seed:
 		random_seed = custom_seed
 	interrupt_update = false
-	
+
 	@warning_ignore("redundant_await") # Not redundant as child classes could use the await keyword here.
 	await _process_transforms(transforms, domain, random_seed)
 

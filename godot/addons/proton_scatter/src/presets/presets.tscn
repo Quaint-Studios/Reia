@@ -6,10 +6,10 @@
 
 [node name="Presets" type="PopupPanel"]
 title = "Manage presets"
+initial_position = 2
 size = Vector2i(490, 200)
 unresizable = false
 borderless = false
-always_on_top = true
 extend_to_title = true
 min_size = Vector2i(400, 150)
 script = ExtResource("1_ualle")

@@ -155,17 +155,19 @@ func _on_load_full_preset(path: String) -> void:
 		for c in _scatter_node.get_children():
 			if c is ProtonScatterItem or c is ProtonScatterShape:
 				_scatter_node.remove_child(c)
+				c.owner = null
 				c.queue_free()
 
 		for c in preset.get_children():
 			if c is Marker3D or c.name == "ScatterOutput":
 				continue
 			preset.remove_child(c)
+			c.owner = null
 			_scatter_node.add_child(c, true)
 
 		ProtonScatterUtil.set_owner_recursive(_scatter_node, get_tree().get_edited_scene_root())
 		preset.queue_free()
-	
+
 	_scatter_node.rebuild.call_deferred()
 	hide()
 
@@ -185,7 +187,7 @@ func _on_delete_button_pressed(path: String, entry: Control) -> void:
 	_preset_control_to_delete = entry
 	_delete_warning_label.text = "Are you sure you want to delete the preset [" \
 		+ path.get_file().get_basename().capitalize() + "] ?\n\n" \
-		+ "This operation cannot be undone." 
+		+ "This operation cannot be undone."
 	_delete_preset_dialog.popup_centered()
 
 
