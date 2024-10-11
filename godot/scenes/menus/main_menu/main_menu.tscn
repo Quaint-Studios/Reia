@@ -481,20 +481,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Back" type="MarginContainer" parent="CanvasLayer/Screens/Play"]
-modulate = Color(1, 1, 1, 0.6)
-layout_mode = 0
-offset_right = 144.0
-offset_bottom = 70.0
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 24
-
-[node name="BackLabel" parent="CanvasLayer/Screens/Play/Back" instance=ExtResource("5_d7wdc")]
-layout_mode = 2
-
-[node name="TextureButton" type="TextureButton" parent="CanvasLayer/Screens/Play/Back"]
-layout_mode = 2
-
 [node name="CenterContainer" type="CenterContainer" parent="CanvasLayer/Screens/Play"]
 layout_mode = 1
 anchors_preset = 15
@@ -570,6 +556,21 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Back" type="MarginContainer" parent="CanvasLayer/Screens/Play"]
+modulate = Color(1, 1, 1, 0.6)
+layout_mode = 0
+offset_right = 144.0
+offset_bottom = 70.0
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 24
+
+[node name="BackLabel" parent="CanvasLayer/Screens/Play/Back" instance=ExtResource("5_d7wdc")]
+layout_mode = 2
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer/Screens/Play/Back"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
 
 [node name="Settings" type="Control" parent="CanvasLayer/Screens"]
 unique_name_in_owner = true
