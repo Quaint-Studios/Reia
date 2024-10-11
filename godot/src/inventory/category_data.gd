@@ -8,10 +8,9 @@ func add_item(item: Item) -> CategoryData:
 	if (name == Inventory.Tab.keys()[Inventory.Tab.WEAPONS]
 	and item is Weapon
 	and items.has(item.name)):
-		const a: int = 100
-		var b: int = item.item_grade
-		var level = pow(log(pow(a, b)), b) * (b * a)
-
+		var xp := Weapon.get_level_xp((item as Weapon).level)
+		var weapon: Weapon = items[item.name]
+		weapon.add_xp(floori(xp / 4.0)) # Add 1/4th of the total xp to the weapon
 
 		print("Item is a duplicate, adding exp")
 		#(items[item.name] as Weapon)#.enhance(wea)
@@ -25,8 +24,8 @@ func get_item(item_name: String) -> Item:
 
 	return items[item_name]
 
-func increment_item(item_name: String, quantity:= 1):
-	var item = get_item(item_name)
+func increment_item(item_name: String, quantity := 1) -> CategoryData:
+	var item := get_item(item_name)
 
 	if item == null:
 		return self
@@ -35,18 +34,23 @@ func increment_item(item_name: String, quantity:= 1):
 		print_debug("Item %s in category %s is not a StackableObject | Stack: %s" % [item_name, name, get_stack()])
 		return self # Item isn't stackable
 
-	(item as StackableItem).increment_item(quantity)
+	(item as StackableItem).quantity += quantity
 	return self
 
-func decrement_item(item_name: String, quantity:= -1):
-	increment_item(item_name, quantity) # Hehe lazy
+func decrement_item(item_name: String, quantity := -1) -> CategoryData:
+	increment_item(item_name, quantity).end() # Hehe lazy
 	return self
+
+func end() -> void:
+	pass
 
 func toJSON() -> Dictionary:
-	var data = {
+	var data := {
 		"name": name,
 		"items": {}
 	}
-	items.keys().all(func(key): data["items"].merge({ "%s" % key: items[key].toJSON() }))
+
+	@warning_ignore("unsafe_method_access")
+	var __ := items.keys().all(func(key: String) -> void: data["items"].merge({"%s" % key: (items[key]).toJSON()}))
 
 	return data

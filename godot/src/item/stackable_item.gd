@@ -2,10 +2,15 @@ class_name StackableItem extends Item
 
 @export var quantity := 0
 
-func increment_item(_quantity:= 1):
-	quantity += quantity
+## Increases the quantity by the given amount (default is 1).
+func increment(_quantity:= 1) -> StackableItem:
+	quantity += _quantity
 	return self
 
-func decrement_item(_quantity:= -1):
-	increment_item(_quantity) # Hehe lazy
+## Decreases the quantity by the given amount (default is 1).
+func decrement(_quantity:= 1) -> StackableItem:
+	quantity -= _quantity
 	return self
+
+func end() -> void:
+	pass
