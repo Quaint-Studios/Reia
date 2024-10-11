@@ -14,7 +14,7 @@ signal disconnected
 #region Variables
 #region Configs
 ## Host IP. Defaults to 127.0.0.1.
-var host = "127.0.0.1"
+var host := "127.0.0.1"
 
 ## Default port.
 const DEF_PORT = 4337
@@ -23,7 +23,7 @@ const DEF_PORT = 4337
 var _client := WebSocketMultiplayerPeer.new()
 #endregion
 
-enum Status { DISCONNECTED, CONNECTED, CONNECTING }
+enum Status {DISCONNECTED, CONNECTED, CONNECTING}
 
 var status := Status.DISCONNECTED:
 	set(value):
@@ -39,28 +39,28 @@ var players := []
 #endregion
 
 ## Sets up the server.
-func _ready():
+func _ready() -> void:
 	_client.supported_protocols = ['ludus']
 	setup_signals()
 
 ## Sets up the client connected and disconnected signals.
-func setup_signals():
-	multiplayer.peer_connected.connect(_on_client_connected)
-	multiplayer.peer_disconnected.connect(_on_client_disconnected)
+func setup_signals() -> void:
+	assert(multiplayer.peer_connected.connect(_on_client_connected) == 0)
+	assert(multiplayer.peer_disconnected.connect(_on_client_disconnected) == 0)
 
-	multiplayer.server_disconnected.connect(_on_server_disconnected)
-	multiplayer.connection_failed.connect(_on_connection_failed)
-	multiplayer.connected_to_server.connect(_on_connected_to_server)
+	assert(multiplayer.server_disconnected.connect(_on_server_disconnected) == 0)
+	assert(multiplayer.connection_failed.connect(_on_connection_failed) == 0)
+	assert(multiplayer.connected_to_server.connect(_on_connected_to_server) == 0)
 
 ## Starts the server and updates the peer.
-func start_client():
+func start_client() -> void:
 	if status != Status.DISCONNECTED:
 		print("Client already connecting or connecting, aborting new connection.")
 		return
 
 	status = Status.CONNECTING
 	multiplayer.multiplayer_peer = null
-	var err = _client.create_client("ws://" + host + ":" + str(DEF_PORT))
+	var err := _client.create_client("ws://" + host + ":" + str(DEF_PORT))
 	if err == Error.OK:
 		multiplayer.multiplayer_peer = _client
 		print_c("Client Started")
@@ -70,7 +70,7 @@ func start_client():
 		status = Status.DISCONNECTED
 
 ## Stops the server and cleans up.
-func stop_client(graceful := false):
+func stop_client(graceful := false) -> void:
 	multiplayer.multiplayer_peer = null
 	_client.close()
 	print_c("Client Stopped")
@@ -81,25 +81,25 @@ func stop_client(graceful := false):
 		start_client()
 
 #region Signal Handlers
-func _on_client_connected(id: int):
+func _on_client_connected(id: int) -> void:
 	print_c("Client (%d) Connected" % id, id)
 
-func _on_client_disconnected(id: int):
+func _on_client_disconnected(id: int) -> void:
 	print_c("Client (%d) Disconnected" % id, id)
 
-func _on_server_disconnected():
+func _on_server_disconnected() -> void:
 	stop_client()
 	print_c("Server Connection Lost")
 
-func _on_connection_failed():
+func _on_connection_failed() -> void:
 	stop_client()
 	print_c("Connection Failed")
 
-func _on_connected_to_server():
+func _on_connected_to_server() -> void:
 	print_c("Connected to %s:%s" % [host, DEF_PORT])
 	MultiplayerManager.instance.handler.update_name(MultiplayerManager.instance.player_name)
 
-func _on_host_ip_text_changed():
+func _on_host_ip_text_changed() -> void:
 	host = (%HostIP as TextEdit).text
 #endregion
 
