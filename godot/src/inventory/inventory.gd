@@ -4,9 +4,9 @@ class_name Inventory extends Resource
 @export var glowing_essence: int
 @export var categories: Dictionary # [CategoryData]
 
-enum Tab { WEAPONS, SOULSTONES, CONSUMABLES, QUEST_ITEMS, EQUIPMENT, MATERIALS }
+enum Tab {WEAPONS, SOULSTONES, CONSUMABLES, QUEST_ITEMS, EQUIPMENT, MATERIALS}
 
-func add_category(name: String, items: Dictionary = {}): # Dictionary[ItemData]
+func add_category(name: String, items: Dictionary = {}) -> Inventory: # Dictionary[ItemData]
 	var new_category := CategoryData.new()
 	new_category.name = name
 	new_category.items = items
@@ -20,7 +20,7 @@ func add_item(category_name: String, item: Item) -> Inventory:
 	if category == null:
 		return self
 
-	category.add_item(item)
+	category.add_item(item).end()
 	return self
 
 func get_category(category_name: String) -> CategoryData:
@@ -29,7 +29,7 @@ func get_category(category_name: String) -> CategoryData:
 		print_debug("category %s is null | Stack: %s" % [category_name, get_stack()])
 		return
 
-	var category = categories[category_name]
+	var category: CategoryData = categories[category_name]
 
 	# Shouldn't happen, but be safe and end if not CategoryData type.
 	if !category is CategoryData:
@@ -38,12 +38,14 @@ func get_category(category_name: String) -> CategoryData:
 
 	return category
 
-func remove_item(category_name: String, item: Item):
+func remove_item(category_name: String, item: Item) -> void:
 	# Category doesn't exist
 	if !categories.has(category_name):
 		return
 
-	var category = categories[category_name]
+	var category := get_category(category_name)
+
+	category.remove_item(item.name).end()
 
 func toJSON() -> Dictionary:
 	var data := {
@@ -51,6 +53,7 @@ func toJSON() -> Dictionary:
 		"glowing_essence": glowing_essence,
 		"categories": {}
 	}
-	categories.keys().all(func(key): data["categories"].merge({ "%s" % key: categories[key].toJSON() }))
+	@warning_ignore("unsafe_method_access")
+	var __ := categories.keys().all(func(key: String) -> void: data["categories"].merge({"%s" % key: categories[key].toJSON()}))
 
 	return data
