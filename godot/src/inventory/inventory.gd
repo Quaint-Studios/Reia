@@ -47,6 +47,9 @@ func remove_item(category_name: String, item: Item) -> void:
 
 	category.remove_item(item.name).end()
 
+func end() -> void:
+	pass
+
 func toJSON() -> Dictionary:
 	var data := {
 		"compressed_essence": compressed_essence,

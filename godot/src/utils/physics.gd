@@ -10,8 +10,8 @@ const ITEM_MASK: int = 6
 const GROUND_MASK: int = 9
 
 # Converts an array of layer numbers to a collision mask.
-static func arr_to_collision_mask(arr: PackedByteArray):
-	var val = 0
+static func arr_to_collision_mask(arr: PackedByteArray) -> int:
+	var val := 0
 	for num in arr:
-		val += pow(2, num - 1)
+		val += int(pow(2, num - 1))
 	return val
