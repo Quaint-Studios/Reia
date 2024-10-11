@@ -11,11 +11,11 @@ var item_type: ItemType
 enum ItemType { WEAPON, EQUIPMENT, MATERIAL, SOULSTONE }
 enum ItemGrade { COMMON, UNCOMMON, RARE, SACRED, ARCANE, RADIANT }
 
-func _toJSON_EXT():
+func _toJSON_EXT() -> Dictionary:
 	return {}
 
 func toJSON() -> Dictionary:
-	var data = {
+	var data := {
 		"id": id,
 		"name": name,
 		"description": description,
