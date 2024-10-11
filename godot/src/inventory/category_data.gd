@@ -17,6 +17,12 @@ func add_item(item: Item) -> CategoryData:
 	items[item.name] = item # TODO: Append experience to existing item
 	return self
 
+# TODO: Test
+func remove_item(item_name: String) -> CategoryData:
+	if items.has(item_name):
+		var __ := items.erase(item_name)
+	return self
+
 func get_item(item_name: String) -> Item:
 	if !items.has(item_name):
 		print_debug("Item %s in category %s is null | Stack: %s" % [item_name, name, get_stack()])
