@@ -45,12 +45,12 @@ func _ready() -> void:
 
 ## Sets up the client connected and disconnected signals.
 func setup_signals() -> void:
-	assert(multiplayer.peer_connected.connect(_on_client_connected) == 0)
-	assert(multiplayer.peer_disconnected.connect(_on_client_disconnected) == 0)
+	var __ := multiplayer.peer_connected.connect(_on_client_connected)
+	__ = multiplayer.peer_disconnected.connect(_on_client_disconnected)
 
-	assert(multiplayer.server_disconnected.connect(_on_server_disconnected) == 0)
-	assert(multiplayer.connection_failed.connect(_on_connection_failed) == 0)
-	assert(multiplayer.connected_to_server.connect(_on_connected_to_server) == 0)
+	__ = multiplayer.server_disconnected.connect(_on_server_disconnected)
+	__ = multiplayer.connection_failed.connect(_on_connection_failed)
+	__ = multiplayer.connected_to_server.connect(_on_connected_to_server)
 
 ## Starts the server and updates the peer.
 func start_client() -> void:

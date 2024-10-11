@@ -38,8 +38,8 @@ func _ready() -> void:
 ## Sets up the client connected and disconnected signals.
 func setup_signals() -> void:
 	get_tree().set_multiplayer(MultiplayerAPI.create_default_interface(), get_path())
-	assert(multiplayer.peer_connected.connect(_on_client_connected) == 0)
-	assert(multiplayer.peer_disconnected.connect(_on_client_disconnected) == 0)
+	var __ := multiplayer.peer_connected.connect(_on_client_connected)
+	__ = multiplayer.peer_disconnected.connect(_on_client_disconnected)
 	initialized.emit()
 
 ## Starts the server and updates the peer.

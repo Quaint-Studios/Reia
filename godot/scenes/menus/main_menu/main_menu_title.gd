@@ -11,20 +11,20 @@ extends Control
 @onready var quitButton: TextureButton = $Quit/TextureButton
 
 func _ready() -> void:
-		assert(playButton.pressed.connect(_on_play_pressed) == 0)
-		assert(settingsButton.pressed.connect(_on_settings_pressed) == 0)
-		assert(creditsButton.pressed.connect(_on_credits_pressed) == 0)
-		assert(quitButton.pressed.connect(_on_quit_pressed) == 0)
+		var __ := playButton.pressed.connect(_on_play_pressed)
+		__ = settingsButton.pressed.connect(_on_settings_pressed)
+		__ = creditsButton.pressed.connect(_on_credits_pressed)
+		__ = quitButton.pressed.connect(_on_quit_pressed)
 
-		assert(playButton.mouse_entered.connect(_on_mouse_entered.bind("Play", playButton)) == 0)
-		assert(settingsButton.mouse_entered.connect(_on_mouse_entered.bind("Settings", settingsButton)) == 0)
-		assert(creditsButton.mouse_entered.connect(_on_mouse_entered.bind("Credits", creditsButton)) == 0)
-		assert(quitButton.mouse_entered.connect(_on_mouse_entered.bind("Quit", quitButton)) == 0)
+		__ = playButton.mouse_entered.connect(_on_mouse_entered.bind("Play", playButton))
+		__ = settingsButton.mouse_entered.connect(_on_mouse_entered.bind("Settings", settingsButton))
+		__ = creditsButton.mouse_entered.connect(_on_mouse_entered.bind("Credits", creditsButton))
+		__ = quitButton.mouse_entered.connect(_on_mouse_entered.bind("Quit", quitButton))
 
-		assert(playButton.mouse_exited.connect(_on_mouse_exited.bind("Play", playButton)) == 0)
-		assert(settingsButton.mouse_exited.connect(_on_mouse_exited.bind("Settings", settingsButton)) == 0)
-		assert(creditsButton.mouse_exited.connect(_on_mouse_exited.bind("Credits", creditsButton)) == 0)
-		assert(quitButton.mouse_exited.connect(_on_mouse_exited.bind("Quit", quitButton)) == 0)
+		__ = playButton.mouse_exited.connect(_on_mouse_exited.bind("Play", playButton))
+		__ = settingsButton.mouse_exited.connect(_on_mouse_exited.bind("Settings", settingsButton))
+		__ = creditsButton.mouse_exited.connect(_on_mouse_exited.bind("Credits", creditsButton))
+		__ = quitButton.mouse_exited.connect(_on_mouse_exited.bind("Quit", quitButton))
 
 # On mouse entered for, change the size of the adjacent Label
 func _on_mouse_entered(labelName: String, btn: TextureButton) -> void:
