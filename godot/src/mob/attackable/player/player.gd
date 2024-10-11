@@ -55,25 +55,25 @@ func _process(_delta: float) -> void:
 		# So you can still fall really fast but won't go at the speed of light
 		# and break the game lol.
 
-func _unhandled_input(event: InputEvent):
+func _unhandled_input(event: InputEvent) -> void:
 	if !should_move():
 		return
 
 	if event is InputEventMouseButton:
-		print("Mouse Click/Unclick at: ", event.position)
+		print("Mouse Click/Unclick at: ", (event as InputEventMouseButton).position)
 		pass
 
 	if event is InputEventMouseMotion:
 		pass
 
 @rpc("any_peer", "call_local")
-func _movement_test():
+func _movement_test() -> void:
 	# Call the movement on the server.
 	# Server sends it to all others peers.
 	# Other peers verifies it's only coming from the server.
 	pass
 
-func _physics_process(delta: float):
+func _physics_process(delta: float) -> void:
 	if !should_move():
 		return
 
@@ -84,9 +84,9 @@ func _physics_process(delta: float):
 	if Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		_handle_inputs(delta)
 
-	move_and_slide()
+	var __ := move_and_slide()
 
-func _handle_inputs(delta: float):
+func _handle_inputs(delta: float) -> void:
 	handle_attack()
 	handle_skills()
 	handle_movement(delta)
@@ -94,7 +94,7 @@ func _handle_inputs(delta: float):
 ###
 ### Movement
 ###
-func handle_movement(delta: float):
+func handle_movement(delta: float) -> void:
 	# Handle jump.
 	if is_on_floor():
 		if Input.is_action_just_pressed("jump"):
@@ -105,7 +105,7 @@ func handle_movement(delta: float):
 
 	# Get the input direction and handle movement.
 
-	var input_dir = Input.get_vector("left", "right", "forward", "back")
+	var input_dir := Input.get_vector("left", "right", "forward", "back")
 	if input_dir:
 		set_anim("movements", "run")
 	else:
@@ -115,13 +115,13 @@ func handle_movement(delta: float):
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 
-		var old_rot = visuals.rotation
+		var old_rot := visuals.rotation
 
 		visuals.look_at(position + direction)
 		visuals.rotation.x = 0
 		visuals.rotation.z = 0
 
-		var new_rot = visuals.rotation
+		var new_rot := visuals.rotation
 
 		visuals.rotation.y = lerp_angle(old_rot.y, new_rot.y, sin(delta * 20))
 	else:
@@ -131,7 +131,7 @@ func handle_movement(delta: float):
 ###
 ### Animator
 ###
-func set_anim(node_name: String, param_name: String):
+func set_anim(node_name: String, param_name: String) -> void:
 	%AnimationTree.set("parameters/" + node_name + "/transition_request", param_name)
 
 ###
@@ -149,7 +149,8 @@ func handle_attack() -> void:
 		if collision:
 			if collision.collider is Attackable:
 				print("Attacked:", collision.collider.name)
-				attack(collision.collider)
+				var attackable : Attackable = collision.collider
+				attack(attackable)
 				return
 		print("Collide with:", "nuthin")
 
