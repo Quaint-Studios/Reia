@@ -3,7 +3,7 @@ extends Node
 ##
 ## This script is used to set the Rich Presence of the Discord SDK.
 
-func _ready():
+func _ready() -> void:
 	if OS.has_feature("wasm32") || OS.has_feature("wasm") || OS.has_feature("mobile"):
 		return
 

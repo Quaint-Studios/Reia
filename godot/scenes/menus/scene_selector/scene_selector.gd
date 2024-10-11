@@ -31,7 +31,7 @@ class MENUS:
 
 enum Maps { JADEWATER_FALLS, WATERBROOK }
 
-func _ready():
+func _ready() -> void:
 	if OS.has_feature("dedicated_server") || DisplayServer.get_name() == "headless" ||  "--server" in OS.get_cmdline_user_args():
 		get_tree().change_scene_to_file.call_deferred(SceneSelector.REGIONS.JADEWATER_FALLS)
 	else:
