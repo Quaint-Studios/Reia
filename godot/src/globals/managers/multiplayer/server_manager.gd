@@ -28,7 +28,7 @@ var players := []
 #endregion
 
 ## Sets up the server.
-func _ready():
+func _ready() -> void:
 	_server.supported_protocols = ['ludus']
 	setup_signals()
 
@@ -36,18 +36,20 @@ func _ready():
 		start_server()
 
 ## Sets up the client connected and disconnected signals.
-func setup_signals():
+func setup_signals() -> void:
 	get_tree().set_multiplayer(MultiplayerAPI.create_default_interface(), get_path())
-	multiplayer.peer_connected.connect(_on_client_connected)
-	multiplayer.peer_disconnected.connect(_on_client_disconnected)
+	assert(multiplayer.peer_connected.connect(_on_client_connected) == 0)
+	assert(multiplayer.peer_disconnected.connect(_on_client_disconnected) == 0)
+	initialized.emit()
 
 ## Starts the server and updates the peer.
-func start_server():
+func start_server() -> void:
 	multiplayer.multiplayer_peer = null
 	var err := _server.create_server(DEF_PORT)
 	if err == Error.OK:
 		multiplayer.multiplayer_peer = _server
 		print_s("Server Started")
+		started.emit()
 	else:
 		print_s("Error: %s" % Error_EXT.get_error(err))
 
@@ -55,8 +57,9 @@ func start_server():
 			get_tree().quit()
 
 ## Stops the server and cleans up.
-func stop_server():
+func stop_server() -> void:
 	print_s("Server Stopped")
+	stopped.emit()
 
 #
 # func restart_server():
@@ -64,10 +67,10 @@ func stop_server():
 #
 
 #region Signal Handlers
-func _on_client_connected(id: int):
+func _on_client_connected(id: int) -> void:
 	print("Client (%d) Connected" % id)
 
-func _on_client_disconnected(id: int):
+func _on_client_disconnected(id: int) -> void:
 	print("Client (%d) Disconnected" % id)
 #endregion
 

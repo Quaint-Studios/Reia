@@ -16,11 +16,11 @@ signal is_respawning
 				is_respawning.emit()
 enum Status { ALIVE, DEAD, RESPAWNING }
 
-func revive():
+func revive() -> void:
 	state = Status.ALIVE
 
-func die(_attacker: Attackable):
+func die(_attacker: Attackable) -> void:
 	state = Status.DEAD
 
-func respawn():
+func respawn() -> void:
 	state = Status.RESPAWNING
