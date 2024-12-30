@@ -30,6 +30,7 @@ jobs:
           name: "Reia_${{ steps.replace_string.outputs.replaced }}"
           preset: ${{ matrix.platform }}
           debugMode: "false"
+          projectDir: "godot"
       - name: Create Release And Upload Asset
         uses: softprops/action-gh-release@v1
         if: ${{startsWith(github.ref, 'refs/tags/') }}
