@@ -52,8 +52,7 @@ const ARG_NOT_SET = '_*_argument_*_is_*_not_set_*_'
 #	- some_signal on ref2 was never emitted.
 #	- other_signal on ref2 was emitted 3 times, each time with 3 parameters.
 var _watched_signals = {}
-var _utils = load('res://addons/gut/utils.gd').get_instance()
-var _lgr = _utils.get_logger()
+var _lgr = GutUtils.get_logger()
 
 func _add_watched_signal(obj, name):
 	# SHORTCIRCUIT - ignore dupes
@@ -131,7 +130,7 @@ func watch_signal(object, signal_name):
 		_add_watched_signal(object, signal_name)
 		did = true
 	else:
-		_utils.get_logger().warn(str(object, ' does not have signal ', signal_name))
+		GutUtils.get_logger().warn(str(object, ' does not have signal ', signal_name))
 	return did
 
 func get_emit_count(object, signal_name):
@@ -170,7 +169,7 @@ func is_watching(object, signal_name):
 
 func clear():
 	for obj in _watched_signals:
-		if(_utils.is_not_freed(obj)):
+		if(GutUtils.is_not_freed(obj)):
 			for signal_name in _watched_signals[obj]:
 				obj.disconnect(signal_name, Callable(self,'_on_watched_signal'))
 	_watched_signals.clear()
@@ -185,3 +184,35 @@ func get_signals_emitted(obj):
 				emitted.append(signal_name)
 
 	return emitted
+
+
+func get_signal_summary(obj):
+	var emitted = {}
+	if(is_watching_object(obj)):
+		for signal_name in _watched_signals[obj]:
+			if(_watched_signals[obj][signal_name].size() > 0):
+				# maybe this could return parameters if any were sent.  should
+				# have an empty list if no parameters were ever sent to the
+				# signal.  Or this all just gets moved into print_signal_summary
+				# since this wouldn't be that useful without more data in the
+				# summary.
+				var entry = {
+					emit_count = get_emit_count(obj, signal_name)
+				}
+				emitted[signal_name] = entry
+
+	return emitted
+
+
+func print_signal_summary(obj):
+	if(!is_watching_object(obj)):
+		var msg = str('Not watching signals for ', obj)
+		GutUtils.get_logger().warn(msg)
+		return
+
+	var summary = get_signal_summary(obj)
+	print(obj, '::Signals')
+	var sorted = summary.keys()
+	sorted.sort()
+	for key in sorted:
+		print(' -  ', key, ' x ', summary[key].emit_count)
