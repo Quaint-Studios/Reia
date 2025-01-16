@@ -1,0 +1,55 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckhga6p2fs1hd"]
+
+[ext_resource type="Theme" uid="uid://58qnuw0igyna" path="res://addons/game_manager/components/core/core_theme.tres" id="1_je5yy"]
+
+[node name="Characters" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_je5yy")
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+split_offset = 250
+
+[node name="List" type="Panel" parent="HSplitContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/List"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/List/MarginContainer"]
+layout_mode = 2
+theme_override_constants/margin_bottom = 36
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HSplitContainer/List/MarginContainer/MarginContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/List/MarginContainer/MarginContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="CreateButton" type="Button" parent="HSplitContainer/List/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_type_variation = &"ButtonSecondary"
+text = "New Character..."
+
+[node name="Data" type="Panel" parent="HSplitContainer"]
+layout_mode = 2
