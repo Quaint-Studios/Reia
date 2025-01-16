@@ -139,7 +139,10 @@ jobs:
           name: web
           path: build/web
   release-notes:
+    name: Release Notes
     runs-on: ubuntu-latest
+    needs: [ export-windows, export-linux, export-mac, export-web ]
+    if: ${{ always() && !cancelled() && needs.build.result == 'success' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
