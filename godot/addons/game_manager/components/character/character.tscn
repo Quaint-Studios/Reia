@@ -44,6 +44,49 @@ layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer/List/MarginContainer/MarginContainer/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CharacterBox" type="Button" parent="HSplitContainer/List/MarginContainer/MarginContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Background" type="Panel" parent="HSplitContainer/List/MarginContainer/MarginContainer/ScrollContainer/VBoxContainer/CharacterBox"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 2
+offset_top = 4.0
+offset_right = 234.0
+offset_bottom = 52.0
+theme_type_variation = &"BluePanel"
+
+[node name="MarginContainer" type="MarginContainer" parent="HSplitContainer/List/MarginContainer/MarginContainer/ScrollContainer/VBoxContainer/CharacterBox/Background"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/List/MarginContainer/MarginContainer/ScrollContainer/VBoxContainer/CharacterBox/Background/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="TextureRect" type="TextureRect" parent="HSplitContainer/List/MarginContainer/MarginContainer/ScrollContainer/VBoxContainer/CharacterBox/Background/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Label" type="Label" parent="HSplitContainer/List/MarginContainer/MarginContainer/ScrollContainer/VBoxContainer/CharacterBox/Background/MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LabelBold"
+text = "Long Character Name"
+text_overrun_behavior = 3
 
 [node name="CreateButton" type="Button" parent="HSplitContainer/List/MarginContainer"]
 layout_mode = 2
