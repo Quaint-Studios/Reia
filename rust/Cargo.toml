@@ -8,7 +8,9 @@ crate-type = ["cdylib"]
 
 [dependencies]
 godot = { git = "https://github.com/godot-rust/gdext", branch = "master" }
-mongodb = "2.8"
-polodb_core = "4.4"
+postgrest = "1.0"  # Supabase Rust client
+reqwest = { version = "0.11", features = ["json"] }  # HTTP client for Turso
 serde = { version = "1.0", features = ["derive"] }
 tokio = { version = "1.35", features = ["full"] }
+jwt = "0.16"  # For handling Supabase JWTs
+sqlx = { version = "0.7", features = ["runtime-tokio-native-tls", "sqlite"] }  # For Turso SQLite interactions

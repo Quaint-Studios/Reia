@@ -60,17 +60,19 @@ Main Godot project directory containing all game-related files.
     └── /shaders    # Shader files
 ```
 
-### /rust_gdext
+### /rust
 Rust integration with Godot using gdext.
 
 ```
-/rust_gdext
+/rust
 ├── /src
 │   ├── lib.rs      # Main library file
+│   ├── /auth       # Authentication system
+│   │   └── /supabase    # Supabase authentication implementation
 │   ├── /db         # Database implementations
-│   │   ├── /models      # Database models
-│   │   ├── /mongodb     # MongoDB implementation
-│   │   └── /polodb      # PoloDB implementation
+│   │   ├── /turso       # Turso database integration
+│   │   ├── /steam       # Steam integration
+│   │   └── /analytics   # Analytics system
 │   ├── /game       # Game logic
 │   │   ├── /state       # Game state management
 │   │   ├── /systems     # Game systems
@@ -82,32 +84,28 @@ Rust integration with Godot using gdext.
 └── Cargo.toml      # Rust dependencies and configuration
 ```
 
-## Database Structure
+## Backend Architecture
 
-### Online Mode (MongoDB)
-- Used for MMO gameplay
-- Handles player data, world state, and economy
-- Collections:
-  - players
-  - characters
-  - inventory
-  - world_state
-  - market
-  - guilds
-  - quests
-  - chat_logs
+### Authentication (Supabase)
+- User authentication and authorization
+- Session management
+- User profiles and roles
+- OAuth integrations
 
-### Offline Mode (PoloDB)
-- Used for single-player and self-hosted gameplay
-- Local data storage
-- Maintains game state without network dependency
-- Tables:
-  - player_data
-  - game_state
-  - inventory
-  - quests
-  - achievements
-  - settings
+### Database (Turso)
+- Primary game data storage
+- Structured SQL database for:
+  - Player data
+  - Game state
+  - Inventory
+  - Quests
+  - Achievements
+  - Settings
+
+### Additional Integrations
+- Steam integration for platform-specific features
+- Analytics for game metrics and player behavior
+- Future database integrations can be added under /db
 
 ## Best Practices
 
@@ -136,3 +134,10 @@ Rust integration with Godot using gdext.
 - Keep scripts focused and single-purpose
 - Implement interfaces for common behaviors
 - Use signals for loose coupling between systems
+
+### Database Practices
+- Use prepared statements for all SQL queries
+- Implement proper error handling and retries
+- Cache frequently accessed data
+- Use transactions for related operations
+- Implement proper migration strategies
