@@ -8,7 +8,7 @@ var rot_speed := 0.5
 var offset := 0.69
 var deleting := false
 
-func _ready():
+func _ready() -> void:
 	super()
 
 	if loot_pivot == null:

@@ -1,12 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://b2jlruki5q8g0"]
+[gd_scene load_steps=13 format=3 uid="uid://b2jlruki5q8g0"]
 
 [ext_resource type="Script" path="res://addons/game_manager/components/core/core.gd" id="1_kcyk4"]
 [ext_resource type="Theme" uid="uid://58qnuw0igyna" path="res://addons/game_manager/components/core/core_theme.tres" id="2_hw2d2"]
 [ext_resource type="FontFile" uid="uid://daf8ykaf1466s" path="res://addons/game_manager/themes/fonts/Poppins-Bold.ttf" id="2_xfmva"]
 [ext_resource type="Script" path="res://addons/game_manager/components/core/toolbar.gd" id="3_bbh6n"]
+[ext_resource type="PackedScene" uid="uid://ckhga6p2fs1hd" path="res://addons/game_manager/components/character/character.tscn" id="3_hmsk8"]
+[ext_resource type="PackedScene" uid="uid://bpasjyv1eruvr" path="res://addons/game_manager/components/dialogue/dialogue.tscn" id="3_lb0ib"]
 [ext_resource type="ButtonGroup" uid="uid://cieij32dxfcee" path="res://addons/game_manager/components/core/toolbar_button_group.tres" id="3_v75j6"]
+[ext_resource type="PackedScene" uid="uid://ckbxrmsml71oc" path="res://addons/game_manager/components/quest/quest.tscn" id="4_yisoh"]
+[ext_resource type="PackedScene" uid="uid://dqpvywluls2bc" path="res://addons/game_manager/components/settings/settings.tscn" id="5_8dqxk"]
+[ext_resource type="Script" path="res://addons/game_manager/components/core/workspace.gd" id="6_fqyfu"]
+[ext_resource type="Texture2D" uid="uid://4pyfxa4qhxcx" path="res://addons/game_manager/icons/reload.svg" id="10_sw1kq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28rqc"]
+bg_color = Color(0.129412, 0.14902, 0.180392, 1)
 corner_radius_top_left = 12
 corner_radius_top_right = 12
 corner_radius_bottom_right = 12
@@ -24,6 +31,10 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 theme = ExtResource("2_hw2d2")
 script = ExtResource("1_kcyk4")
+character_scene = ExtResource("3_hmsk8")
+dialogue_scene = ExtResource("3_lb0ib")
+quest_scene = ExtResource("4_yisoh")
+settings_scene = ExtResource("5_8dqxk")
 
 [node name="Main" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -38,14 +49,21 @@ theme = ExtResource("2_hw2d2")
 layout_mode = 2
 theme = ExtResource("2_hw2d2")
 theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 5
 script = ExtResource("3_bbh6n")
 
 [node name="Layout" type="HBoxContainer" parent="Main/Toolbar"]
 layout_mode = 2
 theme = ExtResource("2_hw2d2")
+
+[node name="Character" type="Button" parent="Main/Toolbar/Layout"]
+layout_mode = 2
+theme = ExtResource("2_hw2d2")
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("3_v75j6")
+text = "Character"
+flat = true
 
 [node name="Dialogue" type="Button" parent="Main/Toolbar/Layout"]
 layout_mode = 2
@@ -73,6 +91,17 @@ button_group = ExtResource("3_v75j6")
 text = "Settings"
 flat = true
 
+[node name="Spacer" type="Control" parent="Main/Toolbar/Layout"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ReloadButton" type="Button" parent="Main/Toolbar/Layout"]
+custom_minimum_size = Vector2(26, 0)
+layout_mode = 2
+theme = ExtResource("2_hw2d2")
+icon = ExtResource("10_sw1kq")
+icon_alignment = 1
+
 [node name="Workspace" type="MarginContainer" parent="Main"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -81,13 +110,14 @@ theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 5
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 5
+script = ExtResource("6_fqyfu")
 
 [node name="Background" type="Panel" parent="Main/Workspace"]
 layout_mode = 2
 theme = ExtResource("2_hw2d2")
 theme_override_styles/panel = SubResource("StyleBoxFlat_28rqc")
 
-[node name="Layout" type="HSplitContainer" parent="Main/Workspace"]
+[node name="Layout" type="Control" parent="Main/Workspace"]
 layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_hw2d2")

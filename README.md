@@ -9,11 +9,13 @@ Explore endless worlds and embark on a magical adventure of a lifetime! Reia is 
 
 ## Info
 
-> Visit the website over at [https://www.playreia.com](https://www.playreia.com).
+> **Website:** Visit the website over at [https://www.playreia.com](https://www.playreia.com).
 
 > **Discord:** Private for now but available if you request it. Just add `makosai` on Discord and ask for an invite! ❤️
 
-> **Sustenet:** Visit [https://github.com/Quaint-Studios/Sustenet](https://github.com/Quaint-Studios/Sustenet) to see the netcode designed specifically for this project and made in Zig.
+> **Sustenet:** Visit [https://github.com/Quaint-Studios/Sustenet](https://github.com/Quaint-Studios/Sustenet) to see the netcode designed specifically for this project and made in Rust & Zig.
+
+> **Jobs:** Check out the list of [jobs](https://github.com/Quaint-Studios/Reia/blob/master/docs/JOBS.md) for this project.
 
 ## Table of Contents
 <ol>

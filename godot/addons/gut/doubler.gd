@@ -1,37 +1,3 @@
-# ##############################################################################
-#(G)odot (U)nit (T)est class
-#
-# ##############################################################################
-# The MIT License (MIT)
-# =====================
-#
-# Copyright (c) 2020 Tom "Butch" Wesley
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-# THE SOFTWARE.
-#
-# ##############################################################################
-# Description
-# -----------
-# ##############################################################################
-
-
-
 # ------------------------------------------------------------------------------
 # A stroke of genius if I do say so.  This allows for doubling a scene without
 # having  to write any files.  By overloading the "instantiate" method  we can
@@ -45,10 +11,24 @@ class PackedSceneDouble:
 	func set_script_obj(obj):
 		_script = obj
 
+	@warning_ignore("native_method_override")
 	func instantiate(edit_state=0):
 		var inst = _scene.instantiate(edit_state)
+		var export_props = []
+		var script_export_flag = (PROPERTY_USAGE_STORAGE | PROPERTY_USAGE_EDITOR | PROPERTY_USAGE_SCRIPT_VARIABLE)
+
 		if(_script !=  null):
+			if(inst.get_script() != null):
+				# Get all the exported props and values so we can set them again
+				for prop in inst.get_property_list():
+					var is_export = prop.usage & (script_export_flag) == script_export_flag
+					if(is_export):
+						export_props.append([prop.name, inst.get(prop.name)])
+
 			inst.set_script(_script)
+			for exported_value in export_props:
+				inst.set(exported_value[0], exported_value[1])
+
 		return inst
 
 	func load_scene(path):
@@ -60,23 +40,22 @@ class PackedSceneDouble:
 # ------------------------------------------------------------------------------
 # START Doubler
 # ------------------------------------------------------------------------------
-var _utils = load('res://addons/gut/utils.gd').get_instance()
-var _base_script_text = _utils.get_file_as_text('res://addons/gut/double_templates/script_template.txt')
-var _script_collector = _utils.ScriptCollector.new()
+var _base_script_text = GutUtils.get_file_as_text('res://addons/gut/double_templates/script_template.txt')
+var _script_collector = GutUtils.ScriptCollector.new()
 # used by tests for debugging purposes.
 var print_source = false
-var inner_class_registry = _utils.InnerClassRegistry.new()
+var inner_class_registry = GutUtils.InnerClassRegistry.new()
 
 # ###############
 # Properties
 # ###############
-var _stubber = _utils.Stubber.new()
+var _stubber = GutUtils.Stubber.new()
 func get_stubber():
 	return _stubber
 func set_stubber(stubber):
 	_stubber = stubber
 
-var _lgr = _utils.get_logger()
+var _lgr = GutUtils.get_logger()
 func get_logger():
 	return _lgr
 func set_logger(logger):
@@ -105,19 +84,19 @@ func set_strategy(strategy):
 		_lgr.error(str('doubler.gd:  invalid double strategy ', strategy))
 
 
-var _method_maker = _utils.MethodMaker.new()
+var _method_maker = GutUtils.MethodMaker.new()
 func get_method_maker():
 	return _method_maker
 
-var _ignored_methods = _utils.OneToMany.new()
+var _ignored_methods = GutUtils.OneToMany.new()
 func get_ignored_methods():
 	return _ignored_methods
 
 # ###############
 # Private
 # ###############
-func _init(strategy=_utils.DOUBLE_STRATEGY.SCRIPT_ONLY):
-	set_logger(_utils.get_logger())
+func _init(strategy=GutUtils.DOUBLE_STRATEGY.SCRIPT_ONLY):
+	set_logger(GutUtils.get_logger())
 	_strategy = strategy
 
 
@@ -129,15 +108,15 @@ func _get_indented_line(indents, text):
 
 
 func _stub_to_call_super(parsed, method_name):
-	if(_utils.non_super_methods.has(method_name)):
+	if(!parsed.get_method(method_name).is_eligible_for_doubling()):
 		return
 
-	var params = _utils.StubParams.new(parsed.script_path, method_name, parsed.subpath)
+	var params = GutUtils.StubParams.new(parsed.script_path, method_name, parsed.subpath)
 	params.to_call_super()
 	_stubber.add_stub(params)
 
 
-func _get_base_script_text(parsed, override_path, partial):
+func _get_base_script_text(parsed, override_path, partial, included_methods):
 	var path = parsed.script_path
 	if(override_path != null):
 		path = override_path
@@ -170,14 +149,15 @@ func _get_base_script_text(parsed, override_path, partial):
 		"gut_id":gut_id,
 		"singleton_name":'',#GutUtils.nvl(obj_info.get_singleton_name(), ''),
 		"is_partial":partial,
+		"doubled_methods":included_methods,
 	}
 
 	return _base_script_text.format(values)
 
 
-func _is_valid_double_method(parsed_script, parsed_method):
+func _is_method_eligible_for_doubling(parsed_script, parsed_method):
 	return !parsed_method.is_accessor() and \
-		!parsed_method.is_black_listed() and \
+		parsed_method.is_eligible_for_doubling() and \
 		!_ignored_methods.has(parsed_script.resource, parsed_method.meta.name)
 
 
@@ -190,40 +170,44 @@ func _create_script_no_warnings(src):
 	prev_native_override_value = ProjectSettings.get_setting(native_method_override)
 	ProjectSettings.set_setting(native_method_override, 0)
 
-	var DblClass = _utils.create_script_from_source(src)
+	var DblClass = GutUtils.create_script_from_source(src)
 
 	ProjectSettings.set_setting(native_method_override, prev_native_override_value)
 	return DblClass
 
 
 func _create_double(parsed, strategy, override_path, partial):
-	var base_script = _get_base_script_text(parsed, override_path, partial)
-	var super_name = ""
 	var path = ""
 
 	path = parsed.script_path
 	var dbl_src = ""
-	dbl_src += base_script
+	var included_methods = []
 
 	for method in parsed.get_local_methods():
-		if(_is_valid_double_method(parsed, method)):
+		if(_is_method_eligible_for_doubling(parsed, method)):
+			included_methods.append(method.meta.name)
 			var mthd = parsed.get_local_method(method.meta.name)
 			if(parsed.is_native):
-				dbl_src += _get_func_text(method.meta, parsed.resource, super_name)
+				dbl_src += _get_func_text(method.meta, parsed.resource)
 			else:
-				dbl_src += _get_func_text(method.meta, path, super_name)
+				dbl_src += _get_func_text(method.meta, path)
 
-	if(strategy == _utils.DOUBLE_STRATEGY.INCLUDE_NATIVE):
+	if(strategy == GutUtils.DOUBLE_STRATEGY.INCLUDE_NATIVE):
 		for method in parsed.get_super_methods():
-			if(_is_valid_double_method(parsed, method)):
+			if(_is_method_eligible_for_doubling(parsed, method)):
+				included_methods.append(method.meta.name)
 				_stub_to_call_super(parsed, method.meta.name)
 				if(parsed.is_native):
-					dbl_src += _get_func_text(method.meta, parsed.resource, super_name)
+					dbl_src += _get_func_text(method.meta, parsed.resource)
 				else:
-					dbl_src += _get_func_text(method.meta, path, super_name)
+					dbl_src += _get_func_text(method.meta, path)
+
+	var base_script = _get_base_script_text(parsed, override_path, partial, included_methods)
+	dbl_src = base_script + "\n\n" + dbl_src
+
 
 	if(print_source):
-		print(_utils.add_line_numbers(dbl_src))
+		print(GutUtils.add_line_numbers(dbl_src))
 
 	var DblClass = _create_script_no_warnings(dbl_src)
 	if(_stubber != null):
@@ -234,7 +218,7 @@ func _create_double(parsed, strategy, override_path, partial):
 
 func _stub_method_default_values(which, parsed, strategy):
 	for method in parsed.get_local_methods():
-		if(!method.is_black_listed() && !_ignored_methods.has(parsed.resource, method.meta.name)):
+		if(method.is_eligible_for_doubling() and !_ignored_methods.has(parsed.resource, method.meta.name)):
 			_stubber.stub_defaults_from_meta(parsed.script_path, method.meta)
 
 
@@ -262,12 +246,12 @@ func _get_inst_id_ref_str(inst):
 	return ref_str
 
 
-func _get_func_text(method_hash, path, super_=""):
+func _get_func_text(method_hash, path):
 	var override_count = null;
 	if(_stubber != null):
 		override_count = _stubber.get_parameter_count(path, method_hash.name)
 
-	var text = _method_maker.get_function_text(method_hash, path, override_count, super_) + "\n"
+	var text = _method_maker.get_function_text(method_hash, override_count) + "\n"
 
 	return text
 
@@ -275,7 +259,7 @@ func _get_func_text(method_hash, path, super_=""):
 func _parse_script(obj):
 	var parsed = null
 
-	if(_utils.is_inner_class(obj)):
+	if(GutUtils.is_inner_class(obj)):
 		if(inner_class_registry.has(obj)):
 			parsed = _script_collector.parse(inner_class_registry.get_base_resource(obj), obj)
 		else:
@@ -320,10 +304,10 @@ func partial_double_scene(scene, strategy=_strategy):
 
 
 func double_gdnative(which):
-	return _double(which, _utils.DOUBLE_STRATEGY.INCLUDE_NATIVE)
+	return _double(which, GutUtils.DOUBLE_STRATEGY.INCLUDE_NATIVE)
 
 func partial_double_gdnative(which):
-	return _partial_double(which, _utils.DOUBLE_STRATEGY.INCLUDE_NATIVE)
+	return _partial_double(which, GutUtils.DOUBLE_STRATEGY.INCLUDE_NATIVE)
 
 
 func double_inner(parent, inner, strategy=_strategy):
@@ -338,3 +322,34 @@ func partial_double_inner(parent, inner, strategy=_strategy):
 
 func add_ignored_method(obj, method_name):
 	_ignored_methods.add(obj, method_name)
+
+
+
+# ##############################################################################
+#(G)odot (U)nit (T)est class
+#
+# ##############################################################################
+# The MIT License (MIT)
+# =====================
+#
+# Copyright (c) 2024 Tom "Butch" Wesley
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+# THE SOFTWARE.
+#
+# ##############################################################################
