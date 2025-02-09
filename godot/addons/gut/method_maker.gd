@@ -26,8 +26,8 @@ class CallParameters:
 # }]
 # default_args []
 
-var _utils = load('res://addons/gut/utils.gd').get_instance()
-var _lgr = _utils.get_logger()
+var _lgr = GutUtils.get_logger()
+var default_vararg_arg_count = 10
 const PARAM_PREFIX = 'p_'
 
 # ------------------------------------------------------
@@ -106,8 +106,8 @@ func _init():
 # ###############
 # Private
 # ###############
-var _func_text = _utils.get_file_as_text('res://addons/gut/double_templates/function_template.txt')
-var _init_text = _utils.get_file_as_text('res://addons/gut/double_templates/init_template.txt')
+var _func_text = GutUtils.get_file_as_text('res://addons/gut/double_templates/function_template.txt')
+var _init_text = GutUtils.get_file_as_text('res://addons/gut/double_templates/init_template.txt')
 
 func _is_supported_default(type_flag):
 	return type_flag >= 0 and type_flag < _supported_defaults.size() and _supported_defaults[type_flag] != null
@@ -116,20 +116,25 @@ func _is_supported_default(type_flag):
 func _make_stub_default(method, index):
 	return str('__gutdbl.default_val("', method, '",', index, ')')
 
+
 func _make_arg_array(method_meta, override_size):
 	var to_return = []
 
 	var has_unsupported_defaults = false
-	var dflt_start = method_meta.args.size() - method_meta.default_args.size()
 
 	for i in range(method_meta.args.size()):
 		var pname = method_meta.args[i].name
 		var dflt_text = _make_stub_default(method_meta.name, i)
 		to_return.append(CallParameters.new(PARAM_PREFIX + pname, dflt_text))
 
+	var extra_params = GutUtils.nvl(override_size, 0)
+	if(extra_params == 0):
+		if(method_meta.flags & METHOD_FLAG_VARARG):
+			extra_params = default_vararg_arg_count
+
 	# Add in extra parameters from stub settings.
-	if(override_size != null):
-		for i in range(method_meta.args.size(), override_size):
+	if(extra_params > 0):
+		for i in range(method_meta.args.size(), extra_params):
 			var pname = str(PARAM_PREFIX, 'arg', i)
 			var dflt_text = _make_stub_default(method_meta.name, i)
 			to_return.append(CallParameters.new(pname, dflt_text))
@@ -155,14 +160,14 @@ func _get_arg_text(arg_array):
 
 
 # creates a call to the function in meta in the super's class.
-func _get_super_call_text(method_name, args, super_name=""):
+func _get_super_call_text(method_name, args):
 	var params = ''
 	for i in range(args.size()):
 		params += args[i].p_name
 		if(i != args.size() -1):
 			params += ', '
 
-	return str(super_name, 'await super(', params, ')')
+	return str('await super(', params, ')')
 
 
 func _get_spy_call_parameters_text(args):
@@ -194,12 +199,11 @@ func _get_init_text(meta, args, method_params, param_array):
 			if(i != args.size() -1):
 				super_params += ', '
 
-
 	text = _init_text.format({
 		"func_decleration":decleration,
 		"super_params":super_params,
 		"param_array":param_array,
-		"method_name":meta.name
+		"method_name":meta.name,
 	})
 
 	return text
@@ -209,14 +213,13 @@ func _get_init_text(meta, args, method_params, param_array):
 # types whose defaults are supported will have their values.  If a datatype
 # is not supported and the parameter has a default, a warning message will be
 # printed and the declaration will return null.
-#
-# path is no longer used
-func get_function_text(meta, path=null, override_size=null, super_name=""):
+func get_function_text(meta, override_size=null):
 	var method_params = ''
 	var text = null
 	var result = _make_arg_array(meta, override_size)
 	var has_unsupported = result[0]
 	var args = result[1]
+	var vararg_warning = ""
 
 	var param_array = _get_spy_call_parameters_text(args)
 	if(has_unsupported):
@@ -230,26 +233,28 @@ func get_function_text(meta, path=null, override_size=null, super_name=""):
 	if(param_array == 'null'):
 		param_array = '[]'
 
+	if(meta.flags & METHOD_FLAG_VARARG and override_size == null):
+		vararg_warning = "__gutdbl.vararg_warning()\n\t"
+
 	if(method_params != null):
 		if(meta.name == '_init'):
 			text =  _get_init_text(meta, args, method_params, param_array)
 		else:
 			var decleration = str('func ', meta.name, '(', method_params, '):')
-			# decleration = str('# ', meta, "\n", decleration)
 			text = _func_text.format({
 				"func_decleration":decleration,
 				"method_name":meta.name,
 				"param_array":param_array,
-				"super_call":_get_super_call_text(meta.name, args, super_name)
+				"super_call":_get_super_call_text(meta.name, args),
+				"vararg_warning":vararg_warning,
 			})
 
 	return text
 
 
-
-
 func get_logger():
 	return _lgr
+
 
 func set_logger(logger):
 	_lgr = logger

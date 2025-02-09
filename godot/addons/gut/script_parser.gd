@@ -1,30 +1,8 @@
-# ------------------------------------------------------------------------------
-# List of methods that should not be overloaded when they are not defined
-# in the class being doubled.  These either break things if they are
-# overloaded or do not have a "super" equivalent so we can't just pass
-# through.
+# These methods didn't have flags that would exclude them from being used
+# in a double and they appear to break things if they are included.
 const BLACKLIST = [
-	'_draw',
-	'_enter_tree',
-	'_exit_tree',
-	'_get_minimum_size', # Nonexistent function _get_minimum_size
-	'_get', # probably
-	'_input',
-	'_notification',
-	'_physics_process',
-	'_process',
-	'_set',
-	'_to_string', # nonexistant function super._to_string
-	'_unhandled_input',
-	'_unhandled_key_input',
-	'draw_mesh', # issue with one parameter, value is `Null((..), (..), (..))``
-	'emit_signal', # can't handle extra parameters to be sent with signal.
-	'get_path',
 	'get_script',
-	'get',
 	'has_method',
-
-	'print_orphan_nodes'
 ]
 
 
@@ -35,15 +13,15 @@ const BLACKLIST = [
 #   parameter
 # ------------------------------------------------------------------------------
 class ParsedMethod:
+	const NO_DEFAULT = '__no__default__'
+
 	var _meta = {}
 	var meta = _meta :
 		get: return _meta
 		set(val): return;
 
-	var _parameters = []
 	var is_local = false
-
-	const NO_DEFAULT = '__no__default__'
+	var _parameters = []
 
 	func _init(metadata):
 		_meta = metadata
@@ -51,7 +29,7 @@ class ParsedMethod:
 		for i in range(_meta.args.size()):
 			var arg = _meta.args[i]
 			# Add a "default" property to the metadata so we don't have to do
-			# weird default position math again.
+			# weird default paramter position math again.
 			if(i >= start_default):
 				arg['default'] = _meta.default_args[start_default - i]
 			else:
@@ -59,12 +37,16 @@ class ParsedMethod:
 			_parameters.append(arg)
 
 
-	func is_black_listed():
-		return BLACKLIST.find(_meta.name) != -1
+	func is_eligible_for_doubling():
+		var has_bad_flag = _meta.flags & \
+			(METHOD_FLAG_OBJECT_CORE | METHOD_FLAG_VIRTUAL | METHOD_FLAG_STATIC)
+		return !has_bad_flag and BLACKLIST.find(_meta.name) == -1
+
 
 	func is_accessor():
 		return _meta.name.begins_with('@') and \
 			(_meta.name.ends_with('_getter') or _meta.name.ends_with('_setter'))
+
 
 	func to_s():
 		var s = _meta.name + "("
@@ -89,13 +71,10 @@ class ParsedMethod:
 
 
 # ------------------------------------------------------------------------------
-# Doesn't know if a method is local and in super, but not sure if that will
-# ever matter.
 # ------------------------------------------------------------------------------
 class ParsedScript:
 	# All methods indexed by name.
 	var _methods_by_name = {}
-	var _utils = load('res://addons/gut/utils.gd').get_instance()
 
 	var _script_path = null
 	var script_path = _script_path :
@@ -112,24 +91,27 @@ class ParsedScript:
 		get: return _resource
 		set(val): return;
 
-	var _native_instance = null
 
-	var is_native = false :
-		get: return _native_instance != null
+	var _is_native = false
+	var is_native = _is_native:
+		get: return _is_native
 		set(val): return;
 
-	func unreference():
-		if(_native_instance != null):
-			_native_instance.free()
-		return super()
+	var _native_methods = {}
+	var _native_class_name = ""
+
 
 
 	func _init(script_or_inst, inner_class=null):
 		var to_load = script_or_inst
 
-		if(_utils.is_native_class(to_load)):
+		if(GutUtils.is_native_class(to_load)):
 			_resource = to_load
-			_native_instance = to_load.new()
+			_is_native = true
+			var inst = to_load.new()
+			_native_class_name = inst.get_class()
+			_native_methods = inst.get_method_list()
+			inst.free()
 		else:
 			if(!script_or_inst is Resource):
 				to_load = load(script_or_inst.get_script().get_path())
@@ -147,23 +129,15 @@ class ParsedScript:
 		_parse_methods(to_load)
 
 
-	func _has_flag_to_be_ignored(flags):
-		return false
-		# I think this is getting anything that has the 1 flag set...I think
-		return 	flags & (1 << 2) == 0 && \
-				flags & (1 << 4) == 0 && \
-				flags & (1 << 6) == 0
-
-
 	func _print_flags(meta):
-		print(str(meta.name, ':').rpad(30), str(meta.flags).rpad(4), ' = ', _utils.dec2bistr(meta.flags, 10))
+		print(str(meta.name, ':').rpad(30), str(meta.flags).rpad(4), ' = ', GutUtils.dec2bistr(meta.flags, 10))
 
 
 	func _get_native_methods(base_type):
 		var to_return = []
 		if(base_type != null):
 			var source = str('extends ', base_type)
-			var inst = _utils.create_script_from_source(source).new()
+			var inst = GutUtils.create_script_from_source(source).new()
 			to_return = inst.get_method_list()
 			if(! inst is RefCounted):
 				inst.free()
@@ -173,19 +147,18 @@ class ParsedScript:
 	func _parse_methods(thing):
 		var methods = []
 		if(is_native):
-			methods = _native_instance.get_method_list()
+			methods = _native_methods.duplicate()
 		else:
 			var base_type = thing.get_instance_base_type()
 			methods = _get_native_methods(base_type)
 
 		for m in methods:
-			if(!_has_flag_to_be_ignored(m.flags)):
-				var parsed = ParsedMethod.new(m)
-				_methods_by_name[m.name] = parsed
-				# _init must always be included so that we can initialize
-				# double_tools
-				if(m.name == '_init'):
-					parsed.is_local = true
+			var parsed = ParsedMethod.new(m)
+			_methods_by_name[m.name] = parsed
+			# _init must always be included so that we can initialize
+			# double_tools
+			if(m.name == '_init'):
+				parsed.is_local = true
 
 
 		# This loop will overwrite all entries in _methods_by_name with the local
@@ -226,11 +199,6 @@ class ParsedScript:
 
 	func get_method(name):
 		return _methods_by_name[name]
-
-
-	func is_method_blacklisted(m_name):
-		if(_methods_by_name.has(m_name)):
-			return _methods_by_name[m_name].is_black_listed()
 
 
 	func get_super_method(name):
@@ -293,7 +261,7 @@ class ParsedScript:
 	func get_extends_text():
 		var text = null
 		if(is_native):
-			text = str("extends ", _native_instance.get_class())
+			text = str("extends ", _native_class_name)
 		else:
 			text = str("extends '", _script_path, "'")
 			if(_subpath != null):
@@ -304,13 +272,11 @@ class ParsedScript:
 # ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 var scripts = {}
-var _utils = load('res://addons/gut/utils.gd').get_instance()
-
 
 func _get_instance_id(thing):
 	var inst_id = null
 
-	if(_utils.is_native_class(thing)):
+	if(GutUtils.is_native_class(thing)):
 		var id_str = str(thing).replace("<", '').replace(">", '').split('#')[1]
 		inst_id = id_str.to_int()
 	elif(typeof(thing) == TYPE_STRING):
@@ -340,7 +306,7 @@ func parse(thing, inner_thing=null):
 			if(inner_thing != null):
 				inner = instance_from_id(_get_instance_id(inner_thing))
 
-			if(obj is Resource or _utils.is_native_class(obj)):
+			if(obj is Resource or GutUtils.is_native_class(obj)):
 				parsed = ParsedScript.new(obj, inner)
 				scripts[key] = parsed
 
