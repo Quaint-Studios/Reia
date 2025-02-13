@@ -34,8 +34,10 @@ This phase focuses on getting some of the core functionalities implemented for R
   - [x] Minimap
   - [ ] Full Map
   - [ ] Fog of War
-- [ ] Quest System
-- [ ] Dialogue System
+- [ ] Story Management
+  - [ ] Quest System
+  - [ ] Dialogue System
+  - [ ] Character System
 - [x] Item System
 - [x] Inventory System
   - [ ] Make a popout version where it's just on the side of the screen and you can still move + attack. On mobile screens this may mean no usable attacks and only movement. Testing needed.
