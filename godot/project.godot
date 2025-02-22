@@ -23,9 +23,9 @@ buses/default_bus_layout="res://rsc/audio/main_bus_layout.tres"
 
 [autoload]
 
-Managers="*res://src/globals/managers/managers.tscn"
-SoundManager="*res://addons/sound_manager/sound_manager.gd"
 DiscordRPCLoader="*res://addons/discord-rpc-gd/nodes/discord_autoload.gd"
+SoundManager="*res://addons/sound_manager/sound_manager.gd"
+Managers="*res://src/globals/managers/managers.tscn"
 
 [debug]
 
