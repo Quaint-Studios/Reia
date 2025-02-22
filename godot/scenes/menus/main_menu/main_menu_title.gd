@@ -29,6 +29,7 @@ func _ready() -> void:
 # On mouse entered for, change the size of the adjacent Label
 func _on_mouse_entered(labelName: String, btn: TextureButton) -> void:
 	var label := btn.get_node("../HBoxContainer/%sLabel" % labelName) as Label
+
 	var decorations: Array[Control] = [
 		btn.get_node("../HBoxContainer/EllipseL") as Control,
 		btn.get_node("../HBoxContainer/StarL") as Control,
@@ -47,8 +48,7 @@ func _on_mouse_entered(labelName: String, btn: TextureButton) -> void:
 	for decoration in decorations:
 		decoration.show()
 
-	label.set("theme_override_font_sizes/font_size", 40)
-	label.set("theme_override_font_colors/font_color", Color.from_string("#f5f5f5", Color(0.96, 0.96, 0.96, 1)))
+	label.theme_type_variation = "MainMenuLabelHovered";
 
 func _on_mouse_exited(labelName: String, btn: TextureButton) -> void:
 	var label := btn.get_node("../HBoxContainer/%sLabel" % labelName) as Label
@@ -71,8 +71,7 @@ func _on_mouse_exited(labelName: String, btn: TextureButton) -> void:
 	for decoration in decorations:
 		decoration.hide()
 
-	label.set("theme_override_font_sizes/font_size", 32)
-	label.set("theme_override_font_colors/font_color", Color.from_string("#f9f3e5", Color(0.98, 0.95, 0.9, 1)))
+	label.theme_type_variation = "MainMenuLabel";
 
 func _on_play_pressed() -> void:
 	print("play")

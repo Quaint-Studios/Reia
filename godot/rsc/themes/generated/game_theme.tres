@@ -1,0 +1,18 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://c288m2hp7oa4d"]
+
+[ext_resource type="FontFile" uid="uid://dpo6v8cknqaqu" path="res://rsc/fonts/Roboto/Roboto-Bold.ttf" id="1_4sreu"]
+[ext_resource type="FontFile" uid="uid://bnbfcpxvegoj4" path="res://rsc/fonts/Roboto/Roboto-Regular.ttf" id="2_1ggb4"]
+
+[resource]
+default_font = ExtResource("2_1ggb4")
+default_font_size = 20
+Button/colors/font_color = Color(0.960784, 0.960784, 0.960784, 1)
+Label/colors/font_color = Color(0.960784, 0.960784, 0.960784, 1)
+MainMenuLabel/base_type = &"Label"
+MainMenuLabel/colors/font_color = Color(0.976471, 0.952941, 0.898039, 1)
+MainMenuLabel/font_sizes/font_size = 46
+MainMenuLabel/fonts/font = ExtResource("1_4sreu")
+MainMenuLabelHovered/base_type = &"Label"
+MainMenuLabelHovered/colors/font_color = Color(1, 1, 1, 1)
+MainMenuLabelHovered/font_sizes/font_size = 54
+MainMenuLabelHovered/fonts/font = ExtResource("1_4sreu")

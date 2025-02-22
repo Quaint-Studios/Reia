@@ -141,10 +141,9 @@ stretch_mode = 5
 
 [node name="PlayLabel" type="Label" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Play/HBoxContainer"]
 use_parent_material = true
+custom_minimum_size = Vector2(0, 65)
 layout_mode = 2
-theme_type_variation = &"LabelBold"
-theme_override_colors/font_color = Color(0.976471, 0.952941, 0.898039, 1)
-theme_override_font_sizes/font_size = 46
+theme_type_variation = &"MainMenuLabel"
 text = "Play"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -200,10 +199,9 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="SettingsLabel" type="Label" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Settings/HBoxContainer"]
+custom_minimum_size = Vector2(0, 65)
 layout_mode = 2
-theme_type_variation = &"LabelBold"
-theme_override_colors/font_color = Color(0.976471, 0.952941, 0.898039, 1)
-theme_override_font_sizes/font_size = 46
+theme_type_variation = &"MainMenuLabel"
 text = "Settings"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -259,10 +257,9 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="CreditsLabel" type="Label" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Credits/HBoxContainer"]
+custom_minimum_size = Vector2(0, 65)
 layout_mode = 2
-theme_type_variation = &"LabelBold"
-theme_override_colors/font_color = Color(0.976471, 0.952941, 0.898039, 1)
-theme_override_font_sizes/font_size = 46
+theme_type_variation = &"MainMenuLabel"
 text = "Credits"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -318,10 +315,9 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="QuitLabel" type="Label" parent="CanvasLayer/Screens/Title/MiddleSection/CenterContainer/VBoxContainer/Quit/HBoxContainer"]
+custom_minimum_size = Vector2(0, 65)
 layout_mode = 2
-theme_type_variation = &"LabelBold"
-theme_override_colors/font_color = Color(0.976471, 0.952941, 0.898039, 1)
-theme_override_font_sizes/font_size = 46
+theme_type_variation = &"MainMenuLabel"
 text = "Quit"
 horizontal_alignment = 1
 vertical_alignment = 1
