@@ -68,7 +68,7 @@ import/fbx/enabled=false
 [gui]
 
 common/text_edit_undo_stack_max_size=16384
-theme/custom="res://rsc/themes/main_theme.tres"
+theme/custom="res://rsc/themes/generated/game_theme.tres"
 theme/default_font_multichannel_signed_distance_field=true
 theme/default_font_generate_mipmaps=true
 
