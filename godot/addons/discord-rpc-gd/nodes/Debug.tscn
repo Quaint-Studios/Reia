@@ -231,9 +231,9 @@ offset_right = 1144.0
 offset_bottom = 665.375
 grow_vertical = 2
 scale = Vector2(0.05, 0.05)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8abo6")
 theme_override_icons/checked = ExtResource("2_q6tao")
 theme_override_icons/unchecked = ExtResource("3_5cyem")
-theme_override_styles/focus = SubResource("StyleBoxEmpty_8abo6")
 button_pressed = true
 
 [node name="TextureRect" type="TextureRect" parent="Panel"]
