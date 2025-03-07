@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://chondv2lhs4pl"]
 
-[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/modifier/components/parameter_bitmask.gd" id="1"]
+[ext_resource type="Script" uid="uid://cb0rdikcdm45n" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/modifier/components/parameter_bitmask.gd" id="1"]
 [ext_resource type="PackedScene" uid="uid://cf4lrr5tnlwnw" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/modifier/components/bitmask_button.tscn" id="2"]
 [ext_resource type="Texture2D" uid="uid://n66mufjib4ds" path="res://addons/proton_scatter/icons/menu.svg" id="3"]
 [ext_resource type="Texture2D" uid="uid://bosx22dy64f11" path="res://addons/proton_scatter/icons/clear.svg" id="4"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dsy7bxowv7qkc"]
 
-[ext_resource type="Shader" path="res://rsc/shaders/screen_space/blur.gdshader" id="1_08rpp"]
+[ext_resource type="Shader" uid="uid://c5q0wl1pktwxm" path="res://rsc/shaders/screen_space/blur.gdshader" id="1_08rpp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ddyyk"]
 shader = ExtResource("1_08rpp")

@@ -4,12 +4,11 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bhums0j31gm5n"
-path="res://.godot/imported/pine_tree.glb-662cc3d34707ccadde24f89b98fadf88.scn"
+valid=false
 
 [deps]
 
 source_file="res://addons/proton_scatter/demos/assets/models/pine_tree.glb"
-dest_files=["res://.godot/imported/pine_tree.glb-662cc3d34707ccadde24f89b98fadf88.scn"]
 
 [params]
 
@@ -18,6 +17,7 @@ nodes/root_name="Scene Root"
 nodes/apply_root_scale=true
 nodes/root_scale=1.0
 nodes/import_as_skeleton_bones=false
+nodes/use_node_type_suffixes=true
 meshes/ensure_tangents=true
 meshes/generate_lods=true
 meshes/create_shadow_meshes=true

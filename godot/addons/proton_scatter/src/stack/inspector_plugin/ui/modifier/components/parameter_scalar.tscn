@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bspbhkrpgak0e"]
 
-[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/modifier/components/parameter_scalar.gd" id="1"]
+[ext_resource type="Script" uid="uid://eduajnn6qhjn" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/modifier/components/parameter_scalar.gd" id="1"]
 
 [node name="ParameterScalar" type="HBoxContainer"]
 anchors_preset = 10

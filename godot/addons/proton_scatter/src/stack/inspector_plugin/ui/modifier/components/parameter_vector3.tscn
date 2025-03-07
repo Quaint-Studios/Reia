@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://cdpfgf0447ph4"]
 
-[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/modifier/components/parameter_vector3.gd" id="1"]
+[ext_resource type="Script" uid="uid://bocw1500ek6lx" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/modifier/components/parameter_vector3.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://bosx22dy64f11" path="res://addons/proton_scatter/icons/clear.svg" id="2"]
 [ext_resource type="Texture2D" uid="uid://gbrmse47gdxb" path="res://addons/proton_scatter/icons/link.svg" id="3_gq2ti"]
 

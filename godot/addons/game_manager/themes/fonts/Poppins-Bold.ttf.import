@@ -3,12 +3,11 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://daf8ykaf1466s"
-path="res://.godot/imported/Poppins-Bold.ttf-a171d5d51bd719021761d93e4d011c53.fontdata"
+valid=false
 
 [deps]
 
 source_file="res://addons/game_manager/themes/fonts/Poppins-Bold.ttf"
-dest_files=["res://.godot/imported/Poppins-Bold.ttf-a171d5d51bd719021761d93e4d011c53.fontdata"]
 
 [params]
 
@@ -23,6 +22,7 @@ allow_system_fallback=true
 force_autohinter=false
 hinting=1
 subpixel_positioning=1
+keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]

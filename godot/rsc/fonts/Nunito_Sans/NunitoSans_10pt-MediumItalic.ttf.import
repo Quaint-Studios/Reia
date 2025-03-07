@@ -3,12 +3,11 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://b2bnyvbbbn7x0"
-path="res://.godot/imported/NunitoSans_10pt-MediumItalic.ttf-782c0695237f4ce8b4a1e392a8453f4a.fontdata"
+valid=false
 
 [deps]
 
 source_file="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-MediumItalic.ttf"
-dest_files=["res://.godot/imported/NunitoSans_10pt-MediumItalic.ttf-782c0695237f4ce8b4a1e392a8453f4a.fontdata"]
 
 [params]
 
@@ -23,6 +22,7 @@ allow_system_fallback=true
 force_autohinter=false
 hinting=1
 subpixel_positioning=1
+keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]

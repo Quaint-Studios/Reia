@@ -3,12 +3,11 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cy8ygsfsvbewp"
-path="res://.godot/imported/NunitoSans_10pt-Regular.ttf-c3e9e74dc53c0197073fcbe69645269f.fontdata"
+valid=false
 
 [deps]
 
 source_file="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-Regular.ttf"
-dest_files=["res://.godot/imported/NunitoSans_10pt-Regular.ttf-c3e9e74dc53c0197073fcbe69645269f.fontdata"]
 
 [params]
 
@@ -23,6 +22,7 @@ allow_system_fallback=true
 force_autohinter=false
 hinting=1
 subpixel_positioning=1
+keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]

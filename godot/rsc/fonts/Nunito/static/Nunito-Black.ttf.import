@@ -3,12 +3,11 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cvl0migkjbg2m"
-path="res://.godot/imported/Nunito-Black.ttf-756ed2298b74ba65e419b0d06a8798c1.fontdata"
+valid=false
 
 [deps]
 
 source_file="res://rsc/fonts/Nunito/static/Nunito-Black.ttf"
-dest_files=["res://.godot/imported/Nunito-Black.ttf-756ed2298b74ba65e419b0d06a8798c1.fontdata"]
 
 [params]
 
@@ -23,6 +22,7 @@ allow_system_fallback=true
 force_autohinter=false
 hinting=1
 subpixel_positioning=1
+keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]

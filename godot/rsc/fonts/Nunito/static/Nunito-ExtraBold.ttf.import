@@ -3,12 +3,11 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://db8hdu6hj307i"
-path="res://.godot/imported/Nunito-ExtraBold.ttf-4be1cc10016b4d865077faa0f69893fc.fontdata"
+valid=false
 
 [deps]
 
 source_file="res://rsc/fonts/Nunito/static/Nunito-ExtraBold.ttf"
-dest_files=["res://.godot/imported/Nunito-ExtraBold.ttf-4be1cc10016b4d865077faa0f69893fc.fontdata"]
 
 [params]
 
@@ -23,6 +22,7 @@ allow_system_fallback=true
 force_autohinter=false
 hinting=1
 subpixel_positioning=1
+keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]

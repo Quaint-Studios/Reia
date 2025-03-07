@@ -3,12 +3,11 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dvs3ga70iqj4s"
-path="res://.godot/imported/Poppins-LightItalic.ttf-81b28cd53f8bd02c652e1ec2bc7a3b89.fontdata"
+valid=false
 
 [deps]
 
 source_file="res://rsc/fonts/Poppins/Poppins-LightItalic.ttf"
-dest_files=["res://.godot/imported/Poppins-LightItalic.ttf-81b28cd53f8bd02c652e1ec2bc7a3b89.fontdata"]
 
 [params]
 
@@ -23,6 +22,7 @@ allow_system_fallback=true
 force_autohinter=false
 hinting=1
 subpixel_positioning=1
+keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]

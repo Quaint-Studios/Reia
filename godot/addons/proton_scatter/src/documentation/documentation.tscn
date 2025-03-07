@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cfg8iqtuion8b"]
 
-[ext_resource type="Script" path="res://addons/proton_scatter/src/documentation/documentation.gd" id="1_5c4lw"]
+[ext_resource type="Script" uid="uid://r0c25h7g76wi" path="res://addons/proton_scatter/src/documentation/documentation.gd" id="1_5c4lw"]
 [ext_resource type="PackedScene" uid="uid://cojoo2c73fpsb" path="res://addons/proton_scatter/src/documentation/panel.tscn" id="2_vpfxu"]
 
 [node name="Documentation" type="PopupPanel"]

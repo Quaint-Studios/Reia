@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://80iqs38fd27c"]
 
-[ext_resource type="Script" path="res://scenes/menus/main_menu/main_menu.gd" id="1_10ukw"]
-[ext_resource type="Script" path="res://scenes/menus/main_menu/main_menu_title.gd" id="2_5dgoh"]
+[ext_resource type="Script" uid="uid://t6p87dh8gj5i" path="res://scenes/menus/main_menu/main_menu.gd" id="1_10ukw"]
+[ext_resource type="Script" uid="uid://yhrovdw0h1na" path="res://scenes/menus/main_menu/main_menu_title.gd" id="2_5dgoh"]
 [ext_resource type="AudioStream" uid="uid://bjmsfaw5a1nh5" path="res://rsc/audio/menu/forest_theme_v1.wav" id="2_iaiqa"]
 [ext_resource type="Texture2D" uid="uid://dnqp10u8o4xik" path="res://rsc/icons/star_icon_84.svg" id="3_xir2b"]
 [ext_resource type="PackedScene" uid="uid://blfb1epv5qnn4" path="res://scenes/interface/back_label.tscn" id="5_d7wdc"]

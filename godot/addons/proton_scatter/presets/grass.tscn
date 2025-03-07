@@ -1,13 +1,14 @@
-[gd_scene load_steps=14 format=3 uid="uid://2e6nvcbuqhao"]
+[gd_scene load_steps=15 format=3 uid="uid://2e6nvcbuqhao"]
 
-[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter.gd" id="1_hwvsa"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="2_84xri"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/create_inside_grid.gd" id="3_t5gts"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="4_v7woi"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="5_tgf12"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_item.gd" id="6_11eqr"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="7_vk3gk"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="9_w0igc"]
+[ext_resource type="Script" uid="uid://4bf2yhk86w85" path="res://addons/proton_scatter/src/scatter.gd" id="1_hwvsa"]
+[ext_resource type="Script" uid="uid://c40nn1n74bxrr" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="2_84xri"]
+[ext_resource type="Script" uid="uid://be6d5o5pfp2e4" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="3_p472w"]
+[ext_resource type="Script" uid="uid://ckwpylyrayw3e" path="res://addons/proton_scatter/src/modifiers/create_inside_grid.gd" id="3_t5gts"]
+[ext_resource type="Script" uid="uid://bixrdcwyr2kqc" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="4_v7woi"]
+[ext_resource type="Script" uid="uid://d0tpq1nf60cng" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="5_tgf12"]
+[ext_resource type="Script" uid="uid://2yquusg4xxjh" path="res://addons/proton_scatter/src/scatter_item.gd" id="6_11eqr"]
+[ext_resource type="Script" uid="uid://5fvpuxscpwv2" path="res://addons/proton_scatter/src/scatter_shape.gd" id="7_vk3gk"]
+[ext_resource type="Script" uid="uid://ef81jy7submy" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="9_w0igc"]
 
 [sub_resource type="Resource" id="Resource_mu1a8"]
 script = ExtResource("3_t5gts")
@@ -38,6 +39,7 @@ remove_points_on_miss = false
 align_with_collision_normal = false
 max_slope = 90.0
 collision_mask = 1
+exclude_mask = 0
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -46,7 +48,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_mv17r"]
 script = ExtResource("2_84xri")
-stack = Array[Resource]([SubResource("Resource_mu1a8"), SubResource("Resource_8361b"), SubResource("Resource_14cyx")])
+stack = Array[ExtResource("3_p472w")]([SubResource("Resource_mu1a8"), SubResource("Resource_8361b"), SubResource("Resource_14cyx")])
 
 [sub_resource type="Resource" id="Resource_gaw40"]
 script = ExtResource("9_w0igc")

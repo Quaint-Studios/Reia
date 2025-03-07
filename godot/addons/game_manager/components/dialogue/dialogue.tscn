@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://bpasjyv1eruvr"]
 
 [ext_resource type="Theme" uid="uid://58qnuw0igyna" path="res://addons/game_manager/components/core/core_theme.tres" id="1_je5yy"]
-[ext_resource type="Script" path="res://addons/game_manager/components/dialogue/main.gd" id="2_kuhc7"]
-[ext_resource type="Script" path="res://addons/game_manager/components/dialogue/dialogue_graph.gd" id="3_php01"]
+[ext_resource type="Script" uid="uid://sb2d7rwvvij1" path="res://addons/game_manager/components/dialogue/main.gd" id="2_kuhc7"]
+[ext_resource type="Script" uid="uid://bwu8bkcds6d1i" path="res://addons/game_manager/components/dialogue/dialogue_graph.gd" id="3_php01"]
 
 [node name="Dialogue" type="Control"]
 layout_mode = 3

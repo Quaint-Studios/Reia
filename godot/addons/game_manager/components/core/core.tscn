@@ -1,15 +1,15 @@
 [gd_scene load_steps=13 format=3 uid="uid://b2jlruki5q8g0"]
 
-[ext_resource type="Script" path="res://addons/game_manager/components/core/core.gd" id="1_kcyk4"]
+[ext_resource type="Script" uid="uid://k8wc4q36563j" path="res://addons/game_manager/components/core/core.gd" id="1_kcyk4"]
 [ext_resource type="Theme" uid="uid://58qnuw0igyna" path="res://addons/game_manager/components/core/core_theme.tres" id="2_hw2d2"]
 [ext_resource type="FontFile" uid="uid://daf8ykaf1466s" path="res://addons/game_manager/themes/fonts/Poppins-Bold.ttf" id="2_xfmva"]
-[ext_resource type="Script" path="res://addons/game_manager/components/core/toolbar.gd" id="3_bbh6n"]
+[ext_resource type="Script" uid="uid://c5fots83bbopg" path="res://addons/game_manager/components/core/toolbar.gd" id="3_bbh6n"]
 [ext_resource type="PackedScene" uid="uid://ckhga6p2fs1hd" path="res://addons/game_manager/components/character/character.tscn" id="3_hmsk8"]
 [ext_resource type="PackedScene" uid="uid://bpasjyv1eruvr" path="res://addons/game_manager/components/dialogue/dialogue.tscn" id="3_lb0ib"]
 [ext_resource type="ButtonGroup" uid="uid://cieij32dxfcee" path="res://addons/game_manager/components/core/toolbar_button_group.tres" id="3_v75j6"]
 [ext_resource type="PackedScene" uid="uid://ckbxrmsml71oc" path="res://addons/game_manager/components/quest/quest.tscn" id="4_yisoh"]
 [ext_resource type="PackedScene" uid="uid://dqpvywluls2bc" path="res://addons/game_manager/components/settings/settings.tscn" id="5_8dqxk"]
-[ext_resource type="Script" path="res://addons/game_manager/components/core/workspace.gd" id="6_fqyfu"]
+[ext_resource type="Script" uid="uid://dgcebcl710n8y" path="res://addons/game_manager/components/core/workspace.gd" id="6_fqyfu"]
 [ext_resource type="Texture2D" uid="uid://4pyfxa4qhxcx" path="res://addons/game_manager/icons/reload.svg" id="10_sw1kq"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_28rqc"]

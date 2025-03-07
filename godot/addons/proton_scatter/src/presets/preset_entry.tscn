@@ -1,10 +1,11 @@
 [gd_scene load_steps=6 format=3 uid="uid://bosqtuvhckh3g"]
 
 [ext_resource type="Texture2D" uid="uid://ddjrq1h4mkn6a" path="res://addons/proton_scatter/icons/load.svg" id="1_0auay"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/presets/preset_entry.gd" id="1_bqha3"]
+[ext_resource type="Script" uid="uid://d1j3w7hg4wnto" path="res://addons/proton_scatter/src/presets/preset_entry.gd" id="1_bqha3"]
 [ext_resource type="Texture2D" uid="uid://btb6rqhhi27mx" path="res://addons/proton_scatter/icons/remove.svg" id="2_p04k2"]
 
 [sub_resource type="SystemFont" id="SystemFont_kgkwq"]
+subpixel_positioning = 0
 
 [sub_resource type="LabelSettings" id="LabelSettings_poli7"]
 font = SubResource("SystemFont_kgkwq")

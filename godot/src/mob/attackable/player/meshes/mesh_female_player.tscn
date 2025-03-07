@@ -13761,25 +13761,27 @@ tracks/177/keys = PackedFloat32Array(0, 1, 0.707107, 1.39993e-06, 0.707107, 3.81
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gi8k3"]
 _data = {
-"Dying": SubResource("Animation_2cgko"),
-"FemaleStartWalking": SubResource("Animation_jm1i2"),
-"FemaleStopAndStartWalking": SubResource("Animation_cil0b"),
-"IdleM": SubResource("Animation_x6hn8"),
-"IdleR": SubResource("Animation_fc228"),
-"IdleSway": SubResource("Animation_bau8b"),
-"RightStrafeWalking": SubResource("Animation_i6xhp"),
-"Running": SubResource("Animation_87bn7"),
-"RunningJump": SubResource("Animation_pqx81"),
-"T-Pose": SubResource("Animation_veop1"),
-"WalkingLeftTurn": SubResource("Animation_f6h05")
+&"Dying": SubResource("Animation_2cgko"),
+&"FemaleStartWalking": SubResource("Animation_jm1i2"),
+&"FemaleStopAndStartWalking": SubResource("Animation_cil0b"),
+&"IdleM": SubResource("Animation_x6hn8"),
+&"IdleR": SubResource("Animation_fc228"),
+&"IdleSway": SubResource("Animation_bau8b"),
+&"RightStrafeWalking": SubResource("Animation_i6xhp"),
+&"Running": SubResource("Animation_87bn7"),
+&"RunningJump": SubResource("Animation_pqx81"),
+&"T-Pose": SubResource("Animation_veop1"),
+&"WalkingLeftTurn": SubResource("Animation_f6h05")
 }
 
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_p864k"]
 input_0/name = "false"
 input_0/auto_advance = false
+input_0/break_loop_at_end = false
 input_0/reset = true
 input_1/name = "true"
 input_1/auto_advance = false
+input_1/break_loop_at_end = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_i7ap6"]
@@ -13791,9 +13793,11 @@ animation = &"IdleSway"
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_c5dlp"]
 input_0/name = "false"
 input_0/auto_advance = false
+input_0/break_loop_at_end = false
 input_0/reset = true
 input_1/name = "true"
 input_1/auto_advance = false
+input_1/break_loop_at_end = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_m5drn"]
@@ -13802,9 +13806,11 @@ animation = &"RunningJump"
 [sub_resource type="AnimationNodeTransition" id="AnimationNodeTransition_jttma"]
 input_0/name = "idle"
 input_0/auto_advance = false
+input_0/break_loop_at_end = false
 input_0/reset = true
 input_1/name = "run"
 input_1/auto_advance = false
+input_1/break_loop_at_end = false
 input_1/reset = true
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e14lc"]
