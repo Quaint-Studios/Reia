@@ -3,12 +3,11 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c3h27dn58j6j5"
-path="res://.godot/imported/Poppins-Light.ttf-86f11deda025b772c4bb4a87c4df2e49.fontdata"
+valid=false
 
 [deps]
 
 source_file="res://rsc/fonts/Poppins/Poppins-Light.ttf"
-dest_files=["res://.godot/imported/Poppins-Light.ttf-86f11deda025b772c4bb4a87c4df2e49.fontdata"]
 
 [params]
 
@@ -23,6 +22,7 @@ allow_system_fallback=true
 force_autohinter=false
 hinting=1
 subpixel_positioning=1
+keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]

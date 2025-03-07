@@ -1,11 +1,11 @@
 [gd_scene load_steps=7 format=3 uid="uid://dgpnu1i4wpcpm"]
 
-[ext_resource type="Script" path="res://src/globals/managers/discord_manager.gd" id="1_q4cw6"]
-[ext_resource type="Script" path="res://src/globals/managers/debug_manager.gd" id="2_eoemg"]
-[ext_resource type="Script" path="res://src/globals/managers/multiplayer/multiplayer_manager.gd" id="3_x240j"]
-[ext_resource type="Script" path="res://src/globals/managers/game_manager.gd" id="4_1fsh8"]
-[ext_resource type="Script" path="res://src/globals/managers/ui/ui_manager.gd" id="5_tt3n5"]
-[ext_resource type="Script" path="res://src/globals/managers/player_manager.gd" id="6_ocllo"]
+[ext_resource type="Script" uid="uid://daywb5deip0vs" path="res://src/globals/managers/discord_manager.gd" id="1_q4cw6"]
+[ext_resource type="Script" uid="uid://6oxmt6nbsrh6" path="res://src/globals/managers/debug_manager.gd" id="2_eoemg"]
+[ext_resource type="Script" uid="uid://sxb6p51h0kc0" path="res://src/globals/managers/multiplayer/multiplayer_manager.gd" id="3_x240j"]
+[ext_resource type="Script" uid="uid://dte0q2facaag8" path="res://src/globals/managers/game_manager.gd" id="4_1fsh8"]
+[ext_resource type="Script" uid="uid://b5icbesbvqeps" path="res://src/globals/managers/ui/ui_manager.gd" id="5_tt3n5"]
+[ext_resource type="Script" uid="uid://bnn6kwnceareg" path="res://src/globals/managers/player_manager.gd" id="6_ocllo"]
 
 [node name="Managers" type="Node"]
 

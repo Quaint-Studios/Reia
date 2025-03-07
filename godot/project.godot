@@ -14,7 +14,7 @@ config/name="Reia"
 config/description="Explore endless worlds and embark on a magical adventure of a lifetime! Choose the way you want to play."
 config/version="1.0.1.0-pre-alpha"
 run/main_scene="res://scenes/menus/scene_selector/scene_selector.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://rsc/images/logos/logo_a.png"
 
 [audio]
@@ -49,7 +49,7 @@ window/vsync/vsync_mode=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/coi_serviceworker/plugin.cfg", "res://addons/discord-rpc-gd/plugin.cfg", "res://addons/game_manager/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/coi_serviceworker/plugin.cfg", "res://addons/game_manager/plugin.cfg", "res://addons/gut/plugin.cfg", "res://addons/proton_scatter/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
 
 [file_customization]
 
@@ -174,8 +174,8 @@ textures/vram_compression/import_etc2_astc=true
 lights_and_shadows/directional_shadow/size=8192
 lights_and_shadows/directional_shadow/soft_shadow_filter_quality=5
 lights_and_shadows/directional_shadow/16_bits=false
+lights_and_shadows/positional_shadow/atlas_16_bits=false
 anti_aliasing/quality/msaa_2d=3
 anti_aliasing/quality/msaa_3d=3
 anti_aliasing/quality/screen_space_aa=1
 anti_aliasing/quality/use_debanding=true
-lights_and_shadows/positional_shadow/atlas_16_bits=false

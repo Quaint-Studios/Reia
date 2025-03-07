@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dqjwibwhdmgsb"]
 
-[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/modifier/components/parameter_curve.gd" id="1"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/modifier/components/curve_panel.gd" id="2"]
+[ext_resource type="Script" uid="uid://su316uhbaurl" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/modifier/components/parameter_curve.gd" id="1"]
+[ext_resource type="Script" uid="uid://cho3jcx1frmyv" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/modifier/components/curve_panel.gd" id="2"]
 
 [node name="ParameterCurve" type="VBoxContainer"]
 anchors_preset = 15

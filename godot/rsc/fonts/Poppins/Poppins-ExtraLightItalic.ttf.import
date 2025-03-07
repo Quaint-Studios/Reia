@@ -3,12 +3,11 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://ci4fxdjvhtiuv"
-path="res://.godot/imported/Poppins-ExtraLightItalic.ttf-727fe9d907ef1ff6f7cdda37fd568207.fontdata"
+valid=false
 
 [deps]
 
 source_file="res://rsc/fonts/Poppins/Poppins-ExtraLightItalic.ttf"
-dest_files=["res://.godot/imported/Poppins-ExtraLightItalic.ttf-727fe9d907ef1ff6f7cdda37fd568207.fontdata"]
 
 [params]
 
@@ -23,6 +22,7 @@ allow_system_fallback=true
 force_autohinter=false
 hinting=1
 subpixel_positioning=1
+keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]

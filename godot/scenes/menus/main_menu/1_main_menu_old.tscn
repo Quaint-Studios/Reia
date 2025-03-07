@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://pvxn6nxqbtpl"]
 
-[ext_resource type="Script" path="res://scenes/menus/main_menu/main_menu.gd" id="1_uksap"]
+[ext_resource type="Script" uid="uid://t6p87dh8gj5i" path="res://scenes/menus/main_menu/main_menu.gd" id="1_uksap"]
 [ext_resource type="AudioStream" uid="uid://bjmsfaw5a1nh5" path="res://rsc/audio/menu/forest_theme_v1.wav" id="2_yt8fi"]
 [ext_resource type="Environment" uid="uid://my6k5ee2qus7" path="res://scenes/regions/jadewater_falls/jadewater_falls_day.tres" id="3_oqpva"]
 [ext_resource type="PackedScene" uid="uid://cykr5gmvdm7xf" path="res://rsc/models/characters/player/female_player.glb" id="4_xhdmv"]
 [ext_resource type="PackedScene" uid="uid://dsy7bxowv7qkc" path="res://scenes/interface/blur.tscn" id="5_j557d"]
-[ext_resource type="Shader" path="res://rsc/shaders/drop_shadow.gdshader" id="6_w4h21"]
+[ext_resource type="Shader" uid="uid://dmum816e20evn" path="res://rsc/shaders/drop_shadow.gdshader" id="6_w4h21"]
 [ext_resource type="Texture2D" uid="uid://djunt32arj3g2" path="res://rsc/images/logos/logo_a_flat_white_68.svg" id="7_k6lrh"]
 [ext_resource type="PackedScene" uid="uid://ci266clm01pqr" path="res://scenes/interface/changelogs/changelog.tscn" id="8_2dtty"]
 

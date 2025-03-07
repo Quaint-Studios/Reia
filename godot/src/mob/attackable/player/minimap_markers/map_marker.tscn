@@ -1,9 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://c03x7cx3t0083"]
-
-[ext_resource type="Texture2D" uid="uid://mfj02y3po58g" path="res://scripts/items/weapons/textures/items_atlas.png" id="1_weyo1"]
+[gd_scene load_steps=2 format=3 uid="uid://c03x7cx3t0083"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_s3buu"]
-atlas = ExtResource("1_weyo1")
 region = Rect2(128, 512, 128, 128)
 
 [node name="MapMarker" type="Sprite3D"]

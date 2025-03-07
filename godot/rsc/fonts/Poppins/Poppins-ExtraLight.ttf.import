@@ -3,12 +3,11 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cok51qpkhardb"
-path="res://.godot/imported/Poppins-ExtraLight.ttf-2b48c8b6762e04a5cec37899aadccf4c.fontdata"
+valid=false
 
 [deps]
 
 source_file="res://rsc/fonts/Poppins/Poppins-ExtraLight.ttf"
-dest_files=["res://.godot/imported/Poppins-ExtraLight.ttf-2b48c8b6762e04a5cec37899aadccf4c.fontdata"]
 
 [params]
 
@@ -23,6 +22,7 @@ allow_system_fallback=true
 force_autohinter=false
 hinting=1
 subpixel_positioning=1
+keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]

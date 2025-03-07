@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c6yo30ag1qlsk"]
 
-[ext_resource type="Script" path="res://scenes/dungeons/dungeon_entrance.gd" id="1_gi3ev"]
+[ext_resource type="Script" uid="uid://trs2gabai2d5" path="res://scenes/dungeons/dungeon_entrance.gd" id="1_gi3ev"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_7wkw6"]
 size = Vector3(2, 4, 1)

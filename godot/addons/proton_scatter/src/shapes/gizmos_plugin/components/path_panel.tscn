@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://vijpujrvtyin"]
 
-[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/gizmos_plugin/components/path_panel.gd" id="1_o7kkg"]
+[ext_resource type="Script" uid="uid://de0jl81eawmak" path="res://addons/proton_scatter/src/shapes/gizmos_plugin/components/path_panel.gd" id="1_o7kkg"]
 [ext_resource type="Texture2D" uid="uid://c1t5x34pc4vs5" path="res://addons/proton_scatter/icons/curve_select.svg" id="2_d7o1n"]
 [ext_resource type="ButtonGroup" uid="uid://1xy55037k3k5" path="res://addons/proton_scatter/src/shapes/gizmos_plugin/components/curve_mode_button_group.tres" id="2_sl6yo"]
 [ext_resource type="Texture2D" uid="uid://cmykha5ja17vj" path="res://addons/proton_scatter/icons/curve_create.svg" id="3_l70sn"]

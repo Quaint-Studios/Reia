@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://belutr5odecw2"]
 
-[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/modifier_list_popup/popup.gd" id="1"]
+[ext_resource type="Script" uid="uid://dyb73kf0qxd0t" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/modifier_list_popup/popup.gd" id="1"]
 
 [node name="ModifiersPopup" type="PopupPanel"]
 size = Vector2i(597, 322)

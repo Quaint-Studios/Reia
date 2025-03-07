@@ -3,12 +3,11 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://c8p2u5pqj1qku"
-path="res://.godot/imported/Nunito-Italic-VariableFont_wght.ttf-f409d939e21f4a44e92d59a2becf9e4e.fontdata"
+valid=false
 
 [deps]
 
 source_file="res://rsc/fonts/Nunito/Nunito-Italic-VariableFont_wght.ttf"
-dest_files=["res://.godot/imported/Nunito-Italic-VariableFont_wght.ttf-f409d939e21f4a44e92d59a2becf9e4e.fontdata"]
 
 [params]
 
@@ -23,6 +22,7 @@ allow_system_fallback=true
 force_autohinter=false
 hinting=1
 subpixel_positioning=1
+keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://cvgj4rdc0mxxq"]
 
 [ext_resource type="Texture2D" uid="uid://bosx22dy64f11" path="res://addons/proton_scatter/icons/clear.svg" id="1"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/modifier/components/parameter_file.gd" id="2"]
+[ext_resource type="Script" uid="uid://cwhdcembibewk" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/modifier/components/parameter_file.gd" id="2"]
 
 [node name="ParameterFile" type="VBoxContainer"]
 anchors_preset = 10

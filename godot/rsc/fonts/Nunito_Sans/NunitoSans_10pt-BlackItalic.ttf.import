@@ -3,12 +3,11 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://caogrs6gae14a"
-path="res://.godot/imported/NunitoSans_10pt-BlackItalic.ttf-567842d76c79373781c9bad4b6f8fa9d.fontdata"
+valid=false
 
 [deps]
 
 source_file="res://rsc/fonts/Nunito_Sans/NunitoSans_10pt-BlackItalic.ttf"
-dest_files=["res://.godot/imported/NunitoSans_10pt-BlackItalic.ttf-567842d76c79373781c9bad4b6f8fa9d.fontdata"]
 
 [params]
 
@@ -23,6 +22,7 @@ allow_system_fallback=true
 force_autohinter=false
 hinting=1
 subpixel_positioning=1
+keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]

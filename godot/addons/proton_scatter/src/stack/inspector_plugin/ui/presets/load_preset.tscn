@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene load_steps=2 format=3 uid="uid://dtts0a8p1425b"]
 
-[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/presets/load_preset.gd" id="1"]
+[ext_resource type="Script" uid="uid://cd4dsnnmqthsf" path="res://addons/proton_scatter/src/stack/inspector_plugin/ui/presets/load_preset.gd" id="1"]
 
 [node name="LoadPresetPopup" type="WindowDialog"]
 visible = true
@@ -16,7 +16,7 @@ size_flags_horizontal = 5
 size_flags_vertical = 5
 window_title = "Load Presets"
 resizable = true
-script = ExtResource( 1 )
+script = ExtResource("1")
 __meta__ = {
 "_edit_use_anchors_": false
 }

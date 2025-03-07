@@ -1,32 +1,33 @@
-[gd_scene load_steps=205 format=3 uid="uid://chgskywnqfgv"]
+[gd_scene load_steps=206 format=3 uid="uid://chgskywnqfgv"]
 
-[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter.gd" id="1_hld6g"]
+[ext_resource type="Script" uid="uid://4bf2yhk86w85" path="res://addons/proton_scatter/src/scatter.gd" id="1_hld6g"]
 [ext_resource type="Texture2D" uid="uid://6xc5b38d25gf" path="res://addons/proton_scatter/demos/assets/textures/grid.png" id="1_xpx1h"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="2_y5xi5"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="3_6h2s3"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_item.gd" id="4_w0gix"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="5_y7d7p"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="6_ma1h0"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/create_inside_grid.gd" id="7_h0gb3"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/create_inside_poisson.gd" id="8_w8gx7"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/create_along_edge_random.gd" id="9_cbx3g"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/create_along_edge_even.gd" id="10_isy7v"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="11_36l2y"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/path_shape.gd" id="11_iwfud"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/create_along_edge_continuous.gd" id="13_x67hv"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/offset_scale.gd" id="14_tn7vn"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/single_item.gd" id="16_mv3jg"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/array.gd" id="16_u8nl4"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="17_lon52"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/offset_position.gd" id="17_wnpjh"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/look_at.gd" id="19_ecgtl"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/offset_rotation.gd" id="19_iqrrv"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/clusterize.gd" id="19_kqhj3"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="20_7q4m2"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/proxy.gd" id="21_5pgs0"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="21_h4uuj"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/remove_outside_shapes.gd" id="21_x4n8q"]
-[ext_resource type="Shader" path="res://addons/proton_scatter/src/particles/example_random_motion.gdshader" id="27_vj2yt"]
+[ext_resource type="Script" uid="uid://c40nn1n74bxrr" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="2_y5xi5"]
+[ext_resource type="Script" uid="uid://csg5eow0uhd1e" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="3_6h2s3"]
+[ext_resource type="Script" uid="uid://be6d5o5pfp2e4" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="4_63p0w"]
+[ext_resource type="Script" uid="uid://2yquusg4xxjh" path="res://addons/proton_scatter/src/scatter_item.gd" id="4_w0gix"]
+[ext_resource type="Script" uid="uid://5fvpuxscpwv2" path="res://addons/proton_scatter/src/scatter_shape.gd" id="5_y7d7p"]
+[ext_resource type="Script" uid="uid://ef81jy7submy" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="6_ma1h0"]
+[ext_resource type="Script" uid="uid://ckwpylyrayw3e" path="res://addons/proton_scatter/src/modifiers/create_inside_grid.gd" id="7_h0gb3"]
+[ext_resource type="Script" uid="uid://c144qgnlreovs" path="res://addons/proton_scatter/src/modifiers/create_inside_poisson.gd" id="8_w8gx7"]
+[ext_resource type="Script" uid="uid://bi143y7ww4uyp" path="res://addons/proton_scatter/src/modifiers/create_along_edge_random.gd" id="9_cbx3g"]
+[ext_resource type="Script" uid="uid://cjd04sd5newpk" path="res://addons/proton_scatter/src/modifiers/create_along_edge_even.gd" id="10_isy7v"]
+[ext_resource type="Script" uid="uid://bwweygd7fv7do" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="11_36l2y"]
+[ext_resource type="Script" uid="uid://raomujjoauye" path="res://addons/proton_scatter/src/shapes/path_shape.gd" id="11_iwfud"]
+[ext_resource type="Script" uid="uid://d1ylb4y84ct2o" path="res://addons/proton_scatter/src/modifiers/create_along_edge_continuous.gd" id="13_x67hv"]
+[ext_resource type="Script" uid="uid://6lwalia70i3r" path="res://addons/proton_scatter/src/modifiers/offset_scale.gd" id="14_tn7vn"]
+[ext_resource type="Script" uid="uid://bmblhrcyddit6" path="res://addons/proton_scatter/src/modifiers/single_item.gd" id="16_mv3jg"]
+[ext_resource type="Script" uid="uid://c7m5rx1ox46cw" path="res://addons/proton_scatter/src/modifiers/array.gd" id="16_u8nl4"]
+[ext_resource type="Script" uid="uid://bixrdcwyr2kqc" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="17_lon52"]
+[ext_resource type="Script" uid="uid://dmatn6lebvjwi" path="res://addons/proton_scatter/src/modifiers/offset_position.gd" id="17_wnpjh"]
+[ext_resource type="Script" uid="uid://c48wuuvdxcadf" path="res://addons/proton_scatter/src/modifiers/look_at.gd" id="19_ecgtl"]
+[ext_resource type="Script" uid="uid://ccema12af6031" path="res://addons/proton_scatter/src/modifiers/offset_rotation.gd" id="19_iqrrv"]
+[ext_resource type="Script" uid="uid://c33syvluqkdem" path="res://addons/proton_scatter/src/modifiers/clusterize.gd" id="19_kqhj3"]
+[ext_resource type="Script" uid="uid://d0tpq1nf60cng" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="20_7q4m2"]
+[ext_resource type="Script" uid="uid://chgkw6kbygcmf" path="res://addons/proton_scatter/src/modifiers/proxy.gd" id="21_5pgs0"]
+[ext_resource type="Script" uid="uid://byqw0hv011amp" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="21_h4uuj"]
+[ext_resource type="Script" uid="uid://d3w50edxib5df" path="res://addons/proton_scatter/src/modifiers/remove_outside_shapes.gd" id="21_x4n8q"]
+[ext_resource type="Shader" uid="uid://c3e6i7ekneiqm" path="res://addons/proton_scatter/src/particles/example_random_motion.gdshader" id="27_vj2yt"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_8ubhl"]
 size = Vector3(50, 1, 50)
@@ -50,7 +51,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_8vei7"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_a0khl")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_a0khl")])
 
 [sub_resource type="Resource" id="Resource_g8bsm"]
 script = ExtResource("6_ma1h0")
@@ -67,7 +68,7 @@ reference_frame = 1
 
 [sub_resource type="Resource" id="Resource_wajph"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_mdhrf")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_mdhrf")])
 
 [sub_resource type="Resource" id="Resource_nwd3r"]
 script = ExtResource("6_ma1h0")
@@ -84,7 +85,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_axkfo"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_rityo")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_rityo")])
 
 [sub_resource type="Resource" id="Resource_y8aw6"]
 script = ExtResource("6_ma1h0")
@@ -101,7 +102,7 @@ reference_frame = 1
 
 [sub_resource type="Resource" id="Resource_4lehm"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_gfasn")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_gfasn")])
 
 [sub_resource type="Resource" id="Resource_fr8ni"]
 script = ExtResource("6_ma1h0")
@@ -119,7 +120,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_rfrgg"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_dvb4u")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_dvb4u")])
 
 [sub_resource type="Resource" id="Resource_ve5u2"]
 script = ExtResource("6_ma1h0")
@@ -137,7 +138,7 @@ reference_frame = 1
 
 [sub_resource type="Resource" id="Resource_j4x61"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_f2e4b")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_f2e4b")])
 
 [sub_resource type="Resource" id="Resource_gywyd"]
 script = ExtResource("6_ma1h0")
@@ -156,7 +157,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_syjiv"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_1knwg")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_1knwg")])
 
 [sub_resource type="Resource" id="Resource_eofyd"]
 script = ExtResource("6_ma1h0")
@@ -175,7 +176,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_rrmii"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_f8pmu")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_f8pmu")])
 
 [sub_resource type="Resource" id="Resource_yleso"]
 script = ExtResource("6_ma1h0")
@@ -195,7 +196,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_b1fel"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_hrm74")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_hrm74")])
 
 [sub_resource type="Resource" id="Resource_1vjos"]
 script = ExtResource("6_ma1h0")
@@ -215,7 +216,7 @@ reference_frame = 1
 
 [sub_resource type="Resource" id="Resource_i6uqa"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_18q2p")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_18q2p")])
 
 [sub_resource type="Curve3D" id="Curve3D_5o4l7"]
 _data = {
@@ -252,7 +253,7 @@ reference_frame = 2
 
 [sub_resource type="Resource" id="Resource_uox5l"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_42dco"), SubResource("Resource_877np")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_42dco"), SubResource("Resource_877np")])
 
 [sub_resource type="Resource" id="Resource_1fk1d"]
 script = ExtResource("6_ma1h0")
@@ -304,7 +305,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_f6tel"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_nqb4l"), SubResource("Resource_bw4o3"), SubResource("Resource_3bvlc")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_nqb4l"), SubResource("Resource_bw4o3"), SubResource("Resource_3bvlc")])
 
 [sub_resource type="Resource" id="Resource_02pho"]
 script = ExtResource("16_mv3jg")
@@ -319,7 +320,7 @@ reference_frame = 1
 
 [sub_resource type="Resource" id="Resource_ec8t1"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_02pho")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_02pho")])
 
 [sub_resource type="Resource" id="Resource_qtf2k"]
 script = ExtResource("16_mv3jg")
@@ -334,7 +335,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_mmyxv"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_qtf2k")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_qtf2k")])
 
 [sub_resource type="Resource" id="Resource_73pjb"]
 script = ExtResource("7_h0gb3")
@@ -364,6 +365,7 @@ mask_offset = Vector2(0, 8.56)
 mask_scale = Vector2(1, 1)
 pixel_to_unit_ratio = 32.0
 remove_below = 0.1
+remove_above = 1.0
 scale_transforms = true
 enabled = true
 override_global_seed = false
@@ -373,7 +375,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_1qaw8"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_73pjb"), SubResource("Resource_blv75"), SubResource("Resource_j0n8o")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_73pjb"), SubResource("Resource_blv75"), SubResource("Resource_j0n8o")])
 
 [sub_resource type="Resource" id="Resource_a5k4o"]
 script = ExtResource("6_ma1h0")
@@ -407,6 +409,7 @@ mask_offset = Vector2(0, 8.56)
 mask_scale = Vector2(1, 1)
 pixel_to_unit_ratio = 32.0
 remove_below = 0.4
+remove_above = 1.0
 scale_transforms = false
 enabled = true
 override_global_seed = false
@@ -416,7 +419,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_lgfwt"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_t8qwo"), SubResource("Resource_bbajx"), SubResource("Resource_mysoe")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_t8qwo"), SubResource("Resource_bbajx"), SubResource("Resource_mysoe")])
 
 [sub_resource type="Resource" id="Resource_y5kok"]
 script = ExtResource("6_ma1h0")
@@ -454,7 +457,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_1jtvd"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_rvnu4"), SubResource("Resource_1pc4a"), SubResource("Resource_iv1l5")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_rvnu4"), SubResource("Resource_1pc4a"), SubResource("Resource_iv1l5")])
 
 [sub_resource type="Resource" id="Resource_cf36a"]
 script = ExtResource("6_ma1h0")
@@ -492,7 +495,7 @@ reference_frame = 1
 
 [sub_resource type="Resource" id="Resource_osg78"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_lqllm"), SubResource("Resource_utrbb"), SubResource("Resource_lg2ny")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_lqllm"), SubResource("Resource_utrbb"), SubResource("Resource_lg2ny")])
 
 [sub_resource type="Resource" id="Resource_m5v8r"]
 script = ExtResource("6_ma1h0")
@@ -530,7 +533,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_ggowg"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_lnjcs"), SubResource("Resource_7rgdv"), SubResource("Resource_2yqfv")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_lnjcs"), SubResource("Resource_7rgdv"), SubResource("Resource_2yqfv")])
 
 [sub_resource type="Resource" id="Resource_b0fis"]
 script = ExtResource("6_ma1h0")
@@ -568,7 +571,7 @@ reference_frame = 1
 
 [sub_resource type="Resource" id="Resource_4d70d"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_kr5cl"), SubResource("Resource_xhov2"), SubResource("Resource_dpvhh")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_kr5cl"), SubResource("Resource_xhov2"), SubResource("Resource_dpvhh")])
 
 [sub_resource type="Resource" id="Resource_kebi0"]
 script = ExtResource("6_ma1h0")
@@ -606,7 +609,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_j0g8b"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_tj3qn"), SubResource("Resource_culo7"), SubResource("Resource_dcn1b")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_tj3qn"), SubResource("Resource_culo7"), SubResource("Resource_dcn1b")])
 
 [sub_resource type="Resource" id="Resource_f2qcq"]
 script = ExtResource("6_ma1h0")
@@ -644,7 +647,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_ojwb1"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_5e2iu"), SubResource("Resource_5x3va"), SubResource("Resource_wxvdn")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_5e2iu"), SubResource("Resource_5x3va"), SubResource("Resource_wxvdn")])
 
 [sub_resource type="Resource" id="Resource_hp05y"]
 script = ExtResource("6_ma1h0")
@@ -682,7 +685,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_ndd04"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_eobi8"), SubResource("Resource_drprl"), SubResource("Resource_8bivh")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_eobi8"), SubResource("Resource_drprl"), SubResource("Resource_8bivh")])
 
 [sub_resource type="Resource" id="Resource_n0ty0"]
 script = ExtResource("6_ma1h0")
@@ -706,6 +709,7 @@ remove_points_on_miss = false
 align_with_collision_normal = true
 max_slope = 90.0
 collision_mask = 1
+exclude_mask = 0
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -714,7 +718,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_tml5i"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_ufee4"), SubResource("Resource_ghxnv")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_ufee4"), SubResource("Resource_ghxnv")])
 
 [sub_resource type="Resource" id="Resource_vq7kx"]
 script = ExtResource("6_ma1h0")
@@ -749,6 +753,7 @@ remove_points_on_miss = false
 align_with_collision_normal = false
 max_slope = 90.0
 collision_mask = 1
+exclude_mask = 0
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -757,7 +762,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_5wv3k"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_74wa8"), SubResource("Resource_t2kop"), SubResource("Resource_gn4jn")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_74wa8"), SubResource("Resource_t2kop"), SubResource("Resource_gn4jn")])
 
 [sub_resource type="Resource" id="Resource_nwkwt"]
 script = ExtResource("6_ma1h0")
@@ -792,6 +797,7 @@ remove_points_on_miss = true
 align_with_collision_normal = false
 max_slope = 90.0
 collision_mask = 1
+exclude_mask = 0
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -800,7 +806,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_wcnr2"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_itdfg"), SubResource("Resource_3mnoc"), SubResource("Resource_sud0j")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_itdfg"), SubResource("Resource_3mnoc"), SubResource("Resource_sud0j")])
 
 [sub_resource type="Resource" id="Resource_h12gh"]
 script = ExtResource("6_ma1h0")
@@ -824,6 +830,7 @@ remove_points_on_miss = false
 align_with_collision_normal = false
 max_slope = 90.0
 collision_mask = 1
+exclude_mask = 0
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -832,7 +839,7 @@ reference_frame = 1
 
 [sub_resource type="Resource" id="Resource_p6kkt"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_sc6yw"), SubResource("Resource_yfh80")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_sc6yw"), SubResource("Resource_yfh80")])
 
 [sub_resource type="Resource" id="Resource_5ddch"]
 script = ExtResource("6_ma1h0")
@@ -867,6 +874,7 @@ remove_points_on_miss = false
 align_with_collision_normal = false
 max_slope = 90.0
 collision_mask = 1
+exclude_mask = 0
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -875,7 +883,7 @@ reference_frame = 2
 
 [sub_resource type="Resource" id="Resource_66aqb"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_mn02k"), SubResource("Resource_up1et"), SubResource("Resource_eeqjr")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_mn02k"), SubResource("Resource_up1et"), SubResource("Resource_eeqjr")])
 
 [sub_resource type="Resource" id="Resource_phfha"]
 script = ExtResource("6_ma1h0")
@@ -910,6 +918,7 @@ remove_points_on_miss = false
 align_with_collision_normal = false
 max_slope = 90.0
 collision_mask = 1
+exclude_mask = 0
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -918,7 +927,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_xxh5g"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_0ovty"), SubResource("Resource_hvbao"), SubResource("Resource_w1c4k")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_0ovty"), SubResource("Resource_hvbao"), SubResource("Resource_w1c4k")])
 
 [sub_resource type="Resource" id="Resource_eifot"]
 script = ExtResource("6_ma1h0")
@@ -927,6 +936,7 @@ radius = 1.6059
 [sub_resource type="Resource" id="Resource_ycnav"]
 script = ExtResource("21_5pgs0")
 scatter_node = NodePath("../Source")
+auto_rebuild = true
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -935,7 +945,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_u7eis"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_ycnav")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_ycnav")])
 
 [sub_resource type="Resource" id="Resource_wowj4"]
 script = ExtResource("6_ma1h0")
@@ -944,6 +954,7 @@ radius = 1.6059
 [sub_resource type="Resource" id="Resource_se8q6"]
 script = ExtResource("21_5pgs0")
 scatter_node = NodePath("../Source")
+auto_rebuild = true
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -955,6 +966,7 @@ script = ExtResource("21_h4uuj")
 iterations = 3
 offset_step = 0.3
 consecutive_step_multiplier = 0.5
+use_computeshader = true
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -963,7 +975,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_d7vu4"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_se8q6"), SubResource("Resource_18oia")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_se8q6"), SubResource("Resource_18oia")])
 
 [sub_resource type="Resource" id="Resource_82ud0"]
 script = ExtResource("6_ma1h0")
@@ -991,7 +1003,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_7up6y"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_x2nmf"), SubResource("Resource_4e7pm")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_x2nmf"), SubResource("Resource_4e7pm")])
 
 [sub_resource type="Resource" id="Resource_7kw48"]
 script = ExtResource("6_ma1h0")
@@ -1019,7 +1031,7 @@ reference_frame = 1
 
 [sub_resource type="Resource" id="Resource_c2lcy"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_4grs6"), SubResource("Resource_so4tv")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_4grs6"), SubResource("Resource_so4tv")])
 
 [sub_resource type="Resource" id="Resource_8al8a"]
 script = ExtResource("6_ma1h0")
@@ -1047,7 +1059,7 @@ reference_frame = 2
 
 [sub_resource type="Resource" id="Resource_t34ex"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_2vim7"), SubResource("Resource_jx3rx")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_2vim7"), SubResource("Resource_jx3rx")])
 
 [sub_resource type="Resource" id="Resource_c5k2f"]
 script = ExtResource("6_ma1h0")
@@ -1067,6 +1079,7 @@ script = ExtResource("21_h4uuj")
 iterations = 5
 offset_step = 0.3
 consecutive_step_multiplier = 0.6
+use_computeshader = true
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -1075,7 +1088,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_ncnfw"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_tlhxg"), SubResource("Resource_cbe88")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_tlhxg"), SubResource("Resource_cbe88")])
 
 [sub_resource type="Resource" id="Resource_pnh7s"]
 script = ExtResource("6_ma1h0")
@@ -1095,6 +1108,7 @@ script = ExtResource("21_h4uuj")
 iterations = 5
 offset_step = 0.3
 consecutive_step_multiplier = 0.6
+use_computeshader = true
 enabled = true
 override_global_seed = false
 custom_seed = 0
@@ -1103,7 +1117,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_1wqmj"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_68u82"), SubResource("Resource_2fbms")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_68u82"), SubResource("Resource_2fbms")])
 
 [sub_resource type="Resource" id="Resource_lsc8o"]
 script = ExtResource("6_ma1h0")
@@ -1140,7 +1154,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_rh222"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_cvv4j"), SubResource("Resource_bcg1s"), SubResource("Resource_ditx6")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_cvv4j"), SubResource("Resource_bcg1s"), SubResource("Resource_ditx6")])
 
 [sub_resource type="Resource" id="Resource_nnf16"]
 script = ExtResource("6_ma1h0")
@@ -1177,7 +1191,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_thdr8"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_rq4m2"), SubResource("Resource_hjmp1"), SubResource("Resource_14l50")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_rq4m2"), SubResource("Resource_hjmp1"), SubResource("Resource_14l50")])
 
 [sub_resource type="Resource" id="Resource_t87ux"]
 script = ExtResource("6_ma1h0")
@@ -1198,7 +1212,7 @@ reference_frame = 1
 
 [sub_resource type="Resource" id="Resource_nvyeo"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_hcorr")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_hcorr")])
 
 [sub_resource type="Resource" id="Resource_t1kde"]
 script = ExtResource("6_ma1h0")
@@ -1215,7 +1229,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_cidgu"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_behou")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_behou")])
 
 [sub_resource type="Resource" id="Resource_4qlye"]
 script = ExtResource("11_36l2y")
@@ -1232,7 +1246,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_ywyj6"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_qsibf")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_qsibf")])
 
 [sub_resource type="Curve3D" id="Curve3D_mco2w"]
 _data = {
@@ -1269,7 +1283,7 @@ reference_frame = 2
 
 [sub_resource type="Resource" id="Resource_yl5xk"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_e8esq"), SubResource("Resource_p3662")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_e8esq"), SubResource("Resource_p3662")])
 
 [sub_resource type="Resource" id="Resource_x5d01"]
 script = ExtResource("6_ma1h0")
@@ -1297,10 +1311,11 @@ reference_frame = 2
 
 [sub_resource type="Resource" id="Resource_gavpu"]
 script = ExtResource("2_y5xi5")
-stack = Array[Resource]([SubResource("Resource_g6tkw"), SubResource("Resource_4jaem")])
+stack = Array[ExtResource("4_63p0w")]([SubResource("Resource_g6tkw"), SubResource("Resource_4jaem")])
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7sbin"]
 shader = ExtResource("27_vj2yt")
+shader_parameter/global_transform = Projection(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 
 [sub_resource type="Resource" id="Resource_o7cnt"]
 script = ExtResource("6_ma1h0")

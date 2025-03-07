@@ -1,23 +1,24 @@
-[gd_scene load_steps=79 format=3 uid="uid://dga4klregd82"]
+[gd_scene load_steps=80 format=3 uid="uid://dga4klregd82"]
 
 [ext_resource type="Texture2D" uid="uid://bgc5rl13dopuj" path="res://addons/proton_scatter/demos/assets/textures/sky_2.png" id="1_bp1wy"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter.gd" id="1_odnwj"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="2_wdwa6"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_item.gd" id="3_tn31i"]
+[ext_resource type="Script" uid="uid://4bf2yhk86w85" path="res://addons/proton_scatter/src/scatter.gd" id="1_odnwj"]
+[ext_resource type="Script" uid="uid://c40nn1n74bxrr" path="res://addons/proton_scatter/src/stack/modifier_stack.gd" id="2_wdwa6"]
+[ext_resource type="Script" uid="uid://2yquusg4xxjh" path="res://addons/proton_scatter/src/scatter_item.gd" id="3_tn31i"]
 [ext_resource type="Material" uid="uid://c7mw5tryqfggw" path="res://addons/proton_scatter/demos/assets/materials/m_water.tres" id="3_yrj3o"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/scatter_shape.gd" id="4_5klvy"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/create_inside_grid.gd" id="4_cnevb"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="5_h0430"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/path_shape.gd" id="8_vjeqj"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="9_mhcwm"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="11_lv5tc"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="12_04tbd"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="13_s5uny"]
+[ext_resource type="Script" uid="uid://5fvpuxscpwv2" path="res://addons/proton_scatter/src/scatter_shape.gd" id="4_5klvy"]
+[ext_resource type="Script" uid="uid://ckwpylyrayw3e" path="res://addons/proton_scatter/src/modifiers/create_inside_grid.gd" id="4_cnevb"]
+[ext_resource type="Script" uid="uid://bixrdcwyr2kqc" path="res://addons/proton_scatter/src/modifiers/randomize_transforms.gd" id="5_h0430"]
+[ext_resource type="Script" uid="uid://be6d5o5pfp2e4" path="res://addons/proton_scatter/src/modifiers/base_modifier.gd" id="6_jpid5"]
+[ext_resource type="Script" uid="uid://raomujjoauye" path="res://addons/proton_scatter/src/shapes/path_shape.gd" id="8_vjeqj"]
+[ext_resource type="Script" uid="uid://ef81jy7submy" path="res://addons/proton_scatter/src/shapes/sphere_shape.gd" id="9_mhcwm"]
+[ext_resource type="Script" uid="uid://bwweygd7fv7do" path="res://addons/proton_scatter/src/shapes/box_shape.gd" id="11_lv5tc"]
+[ext_resource type="Script" uid="uid://byqw0hv011amp" path="res://addons/proton_scatter/src/modifiers/relax.gd" id="12_04tbd"]
+[ext_resource type="Script" uid="uid://d0tpq1nf60cng" path="res://addons/proton_scatter/src/modifiers/project_on_geometry.gd" id="13_s5uny"]
 [ext_resource type="PackedScene" uid="uid://bmglbfn5jaubp" path="res://addons/proton_scatter/demos/assets/gobot.tscn" id="15_mnk3f"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="15_terd0"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/randomize_rotation.gd" id="16_qmwrn"]
-[ext_resource type="Script" path="res://addons/proton_scatter/src/modifiers/array.gd" id="17_2af2s"]
-[ext_resource type="Script" path="res://addons/proton_scatter/demos/loading.gd" id="18_0clps"]
+[ext_resource type="Script" uid="uid://csg5eow0uhd1e" path="res://addons/proton_scatter/src/modifiers/create_inside_random.gd" id="15_terd0"]
+[ext_resource type="Script" uid="uid://cjy26nlet0yp8" path="res://addons/proton_scatter/src/modifiers/randomize_rotation.gd" id="16_qmwrn"]
+[ext_resource type="Script" uid="uid://c7m5rx1ox46cw" path="res://addons/proton_scatter/src/modifiers/array.gd" id="17_2af2s"]
+[ext_resource type="Script" uid="uid://dy2jou28lhgs0" path="res://addons/proton_scatter/demos/loading.gd" id="18_0clps"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_bxgb5"]
 panorama = ExtResource("1_bp1wy")
@@ -83,7 +84,7 @@ reference_frame = 2
 
 [sub_resource type="Resource" id="Resource_nl1d8"]
 script = ExtResource("2_wdwa6")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_slkpd"), SubResource("Resource_hc5ta"), SubResource("Resource_4npfm")])
+stack = Array[ExtResource("6_jpid5")]([SubResource("Resource_slkpd"), SubResource("Resource_hc5ta"), SubResource("Resource_4npfm")])
 
 [sub_resource type="Curve3D" id="Curve3D_ew6qf"]
 _data = {
@@ -130,7 +131,7 @@ reference_frame = 2
 
 [sub_resource type="Resource" id="Resource_56f0d"]
 script = ExtResource("2_wdwa6")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_egokv"), SubResource("Resource_sfry4"), SubResource("Resource_lq5i4")])
+stack = Array[ExtResource("6_jpid5")]([SubResource("Resource_egokv"), SubResource("Resource_sfry4"), SubResource("Resource_lq5i4")])
 
 [sub_resource type="Resource" id="Resource_1jvqx"]
 script = ExtResource("11_lv5tc")
@@ -186,7 +187,7 @@ reference_frame = 2
 
 [sub_resource type="Resource" id="Resource_vl457"]
 script = ExtResource("2_wdwa6")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_k2idu"), SubResource("Resource_5juyu"), SubResource("Resource_8rpv2"), SubResource("Resource_le8k7")])
+stack = Array[ExtResource("6_jpid5")]([SubResource("Resource_k2idu"), SubResource("Resource_5juyu"), SubResource("Resource_8rpv2"), SubResource("Resource_le8k7")])
 
 [sub_resource type="Curve3D" id="Curve3D_p31po"]
 _data = {
@@ -239,7 +240,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_ac5wm"]
 script = ExtResource("2_wdwa6")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_5p0cc"), SubResource("Resource_25te8"), SubResource("Resource_v0wvh")])
+stack = Array[ExtResource("6_jpid5")]([SubResource("Resource_5p0cc"), SubResource("Resource_25te8"), SubResource("Resource_v0wvh")])
 
 [sub_resource type="Resource" id="Resource_0weea"]
 script = ExtResource("11_lv5tc")
@@ -283,7 +284,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_ywyik"]
 script = ExtResource("2_wdwa6")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_eq8kb"), SubResource("Resource_m4caw"), SubResource("Resource_i8m6m")])
+stack = Array[ExtResource("6_jpid5")]([SubResource("Resource_eq8kb"), SubResource("Resource_m4caw"), SubResource("Resource_i8m6m")])
 
 [sub_resource type="Resource" id="Resource_iou5c"]
 script = ExtResource("9_mhcwm")
@@ -341,7 +342,7 @@ reference_frame = 2
 
 [sub_resource type="Resource" id="Resource_01as6"]
 script = ExtResource("2_wdwa6")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_maxps"), SubResource("Resource_5ics8"), SubResource("Resource_ilaru"), SubResource("Resource_elisw")])
+stack = Array[ExtResource("6_jpid5")]([SubResource("Resource_maxps"), SubResource("Resource_5ics8"), SubResource("Resource_ilaru"), SubResource("Resource_elisw")])
 
 [sub_resource type="Resource" id="Resource_272xj"]
 script = ExtResource("11_lv5tc")
@@ -393,7 +394,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_tmf4u"]
 script = ExtResource("2_wdwa6")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_f0xq2"), SubResource("Resource_txtls"), SubResource("Resource_i0o45")])
+stack = Array[ExtResource("6_jpid5")]([SubResource("Resource_f0xq2"), SubResource("Resource_txtls"), SubResource("Resource_i0o45")])
 
 [sub_resource type="Curve3D" id="Curve3D_lorvn"]
 _data = {
@@ -458,7 +459,7 @@ reference_frame = 0
 
 [sub_resource type="Resource" id="Resource_itou7"]
 script = ExtResource("2_wdwa6")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_s5vim"), SubResource("Resource_71r1e"), SubResource("Resource_7g71n"), SubResource("Resource_xgx45")])
+stack = Array[ExtResource("6_jpid5")]([SubResource("Resource_s5vim"), SubResource("Resource_71r1e"), SubResource("Resource_7g71n"), SubResource("Resource_xgx45")])
 
 [sub_resource type="Resource" id="Resource_bpfxh"]
 script = ExtResource("9_mhcwm")
@@ -528,7 +529,7 @@ reference_frame = 2
 
 [sub_resource type="Resource" id="Resource_jft8j"]
 script = ExtResource("2_wdwa6")
-stack = Array[Resource("res://addons/proton_scatter/src/modifiers/base_modifier.gd")]([SubResource("Resource_rkfbt"), SubResource("Resource_58g4b"), SubResource("Resource_187ca"), SubResource("Resource_3s5c4")])
+stack = Array[ExtResource("6_jpid5")]([SubResource("Resource_rkfbt"), SubResource("Resource_58g4b"), SubResource("Resource_187ca"), SubResource("Resource_3s5c4")])
 
 [sub_resource type="Resource" id="Resource_3agf6"]
 script = ExtResource("11_lv5tc")
