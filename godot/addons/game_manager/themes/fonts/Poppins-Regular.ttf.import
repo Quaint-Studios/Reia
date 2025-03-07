@@ -3,11 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dxq5k3gvgd50d"
-valid=false
+path="res://.godot/imported/Poppins-Regular.ttf-7451c3f7aad4be3a801469a822053a28.fontdata"
 
 [deps]
 
 source_file="res://addons/game_manager/themes/fonts/Poppins-Regular.ttf"
+dest_files=["res://.godot/imported/Poppins-Regular.ttf-7451c3f7aad4be3a801469a822053a28.fontdata"]
 
 [params]
 

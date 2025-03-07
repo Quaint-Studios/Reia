@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cmqlv88xp71tw"
-valid=false
+path="res://.godot/imported/dead_branch.glb-e4e41ce877f1ef0b2d20a7b89af5de7b.scn"
 
 [deps]
 
 source_file="res://addons/proton_scatter/demos/assets/models/dead_branch.glb"
+dest_files=["res://.godot/imported/dead_branch.glb-e4e41ce877f1ef0b2d20a7b89af5de7b.scn"]
 
 [params]
 

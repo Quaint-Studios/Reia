@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bxqkgplyoipsx"
-valid=false
+path="res://.godot/imported/large_rock.glb-f7a7a73f49167cee4ed84e7342d1f507.scn"
 
 [deps]
 
 source_file="res://addons/proton_scatter/demos/assets/models/large_rock.glb"
+dest_files=["res://.godot/imported/large_rock.glb-f7a7a73f49167cee4ed84e7342d1f507.scn"]
 
 [params]
 

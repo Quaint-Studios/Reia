@@ -3,11 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dt271inn3y37q"
-valid=false
+path="res://.godot/imported/Nunito-MediumItalic.ttf-c3810d99e7f1837e6e7f4077f334182a.fontdata"
 
 [deps]
 
 source_file="res://rsc/fonts/Nunito/static/Nunito-MediumItalic.ttf"
+dest_files=["res://.godot/imported/Nunito-MediumItalic.ttf-c3810d99e7f1837e6e7f4077f334182a.fontdata"]
 
 [params]
 

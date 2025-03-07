@@ -3,11 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://hf5rdg67jcwc"
-valid=false
+path="res://.godot/imported/AnonymousPro-Italic.ttf-9989590b02137b799e13d570de2a42c1.fontdata"
 
 [deps]
 
 source_file="res://addons/gut/fonts/AnonymousPro-Italic.ttf"
+dest_files=["res://.godot/imported/AnonymousPro-Italic.ttf-9989590b02137b799e13d570de2a42c1.fontdata"]
 
 [params]
 

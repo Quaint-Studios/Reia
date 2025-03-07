@@ -3,11 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://bvnax5t16kdml"
-valid=false
+path="res://.godot/imported/Nunito-SemiBold.ttf-55f410783394ba987c24b581959c3226.fontdata"
 
 [deps]
 
 source_file="res://rsc/fonts/Nunito/static/Nunito-SemiBold.ttf"
+dest_files=["res://.godot/imported/Nunito-SemiBold.ttf-55f410783394ba987c24b581959c3226.fontdata"]
 
 [params]
 
