@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://bhums0j31gm5n"
-valid=false
+path="res://.godot/imported/pine_tree.glb-662cc3d34707ccadde24f89b98fadf88.scn"
 
 [deps]
 
 source_file="res://addons/proton_scatter/demos/assets/models/pine_tree.glb"
+dest_files=["res://.godot/imported/pine_tree.glb-662cc3d34707ccadde24f89b98fadf88.scn"]
 
 [params]
 

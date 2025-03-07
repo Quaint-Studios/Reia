@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c38uugpgw7hjm"
-valid=false
+path="res://.godot/imported/mushrooms.glb-64c83b02a53711f9983c978d53ab0f12.scn"
 
 [deps]
 
 source_file="res://addons/proton_scatter/demos/assets/models/mushrooms.glb"
+dest_files=["res://.godot/imported/mushrooms.glb-64c83b02a53711f9983c978d53ab0f12.scn"]
 
 [params]
 

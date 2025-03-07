@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://d1d1fag0m04yc"
-valid=false
+path="res://.godot/imported/brick.glb-d79404ecf88b29143e6e07e77bacb44c.scn"
 
 [deps]
 
 source_file="res://addons/proton_scatter/demos/assets/models/brick.glb"
+dest_files=["res://.godot/imported/brick.glb-d79404ecf88b29143e6e07e77bacb44c.scn"]
 
 [params]
 

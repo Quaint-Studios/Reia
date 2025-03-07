@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dbb4culid55v5"
-valid=false
+path="res://.godot/imported/bush.glb-28e0128066fe8d913839a6b96204b1c6.scn"
 
 [deps]
 
 source_file="res://addons/proton_scatter/demos/assets/models/bush.glb"
+dest_files=["res://.godot/imported/bush.glb-28e0128066fe8d913839a6b96204b1c6.scn"]
 
 [params]
 

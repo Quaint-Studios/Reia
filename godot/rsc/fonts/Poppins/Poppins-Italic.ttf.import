@@ -3,11 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://b14vqvwbyorlj"
-valid=false
+path="res://.godot/imported/Poppins-Italic.ttf-5711f80ac1c27ea2b4d8dff4a643e2c6.fontdata"
 
 [deps]
 
 source_file="res://rsc/fonts/Poppins/Poppins-Italic.ttf"
+dest_files=["res://.godot/imported/Poppins-Italic.ttf-5711f80ac1c27ea2b4d8dff4a643e2c6.fontdata"]
 
 [params]
 

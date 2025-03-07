@@ -3,11 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://bddrd0lq2uqi2"
-valid=false
+path="res://.godot/imported/Roboto-ThinItalic.ttf-a7f892dbb67b7e0c471cfdaa356979ff.fontdata"
 
 [deps]
 
 source_file="res://rsc/fonts/Roboto/Roboto-ThinItalic.ttf"
+dest_files=["res://.godot/imported/Roboto-ThinItalic.ttf-a7f892dbb67b7e0c471cfdaa356979ff.fontdata"]
 
 [params]
 

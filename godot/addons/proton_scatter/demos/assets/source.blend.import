@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cjwgqbg082nfc"
-valid=false
+path="res://.godot/imported/source.blend-6553bbdea542ba64489fdff7990920e8.scn"
 
 [deps]
 
 source_file="res://addons/proton_scatter/demos/assets/source.blend"
+dest_files=["res://.godot/imported/source.blend-6553bbdea542ba64489fdff7990920e8.scn"]
 
 [params]
 

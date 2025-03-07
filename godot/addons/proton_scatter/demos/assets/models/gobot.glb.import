@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://d3f4d3m7n8tpr"
-valid=false
+path="res://.godot/imported/gobot.glb-36505aa16090f2bc2f34fbe5362f44e8.scn"
 
 [deps]
 
 source_file="res://addons/proton_scatter/demos/assets/models/gobot.glb"
+dest_files=["res://.godot/imported/gobot.glb-36505aa16090f2bc2f34fbe5362f44e8.scn"]
 
 [params]
 

@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://6gxiul1pw13t"
-valid=false
+path="res://.godot/imported/fence_planks.glb-4cee642c3e514323763ee9631fb323e9.scn"
 
 [deps]
 
 source_file="res://addons/proton_scatter/demos/assets/models/fence_planks.glb"
+dest_files=["res://.godot/imported/fence_planks.glb-4cee642c3e514323763ee9631fb323e9.scn"]
 
 [params]
 

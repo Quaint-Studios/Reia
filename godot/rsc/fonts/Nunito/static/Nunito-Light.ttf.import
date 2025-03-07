@@ -3,11 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cnjxgje352obr"
-valid=false
+path="res://.godot/imported/Nunito-Light.ttf-540c88684a6953a81aba9c57e628e7b3.fontdata"
 
 [deps]
 
 source_file="res://rsc/fonts/Nunito/static/Nunito-Light.ttf"
+dest_files=["res://.godot/imported/Nunito-Light.ttf-540c88684a6953a81aba9c57e628e7b3.fontdata"]
 
 [params]
 

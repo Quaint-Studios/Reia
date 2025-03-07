@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dors5tqhx56xu"
-valid=false
+path="res://.godot/imported/snow_skybox.glb-d5dcca8ae0fa33c916eeb0415870559f.scn"
 
 [deps]
 
 source_file="res://rsc/images/skyboxes/snow_skybox.glb"
+dest_files=["res://.godot/imported/snow_skybox.glb-d5dcca8ae0fa33c916eeb0415870559f.scn"]
 
 [params]
 

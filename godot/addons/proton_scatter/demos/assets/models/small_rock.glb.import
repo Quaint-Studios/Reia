@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://b81l25tbebki4"
-valid=false
+path="res://.godot/imported/small_rock.glb-9b9690e480edfa6e23f0243045338de9.scn"
 
 [deps]
 
 source_file="res://addons/proton_scatter/demos/assets/models/small_rock.glb"
+dest_files=["res://.godot/imported/small_rock.glb-9b9690e480edfa6e23f0243045338de9.scn"]
 
 [params]
 

@@ -3,11 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://bsoeabiyb24a3"
-valid=false
+path="res://.godot/imported/Poppins-ExtraBoldItalic.ttf-3ea5de4a6d3906423d82ab03851a38d8.fontdata"
 
 [deps]
 
 source_file="res://rsc/fonts/Poppins/Poppins-ExtraBoldItalic.ttf"
+dest_files=["res://.godot/imported/Poppins-ExtraBoldItalic.ttf-3ea5de4a6d3906423d82ab03851a38d8.fontdata"]
 
 [params]
 

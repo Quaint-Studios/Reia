@@ -3,11 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://kv0g4qpe1isw"
-valid=false
+path="res://.godot/imported/Poppins-SemiBold.ttf-c67dd652403100b447f4ddb8c440b767.fontdata"
 
 [deps]
 
 source_file="res://rsc/fonts/Poppins/Poppins-SemiBold.ttf"
+dest_files=["res://.godot/imported/Poppins-SemiBold.ttf-c67dd652403100b447f4ddb8c440b767.fontdata"]
 
 [params]
 

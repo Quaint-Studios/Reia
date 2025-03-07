@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://dcnm2ijk7hj4j"
-valid=false
+path="res://.godot/imported/grass_2.glb-2dc56a32acf64077863c701e8b94ea02.scn"
 
 [deps]
 
 source_file="res://addons/proton_scatter/demos/assets/models/grass_2.glb"
+dest_files=["res://.godot/imported/grass_2.glb-2dc56a32acf64077863c701e8b94ea02.scn"]
 
 [params]
 

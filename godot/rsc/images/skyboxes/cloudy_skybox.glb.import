@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://chfxuvsxn3b8q"
-valid=false
+path="res://.godot/imported/cloudy_skybox.glb-4b5d0e7009735ce65ec3ad320038eec3.scn"
 
 [deps]
 
 source_file="res://rsc/images/skyboxes/cloudy_skybox.glb"
+dest_files=["res://.godot/imported/cloudy_skybox.glb-4b5d0e7009735ce65ec3ad320038eec3.scn"]
 
 [params]
 

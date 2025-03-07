@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://c3mfolo7c5uvh"
-valid=false
+path="res://.godot/imported/tree.glb-86fae6fb2428df7d74097b1a7c75b288.scn"
 
 [deps]
 
 source_file="res://addons/proton_scatter/demos/assets/models/tree.glb"
+dest_files=["res://.godot/imported/tree.glb-86fae6fb2428df7d74097b1a7c75b288.scn"]
 
 [params]
 

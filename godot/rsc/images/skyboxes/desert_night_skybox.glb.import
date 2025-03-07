@@ -4,11 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://2ewo4hrgjtqv"
-valid=false
+path="res://.godot/imported/desert_night_skybox.glb-633c52d81d385ea7c60ba5b93b8a8656.scn"
 
 [deps]
 
 source_file="res://rsc/images/skyboxes/desert_night_skybox.glb"
+dest_files=["res://.godot/imported/desert_night_skybox.glb-633c52d81d385ea7c60ba5b93b8a8656.scn"]
 
 [params]
 
