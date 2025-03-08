@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://inny187m6t4r"
+uid="uid://5q50gpjvfbsg"
 path="res://.godot/imported/Ball.glb-9857fa3e6c1447994d9205d00e9b6309.scn"
 
 [deps]
@@ -1837,19 +1837,19 @@ _subresources={
 "materials": {
 "BallMat": {
 "use_external/enabled": true,
-"use_external/path": "res://scenes/vfx_test/Ball_BallMat.material"
+"use_external/path": "uid://drimrqy31s0hf"
 },
 "BaseMat": {
 "use_external/enabled": true,
-"use_external/path": "res://scenes/vfx_test/Ball_BaseMat.material"
+"use_external/path": "uid://ds7hxs5rg72d5"
 },
 "InnerMat": {
 "use_external/enabled": true,
-"use_external/path": "res://scenes/vfx_test/Ball_InnerMat.material"
+"use_external/path": "uid://dh4wfbnmqprpm"
 },
 "OuterMat": {
 "use_external/enabled": true,
-"use_external/path": "res://scenes/vfx_test/Ball_OuterMat.material"
+"use_external/path": "uid://joy2fj6pc832"
 }
 }
 }
