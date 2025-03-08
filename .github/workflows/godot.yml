@@ -14,7 +14,7 @@ env:
 jobs:
   export-windows:
     name: Windows Export
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     container:
       image: barichello/godot-ci:4.4
     steps:
@@ -33,18 +33,18 @@ jobs:
           mkdir -v -p build/windows
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
-          godot --headless --verbose --export-release "Windows Desktop" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
+          godot --headless --verbose --export-release "win64" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows
           path: build/windows
 
-  export-linux:
-    name: Linux Export
+  export-linux-server:
+    name: Linux Server Export
     runs-on: ubuntu-20.04
     container:
-      image: barichello/godot-ci:4.3
+      image: barichello/godot-ci:4.4
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -59,44 +59,44 @@ jobs:
           mkdir -v -p build/linux
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
-          godot --headless --verbose --export-release "Linux/X11" "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
+          godot --headless --verbose --export-release "linux_server" "$EXPORT_DIR/linux_server/$EXPORT_NAME.x86_64"
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: linux
           path: build/linux
 
-  export-mac:
-    name: Mac Export
-    runs-on: ubuntu-20.04
-    container:
-      image: barichello/godot-ci:4.3
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          lfs: true
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/export_templates/
-          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-      - name: Mac Build
-        run: |
-          mkdir -v -p build/mac
-          EXPORT_DIR="$(readlink -f build)"
-          cd $PROJECT_PATH
-          godot --headless --verbose --export-release "macOS" "$EXPORT_DIR/mac/$EXPORT_NAME.zip"
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: mac
-          path: build/mac
+  # export-mac:
+  #   name: Mac Export
+  #   runs-on: ubuntu-20.04
+  #   container:
+  #     image: barichello/godot-ci:4.4
+  #   steps:
+  #     - name: Checkout
+  #       uses: actions/checkout@v4
+  #       with:
+  #         lfs: true
+  #     - name: Setup
+  #       run: |
+  #         mkdir -v -p ~/.local/share/godot/export_templates/
+  #         mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+  #     - name: Mac Build
+  #       run: |
+  #         mkdir -v -p build/mac
+  #         EXPORT_DIR="$(readlink -f build)"
+  #         cd $PROJECT_PATH
+  #         godot --headless --verbose --export-release "macOS" "$EXPORT_DIR/mac/$EXPORT_NAME.zip"
+  #     - name: Upload Artifact
+  #       uses: actions/upload-artifact@v4
+  #       with:
+  #         name: mac
+  #         path: build/mac
 
   export-web:
     name: Web Export
     runs-on: ubuntu-20.04
     container:
-      image: barichello/godot-ci:4.3
+      image: barichello/godot-ci:4.4
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -111,7 +111,7 @@ jobs:
           mkdir -v -p build/web
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
-          godot --headless --verbose --export-release "Web" "$EXPORT_DIR/web/index.html"
+          godot --headless --verbose --export-release "web" "$EXPORT_DIR/web/index.html"
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
@@ -120,7 +120,7 @@ jobs:
   release-notes:
     name: Release Notes
     runs-on: ubuntu-latest
-    needs: [export-windows, export-linux, export-mac, export-web]
+    needs: [export-windows, export-linux-server, export-web]
     if: ${{ always() && !cancelled() && needs.build.result == 'success' }}
     steps:
       - name: Checkout
