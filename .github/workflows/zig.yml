@@ -9,7 +9,7 @@ on:
 env:
   ZIG_VERSION: 0.13.0
   ZIG_PATH: ~/sdk/zig
-  GODOT_VERSION: 4.3
+  GODOT_VERSION: 4.4
   GODOT_PATH: ~/sdk/godot
 
 jobs:
@@ -70,9 +70,9 @@ jobs:
         run: |
           sudo mkdir -p ~/sdk/godot
           sudo mkdir -p /home/downloads
-          sudo wget https://github.com/godotengine/godot/releases/download/4.3-stable/Godot_v4.3-stable_linux.x86_64.zip -O /home/downloads/Godot_v4.3-stable_linux.x86_64.zip
-          sudo unzip /home/downloads/Godot_v4.3-stable_linux.x86_64.zip -d ~/sdk/godot
-          sudo mv ~/sdk/godot/Godot_v4.3-stable_linux.x86_64 ~/sdk/godot/godot
+          sudo wget https://github.com/godotengine/godot/releases/download/4.4-stable/Godot_v4.4-stable_linux.x86_64.zip -O /home/downloads/Godot_v4.4-stable_linux.x86_64.zip
+          sudo unzip /home/downloads/Godot_v4.4-stable_linux.x86_64.zip -d ~/sdk/godot
+          sudo mv ~/sdk/godot/Godot_v4.4-stable_linux.x86_64 ~/sdk/godot/godot
       - name: Add Godot to PATH
         run: echo ${{env.GODOT_PATH}} >> $GITHUB_PATH
       - name: Generate Godot Project
