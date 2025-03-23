@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://cykrsunnvj3w5"]
-
-[ext_resource type="Script" uid="uid://eadfiloffsdh" path="res://scenes/menus/scene_selector/scene_selector.gd" id="1_ba5hv"]
-
-[node name="SceneSelector" type="Node"]
-script = ExtResource("1_ba5hv")
