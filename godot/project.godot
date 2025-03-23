@@ -1,0 +1,67 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[application]
+
+config/name="Reia"
+config/name_localized={
+"es": "Reia",
+"fr": "Réia",
+"ja": "再会",
+"ru": "Reia"
+}
+config/description="Reia"
+config/version="1.1.0"
+run/main_scene="uid://djtfroocdt7mo"
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="uid://c01csoxrxapip"
+
+[audio]
+
+buses/default_bus_layout="uid://82gy4qqnnk7o"
+
+[debug]
+
+gdscript/warnings/exclude_addons=false
+gdscript/warnings/untyped_declaration=1
+gdscript/warnings/unsafe_property_access=1
+gdscript/warnings/unsafe_method_access=1
+gdscript/warnings/unsafe_cast=1
+gdscript/warnings/unsafe_call_argument=1
+gdscript/warnings/return_value_discarded=1
+
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
+window/stretch/aspect="expand"
+window/handheld/orientation=4
+window/vsync/vsync_mode=0
+window/size/mode.release=3
+
+[file_customization]
+
+folder_colors={
+"res://addons/": "yellow",
+"res://rsc/": "green",
+"res://scenes/": "purple",
+"res://src/": "blue"
+}
+
+[internationalization]
+
+locale/locale_filter_mode=0
+
+[physics]
+
+3d/run_on_separate_thread=true
+common/physics_jitter_fix=0.0
+common/physics_interpolation=true
