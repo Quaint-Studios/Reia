@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Configure Wine
         run: |
-          winecfg
+          wine64 winecfg
       - name: Checkout
         uses: actions/checkout@v4
         with:
