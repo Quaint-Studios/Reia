@@ -19,9 +19,6 @@ jobs:
     container:
       image: barichello/godot-ci:4.4
     steps:
-      - name: Configure Wine
-        run: |
-          /usr/bin/wine64-stable winecfg
       - name: Checkout
         uses: actions/checkout@v4
         with:
