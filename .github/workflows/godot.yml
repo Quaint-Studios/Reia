@@ -10,8 +10,6 @@ env:
   GODOT_VERSION: 4.4
   EXPORT_NAME: Reia
   PROJECT_PATH: godot
-  WINEPREFIX: /home/runner/.wine
-  WINEARCH: win64
 
 jobs:
   export-windows:
@@ -22,7 +20,7 @@ jobs:
     steps:
       - name: Configure Wine
         run: |
-          ls -la ~
+          ~
           /usr/bin/wine64-stable winecfg
       - name: Checkout
         uses: actions/checkout@v4
