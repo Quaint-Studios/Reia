@@ -1,3 +1,46 @@
-[gd_scene format=3 uid="uid://dekcf0t4rq37i"]
+[gd_scene load_steps=3 format=3 uid="uid://dekcf0t4rq37i"]
+
+[ext_resource type="Script" uid="uid://c0ipc0671k2o3" path="res://scenes/main/title_screen/title_screen.gd" id="1_ghve1"]
+[ext_resource type="AudioStream" uid="uid://dtmbfhyhroq5w" path="res://rsc/audio/title/forest_theme_v1.wav" id="2_hkvcx"]
 
 [node name="TitleScreen" type="Node"]
+script = ExtResource("1_ghve1")
+menu_music = ExtResource("2_hkvcx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Dimmer" type="ColorRect" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Screens" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Title" type="Control" parent="CanvasLayer/Screens"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Play" type="Control" parent="CanvasLayer/Screens"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Settings" type="Control" parent="CanvasLayer/Screens"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Credits" type="Control" parent="CanvasLayer/Screens"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="World" type="Node3D" parent="."]
