@@ -9,7 +9,7 @@ var available_players: Array[AudioStreamPlayer] = []
 var busy_players: Array[AudioStreamPlayer] = []
 var bus: String = "Master"
 
-var _tweens: Dictionary = {}
+var _tweens: Dictionary[AudioStreamPlayer, Tween] = {}
 
 
 func _init(possible_busses: PackedStringArray = default_busses, pool_size: int = default_pool_size) -> void:
@@ -52,7 +52,7 @@ func prepare(resource: AudioStream, override_bus: String = "") -> AudioStreamPla
 func get_available_player() -> AudioStreamPlayer:
 	if available_players.size() == 0:
 		increase_pool()
-	var player = available_players.pop_front()
+	var player : Variant = available_players.pop_front()
 	busy_players.append(player)
 	return player
 
@@ -93,6 +93,7 @@ func increase_pool() -> void:
 	add_child(player)
 	available_players.append(player)
 	player.bus = bus
+	@warning_ignore("return_value_discarded")
 	player.finished.connect(_on_player_finished.bind(player))
 
 
@@ -106,12 +107,15 @@ func fade_volume(player: AudioStreamPlayer, from_volume: float, to_volume: float
 	player.volume_db = from_volume
 	if from_volume > to_volume:
 		# Fade out
+		@warning_ignore("return_value_discarded")
 		tween.tween_property(player, "volume_db", to_volume, duration).set_trans(Tween.TRANS_CIRC).set_ease(Tween.EASE_IN)
 	else:
 		# Fade in
+		@warning_ignore("return_value_discarded")
 		tween.tween_property(player, "volume_db", to_volume, duration).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 
 	_tweens[player] = tween
+	@warning_ignore("return_value_discarded")
 	tween.finished.connect(_on_fade_completed.bind(player, tween, from_volume, to_volume, duration))
 
 	return player
@@ -124,6 +128,7 @@ func _remove_tween(player: AudioStreamPlayer) -> void:
 	if _tweens.has(player):
 		var fade: Tween = _tweens.get(player)
 		fade.kill()
+		@warning_ignore("return_value_discarded")
 		_tweens.erase(player)
 
 
@@ -136,7 +141,7 @@ func _on_player_finished(player: AudioStreamPlayer) -> void:
 	mark_player_as_available(player)
 
 
-func _on_fade_completed(player: AudioStreamPlayer, tween: Tween, from_volume: float, to_volume: float, duration: float):
+func _on_fade_completed(player: AudioStreamPlayer, _tween: Tween, _from_volume: float, to_volume: float, _duration: float) -> void:
 	_remove_tween(player)
 
 	# If we just faded out then our player is now available
