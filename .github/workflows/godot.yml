@@ -168,6 +168,7 @@ jobs:
           files: |
             build/windows
             build/linux
+            build/server
             build/mac
             build/web
           # build/Reia_${{ steps.replace_string.outputs.replaced }}
