@@ -30,6 +30,10 @@ boot_splash/minimum_display_time=2000
 
 buses/default_bus_layout="uid://82gy4qqnnk7o"
 
+[autoload]
+
+SoundManager="*res://addons/sound_manager/sound_manager.gd"
+
 [debug]
 
 gdscript/warnings/exclude_addons=false
@@ -50,6 +54,10 @@ window/stretch/aspect="expand"
 window/handheld/orientation=4
 window/vsync/vsync_mode=0
 window/size/mode.release=3
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/sound_manager/plugin.cfg")
 
 [file_customization]
 
