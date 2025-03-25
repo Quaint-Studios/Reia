@@ -34,15 +34,41 @@ jobs:
           mkdir -v -p build/windows
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
-          godot --headless --verbose --export-release "win64" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
+          godot --headless --verbose --export-release "win" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
           name: windows
           path: build/windows
 
-  export-linux-server:
-    name: Linux Server Export
+  export-linux:
+      name: Linux Export
+      runs-on: ubuntu-20.04
+      container:
+        image: barichello/godot-ci:4.4
+      steps:
+        - name: Checkout
+          uses: actions/checkout@v4
+          with:
+            lfs: true
+        - name: Setup
+          run: |
+            mkdir -v -p ~/.local/share/godot/export_templates/
+            mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+        - name: Linux Build
+          run: |
+            mkdir -v -p build/linux
+            EXPORT_DIR="$(readlink -f build)"
+            cd $PROJECT_PATH
+            godot --headless --verbose --export-release "linux" "$EXPORT_DIR/linux_server/$EXPORT_NAME.x86_64"
+        - name: Upload Artifact
+          uses: actions/upload-artifact@v4
+          with:
+            name: linux
+            path: build/linux
+
+  export-server:
+    name: Server Export
     runs-on: ubuntu-20.04
     container:
       image: barichello/godot-ci:4.4
@@ -60,38 +86,38 @@ jobs:
           mkdir -v -p build/linux
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
-          godot --headless --verbose --export-release "linux_server" "$EXPORT_DIR/linux_server/$EXPORT_NAME.x86_64"
+          godot --headless --verbose --export-release "server" "$EXPORT_DIR/server/$EXPORT_NAME.x86_64"
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: linux
-          path: build/linux
+          name: server
+          path: build/server
 
-  # export-mac:
-  #   name: Mac Export
-  #   runs-on: ubuntu-20.04
-  #   container:
-  #     image: barichello/godot-ci:4.4
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
-  #       with:
-  #         lfs: true
-  #     - name: Setup
-  #       run: |
-  #         mkdir -v -p ~/.local/share/godot/export_templates/
-  #         mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-  #     - name: Mac Build
-  #       run: |
-  #         mkdir -v -p build/mac
-  #         EXPORT_DIR="$(readlink -f build)"
-  #         cd $PROJECT_PATH
-  #         godot --headless --verbose --export-release "macOS" "$EXPORT_DIR/mac/$EXPORT_NAME.zip"
-  #     - name: Upload Artifact
-  #       uses: actions/upload-artifact@v4
-  #       with:
-  #         name: mac
-  #         path: build/mac
+  export-mac:
+    name: Mac Export
+    runs-on: ubuntu-20.04
+    container:
+      image: barichello/godot-ci:4.4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Mac Build
+        run: |
+          mkdir -v -p build/mac
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "mac" "$EXPORT_DIR/mac/$EXPORT_NAME.zip"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mac
+          path: build/mac
 
   export-web:
     name: Web Export
@@ -121,8 +147,8 @@ jobs:
   release-notes:
     name: Release Notes
     runs-on: ubuntu-latest
-    needs: [export-windows, export-linux-server, export-web]
-    if: ${{ always() && !cancelled() && needs.build.result == 'success' }}
+    needs: [export-windows, export-linux, export-server, export-mac, export-web]
+    if: ${{ always() && !cancelled() && needs.build.result == 'success' && startsWith(github.ref, 'refs/tags/') }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -139,7 +165,13 @@ jobs:
         uses: softprops/action-gh-release@v2
         if: ${{startsWith(github.ref, 'refs/tags/') }}
         with:
-          files: build/Reia_${{ steps.replace_string.outputs.replaced }}
+          files: |
+            build/windows
+            build/linux
+            build/mac
+            build/web
+          # build/Reia_${{ steps.replace_string.outputs.replaced }}
+          tag_name: ${{ github.ref_name }}
           body: |
             # Reia - `${{ github.ref_name }}`
 
