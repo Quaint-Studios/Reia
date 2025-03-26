@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c0ipc0671k2o3" path="res://scenes/main/title_screen/title_screen.gd" id="1_ghve1"]
 [ext_resource type="AudioStream" uid="uid://dtmbfhyhroq5w" path="res://rsc/audio/title/forest_theme_v1.wav" id="2_hkvcx"]
 [ext_resource type="Texture2D" uid="uid://dn1x1iiwekxih" path="res://rsc/logos/logo_white.svg" id="3_4m48f"]
-[ext_resource type="PackedScene" uid="uid://boustpyvomg3o" path="res://scenes/main/title_screen/components/MenuButton.tscn" id="4_wj2ee"]
+[ext_resource type="PackedScene" uid="uid://boustpyvomg3o" path="res://scenes/main/title_screen/components/menu_button.tscn" id="4_wj2ee"]
 
 [node name="TitleScreen" type="Node"]
 script = ExtResource("1_ghve1")

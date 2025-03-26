@@ -7,6 +7,7 @@
 alignment = 1
 
 [node name="DotL" type="TextureRect" parent="."]
+unique_name_in_owner = true
 visible = false
 modulate = Color(0.960784, 0.960784, 0.960784, 1)
 use_parent_material = true
@@ -18,6 +19,7 @@ texture = ExtResource("1_ikrl4")
 expand_mode = 1
 
 [node name="StarL" type="TextureRect" parent="."]
+unique_name_in_owner = true
 visible = false
 modulate = Color(0.960784, 0.960784, 0.960784, 1)
 use_parent_material = true
@@ -29,10 +31,12 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Menu Button"
 
 [node name="StarR" type="TextureRect" parent="."]
+unique_name_in_owner = true
 visible = false
 modulate = Color(0.960784, 0.960784, 0.960784, 1)
 use_parent_material = true
@@ -44,6 +48,7 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="DotR" type="TextureRect" parent="."]
+unique_name_in_owner = true
 visible = false
 modulate = Color(0.960784, 0.960784, 0.960784, 1)
 use_parent_material = true
