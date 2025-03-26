@@ -1,46 +1,113 @@
-[gd_scene load_steps=3 format=3 uid="uid://dekcf0t4rq37i"]
+[gd_scene load_steps=5 format=3 uid="uid://dekcf0t4rq37i"]
 
 [ext_resource type="Script" uid="uid://c0ipc0671k2o3" path="res://scenes/main/title_screen/title_screen.gd" id="1_ghve1"]
 [ext_resource type="AudioStream" uid="uid://dtmbfhyhroq5w" path="res://rsc/audio/title/forest_theme_v1.wav" id="2_hkvcx"]
+[ext_resource type="Texture2D" uid="uid://dn1x1iiwekxih" path="res://rsc/logos/logo_white.svg" id="3_4m48f"]
+[ext_resource type="PackedScene" uid="uid://boustpyvomg3o" path="res://scenes/main/title_screen/components/MenuButton.tscn" id="4_wj2ee"]
 
 [node name="TitleScreen" type="Node"]
 script = ExtResource("1_ghve1")
 menu_music = ExtResource("2_hkvcx")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="Canvas" type="CanvasLayer" parent="."]
 
-[node name="Dimmer" type="ColorRect" parent="CanvasLayer"]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Dimmer" type="ColorRect" parent="Canvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.203922, 0.2, 0.247059, 0.2)
 
-[node name="Screens" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Screens" type="MarginContainer" parent="Canvas"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
 
-[node name="Title" type="Control" parent="CanvasLayer/Screens"]
+[node name="Title" type="Control" parent="Canvas/Screens"]
 unique_name_in_owner = true
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2
+mouse_filter = 2
 
-[node name="Play" type="Control" parent="CanvasLayer/Screens"]
-unique_name_in_owner = true
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Logo" type="TextureRect" parent="Canvas/Screens/Title"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -156.0
+offset_top = 48.0
+offset_right = 156.0
+offset_bottom = 360.0
+grow_horizontal = 2
+mouse_filter = 2
+texture = ExtResource("3_4m48f")
+expand_mode = 1
+stretch_mode = 5
 
-[node name="Settings" type="Control" parent="CanvasLayer/Screens"]
-unique_name_in_owner = true
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="VBox" type="VBoxContainer" parent="Canvas/Screens/Title"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.6
+anchor_right = 0.5
+anchor_bottom = 0.6
+offset_left = -166.0
+offset_top = -175.5
+offset_right = 166.0
+offset_bottom = 175.5
+theme_override_constants/separation = 12
+alignment = 1
+metadata/_edit_lock_ = true
 
-[node name="Credits" type="Control" parent="CanvasLayer/Screens"]
+[node name="Play" parent="Canvas/Screens/Title/VBox" instance=ExtResource("4_wj2ee")]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="Label" parent="Canvas/Screens/Title/VBox/Play" index="2"]
+text = "Play"
+
+[node name="Settings" parent="Canvas/Screens/Title/VBox" instance=ExtResource("4_wj2ee")]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="Label" parent="Canvas/Screens/Title/VBox/Settings" index="2"]
+text = "Settings"
+
+[node name="Credits" parent="Canvas/Screens/Title/VBox" instance=ExtResource("4_wj2ee")]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="Label" parent="Canvas/Screens/Title/VBox/Credits" index="2"]
+text = "Credits"
+
+[node name="Quit" parent="Canvas/Screens/Title/VBox" instance=ExtResource("4_wj2ee")]
+layout_mode = 2
+metadata/_edit_lock_ = true
+
+[node name="Label" parent="Canvas/Screens/Title/VBox/Quit" index="2"]
+text = "Quit"
+
+[node name="Play" type="Control" parent="Canvas/Screens"]
 unique_name_in_owner = true
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Settings" type="Control" parent="Canvas/Screens"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Credits" type="Control" parent="Canvas/Screens"]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
 
 [node name="World" type="Node3D" parent="."]
+
+[editable path="Canvas/Screens/Title/VBox/Play"]
+[editable path="Canvas/Screens/Title/VBox/Settings"]
+[editable path="Canvas/Screens/Title/VBox/Credits"]
+[editable path="Canvas/Screens/Title/VBox/Quit"]
