@@ -1,0 +1,55 @@
+[gd_scene load_steps=3 format=3 uid="uid://boustpyvomg3o"]
+
+[ext_resource type="Texture2D" uid="uid://c7cg6i2b3y5e0" path="res://rsc/icons/star.svg" id="1_h2ori"]
+[ext_resource type="Texture2D" uid="uid://cikhhiehh4hjs" path="res://rsc/icons/dot.svg" id="1_ikrl4"]
+
+[node name="MenuButton" type="HBoxContainer"]
+alignment = 1
+
+[node name="DotL" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+use_parent_material = true
+custom_minimum_size = Vector2(6, 6)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("1_ikrl4")
+expand_mode = 1
+
+[node name="StarL" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+use_parent_material = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_h2ori")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+text = "Menu Button"
+
+[node name="StarR" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+use_parent_material = true
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_h2ori")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DotR" type="TextureRect" parent="."]
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+use_parent_material = true
+custom_minimum_size = Vector2(6, 6)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("1_ikrl4")
+expand_mode = 1
