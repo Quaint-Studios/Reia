@@ -12,31 +12,31 @@ class_name ProgrammaticTheme
 ## const UPDATE_ON_SAVE = true
 ## [/codeblock]
 ##
-## See the README for more information: 
+## See the README for more information:
 ## [url]https://github.com/Inspiaaa/ThemeGen[/url]
 
 
 const THEME_GEN_VERSION = "1.3.1"
 
 
-## Determines the verbosity of the logging. 
+## Determines the verbosity of the logging.
 ## It applies to the theme generator and the hot reload plugin. [br]
 ## The verbosity level of the logging can be configured by adding the following
 ## [b]const[/b] variable in the child script:
 ## [codeblock]
 ## const VERBOSITY = Verbosity.SILENT # or other option.
 ## [/codeblock]
-enum Verbosity { 
+enum Verbosity {
 	## No logging (except for errors).
-	SILENT = 0, 
+	SILENT = 0,
 	## Only the most important messages are logged.
-	QUIET = 1, 
+	QUIET = 1,
 	## Detailed logging.
-	NORMAL = 2 
+	NORMAL = 2
 }
 
 # Logging levels that correspond to the Verbosity levels.
-enum _LoggingLevel { 
+enum _LoggingLevel {
 	INFO = 1, # For Verbosity.QUIET and higher.
 	DEBUG = 2  # For Verbosity.NORMAL and higher.
 }
@@ -54,7 +54,7 @@ var _save_path = null
 var _theme_generator = null
 
 # The default theme is used to get the base type for each theme variation.
-# Previoiusly, it was also used to get the data type of each item (e.g. is a 
+# Previoiusly, it was also used to get the data type of each item (e.g. is a
 # given integer a constant or a font size?). If the ClassDB property lookup fails,
 # this system could be used as a fallback in future versions.
 var _default_theme: Theme
@@ -63,18 +63,18 @@ var _default_theme: Theme
 var _current_theme: Theme
 
 
-## Dictionary that contains the styles defined via 
-## [method define_style] and [method define_variant_style], 
+## Dictionary that contains the styles defined via
+## [method define_style] and [method define_variant_style],
 ## mapping each type name to the corresponding style data.
 var styles: Dictionary:
 	get:
 		return _styles_by_name
 
-## Returns the current [Theme] instance (of the current theme variant being 
+## Returns the current [Theme] instance (of the current theme variant being
 ## processed in define_theme), allowing you to add custom properties.
 var current_theme: Theme:
 	get:
-		assert(_current_theme != null, "The current theme instance can only be accessed from within define_theme().") 
+		assert(_current_theme != null, "The current theme instance can only be accessed from within define_theme().")
 		return _current_theme
 
 
@@ -198,7 +198,7 @@ func _generate_theme(setup_function: Callable):
 
 	_debug("Generating theme... (%s)" % _theme_generator)
 	var theme = Theme.new()
-	
+
 	# Make the current theme instance available during define_theme().
 	_current_theme = theme
 	_theme_generator.call()
@@ -247,18 +247,18 @@ func _update_existing_theme_instance(new_theme: Theme):
 	# When the editor uses the generated theme file, it loads the resource into
 	# memory. This means that when the new theme is saved, the existing one in
 	# memory is not updated or invalidated until the editor is restarted,
-	# leaving the UI unaffected. 
-	# To fix this issue, the cached theme resource in memory is fetched and 
+	# leaving the UI unaffected.
+	# To fix this issue, the cached theme resource in memory is fetched and
 	# mutated in-place (using the fact that when a resource is loaded, Godot uses
 	# the shared instance in memory instead of loading a new instance from disk).
-	
+
 	if not ResourceLoader.exists(_save_path):
 		return
-	
+
 	var existing_theme = load(_save_path)
 	if not existing_theme is Theme:
 		return
-	
+
 	_debug("Updating cached theme instance...")
 	existing_theme.clear()
 	existing_theme.merge_with(new_theme)
@@ -374,19 +374,19 @@ func _get_data_type_for_value(default_theme: Theme, theme: Theme, type_name, ite
 
 func _type_has_color_item(type_name: String, item_name: String):
 	return _type_has_property(type_name, "theme_override_colors/" + item_name)
-	
+
 func _type_has_constant_item(type_name: String, item_name: String):
 	return _type_has_property(type_name, "theme_override_constants/" + item_name)
-	
+
 func _type_has_font_item(type_name: String, item_name: String):
 	return _type_has_property(type_name, "theme_override_fonts/" + item_name)
-	
+
 func _type_has_font_size_item(type_name: String, item_name: String):
 	return _type_has_property(type_name, "theme_override_font_sizes/" + item_name)
-	
+
 func _type_has_icon_item(type_name: String, item_name: String):
 	return _type_has_property(type_name, "theme_override_icons/" + item_name)
-	
+
 func _type_has_style_item(type_name: String, item_name: String):
 	return _type_has_property(type_name, "theme_override_styles/" + item_name)
 
@@ -394,7 +394,7 @@ func _type_has_style_item(type_name: String, item_name: String):
 func _type_has_property(type_name: String, property_name: String):
 	if not ClassDB.class_exists(type_name):
 		return false
-	
+
 	var properties = ClassDB.instantiate(type_name).get_property_list()
 	return properties.any(func(property): return property.name == property_name)
 
