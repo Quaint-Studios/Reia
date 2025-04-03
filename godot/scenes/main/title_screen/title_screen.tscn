@@ -58,7 +58,6 @@ offset_left = -166.0
 offset_top = -175.5
 offset_right = 166.0
 offset_bottom = 175.5
-theme_override_constants/separation = 12
 alignment = 1
 metadata/_edit_lock_ = true
 
@@ -66,28 +65,28 @@ metadata/_edit_lock_ = true
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Label" parent="Canvas/Screens/Title/VBox/Play" index="2"]
+[node name="Label" parent="Canvas/Screens/Title/VBox/Play/Content" index="2"]
 text = "Play"
 
 [node name="Settings" parent="Canvas/Screens/Title/VBox" instance=ExtResource("4_wj2ee")]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Label" parent="Canvas/Screens/Title/VBox/Settings" index="2"]
+[node name="Label" parent="Canvas/Screens/Title/VBox/Settings/Content" index="2"]
 text = "Settings"
 
 [node name="Credits" parent="Canvas/Screens/Title/VBox" instance=ExtResource("4_wj2ee")]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Label" parent="Canvas/Screens/Title/VBox/Credits" index="2"]
+[node name="Label" parent="Canvas/Screens/Title/VBox/Credits/Content" index="2"]
 text = "Credits"
 
 [node name="Quit" parent="Canvas/Screens/Title/VBox" instance=ExtResource("4_wj2ee")]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Label" parent="Canvas/Screens/Title/VBox/Quit" index="2"]
+[node name="Label" parent="Canvas/Screens/Title/VBox/Quit/Content" index="2"]
 text = "Quit"
 
 [node name="Play" type="Control" parent="Canvas/Screens"]
