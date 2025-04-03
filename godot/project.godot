@@ -20,6 +20,7 @@ config/name_localized={
 config/description="Reia"
 config/version="1.1.0"
 run/main_scene="uid://djtfroocdt7mo"
+config/use_custom_user_dir=true
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="uid://cjsvcwnm1cqda"
@@ -68,6 +69,10 @@ folder_colors={
 "res://scenes/": "purple",
 "res://src/": "blue"
 }
+
+[gui]
+
+theme/custom="uid://clk264aapxxuu"
 
 [internationalization]
 
