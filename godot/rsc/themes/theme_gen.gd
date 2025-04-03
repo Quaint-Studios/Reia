@@ -67,19 +67,6 @@ func define_label_default() -> void:
 		font_color = Colors.White.SOFT
 	})
 
-func define_mainmenulabel_label() -> void:
-	define_variant_style("MainMenu", "Label", {
-		font = Fonts.Poppins.bold,
-		font_color = Colors.White.CREAMY,
-		font_size = 46,
-	})
-
-	define_variant_style("MainMenu_Hovered", "Label", {
-		font = Fonts.Poppins.bold,
-		font_color = Colors.White.PURE,
-		font_size = 54
-	})
-
 	define_variant_style("Roboto_Black_20_BlueChip", "Label", {
 		font = Fonts.Roboto.black,
 		font_color = Colors.Blue.CHIP,
@@ -90,6 +77,19 @@ func define_mainmenulabel_label() -> void:
 		font = Fonts.Poppins.bold,
 		font_color = Colors.Black.DEBUG,
 		font_size = 18
+	})
+
+func define_mainmenulabel_label() -> void:
+	define_variant_style("MainMenu", "Label", {
+		font = Fonts.Poppins.bold,
+		font_color = Colors.White.CREAMY,
+		font_size = 46,
+	})
+
+	define_variant_style("MainMenu_Hovered", "Label", {
+		font = Fonts.Poppins.bold,
+		font_color = Colors.White.PURE,
+		font_size = 54,
 	})
 #endregion
 
