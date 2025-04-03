@@ -1,0 +1,12 @@
+[gd_resource type="Theme" format=3 uid="uid://clk264aapxxuu"]
+
+[resource]
+default_font_size = 20
+Button/colors/font_color = Color(0.960784, 0.960784, 0.960784, 1)
+Label/colors/font_color = Color(0.960784, 0.960784, 0.960784, 1)
+MainMenuLabel/base_type = &"Label"
+MainMenuLabel/colors/font_color = Color(0.976471, 0.952941, 0.898039, 1)
+MainMenuLabel/font_sizes/font_size = 46
+MainMenuLabelHovered/base_type = &"Label"
+MainMenuLabelHovered/colors/font_color = Color(1, 1, 1, 1)
+MainMenuLabelHovered/font_sizes/font_size = 54
