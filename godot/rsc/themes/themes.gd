@@ -7,7 +7,8 @@ class Colors:
 		const CREAMY = Color8(249, 243, 229)
 		const SOFT = Color8(245, 245, 245)
 	class Black:
-		const TRANSPARENT = Color8(26, 26, 26, 51)
+		const TRANSPARENT = Color8(26, 26, 26, 51) # 20% alpha
+		const DEBUG = Color8(7, 38, 61, 127.5) # 50% alpha
 	class Blue:
 		const CLEAR = Color8(95, 144, 151)
 		const CHIP = Color8(85, 142, 221)
@@ -34,10 +35,10 @@ class Fonts:
 	class Size:
 		const NORMAL = 20
 	class Poppins:
-		var normal := ResourceLoader.load("res://rsc/fonts/poppins-latin-400-normal.ttf") as FontFile
-		var bold := ResourceLoader.load("res://rsc/fonts/poppins-latin-700-normal.ttf") as FontFile
+		static var normal := ResourceLoader.load("res://rsc/fonts/poppins-latin-400-normal.ttf") as FontFile
+		static var bold := ResourceLoader.load("res://rsc/fonts/poppins-latin-700-normal.ttf") as FontFile
 	class Roboto:
-		var black := ResourceLoader.load("res://rsc/fonts/roboto-latin-900-normal.ttf") as FontFile
+		static var black := ResourceLoader.load("res://rsc/fonts/roboto-latin-900-normal.ttf") as FontFile
 
 func setup() -> void:
 	set_save_path("res://rsc/themes/theme.tres")
@@ -52,7 +53,7 @@ func define_fonts() -> void:
 	define_font_default()
 
 func define_font_default() -> void:
-	#define_default_font(font_normal)
+	define_default_font(Fonts.Poppins.normal)
 	define_default_font_size(Fonts.Size.NORMAL)
 #endregion
 
@@ -67,16 +68,28 @@ func define_label_default() -> void:
 	})
 
 func define_mainmenulabel_label() -> void:
-	define_variant_style("MainMenuLabel", "Label", {
-		#font = font_bold,
+	define_variant_style("MainMenu", "Label", {
+		font = Fonts.Poppins.bold,
 		font_color = Colors.White.CREAMY,
 		font_size = 46,
 	})
 
-	define_variant_style("MainMenuLabelHovered", "Label", {
-		#font = font_bold,
+	define_variant_style("MainMenu_Hovered", "Label", {
+		font = Fonts.Poppins.bold,
 		font_color = Colors.White.PURE,
 		font_size = 54
+	})
+
+	define_variant_style("Roboto_Black_20_BlueChip", "Label", {
+		font = Fonts.Roboto.black,
+		font_color = Colors.Blue.CHIP,
+		font_size = 20
+	})
+
+	define_variant_style("Poppins_Bold_18_Debug", "Label", {
+		font = Fonts.Poppins.bold,
+		font_color = Colors.Black.DEBUG,
+		font_size = 18
 	})
 #endregion
 
