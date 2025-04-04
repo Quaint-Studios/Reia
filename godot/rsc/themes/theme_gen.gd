@@ -3,33 +3,33 @@ extends ProgrammaticTheme
 
 class Colors:
 	class White:
-		const PURE = Color8(255, 255, 255)
-		const CREAMY = Color8(249, 243, 229)
-		const SOFT = Color8(245, 245, 245)
+		const PURE = Color("#FFFFFF")
+		const CREAMY = Color("#F9F3E5")
+		const SOFT = Color("#F5F5F5")
 	class Black:
-		const TRANSPARENT = Color8(26, 26, 26, 51) # 20% alpha
-		const DEBUG = Color8(7, 38, 61, 127.5) # 50% alpha
+		const TRANSPARENT = Color("#1A1A1A", 0.2)
+		const DEBUG = Color("#07263D", 0.5)
 	class Blue:
-		const CLEAR = Color8(95, 144, 151)
-		const CHIP = Color8(85, 142, 221)
+		const CLEAR = Color("#5F9097")
+		const CHIP = Color("#558EDD")
 	class Red:
-		const CANCEL = Color8(249, 98, 47)
+		const CANCEL = Color("#F9622F")
 	class Inventory:
-		const BAR = Color8(56, 90, 166, 165.75) # 65% alpha
-		const CONTENT = Color8(255, 255, 255, 25.5) # 10% alpha
+		const BAR = Color("#385AA6", 0.65)
+		const CONTENT = Color("#FFFFFF", 0.1) # 10% alpha
 		class Item:
-			const COMMON = Color8(85, 221, 99)
-			const UNCOMMON = Color8(85, 126, 221)
-			const RARE = Color8(247, 237, 186)
-			const SACRED = Color8(186, 84, 248)
-			const ARCANE_1 = Color8(248, 87, 32)
-			const ARCANE_2 = Color8(250, 128, 87)
-			const RADIANT_1 = Color8(240, 211, 66)
-			const RADIANT_2 = Color8(255, 255, 255)
-			const TEXT_BG = Color8(52, 51, 63)
-			const TEXT_FG = Color8(250, 253, 255)
-			const HEADER_BG = Color8(52, 51, 63, 127.5) # 50% alpha
-			const HEADER_FG = Color8(250, 253, 255)
+			const COMMON = Color("#55DD63")
+			const UNCOMMON = Color("#557EDD")
+			const RARE = Color("#F7EDBA")
+			const SACRED = Color("#BA54F8")
+			const ARCANE_1 = Color("#F85720")
+			const ARCANE_2 = Color("#FA8057")
+			const RADIANT_1 = Color("#F0D342")
+			const RADIANT_2 = Color("#FFFFFF")
+			const TEXT_BG = Color("#34333F")
+			const TEXT_FG = Color("#FAFDFF")
+			const HEADER_BG = Color("#34333F", 0.5)
+			const HEADER_FG = Color("#FAFDFF")
 
 class Fonts:
 	class Size:
