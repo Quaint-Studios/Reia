@@ -96,9 +96,34 @@ func define_mainmenulabel_label() -> void:
 #region Buttons
 func define_buttons() -> void:
 	define_button_default()
+	define_button_24r()
 
 func define_button_default() -> void:
 	define_style("Button", {
-		font_color = Colors.White.SOFT
+		font_color = Colors.White.SOFT,
+		focus = stylebox_empty({}),
+		hover = stylebox_empty({})
+	})
+
+func define_button_24r() -> void:
+	var style = stylebox_flat({
+		borders_ = border_width(0),
+		corners_ = corner_radius(24)
+	})
+
+	var white_creamy = inherit(style, {
+		bg_color = Colors.White.CREAMY
+	})
+	var white_creamy_hover = inherit(white_creamy, {
+		borders_ = border_width(2),
+		border_color = Colors.Blue.CHIP
+	})
+	var white_creamy_pressed = inherit(white_creamy_hover, {
+		bg_color = Colors.White.SOFT
+	})
+	define_variant_style("24r_WhiteCreamy", "Button", {
+		normal = white_creamy,
+		hover = white_creamy_hover,
+		pressed = white_creamy_pressed
 	})
 #endregion
