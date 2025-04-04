@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://clk264aapxxuu"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://clk264aapxxuu"]
 
 [ext_resource type="FontFile" uid="uid://cgiw1u6elrrsd" path="res://rsc/fonts/poppins-latin-700-normal.ttf" id="1_1d5rj"]
 [ext_resource type="FontFile" uid="uid://dqprfmwn0cetn" path="res://rsc/fonts/poppins-latin-400-normal.ttf" id="1_7alsp"]
@@ -35,9 +35,18 @@ corner_radius_top_right = 24
 corner_radius_bottom_right = 24
 corner_radius_bottom_left = 24
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ouc2r"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ouc2r"]
+bg_color = Color(0.333333, 0.556863, 0.866667, 1)
+corner_radius_top_left = 48
+corner_radius_top_right = 48
+corner_radius_bottom_right = 48
+corner_radius_bottom_left = 48
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lto43"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ojcqq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_knixb"]
 
 [resource]
 default_font = ExtResource("1_7alsp")
@@ -46,9 +55,11 @@ default_font_size = 20
 24r_WhiteCreamy/styles/hover = SubResource("StyleBoxFlat_uoplr")
 24r_WhiteCreamy/styles/normal = SubResource("StyleBoxFlat_st43d")
 24r_WhiteCreamy/styles/pressed = SubResource("StyleBoxFlat_bxpad")
+48r_Circle_BlueChip/base_type = &"Panel"
+48r_Circle_BlueChip/styles/panel = SubResource("StyleBoxFlat_ouc2r")
 Button/colors/font_color = Color(0.960784, 0.960784, 0.960784, 1)
-Button/styles/focus = SubResource("StyleBoxEmpty_ouc2r")
-Button/styles/hover = SubResource("StyleBoxEmpty_lto43")
+Button/styles/focus = SubResource("StyleBoxEmpty_lto43")
+Button/styles/hover = SubResource("StyleBoxEmpty_ojcqq")
 Label/colors/font_color = Color(0.960784, 0.960784, 0.960784, 1)
 MainMenu/base_type = &"Label"
 MainMenu/colors/font_color = Color(0.976471, 0.952941, 0.898039, 1)
@@ -58,6 +69,7 @@ MainMenu_Hovered/base_type = &"Label"
 MainMenu_Hovered/colors/font_color = Color(1, 1, 1, 1)
 MainMenu_Hovered/font_sizes/font_size = 54
 MainMenu_Hovered/fonts/font = ExtResource("1_1d5rj")
+Panel/styles/panel = SubResource("StyleBoxEmpty_knixb")
 Poppins_Bold_18_Debug/base_type = &"Label"
 Poppins_Bold_18_Debug/colors/font_color = Color(0.027451, 0.14902, 0.239216, 0.5)
 Poppins_Bold_18_Debug/font_sizes/font_size = 18
