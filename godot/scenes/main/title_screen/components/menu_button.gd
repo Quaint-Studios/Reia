@@ -1,10 +1,18 @@
-extends Node
+extends MarginContainer
 
-func show_decorations(hidden := false) -> void:
-	(%DotL as TextureRect).visible = hidden
-	(%DotR as TextureRect).visible = hidden
-	(%StarL as TextureRect).visible = hidden
-	(%StarR as TextureRect).visible = hidden
+func show_decorations(isHidden := false) -> void:
+	(%DotL as TextureRect).visible = isHidden
+	(%DotR as TextureRect).visible = isHidden
+	(%StarL as TextureRect).visible = isHidden
+	(%StarR as TextureRect).visible = isHidden
+
+func _on_button_button_down() -> void:
+	modulate.a = 0.5
+	scale = Vector2(0.9,0.9)
+
+func _on_button_button_up() -> void:
+	modulate.a = 1
+	scale = Vector2(1,1)
 
 func hover() -> void:
 	(%Label as Label).theme_type_variation = &"MainMenu_Hovered"
