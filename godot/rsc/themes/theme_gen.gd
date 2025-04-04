@@ -46,6 +46,7 @@ func setup() -> void:
 func define_theme() -> void:
 	define_fonts()
 	define_labels()
+	define_panels()
 	define_buttons()
 
 #region Fonts
@@ -91,6 +92,28 @@ func define_mainmenulabel_label() -> void:
 		font_color = Colors.White.PURE,
 		font_size = 54,
 	})
+#endregion
+
+#region Panels
+func define_panels() -> void:
+	define_panel_default()
+	define_panel_circle()
+
+func define_panel_default() -> void:
+	define_style("Panel", {
+		panel = stylebox_empty({})
+	})
+
+func define_panel_circle() -> void:
+	var style = stylebox_flat({
+		corners_ = corner_radius(48)
+	})
+	define_variant_style("48r_Circle_BlueChip", "Panel", {
+		panel = inherit(style, {
+			bg_color = Colors.Blue.CHIP
+		})
+	})
+
 #endregion
 
 #region Buttons

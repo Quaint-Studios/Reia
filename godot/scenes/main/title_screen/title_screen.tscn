@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://dekcf0t4rq37i"]
+[gd_scene load_steps=6 format=3 uid="uid://dekcf0t4rq37i"]
 
 [ext_resource type="Script" uid="uid://c0ipc0671k2o3" path="res://scenes/main/title_screen/title_screen.gd" id="1_ghve1"]
 [ext_resource type="AudioStream" uid="uid://dtmbfhyhroq5w" path="res://rsc/audio/title/forest_theme_v1.wav" id="2_hkvcx"]
 [ext_resource type="Texture2D" uid="uid://dn1x1iiwekxih" path="res://rsc/logos/logo_white.svg" id="3_4m48f"]
 [ext_resource type="PackedScene" uid="uid://boustpyvomg3o" path="res://scenes/main/title_screen/components/menu_button.tscn" id="4_wj2ee"]
+[ext_resource type="Texture2D" uid="uid://ucyx63x3aags" path="res://rsc/icons/notes-star.svg" id="5_u4k1n"]
 
 [node name="TitleScreen" type="Node"]
 script = ExtResource("1_ghve1")
@@ -89,10 +90,8 @@ metadata/_edit_lock_ = true
 [node name="Label" parent="Canvas/Screens/Title/VBox/Quit/Content" index="2"]
 text = "Quit"
 
-[node name="ReleaseNotes" type="MarginContainer" parent="Canvas/Screens/Title"]
-custom_minimum_size = Vector2(246, 60)
-layout_mode = 1
-anchors_preset = 3
+[node name="Button" type="Button" parent="Canvas/Screens/Title"]
+layout_mode = 2
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -101,19 +100,54 @@ offset_left = -280.0
 offset_top = -94.0
 offset_right = -34.0
 offset_bottom = -34.0
-grow_horizontal = 0
-grow_vertical = 0
-
-[node name="Button" type="Button" parent="Canvas/Screens/Title/ReleaseNotes"]
-layout_mode = 2
+mouse_default_cursor_shape = 2
 theme_type_variation = &"24r_WhiteCreamy"
 
-[node name="Label" type="Label" parent="Canvas/Screens/Title/ReleaseNotes"]
-layout_mode = 2
-text = "Release Notes"
+[node name="ReleaseNotes" type="MarginContainer" parent="Canvas/Screens/Title/Button"]
+custom_minimum_size = Vector2(246, 60)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -123.0
+offset_top = -30.0
+offset_right = 123.0
+offset_bottom = 30.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/margin_left = 12
 
-[node name="HBox" type="HBoxContainer" parent="Canvas/Screens/Title/ReleaseNotes"]
+[node name="HBox" type="HBoxContainer" parent="Canvas/Screens/Title/Button/ReleaseNotes"]
 layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 16
+
+[node name="CenterContainer" type="CenterContainer" parent="Canvas/Screens/Title/Button/ReleaseNotes/HBox"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Circle" type="Panel" parent="Canvas/Screens/Title/Button/ReleaseNotes/HBox/CenterContainer"]
+custom_minimum_size = Vector2(46, 46)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+theme_type_variation = &"48r_Circle_BlueChip"
+
+[node name="TextureRect" type="TextureRect" parent="Canvas/Screens/Title/Button/ReleaseNotes/HBox/CenterContainer"]
+custom_minimum_size = Vector2(35, 35)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5_u4k1n")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Canvas/Screens/Title/Button/ReleaseNotes/HBox"]
+layout_mode = 2
+theme_type_variation = &"Roboto_Black_20_BlueChip"
+text = "Release Notes"
 
 [node name="Play" type="Control" parent="Canvas/Screens"]
 unique_name_in_owner = true
