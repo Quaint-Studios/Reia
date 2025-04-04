@@ -1,13 +1,54 @@
-[gd_resource type="Theme" load_steps=4 format=3 uid="uid://clk264aapxxuu"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://clk264aapxxuu"]
 
 [ext_resource type="FontFile" uid="uid://cgiw1u6elrrsd" path="res://rsc/fonts/poppins-latin-700-normal.ttf" id="1_1d5rj"]
 [ext_resource type="FontFile" uid="uid://dqprfmwn0cetn" path="res://rsc/fonts/poppins-latin-400-normal.ttf" id="1_7alsp"]
 [ext_resource type="FontFile" uid="uid://d3vaf1msq4riv" path="res://rsc/fonts/roboto-latin-900-normal.ttf" id="2_uoplr"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uoplr"]
+bg_color = Color(0.976471, 0.952941, 0.898039, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.333333, 0.556863, 0.866667, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_st43d"]
+bg_color = Color(0.976471, 0.952941, 0.898039, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bxpad"]
+bg_color = Color(0.960784, 0.960784, 0.960784, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.333333, 0.556863, 0.866667, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ouc2r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lto43"]
+
 [resource]
 default_font = ExtResource("1_7alsp")
 default_font_size = 20
+24r_WhiteCreamy/base_type = &"Button"
+24r_WhiteCreamy/styles/hover = SubResource("StyleBoxFlat_uoplr")
+24r_WhiteCreamy/styles/normal = SubResource("StyleBoxFlat_st43d")
+24r_WhiteCreamy/styles/pressed = SubResource("StyleBoxFlat_bxpad")
 Button/colors/font_color = Color(0.960784, 0.960784, 0.960784, 1)
+Button/styles/focus = SubResource("StyleBoxEmpty_ouc2r")
+Button/styles/hover = SubResource("StyleBoxEmpty_lto43")
 Label/colors/font_color = Color(0.960784, 0.960784, 0.960784, 1)
 MainMenu/base_type = &"Label"
 MainMenu/colors/font_color = Color(0.976471, 0.952941, 0.898039, 1)
@@ -18,7 +59,7 @@ MainMenu_Hovered/colors/font_color = Color(1, 1, 1, 1)
 MainMenu_Hovered/font_sizes/font_size = 54
 MainMenu_Hovered/fonts/font = ExtResource("1_1d5rj")
 Poppins_Bold_18_Debug/base_type = &"Label"
-Poppins_Bold_18_Debug/colors/font_color = Color(0.027451, 0.14902, 0.239216, 0.498039)
+Poppins_Bold_18_Debug/colors/font_color = Color(0.027451, 0.14902, 0.239216, 0.5)
 Poppins_Bold_18_Debug/font_sizes/font_size = 18
 Poppins_Bold_18_Debug/fonts/font = ExtResource("1_1d5rj")
 Roboto_Black_20_BlueChip/base_type = &"Label"
