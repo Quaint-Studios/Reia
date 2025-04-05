@@ -4,7 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://dtmbfhyhroq5w" path="res://rsc/audio/title/forest_theme_v1.wav" id="2_hkvcx"]
 [ext_resource type="Texture2D" uid="uid://dn1x1iiwekxih" path="res://rsc/logos/logo_white.svg" id="3_4m48f"]
 [ext_resource type="PackedScene" uid="uid://boustpyvomg3o" path="res://scenes/main/title_screen/components/menu_button.tscn" id="4_wj2ee"]
-[ext_resource type="Shader" uid="uid://cj8l8baynjtth" path="res://scenes/main/title_screen/linear_gradient_a.gdshader" id="5_1rvqr"]
+[ext_resource type="Shader" uid="uid://cj8l8baynjtth" path="res://common/shaders/linear_gradient_a.gdshader" id="5_1rvqr"]
 [ext_resource type="Texture2D" uid="uid://ucyx63x3aags" path="res://rsc/icons/notes-star.svg" id="5_u4k1n"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0ecsx"]
