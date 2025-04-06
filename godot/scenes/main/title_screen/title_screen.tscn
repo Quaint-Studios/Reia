@@ -1,11 +1,17 @@
-[gd_scene load_steps=8 format=3 uid="uid://dekcf0t4rq37i"]
+[gd_scene load_steps=10 format=3 uid="uid://dekcf0t4rq37i"]
 
 [ext_resource type="Script" uid="uid://c0ipc0671k2o3" path="res://scenes/main/title_screen/title_screen.gd" id="1_ghve1"]
 [ext_resource type="AudioStream" uid="uid://dtmbfhyhroq5w" path="res://rsc/audio/title/forest_theme_v1.wav" id="2_hkvcx"]
 [ext_resource type="Texture2D" uid="uid://dn1x1iiwekxih" path="res://rsc/logos/logo_white.svg" id="3_4m48f"]
+[ext_resource type="Shader" uid="uid://d1ft75j3rmcw4" path="res://common/shaders/drop_shadow.gdshader" id="4_0ecsx"]
 [ext_resource type="PackedScene" uid="uid://boustpyvomg3o" path="res://scenes/main/title_screen/components/menu_button.tscn" id="4_wj2ee"]
 [ext_resource type="Shader" uid="uid://cj8l8baynjtth" path="res://common/shaders/linear_gradient_a.gdshader" id="5_1rvqr"]
 [ext_resource type="Texture2D" uid="uid://ucyx63x3aags" path="res://rsc/icons/notes-star.svg" id="5_u4k1n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ltsel"]
+shader = ExtResource("4_0ecsx")
+shader_parameter/shadow_color = Vector4(0, 0, 0, 1)
+shader_parameter/direction = Vector2(-0.1, -0.15)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0ecsx"]
 shader = ExtResource("5_1rvqr")
@@ -58,16 +64,16 @@ expand_mode = 1
 stretch_mode = 5
 
 [node name="VBox" type="VBoxContainer" parent="Canvas/Screens/Title"]
+clip_children = 2
+material = SubResource("ShaderMaterial_ltsel")
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.6
 anchor_right = 0.5
-anchor_bottom = 0.6
 offset_left = -166.0
-offset_top = -175.5
+offset_top = 472.5
 offset_right = 166.0
-offset_bottom = 175.5
+offset_bottom = 823.5
 alignment = 1
 metadata/_edit_lock_ = true
 
