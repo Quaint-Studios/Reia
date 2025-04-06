@@ -7,7 +7,7 @@ func show_decorations(isHidden := false) -> void:
 	(%StarR as TextureRect).visible = isHidden
 
 func _on_button_button_down() -> void:
-	modulate.a = 0.5
+	modulate.a = 0.8
 	scale = Vector2(0.9,0.9)
 
 func _on_button_button_up() -> void:
