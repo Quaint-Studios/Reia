@@ -1,15 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://boustpyvomg3o"]
+[gd_scene load_steps=4 format=3 uid="uid://boustpyvomg3o"]
 
-[ext_resource type="Shader" uid="uid://d1ft75j3rmcw4" path="res://common/shaders/drop_shadow.gdshader" id="1_de43x"]
 [ext_resource type="Texture2D" uid="uid://c7cg6i2b3y5e0" path="res://rsc/icons/star.svg" id="1_h2ori"]
 [ext_resource type="Texture2D" uid="uid://cikhhiehh4hjs" path="res://rsc/icons/dot.svg" id="1_ikrl4"]
 [ext_resource type="Script" uid="uid://c2y2p7qeeu146" path="res://scenes/main/title_screen/components/menu_button.gd" id="1_othui"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_80r2m"]
-shader = ExtResource("1_de43x")
-
 [node name="MenuButton" type="MarginContainer"]
-material = SubResource("ShaderMaterial_80r2m")
 custom_minimum_size = Vector2(0, 81)
 anchors_preset = -1
 anchor_left = 0.086
@@ -24,7 +19,6 @@ pivot_offset = Vector2(166, 40)
 script = ExtResource("1_othui")
 
 [node name="Content" type="HBoxContainer" parent="."]
-use_parent_material = true
 layout_mode = 2
 mouse_filter = 2
 alignment = 1
@@ -33,7 +27,6 @@ alignment = 1
 unique_name_in_owner = true
 visible = false
 modulate = Color(0.960784, 0.960784, 0.960784, 1)
-use_parent_material = true
 custom_minimum_size = Vector2(6, 6)
 layout_mode = 2
 size_flags_vertical = 4
@@ -46,7 +39,6 @@ stretch_mode = 5
 unique_name_in_owner = true
 visible = false
 modulate = Color(0.960784, 0.960784, 0.960784, 1)
-use_parent_material = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_filter = 2
@@ -56,7 +48,6 @@ stretch_mode = 5
 
 [node name="Label" type="Label" parent="Content"]
 unique_name_in_owner = true
-use_parent_material = true
 layout_mode = 2
 theme_type_variation = &"MainMenu"
 text = "Menu Button"
@@ -65,7 +56,6 @@ text = "Menu Button"
 unique_name_in_owner = true
 visible = false
 modulate = Color(0.960784, 0.960784, 0.960784, 1)
-use_parent_material = true
 custom_minimum_size = Vector2(24, 24)
 layout_mode = 2
 mouse_filter = 2
@@ -77,7 +67,6 @@ stretch_mode = 5
 unique_name_in_owner = true
 visible = false
 modulate = Color(0.960784, 0.960784, 0.960784, 1)
-use_parent_material = true
 custom_minimum_size = Vector2(6, 6)
 layout_mode = 2
 size_flags_vertical = 4
@@ -88,7 +77,6 @@ stretch_mode = 5
 
 [node name="Button" type="Button" parent="."]
 unique_name_in_owner = true
-use_parent_material = true
 layout_mode = 2
 mouse_default_cursor_shape = 2
 flat = true
