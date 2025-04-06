@@ -1,0 +1,17 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://cfihjq48kmy3v"]
+
+[ext_resource type="Texture2D" uid="uid://djym1kltn1v4j" path="res://rsc/skyboxes/mountain_skybox_0.jpg" id="1_33lyb"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lctso"]
+panorama = ExtResource("1_33lyb")
+
+[sub_resource type="Sky" id="Sky_ep4v4"]
+sky_material = SubResource("PanoramaSkyMaterial_lctso")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_ep4v4")
+sky_rotation = Vector3(-3.1957, 0, 0)
+ambient_light_source = 3
+ambient_light_color = Color(0.525, 0.784, 0.863, 1)
+reflected_light_source = 2
