@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dekcf0t4rq37i"]
+[gd_scene load_steps=11 format=3 uid="uid://dekcf0t4rq37i"]
 
 [ext_resource type="Script" uid="uid://c0ipc0671k2o3" path="res://scenes/main/title_screen/title_screen.gd" id="1_ghve1"]
 [ext_resource type="AudioStream" uid="uid://dtmbfhyhroq5w" path="res://rsc/audio/title/forest_theme_v1.wav" id="2_hkvcx"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://boustpyvomg3o" path="res://scenes/main/title_screen/components/menu_button.tscn" id="4_wj2ee"]
 [ext_resource type="Shader" uid="uid://cj8l8baynjtth" path="res://common/shaders/linear_gradient_a.gdshader" id="5_1rvqr"]
 [ext_resource type="Texture2D" uid="uid://ucyx63x3aags" path="res://rsc/icons/notes-star.svg" id="5_u4k1n"]
+[ext_resource type="Environment" uid="uid://cfihjq48kmy3v" path="res://scenes/regions/jadewater_falls/jadewater_falls_day.tres" id="8_ltsel"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ltsel"]
 shader = ExtResource("4_0ecsx")
@@ -47,6 +48,22 @@ mouse_filter = 2
 unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
+
+[node name="TestingNotice" type="Label" parent="Canvas/Screens/Title"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -351.0
+offset_top = -120.0
+offset_right = 351.0
+offset_bottom = -30.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "This is purely a visual test at the moment. No buttons are functional yet as we revise our strategy for implementing the UI. :) Thanks for testing out the web-version to let us know it's functional!"
+autowrap_mode = 2
 
 [node name="Logo" type="TextureRect" parent="Canvas/Screens/Title"]
 layout_mode = 1
@@ -181,6 +198,12 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="World" type="Node3D" parent="."]
+
+[node name="Environment" type="WorldEnvironment" parent="World"]
+environment = ExtResource("8_ltsel")
+
+[node name="Camera" type="Camera3D" parent="World"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555218, 2.42893)
 
 [editable path="Canvas/Screens/Title/VBox/Play"]
 [editable path="Canvas/Screens/Title/VBox/Settings"]
