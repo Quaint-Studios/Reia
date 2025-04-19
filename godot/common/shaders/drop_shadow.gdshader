@@ -16,10 +16,10 @@ void fragment() {
 		shadow += texture(SCREEN_TEXTURE, SCREEN_UV + 3.0 * (direction / 100.0)) * 0.0540540541;
 		shadow += texture(SCREEN_TEXTURE, SCREEN_UV + 4.0 * (direction / 100.0)) * 0.0162162162;
 		shadow = shadow_color * vec4(100.0, 100.0, 100.0, shadow.w) / 1.0;
-		
+
 		COLOR = shadow;
 	}
-	
+
 	// Sample the original content
-    
+
 }
