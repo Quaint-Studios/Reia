@@ -1,4 +1,7 @@
 extends Node3D
 
+var cluster := SustenetCluster.new()
+
 func _ready() -> void:
-	add_child(PlayerTest.new())
+	# Maybe a SustenetMaster call for single-PC servers?
+	cluster.start()

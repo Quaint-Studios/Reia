@@ -1,62 +1,45 @@
+use godot::classes::Engine;
 use godot::prelude::*;
-use godot::classes::Sprite2D;
-use godot::classes::ISprite2D;
+use godot_tokio::AsyncRuntime;
 
-#[derive(GodotClass)]
-#[class(base=Sprite2D)]
-struct PlayerTest {
-    speed: f64,
-    angular_speed: f64,
+mod sustenet;
 
-    base: Base<Sprite2D>
-}
-#[godot_api]
-impl ISprite2D for PlayerTest {
-    fn init(base: Base<Sprite2D>) -> Self {
-        godot_print!("Hello, world!"); // Prints to the Godot console
-        
-        Self {
-            speed: 400.0,
-            angular_speed: std::f64::consts::PI,
-            base,
+struct Reia;
+#[gdextension]
+unsafe impl ExtensionLibrary for Reia {
+    fn on_level_init(level: InitLevel) {
+        match level {
+            InitLevel::Core => {}
+            InitLevel::Servers => {}
+            InitLevel::Scene => {
+                let mut engine = Engine::singleton();
+
+                // This is where we register our async runtime singleton.
+                engine.register_singleton(AsyncRuntime::SINGLETON, &AsyncRuntime::new_alloc());
+            }
+            InitLevel::Editor => {}
         }
     }
 
-    fn physics_process(&mut self, delta: f64) {
-        // GDScript code:
-        //
-        // rotation += angular_speed * delta
-        // var velocity = Vector2.UP.rotated(rotation) * speed
-        // position += velocity * delta
-        
-        let radians = (self.angular_speed * delta) as f32;
-        self.base_mut().rotate(radians);
+    fn on_level_deinit(level: InitLevel) {
+        match level {
+            InitLevel::Core => {}
+            InitLevel::Servers => {}
+            InitLevel::Scene => {
+                let mut engine = Engine::singleton();
 
-        let rotation = self.base().get_rotation();
-        let velocity = Vector2::UP.rotated(rotation) * self.speed as f32;
-        self.base_mut().translate(velocity * delta as f32);
-        
-        // or verbose: 
-        // let this = self.base_mut();
-        // this.set_position(
-        //     this.position() + velocity * delta as f32
-        // );
+                // Here is where we free our async runtime singleton from memory.
+                if let Some(async_singleton) = engine.get_singleton(AsyncRuntime::SINGLETON) {
+                    engine.unregister_singleton(AsyncRuntime::SINGLETON);
+                    async_singleton.free();
+                } else {
+                    godot_warn!(
+                        "Failed to find & free singleton -> {}",
+                        AsyncRuntime::SINGLETON
+                    );
+                }
+            }
+            InitLevel::Editor => {}
+        }
     }
 }
-#[godot_api]
-impl PlayerTest {
-    #[func]
-    fn increase_speed(&mut self, amount: f64) {
-        self.speed += amount;
-        self.base_mut().emit_signal("speed_increased", &[]);
-    }
-
-    #[signal]
-    fn speed_increased();
-}
-
-struct Reia;
-
-#[gdextension]
-unsafe impl ExtensionLibrary for Reia {}
-
