@@ -1,1 +1,0 @@
-class_name PlayerUI_StatusBars extends Control
