@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dekcf0t4rq37i"]
+[gd_scene load_steps=12 format=3 uid="uid://dekcf0t4rq37i"]
 
 [ext_resource type="Script" uid="uid://c0ipc0671k2o3" path="res://scenes/main/title_screen/title_screen.gd" id="1_ghve1"]
 [ext_resource type="AudioStream" uid="uid://dtmbfhyhroq5w" path="res://rsc/audio/title/forest_theme_v1.wav" id="2_hkvcx"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://boustpyvomg3o" path="res://scenes/main/title_screen/components/menu_button.tscn" id="4_wj2ee"]
 [ext_resource type="Shader" uid="uid://cj8l8baynjtth" path="res://common/shaders/linear_gradient_a.gdshader" id="5_1rvqr"]
 [ext_resource type="Texture2D" uid="uid://ucyx63x3aags" path="res://rsc/icons/notes-star.svg" id="5_u4k1n"]
+[ext_resource type="Script" uid="uid://ddxdd3yuk5i7b" path="res://Reia_gdext_test.gd" id="8_8efgc"]
 [ext_resource type="Environment" uid="uid://cfihjq48kmy3v" path="res://scenes/regions/jadewater_falls/jadewater_falls_day.tres" id="8_ltsel"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ltsel"]
@@ -198,6 +199,7 @@ layout_mode = 2
 mouse_filter = 2
 
 [node name="World" type="Node3D" parent="."]
+script = ExtResource("8_8efgc")
 
 [node name="Environment" type="WorldEnvironment" parent="World"]
 environment = ExtResource("8_ltsel")
