@@ -7,9 +7,7 @@ edition = "2024"
 crate-type = ["cdylib"] # Compile this crate to a dynamic C library.
 
 [dependencies]
-client = { package = "client", git = "https://github.com/Quaint-Studios/Sustenet", version = "0.1.0" }
-cluster = { package = "cluster", git = "https://github.com/Quaint-Studios/Sustenet", version = "0.1.0" }
 godot = "0.2.4"
 godot_tokio = "0.3.0"
-shared = { package = "shared", git = "https://github.com/Quaint-Studios/Sustenet", version = "0.1.0" }
+sustenet = { version = "0.1.1", features = ["full"] }
 tokio = { version = "1.44.2", features = ["sync"] }
