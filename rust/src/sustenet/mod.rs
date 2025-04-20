@@ -1,5 +1,10 @@
-use std::{sync::{Arc, Mutex}, thread::sleep, time::Duration};
+use std::{
+    sync::{Arc, Mutex},
+    thread::sleep,
+    time::Duration,
+};
 
+use client::cleanup;
 use cluster::{error, start};
 use godot::{global::godot_print, prelude::*};
 use godot_tokio::AsyncRuntime;
@@ -36,20 +41,38 @@ struct SustenetCluster;
 #[godot_api]
 impl SustenetCluster {
     #[func]
-    fn start(&self) {
-        let reia = Reia { logs: Arc::new(Mutex::new(vec![])) };
+    fn start_server(&self) {
+        let reia = Reia {
+            logs: Arc::new(Mutex::new(vec![])),
+        };
         let logs = reia.logs.clone();
+        let logs2 = Arc::new(Mutex::new(String::from("logs2")));
+        let logs2_clone = logs2.clone();
         godot_print!("Starting the cluster server...");
-        // Pass a reference or clone if needed
-        AsyncRuntime::spawn(start(reia));
+        AsyncRuntime::spawn(async move {
+            panic!();
+            start(reia).await;
+            cleanup().await;
+            {
+                let mut logs2_guard = logs2_clone.lock().unwrap();
+                *logs2_guard = String::from("fart");
+            }
+            sleep(Duration::from_secs(1));
+        });
         godot_print!("The cluster has been started!");
-        sleep(Duration::from_secs(1));
+
+        // Debug
+        sleep(Duration::from_secs(3));
         godot_print!("Printing logs.");
 
         if let Ok(logsvec) = logs.lock() {
             for log in logsvec.iter() {
                 godot_print!("{log}");
             }
+        }
+
+        if let Ok(logs2_guard) = logs2.lock() {
+            godot_print!("{logs2_guard}");
         }
     }
 }
