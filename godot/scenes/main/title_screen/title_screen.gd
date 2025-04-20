@@ -13,8 +13,8 @@ func _prepare_screens() -> void:
 	_on_screen_change("title")
 
 func _prepare_sound() -> void:
-	SoundManager.set_sound_volume(0.4)
-	SoundManager.set_music_volume(0.4)
+	SoundManager.set_sound_volume(0.35)
+	SoundManager.set_music_volume(0.35)
 
 	# Audio Stream Player
 	var _asp := SoundManager.play_music(menu_music, 1.0)
