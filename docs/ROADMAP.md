@@ -79,22 +79,29 @@ This phase focuses on getting some of the core functionalities implemented for R
   - [ ] Clouds
   - [ ] Rain
 - [ ] Rust
-  - [ ] Implement Rust with Godot so some backend services can take advantage of the performance.
+  - [x] Implement Rust with Godot so some backend services can take advantage of the performance.
+  - [ ] Swap Discord SDK to Rust
   - [ ] Database
   - [ ] Multiplayer Migration
 - [ ] Multiplayer
   - [ ] (Add friend via account name, but they have their own display name, and you can invite them to play with you and you can progress storylines together if you're on the same quest)
+  - [ ] Send and receive private messages
+  - [ ] Send and receive local messages
+  - [ ] Send and receive movement
+  - [ ] Send and receive rotations
+  - [ ] Send and receive actions
 - [ ] Improve Camera
   - [ ] Smoothing
 - [x] Changelog
   - [ ] Optional: Create a system for easily tracking changes.
 - [ ] Saving
-  - [ ] MongoDB for Online Environments
-  - [ ] PoloDB for Local Environments
+  - [ ] ~~MongoDB for Online Environments~~
+  - [ ] ~~PoloDB for Local Environments~~
+  - [ ] Supabase + Turso Implementation for Offline (no Supabase) / Online.
 - [ ] Update
   - [x] Discord SDK Version
-  - [ ] GitHub Actions for automatically building the game
-  - [ ] Use Zig for GDExtension
+  - [x] GitHub Actions for automatically building the game
+  - [x] Use Zig for GDExtension
   - [ ] ...
 
 ## Alpha
