@@ -72,7 +72,7 @@ If there's anything in the [Roadmap](/docs/ROADMAP.md) you want to work on then 
      - ✔️ Change the player speed.
      - ✔️ Read the player position on load.
      - ✔️ Remove the ability to walk.
-  The length of the commit doesn't matter. Just don't go overboard. If it's a long commit the summarize it and then put the rest of the information in the description of the commit.
+  The length of the commit doesn't matter. Just don't go overboard. If it's a long commit, then summarize it and then put the rest of the information in the description of the commit.
 5. Create a pull-request and done!
 
 ## About this Project
