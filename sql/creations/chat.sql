@@ -96,7 +96,10 @@ CREATE INDEX `idx_chat_private_type` ON `chat_private` (`type`);
 CREATE INDEX `idx_chat_private_deleted` ON `chat_private` (`deleted`);
 CREATE INDEX `idx_chat_private_createdat` ON `chat_private` (`createdat`);
 
---- TODO: BELOW HERE NEEDS WORK. | Maybe a new table for auth_accountexternal? | This would have temporary accounts that get deleted after their presence is gone. We put their account in auth_account like normal but we store only the id in external to make cleaning up easier. it also makes it easier to do some extra cascades.
+--- TODO: BELOW HERE NEEDS WORK. | Maybe a new table for auth_accountexternal? |
+--This would have temporary accounts that get deleted after their presence is gone.
+-- We put their account in auth_account like normal but we store only the id in external
+-- to make cleaning up easier. it also makes it easier to do some extra cascades.
 
 -- Contains a list of all parties a user can be in.
 CREATE TABLE `chat_partylist` (
