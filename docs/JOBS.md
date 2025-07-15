@@ -2,6 +2,8 @@
 
 This is a list of possible roles you can fulfill with a job here. Until they're filled, [Kris (@Makosai)](https://github.com/Makosai), will fill all roles.
 
+The website has more frequent updates and more information on how to apply as well. Visit our [jobs page](https://www.playreia.com/jobs).
+
 ## Current Team
 [Kris (@Makosai)](https://github.com/Makosai),
 [Abdi (@Dexodian)](https://github.com/Dexodian)

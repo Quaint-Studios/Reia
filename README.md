@@ -212,3 +212,18 @@ You play as an occupant of Reia's realm. One of your main tasks is to find spiri
 6. Can mods be used in both online and offline modes?
 
     In the second FAQ item for this section, it covers where you can use each mod type. So yeah, you can use them in those areas!
+
+## 🌱 Made by Quaint Studios
+
+We're independent developers of games and software. [Quaint Studios](https://www.quaintstudios.com) is a small team focused on making Reia a fun, open, and player-driven game that you can enjoy for free. Visit our website for updates, behind-the-scenes, and more projects!
+
+- [Website](https://quaintstudios.com)
+- [Reia Discord](https://discord.playreia.com)
+
+---
+
+## 💖 Sponsors & Supporters
+
+_Reia is possible thanks to our amazing community and supporters!_
+
+Want to support development? [Sponsor us on Open Collective!](https://opencollective.com/reia)
