@@ -29,7 +29,7 @@ ALTER TABLE `__new_server_region`
 RENAME TO `server_region`;
 
 
-/* CREATE TABLE `__new_server_list` (
+CREATE TABLE `__new_server_list` (
   `id` integer PRIMARY KEY AUTOINCREMENT,
   `ip` text NOT NULL,
   `port` integer NOT NULL,
@@ -75,4 +75,4 @@ CREATE INDEX `idx_server_list_ip_port` ON `server_list` (`ip`, `port`);
 CREATE INDEX `idx_server_list_online` ON `server_list` (`online`);
 CREATE INDEX `idx_server_list_players` ON `server_list` (`players`);
 CREATE INDEX `idx_server_list_maxplayers` ON `server_list` (`maxplayers`);
-CREATE INDEX `idx_server_list_updatedat` ON `server_list` (`updatedat`); */
+CREATE INDEX `idx_server_list_updatedat` ON `server_list` (`updatedat`);
