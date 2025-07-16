@@ -73,3 +73,52 @@ CREATE INDEX `idx_player_friendlog_userid2` ON `player_friendlog` (`userid2`);
 CREATE INDEX `idx_player_friendlog_action` ON `player_friendlog` (`action`);
 CREATE INDEX `idx_player_friendlog_createdat` ON `player_friendlog` (`createdat`);
 
+--- Stats Tables
+
+-- Contains player statistics.
+CREATE TABLE `player_stats` (
+  `id` integer PRIMARY KEY,
+  -- Combat Stats
+  `health` integer NOT NULL DEFAULT 1, -- Increases health pool by 100 each level, also combos with spirits
+  `ether` integer NOT NULL DEFAULT 1, -- Increases mana pool by 50 each level, also combos with spirits and magic damage and unlocks magic skills
+  `attack` integer NOT NULL DEFAULT 1, -- Unlocks sections in sub skills. Also can increase critical hit chance and ranged damage.
+  `strength` integer NOT NULL DEFAULT 1, -- Improves both physical damage and ranged damage.
+  `defense` integer NOT NULL DEFAULT 1, -- Has focus on sub skills like tank, agile, and also improves damage mitigation.
+
+  -- Crafting Stats
+  --- The skills below are for the future designs. Maybe a separate table?
+  /* `smithing` integer NOT NULL DEFAULT 1, -- Improves weapon quality and unlocks weapon crafting skills.
+  `tailoring` integer NOT NULL DEFAULT 1, -- Improves clothing quality and unlocks clothing crafting skills.
+  `alchemy` integer NOT NULL DEFAULT 1, -- Improves potion quality and unlocks potion crafting skills.
+  `cooking` integer NOT NULL DEFAULT 1, -- Improves food quality and cooking efficiency. Also unlocks cooking skills.
+  `enchanting` integer NOT NULL DEFAULT 1, -- Improves enchantment quality and unlocks enchanting skills.
+
+  -- Resource Gathering Stats
+  `mining` integer NOT NULL DEFAULT 1, -- Improves mining efficiency and unlocks mining skills.
+  `fishing` integer NOT NULL DEFAULT 1, -- Improves fishing efficiency and unlocks better fish you can capture.
+  `farming` integer NOT NULL DEFAULT 1, -- Improves crop yield and farming efficiency. Also unlocks farming skills.
+  `hunting` integer NOT NULL DEFAULT 1, -- Improves hunting efficiency and unlocks hunting skills.
+
+  -- Utility Stats
+  `trading` integer NOT NULL DEFAULT 1, -- Improves trading efficiency and unlocks trading skills. Also effective on island trading.
+  `sailing` integer NOT NULL DEFAULT 1, -- Improves sailing your flying ship and unlocks ship upgrades. Also unlocks sailing sub skills.
+
+  -- Island Skills
+  `exploration` integer NOT NULL DEFAULT 1,
+  `management` integer NOT NULL DEFAULT 1, -- Improves island management, NPC hiring, automation, and resource gathering efficiency. */
+  `updatedat` datetime NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+
+  FOREIGN KEY (`id`) REFERENCES `auth_account` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+);
+
+---
+
+-- Contains player inventory.
+CREATE TABLE `player_inventory` (
+  `id` integer PRIMARY KEY,
+  `itemid` integer NOT NULL, -- FK to item table
+  `quantity` integer NOT NULL DEFAULT 1,
+  FOREIGN KEY (`id`) REFERENCES `auth_account` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+);
+
+CREATE INDEX `idx_player_inventory_itemid` ON `player_inventory` (`id`, `itemid`);
