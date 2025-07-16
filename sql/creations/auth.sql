@@ -1,7 +1,7 @@
 --- Auth Tables
 
--- Contains all users.
-CREATE TABLE `auth_account` (
+-- Contains all local user accounts.
+CREATE TABLE `auth_accountinfo` (
   `id` integer PRIMARY KEY AUTOINCREMENT,
   `username` text NOT NULL UNIQUE,
   `displayname` text NOT NULL,
@@ -13,9 +13,20 @@ CREATE TABLE `auth_account` (
   `updatedat` datetime NOT NULL DEFAULT (CURRENT_TIMESTAMP)
 );
 
-CREATE INDEX `idx_auth_account_createdat` ON `auth_account` (`createdat`);
-CREATE INDEX `idx_auth_account_status` ON `auth_account` (`status`);
-CREATE INDEX `idx_auth_account_displayname` ON `auth_account` (`displayname`);
+CREATE INDEX `idx_auth_accountinfo_displayname` ON `auth_accountinfo` (`displayname`);
+CREATE INDEX `idx_auth_accountinfo_status` ON `auth_accountinfo` (`status`);
+CREATE INDEX `idx_auth_accountinfo_createdat` ON `auth_accountinfo` (`createdat`);
+
+---
+
+-- Contains all users that have connected to this database.
+CREATE TABLE `auth_account` (
+  `id` integer PRIMARY KEY,
+  `isexternal` boolean NOT NULL DEFAULT 0,
+  FOREIGN KEY (`id`) REFERENCES `auth_accountinfo` (`id`) ON UPDATE NO ACTION ON DELETE CASCADE
+);
+
+CREATE INDEX `idx_auth_account_isexternal` ON `auth_account` (`isexternal`);
 
 ---
 
