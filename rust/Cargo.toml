@@ -1,15 +1,13 @@
 [package]
-name = "reia_rust"
+name = "reia_gdext"
 version = "0.1.0"
-edition = "2021"
+edition = "2024"
 
 [lib]
-crate-type = ["cdylib"]
+crate-type = ["cdylib"] # Compile this crate to a dynamic C library.
 
 [dependencies]
-godot = { git = "https://github.com/godot-rust/gdext", branch = "master" }
-postgrest = "1.0"  # Supabase Rust client
-supabase-auth = "0.4"  # Supabase Auth client
-serde = { version = "1.0", features = ["derive"] }
-tokio = { version = "1.35", features = [] }  # Updated to remove full features
-jwt = "0.16"  # For handling Supabase JWTs
+godot = "0.2.4"
+godot_tokio = "0.3.0"
+sustenet = { version = "0.1.1", features = ["full"] }
+tokio = { version = "1.44.2", features = ["sync"] }

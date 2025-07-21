@@ -1,0 +1,90 @@
+[gd_scene load_steps=4 format=3 uid="uid://boustpyvomg3o"]
+
+[ext_resource type="Texture2D" uid="uid://c7cg6i2b3y5e0" path="res://rsc/icons/star.svg" id="1_h2ori"]
+[ext_resource type="Texture2D" uid="uid://cikhhiehh4hjs" path="res://rsc/icons/dot.svg" id="1_ikrl4"]
+[ext_resource type="Script" uid="uid://c2y2p7qeeu146" path="res://scenes/main/title_screen/components/menu_button.gd" id="1_othui"]
+
+[node name="MenuButton" type="MarginContainer"]
+custom_minimum_size = Vector2(0, 81)
+anchors_preset = -1
+anchor_left = 0.086
+anchor_top = 0.037
+anchor_right = 0.086
+anchor_bottom = 0.037
+offset_left = -165.12
+offset_top = -39.96
+offset_right = 166.88
+offset_bottom = 41.04
+pivot_offset = Vector2(166, 40)
+script = ExtResource("1_othui")
+
+[node name="Content" type="HBoxContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+alignment = 1
+
+[node name="DotL" type="TextureRect" parent="Content"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+custom_minimum_size = Vector2(6, 6)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("1_ikrl4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="StarL" type="TextureRect" parent="Content"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_h2ori")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="Content"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"MainMenu"
+text = "Menu Button"
+
+[node name="StarR" type="TextureRect" parent="Content"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+custom_minimum_size = Vector2(24, 24)
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("1_h2ori")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="DotR" type="TextureRect" parent="Content"]
+unique_name_in_owner = true
+visible = false
+modulate = Color(0.960784, 0.960784, 0.960784, 1)
+custom_minimum_size = Vector2(6, 6)
+layout_mode = 2
+size_flags_vertical = 4
+mouse_filter = 2
+texture = ExtResource("1_ikrl4")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Button" type="Button" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+flat = true
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]
+[connection signal="focus_entered" from="Button" to="." method="_on_button_focus_entered"]
+[connection signal="focus_exited" from="Button" to="." method="_on_button_focus_exited"]
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

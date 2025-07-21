@@ -58,14 +58,9 @@ func get_sound_volume() -> float:
 	return db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(sound_effects.bus)))
 
 
-func get_ui_sound_volume() -> float:
-	return db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(ui_sound_effects.bus)))
-
-
 func set_sound_volume(volume_between_0_and_1: float) -> void:
 	_show_shared_bus_warning()
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(sound_effects.bus), linear_to_db(volume_between_0_and_1))
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(ui_sound_effects.bus), linear_to_db(volume_between_0_and_1))
 
 
 func play_sound(resource: AudioStream, override_bus: String = "") -> AudioStreamPlayer:
@@ -73,7 +68,7 @@ func play_sound(resource: AudioStream, override_bus: String = "") -> AudioStream
 
 
 func play_sound_with_pitch(resource: AudioStream, pitch: float = 1.0, override_bus: String = "") -> AudioStreamPlayer:
-	var player = sound_effects.play(resource, override_bus)
+	var player := sound_effects.play(resource, override_bus)
 	player.pitch_scale = pitch
 	return player
 
@@ -82,22 +77,36 @@ func stop_sound(resource: AudioStream) -> void:
 	return sound_effects.stop(resource)
 
 
+func set_default_sound_bus(bus: String) -> void:
+	sound_effects.bus = bus
+
+
+#endregion
+
+#region UI sounds
+
+
+func get_ui_sound_volume() -> float:
+	return db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(ui_sound_effects.bus)))
+
+
+func set_ui_sound_volume(volume_between_0_and_1: float) -> void:
+	_show_shared_bus_warning()
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(ui_sound_effects.bus), linear_to_db(volume_between_0_and_1))
+
+
 func play_ui_sound(resource: AudioStream, override_bus: String = "") -> AudioStreamPlayer:
 	return ui_sound_effects.play(resource, override_bus)
 
 
 func play_ui_sound_with_pitch(resource: AudioStream, pitch: float = 1.0, override_bus: String = "") -> AudioStreamPlayer:
-	var player = ui_sound_effects.play(resource, override_bus)
+	var player := ui_sound_effects.play(resource, override_bus)
 	player.pitch_scale = pitch
 	return player
 
 
 func stop_ui_sound(resource: AudioStream) -> void:
 	return ui_sound_effects.stop(resource)
-
-
-func set_default_sound_bus(bus: String) -> void:
-	sound_effects.bus = bus
 
 
 func set_default_ui_sound_bus(bus: String) -> void:
@@ -184,7 +193,7 @@ func get_currently_playing_music() -> Array:
 
 
 func get_currently_playing_music_tracks() -> Array:
-	return music.get_current_tracks()
+	return music.get_currently_playing_tracks()
 
 
 func pause_music(resource: AudioStream = null) -> void:
@@ -209,29 +218,30 @@ func set_default_music_bus(bus: String) -> void:
 
 
 func _show_shared_bus_warning() -> void:
+	if "Master" in [music.bus, sound_effects.bus, ui_sound_effects.bus, ambient_sounds.bus]:
+		push_warning("Using the Master sound bus directly isn't recommended.")
 	if music.bus == sound_effects.bus or music.bus == ui_sound_effects.bus:
 		push_warning("Both music and sounds are using the same bus: %s" % music.bus)
 
 
 #endregion
 
-### Custom Code goes here to make it easier to re-add after updates
+#region Custom Code
+# Custom Code goes here to make it easier to re-add after updates
+
 func get_master_volume() -> float:
 	return db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Master")))
 
-func set_master_volume(volume_between_0_and_1) -> void:
+func set_master_volume(volume_between_0_and_1: float) -> void:
 	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(volume_between_0_and_1))
 
-func set_ui_sound_volume(volume_between_0_and_1) -> void:
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index(ui_sound_effects.bus), linear_to_db(volume_between_0_and_1))
+var dialogue: MusicPlayer = MusicPlayer.new(["Dialogue"], 2)
 
 var dialogue_process_mode: ProcessMode:
 	set(value):
 		dialogue.process_mode = value
 	get:
 		return dialogue.process_mode
-
-var dialogue: MusicPlayer = MusicPlayer.new(["Dialogue"], 2)
 
 func get_dialogue_volume() -> float:
 	return db_to_linear(AudioServer.get_bus_volume_db(AudioServer.get_bus_index(dialogue.bus)))
@@ -275,7 +285,7 @@ func get_currently_playing_dialogue() -> Array:
 
 
 func get_currently_playing_dialogue_tracks() -> Array:
-	return dialogue.get_current_tracks()
+	return dialogue.get_currently_playing_tracks()
 
 
 func pause_dialogue(resource: AudioStream = null) -> void:
@@ -291,3 +301,4 @@ func stop_dialogue(fade_out_duration: float = 0.0) -> void:
 
 func set_default_dialogue_bus(bus: String) -> void:
 	dialogue.bus = bus
+#endregion
