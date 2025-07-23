@@ -7,7 +7,8 @@ edition = "2024"
 crate-type = ["cdylib"] # Compile this crate to a dynamic C library.
 
 [dependencies]
-godot = "0.2.4"
-godot_tokio = "0.3.0"
-sustenet = { version = "0.1.1", features = ["full"] }
-tokio = { version = "1.44.2", features = ["sync"] }
+bytes = "1.10.1"
+godot = "^0.3.4"
+godot_tokio = "^0.3.1"
+sustenet = { path = "./externals/sustenet/rust/sustenet", features = ["full"] }
+tokio = { version = "^1.46.1", features = ["sync"] }
