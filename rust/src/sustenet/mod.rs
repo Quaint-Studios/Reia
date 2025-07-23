@@ -7,39 +7,40 @@
 // For now, the master, cluster, and client all run perfectly. And it generates and loads
 // the config file correctly as well as the AES keys.
 
-use std::{
-    sync::{Arc, Mutex},
-    thread::sleep,
-    time::Duration,
-};
+use bytes::Bytes;
+use std::{ sync::{ Arc, Mutex }, thread::sleep, time::Duration };
+use tokio::{ io::BufReader, net::tcp::ReadHalf };
 
-use godot::{global::godot_print, prelude::*};
+use godot::{ global::godot_print, prelude::* };
 use godot_tokio::AsyncRuntime;
 
-use tokio::sync::mpsc::Sender;
-
-use sustenet::shared::Plugin;
-use sustenet::{client, cluster, master};
+use sustenet::{cluster::{cluster::LOGGER, ClusterServer}, shared::{PluginPin, SenderBytes, ServerPlugin}};
+use sustenet::{ client, master };
 
 struct Reia {
     logs: Arc<Mutex<Vec<String>>>,
 }
-impl Plugin for Reia {
-    fn receive(
+impl ServerPlugin for Reia {
+    fn set_sender(&self, _tx: SenderBytes) {
+        todo!()
+    }
+
+    fn receive<'plug>(
         &self,
-        tx: Sender<Box<[u8]>>,
+        tx: SenderBytes,
         command: u8,
-    ) -> std::pin::Pin<Box<dyn std::future::Future<Output = ()> + Send>> {
+        _reader: &'plug mut BufReader<ReadHalf<'_>>
+    ) -> PluginPin<'plug> {
         let logs = self.logs.clone();
         Box::pin(async move {
             if let Ok(mut logs) = logs.lock() {
                 logs.push(format!("Received External Command: {}", command));
             }
-            if let Err(e) = tx.send(Box::new([20])).await {
+            if let Err(e) = tx.send(Bytes::from_static(&[20])).await {
                 if let Ok(mut logs) = logs.lock() {
                     logs.push(format!("Failed to send message. {e}"));
                 }
-                cluster::error(format!("Failed to send message. {e}").as_str());
+                LOGGER.error(format!("Failed to send message. {e}").as_str());
             }
         })
     }
@@ -54,6 +55,7 @@ impl Plugin for Reia {
 #[derive(GodotClass)]
 #[class(init)]
 struct SustenetCluster;
+
 #[godot_api]
 impl SustenetCluster {
     #[func]
@@ -66,9 +68,17 @@ impl SustenetCluster {
         let master_logs = reia.logs.clone();
         let cluster_logs = reia.logs.clone();
         let client_logs = reia.logs.clone();
-        
+
         let master_thread = AsyncRuntime::spawn(async move {
-            master::start().await;
+            let _master = match master::MasterServer::new_from_config().await {
+                Ok(master) => master,
+                Err(e) => {
+                    let mut logs_guard = master_logs.lock().unwrap();
+                    logs_guard.push(format!("Failed to start Master server: {e}"));
+                    LOGGER.error(format!("Failed to start Master server: {e}").as_str());
+                    return;
+                }
+            };
             {
                 let mut logs_guard = master_logs.lock().unwrap();
                 logs_guard.push("Master server started.".to_string());
@@ -78,8 +88,18 @@ impl SustenetCluster {
         godot_print!("The master has been started!");
 
         let cluster_thread = AsyncRuntime::spawn(async move {
-            cluster::start(reia).await;
-            cluster::cleanup().await;
+            // let server = ClusterServer::new_from_config(reia).await;
+            // server but resolve the result
+            let _server = match ClusterServer::new_from_config(reia).await {
+                Ok(server) => server,
+                Err(e) => {
+                    let mut logs_guard = cluster_logs.lock().unwrap();
+                    logs_guard.push(format!("Failed to start Cluster server: {e}"));
+                    LOGGER.error(format!("Failed to start Cluster server: {e}").as_str());
+                    return;
+                }
+            };
+            // cluster::cleanup().await;
             {
                 let mut logs_guard = cluster_logs.lock().unwrap();
                 logs_guard.push("Cluster server started.".to_string());
@@ -88,9 +108,10 @@ impl SustenetCluster {
         });
         godot_print!("The cluster has been started!");
 
-        
         let client_thread = AsyncRuntime::spawn(async move {
-            client::start(/* reia */).await;
+            let address = "0.0.0.0";
+            let port = 6256;
+            let _client = client::Client::connect(address, port);
             {
                 let mut logs_guard = client_logs.lock().unwrap();
                 logs_guard.push("Client server started.".to_string());
