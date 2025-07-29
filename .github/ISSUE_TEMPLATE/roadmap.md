@@ -2,7 +2,7 @@
 name: Roadmap item
 about: Track progress for a roadmap item
 title: ''
-labels: ["type: roadmap", "priority: med"]
+labels: 'priority: med, type: roadmap'
 assignees: ''
 
 ---
