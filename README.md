@@ -1,4 +1,5 @@
 [![Godot Builder](https://github.com/Quaint-Studios/Reia/actions/workflows/godot.yml/badge.svg)](https://github.com/Quaint-Studios/Reia/actions/workflows/godot.yml)
+[![Rust Test](https://github.com/Quaint-Studios/Reia/actions/workflows/rust.yml/badge.svg)](https://github.com/Quaint-Studios/Reia/actions/workflows/rust.yml)
 [![Zig Test](https://github.com/Quaint-Studios/Reia/actions/workflows/zig.yml/badge.svg)](https://github.com/Quaint-Studios/Reia/actions/workflows/zig.yml)
 [![Open Collective backers and sponsors](https://img.shields.io/opencollective/all/reia?logo=opencollective)](https://opencollective.com/reia)
 
