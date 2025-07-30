@@ -13,7 +13,31 @@ env:
   WINEPREFIX: /tmp/.wine
 
 jobs:
+  build-rust-windows:
+    name: Build Rust GDExtension (Windows)
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: x86_64-pc-windows-msvc
+          override: true
+      - name: Build GDExtension (dll)
+        run: |
+          cd rust
+          cargo build --release --target x86_64-pc-windows-msvc
+      - name: Upload GDExtension artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: reia_gdext-windows
+          path: rust/target/x86_64-pc-windows-msvc/release/reia_gdext.dll
+
   export-windows:
+    needs: build-rust-windows
     name: Windows Export
     runs-on: ubuntu-22.04
     container:
@@ -23,6 +47,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+      - name: Download Rust GDExtension
+        uses: actions/download-artifact@v4
+        with:
+          name: reia_gdext-windows
+          path: rust/target/release/
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
@@ -41,7 +70,31 @@ jobs:
           name: windows
           path: build/windows
 
+  build-rust-linux:
+    name: Build Rust GDExtension (Linux)
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        lfs: true
+    - name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        target: x86_64-unknown-linux-gnu
+        override: true
+    - name: Build GDExtension (so)
+      run: |
+        cd rust
+        cargo build --release --target x86_64-unknown-linux-gnu
+    - name: Upload GDExtension artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: reia_gdext-linux
+        path: rust/target/x86_64-unknown-linux-gnu/release/reia_gdext.so
+
   export-linux:
+      needs: build-rust-linux
       name: Linux Export
       runs-on: ubuntu-20.04
       container:
@@ -51,6 +104,11 @@ jobs:
           uses: actions/checkout@v4
           with:
             lfs: true
+        - name: Download Rust GDExtension
+          uses: actions/download-artifact@v4
+          with:
+            name: reia_gdext-linux
+            path: rust/target/release/
         - name: Setup
           run: |
             mkdir -v -p ~/.local/share/godot/export_templates/
@@ -68,6 +126,7 @@ jobs:
             path: build/linux
 
   export-server:
+    needs: build-rust-linux
     name: Server Export
     runs-on: ubuntu-20.04
     container:
@@ -77,6 +136,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+      - name: Download Rust GDExtension
+        uses: actions/download-artifact@v4
+        with:
+          name: reia_gdext-linux
+          path: rust/target/release/
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
@@ -93,7 +157,31 @@ jobs:
           name: server
           path: build/server
 
+  build-rust-mac:
+    name: Build Rust GDExtension (Mac)
+    runs-on: macos-13
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: x86_64-apple-darwin
+          override: true
+      - name: Build GDExtension (dylib)
+        run: |
+          cd rust
+          cargo build --release --target x86_64-apple-darwin
+      - name: Upload GDExtension artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: reia_gdext-mac
+          path: rust/target/x86_64-apple-darwin/release/reia_gdext.dylib
+
   export-mac:
+    needs: build-rust-mac
     name: Mac Export
     runs-on: ubuntu-20.04
     container:
@@ -103,6 +191,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+      - name: Download Rust GDExtension
+        uses: actions/download-artifact@v4
+        with:
+          name: reia_gdext-mac
+          path: rust/target/release/
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
@@ -119,7 +212,31 @@ jobs:
           name: mac
           path: build/mac
 
+  build-rust-web:
+    name: Build Rust GDExtension (Web)
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: wasm32-unknown-unknown
+          override: true
+      - name: Build GDExtension (wasm)
+        run: |
+          cd rust
+          cargo build --release --target wasm32-unknown-unknown
+      - name: Upload GDExtension artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: reia_gdext-web
+          path: rust/target/wasm32-unknown-unknown/release/reia_gdext.wasm
+
   export-web:
+    needs: build-rust-web
     name: Web Export
     runs-on: ubuntu-20.04
     container:
@@ -129,6 +246,11 @@ jobs:
         uses: actions/checkout@v4
         with:
           lfs: true
+      - name: Download Rust GDExtension
+        uses: actions/download-artifact@v4
+        with:
+          name: reia_gdext-web
+          path: rust/target/release/
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
