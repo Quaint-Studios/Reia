@@ -4,11 +4,11 @@ compatibility_minimum = 4.4
 reloadable = true
 
 [libraries]
-linux.debug.x86_64 =     "res://../rust/target/debug/libreia_gdext.so"
-linux.release.x86_64 =   "res://../rust/target/release/libreia_gdext.so"
+linux.debug.x86_64 =     "res://../rust/target/debug/reia_gdext.so"
+linux.release.x86_64 =   "res://../rust/target/release/reia_gdext.so"
 windows.debug.x86_64 =   "res://../rust/target/debug/reia_gdext.dll"
 windows.release.x86_64 = "res://../rust/target/release/reia_gdext.dll"
-macos.debug =            "res://../rust/target/debug/libreia_gdext.dylib"
-macos.release =          "res://../rust/target/release/libreia_gdext.dylib"
-macos.debug.arm64 =      "res://../rust/target/debug/libreia_gdext.dylib"
-macos.release.arm64 =    "res://../rust/target/release/libreia_gdext.dylib"
+macos.debug =            "res://../rust/target/debug/reia_gdext.dylib"
+macos.release =          "res://../rust/target/release/reia_gdext.dylib"
+macos.debug.arm64 =      "res://../rust/target/debug/reia_gdext.dylib"
+macos.release.arm64 =    "res://../rust/target/release/reia_gdext.dylib"
