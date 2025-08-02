@@ -1,2 +1,5 @@
 [lfs]
-url = https://lfs.playreia.com/objects/batch
+url = https://lfs.playreia.com
+
+[lfs "https://lfs.playreia.com"]
+# access = "basic"
