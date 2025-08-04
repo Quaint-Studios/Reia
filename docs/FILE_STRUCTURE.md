@@ -66,6 +66,4 @@
 ├── rust/
 │   ├── db/
 │   ├── networking/
-└── zig/
-│   └── generation/
 ```
