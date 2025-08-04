@@ -25,7 +25,8 @@ jobs:
           lfs: true
       - name: Configure Git LFS
         run: |
-          git config lfs.url "https://lfs.playreia.com"
+          git lfs install
+          git lfs pull
 
       # Cache Godot Imports
       - name: Cache import assets
