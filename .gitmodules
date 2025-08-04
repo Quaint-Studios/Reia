@@ -1,8 +1,3 @@
-[submodule "godot-zig"]
-	path = zig/godot-zig
-	url = https://github.com/godot-zig/godot-zig
-	branch = stable
-	ignore = dirty
 [submodule "rust/externals/sustenet"]
 	path = rust/externals/sustenet
 	url = git@github.com:Quaint-Studios/Sustenet.git
