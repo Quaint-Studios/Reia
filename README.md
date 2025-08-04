@@ -1,6 +1,5 @@
 [![Godot Builder](https://github.com/Quaint-Studios/Reia/actions/workflows/godot.yml/badge.svg)](https://github.com/Quaint-Studios/Reia/actions/workflows/godot.yml)
 [![Rust Test](https://github.com/Quaint-Studios/Reia/actions/workflows/rust.yml/badge.svg)](https://github.com/Quaint-Studios/Reia/actions/workflows/rust.yml)
-[![Zig Test](https://github.com/Quaint-Studios/Reia/actions/workflows/zig.yml/badge.svg)](https://github.com/Quaint-Studios/Reia/actions/workflows/zig.yml)
 [![Open Collective backers and sponsors](https://img.shields.io/opencollective/all/reia?logo=opencollective)](https://opencollective.com/reia)
 
 
@@ -146,7 +145,7 @@ You play as an occupant of Reia's realm. One of your main tasks is to find spiri
     
     How about the not-so-technical stuff first. We're working on designing new locations for you to explore, drawing pretty art with awesome colors to make you drool, a Map system, a new UI system, and a custom quest system so you get intricate questing much like *Old School Runescape* and other great titles!
 
-    Now for the slightly technical side of things -- our tech stack! We're using Godot-Zig to prepare ourselves for high-performant situations, we're designing our our own [networking solution](https://github.com/Quaint-Studios/Sustenet), we're working on implementing Turso into Zig so we can support Databases both offline and offline, we're also developing and contributing to Godot Supabase for authentication. And obviously, GDScript for the bulk of the game!
+    Now for the slightly technical side of things -- our tech stack! We're designing our our own [networking solution](https://github.com/Quaint-Studios/Sustenet), we're use Turso with Rust so we can support databases both offline and offline, we also use Bevy-ECS with Rust, and we use GDScript for the bulk of the game!
 
 3. Are there upcoming alpha or beta tests?
 
@@ -155,6 +154,7 @@ You play as an occupant of Reia's realm. One of your main tasks is to find spiri
 4. Are there any planned expansions or DLCs?
 
     Ooo... This is something we're excited about. We obviously want to monitize the game but we also want the barrier for entry to be low. You can read more about it in our [Monetization README](/docs/MONETIZATION.md).
+
 ### How is multiplayer and singleplayer handled in Reia?
 1. Will this be online or offline?
   
