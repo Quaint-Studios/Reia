@@ -1,3 +1,6 @@
+# Art Files
+*.blend?
+
 # Godot 4+ specific ignores
 .godot/
 godot/android/
