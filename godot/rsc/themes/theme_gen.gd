@@ -35,10 +35,10 @@ class Fonts:
 	class Size:
 		const NORMAL = 20
 	class Poppins:
-		static var normal := ResourceLoader.load("res://rsc/fonts/poppins-latin-400-normal.ttf") as FontFile
-		static var bold := ResourceLoader.load("res://rsc/fonts/poppins-latin-700-normal.ttf") as FontFile
+		static var normal := ResourceLoader.load("res://assets/fonts/poppins-latin-400-normal.ttf") as FontFile
+		static var bold := ResourceLoader.load("res://assets/fonts/poppins-latin-700-normal.ttf") as FontFile
 	class Roboto:
-		static var black := ResourceLoader.load("res://rsc/fonts/roboto-latin-900-normal.ttf") as FontFile
+		static var black := ResourceLoader.load("res://assets/fonts/roboto-latin-900-normal.ttf") as FontFile
 
 func setup() -> void:
 	set_save_path("res://rsc/themes/theme.tres")
