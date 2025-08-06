@@ -19,7 +19,7 @@ All raw and processed assets used by the project.
 - `audio/` — BGM and SFX, organized by context (bosses, regions, enemies, player, UI, etc.).
 - `fonts/` — Font files for UI and localization.
 - `icons/` — All 2D icons for UI, items, abilities, etc., further organized by category.
-- `models/` — 3D models, grouped by type (enemies, player, props, etc.).
+- `models/` — 3D models, grouped by type (enemies, player, spirits, npcs, props, etc.).
 - `textures/` — All 2D textures, grouped by context (enemies, player, props, effects, UI).
 - **Best Practice:** Do not place code, scenes, or scripts here; this directory is strictly for media assets.
 
