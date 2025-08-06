@@ -105,7 +105,7 @@ func define_panel_default() -> void:
 	})
 
 func define_panel_circle() -> void:
-	var style = stylebox_flat({
+	var style: Dictionary = stylebox_flat({
 		corners_ = corner_radius(48)
 	})
 	define_variant_style("48r_Circle_BlueChip", "Panel", {
@@ -129,19 +129,19 @@ func define_button_default() -> void:
 	})
 
 func define_button_24r() -> void:
-	var style = stylebox_flat({
+	var style: Dictionary = stylebox_flat({
 		borders_ = border_width(0),
 		corners_ = corner_radius(24)
 	})
 
-	var white_creamy = inherit(style, {
+	var white_creamy: Dictionary = inherit(style, {
 		bg_color = Colors.White.CREAMY
 	})
-	var white_creamy_hover = inherit(white_creamy, {
+	var white_creamy_hover: Dictionary = inherit(white_creamy, {
 		borders_ = border_width(2),
 		border_color = Colors.Blue.CHIP
 	})
-	var white_creamy_pressed = inherit(white_creamy_hover, {
+	var white_creamy_pressed: Dictionary = inherit(white_creamy_hover, {
 		bg_color = Colors.White.SOFT
 	})
 	define_variant_style("24r_WhiteCreamy", "Button", {
