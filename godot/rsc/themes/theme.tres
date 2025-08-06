@@ -1,8 +1,8 @@
 [gd_resource type="Theme" load_steps=11 format=3 uid="uid://clk264aapxxuu"]
 
-[ext_resource type="FontFile" uid="uid://cgiw1u6elrrsd" path="res://rsc/fonts/poppins-latin-700-normal.ttf" id="1_1d5rj"]
-[ext_resource type="FontFile" uid="uid://dqprfmwn0cetn" path="res://rsc/fonts/poppins-latin-400-normal.ttf" id="1_7alsp"]
-[ext_resource type="FontFile" uid="uid://d3vaf1msq4riv" path="res://rsc/fonts/roboto-latin-900-normal.ttf" id="2_uoplr"]
+[ext_resource type="FontFile" uid="uid://cgiw1u6elrrsd" path="res://assets/fonts/poppins-latin-700-normal.ttf" id="1_1d5rj"]
+[ext_resource type="FontFile" uid="uid://dqprfmwn0cetn" path="res://assets/fonts/poppins-latin-400-normal.ttf" id="1_7alsp"]
+[ext_resource type="FontFile" uid="uid://d3vaf1msq4riv" path="res://assets/fonts/roboto-latin-900-normal.ttf" id="2_uoplr"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_uoplr"]
 bg_color = Color(0.976471, 0.952941, 0.898039, 1)

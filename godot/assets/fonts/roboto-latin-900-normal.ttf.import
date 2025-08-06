@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://d3vaf1msq4riv"
-path="res://.godot/imported/roboto-latin-900-normal.ttf-2a5637c35bcaed57ff0902cbaa828e96.fontdata"
+path="res://.godot/imported/roboto-latin-900-normal.ttf-d2215f98da18ffd2c924bbfaba326e70.fontdata"
 
 [deps]
 
-source_file="res://rsc/fonts/roboto-latin-900-normal.ttf"
-dest_files=["res://.godot/imported/roboto-latin-900-normal.ttf-2a5637c35bcaed57ff0902cbaa828e96.fontdata"]
+source_file="res://assets/fonts/roboto-latin-900-normal.ttf"
+dest_files=["res://.godot/imported/roboto-latin-900-normal.ttf-d2215f98da18ffd2c924bbfaba326e70.fontdata"]
 
 [params]
 

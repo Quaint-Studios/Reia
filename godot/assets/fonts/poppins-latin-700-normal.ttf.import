@@ -3,12 +3,12 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://cgiw1u6elrrsd"
-path="res://.godot/imported/poppins-latin-700-normal.ttf-082594c247f92e94f3b7d572cf30c392.fontdata"
+path="res://.godot/imported/poppins-latin-700-normal.ttf-5d52720f04ff9b83543f70488c14fe75.fontdata"
 
 [deps]
 
-source_file="res://rsc/fonts/poppins-latin-700-normal.ttf"
-dest_files=["res://.godot/imported/poppins-latin-700-normal.ttf-082594c247f92e94f3b7d572cf30c392.fontdata"]
+source_file="res://assets/fonts/poppins-latin-700-normal.ttf"
+dest_files=["res://.godot/imported/poppins-latin-700-normal.ttf-5d52720f04ff9b83543f70488c14fe75.fontdata"]
 
 [params]
 
