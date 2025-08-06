@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c0ipc0671k2o3" path="res://scenes/title_screen/title_screen.gd" id="1_ghve1"]
 [ext_resource type="AudioStream" uid="uid://dtmbfhyhroq5w" path="res://assets/audio/bgm/main_theme.wav" id="2_hkvcx"]
-[ext_resource type="Texture2D" uid="uid://dn1x1iiwekxih" path="res://rsc/logos/logo_white.svg" id="3_4m48f"]
+[ext_resource type="Texture2D" uid="uid://dn1x1iiwekxih" path="res://assets/icons/branding/logo_white.svg" id="3_4m48f"]
 [ext_resource type="Shader" uid="uid://d1ft75j3rmcw4" path="res://presentation/shaders/ui/drop_shadow.gdshader" id="4_0ecsx"]
 [ext_resource type="PackedScene" uid="uid://boustpyvomg3o" path="res://scenes/title_screen/components/menu_button.tscn" id="4_wj2ee"]
 [ext_resource type="Shader" uid="uid://cj8l8baynjtth" path="res://presentation/shaders/ui/linear_gradient_a.gdshader" id="5_1rvqr"]
