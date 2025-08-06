@@ -65,8 +65,8 @@ enabled=PackedStringArray("res://addons/sound_manager/plugin.cfg")
 
 folder_colors={
 "res://addons/": "yellow",
+"res://assets/": "green",
 "res://presentation/": "pink",
-"res://rsc/": "green",
 "res://scenes/": "purple",
 "res://src/": "blue"
 }
