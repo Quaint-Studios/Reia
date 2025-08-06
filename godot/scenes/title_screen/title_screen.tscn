@@ -6,7 +6,7 @@
 [ext_resource type="Shader" uid="uid://d1ft75j3rmcw4" path="res://presentation/shaders/ui/drop_shadow.gdshader" id="4_0ecsx"]
 [ext_resource type="PackedScene" uid="uid://boustpyvomg3o" path="res://scenes/title_screen/components/menu_button.tscn" id="4_wj2ee"]
 [ext_resource type="Shader" uid="uid://cj8l8baynjtth" path="res://presentation/shaders/ui/linear_gradient_a.gdshader" id="5_1rvqr"]
-[ext_resource type="Texture2D" uid="uid://ucyx63x3aags" path="res://rsc/icons/notes-star.svg" id="5_u4k1n"]
+[ext_resource type="Texture2D" uid="uid://ucyx63x3aags" path="res://assets/icons/ui/notes-star.svg" id="5_u4k1n"]
 [ext_resource type="Script" uid="uid://ddxdd3yuk5i7b" path="res://Reia_gdext_test.gd" id="8_8efgc"]
 [ext_resource type="Environment" uid="uid://cfihjq48kmy3v" path="res://scenes/regions/jadewater_falls/jadewater_falls_day.tres" id="8_ltsel"]
 

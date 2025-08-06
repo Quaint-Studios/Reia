@@ -1,8 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://boustpyvomg3o"]
 
-[ext_resource type="Texture2D" uid="uid://c7cg6i2b3y5e0" path="res://rsc/icons/star.svg" id="1_h2ori"]
-[ext_resource type="Texture2D" uid="uid://cikhhiehh4hjs" path="res://rsc/icons/dot.svg" id="1_ikrl4"]
-[ext_resource type="Script" uid="uid://c2y2p7qeeu146" path="res://scenes2/title_screen/components/menu_button.gd" id="1_othui"]
+[ext_resource type="Texture2D" uid="uid://c7cg6i2b3y5e0" path="res://assets/icons/ui/star.svg" id="1_h2ori"]
+[ext_resource type="Texture2D" uid="uid://cikhhiehh4hjs" path="res://assets/icons/ui/dot.svg" id="1_ikrl4"]
+[ext_resource type="Script" uid="uid://c2y2p7qeeu146" path="res://scenes/title_screen/components/menu_button.gd" id="1_othui"]
 
 [node name="MenuButton" type="MarginContainer"]
 custom_minimum_size = Vector2(0, 81)
