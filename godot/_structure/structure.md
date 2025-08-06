@@ -52,6 +52,7 @@ All visual presentation logic and assets, decoupled from core gameplay logic.
 - UI scenes/components (HUD, menus, dialogs, inventory screens, etc.).
 - Visual effects and post-processing scripts.
 - Theming and style resources.
+- Shaders (materials, post processing, ui, particles, etc.).
 - Helps enforce a clean MVC separation between game logic and user-facing presentation.
 
 ---
@@ -104,15 +105,6 @@ Custom project tools to aid development, asset management, and localization.
 - Editor plugins, asset validators, scene generators, localization checkers, etc.
 - May include scripts or binaries for integration with build/CI pipelines.
 - Should not contain core game logic.
-
----
-
-## `tree.log`
-**Purpose:**
-An example of the structure of this project.
-**Contents:**
-- Used for audits, onboarding, or documentation purposes.
-- Not required for the game to function.
 
 ---
 
@@ -290,6 +282,16 @@ An example of the structure of this project.
 │   │   └── post_process/
 │   │       ├── bloom.gd.gitkeep
 │   │       └── vignette.gd.gitkeep
+│   ├── shaders/
+│   │   ├── materials/
+│   │   │   └── pbr_water.gdshader.gitkeep
+│   │   ├── particles/
+│   │   │   └── dissolve.gdshader.gitkeep
+│   │   ├── post_process/
+│   │   │   ├── outline.gdshader.gitkeep
+│   │   │   └── bloom.gdshader.gitkeep
+│   │   └── ui/
+│   │       └── grayscale.gdshader.gitkeep
 │   └── ui/
 │       ├── components/
 │       │   ├── health_bar.gitkeep
