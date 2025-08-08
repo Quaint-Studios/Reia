@@ -113,7 +113,10 @@ Custom project tools to aid development, asset management, and localization.
 - **Keep each directory focused** on its primary purpose to avoid messy logic, assets, or presentation.
 - **Maintain consistent naming and organization** to ensure long-term maintainability and scalability.
 
+## Example structure
+
 ```
+
 
 ./
 ├── addons
@@ -203,6 +206,8 @@ Custom project tools to aid development, asset management, and localization.
 │   │   │       ├── eye_albedo.gitkeep
 │   │   │       ├── slime.gitkeep
 │   │   │       └── slime_lod1.gitkeep
+│   │   ├── npcs/
+│   │   │   └── .gitkeep
 │   │   ├── player/
 │   │   │   ├── body_a.gitkeep
 │   │   │   └── body_b.gitkeep
@@ -240,6 +245,7 @@ Custom project tools to aid development, asset management, and localization.
 │       │   ├── body_albedo_g.gitkeep
 │       │   └── body_normal_g.gitkeep
 │       ├── props
+│       ├── skyboxes
 │       └── ui
 ├── entities/
 │   ├── base/

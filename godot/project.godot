@@ -33,6 +33,8 @@ buses/default_bus_layout="uid://82gy4qqnnk7o"
 [autoload]
 
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
+AutoAssetSorter="*res://tools/auto_asset_sorter/auto_asset_sorter.gd"
+Dialogs="*res://tools/utils/dialogs.gd"
 
 [debug]
 

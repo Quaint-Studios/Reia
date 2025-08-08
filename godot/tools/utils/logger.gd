@@ -20,3 +20,9 @@ func log(message: String) -> void:
 		log_file.close()
 	else:
 		push_error("Failed to open log file for writing: %s" % path)
+
+func print(message: String, should_log: bool = false) -> void:
+	# For debugging, we can also print to the console.
+	print("%s [%s]: %s" % [Time.get_datetime_string_from_system(), name, message])
+	if should_log:
+		self.log(message)

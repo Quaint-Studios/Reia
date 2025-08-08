@@ -1,6 +1,5 @@
 @tool
 extends Node
-class_name Dialogs
 
 ## Shows a confirmation dialog for moving a texture.
 ## Calls the given callback with (src_path, dest_path, confirmed: bool)
