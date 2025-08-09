@@ -4,11 +4,25 @@ compatibility_minimum = 4.4
 reloadable = true
 
 [libraries]
-linux.debug.x86_64 =     "res://../rust/target/debug/reia_gdext.so"
-linux.release.x86_64 =   "res://../rust/target/release/reia_gdext.so"
-windows.debug.x86_64 =   "res://../rust/target/debug/reia_gdext.dll"
-windows.release.x86_64 = "res://../rust/target/release/reia_gdext.dll"
-macos.debug =            "res://../rust/target/debug/reia_gdext.dylib"
-macos.release =          "res://../rust/target/release/reia_gdext.dylib"
-macos.debug.arm64 =      "res://../rust/target/debug/reia_gdext.dylib"
-macos.release.arm64 =    "res://../rust/target/release/reia_gdext.dylib"
+# linux.debug.x86_64 =     "res://../rust/target/debug/reia.so"
+# linux.release.x86_64 =   "res://../rust/target/release/reia.so"
+# linux.debug.x86_64 = "res://../rust/target/x86_64-unknown-linux-gnu/debug/reia.so"
+# linux.release.x86_64 = "res://../rust/target/x86_64-unknown-linux-gnu/release/reia.so"
+linux.x86_64 = "res://../rust/target/x86_64-unknown-linux-gnu/release/reia.so"
+
+# windows.debug.x86_64 =   "res://../rust/target/debug/reia.dll"
+# windows.release.x86_64 = "res://../rust/target/release/reia.dll"
+# windows.debug.x86_64 = "res://../rust/target/x86_64-pc-windows-msvc/debug/reia.dll"
+# windows.release.x86_64 = "res://../rust/target/x86_64-pc-windows-msvc/release/reia.dll"
+windows.x86_64 = "res://../rust/target/x86_64-pc-windows-msvc/release/reia.dll"
+
+# macos.debug =            "res://../rust/target/debug/reia.dylib"
+# macos.debug.arm64 =      "res://../rust/target/debug/reia.dylib"
+# macos.release =          "res://../rust/target/release/reia.dylib"
+# macos.release.arm64 =    "res://../rust/target/release/reia.dylib"
+# macos.debug.x86_64 = "res://../rust/target/x86_64-apple-darwin/debug/reia.dylib"
+# macos.debug.arm64 = "res://../rust/target/aarch64-apple-darwin/debug/reia.dylib"
+# macos.release.x86_64 = "res://../rust/target/x86_64-apple-darwin/release/reia.dylib"
+# macos.release.arm64 = "res://../rust/target/aarch64-apple-darwin/release/reia.dylib"
+macos.x86_64 = "res://../rust/target/x86_64-apple-darwin/release/reia.dylib"
+macos.arm64 = "res://../rust/target/aarch64-apple-darwin/release/reia.dylib"

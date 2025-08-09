@@ -19,6 +19,7 @@ config/name_localized={
 }
 config/description="Reia"
 config/version="1.1.0"
+config/tags=PackedStringArray("3d", "adventure", "game", "major", "mmo", "reia", "rpg")
 run/main_scene="uid://djtfroocdt7mo"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.4", "Forward Plus")
@@ -59,14 +60,14 @@ window/size/mode.editor=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/sound_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/auto_asset_sorter/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
 "res://addons/": "yellow",
-"res://common/": "pink",
-"res://rsc/": "green",
+"res://assets/": "green",
+"res://presentation/": "pink",
 "res://scenes/": "purple",
 "res://src/": "blue"
 }
@@ -74,6 +75,15 @@ folder_colors={
 [gui]
 
 theme/custom="uid://clk264aapxxuu"
+
+[importer_defaults]
+
+auto_glb_texture_sorter={
+"collision_strategy": 1,
+"dry_run": false,
+"enable_reference_patch": true,
+"log_verbose": true
+}
 
 [internationalization]
 
