@@ -41,7 +41,7 @@ class Fonts:
 		static var black := ResourceLoader.load("res://assets/fonts/roboto-latin-900-normal.ttf") as FontFile
 
 func setup() -> void:
-	set_save_path("res://rsc/themes/theme.tres")
+	set_save_path("res://presentation/ui/themes/theme.tres")
 
 func define_theme() -> void:
 	define_fonts()
