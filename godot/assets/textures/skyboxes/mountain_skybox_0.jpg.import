@@ -3,8 +3,8 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://djym1kltn1v4j"
-path.s3tc="res://.godot/imported/mountain_skybox_0.jpg-74b6b0b619b5a190d80a95bc1308bf78.s3tc.ctex"
-path.etc2="res://.godot/imported/mountain_skybox_0.jpg-74b6b0b619b5a190d80a95bc1308bf78.etc2.ctex"
+path.s3tc="res://.godot/imported/mountain_skybox_0.jpg-7cbfd7163ad7f6689ce5f0a0e8a64acb.s3tc.ctex"
+path.etc2="res://.godot/imported/mountain_skybox_0.jpg-7cbfd7163ad7f6689ce5f0a0e8a64acb.etc2.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
@@ -15,8 +15,8 @@ generator_parameters={
 
 [deps]
 
-source_file="res://rsc/skyboxes/mountain_skybox_0.jpg"
-dest_files=["res://.godot/imported/mountain_skybox_0.jpg-74b6b0b619b5a190d80a95bc1308bf78.s3tc.ctex", "res://.godot/imported/mountain_skybox_0.jpg-74b6b0b619b5a190d80a95bc1308bf78.etc2.ctex"]
+source_file="res://assets/textures/skyboxes/mountain_skybox_0.jpg"
+dest_files=["res://.godot/imported/mountain_skybox_0.jpg-7cbfd7163ad7f6689ce5f0a0e8a64acb.s3tc.ctex", "res://.godot/imported/mountain_skybox_0.jpg-7cbfd7163ad7f6689ce5f0a0e8a64acb.etc2.ctex"]
 
 [params]
 
