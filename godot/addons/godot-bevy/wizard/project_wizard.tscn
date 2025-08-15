@@ -1,0 +1,69 @@
+[gd_scene load_steps=2 format=3 uid="uid://dqhby7f587fe0"]
+
+[ext_resource type="Script" uid="uid://guo1kx7de5ss" path="res://addons/godot-bevy/wizard/project_wizard.gd" id="1"]
+
+[node name="ProjectWizard" type="ConfirmationDialog"]
+title = "Setup godot-bevy Project"
+size = Vector2i(600, 400)
+ok_button_text = "Create Project"
+script = ExtResource("1")
+
+[node name="VBox" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = -49.0
+
+[node name="Label" type="Label" parent="VBox"]
+layout_mode = 2
+text = "Configure your godot-bevy project:"
+
+[node name="HSeparator" type="HSeparator" parent="VBox"]
+layout_mode = 2
+
+[node name="ProjectName" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox/ProjectName"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "Project Name:"
+
+[node name="LineEdit" type="LineEdit" parent="VBox/ProjectName"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "my_game"
+placeholder_text = "Enter project name..."
+
+[node name="Version" type="HBoxContainer" parent="VBox"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBox/Version"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "godot-bevy Version:"
+
+[node name="LineEdit" type="LineEdit" parent="VBox/Version"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "0.9"
+placeholder_text = "e.g., 0.9"
+
+[node name="HSeparator2" type="HSeparator" parent="VBox"]
+layout_mode = 2
+
+[node name="ReleaseBuild" type="CheckBox" parent="VBox"]
+layout_mode = 2
+text = "Configure for release builds"
+
+[node name="HSeparator3" type="HSeparator" parent="VBox"]
+layout_mode = 2
+
+[node name="PluginNote" type="RichTextLabel" parent="VBox"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[b]Note:[/b] This wizard creates a project with [i]GodotDefaultPlugins[/i] which includes all standard godot-bevy functionality.\n\nAfter generation, you can customize plugin selection in your [code]lib.rs[/code] file by replacing [code]GodotDefaultPlugins[/code] with individual plugins.\n\nSee the [url=https://docs.rs/godot-bevy]godot-bevy documentation[/url] for available plugins."
+fit_content = true
