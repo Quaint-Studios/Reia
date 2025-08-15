@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://bjsfwt816j4tp"]
+
+[sub_resource type="GDScript" id="GDScript_1"]
+script/source = "extends BevyApp
+
+
+# Bulk Transform Optimization Methods
+# Automatically detected by godot-bevy library for performance optimization
+
+func bulk_update_transforms_3d(instance_ids: PackedInt64Array, positions: PackedVector3Array, rotations: PackedVector3Array, scales: PackedVector3Array):
+	for i in range(instance_ids.size()):
+		var node = instance_from_id(instance_ids[i]) as Node3D
+		# Trust instance IDs are valid
+		node.position = positions[i]
+		node.rotation = rotations[i]
+		node.scale = scales[i]
+
+func bulk_update_transforms_2d(instance_ids: PackedInt64Array, positions: PackedVector2Array, rotations: PackedFloat32Array, scales: PackedVector2Array):
+	for i in range(instance_ids.size()):
+		var node = instance_from_id(instance_ids[i]) as Node2D
+		# Trust instance IDs are valid
+		node.position = positions[i]
+		node.rotation = rotations[i]
+		node.scale = scales[i]
+"
+
+[node name="BevyApp" type="BevyApp"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+script = SubResource("GDScript_1")
