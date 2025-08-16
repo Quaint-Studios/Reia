@@ -6,6 +6,9 @@ edition = "2024"
 [lib]
 crate-type = ["cdylib"] # Compile this crate to a dynamic C library.
 
+[features]
+trace_tracy = []
+
 [dependencies]
 bevy = { version = "0.16.1", default-features = false }
 bytes = "1.10.1"
