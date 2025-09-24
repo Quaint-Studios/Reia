@@ -1,3 +1,7 @@
 [submodule "rust/externals/sustenet"]
 	path = rust/externals/sustenet
 	url = git@github.com:Quaint-Studios/Sustenet.git
+[submodule "godot/addons/gecs"]
+	path = godot/addons/gecs
+	url = https://github.com/csprance/gecs
+	branch = release-v4.3.0
