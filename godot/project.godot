@@ -35,6 +35,7 @@ buses/default_bus_layout="uid://82gy4qqnnk7o"
 
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
 BevyAppSingleton="*res://systems/bridge/bevy_app_singleton.tscn"
+ECS="*res://addons/gecs/ecs.gd"
 
 [debug]
 
@@ -61,7 +62,7 @@ window/size/mode.editor=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/auto_asset_sorter/plugin.cfg", "res://addons/godot-bevy/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/auto_asset_sorter/plugin.cfg", "res://addons/gecs/plugin.cfg", "res://addons/godot-bevy/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
 
 [file_customization]
 
