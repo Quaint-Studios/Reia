@@ -1,6 +1,6 @@
 @tool
 extends Object
-class_name Logger
+class_name FileLogger
 
 var path: String
 var name: String

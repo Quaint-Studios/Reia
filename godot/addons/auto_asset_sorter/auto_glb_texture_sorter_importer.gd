@@ -20,12 +20,12 @@ const PATCHABLE_TEXT_EXTS: PackedStringArray = [
 
 enum CollisionStrategy {SKIP, OVERWRITE, INCREMENT}
 
-var logger: Logger
+var logger: FileLogger
 #endregion
 
 #region Importer Functions
 func _init() -> void:
-	logger = Logger.new(LOG_PATH, LOG_NAME)
+	logger = FileLogger.new(LOG_PATH, LOG_NAME)
 
 func _get_importer_name() -> String:
 	return "auto_glb_texture_sorter"
@@ -94,14 +94,14 @@ func _can_import_threaded() -> bool:
 func _import(source_file: String, save_path: String, options: Dictionary, _platform_variants: Array, _gen_files: Array) -> int:
 	if not Engine.is_editor_hint():
 		return ERR_UNAUTHORIZED
-	
+
 	var section: String = _detect_section(source_file)
 	# TODO: Look into getting the proper types here.
 	var collision_strategy: int = int(options.get("collision_strategy", CollisionStrategy.INCREMENT))
 	var do_patch: bool = bool(options.get("enable_reference_patch", false))
 	var dry_run: bool = bool(options.get("dry_run", false))
 	var verbose: bool = bool(options.get("log_verbose", true))
-	
+
 	_log("IMPORT START: %s (section=%s)" % [source_file, section], verbose)
 
 	var result := append_import_external_resource(
@@ -112,18 +112,18 @@ func _import(source_file: String, save_path: String, options: Dictionary, _platf
 	if result != OK:
 		_log("ERROR: Built-in scene import failed.", true)
 		return result
-	
+
 	var packed_scene: PackedScene = ResourceLoader.load(source_file)
 	if packed_scene == null:
 		_log("ERROR: Failed to load GLB as PackedScene: %s" % source_file, true)
 		return ERR_CANT_OPEN
-	
+
 	var texture_paths: Array[String] = _collect_external_texture_paths(packed_scene)
 	if texture_paths.is_empty():
 		_log("No external textures found.", verbose)
 	else:
 		_log("Found %d external textures." % texture_paths.size(), verbose)
-	
+
 	var relocation_map: Dictionary = {}
 	for tex_path: String in texture_paths:
 		var new_path: String = _compute_target_path(tex_path, section)
@@ -132,26 +132,26 @@ func _import(source_file: String, save_path: String, options: Dictionary, _platf
 		var final_dest: String = _handle_collision_and_move(tex_path, new_path, collision_strategy, dry_run, verbose)
 		if final_dest != "":
 			relocation_map[tex_path] = final_dest
-	
+
 	if relocation_map.is_empty():
 		_log("No textures moved.", verbose)
 	else:
 		_log("Relocated %d textures." % relocation_map.size(), true)
-	
+
 	if not relocation_map.is_empty():
 		_update_scene_material_texture_paths(packed_scene, relocation_map, verbose)
-	
+
 	if do_patch and not relocation_map.is_empty() and not dry_run:
 		_patch_references(relocation_map, verbose)
-	
+
 	var scene_save_path: String = "%s.%s" % [save_path, _get_save_extension()]
 	var save_err: Error = ResourceSaver.save(packed_scene, scene_save_path)
 	if save_err != OK:
 		_log("ERROR: Failed to save scene: %s (err=%d)" % [scene_save_path, save_err], true)
 		return save_err
-	
+
 	_log("IMPORT COMPLETE: %s -> %s" % [source_file, scene_save_path], true)
-	
+
 	# TODO: This needs to be a button in the importer in the future.
 	# _deferred_filesystem_scan.call_deferred()
 
@@ -267,13 +267,13 @@ func _handle_collision_and_move(src: String, dst: String, strategy: int, dry_run
 	if dry_run:
 		_log("DRY RUN: %s -> %s" % [src, final_dst], true)
 		return final_dst
-	
+
 	var dst_dir: String = final_dst.get_base_dir()
 	var mk_err: int = DirAccess.make_dir_recursive_absolute(dst_dir)
 	if mk_err != OK and mk_err != ERR_ALREADY_EXISTS:
 		_log("ERROR: mkdir failed (%d): %s" % [mk_err, dst_dir], true)
 		return ""
-	
+
 	var copy_err: int = DirAccess.copy_absolute(src, final_dst)
 	if copy_err != OK:
 		_log("ERROR: Copy failed (%d): %s -> %s" % [copy_err, src, final_dst], true)
@@ -281,7 +281,7 @@ func _handle_collision_and_move(src: String, dst: String, strategy: int, dry_run
 	var rm_err: int = DirAccess.remove_absolute(src)
 	if rm_err != OK:
 		_log("WARN: Remove source failed (%d): %s" % [rm_err, src], true)
-	
+
 	_move_sidecar_import(src, final_dst)
 	_log("MOVE: %s -> %s" % [src, final_dst], true)
 	return final_dst
@@ -425,7 +425,7 @@ func _scan_dir_recursive(path: String, exts: PackedStringArray, out: PackedStrin
 	dir.list_dir_end()
 #endregion
 
-#region Logging 
+#region Logging
 func _log(msg: String, force: bool) -> void:
 	if not force:
 		return
