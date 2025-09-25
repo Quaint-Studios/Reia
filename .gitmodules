@@ -3,5 +3,5 @@
 	url = git@github.com:Quaint-Studios/Sustenet.git
 [submodule "godot/addons/gecs"]
 	path = godot/addons/gecs
-	url = https://github.com/csprance/gecs
-	branch = release-v4.3.0
+	url = https://github.com/makosai/gecs
+	branch = makosai/changes
