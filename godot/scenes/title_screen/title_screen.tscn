@@ -81,7 +81,8 @@ texture = ExtResource("3_4m48f")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="VBox" type="VBoxContainer" parent="Canvas/Screens/Title"]
+[node name="MenuItems" type="VBoxContainer" parent="Canvas/Screens/Title"]
+unique_name_in_owner = true
 clip_children = 2
 material = SubResource("ShaderMaterial_ltsel")
 layout_mode = 1
@@ -95,36 +96,36 @@ offset_bottom = 823.5
 alignment = 1
 metadata/_edit_lock_ = true
 
-[node name="Play" parent="Canvas/Screens/Title/VBox" instance=ExtResource("4_wj2ee")]
+[node name="Play" parent="Canvas/Screens/Title/MenuItems" instance=ExtResource("4_wj2ee")]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Label" parent="Canvas/Screens/Title/VBox/Play/Content" index="2"]
+[node name="Label" parent="Canvas/Screens/Title/MenuItems/Play/Content" index="2"]
 text = "Play"
 
-[node name="Settings" parent="Canvas/Screens/Title/VBox" instance=ExtResource("4_wj2ee")]
+[node name="Settings" parent="Canvas/Screens/Title/MenuItems" instance=ExtResource("4_wj2ee")]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Label" parent="Canvas/Screens/Title/VBox/Settings/Content" index="2"]
+[node name="Label" parent="Canvas/Screens/Title/MenuItems/Settings/Content" index="2"]
 text = "Settings"
 
-[node name="Credits" parent="Canvas/Screens/Title/VBox" instance=ExtResource("4_wj2ee")]
+[node name="Credits" parent="Canvas/Screens/Title/MenuItems" instance=ExtResource("4_wj2ee")]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Label" parent="Canvas/Screens/Title/VBox/Credits/Content" index="2"]
+[node name="Label" parent="Canvas/Screens/Title/MenuItems/Credits/Content" index="2"]
 text = "Credits"
 
-[node name="Quit" parent="Canvas/Screens/Title/VBox" instance=ExtResource("4_wj2ee")]
+[node name="Quit" parent="Canvas/Screens/Title/MenuItems" instance=ExtResource("4_wj2ee")]
 layout_mode = 2
 metadata/_edit_lock_ = true
 
-[node name="Label" parent="Canvas/Screens/Title/VBox/Quit/Content" index="2"]
+[node name="Label" parent="Canvas/Screens/Title/MenuItems/Quit/Content" index="2"]
 text = "Quit"
 
 [node name="Button" type="Button" parent="Canvas/Screens/Title"]
-layout_mode = 2
+layout_mode = 0
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
@@ -198,16 +199,16 @@ unique_name_in_owner = true
 layout_mode = 2
 mouse_filter = 2
 
-[node name="World" type="Node3D" parent="."]
+[node name="Level" type="Node3D" parent="."]
 script = ExtResource("8_8efgc")
 
-[node name="Environment" type="WorldEnvironment" parent="World"]
+[node name="Environment" type="WorldEnvironment" parent="Level"]
 environment = ExtResource("8_ltsel")
 
-[node name="Camera" type="Camera3D" parent="World"]
+[node name="Camera" type="Camera3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.555218, 2.42893)
 
-[editable path="Canvas/Screens/Title/VBox/Play"]
-[editable path="Canvas/Screens/Title/VBox/Settings"]
-[editable path="Canvas/Screens/Title/VBox/Credits"]
-[editable path="Canvas/Screens/Title/VBox/Quit"]
+[editable path="Canvas/Screens/Title/MenuItems/Play"]
+[editable path="Canvas/Screens/Title/MenuItems/Settings"]
+[editable path="Canvas/Screens/Title/MenuItems/Credits"]
+[editable path="Canvas/Screens/Title/MenuItems/Quit"]

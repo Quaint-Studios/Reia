@@ -1,17 +1,36 @@
-[gd_scene format=3 uid="uid://b5wk75hsjto8v"]
+[gd_scene load_steps=4 format=3 uid="uid://b5wk75hsjto8v"]
+
+[ext_resource type="Script" uid="uid://cejo0i5slihx3" path="res://ecs/main.gd" id="1_p72kj"]
+[ext_resource type="Script" uid="uid://cdu5tlyk72uu4" path="res://addons/gecs/world.gd" id="2_58eoa"]
+[ext_resource type="Script" uid="uid://bk4gcu87g6us2" path="res://ecs/systems/s_movement.gd" id="3_6n66g"]
 
 [node name="JadewaterFalls" type="Node"]
+script = ExtResource("1_p72kj")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="World" type="Node3D" parent="."]
+[node name="World" type="Node" parent="."]
+script = ExtResource("2_58eoa")
+entity_nodes_root = NodePath("Entities")
+system_nodes_root = NodePath("Systems")
+metadata/_custom_type_script = "uid://cdu5tlyk72uu4"
 
-[node name="Sun" type="DirectionalLight3D" parent="World"]
+[node name="Systems" type="Node" parent="World"]
+
+[node name="MovementSystem" type="Node" parent="World/Systems"]
+script = ExtResource("3_6n66g")
+metadata/_custom_type_script = "uid://bk4gcu87g6us2"
+
+[node name="Entities" type="Node" parent="World"]
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="Sun" type="DirectionalLight3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 0.109162, 0.994024, 0, -0.994024, 0.109162, -0.0450239, 2.48442, 0)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="World"]
+[node name="CSGBox3D" type="CSGBox3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91074, 0, -6.62756)
 size = Vector3(20.8036, 1, 23.637)
 
-[node name="Camera3D" type="Camera3D" parent="World"]
-transform = Transform3D(0.110428, 0, 0.993884, 0, 1, 0, -0.993884, 0, 0.110428, -0.588841, 1.0901, -4.12563)
+[node name="Camera3D" type="Camera3D" parent="Level"]
+transform = Transform3D(0.11042801, 0, 0.99388415, 0, 1, 0, -0.99388415, 0, 0.11042801, -0.588841, 1.0901, -4.12563)

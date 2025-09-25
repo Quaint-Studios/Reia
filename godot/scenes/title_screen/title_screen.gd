@@ -5,8 +5,12 @@ extends Node
 @onready var packed_scene_reia := preload(SceneSelector.REGIONS.JADEWATER_FALLS)
 
 func _ready() -> void:
+	_prepare_signals()
 	_prepare_screens()
 	_prepare_sound()
+
+func _prepare_signals() -> void:
+	var __ := (%MenuItems/Play/Button as Button).pressed.connect(func() -> void: _on_screen_change("play"))
 
 func _prepare_screens() -> void:
 	hide_all_screens()
@@ -36,8 +40,12 @@ func _on_screen_change(to: String) -> void:
 			hide_all_screens()
 			(%Title as Control).show()
 		"play":
-			hide_all_screens()
-			(%Play as Control).show()
+			# Temporarily load the Jadewater Falls map scene for testing.
+			SceneSelector.change_map(get_tree(), SceneSelector.Maps.JADEWATER_FALLS)
+			return
+
+			# hide_all_screens()
+			# (%Play as Control).show()
 		"settings":
 			hide_all_screens()
 			(%Settings as Control).show()

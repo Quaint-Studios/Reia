@@ -36,3 +36,12 @@ func _ready() -> void:
 		get_tree().change_scene_to_file.call_deferred(SceneSelector.REGIONS.JADEWATER_FALLS)
 	else:
 		get_tree().change_scene_to_file.call_deferred(SceneSelector.MAIN.TITLE_SCREEN)
+
+static func change_map(tree: SceneTree, to: Maps) -> void:
+	match to:
+		Maps.JADEWATER_FALLS:
+			tree.change_scene_to_file.call_deferred(SceneSelector.REGIONS.JADEWATER_FALLS)
+		Maps.WATERBROOK_CITY:
+			tree.change_scene_to_file.call_deferred(SceneSelector.REGIONS.WATERBROOK_CITY)
+		_:
+			push_error("Invalid map selection.")

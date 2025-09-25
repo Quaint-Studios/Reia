@@ -6,8 +6,8 @@ func query() -> QueryBuilder:
 	return q.with_all([C_Transform, C_Velocity])
 
 func process(entity: Entity, delta: float) -> void:
-	var transform_comp : C_Transform = entity.get_component(C_Transform)
-	var velocity_comp : C_Velocity = entity.get_component(C_Velocity)
+	var transform_comp: C_Transform = entity.get_component(C_Transform)
+	var velocity_comp: C_Velocity = entity.get_component(C_Velocity)
 
 	# Move the entity based on its velocity
 	transform_comp.position += velocity_comp.velocity * delta
