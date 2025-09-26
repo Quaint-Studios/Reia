@@ -34,7 +34,6 @@ buses/default_bus_layout="uid://82gy4qqnnk7o"
 [autoload]
 
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
-BevyAppSingleton="*res://systems/bridge/bevy_app_singleton.tscn"
 ECS="*res://addons/gecs/ecs.gd"
 
 [debug]
