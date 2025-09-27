@@ -3,7 +3,7 @@
 ---
 
 ## The goal of the Rust side 
-Host authoritative game logic, high-performance networking (mio), Bevy ECS, Turso DB access, and a gdext bridge to Godot. Keep nearly all Rust source under `src/` for IDE ergonomics and conventional crate layout.
+Host authoritative game logic, high-performance networking (tokio), Turso DB access, and a gdext bridge to Godot. Keep nearly all Rust source under `src/` for IDE ergonomics and conventional crate layout.
 
 ---
 
@@ -157,36 +157,44 @@ Unit-test helpers and mocks kept inside `src/` for easier referencing.
 
 
 src/
-├── lib.rs
-├── entry.rs
-├── app/
-│   ├── mod.rs
-│   ├── app_builder.rs
-│   └── tick.rs
-├── game/
-│   ├── components/
-│   ├── bundles/
-│   ├── systems/
-│   └── resources/
-├── network/
-│   ├── socket/
-│   ├── driver/
-│   ├── framing.rs
-│   ├── protocol.rs
-│   └── queue/
-├── bridge/
-│   ├── godot.rs
-│   ├── player_bridge.rs
-│   └── net_bridge.rs
-├── db/
-│   ├── turso.rs
-│   ├── cache.rs
-│   └── migrations/
-├── util/
-├── externals/
-│   └── sustenet/
-├── tools/
-└── bin/
-    ├── server_main.rs
-    └── migrate.rs
+├── lib.rs              // Crate root, wires up plugins
+├── bridge/             // Godot gdext bindings
+├── db/                 // Database layer
+├── network/            // Network protocol and session management
+└── game/
+    ├── mod.rs          // Publicly exports modules for the main lib
+    ├── common/         // Truly global types (Health, Mana, AppState, custom Vec3)
+    │
+    ├── features/       // Self-contained, reusable "Lego bricks" of gameplay
+    │   ├── mod.rs
+    │   ├── combat/       // All logic for combat mechanics (damage, abilities, effects)
+    │   │   ├── components.rs
+    │   │   ├── systems.rs
+    │   │   ├── events.rs
+    │   │   └── plugin.rs // Bevy plugin for the combat feature
+    │   ├── movement/     // All logic for movement and navigation
+    │   │   └── ...
+    │   ├── inventory/    // All logic for item management
+    │   │   └── ...
+    │   └── replication/  // Your network replication logic is a core feature
+    │       └── ...
+    │
+    └── world/            // Concrete entities that compose features
+        ├── mod.rs
+        ├── player/       // Player-specific logic and assembly
+        │   ├── components.rs // Components ONLY for the player (e.g., IsPlayer)
+        │   ├── systems.rs  // Systems ONLY for the player (e.g., input handling)
+        │   └── plugin.rs   // Bevy plugin that assembles a player from various features
+        │
+        ├── npcs/         // Non-player characters
+        │   ├── mod.rs
+        │   ├── vendor.rs   // Logic for a vendor NPC
+        │   └── quest_giver.rs
+        │
+        └── creatures/    // AI-driven mobs
+            ├── mod.rs
+            ├── wolf/       // Logic specific to wolves (e.g., pack AI)
+            │   └── plugin.rs
+            └── dragon/     // Logic specific to dragons
+                └── plugin.rs
 ```
