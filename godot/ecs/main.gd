@@ -4,22 +4,37 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	ECS.world = world
+	_setup_world()
 
 	# Spawn player entity
-	var player_entity: Entity = preload("res://ecs/entities/player/Player.tscn").instantiate()
+	var player_tscn := preload("res://entities/player/Player.tscn").instantiate()
+	var e_player: Entity = player_tscn
+	world.add_entity(e_player)
 
-	# Add to world
-	world.add_entity(player_entity)
+	var player: CharacterBody3D = player_tscn
+	var body_ref: C_CharacterBodyRef = e_player.get_component(C_CharacterBodyRef)
+	body_ref.node = player
 
-	# Position player, you can't get the component before it's added to the world
-	var transform_comp: C_Transform = player_entity.get_component(C_Transform)
+func _setup_world() -> void:
+	ECS.world = world
 
-	# Manipulate the transform component directly
-	transform_comp.transform.origin = Vector3(-5, 1, -5)
+	# Create system groups for organization and scheduling
+	const GROUP_GAMEPLAY: String = "gameplay"
+	const GROUP_PHYSICS: String = "physics"
 
-	# Sync the component back to the node if it's not already being synced by a system
-	ECSUtils.sync_component_to_transform(player_entity)
+	# Instantiate input and movement systems
+	var input_system := PlayerInputSystem.new()
+	input_system.name = "PlayerInputSystem"
+	var movement_system := PlayerMovementSystem.new()
+	movement_system.name = "PlayerMovementSystem"
+
+	# Assign systems to groups for scheduling
+	input_system.group = GROUP_GAMEPLAY
+	movement_system.group = GROUP_PHYSICS
+
+	# Register systems with the world
+	world.add_system(input_system)
+	world.add_system(movement_system)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

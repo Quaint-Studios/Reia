@@ -1,35 +1,50 @@
-[gd_scene load_steps=13 format=3 uid="uid://dap7fo0mmydyu"]
+[gd_scene load_steps=18 format=3 uid="uid://dap7fo0mmydyu"]
 
-[ext_resource type="Script" uid="uid://cdihsb8bluew1" path="res://ecs/entities/player/e_player.gd" id="1_mab2k"]
-[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/component.gd" id="2_kppsj"]
-[ext_resource type="Script" uid="uid://b4sm0itvwxex0" path="res://ecs/components/core/c_transform.gd" id="4_kiixs"]
-[ext_resource type="Script" uid="uid://b4lud7qs15db0" path="res://ecs/components/core/c_velocity.gd" id="5_c6887"]
-[ext_resource type="Script" uid="uid://67uxp3w6ppt6" path="res://ecs/components/stats/c_health.gd" id="5_kppsj"]
-[ext_resource type="Script" uid="uid://br8a6btmexh2k" path="res://ecs/components/stats/c_ether.gd" id="6_61vjg"]
-[ext_resource type="Script" uid="uid://btd884t2m4ejl" path="res://ecs/components/stats/c_stamina.gd" id="7_kiixs"]
+[ext_resource type="Script" uid="uid://cdihsb8bluew1" path="res://entities/player/e_player.gd" id="1_rl6fg"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/component.gd" id="2_rl6fg"]
+[ext_resource type="Script" uid="uid://b4sm0itvwxex0" path="res://ecs/components/core/c_transform.gd" id="3_q57vx"]
+[ext_resource type="Script" uid="uid://b4lud7qs15db0" path="res://ecs/components/core/c_velocity.gd" id="4_ak4un"]
+[ext_resource type="Script" uid="uid://bwodo8nptb0w" path="res://ecs/components/player/c_is_player_controlled.gd" id="4_q57vx"]
+[ext_resource type="Script" uid="uid://67uxp3w6ppt6" path="res://ecs/components/stats/c_health.gd" id="5_1ms0h"]
+[ext_resource type="Script" uid="uid://br8a6btmexh2k" path="res://ecs/components/stats/c_ether.gd" id="6_2rv2u"]
+[ext_resource type="Script" uid="uid://bnsb7fvb3nr3n" path="res://entities/refs/c_characterbodyref.gd" id="7_fmb3c"]
+[ext_resource type="Script" uid="uid://btd884t2m4ejl" path="res://ecs/components/stats/c_stamina.gd" id="7_mq27t"]
+
+[sub_resource type="Resource" id="Resource_rl6fg"]
+script = ExtResource("7_fmb3c")
+metadata/_custom_type_script = "uid://bnsb7fvb3nr3n"
+
+[sub_resource type="Resource" id="Resource_ak4un"]
+script = ExtResource("4_q57vx")
+metadata/_custom_type_script = "uid://bwodo8nptb0w"
 
 [sub_resource type="Resource" id="Resource_h51yf"]
-script = ExtResource("4_kiixs")
+script = ExtResource("3_q57vx")
 metadata/_custom_type_script = "uid://b4sm0itvwxex0"
 
 [sub_resource type="Resource" id="Resource_afiri"]
-script = ExtResource("5_c6887")
+script = ExtResource("4_ak4un")
 metadata/_custom_type_script = "uid://b4lud7qs15db0"
 
 [sub_resource type="Resource" id="Resource_61vjg"]
-script = ExtResource("5_kppsj")
+script = ExtResource("5_1ms0h")
 metadata/_custom_type_script = "uid://67uxp3w6ppt6"
 
 [sub_resource type="Resource" id="Resource_kiixs"]
-script = ExtResource("6_61vjg")
+script = ExtResource("6_2rv2u")
 metadata/_custom_type_script = "uid://br8a6btmexh2k"
 
 [sub_resource type="Resource" id="Resource_c6887"]
-script = ExtResource("7_kiixs")
+script = ExtResource("7_mq27t")
 metadata/_custom_type_script = "uid://btd884t2m4ejl"
 
-[node name="Player" type="Node3D"]
-script = ExtResource("1_mab2k")
-component_resources = Array[ExtResource("2_kppsj")]([SubResource("Resource_h51yf"), SubResource("Resource_afiri"), SubResource("Resource_61vjg"), SubResource("Resource_kiixs"), SubResource("Resource_c6887")])
+[sub_resource type="BoxShape3D" id="BoxShape3D_kwk8g"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_rl6fg")
+component_resources = Array[ExtResource("2_rl6fg")]([SubResource("Resource_rl6fg"), SubResource("Resource_ak4un"), SubResource("Resource_h51yf"), SubResource("Resource_afiri"), SubResource("Resource_61vjg"), SubResource("Resource_kiixs"), SubResource("Resource_c6887")])
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_kwk8g")
