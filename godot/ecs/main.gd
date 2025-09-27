@@ -7,7 +7,7 @@ func _ready() -> void:
 	_setup_world()
 
 	# Spawn player entity
-	var player_tscn := preload("res://entities/player/Player.tscn").instantiate()
+	var player_tscn := preload("res://features/player/Player.tscn").instantiate()
 	var e_player: Entity = player_tscn
 	world.add_entity(e_player)
 
