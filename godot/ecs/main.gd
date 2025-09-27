@@ -27,14 +27,18 @@ func _setup_world() -> void:
 	input_system.name = "PlayerInputSystem"
 	var movement_system := PlayerMovementSystem.new()
 	movement_system.name = "PlayerMovementSystem"
+	var dash_system := DashAbilitySystem.new()
+	dash_system.name = "DashAbilitySystem"
 
 	# Assign systems to groups for scheduling
 	input_system.group = GROUP_GAMEPLAY
 	movement_system.group = GROUP_PHYSICS
+	dash_system.group = GROUP_GAMEPLAY
 
 	# Register systems with the world
 	world.add_system(input_system)
 	world.add_system(movement_system)
+	world.add_system(dash_system)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
