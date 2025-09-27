@@ -41,6 +41,9 @@ metadata/_custom_type_script = "uid://btd884t2m4ejl"
 [sub_resource type="BoxShape3D" id="BoxShape3D_kwk8g"]
 
 [node name="Player" type="CharacterBody3D"]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
 script = ExtResource("1_rl6fg")
 component_resources = Array[ExtResource("2_rl6fg")]([SubResource("Resource_rl6fg"), SubResource("Resource_ak4un"), SubResource("Resource_h51yf"), SubResource("Resource_afiri"), SubResource("Resource_61vjg"), SubResource("Resource_kiixs"), SubResource("Resource_c6887")])
 

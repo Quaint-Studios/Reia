@@ -23,8 +23,11 @@ metadata/_custom_type_script = "uid://cdu5tlyk72uu4"
 [node name="Sun" type="DirectionalLight3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 0.109162, 0.994024, 0, -0.994024, 0.109162, -0.0450239, 2.48442, 0)
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Level"]
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Level"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.91074, 0, -6.62756)
+use_collision = true
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level/CSGCombiner3D"]
 size = Vector3(20.8036, 1, 23.637)
 
 [node name="Camera3D" type="Camera3D" parent="Level"]

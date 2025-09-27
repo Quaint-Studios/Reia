@@ -2,12 +2,18 @@ class_name PlayerInputSystem
 extends System
 
 const MOVE_SPEED: float = 6.0
+const JUMP_SPEED: float = 4.0
+
+var GRAVITY: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func query() -> QueryBuilder:
-	return q.with_all([C_PlayerControlled, C_Velocity])
+	return q.with_all([C_PlayerControlled, C_Velocity, C_CharacterBodyRef])
 
-func process(entity: Entity, _delta: float) -> void:
+func process(entity: Entity, delta: float) -> void:
 	var velocity_comp: C_Velocity = entity.get_component(C_Velocity)
+	var body_ref: C_CharacterBodyRef = entity.get_component(C_CharacterBodyRef)
+	var character: CharacterBody3D = body_ref.node
+
 	var input_vector: Vector3 = Vector3.ZERO
 
 	# Keyboard input (WASD and arrow keys)
@@ -29,4 +35,15 @@ func process(entity: Entity, _delta: float) -> void:
 	# Normalize for consistent speed, discard if zero
 	if input_vector != Vector3.ZERO:
 		input_vector = input_vector.normalized() * MOVE_SPEED
+
+	# Preserve vertical velocity
+	input_vector.y = velocity_comp.velocity.y
+
+	# Jump input
+	if Input.is_action_just_pressed("jump") and character.is_on_floor():
+		input_vector.y = JUMP_SPEED
+	else:
+		# Apply gravity if not jumping
+		input_vector.y += -GRAVITY * delta
+
 	velocity_comp.velocity = input_vector
