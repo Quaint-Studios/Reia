@@ -2,7 +2,7 @@ class_name PlayerInputSystem
 extends System
 
 const MOVE_SPEED: float = 6.0
-const JUMP_SPEED: float = 8.0
+const JUMP_SPEED: float = 4.0
 const ROTATE_SPEED: float = 12.0
 const LATERAL_BLEND: float = 0.3 # 0.0 = no control, 1.0 = full control
 
@@ -24,7 +24,7 @@ func process(entity: Entity, delta: float) -> void:
 	input_vector.z = Input.get_action_strength("move_back") - Input.get_action_strength("move_forward")
 
 	# Normalize horizontal movement for consistent speed
-	var horizontal_input := input_vector.normalized() if input_vector.length() > 1.0 else Vector3.ZERO
+	var horizontal_input := input_vector.normalized() if input_vector.length() > 0.01 else Vector3.ZERO
 	var move_dir := horizontal_input.rotated(Vector3.UP, camera_target.yaw)
 
 	# Jump buffering
