@@ -42,6 +42,8 @@ func _setup_world() -> void:
 	dash_system.name = "DashAbilitySystem"
 	var camera_system := CameraSystem.new()
 	camera_system.name = "CameraSystem"
+	var camera_input_system := CameraInputSystem.new()
+	camera_input_system.name = "CameraInputSystem"
 
 
 	# Assign systems to groups for scheduling
@@ -49,12 +51,14 @@ func _setup_world() -> void:
 	movement_system.group = GROUP_PHYSICS
 	dash_system.group = GROUP_GAMEPLAY
 	camera_system.group = GROUP_GAMEPLAY
+	camera_input_system.group = GROUP_GAMEPLAY
 
 	# Register systems with the world
 	world.add_system(input_system)
 	world.add_system(movement_system)
 	world.add_system(dash_system)
 	world.add_system(camera_system)
+	world.add_system(camera_input_system)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
