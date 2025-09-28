@@ -29,6 +29,3 @@ use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Level/CSGCombiner3D"]
 size = Vector3(20.8036, 1, 23.637)
-
-[node name="Camera3D" type="Camera3D" parent="Level"]
-transform = Transform3D(0.11042801, 0, 0.99388415, 0, 1, 0, -0.99388415, 0, 0.11042801, -0.588841, 1.0901, -4.12563)

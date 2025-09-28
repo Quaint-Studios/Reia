@@ -1,0 +1,18 @@
+[gd_scene load_steps=7 format=3 uid="uid://bphverduthnsw"]
+
+[ext_resource type="Script" uid="uid://bobiedn5juysi" path="res://features/camera/c_camera.gd" id="1_y70si"]
+[ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/component.gd" id="2_6ckj7"]
+[ext_resource type="Script" uid="uid://8l6ybeapf3pd" path="res://features/refs/c_cameraref.gd" id="3_cq2cj"]
+[ext_resource type="Script" uid="uid://duvnylfxsnokb" path="res://features/camera/c_camera_target.gd" id="4_6ckj7"]
+
+[sub_resource type="Resource" id="Resource_leujr"]
+script = ExtResource("3_cq2cj")
+metadata/_custom_type_script = "uid://8l6ybeapf3pd"
+
+[sub_resource type="Resource" id="Resource_cq2cj"]
+script = ExtResource("4_6ckj7")
+metadata/_custom_type_script = "uid://duvnylfxsnokb"
+
+[node name="PlayerCamera" type="Camera3D"]
+script = ExtResource("1_y70si")
+component_resources = Array[ExtResource("2_6ckj7")]([SubResource("Resource_leujr"), SubResource("Resource_cq2cj")])

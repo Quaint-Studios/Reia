@@ -15,6 +15,17 @@ func _ready() -> void:
 	var body_ref: C_CharacterBodyRef = e_player.get_component(C_CharacterBodyRef)
 	body_ref.node = player
 
+	# Setup camera entity
+	var camera_tscn := preload("res://features/camera/PlayerCamera.tscn").instantiate()
+	var e_camera: Entity = camera_tscn
+	world.add_entity(e_camera)
+
+	var camera: Camera3D = camera_tscn
+	var camera_ref: C_CameraRef = e_camera.get_component(C_CameraRef)
+	camera_ref.node = camera
+	var camera_target: C_CameraTarget = e_camera.get_component(C_CameraTarget)
+	camera_target.target_entity = e_player
+
 func _setup_world() -> void:
 	ECS.world = world
 
@@ -29,16 +40,21 @@ func _setup_world() -> void:
 	movement_system.name = "PlayerMovementSystem"
 	var dash_system := DashAbilitySystem.new()
 	dash_system.name = "DashAbilitySystem"
+	var camera_system := CameraSystem.new()
+	camera_system.name = "CameraSystem"
+
 
 	# Assign systems to groups for scheduling
 	input_system.group = GROUP_GAMEPLAY
 	movement_system.group = GROUP_PHYSICS
 	dash_system.group = GROUP_GAMEPLAY
+	camera_system.group = GROUP_GAMEPLAY
 
 	# Register systems with the world
 	world.add_system(input_system)
 	world.add_system(movement_system)
 	world.add_system(dash_system)
+	world.add_system(camera_system)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
