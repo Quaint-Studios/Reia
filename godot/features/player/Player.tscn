@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://btd884t2m4ejl" path="res://features/stats/c_stamina.gd" id="7_mq27t"]
 [ext_resource type="Script" uid="uid://du3xv1854tevo" path="res://features/abilities/c_dash_intent.gd" id="10_sw0rk"]
 [ext_resource type="Script" uid="uid://ccscw7vktc7d1" path="res://features/camera/c_camera_target_ref.gd" id="11_5wo5g"]
-[ext_resource type="Script" uid="uid://3v08g5ghn5m0" path="res://features/player/c_coyote_time.gd" id="12_v0hdl"]
+[ext_resource type="Script" uid="uid://3v08g5ghn5m0" path="res://features/player/c_jump_state.gd" id="12_v0hdl"]
 
 [sub_resource type="Resource" id="Resource_5wo5g"]
 script = ExtResource("7_fmb3c")
