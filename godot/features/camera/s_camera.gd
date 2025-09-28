@@ -10,7 +10,7 @@ func process(entity: Entity, _delta: float) -> void:
 	var camera: Camera3D = camera_ref.node
 
 	match camera_target.mode:
-		0: # Follow (Orbit)
+		C_CameraTarget.Mode.FOLLOW:
 			if camera_target.target_entity:
 				var target_body: C_CharacterBodyRef = camera_target.target_entity.get_component(C_CharacterBodyRef)
 				if target_body and target_body.node:
@@ -33,9 +33,9 @@ func process(entity: Entity, _delta: float) -> void:
 					camera.global_transform.origin = camera.global_transform.origin.lerp(target_pos, camera_target.smoothing)
 					# Instantly look at look point
 					camera.look_at(look_at_pos, Vector3.UP)
-		1: # Free
+		C_CameraTarget.Mode.FREE:
 			# Camera movement handled by input script or other system
 			pass
-		2: # Cinematic
+		C_CameraTarget.Mode.CINEMATIC:
 			# Camera position/rotation set by cutscene logic or animation
 			pass
