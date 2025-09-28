@@ -6,4 +6,3 @@ const JUMP_BUFFER_TIME: float = 0.15
 
 var coyote_timer: float = 0.0
 var jump_buffer_timer: float = 0.0
-var jump_buffer_active: bool = false
