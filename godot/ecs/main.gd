@@ -26,6 +26,12 @@ func _ready() -> void:
 	var camera_target: C_CameraTarget = e_camera.get_component(C_CameraTarget)
 	camera_target.target_entity = e_player
 
+	var camera_target_ref: C_CameraTargetRef = e_player.get_component(C_CameraTargetRef)
+	if camera_target_ref != null and camera_target != null:
+		camera_target_ref.camera_target = camera_target
+	else:
+		push_error("Failed to initialize CameraTargetRef: missing component(s)")
+
 func _setup_world() -> void:
 	ECS.world = world
 
