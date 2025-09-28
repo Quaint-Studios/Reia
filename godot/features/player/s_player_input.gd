@@ -3,17 +3,19 @@ extends System
 
 const MOVE_SPEED: float = 6.0
 const JUMP_SPEED: float = 4.0
+const ROTATE_SPEED: float = 12.0
 const LATERAL_BLEND: float = 0.3 # 0.0 = no control, 1.0 = full control
 
 var GRAVITY: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 func query() -> QueryBuilder:
-	return q.with_all([C_PlayerControlled, C_Velocity, C_CharacterBodyRef, C_DashIntent])
+	return q.with_all([C_PlayerControlled, C_Velocity, C_CharacterBodyRef, C_DashIntent, C_CameraTargetRef])
 
 func process(entity: Entity, delta: float) -> void:
 	var velocity_comp: C_Velocity = entity.get_component(C_Velocity)
 	var body_ref: C_CharacterBodyRef = entity.get_component(C_CharacterBodyRef)
 	var dash_intent: C_DashIntent = entity.get_component(C_DashIntent)
+	var camera_target: C_CameraTarget = (entity.get_component(C_CameraTargetRef) as C_CameraTargetRef).camera_target
 	var character: CharacterBody3D = body_ref.node
 
 	var input_vector: Vector3 = Vector3.ZERO
@@ -38,6 +40,7 @@ func process(entity: Entity, delta: float) -> void:
 	var horizontal_input := Vector3(input_vector.x, 0.0, input_vector.z)
 	if horizontal_input != Vector3.ZERO:
 		horizontal_input = horizontal_input.normalized()
+	var move_dir := horizontal_input.rotated(Vector3.UP, camera_target.yaw)
 
 	# Set vertical velocity
 	var vertical_velocity := velocity_comp.velocity.y
@@ -46,10 +49,18 @@ func process(entity: Entity, delta: float) -> void:
 	else:
 		vertical_velocity += -GRAVITY * delta
 
+	# Rotate player to face movement direction
+	if move_dir.length() > 0.01:
+		var target_rot := atan2(move_dir.x, move_dir.z)
+		character.rotation.y = lerp_angle(character.rotation.y, target_rot, delta * ROTATE_SPEED)
+
 	# Dash input (e.g., Shift or gamepad button)
 	if Input.is_action_just_pressed("dash") and dash_intent.cooldown <= 0.0:
 		dash_intent.triggered = true
-		dash_intent.direction = horizontal_input if horizontal_input.length() > 0.01 else -character.transform.basis.z
+		if move_dir.length() > 0.01:
+			dash_intent.direction = horizontal_input.rotated(Vector3.UP, camera_target.yaw)
+		else:
+			dash_intent.direction = Vector3(0, 0, -1).rotated(Vector3.UP, camera_target.yaw)
 
 	# If dashing, blend dash velocity with lateral input and preserve vertical velocity
 	if dash_intent.dash_time_left > 0.0:
