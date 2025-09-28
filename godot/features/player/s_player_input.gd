@@ -44,8 +44,12 @@ func process(entity: Entity, delta: float) -> void:
 
 	# Set vertical velocity
 	var vertical_velocity := velocity_comp.velocity.y
-	if Input.is_action_just_pressed("jump") and character.is_on_floor():
-		vertical_velocity = JUMP_SPEED
+	if character.is_on_floor():
+		if Input.is_action_just_pressed("jump"):
+			vertical_velocity = JUMP_SPEED
+		else:
+			if vertical_velocity <= 0.0:
+				vertical_velocity = 0.0
 	else:
 		vertical_velocity += -GRAVITY * delta
 
