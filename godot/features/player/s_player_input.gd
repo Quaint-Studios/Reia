@@ -54,8 +54,8 @@ func process(entity: Entity, delta: float) -> void:
 		vertical_velocity -= GRAVITY * delta
 
 	# Clear jump buffer if jump was triggered
-	jump_state.jump_buffer_timer = jump_trigger * 0.0 + (1 - jump_trigger) * jump_state.jump_buffer_timer
-	jump_state.coyote_timer = jump_trigger * 0.0 + (1 - jump_trigger) * jump_state.coyote_timer
+	jump_state.jump_buffer_timer *= 1 - jump_trigger
+	jump_state.coyote_timer *= 1 - jump_trigger
 
 	# Rotate player to face movement direction
 	if move_dir.length() > 0.01:
