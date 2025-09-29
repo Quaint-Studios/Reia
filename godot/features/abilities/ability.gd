@@ -1,13 +1,20 @@
-class_name Ability extends Resource
+@abstract class_name Ability extends Resource
+
+@export var is_targetable := true
+
+@export var name := ""
+@export var description := ""
 
 @export var cooldown := 0.0
-@export var base_dmg := 1.0
-@export var proficiency := 0.0 # out of 100%, how mastered it is -- how much it drains you
+@export var skill_power := 1.0
+@export var multiplier := 1.0
 
-@export var name: String = ""
-@export var description: String = ""
+@export var cost := 1
+@export var cost_type := Enums.Resource_Type.ETHER
+@export var mastery := 0.0 # out of 100%, how much it drains you
 
 @export var element: Enums.Element_Affinity
 
-func get_damage(power: int) -> int:
-	return ceili(power + base_dmg)
+## Base calculation: ceili(power + skill_power)
+@abstract func get_power(power: int) -> int
+@abstract func execute(caster: Entity, target: Entity) -> void
