@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dap7fo0mmydyu"]
+[gd_scene load_steps=26 format=3 uid="uid://dap7fo0mmydyu"]
 
 [ext_resource type="Script" uid="uid://cdihsb8bluew1" path="res://features/player/e_player.gd" id="1_rl6fg"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/component.gd" id="2_rl6fg"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://du3xv1854tevo" path="res://features/abilities/c_dash_intent.gd" id="10_sw0rk"]
 [ext_resource type="Script" uid="uid://ccscw7vktc7d1" path="res://features/camera/c_camera_target_ref.gd" id="11_5wo5g"]
 [ext_resource type="Script" uid="uid://3v08g5ghn5m0" path="res://features/player/c_jump_state.gd" id="12_v0hdl"]
+[ext_resource type="Script" uid="uid://drai2jq4b2i1x" path="res://features/abilities/c_player_ability_state.gd" id="13_n4aik"]
 
 [sub_resource type="Resource" id="Resource_5wo5g"]
 script = ExtResource("7_fmb3c")
@@ -53,6 +54,10 @@ metadata/_custom_type_script = "uid://ccscw7vktc7d1"
 script = ExtResource("12_v0hdl")
 metadata/_custom_type_script = "uid://3v08g5ghn5m0"
 
+[sub_resource type="Resource" id="Resource_bh38x"]
+script = ExtResource("13_n4aik")
+metadata/_custom_type_script = "uid://drai2jq4b2i1x"
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_kwk8g"]
 
 [node name="Player" type="CharacterBody3D"]
@@ -60,7 +65,7 @@ axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
 script = ExtResource("1_rl6fg")
-component_resources = Array[ExtResource("2_rl6fg")]([SubResource("Resource_5wo5g"), SubResource("Resource_v0hdl"), SubResource("Resource_n4aik"), SubResource("Resource_jxlx1"), SubResource("Resource_dh6cn"), SubResource("Resource_8nsah"), SubResource("Resource_5mj2j"), SubResource("Resource_a2auv"), SubResource("Resource_fnld3"), SubResource("Resource_fqxgg")])
+component_resources = Array[ExtResource("2_rl6fg")]([SubResource("Resource_5wo5g"), SubResource("Resource_v0hdl"), SubResource("Resource_n4aik"), SubResource("Resource_jxlx1"), SubResource("Resource_dh6cn"), SubResource("Resource_8nsah"), SubResource("Resource_5mj2j"), SubResource("Resource_a2auv"), SubResource("Resource_fnld3"), SubResource("Resource_fqxgg"), SubResource("Resource_bh38x")])
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 

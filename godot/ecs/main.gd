@@ -50,6 +50,10 @@ func _setup_world() -> void:
 	camera_system.name = "CameraSystem"
 	var camera_input_system := CameraInputSystem.new()
 	camera_input_system.name = "CameraInputSystem"
+	var player_ability_system := PlayerAbilitySystem.new()
+	player_ability_system.name = "PlayerAbilitySystem"
+	var fireball_system := FireballSystem.new()
+	fireball_system.name = "FireballSystem"
 
 
 	# Assign systems to groups for scheduling
@@ -58,6 +62,8 @@ func _setup_world() -> void:
 	dash_system.group = GROUP_GAMEPLAY
 	camera_system.group = GROUP_GAMEPLAY
 	camera_input_system.group = GROUP_GAMEPLAY
+	player_ability_system.group = GROUP_PHYSICS
+	fireball_system.group = GROUP_PHYSICS
 
 	# Register systems with the world
 	world.add_system(input_system)
@@ -65,6 +71,8 @@ func _setup_world() -> void:
 	world.add_system(dash_system)
 	world.add_system(camera_system)
 	world.add_system(camera_input_system)
+	world.add_system(player_ability_system)
+	world.add_system(fireball_system)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

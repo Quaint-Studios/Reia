@@ -8,8 +8,10 @@ const LATERAL_BLEND: float = 0.3 # 0.0 = no control, 1.0 = full control
 
 var GRAVITY: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var preloaded_fireball_ability := preload("res://features/abilities/fireball/r_fireball_ability.gd")
+
 func query() -> QueryBuilder:
-	return q.with_all([C_PlayerControlled, C_Velocity, C_CharacterBodyRef, C_DashIntent, C_CameraTargetRef, C_JumpState])
+	return q.with_all([C_PlayerControlled, C_Velocity, C_CharacterBodyRef, C_DashIntent, C_CameraTargetRef, C_JumpState, C_PlayerAbilityState])
 
 func process(entity: Entity, delta: float) -> void:
 	var velocity_comp: C_Velocity = entity.get_component(C_Velocity)
@@ -82,3 +84,20 @@ func process(entity: Entity, delta: float) -> void:
 		var final_velocity := horizontal_input * MOVE_SPEED
 		final_velocity.y = vertical_velocity
 		velocity_comp.velocity = final_velocity
+
+	# Ability 1: Fireball (ability_1)
+	if Input.is_action_just_pressed("ability_1"):
+		var ability_state: C_PlayerAbilityState = entity.get_component(C_PlayerAbilityState)
+		if ability_state != null:
+			ability_state.queued_ability = 0 # Fireball index
+
+	# Ability 2: Cube Entity (ability_2)
+	if Input.is_action_just_pressed("ability_2"):
+		var enemy_test_tscn := preload("res://features/enemy/enemy_test/EnemyTest.tscn").instantiate()
+		var e_enemy_test: Entity = enemy_test_tscn
+		ECS.world.add_entity(e_enemy_test)
+
+		var enemy_test: StaticBody3D = enemy_test_tscn
+		var node3d_ref: C_Node3DRef = e_enemy_test.get_component(C_Node3DRef)
+		node3d_ref.node = enemy_test
+		enemy_test.global_transform.origin = character.global_transform.origin + Vector3(0, 0, -2).rotated(Vector3.UP, camera_target.yaw)
