@@ -2,6 +2,11 @@ class_name FireballSystem
 extends System
 
 const FIREBALL_RADIUS: float = 0.5
+var _fireball_sphere_shape: SphereShape3D
+
+func _init():
+	_fireball_sphere_shape = SphereShape3D.new()
+	_fireball_sphere_shape.radius = FIREBALL_RADIUS
 
 func query() -> QueryBuilder:
 	return q.with_all([C_Fireball, C_Node3DRef])
@@ -18,7 +23,7 @@ func process(entity: Entity, delta: float) -> void:
 
 	var start_pos := fireball.start_position
 	var current_pos := node.global_transform.origin
-	
+
 	# Calculate direction to target
 	fireball.direction = (target.global_transform.origin - fireball.start_position).normalized()
 	var velocity: Vector3 = fireball.direction * fireball.speed
@@ -32,23 +37,28 @@ func process(entity: Entity, delta: float) -> void:
 
 	# Fizzle out of max distance reached
 	if traveled_distance >= fireball.max_distance:
-		entity.queue_free()
+		ECS.world.remove_entity(entity)
 		return
 
 	# Sphere collision check with static geometry
 	var space_state := node.get_world_3d().direct_space_state
-	var sphere := SphereShape3D.new()
-	sphere.radius = FIREBALL_RADIUS
 
 	var params := PhysicsShapeQueryParameters3D.new()
-	params.shape = sphere
+	params.shape = _fireball_sphere_shape
 	params.transform = node.global_transform
 	params.collide_with_areas = false
 	params.collide_with_bodies = true
+	params.exclude = [node]
 
 	var collisions := space_state.intersect_shape(params, 1)
 	if collisions.size() > 0:
 		# On collision, apply damage/effects here
 		# For now, just remove the fireball
-		entity.queue_free()
+		ECS.world.remove_entity(entity)
+		return
+
+	var target_distance := current_pos.distance_to(target.global_transform.origin)
+	if target_distance <= FIREBALL_RADIUS:
+		# On hit, apply damage/effects here
+		ECS.world.remove_entity(entity)
 		return
