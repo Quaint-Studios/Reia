@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://7vpva3u3bbyw"]
+
+[ext_resource type="Script" uid="uid://ieix3v6r81k3" path="res://features/abilities/fireball/e_fireball.gd" id="1_2dp54"]
+
+[node name="Fireball" type="Node3D"]
+script = ExtResource("1_2dp54")
+
+[node name="CSGSphere3D" type="CSGSphere3D" parent="."]

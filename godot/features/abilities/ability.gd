@@ -8,6 +8,8 @@
 @export var cooldown := 0.0
 @export var skill_power := 1.0
 @export var multiplier := 1.0
+@export var distance := 15.0
+@export var aoe := 0.0
 
 @export var cost := 1
 @export var cost_type := Enums.Resource_Type.ETHER
