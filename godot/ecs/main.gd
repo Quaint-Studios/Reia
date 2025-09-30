@@ -6,6 +6,8 @@ extends Node
 func _ready() -> void:
 	_setup_world()
 
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
 	# Spawn player entity
 	var player_tscn := preload("res://features/player/Player.tscn").instantiate()
 	var e_player: Entity = player_tscn

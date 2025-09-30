@@ -101,3 +101,9 @@ func process(entity: Entity, delta: float) -> void:
 		var node3d_ref: C_Node3DRef = e_enemy_test.get_component(C_Node3DRef)
 		node3d_ref.node = enemy_test
 		enemy_test.global_transform.origin = character.global_transform.origin + Vector3(0, 0, -2).rotated(Vector3.UP, camera_target.yaw)
+
+	# Mouse capture/release logic
+	if Input.is_action_just_pressed("ui_focus_camera"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if Input.is_action_just_pressed("ui_release_camera"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
