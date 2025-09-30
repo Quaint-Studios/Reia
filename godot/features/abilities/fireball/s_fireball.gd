@@ -4,7 +4,7 @@ extends System
 const FIREBALL_RADIUS: float = 0.5
 var _fireball_sphere_shape: SphereShape3D
 
-func _init():
+func _init() -> void:
 	_fireball_sphere_shape = SphereShape3D.new()
 	_fireball_sphere_shape.radius = FIREBALL_RADIUS
 
