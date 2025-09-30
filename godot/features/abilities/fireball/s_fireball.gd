@@ -14,6 +14,7 @@ func query() -> QueryBuilder:
 func process(entity: Entity, delta: float) -> void:
 	var fireball: C_Fireball = entity.get_component(C_Fireball)
 	var node_ref: C_Node3DRef = entity.get_component(C_Node3DRef)
+	var caster_ref: C_CharacterBodyRef = fireball.caster
 	var target_ref: C_Node3DRef = fireball.target
 	var node: Node3D = node_ref.node
 	var target := target_ref.node if target_ref else null
@@ -37,6 +38,7 @@ func process(entity: Entity, delta: float) -> void:
 
 	# Fizzle out of max distance reached
 	if traveled_distance >= fireball.max_distance:
+		print("Fireball fizzled out after reaching max distance")
 		ECS.world.remove_entity(entity)
 		return
 
@@ -48,7 +50,7 @@ func process(entity: Entity, delta: float) -> void:
 	params.transform = node.global_transform
 	params.collide_with_areas = false
 	params.collide_with_bodies = true
-	params.exclude = [node]
+	params.exclude = [node, caster_ref.node]
 
 	var collisions := space_state.intersect_shape(params, 1)
 	if collisions.size() > 0:
@@ -60,5 +62,6 @@ func process(entity: Entity, delta: float) -> void:
 	var target_distance := current_pos.distance_to(target.global_transform.origin)
 	if target_distance <= FIREBALL_RADIUS:
 		# On hit, apply damage/effects here
+		print("Fireball hit the target")
 		ECS.world.remove_entity(entity)
 		return

@@ -3,6 +3,7 @@ extends Component
 
 
 var start_position: Vector3
+var caster: C_CharacterBodyRef
 var target: C_Node3DRef
 var direction: Vector3
 var max_distance: float = 20.0

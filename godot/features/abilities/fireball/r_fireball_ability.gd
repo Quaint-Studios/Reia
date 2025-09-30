@@ -24,13 +24,13 @@ func execute(caster: Entity, target: Entity) -> void:
 		push_error("FireballAbility requires both a caster and a target.")
 		return
 
-	var caster_node_ref: C_CharacterBodyRef = caster.get_component(C_CharacterBodyRef)
+	var caster_body_ref: C_CharacterBodyRef = caster.get_component(C_CharacterBodyRef)
 	var target_node_ref: C_Node3DRef = target.get_component(C_Node3DRef)
-	if caster_node_ref == null or target_node_ref == null:
+	if caster_body_ref == null or target_node_ref == null:
 		push_error("FireballAbility: Missing C_Node3DRef component on caster or target.")
 		return
 
-	var caster_node: Node3D = caster_node_ref.node
+	var caster_node: Node3D = caster_body_ref.node
 	var target_node: Node3D = target_node_ref.node
 	if caster_node == null or target_node == null:
 		push_error("FireballAbility: Invalid Node3D reference on caster or target.")
@@ -57,7 +57,8 @@ func execute(caster: Entity, target: Entity) -> void:
 		return
 
 	c_fireball.start_position = caster_node.global_transform.origin
+	c_fireball.caster = caster_body_ref
 	c_fireball.target = target_node_ref
 	c_fireball.direction = (target_node.global_position - c_fireball.start_position).normalized()
 
-	node3d_ref.node = fireball_tscn
+	fireball.global_transform.origin = c_fireball.start_position
