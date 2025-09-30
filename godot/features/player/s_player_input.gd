@@ -3,7 +3,7 @@ extends System
 
 const MOVE_SPEED: float = 6.0
 const JUMP_SPEED: float = 4.0
-const ROTATE_SPEED: float = 12.0
+const ROTATE_SPEED: float = 16.0
 const LATERAL_BLEND: float = 0.3 # 0.0 = no control, 1.0 = full control
 
 var GRAVITY: float = ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -81,7 +81,7 @@ func process(entity: Entity, delta: float) -> void:
 		blended_dir.y = vertical_velocity
 		velocity_comp.velocity = blended_dir
 	else:
-		var final_velocity := horizontal_input * MOVE_SPEED
+		var final_velocity := move_dir * MOVE_SPEED
 		final_velocity.y = vertical_velocity
 		velocity_comp.velocity = final_velocity
 
