@@ -22,9 +22,9 @@ func process(entity: Entity, _delta: float) -> void:
 					var pitch: float = camera_target.pitch
 
 					var offset: Vector3 = Vector3(
-						distance * cos(pitch) * sin(yaw),
-						distance * sin(pitch),
-						distance * cos(pitch) * cos(yaw)
+						distance * cos(-pitch) * sin(yaw),
+						distance * sin(-pitch),
+						distance * cos(-pitch) * cos(yaw)
 					)
 
 					var target_pos: Vector3 = look_at_pos + offset

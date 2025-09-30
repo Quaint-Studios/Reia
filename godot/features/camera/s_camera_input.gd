@@ -1,7 +1,7 @@
 class_name CameraInputSystem
 extends System
 
-const SENSITIVITY: float = 0.012
+const SENSITIVITY: float = 0.005
 
 func query() -> QueryBuilder:
 	return q.with_all([C_CameraTarget])
