@@ -1,8 +1,9 @@
 class_name PlayerAbilitySystem
 extends System
 
-static var ability_cache: Dictionary = {}
+const COMBO_RESET_TIME: float = 0.8
 
+static var ability_cache: Dictionary = {}
 static var fireballRes := preload("res://features/abilities/fireball/r_fireball_ability.gd")
 
 func query() -> QueryBuilder:
@@ -14,10 +15,14 @@ func process(entity: Entity, delta: float) -> void:
 	var camera_target: C_CameraTarget = (entity.get_component(C_CameraTargetRef) as C_CameraTargetRef).camera_target
 	var character: CharacterBody3D = body_ref.node
 
-	# Update cooldowns
+
+	# Update cooldowns and combo timers
 	for i in range(ability_state.cooldowns.size()):
 		if ability_state.cooldowns[i] > 0.0:
 			ability_state.cooldowns[i] = max(0.0, ability_state.cooldowns[i] - delta)
+		# Reset combo if too much time has passed since last cast
+		if ability_state.last_cast_times[i] > 0.0 and (Time.get_ticks_msec() / 1000.0 - ability_state.last_cast_times[i]) > COMBO_RESET_TIME:
+			ability_state.attack_combos[i] = 0
 
 	# Handle queued ability
 	if ability_state.queued_ability != -1:
@@ -26,7 +31,7 @@ func process(entity: Entity, delta: float) -> void:
 			if ability_state.cooldowns[ability_index] <= 0.0:
 				var ability := fireballRes.new()
 				if ability != null:
-					print("PlayerAbilitySystem: Executing ability index %d" % ability_index)
+					print("PlayerAbilitySystem: Executing ability index %d, combo stage %d" % [ability_index, ability_state.attack_combos[ability_index]])
 
 					# Raycast for target (same logic as before, now in physics tick)
 					var ray_origin := character.global_transform.origin + Vector3.UP * 1.0
@@ -51,9 +56,17 @@ func process(entity: Entity, delta: float) -> void:
 							if result.has("collider") && result.collider is Entity:
 								var target_entity: Entity = result.collider
 								print("Ability target entity found: %s" % target_entity)
+								# Pass combo stage to ability execution if needed
 								ability.execute(entity, target_entity)
 							else:
 								print("Ability target entity not found in raycast result.")
+
+					# Update last cast time and increment combo stage
+					ability_state.last_cast_times[ability_index] = Time.get_ticks_msec() / 1000.0
+					ability_state.attack_combos[ability_index] += 1
+					# Reset combo if max stage reached (example: 3-stage combo)
+					if ability_state.attack_combos[ability_index] >= 3:
+						ability_state.attack_combos[ability_index] = 0
 
 					ability_state.cooldowns[ability_index] = (ability as Ability).cooldown
 				else:
