@@ -15,11 +15,11 @@ This phase focuses on getting some of the core functionalities implemented for R
 - [ ] Abilities
   - [x] Core System
   - [ ] Mobility
-    - [ ] Dash
+    - [x] Dash
     - [ ] Double Jump
     - [ ] Teleport
   - [ ] Pyro
-    - [ ] Fireball
+    - [x] Fireball
     - [ ] Explosion
   - [ ] Electro
     - [ ] Lightning Strike
@@ -108,6 +108,16 @@ This phase focuses on getting some of the core functionalities implemented for R
 This phase will be about polishing and introducing complex features.
 
 - [ ] Programming
+  - [ ] Wiki
+    - [ ] ...
+  - [ ] Modding Support
+    - [ ] Documentation
+    - [ ] Implementation
+    - [ ] Hosting
+      - [x] Cloudflare
+      - [ ] Steamworks
+      - [ ] Others
+      - [ ] Vercel (web browsing)
   - [ ] Spirit
     - [ ] Locating
     - [ ] Unlocking
