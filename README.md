@@ -13,7 +13,7 @@ Explore endless worlds and embark on a magical adventure of a lifetime! Reia is 
 
 > **Discord:** Our Discord server is now finally more open! [Join our Discord now](https://discord.playreia.com). ❤️
 
-> **Sustenet:** Visit [https://github.com/Quaint-Studios/Sustenet](https://github.com/Quaint-Studios/Sustenet) to see the netcode designed specifically for this project and made in Rust & Zig.
+> **Sustenet:** Visit [https://github.com/Quaint-Studios/Sustenet](https://github.com/Quaint-Studios/Sustenet) to see the netcode designed specifically for this project and made in Rust.
 
 > **Jobs:** Check out the list of [jobs](https://github.com/Quaint-Studios/Reia/blob/master/docs/JOBS.md) for this project. You can also visit the [jobs page](https://www.playreia.com/jobs) on our website to learn more information.
 
@@ -200,7 +200,7 @@ You play as an occupant of Reia's realm. One of your main tasks is to find spiri
 
 3. How do I install mods in Reia?
 
-    You can do so via our [Mod.io](https://mod.io/g/playreia?preview=e600acffc6322c61ed44b6464323366e) page or in-game since we integrate Mod.io in the Godot Engine too! It's still under construction so you'll have to login to access it.
+    We wanted to use mod.io but we're going to do a custom modding solution. We'll eventually create a page or in-game tool! It's still under construction.
 
 4. Are there any restrictions on the type of mods I can use?
 
