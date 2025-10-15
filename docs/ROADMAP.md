@@ -4,6 +4,7 @@ Below you'll find a list of things needed to be accomplished before we can hit t
 ## Pre-Alpha
 This phase focuses on getting some of the core functionalities implemented for Reia.
 
+- [ ] Solid GECS foundation
 - [x] Animation
 - [ ] Combat Systems
   - [ ] Health System
