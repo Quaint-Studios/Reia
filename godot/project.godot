@@ -34,7 +34,7 @@ buses/default_bus_layout="uid://82gy4qqnnk7o"
 [autoload]
 
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
-ECS="*res://addons/gecs/ecs.gd"
+ECS="*res://addons/gecs/ecs/ecs.gd"
 
 [debug]
 
