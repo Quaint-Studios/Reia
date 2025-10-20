@@ -34,11 +34,11 @@ jobs:
             target: x86_64-apple-darwin
             artifact: reia_gdext-mac
             output: dylib
-          - platform: web
-            runner: ubuntu-24.04
-            target: wasm32-unknown-unknown
-            artifact: reia_gdext-web
-            output: wasm
+          # - platform: web
+          #   runner: ubuntu-24.04
+          #   target: wasm32-unknown-unknown
+          #   artifact: reia_gdext-web
+          #   output: wasm
     steps:
       - uses: actions/checkout@v4
         with:
@@ -112,13 +112,13 @@ jobs:
             godot_export: mac
             output_dir: build/mac
             export_name: mac
-          - export: web
-            runner: ubuntu-24.04
-            artifact: reia_gdext-web
-            ext: html
-            godot_export: web
-            output_dir: build/web
-            export_name: web
+          # - export: web
+          #   runner: ubuntu-24.04
+          #   artifact: reia_gdext-web
+          #   ext: html
+          #   godot_export: web
+          #   output_dir: build/web
+          #   export_name: web
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -185,7 +185,7 @@ jobs:
             build/linux
             build/server
             build/mac
-            build/web
+          # build/web
           tag_name: ${{ github.ref_name }}
           body: |
             # Reia - `${{ github.ref_name }}`
