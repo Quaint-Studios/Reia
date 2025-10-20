@@ -1,4 +1,4 @@
-name: Godot Builder (Matrix Simplified)
+name: Godot Builder
 
 on:
   workflow_dispatch:
