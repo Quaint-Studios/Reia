@@ -41,6 +41,8 @@ jobs:
             output: wasm
     steps:
       - uses: actions/checkout@v4
+      - name: Initialize and update submodules
+        run: git submodule update --init --recursive
       - name: Cache Rust dependencies
         uses: actions/cache@v4
         with:
@@ -120,6 +122,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Initialize and update submodules
+        run: git submodule update --init --recursive
       - name: Cache Godot export templates
         uses: actions/cache@v4
         with:
