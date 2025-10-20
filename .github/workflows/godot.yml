@@ -7,285 +7,162 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+([a-zA-Z]*\-*)*'
 
 env:
-  GODOT_VERSION: 4.4
+  GODOT_VERSION: 4.5
   EXPORT_NAME: Reia
   PROJECT_PATH: godot
   WINEPREFIX: /tmp/.wine
 
 jobs:
-  build-rust-windows:
-    name: Build Rust GDExtension (Windows)
-    runs-on: windows-latest
+  build-gdextension:
+    name: Build Rust GDExtension (${{ matrix.platform }})
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        include:
+          - platform: windows
+            runner: windows-latest
+            target: x86_64-pc-windows-msvc
+            artifact: reia_gdext-windows
+            output: dll
+          - platform: linux
+            runner: ubuntu-24.04
+            target: x86_64-unknown-linux-gnu
+            artifact: reia_gdext-linux
+            output: so
+          - platform: mac
+            runner: macos-15
+            target: x86_64-apple-darwin
+            artifact: reia_gdext-mac
+            output: dylib
+          - platform: web
+            runner: ubuntu-24.04
+            target: wasm32-unknown-unknown
+            artifact: reia_gdext-web
+            output: wasm
     steps:
       - uses: actions/checkout@v4
+      - name: Cache Rust dependencies
+        uses: actions/cache@v4
         with:
-          lfs: true
-          submodules: recursive
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            rust/target
+          key: ${{ runner.os }}-cargo-${{ matrix.target }}-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-cargo-${{ matrix.target }}-
+            ${{ runner.os }}-cargo-
+      - name: Ensure custom LFS config
+        run: |
+          git lfs install --local
+          git lfs fetch
+          git lfs checkout
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
-          target: x86_64-pc-windows-msvc
+          target: ${{ matrix.target }}
           override: true
-      - name: Build GDExtension (dll)
+      - name: Build GDExtension
         run: |
           cd rust
-          cargo build --release --target x86_64-pc-windows-msvc
+          cargo build --release --target ${{ matrix.target }}
       - name: Upload GDExtension artifact
         uses: actions/upload-artifact@v4
         with:
-          name: reia_gdext-windows
-          path: rust/target/x86_64-pc-windows-msvc/release/reia_gdext.dll
+          name: ${{ matrix.artifact }}
+          path: rust/target/${{ matrix.target }}/release/reia_gdext.${{ matrix.output }}
 
-  export-windows:
-    needs: build-rust-windows
-    name: Windows Export
-    runs-on: ubuntu-22.04
+  export:
+    needs: build-gdextension
+    name: Export (${{ matrix.export }})
+    runs-on: ${{ matrix.runner }}
     container:
-      image: barichello/godot-ci:4.4
+      image: barichello/godot-ci:4.5.1
+    strategy:
+      matrix:
+        include:
+          - export: windows
+            runner: ubuntu-24.04
+            artifact: reia_gdext-windows
+            ext: exe
+            godot_export: win
+            output_dir: build/windows
+            export_name: windows
+          - export: linux
+            runner: ubuntu-24.04
+            artifact: reia_gdext-linux
+            ext: x86_64
+            godot_export: linux
+            output_dir: build/linux
+            export_name: linux
+          - export: server
+            runner: ubuntu-24.04
+            artifact: reia_gdext-linux
+            ext: x86_64
+            godot_export: server
+            output_dir: build/server
+            export_name: server
+          - export: mac
+            runner: ubuntu-24.04
+            artifact: reia_gdext-mac
+            ext: zip
+            godot_export: mac
+            output_dir: build/mac
+            export_name: mac
+          - export: web
+            runner: ubuntu-24.04
+            artifact: reia_gdext-web
+            ext: html
+            godot_export: web
+            output_dir: build/web
+            export_name: web
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Cache Godot export templates
+        uses: actions/cache@v4
         with:
-          lfs: true
+          path: ~/.local/share/godot/export_templates/
+          key: ${{ runner.os }}-godot-templates-${{ env.GODOT_VERSION }}
+          restore-keys: |
+            ${{ runner.os }}-godot-templates-
+      - name: Ensure custom LFS config
+        run: |
+          git lfs install --local
+          git lfs fetch
+          git lfs checkout
       - name: Download Rust GDExtension
         uses: actions/download-artifact@v4
         with:
-          name: reia_gdext-windows
+          name: ${{ matrix.artifact }}
           path: rust/target/release/
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
           mkdir -v -p ~/.config/
-          mv /root/.config/godot ~/.config/godot
-          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-      - name: Windows Build
+          mv /root/.config/godot ~/.config/godot || true
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable || true
+      - name: Export Build
         run: |
-          mkdir -v -p build/windows
+          mkdir -v -p ${{ matrix.output_dir }}
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
-          godot --headless --verbose --export-release "win" "$EXPORT_DIR/windows/$EXPORT_NAME.exe"
+          godot --headless --verbose --export-release "${{ matrix.godot_export }}" "$EXPORT_DIR/${{ matrix.export_name }}/${EXPORT_NAME}.${{ matrix.ext }}"
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: windows
-          path: build/windows
+          name: ${{ matrix.export_name }}
+          path: ${{ matrix.output_dir }}
 
-  build-rust-linux:
-    name: Build Rust GDExtension (Linux)
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        lfs: true
-        submodules: recursive
-    - name: Install Rust
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
-        target: x86_64-unknown-linux-gnu
-        override: true
-    - name: Build GDExtension (so)
-      run: |
-        cd rust
-        cargo build --release --target x86_64-unknown-linux-gnu
-    - name: Upload GDExtension artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: reia_gdext-linux
-        path: rust/target/x86_64-unknown-linux-gnu/release/reia_gdext.so
-
-  export-linux:
-      needs: build-rust-linux
-      name: Linux Export
-      runs-on: ubuntu-20.04
-      container:
-        image: barichello/godot-ci:4.4
-      steps:
-        - name: Checkout
-          uses: actions/checkout@v4
-          with:
-            lfs: true
-        - name: Download Rust GDExtension
-          uses: actions/download-artifact@v4
-          with:
-            name: reia_gdext-linux
-            path: rust/target/release/
-        - name: Setup
-          run: |
-            mkdir -v -p ~/.local/share/godot/export_templates/
-            mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-        - name: Linux Build
-          run: |
-            mkdir -v -p build/linux
-            EXPORT_DIR="$(readlink -f build)"
-            cd $PROJECT_PATH
-            godot --headless --verbose --export-release "linux" "$EXPORT_DIR/linux/$EXPORT_NAME.x86_64"
-        - name: Upload Artifact
-          uses: actions/upload-artifact@v4
-          with:
-            name: linux
-            path: build/linux
-
-  export-server:
-    needs: build-rust-linux
-    name: Server Export
-    runs-on: ubuntu-20.04
-    container:
-      image: barichello/godot-ci:4.4
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          lfs: true
-      - name: Download Rust GDExtension
-        uses: actions/download-artifact@v4
-        with:
-          name: reia_gdext-linux
-          path: rust/target/release/
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/export_templates/
-          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-      - name: Linux Build
-        run: |
-          mkdir -v -p build/server
-          EXPORT_DIR="$(readlink -f build)"
-          cd $PROJECT_PATH
-          godot --headless --verbose --export-release "server" "$EXPORT_DIR/server/$EXPORT_NAME.x86_64"
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: server
-          path: build/server
-
-  build-rust-mac:
-    name: Build Rust GDExtension (Mac)
-    runs-on: macos-13
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          lfs: true
-          submodules: recursive
-      - name: Install Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          target: x86_64-apple-darwin
-          override: true
-      - name: Build GDExtension (dylib)
-        run: |
-          cd rust
-          cargo build --release --target x86_64-apple-darwin
-      - name: Upload GDExtension artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: reia_gdext-mac
-          path: rust/target/x86_64-apple-darwin/release/reia_gdext.dylib
-
-  export-mac:
-    needs: build-rust-mac
-    name: Mac Export
-    runs-on: ubuntu-20.04
-    container:
-      image: barichello/godot-ci:4.4
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          lfs: true
-      - name: Download Rust GDExtension
-        uses: actions/download-artifact@v4
-        with:
-          name: reia_gdext-mac
-          path: rust/target/release/
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/export_templates/
-          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-      - name: Mac Build
-        run: |
-          mkdir -v -p build/mac
-          EXPORT_DIR="$(readlink -f build)"
-          cd $PROJECT_PATH
-          godot --headless --verbose --export-release "mac" "$EXPORT_DIR/mac/$EXPORT_NAME.zip"
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: mac
-          path: build/mac
-
-  build-rust-web:
-    name: Build Rust GDExtension (Web)
-    runs-on: ubuntu-20.04
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          lfs: true
-          submodules: recursive
-      - name: Install Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          target: wasm32-unknown-unknown
-          override: true
-      - name: Build GDExtension (wasm)
-        run: |
-          cd rust
-          cargo build --release --target wasm32-unknown-unknown
-      - name: Upload GDExtension artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: reia_gdext-web
-          path: rust/target/wasm32-unknown-unknown/release/reia_gdext.wasm
-
-  export-web:
-    needs: build-rust-web
-    name: Web Export
-    runs-on: ubuntu-20.04
-    container:
-      image: barichello/godot-ci:4.4
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          lfs: true
-      - name: Download Rust GDExtension
-        uses: actions/download-artifact@v4
-        with:
-          name: reia_gdext-web
-          path: rust/target/release/
-      - name: Setup
-        run: |
-          mkdir -v -p ~/.local/share/godot/export_templates/
-          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
-      - name: Web Build
-        run: |
-          mkdir -v -p build/web
-          EXPORT_DIR="$(readlink -f build)"
-          cd $PROJECT_PATH
-          godot --headless --verbose --export-release "web" "$EXPORT_DIR/web/index.html"
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: web
-          path: build/web
   release-notes:
     name: Release Notes
     runs-on: ubuntu-latest
-    needs: [export-windows, export-linux, export-server, export-mac, export-web]
-    if: ${{ always() && !cancelled()
-      && needs.export-windows.result == 'success'
-      && needs.export-linux.result == 'success'
-      && needs.export-server.result == 'success'
-      && needs.export-mac.result == 'success'
-      && needs.export-web.result == 'success'
-      && startsWith(github.ref, 'refs/tags/') }}
+    needs: export
+    if: ${{ always() && !cancelled() && needs.export.result == 'success' && startsWith(github.ref, 'refs/tags/') }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          lfs: true
       - name: Format Tag Name
         id: replace_string
         uses: frabert/replace-string-action@v2
@@ -295,7 +172,7 @@ jobs:
           replace-with: "_"
       - name: Create Release And Upload Asset
         uses: softprops/action-gh-release@v2
-        if: ${{startsWith(github.ref, 'refs/tags/') }}
+        if: ${{ startsWith(github.ref, 'refs/tags/') }}
         with:
           files: |
             build/windows
@@ -303,7 +180,6 @@ jobs:
             build/server
             build/mac
             build/web
-          # build/Reia_${{ steps.replace_string.outputs.replaced }}
           tag_name: ${{ github.ref_name }}
           body: |
             # Reia - `${{ github.ref_name }}`
