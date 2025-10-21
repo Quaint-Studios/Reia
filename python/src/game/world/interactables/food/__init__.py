@@ -1,0 +1,2 @@
+"""Food interactable - Placeholder"""
+pass

@@ -1,0 +1,2 @@
+"""Creature definitions - Placeholder"""
+pass

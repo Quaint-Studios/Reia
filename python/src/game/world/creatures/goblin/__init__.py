@@ -1,0 +1,2 @@
+"""Goblin creature - Placeholder"""
+pass

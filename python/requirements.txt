@@ -1,0 +1,21 @@
+# Reia Python 3.14 Dependencies
+# Converted from Rust Cargo.toml
+
+# Godot Python bindings
+# godot-python>=0.9.0  # Uncomment when using actual Godot integration
+
+# Database
+# libsql-client>=0.1.0  # Python client for Turso/LibSQL
+
+# Networking
+# asyncio is built-in to Python 3.14
+
+# Development dependencies
+pytest>=8.0.0
+pytest-asyncio>=0.23.0
+mypy>=1.8.0
+black>=24.0.0
+ruff>=0.1.0
+
+# Optional: ECS library if needed
+# esper>=3.0.0  # Simple Entity Component System

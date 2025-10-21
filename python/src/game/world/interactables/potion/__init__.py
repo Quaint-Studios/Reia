@@ -1,0 +1,2 @@
+"""Potion interactable - Placeholder"""
+pass

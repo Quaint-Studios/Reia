@@ -1,0 +1,2 @@
+"""NPC definitions - Placeholder"""
+pass

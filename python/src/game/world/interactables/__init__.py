@@ -1,0 +1,2 @@
+"""Interactable objects - Placeholder"""
+pass
