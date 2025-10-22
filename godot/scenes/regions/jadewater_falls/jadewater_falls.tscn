@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b5wk75hsjto8v"]
 
 [ext_resource type="Script" uid="uid://cejo0i5slihx3" path="res://ecs/main.gd" id="1_p72kj"]
-[ext_resource type="Script" uid="uid://cdu5tlyk72uu4" path="res://addons/gecs/world.gd" id="2_58eoa"]
+[ext_resource type="Script" uid="uid://cdu5tlyk72uu4" path="res://addons/gecs/ecs/world.gd" id="2_58eoa"]
 
 [node name="JadewaterFalls" type="Node"]
 script = ExtResource("1_p72kj")
