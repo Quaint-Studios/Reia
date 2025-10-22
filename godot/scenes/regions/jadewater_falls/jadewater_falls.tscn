@@ -29,3 +29,19 @@ use_collision = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Level/CSGCombiner3D"]
 size = Vector3(20.8036, 1, 23.637)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Level/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -11.3185005)
+size = Vector3(20.8036, 4, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Level/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 11.6814995)
+size = Vector3(20.8036, 4, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Level/CSGCombiner3D"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 10, 1.5, 0.27969933)
+size = Vector3(22, 4, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Level/CSGCombiner3D"]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10, 1.5, 0.27969933)
+size = Vector3(22, 4, 1)
