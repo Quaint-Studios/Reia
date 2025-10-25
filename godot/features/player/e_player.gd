@@ -1,12 +1,28 @@
 class_name Player
 extends Entity
 
+func define_components() -> Array:
+	return [
+		C_AimState.new(),
+		C_CameraState.new(),
+
+		C_Transform.new(),
+		C_Velocity.new(),
+
+		# C_LocalPlayer.new(),
+		# C_Transform.new(),
+		# C_Velocity.new(),
+		# C_CharacterBodyRef.new(),
+		# C_CameraTarget.new(),
+
+		# C_DashIntent.new(),
+		# C_JumpState.new(),
+		# C_PlayerAbilityState.new(),
+
+		# C_Health.new(100.0),
+		# C_Ether.new(100.0),
+		# C_Stamina.new(100.0)
+	]
+
 func on_ready() -> void:
-	# Position player, you can't get the component before it's added to the world
-	var transform_comp: C_Transform = self.get_component(C_Transform)
-
-	# Manipulate the transform component directly
-	transform_comp.transform.origin = Vector3(-5, 1, -5)
-
-	# Sync the component back to the node if it's not already being synced by a system
-	ECSUtils.sync_component_to_transform(self)
+	ECSUtils.sync_transform(self)

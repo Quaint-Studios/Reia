@@ -1,86 +1,122 @@
-extends Node
+extends Node3D
 
 @onready var world: World = $World
 
-# Called when the node enters the scene tree for the first time.
+const GROUP_GAMEPLAY: String = "gameplay"
+const GROUP_INPUT: String = "input"
+const GROUP_PHYSICS: String = "physics"
+
 func _ready() -> void:
-	_setup_world()
+	ECS.world = world
 
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
-	# Spawn player entity
-	var player_tscn := preload("res://features/player/Player.tscn").instantiate()
-	var e_player: Entity = player_tscn
-	world.add_entity(e_player)
+	#region Spawn
+	var player := preload("res://features/player/e_player.tscn").instantiate() as Player
+	world.add_entity(player)
+	player.add_component(C_LocalPlayer.new())
+	ECSUtils.update_transform(player, Vector3(0, 1, 0))
 
-	var player: CharacterBody3D = player_tscn
-	var body_ref: C_CharacterBodyRef = e_player.get_component(C_CharacterBodyRef)
-	body_ref.node = player
+	var camera := preload("res://features/camera/player_camera.tscn").instantiate() as Camera3D
+	add_child(camera)
 
-	# Setup camera entity
-	var camera_tscn := preload("res://features/camera/PlayerCamera.tscn").instantiate()
-	var e_camera: Entity = camera_tscn
-	world.add_entity(e_camera)
+	var mouse_mode := MouseMode.new()
+	mouse_mode.name = "MouseMode"
+	camera.add_child(mouse_mode)
 
-	var camera: Camera3D = camera_tscn
-	var camera_ref: C_CameraRef = e_camera.get_component(C_CameraRef)
-	camera_ref.node = camera
-	var camera_target: C_CameraTarget = e_camera.get_component(C_CameraTarget)
-	camera_target.target_entity = e_player
+	var npc := preload("res://features/npc/e_npc.tscn").instantiate() as Npc
+	world.add_entity(npc)
+	ECSUtils.update_transform(npc, Vector3(5, 1, 5))
+	#endregion
 
-	var camera_target_ref: C_CameraTargetRef = e_player.get_component(C_CameraTargetRef)
-	if camera_target_ref != null and camera_target != null:
-		camera_target_ref.camera_target = camera_target
-	else:
-		push_error("Failed to initialize CameraTargetRef: missing component(s)")
-
-func _setup_world() -> void:
-	ECS.world = world
-
-	# Create system groups for organization and scheduling
-	const GROUP_GAMEPLAY: String = "gameplay"
-	const GROUP_PHYSICS: String = "physics"
-
-	# Instantiate input and movement systems
-	var input_system := PlayerInputSystem.new()
-	input_system.name = "PlayerInputSystem"
-	var movement_system := PlayerMovementSystem.new()
-	movement_system.name = "PlayerMovementSystem"
-	var dash_system := DashAbilitySystem.new()
-	dash_system.name = "DashAbilitySystem"
-	var camera_system := CameraSystem.new()
-	camera_system.name = "CameraSystem"
+	#region Systems
 	var camera_input_system := CameraInputSystem.new()
 	camera_input_system.name = "CameraInputSystem"
-	var player_ability_system := PlayerAbilitySystem.new()
-	player_ability_system.name = "PlayerAbilitySystem"
-	var fireball_system := FireballSystem.new()
-	fireball_system.name = "FireballSystem"
-
-
-	# Assign systems to groups for scheduling
-	input_system.group = GROUP_GAMEPLAY
-	movement_system.group = GROUP_PHYSICS
-	dash_system.group = GROUP_GAMEPLAY
-	camera_system.group = GROUP_GAMEPLAY
-	camera_input_system.group = GROUP_GAMEPLAY
-	player_ability_system.group = GROUP_PHYSICS
-	fireball_system.group = GROUP_PHYSICS
-
-	# Register systems with the world
-	world.add_system(input_system)
-	world.add_system(movement_system)
-	world.add_system(dash_system)
-	world.add_system(camera_system)
+	camera_input_system.group = GROUP_INPUT
 	world.add_system(camera_input_system)
-	world.add_system(player_ability_system)
-	world.add_system(fireball_system)
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+	var camera_follow_system := CameraFollowSystem.new()
+	camera_follow_system.name = "CameraFollowSystem"
+	camera_follow_system.camera_node_path = camera.get_path()
+	camera_follow_system.group = GROUP_GAMEPLAY
+	world.add_system(camera_follow_system)
+
+	var aim_animation_system := AimAnimationSystem.new()
+	aim_animation_system.name = "AimAnimationSystem"
+	aim_animation_system.group = GROUP_GAMEPLAY
+	world.add_system(aim_animation_system)
+
+
+	#endregion
+
+
 func _process(delta: float) -> void:
-	world.process(delta, 'gameplay')
+	world.process(delta, GROUP_INPUT)
+	world.process(delta, GROUP_GAMEPLAY)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	world.process(delta, 'physics')
+	world.process(delta, GROUP_PHYSICS)
+
+# # Called when the node enters the scene tree for the first time.
+# func _ready() -> void:
+# 	_setup_world()
+
+# 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+# 	# Spawn player entity
+# 	var player_tscn := preload("res://features/player/Player.tscn").instantiate()
+# 	var e_player: Entity = player_tscn
+# 	world.add_entity(e_player)
+
+# 	var player: CharacterBody3D = player_tscn
+# 	var body_ref: C_CharacterBodyRef = e_player.get_component(C_CharacterBodyRef)
+# 	body_ref.node = player
+
+# 	# Setup camera entity
+# 	var camera_tscn: PlayerCamera = preload("res://features/camera/player_camera.tscn").instantiate()
+# 	camera_tscn.name = "PlayerCamera"
+# 	camera_tscn.set_target(player)
+# 	add_child(camera_tscn)
+
+# func _setup_world() -> void:
+# 	ECS.world = world
+
+# 	# Create system groups for organization and scheduling
+# 	const GROUP_GAMEPLAY: String = "gameplay"
+# 	const GROUP_PHYSICS: String = "physics"
+
+# 	# Instantiate input and movement systems
+# 	var input_system := PlayerInputSystem.new()
+# 	input_system.name = "PlayerInputSystem"
+# 	var movement_system := PlayerMovementSystem.new()
+# 	movement_system.name = "PlayerMovementSystem"
+# 	var dash_system := DashAbilitySystem.new()
+# 	dash_system.name = "DashAbilitySystem"
+# 	var player_ability_system := PlayerAbilitySystem.new()
+# 	player_ability_system.name = "PlayerAbilitySystem"
+# 	var fireball_system := FireballSystem.new()
+# 	fireball_system.name = "FireballSystem"
+
+
+# 	# Assign systems to groups for scheduling
+# 	input_system.group = GROUP_GAMEPLAY
+# 	movement_system.group = GROUP_PHYSICS
+# 	dash_system.group = GROUP_GAMEPLAY
+# 	player_ability_system.group = GROUP_PHYSICS
+# 	fireball_system.group = GROUP_PHYSICS
+
+# 	# Register systems with the world
+# 	world.add_system(input_system)
+# 	world.add_system(movement_system)
+# 	world.add_system(dash_system)
+# 	world.add_system(player_ability_system)
+# 	world.add_system(fireball_system)
+
+# # Called every frame. 'delta' is the elapsed time since the previous frame.
+# func _process(delta: float) -> void:
+# 	world.process(delta, 'gameplay')
+
+
+# # Called every frame. 'delta' is the elapsed time since the previous frame.
+# func _physics_process(delta: float) -> void:
+# 	world.process(delta, 'physics')

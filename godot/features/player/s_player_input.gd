@@ -11,14 +11,22 @@ var GRAVITY: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 var preloaded_fireball_ability := preload("res://features/abilities/fireball/r_fireball_ability.gd")
 
 func query() -> QueryBuilder:
-	return q.with_all([C_PlayerControlled, C_Velocity, C_CharacterBodyRef, C_DashIntent, C_CameraTargetRef, C_JumpState, C_PlayerAbilityState])
+	return q.with_all([
+		C_LocalPlayer,
+		C_Velocity,
+		C_CharacterBodyRef,
+		C_DashIntent,
+		C_CameraTarget,
+		C_JumpState,
+		C_PlayerAbilityState
+	])
 
 func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 	for entity in entities:
 		var velocity_comp: C_Velocity = entity.get_component(C_Velocity)
 		var body_ref: C_CharacterBodyRef = entity.get_component(C_CharacterBodyRef)
 		var dash_intent: C_DashIntent = entity.get_component(C_DashIntent)
-		var camera_target: C_CameraTarget = (entity.get_component(C_CameraTargetRef) as C_CameraTargetRef).camera_target
+		var camera_target: C_CameraTarget = entity.get_component(C_CameraTarget)
 		var jump_state: C_JumpState = entity.get_component(C_JumpState)
 		var character: CharacterBody3D = body_ref.node
 
@@ -30,6 +38,7 @@ func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 		var horizontal_input := input_vector.normalized() if input_vector.length() > 0.01 else Vector3.ZERO
 		var move_dir := horizontal_input.rotated(Vector3.UP, camera_target.yaw)
 
+		#region Jumping
 		# Jump buffering
 		if Input.is_action_just_pressed("jump"):
 			jump_state.jump_buffer_timer = C_JumpState.JUMP_BUFFER_TIME
@@ -59,6 +68,7 @@ func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 		# Clear jump buffer if jump was triggered
 		jump_state.jump_buffer_timer *= 1 - jump_trigger
 		jump_state.coyote_timer *= 1 - jump_trigger
+		#endregion
 
 		# Rotate player to face movement direction
 		if move_dir.length() > 0.01:

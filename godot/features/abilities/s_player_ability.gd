@@ -7,7 +7,7 @@ static var ability_cache: Dictionary = {}
 static var fireballRes := preload("res://features/abilities/fireball/r_fireball_ability.gd")
 
 func query() -> QueryBuilder:
-	return q.with_all([C_PlayerAbilityState, C_PlayerControlled, C_CharacterBodyRef, C_CameraTargetRef])
+	return q.with_all([C_PlayerAbilityState, C_LocalPlayer, C_CharacterBodyRef, C_CameraTarget])
 
 func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 	for entity in entities:
