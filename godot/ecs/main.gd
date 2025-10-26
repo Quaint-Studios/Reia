@@ -17,42 +17,48 @@ func _ready() -> void:
 	player.add_component(C_LocalPlayer.new())
 	ECSUtils.update_transform(player, Vector3(0, 1, 0))
 
-	var camera := preload("res://features/camera/player_camera.tscn").instantiate() as Camera3D
-	add_child(camera)
-
-	var mouse_mode := MouseMode.new()
-	mouse_mode.name = "MouseMode"
-	camera.add_child(mouse_mode)
+	var camera := preload("res://features/camera/e_camera.tscn").instantiate() as Camera
+	world.add_entity(camera)
+	(camera.find_child("CameraInput", false) as CameraInput).setup(camera, player)
 
 	var npc := preload("res://features/npc/e_npc.tscn").instantiate() as Npc
 	world.add_entity(npc)
 	ECSUtils.update_transform(npc, Vector3(5, 1, 5))
 	#endregion
 
-	#region Systems
+func _register_systems() -> void:
+	# INPUT
 	var camera_input_system := CameraInputSystem.new()
 	camera_input_system.name = "CameraInputSystem"
 	camera_input_system.group = GROUP_INPUT
 	world.add_system(camera_input_system)
 
-	var camera_follow_system := CameraFollowSystem.new()
-	camera_follow_system.name = "CameraFollowSystem"
-	camera_follow_system.camera_node_path = camera.get_path()
-	camera_follow_system.group = GROUP_GAMEPLAY
-	world.add_system(camera_follow_system)
+	# GAMEPLAY
+	var camera_mode_blend_system := CameraModeBlendSystem.new()
+	camera_mode_blend_system.name = "CameraModeBlendSystem"
+	camera_mode_blend_system.group = GROUP_GAMEPLAY
+	world.add_system(camera_mode_blend_system)
+
+	var camera_kinematics_system := CameraKinematicsSystem.new()
+	camera_kinematics_system.name = "CameraKinematicsSystem"
+	camera_kinematics_system.group = GROUP_GAMEPLAY
+	world.add_system(camera_kinematics_system)
+
+	var camera_rotation_system := CameraRotationSystem.new()
+	camera_rotation_system.name = "CameraRotationSystem"
+	camera_rotation_system.group = GROUP_GAMEPLAY
+	world.add_system(camera_rotation_system)
 
 	var aim_animation_system := AimAnimationSystem.new()
 	aim_animation_system.name = "AimAnimationSystem"
 	aim_animation_system.group = GROUP_GAMEPLAY
 	world.add_system(aim_animation_system)
-	#endregion
 
-	#region Observers
-	var transform_observer := TransformObserver.new()
-	transform_observer.name = "TransformObserver"
-	world.add_observer(transform_observer)
-	#region
-
+	# PHYSICS
+	var camera_collision_system := CameraCollisionSystem.new()
+	camera_collision_system.name = "CameraCollisionSystem"
+	camera_collision_system.group = GROUP_PHYSICS
+	world.add_system(camera_collision_system)
 
 func _process(delta: float) -> void:
 	world.process(delta, GROUP_INPUT)
