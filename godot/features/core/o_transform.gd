@@ -20,7 +20,6 @@ func on_component_changed(entity: Entity, _component: Resource, property: String
 			entity.global_position = new_value
 		_:
 			print("changed %s and %s" % [property, new_value])
-			pass
 
 func on_component_removed(_entity: Entity, _component: Resource) -> void:
 	pass
