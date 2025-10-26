@@ -7,7 +7,6 @@ var camera: Camera3D = null
 
 func _ready() -> void:
 	if camera != null:
-		push_warning("CameraFollowSystem: Camera already assigned, skipping resolution.")
 		return
 
 	if camera_node_path and has_node(camera_node_path):
@@ -41,6 +40,6 @@ func process(entities: Array[Entity], components: Array[Array], _delta: float) -
 		basis = basis.rotated(Vector3.UP, aim.yaw)
 		basis = basis.rotated(basis.x, aim.pitch)
 		var offset := basis * Vector3(0, 0, -cam.zoom)
-		var desired_position := focus + offset
+		var desired_position := Vector3(0, 2, 0) + offset
 		camera.global_transform.origin = desired_position
 		camera.look_at(focus, Vector3.UP)
