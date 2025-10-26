@@ -6,6 +6,3 @@ func define_components() -> Array:
 		C_AimState.new(),
 		C_Transform.new()
 	]
-
-func on_ready() -> void:
-	ECSUtils.sync_transform(self)

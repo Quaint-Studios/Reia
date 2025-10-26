@@ -23,6 +23,3 @@ func define_components() -> Array:
 		# C_Ether.new(100.0),
 		# C_Stamina.new(100.0)
 	]
-
-func on_ready() -> void:
-	ECSUtils.sync_transform(self)
