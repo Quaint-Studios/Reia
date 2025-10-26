@@ -45,9 +45,13 @@ func _ready() -> void:
 	aim_animation_system.name = "AimAnimationSystem"
 	aim_animation_system.group = GROUP_GAMEPLAY
 	world.add_system(aim_animation_system)
-
-
 	#endregion
+
+	#region Observers
+	var transform_observer := TransformObserver.new()
+	transform_observer.name = "TransformObserver"
+	world.add_observer(transform_observer)
+	#region
 
 
 func _process(delta: float) -> void:
