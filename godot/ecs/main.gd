@@ -9,6 +9,9 @@ const GROUP_PHYSICS: String = "physics"
 func _ready() -> void:
 	ECS.world = world
 
+	_register_systems()
+	_register_observers()
+
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 	#region Spawn
@@ -25,9 +28,6 @@ func _ready() -> void:
 	world.add_entity(npc)
 	ECSUtils.update_transform(npc, Vector3(5, 1, 5))
 	#endregion
-
-	_register_systems()
-	_register_observers()
 
 func _process(delta: float) -> void:
 	world.process(delta, GROUP_INPUT)
@@ -85,7 +85,6 @@ func _register_observers() -> void:
 	transform_observer.name = "TransformObserver"
 	world.add_observer(transform_observer)
 
-	# If you added the rig observer earlier
-	# var rig_observer := CameraRigObserver.new()
-	# rig_observer.name = "CameraRigObserver"
-	# world.add_observer(rig_observer)
+	var rig_observer := CameraRigObserver.new()
+	rig_observer.name = "CameraRigObserver"
+	world.add_observer(rig_observer)
