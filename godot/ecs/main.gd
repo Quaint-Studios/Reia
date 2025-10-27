@@ -26,39 +26,8 @@ func _ready() -> void:
 	ECSUtils.update_transform(npc, Vector3(5, 1, 5))
 	#endregion
 
-func _register_systems() -> void:
-	# INPUT
-	var camera_input_system := CameraInputSystem.new()
-	camera_input_system.name = "CameraInputSystem"
-	camera_input_system.group = GROUP_INPUT
-	world.add_system(camera_input_system)
-
-	# GAMEPLAY
-	var camera_mode_blend_system := CameraModeBlendSystem.new()
-	camera_mode_blend_system.name = "CameraModeBlendSystem"
-	camera_mode_blend_system.group = GROUP_GAMEPLAY
-	world.add_system(camera_mode_blend_system)
-
-	var camera_kinematics_system := CameraKinematicsSystem.new()
-	camera_kinematics_system.name = "CameraKinematicsSystem"
-	camera_kinematics_system.group = GROUP_GAMEPLAY
-	world.add_system(camera_kinematics_system)
-
-	var camera_rotation_system := CameraRotationSystem.new()
-	camera_rotation_system.name = "CameraRotationSystem"
-	camera_rotation_system.group = GROUP_GAMEPLAY
-	world.add_system(camera_rotation_system)
-
-	var aim_animation_system := AimAnimationSystem.new()
-	aim_animation_system.name = "AimAnimationSystem"
-	aim_animation_system.group = GROUP_GAMEPLAY
-	world.add_system(aim_animation_system)
-
-	# PHYSICS
-	var camera_collision_system := CameraCollisionSystem.new()
-	camera_collision_system.name = "CameraCollisionSystem"
-	camera_collision_system.group = GROUP_PHYSICS
-	world.add_system(camera_collision_system)
+	_register_systems()
+	_register_observers()
 
 func _process(delta: float) -> void:
 	world.process(delta, GROUP_INPUT)
@@ -67,66 +36,56 @@ func _process(delta: float) -> void:
 func _physics_process(delta: float) -> void:
 	world.process(delta, GROUP_PHYSICS)
 
-# # Called when the node enters the scene tree for the first time.
-# func _ready() -> void:
-# 	_setup_world()
+func _register_systems() -> void:
+	# INPUT
+	var move_input := PlayerMovementInputSystem.new()
+	move_input.name = "PlayerMovementInputSystem"
+	move_input.group = GROUP_INPUT
+	world.add_system(move_input)
 
-# 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	var camera_input := CameraInputSystem.new()
+	camera_input.name = "CameraInputSystem"
+	camera_input.group = GROUP_INPUT
+	world.add_system(camera_input)
 
-# 	# Spawn player entity
-# 	var player_tscn := preload("res://features/player/Player.tscn").instantiate()
-# 	var e_player: Entity = player_tscn
-# 	world.add_entity(e_player)
+	# GAMEPLAY
+	var cam_mode := CameraModeBlendSystem.new()
+	cam_mode.name = "CameraModeBlendSystem"
+	cam_mode.group = GROUP_GAMEPLAY
+	world.add_system(cam_mode)
 
-# 	var player: CharacterBody3D = player_tscn
-# 	var body_ref: C_CharacterBodyRef = e_player.get_component(C_CharacterBodyRef)
-# 	body_ref.node = player
+	var cam_kin := CameraKinematicsSystem.new()
+	cam_kin.name = "CameraKinematicsSystem"
+	cam_kin.group = GROUP_GAMEPLAY
+	world.add_system(cam_kin)
 
-# 	# Setup camera entity
-# 	var camera_tscn: PlayerCamera = preload("res://features/camera/player_camera.tscn").instantiate()
-# 	camera_tscn.name = "PlayerCamera"
-# 	camera_tscn.set_target(player)
-# 	add_child(camera_tscn)
+	var cam_rot := CameraRotationSystem.new()
+	cam_rot.name = "CameraRotationSystem"
+	cam_rot.group = GROUP_GAMEPLAY
+	world.add_system(cam_rot)
 
-# func _setup_world() -> void:
-# 	ECS.world = world
+	var player_move := PlayerMovementSystem.new()
+	player_move.name = "PlayerMovementSystem"
+	player_move.group = GROUP_PHYSICS
+	world.add_system(player_move)
 
-# 	# Create system groups for organization and scheduling
-# 	const GROUP_GAMEPLAY: String = "gameplay"
-# 	const GROUP_PHYSICS: String = "physics"
+	var aim_anim := AimAnimationSystem.new()
+	aim_anim.name = "AimAnimationSystem"
+	aim_anim.group = GROUP_GAMEPLAY
+	world.add_system(aim_anim)
 
-# 	# Instantiate input and movement systems
-# 	var input_system := PlayerInputSystem.new()
-# 	input_system.name = "PlayerInputSystem"
-# 	var movement_system := PlayerMovementSystem.new()
-# 	movement_system.name = "PlayerMovementSystem"
-# 	var dash_system := DashAbilitySystem.new()
-# 	dash_system.name = "DashAbilitySystem"
-# 	var player_ability_system := PlayerAbilitySystem.new()
-# 	player_ability_system.name = "PlayerAbilitySystem"
-# 	var fireball_system := FireballSystem.new()
-# 	fireball_system.name = "FireballSystem"
+	# PHYSICS
+	var cam_col := CameraCollisionSystem.new()
+	cam_col.name = "CameraCollisionSystem"
+	cam_col.group = GROUP_PHYSICS
+	world.add_system(cam_col)
 
+func _register_observers() -> void:
+	var transform_observer := TransformObserver.new()
+	transform_observer.name = "TransformObserver"
+	world.add_observer(transform_observer)
 
-# 	# Assign systems to groups for scheduling
-# 	input_system.group = GROUP_GAMEPLAY
-# 	movement_system.group = GROUP_PHYSICS
-# 	dash_system.group = GROUP_GAMEPLAY
-# 	player_ability_system.group = GROUP_PHYSICS
-# 	fireball_system.group = GROUP_PHYSICS
-
-# 	# Register systems with the world
-# 	world.add_system(input_system)
-# 	world.add_system(movement_system)
-# 	world.add_system(dash_system)
-# 	world.add_system(player_ability_system)
-# 	world.add_system(fireball_system)
-
-# # Called every frame. 'delta' is the elapsed time since the previous frame.
-# func _process(delta: float) -> void:
-# 	world.process(delta, 'gameplay')
-
-
-# # Called every frame. 'delta' is the elapsed time since the previous frame.
-# func _physics_process(delta: float) -> void:
-# 	world.process(delta, 'physics')
+	# If you added the rig observer earlier
+	# var rig_observer := CameraRigObserver.new()
+	# rig_observer.name = "CameraRigObserver"
+	# world.add_observer(rig_observer)
