@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bhuoqilp5584w" path="res://features/camera/e_camera.gd" id="1_bkehp"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/ecs/component.gd" id="2_bkehp"]
 [ext_resource type="Script" uid="uid://dugygb7wphee4" path="res://features/camera/c_camera_rig_ref.gd" id="3_71ge8"]
-[ext_resource type="Script" uid="uid://dqfmxqtewe2o5" path="res://features/input/mouse_mode.gd" id="4_2v7k0"]
+[ext_resource type="Script" path="res://features/input/mouse_mode_input.gd" id="4_bkehp"]
 [ext_resource type="Script" uid="uid://c1ajffgoliwlr" path="res://features/input/camera_input.gd" id="5_y5vcc"]
 
 [sub_resource type="Resource" id="Resource_71vvu"]
@@ -35,8 +35,8 @@ margin = 0.2
 current = true
 fov = 70.0
 
-[node name="MouseMode" type="Node" parent="."]
-script = ExtResource("4_2v7k0")
+[node name="MouseModeInput" type="Node" parent="."]
+script = ExtResource("4_bkehp")
 metadata/_custom_type_script = "uid://dqfmxqtewe2o5"
 
 [node name="CameraInput" type="Node" parent="."]

@@ -1,4 +1,4 @@
-class_name MouseMode
+class_name MouseModeInput
 extends Node
 
 func _unhandled_input(event: InputEvent) -> void:
