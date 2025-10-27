@@ -43,10 +43,10 @@ func _register_systems() -> void:
 	move_input.group = GROUP_INPUT
 	world.add_system(move_input)
 
-	var camera_input := CameraInputSystem.new()
-	camera_input.name = "CameraInputSystem"
-	camera_input.group = GROUP_INPUT
-	world.add_system(camera_input)
+	# var camera_input := CameraInputSystem.new()
+	# camera_input.name = "CameraInputSystem"
+	# camera_input.group = GROUP_INPUT
+	# world.add_system(camera_input)
 
 	# GAMEPLAY
 	var cam_mode := CameraModeBlendSystem.new()
@@ -54,20 +54,10 @@ func _register_systems() -> void:
 	cam_mode.group = GROUP_GAMEPLAY
 	world.add_system(cam_mode)
 
-	var cam_kin := CameraKinematicsSystem.new()
-	cam_kin.name = "CameraKinematicsSystem"
-	cam_kin.group = GROUP_GAMEPLAY
-	world.add_system(cam_kin)
-
 	var cam_rot := CameraRotationSystem.new()
 	cam_rot.name = "CameraRotationSystem"
 	cam_rot.group = GROUP_GAMEPLAY
 	world.add_system(cam_rot)
-
-	var player_move := PlayerMovementSystem.new()
-	player_move.name = "PlayerMovementSystem"
-	player_move.group = GROUP_PHYSICS
-	world.add_system(player_move)
 
 	var aim_anim := AimAnimationSystem.new()
 	aim_anim.name = "AimAnimationSystem"
@@ -75,6 +65,16 @@ func _register_systems() -> void:
 	world.add_system(aim_anim)
 
 	# PHYSICS
+	var player_move := PlayerMovementSystem.new()
+	player_move.name = "PlayerMovementSystem"
+	player_move.group = GROUP_PHYSICS
+	world.add_system(player_move)
+
+	var cam_kin := CameraKinematicsSystem.new()
+	cam_kin.name = "CameraKinematicsSystem"
+	cam_kin.group = GROUP_PHYSICS
+	world.add_system(cam_kin)
+
 	var cam_col := CameraCollisionSystem.new()
 	cam_col.name = "CameraCollisionSystem"
 	cam_col.group = GROUP_PHYSICS

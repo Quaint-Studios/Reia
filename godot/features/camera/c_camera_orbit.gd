@@ -17,6 +17,6 @@ extends Component
 @export var pitch_sensitivity: float = 0.010
 
 @export var min_pitch: float = -0.4
-@export var max_pitch: float = 1.2
+@export var max_pitch: float = 1.5
 
 @export var slerp_rate: float = 12.0 # higher = snappier

@@ -9,6 +9,9 @@ var camera_orbit: C_CameraOrbit = null
 var camera_mode: C_CameraMode = null
 
 func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_pressed("aim"):
+		aim_state.is_aiming = not aim_state.is_aiming
+
 	# Accumulate input for next process()
 	if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		var mouse_event := event as InputEventMouseMotion
