@@ -1,3 +1,4 @@
+## DEPRECATED - Deleting after coyote timer and other movement are stable and implemented.
 class_name PlayerInputSystem
 extends System
 
@@ -14,21 +15,20 @@ func query() -> QueryBuilder:
 	return q.with_all([
 		C_LocalPlayer,
 		C_Velocity,
-		C_CharacterBodyRef,
-		C_DashIntent,
-		C_CameraTarget,
-		C_JumpState,
+		# C_DashIntent,
+		C_AimState,
+		# C_JumpState,
 		C_PlayerAbilityState
 	])
 
 func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 	for entity in entities:
 		var velocity_comp: C_Velocity = entity.get_component(C_Velocity)
-		var body_ref: C_CharacterBodyRef = entity.get_component(C_CharacterBodyRef)
 		var dash_intent: C_DashIntent = entity.get_component(C_DashIntent)
-		var camera_target: C_CameraTarget = entity.get_component(C_CameraTarget)
-		var jump_state: C_JumpState = entity.get_component(C_JumpState)
-		var character: CharacterBody3D = body_ref.node
+		var aim_state: C_AimState = entity.get_component(C_AimState)
+		# var camera_target: C_CameraTarget = entity.get_component(C_CameraTarget)
+		# var jump_state: C_JumpState = entity.get_component(C_JumpState)
+		var character := (entity as Node) as CharacterBody3D
 
 		var input_vector: Vector3 = Vector3.ZERO
 		input_vector.x = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
