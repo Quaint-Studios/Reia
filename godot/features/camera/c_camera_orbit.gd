@@ -1,6 +1,12 @@
 class_name C_CameraOrbit
 extends Component
 
+@export var distance: float = 4.0
+@export var min_zoom: float = 2.0
+@export var max_zoom: float = 12.0
+
+@export var zoom_step: float = 0.5
+
 @export var target_yaw: float = 0.0 # radians, wrapped [-PI, PI]
 @export var target_pitch: float = 0.2 # radians, clamped
 
