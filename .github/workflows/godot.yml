@@ -132,10 +132,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-godot-templates-
       - name: Ensure custom LFS config
+        working-directory: ${{ github.workspace }}
         run: |
           ls -la
-          ls -la godot/
-          ls -la /
           git lfs install --local
           git lfs fetch
           git lfs checkout
