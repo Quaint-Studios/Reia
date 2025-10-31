@@ -7,7 +7,7 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+([a-zA-Z]*\-*)*'
 
 env:
-  GODOT_VERSION: 4.5
+  GODOT_VERSION: 4.5.1
   EXPORT_NAME: Reia
   PROJECT_PATH: godot
   WINEPREFIX: /tmp/.wine
@@ -24,16 +24,16 @@ jobs:
             target: x86_64-pc-windows-msvc
             artifact: reia_gdext-windows
             output: dll
-          - platform: linux
-            runner: ubuntu-24.04
-            target: x86_64-unknown-linux-gnu
-            artifact: reia_gdext-linux
-            output: so
-          - platform: mac
-            runner: macos-15
-            target: x86_64-apple-darwin
-            artifact: reia_gdext-mac
-            output: dylib
+          # - platform: linux
+          #   runner: ubuntu-24.04
+          #   target: x86_64-unknown-linux-gnu
+          #   artifact: reia_gdext-linux
+          #   output: so
+          # - platform: mac
+          #   runner: macos-15
+          #   target: x86_64-apple-darwin
+          #   artifact: reia_gdext-mac
+          #   output: dylib
           # - platform: web
           #   runner: ubuntu-24.04
           #   target: wasm32-unknown-unknown
@@ -91,27 +91,27 @@ jobs:
             godot_export: win
             output_dir: build/windows
             export_name: windows
-          - export: linux
-            runner: ubuntu-24.04
-            artifact: reia_gdext-linux
-            ext: x86_64
-            godot_export: linux
-            output_dir: build/linux
-            export_name: linux
-          - export: server
-            runner: ubuntu-24.04
-            artifact: reia_gdext-linux
-            ext: x86_64
-            godot_export: server
-            output_dir: build/server
-            export_name: server
-          - export: mac
-            runner: ubuntu-24.04
-            artifact: reia_gdext-mac
-            ext: zip
-            godot_export: mac
-            output_dir: build/mac
-            export_name: mac
+          # - export: linux
+          #   runner: ubuntu-24.04
+          #   artifact: reia_gdext-linux
+          #   ext: x86_64
+          #   godot_export: linux
+          #   output_dir: build/linux
+          #   export_name: linux
+          # - export: server
+          #   runner: ubuntu-24.04
+          #   artifact: reia_gdext-linux
+          #   ext: x86_64
+          #   godot_export: server
+          #   output_dir: build/server
+          #   export_name: server
+          # - export: mac
+          #   runner: ubuntu-24.04
+          #   artifact: reia_gdext-mac
+          #   ext: zip
+          #   godot_export: mac
+          #   output_dir: build/mac
+          #   export_name: mac
           # - export: web
           #   runner: ubuntu-24.04
           #   artifact: reia_gdext-web
@@ -133,6 +133,9 @@ jobs:
             ${{ runner.os }}-godot-templates-
       - name: Ensure custom LFS config
         run: |
+          ls -la
+          ls -la godot/
+          ls -la /
           git lfs install --local
           git lfs fetch
           git lfs checkout
