@@ -57,9 +57,7 @@ jobs:
             ${{ runner.os }}-cargo-
       - name: Ensure custom LFS config
         run: |
-          git lfs install --local
-          git lfs fetch
-          git lfs checkout
+          git lfs pull
       - name: Install Rust
         uses: actions-rs/toolchain@v1
         with:
@@ -133,11 +131,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-godot-templates-
       - name: Ensure custom LFS config
-        working-directory: ${{ github.workspace }}
         run: |
-          git -C "$GITHUB_WORKSPACE" lfs install --local
-          git -C "$GITHUB_WORKSPACE" lfs fetch
-          git -C "$GITHUB_WORKSPACE" lfs checkout
+          git lfs pull
       - name: Download Rust GDExtension
         uses: actions/download-artifact@v4
         with:
@@ -184,9 +179,9 @@ jobs:
         with:
           files: |
             build/windows
-            build/linux
-            build/server
-            build/mac
+          # build/linux
+          # build/server
+          # build/mac
           # build/web
           tag_name: ${{ github.ref_name }}
           body: |
