@@ -14,6 +14,7 @@ transform = Transform3D(1, 0, 0, 0, 0.109162, 0.994024, 0, -0.994024, 0.109162, 
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Level"]
 use_collision = true
+collision_layer = 3
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Level/CSGCombiner3D"]
 size = Vector3(20.8036, 1, 23.637)

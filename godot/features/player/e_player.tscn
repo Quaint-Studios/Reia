@@ -12,6 +12,8 @@ albedo_color = Color(0, 0, 1, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_npkru"]
 
 [node name="Player" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 29
 script = ExtResource("1_tqrk1")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -20,11 +22,15 @@ shape = SubResource("CapsuleShape3D_6sorm")
 
 [node name="CSGMesh3D" type="CSGMesh3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+layers = 4
 use_collision = true
+collision_layer = 2
+collision_mask = 29
 mesh = SubResource("CapsuleMesh_npkru")
 material = SubResource("StandardMaterial3D_tqrk1")
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.4)
+layers = 4
 size = Vector3(0.4, 0.25, 0.25)
 material = SubResource("StandardMaterial3D_npkru")

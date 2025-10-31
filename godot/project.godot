@@ -171,6 +171,32 @@ aim={
 
 locale/locale_filter_mode=0
 
+[layer_names]
+
+3d_render/layer_1="world"
+3d_render/layer_2="local_player"
+3d_render/layer_3="other_players"
+3d_render/layer_4="enemies_and_bosses"
+3d_render/layer_5="npcs"
+3d_render/layer_6="items"
+3d_render/layer_7="vfx"
+3d_render/layer_8="ui"
+3d_physics/layer_1="world"
+3d_physics/layer_2="player"
+3d_physics/layer_3="enemy"
+3d_physics/layer_4="boss"
+3d_physics/layer_5="npc"
+3d_physics/layer_6="spring_arm"
+3d_physics/layer_7="player_hitbox"
+3d_physics/layer_8="enemy_hitbox"
+3d_physics/layer_9="boss_hitbox"
+3d_physics/layer_10="player_hurtbox"
+3d_physics/layer_11="enemy_hurtbox"
+3d_physics/layer_12="boss_hurtbox"
+3d_physics/layer_13="npc_hurtbox"
+3d_physics/layer_14="item_pickup"
+3d_physics/layer_15="item_harvestable"
+
 [navigation]
 
 pathfinding/max_threads=-1
