@@ -1,21 +1,15 @@
 class_name PlayerMovementSystem
 extends System
 
-var orbit: C_CameraOrbit = null
-
 func query() -> QueryBuilder:
 	return q.with_all([C_LocalPlayer, C_MoveInput, C_PlayerMovementConfig, C_Transform]) \
 	.iterate([C_MoveInput, C_PlayerMovementConfig, C_Transform])
 
 func process(entities: Array[Entity], components: Array[Array], delta: float) -> void:
-	if orbit == null:
-		var q1 := ECS.world.query.with_all([C_Camera, C_CameraOrbit])
-		var cams: Array[Entity] = q1.execute()
-		if not cams.is_empty():
-			var cam_entity := cams[0] as Entity
-			orbit = cam_entity.get_component(C_CameraOrbit) as C_CameraOrbit
-		else:
-			return # No camera orbit found; cannot proceed
+	var camera_state: CameraStateData = LocalCache.camera_global.camera_state
+
+	if camera_state == null:
+		return
 
 	var move: C_MoveInput = components[0][0]
 	var cfg: C_PlayerMovementConfig = components[1][0]
@@ -30,7 +24,7 @@ func process(entities: Array[Entity], components: Array[Array], delta: float) ->
 		dir = Vector3.ZERO
 	else:
 		# Construct yaw-only basis from camera yaw
-		var yaw_basis := Basis(Vector3.UP, orbit.current_yaw)
+		var yaw_basis := Basis(Vector3.UP, camera_state.yaw)
 		var forward := -yaw_basis.z
 		var right := yaw_basis.x
 		dir = ((right * move.dir.x) + (forward * move.dir.y)).normalized()

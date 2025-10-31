@@ -1,11 +1,20 @@
 class_name CameraGlobal
 
-# Cache player, camera, and all necessary components for easy access
+var camera_state: CameraStateData = CameraStateData.new()
 
-func update() -> void:
-	# Do a single function call to handle all camera functionality
-	pass
+# Cached Components
 
-# handle input here
+func process(_delta: float) -> void:
+	if not LocalCache.is_valid():
+		load_player()
 
-# break down into smaller functions as much as possible to keep things organized
+		if not LocalCache.is_valid():
+			return
+
+func load_player() -> void:
+	if ECS.world == null:
+		return
+
+	var player_entity := ECS.world.query.with_all([C_LocalPlayer]).execute_one()
+	if player_entity != null:
+		LocalCache.set_player(player_entity)

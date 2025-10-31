@@ -35,6 +35,8 @@ buses/default_bus_layout="uid://82gy4qqnnk7o"
 
 SoundManager="*res://addons/sound_manager/sound_manager.gd"
 ECS="*res://addons/gecs/ecs/ecs.gd"
+LocalCache="*res://features/globals/local_cache.gd"
+InputManager="*res://features/globals/input_manager.gd"
 
 [debug]
 

@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://ctxba2ch5c65s"]
+
+[ext_resource type="Script" path="res://features/input/mouse_mode_input.gd" id="4_bkehp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_s3cxe"]
+radius = 0.2
+
+[node name="Camera" type="Node3D"]
+
+[node name="YawPivot" type="Node3D" parent="."]
+
+[node name="PitchPivot" type="Node3D" parent="YawPivot"]
+
+[node name="SpringArm3D" type="SpringArm3D" parent="YawPivot/PitchPivot"]
+shape = SubResource("SphereShape3D_s3cxe")
+spring_length = 6.0
+margin = 0.2
+
+[node name="Camera3D" type="Camera3D" parent="YawPivot/PitchPivot/SpringArm3D"]
+current = true
+fov = 70.0
+
+[node name="MouseModeInput" type="Node" parent="."]
+script = ExtResource("4_bkehp")
+metadata/_custom_type_script = "uid://dqfmxqtewe2o5"

@@ -20,9 +20,8 @@ func _ready() -> void:
 	player.add_component(C_LocalPlayer.new())
 	ECSUtils.update_transform(player, Vector3(0, 1, 0))
 
-	var camera := preload("res://features/camera/e_camera.tscn").instantiate() as Camera
-	world.add_entity(camera)
-	(camera.find_child("CameraInput", false) as CameraInput).setup(camera, player)
+	var camera := preload("res://features/camera/camera.tscn").instantiate()
+	add_child(camera)
 
 	var npc := preload("res://features/npc/e_npc.tscn").instantiate() as Npc
 	world.add_entity(npc)
@@ -49,20 +48,6 @@ func _register_systems() -> void:
 	# world.add_system(camera_input)
 
 	# GAMEPLAY
-	var cam_mode := CameraModeBlendSystem.new()
-	cam_mode.name = "CameraModeBlendSystem"
-	cam_mode.group = GROUP_GAMEPLAY
-	world.add_system(cam_mode)
-
-	var cam_rot := CameraRotationSystem.new()
-	cam_rot.name = "CameraRotationSystem"
-	cam_rot.group = GROUP_GAMEPLAY
-	world.add_system(cam_rot)
-
-	var aim_anim := AimAnimationSystem.new()
-	aim_anim.name = "AimAnimationSystem"
-	aim_anim.group = GROUP_GAMEPLAY
-	world.add_system(aim_anim)
 
 	# PHYSICS
 	var player_move := PlayerMovementSystem.new()
@@ -70,21 +55,7 @@ func _register_systems() -> void:
 	player_move.group = GROUP_PHYSICS
 	world.add_system(player_move)
 
-	var cam_kin := CameraKinematicsSystem.new()
-	cam_kin.name = "CameraKinematicsSystem"
-	cam_kin.group = GROUP_PHYSICS
-	world.add_system(cam_kin)
-
-	var cam_col := CameraCollisionSystem.new()
-	cam_col.name = "CameraCollisionSystem"
-	cam_col.group = GROUP_PHYSICS
-	world.add_system(cam_col)
-
 func _register_observers() -> void:
 	var transform_observer := TransformObserver.new()
 	transform_observer.name = "TransformObserver"
 	world.add_observer(transform_observer)
-
-	var rig_observer := CameraRigObserver.new()
-	rig_observer.name = "CameraRigObserver"
-	world.add_observer(rig_observer)
