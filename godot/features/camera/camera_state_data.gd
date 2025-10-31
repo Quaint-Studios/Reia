@@ -15,9 +15,9 @@ extends Resource
 @export var rotation_lerp_speed: float = 10.0
 
 const ZOOM_STEP := 0.5
-@export var distance: float = 4.0
-@export var min_distance: float = 0.5
-@export var max_distance: float = 8.0
+@export var distance: float = 6.5
+@export var min_distance: float = 1.0
+@export var max_distance: float = 7.0
 
 @export var height_offset: float = 1.6
 @export var offset: Vector3 = Vector3(0, 1.6, 0)

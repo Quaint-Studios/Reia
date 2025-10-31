@@ -31,12 +31,18 @@ func unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton:
 		var mb := event as InputEventMouseButton
 		if mb.pressed and (mb.button_index == MOUSE_BUTTON_WHEEL_UP or mb.button_index == MOUSE_BUTTON_WHEEL_DOWN):
-			var min_len := 2.0
-			var max_len := 12.0
 			if mb.button_index == MOUSE_BUTTON_WHEEL_UP:
-				camera_state.distance = clampf(camera_state.distance - CameraStateData.ZOOM_STEP, min_len, max_len)
+				camera_state.distance = clampf(
+					camera_state.distance - CameraStateData.ZOOM_STEP,
+					camera_state.min_distance,
+					camera_state.max_distance
+				)
 			elif mb.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-				camera_state.distance = clampf(camera_state.distance + CameraStateData.ZOOM_STEP, min_len, max_len)
+				camera_state.distance = clampf(
+					camera_state.distance + CameraStateData.ZOOM_STEP,
+					camera_state.min_distance,
+					camera_state.max_distance
+				)
 
 func process(delta: float) -> void:
 	# Sync everything
