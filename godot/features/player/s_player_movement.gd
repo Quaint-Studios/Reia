@@ -24,7 +24,7 @@ func process(entities: Array[Entity], components: Array[Array], delta: float) ->
 		dir = Vector3.ZERO
 	else:
 		# Construct yaw-only basis from camera yaw
-		var yaw_basis := Basis(Vector3.UP, camera_state.yaw)
+		var yaw_basis := Basis(Vector3.UP, deg_to_rad(camera_state.yaw))
 		var forward := -yaw_basis.z
 		var right := yaw_basis.x
 		dir = ((right * move.dir.x) + (forward * move.dir.y)).normalized()

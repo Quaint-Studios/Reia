@@ -7,3 +7,6 @@ func _ready() -> void:
 
 func _unhandled_input(event: InputEvent) -> void:
 	camera.unhandled_input(event)
+
+func _process(delta: float) -> void:
+	camera.process(delta)
