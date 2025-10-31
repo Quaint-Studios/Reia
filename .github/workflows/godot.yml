@@ -41,7 +41,7 @@ jobs:
           #   output: wasm
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
       - name: Cache Rust dependencies
@@ -69,10 +69,10 @@ jobs:
           cd rust
           cargo build --release --target ${{ matrix.target }}
       - name: Upload GDExtension artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ matrix.artifact }}
-          path: rust/target/${{ matrix.target }}/release/reia_gdext.${{ matrix.output }}
+          path: rust/target/${{ matrix.target }}/release/reia.${{ matrix.output }}
 
   export:
     needs: build-gdextension
@@ -120,7 +120,7 @@ jobs:
           #   export_name: web
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
       - name: Cache Godot export templates
@@ -134,7 +134,7 @@ jobs:
         run: |
           git lfs pull
       - name: Download Rust GDExtension
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v6
         with:
           name: ${{ matrix.artifact }}
           path: rust/target/release/
@@ -151,7 +151,7 @@ jobs:
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "${{ matrix.godot_export }}" "$EXPORT_DIR/${{ matrix.export_name }}/${EXPORT_NAME}.${{ matrix.ext }}"
       - name: Upload Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: ${{ matrix.export_name }}
           path: ${{ matrix.output_dir }}
@@ -163,7 +163,7 @@ jobs:
     if: ${{ always() && !cancelled() && needs.export.result == 'success' && startsWith(github.ref, 'refs/tags/') }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: recursive
       - name: Format Tag Name
