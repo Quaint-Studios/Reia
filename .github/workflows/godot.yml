@@ -40,7 +40,8 @@ jobs:
           #   artifact: reia_gdext-web
           #   output: wasm
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: Cache Rust dependencies
@@ -134,10 +135,9 @@ jobs:
       - name: Ensure custom LFS config
         working-directory: ${{ github.workspace }}
         run: |
-          ls -la
-          git lfs install
-          git lfs fetch
-          git lfs checkout
+          git -C "$GITHUB_WORKSPACE" lfs install --local
+          git -C "$GITHUB_WORKSPACE" lfs fetch
+          git -C "$GITHUB_WORKSPACE" lfs checkout
       - name: Download Rust GDExtension
         uses: actions/download-artifact@v4
         with:
