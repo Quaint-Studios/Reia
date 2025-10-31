@@ -131,7 +131,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-godot-templates-
       - name: Ensure custom LFS config
+        working-directory: '/__w/Reia/Reia/'
         run: |
+          pwd
+          ls -la
+          ls -la /__w/Reia/Reia/
           git lfs pull
       - name: Download Rust GDExtension
         uses: actions/download-artifact@v6
