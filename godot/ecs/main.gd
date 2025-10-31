@@ -1,12 +1,14 @@
 extends Node3D
 
-@onready var world: World = $World
+var world: World = World.new()
 
 const GROUP_GAMEPLAY: String = "gameplay"
 const GROUP_INPUT: String = "input"
 const GROUP_PHYSICS: String = "physics"
 
 func _ready() -> void:
+	world.name = "ECS World"
+	add_child(world)
 	ECS.world = world
 
 	_register_systems()

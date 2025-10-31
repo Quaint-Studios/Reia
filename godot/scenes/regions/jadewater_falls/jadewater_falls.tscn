@@ -1,22 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://b5wk75hsjto8v"]
+[gd_scene load_steps=2 format=3 uid="uid://b5wk75hsjto8v"]
 
 [ext_resource type="Script" uid="uid://cejo0i5slihx3" path="res://ecs/main.gd" id="1_p72kj"]
-[ext_resource type="Script" uid="uid://cdu5tlyk72uu4" path="res://addons/gecs/ecs/world.gd" id="2_58eoa"]
 
 [node name="JadewaterFalls" type="Node3D"]
 script = ExtResource("1_p72kj")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="World" type="Node" parent="."]
-script = ExtResource("2_58eoa")
-entity_nodes_root = NodePath("Entities")
-system_nodes_root = NodePath("Systems")
-metadata/_custom_type_script = "uid://cdu5tlyk72uu4"
-
-[node name="Systems" type="Node" parent="World"]
-
-[node name="Entities" type="Node" parent="World"]
 
 [node name="Level" type="Node3D" parent="."]
 
