@@ -63,7 +63,7 @@ window/size/mode.editor=0
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/auto_asset_sorter/plugin.cfg", "res://addons/gecs/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/gecs/plugin.cfg", "res://addons/sound_manager/plugin.cfg")
 
 [file_customization]
 
