@@ -55,7 +55,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-cargo-${{ matrix.target }}-
             ${{ runner.os }}-cargo-
-      - name: Ensure custom LFS config
+      - name: Ensure custom LFS config (Rust)
         run: |
           git lfs pull
       - name: Install Rust
@@ -130,12 +130,14 @@ jobs:
           key: ${{ runner.os }}-godot-templates-${{ env.GODOT_VERSION }}
           restore-keys: |
             ${{ runner.os }}-godot-templates-
-      - name: Ensure custom LFS config
+      - name: Ensure custom LFS config (Godot)
         working-directory: '/__w/Reia/Reia/'
         run: |
           pwd
           ls -la
           ls -la /__w/Reia/Reia/
+          git init
+          git remote get-url origin
           git lfs pull
       - name: Download Rust GDExtension
         uses: actions/download-artifact@v6
