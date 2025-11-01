@@ -75,7 +75,7 @@ jobs:
           path: rust/target/${{ matrix.target }}/release/reia.${{ matrix.output }}
 
   export:
-    # needs: build-gdextension
+    needs: build-gdextension
     name: Export (${{ matrix.export }})
     runs-on: ${{ matrix.runner }}
     container:
