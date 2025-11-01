@@ -32,14 +32,14 @@ func unhandled_input(event: InputEvent) -> void:
 		var mb := event as InputEventMouseButton
 		if mb.pressed and (mb.button_index == MOUSE_BUTTON_WHEEL_UP or mb.button_index == MOUSE_BUTTON_WHEEL_DOWN):
 			if mb.button_index == MOUSE_BUTTON_WHEEL_UP:
-				camera_state.distance = clampf(
-					camera_state.distance - CameraStateData.ZOOM_STEP,
+				camera_state.target_distance = clampf(
+					camera_state.target_distance - CameraStateData.ZOOM_STEP,
 					camera_state.min_distance,
 					camera_state.max_distance
 				)
 			elif mb.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-				camera_state.distance = clampf(
-					camera_state.distance + CameraStateData.ZOOM_STEP,
+				camera_state.target_distance = clampf(
+					camera_state.target_distance + CameraStateData.ZOOM_STEP,
 					camera_state.min_distance,
 					camera_state.max_distance
 				)
@@ -58,3 +58,4 @@ func process(delta: float) -> void:
 	camera_state.yaw = lerp(camera_state.yaw, camera_state.target_yaw, camera_state.rotation_lerp_speed * delta)
 	camera_state.pitch = lerp(camera_state.pitch, camera_state.target_pitch, camera_state.rotation_lerp_speed * delta)
 	camera_state.fov = lerp(camera_state.fov, camera_state.target_fov, camera_state.fov_lerp_speed * delta)
+	camera_state.distance = lerp(camera_state.distance, camera_state.target_distance, camera_state.follow_speed * delta)

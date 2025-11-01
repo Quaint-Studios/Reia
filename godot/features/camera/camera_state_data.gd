@@ -8,13 +8,14 @@ extends Resource
 @export var pitch: float = -10.0
 @export var target_yaw: float = 0.0
 @export var target_pitch: float = -10.0
-@export var yaw_sensitivity: float = 0.1
-@export var pitch_sensitivity: float = 0.1
-@export var min_pitch: float = -45.0
-@export var max_pitch: float = 45.0
-@export var rotation_lerp_speed: float = 10.0
+@export var yaw_sensitivity: float = 0.15
+@export var pitch_sensitivity: float = 0.15
+@export var min_pitch: float = -70.0
+@export var max_pitch: float = 50.0
+@export var rotation_lerp_speed: float = 20.0
 
 const ZOOM_STEP := 0.5
+@export var target_distance: float = 6.5
 @export var distance: float = 6.5
 @export var min_distance: float = 1.0
 @export var max_distance: float = 7.0
