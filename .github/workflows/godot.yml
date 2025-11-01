@@ -131,13 +131,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-godot-templates-
       - name: Ensure custom LFS config (Godot)
-        working-directory: '/__w/Reia/Reia/'
+        working-directory: ${{ github.workspace }}
         run: |
-          pwd
-          ls -la
-          ls -la /__w/Reia/Reia/
-          git init
-          git remote get-url origin
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          git lfs install --local
           git lfs pull
       - name: Download Rust GDExtension
         uses: actions/download-artifact@v6
