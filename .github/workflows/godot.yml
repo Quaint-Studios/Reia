@@ -22,22 +22,18 @@ jobs:
           - platform: windows
             runner: windows-latest
             target: x86_64-pc-windows-msvc
-            artifact: reia_gdext-windows
             output: dll
           # - platform: linux
           #   runner: ubuntu-24.04
           #   target: x86_64-unknown-linux-gnu
-          #   artifact: reia_gdext-linux
           #   output: so
           # - platform: mac
           #   runner: macos-15
           #   target: x86_64-apple-darwin
-          #   artifact: reia_gdext-mac
           #   output: dylib
           # - platform: web
           #   runner: ubuntu-24.04
           #   target: wasm32-unknown-unknown
-          #   artifact: reia_gdext-web
           #   output: wasm
     steps:
       - name: Checkout
@@ -71,7 +67,7 @@ jobs:
       - name: Upload GDExtension artifact
         uses: actions/upload-artifact@v5
         with:
-          name: ${{ matrix.artifact }}
+          name: ${{ matrix.target }}
           path: rust/target/${{ matrix.target }}/release/reia.${{ matrix.output }}
 
   export:
@@ -85,35 +81,35 @@ jobs:
         include:
           - export: windows
             runner: ubuntu-24.04
-            artifact: reia_gdext-windows
+            artifact: x86_64-pc-windows-msvc
             ext: exe
             godot_export: win
             output_dir: build/windows
             export_name: windows
           # - export: linux
           #   runner: ubuntu-24.04
-          #   artifact: reia_gdext-linux
+          #   artifact: x86_64-unknown-linux-gnu
           #   ext: x86_64
           #   godot_export: linux
           #   output_dir: build/linux
           #   export_name: linux
           # - export: server
           #   runner: ubuntu-24.04
-          #   artifact: reia_gdext-linux
+          #   artifact: x86_64-unknown-linux-gnu
           #   ext: x86_64
           #   godot_export: server
           #   output_dir: build/server
           #   export_name: server
           # - export: mac
           #   runner: ubuntu-24.04
-          #   artifact: reia_gdext-mac
+          #   artifact: x86_64-apple-darwin
           #   ext: zip
           #   godot_export: mac
           #   output_dir: build/mac
           #   export_name: mac
           # - export: web
           #   runner: ubuntu-24.04
-          #   artifact: reia_gdext-web
+          #   artifact: wasm32-unknown-unknown
           #   ext: html
           #   godot_export: web
           #   output_dir: build/web
@@ -140,7 +136,7 @@ jobs:
         uses: actions/download-artifact@v6
         with:
           name: ${{ matrix.artifact }}
-          path: rust/target/release/
+          path: rust/target/${{ matrix.artifact }}/release/
       - name: Setup
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
