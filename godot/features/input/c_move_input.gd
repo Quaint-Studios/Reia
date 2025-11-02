@@ -6,4 +6,6 @@ extends Component
 @export var dir: Vector2 = Vector2.ZERO
 
 @export var sprint: bool = false
+
 @export var jump_pressed: bool = false
+@export var jump_held: bool = false
