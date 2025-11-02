@@ -1,6 +1,8 @@
 class_name PlayerMovementSystem
 extends System
 
+const GRAVITY := 9.8
+
 func query() -> QueryBuilder:
 	return q.with_all([C_LocalPlayer, C_MoveInput, C_PlayerMovementConfig, C_Transform]) \
 	.iterate([C_MoveInput, C_PlayerMovementConfig, C_Transform])
@@ -35,7 +37,23 @@ func process(entities: Array[Entity], components: Array[Array], delta: float) ->
 	vel.x = dir.x * speed
 	vel.z = dir.z * speed
 
-	vel.y -= ProjectSettings.get_setting("physics/3d/default_gravity") * delta # TODO: Migrate this to gravity system later
+	# Handle jumping and gravity
+	if body.is_on_floor():
+		vel.y = 0.0
+
+		if move.jump_pressed:
+			vel.y = cfg.jump_speed
+			move.jump_pressed = false # Consume jump input
+	else:
+		var gravity_scale := 1.0
+
+		# Early jump release
+		if vel.y > 0.0 and not move.jump_held:
+			gravity_scale = cfg.jump_cut_multiplier
+		elif vel.y < 0.0:
+			gravity_scale = cfg.fall_multiplier
+
+		vel.y -= GRAVITY * gravity_scale * delta
 
 	body.velocity = vel
 	var __ := body.move_and_slide()
