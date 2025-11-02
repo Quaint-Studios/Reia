@@ -5,8 +5,8 @@ var player_entity: Entity = null
 var player_node: Node3D = null
 var camera_global: CameraGlobal = CameraGlobal.new()
 
-func _process(_delta: float) -> void:
-	camera_global.process(_delta)
+func _process(delta: float) -> void:
+	camera_global.process(delta)
 
 func set_player(entity: Entity) -> void:
 	player_entity = entity
