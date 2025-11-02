@@ -1,5 +1,4 @@
 [![Godot Builder](https://github.com/Quaint-Studios/Reia/actions/workflows/godot.yml/badge.svg)](https://github.com/Quaint-Studios/Reia/actions/workflows/godot.yml)
-[![Rust Test](https://github.com/Quaint-Studios/Reia/actions/workflows/rust.yml/badge.svg)](https://github.com/Quaint-Studios/Reia/actions/workflows/rust.yml)
 [![Open Collective backers and sponsors](https://img.shields.io/opencollective/all/reia?logo=opencollective)](https://opencollective.com/reia)
 
 
@@ -226,5 +225,11 @@ We're independent developers of games and software. [Quaint Studios](https://www
 ## 💖 Sponsors & Supporters
 
 _Reia is possible thanks to our amazing community and supporters!_
+
+<p>
+  <a href="https://www.digitalocean.com/">
+    <img src="https://opensource.nyc3.cdn.digitaloceanspaces.com/attribution/assets/PoweredByDO/DO_Powered_by_Badge_blue.svg" width="201px">
+  </a>
+</p>
 
 Want to support development? [Sponsor us on Open Collective!](https://opencollective.com/reia)
