@@ -55,7 +55,7 @@ func process(delta: float) -> void:
 			return
 
 	var camera_state := LocalCache.camera_global.camera_state
-	camera_state.yaw = lerp(camera_state.yaw, camera_state.target_yaw, camera_state.rotation_lerp_speed * delta)
-	camera_state.pitch = lerp(camera_state.pitch, camera_state.target_pitch, camera_state.rotation_lerp_speed * delta)
+	camera_state.yaw = camera_state.target_yaw
+	camera_state.pitch = camera_state.target_pitch
 	camera_state.fov = lerp(camera_state.fov, camera_state.target_fov, camera_state.fov_lerp_speed * delta)
 	camera_state.distance = lerp(camera_state.distance, camera_state.target_distance, camera_state.follow_speed * delta)
