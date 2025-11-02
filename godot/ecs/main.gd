@@ -27,7 +27,7 @@ func _ready() -> void:
 
 	var npc := preload("res://features/npc/e_npc.tscn").instantiate() as Npc
 	world.add_entity(npc)
-	ECSUtils.update_transform(npc, Vector3(5, 1, 5))
+	ECSUtils.update_transform(npc, Vector3(5, 0.5, 5))
 	#endregion
 
 func _process(delta: float) -> void:
