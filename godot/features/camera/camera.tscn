@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://ctxba2ch5c65s"]
 
-[ext_resource type="Script" path="res://features/input/mouse_mode_input.gd" id="4_bkehp"]
+[ext_resource type="Script" uid="uid://dqfmxqtewe2o5" path="res://features/input/mouse_mode_input.gd" id="4_bkehp"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_s3cxe"]
 radius = 0.2

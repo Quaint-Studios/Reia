@@ -36,6 +36,14 @@ func process(_delta: float) -> void:
 		if target == null:
 			return
 
+
+func physics_process(_delta: float) -> void:
+	if not LocalCache.is_valid():
+		return
+
+	if root == null:
+		return
+
 	# Update camera transforms
 	root.global_transform.origin = target.global_transform.origin + camera_state.offset
 	yaw_pivot.rotation.y = deg_to_rad(camera_state.yaw)
