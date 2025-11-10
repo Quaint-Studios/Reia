@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5wk75hsjto8v"]
+[gd_scene load_steps=4 format=3 uid="uid://b5wk75hsjto8v"]
 
 [ext_resource type="Script" uid="uid://cejo0i5slihx3" path="res://ecs/main.gd" id="1_p72kj"]
+[ext_resource type="Material" uid="uid://xdy3kjia5745" path="res://presentation/shaders/materials/examples/example_wood.material" id="2_58eoa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58eoa"]
+transparency = 1
+albedo_color = Color(0.24313726, 0.45490196, 1, 0.34901962)
 
 [node name="JadewaterFalls" type="Node3D"]
 script = ExtResource("1_p72kj")
@@ -13,7 +18,8 @@ script = ExtResource("1_p72kj")
 transform = Transform3D(1, 0, 0, 0, 0.109162, 0.994024, 0, -0.994024, 0.109162, -0.0450239, 2.48442, 0)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="Level"]
-use_collision = true
+process_mode = 4
+visible = false
 collision_layer = 3
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Level/CSGCombiner3D"]
@@ -34,3 +40,42 @@ size = Vector3(22, 4, 1)
 [node name="CSGBox3D5" type="CSGBox3D" parent="Level/CSGCombiner3D"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -10, 1.5, 0.27969933)
 size = Vector3(22, 4, 1)
+
+[node name="Map" type="CSGCombiner3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.5803108)
+use_collision = true
+
+[node name="MapBase" type="CSGBox3D" parent="Level/Map"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -91.89209)
+size = Vector3(250.949, 3, 255.029)
+
+[node name="Masks" type="CSGCombiner3D" parent="Level/Map"]
+operation = 2
+
+[node name="BridgeWaterMask" type="CSGPolygon3D" parent="Level/Map/Masks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45439148, -16.342697)
+polygon = PackedVector2Array(-11, -1, -27, 1, 8, 1, 57.672462, 1.7450142, 8, -1)
+depth = 14.72
+
+[node name="Props" type="CSGCombiner3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.5803108)
+use_collision = true
+
+[node name="Bridge1" type="CSGBox3D" parent="Level/Props"]
+transform = Transform3D(1, 0, 0, 0, 0.9869121, -0.16125932, 0, 0.16125932, 0.9869121, 0, 0.9020246, -11.930923)
+size = Vector3(6.3083496, 1, 13.237976)
+material = ExtResource("2_58eoa")
+
+[node name="Bridge2" type="CSGBox3D" parent="Level/Props"]
+transform = Transform3D(-1, -1.4097738e-08, -8.62786e-08, 0, 0.9869121, -0.16125932, 8.742278e-08, -0.16125932, -0.9869121, 0, 0.9020246, -35.079796)
+size = Vector3(6.3083496, 1, 13.237976)
+material = ExtResource("2_58eoa")
+
+[node name="Water" type="CSGCombiner3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.5803108)
+
+[node name="BridgeWater" type="CSGPolygon3D" parent="Level/Water"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.0977974, -16.342697)
+polygon = PackedVector2Array(-11, -1, -27, 1, 8, 1, 57.672462, 1.7450142, 8, -1)
+depth = 14.72
+material = SubResource("StandardMaterial3D_58eoa")
