@@ -2,7 +2,7 @@ class_name C_PlayerMovementConfig
 extends Component
 
 @export var walk_speed: float = 4.5
-@export var run_speed: float = 7.0
+@export var run_speed: float = 12.0
 
 @export var jump_speed: float = 5.5
 @export var jump_cut_multiplier: float = 3.0
