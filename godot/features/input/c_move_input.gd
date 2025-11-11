@@ -5,7 +5,13 @@ extends Component
 # y: forward (+1), back (-1)
 @export var dir: Vector2 = Vector2.ZERO
 
-@export var sprint: bool = false
+enum MovementState {
+	IDLE,
+	CROUCH,
+	WALK,
+	JOG,
+	RUN
+}
+@export var state: MovementState = MovementState.IDLE
 
 @export var jump_pressed: bool = false
-@export var jump_held: bool = false

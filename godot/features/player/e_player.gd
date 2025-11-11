@@ -9,6 +9,7 @@ func define_components() -> Array:
 		C_Velocity.new(),
 
 		C_MoveInput.new(),
+		C_PlayerJumpState.new(),
 		C_PlayerMovementConfig.new(),
 
 		# C_LocalPlayer.new(), # Mark this entity as the local player

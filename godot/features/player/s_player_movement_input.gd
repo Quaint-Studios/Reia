@@ -11,6 +11,15 @@ func process(_entities: Array[Entity], components: Array[Array], _delta: float) 
 	var y := Input.get_action_strength("move_forward") - Input.get_action_strength("move_back")
 	move.dir = Vector2(x, y)
 
-	move.sprint = Input.is_action_pressed("sprint") # e.g., Shift
-	move.jump_pressed = Input.is_action_just_pressed("jump") or move.jump_pressed
-	move.jump_held = Input.is_action_pressed("jump")
+	if move.dir.length_squared() < 0.000001:
+		move.state = C_MoveInput.MovementState.IDLE
+	elif Input.is_action_pressed("run"):
+		move.state = C_MoveInput.MovementState.RUN
+	elif Input.is_action_pressed("walk"):
+		move.state = C_MoveInput.MovementState.WALK
+	elif Input.is_action_pressed("crouch"):
+		move.state = C_MoveInput.MovementState.CROUCH
+	else:
+		move.state = C_MoveInput.MovementState.JOG
+
+	move.jump_pressed = Input.is_action_just_pressed("jump")
