@@ -22,11 +22,11 @@ func process(entities: Array[Entity], components: Array[Array], delta: float) ->
 
 	# Build camera-relative move direction
 	var dir := Vector3.ZERO
-	var yaw_basis := Basis(Vector3.UP, deg_to_rad(camera_state.yaw))
-	var forward := -yaw_basis.z
-	var right := yaw_basis.x
-
 	if move.dir.length_squared() >= 0.000001:
+		# Construct yaw-only basis from camera yaw
+		var yaw_basis := Basis(Vector3.UP, deg_to_rad(camera_state.yaw))
+		var forward := -yaw_basis.z
+		var right := yaw_basis.x
 		dir = ((right * move.dir.x) + (forward * move.dir.y)).normalized()
 
 	var was_on_floor := body.is_on_floor()
@@ -36,7 +36,7 @@ func process(entities: Array[Entity], components: Array[Array], delta: float) ->
 		C_MoveInput.MovementState.RUN:
 			base_speed = cfg.run_speed
 		C_MoveInput.MovementState.JOG:
-			base_speed = cfg.jog_speed
+			base_speed = cfg.run_speed - cfg.walk_speed
 		C_MoveInput.MovementState.WALK:
 			base_speed = cfg.walk_speed
 		C_MoveInput.MovementState.CROUCH:
@@ -49,28 +49,8 @@ func process(entities: Array[Entity], components: Array[Array], delta: float) ->
 
 	# Preserve vertical velocity; apply planar movement
 	var vel := body.velocity
-	var planar_vel := Vector3(vel.x, 0.0, vel.z)
-	var forward_speed := planar_vel.dot(forward)
-	var lateral_speed := planar_vel.dot(right)
-
-	if was_on_floor:
-		var target_forward := base_speed * dir.dot(forward)
-		var target_lateral := base_speed * dir.dot(right)
-		forward_speed = target_forward
-		lateral_speed = target_lateral
-	else:
-		var target_forward := forward_speed
-		var target_lateral := 0.0
-		if dir != Vector3.ZERO:
-			target_forward = base_speed * dir.dot(forward)
-			target_lateral = base_speed * dir.dot(right)
-		forward_speed = target_forward
-		var lateral_factor := clampf(cfg.air_control_multiplier, 0.0, 1.0)
-		lateral_speed = lerp(lateral_speed, target_lateral, lateral_factor)
-
-	var new_planar := (forward * forward_speed) + (right * lateral_speed)
-	vel.x = new_planar.x
-	vel.z = new_planar.z
+	vel.x = dir.x * target_speed
+	vel.z = dir.z * target_speed
 
 	# Handle jumping and gravity
 	if was_on_floor:
