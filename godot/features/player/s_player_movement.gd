@@ -36,7 +36,7 @@ func process(entities: Array[Entity], components: Array[Array], delta: float) ->
 		C_MoveInput.MovementState.RUN:
 			base_speed = cfg.run_speed
 		C_MoveInput.MovementState.JOG:
-			base_speed = cfg.run_speed - cfg.walk_speed
+			base_speed = cfg.jog_speed
 		C_MoveInput.MovementState.WALK:
 			base_speed = cfg.walk_speed
 		C_MoveInput.MovementState.CROUCH:
