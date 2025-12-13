@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ieix3v6r81k3" path="res://features/abilities/fireball/e_fireball.gd" id="1_2dp54"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/component.gd" id="2_sb38c"]
 [ext_resource type="Script" uid="uid://btrind2w7ngcq" path="res://features/abilities/fireball/c_fireball.gd" id="3_6y3rx"]
-[ext_resource type="Script" uid="uid://bf3urrtureql3" path="res://features/refs/c_node3dref.gd" id="4_mnlm0"]
+; [ext_resource type="Script" uid="uid://bf3urrtureql3" path="res://features/refs/c_node3dref.gd" id="4_mnlm0"] DEPRECATED
 
 [sub_resource type="Resource" id="Resource_vytus"]
 script = ExtResource("3_6y3rx")

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c10c8wr8i0vxw" path="res://features/enemy/enemy_test/e_enemy_test.gd" id="1_wxdq4"]
 [ext_resource type="Script" uid="uid://b6k13gc2m4e5s" path="res://addons/gecs/component.gd" id="2_rchbl"]
 [ext_resource type="Script" uid="uid://67uxp3w6ppt6" path="res://features/stats/c_health.gd" id="3_cmi3h"]
-[ext_resource type="Script" uid="uid://bf3urrtureql3" path="res://features/refs/c_node3dref.gd" id="4_cmi3h"]
+; [ext_resource type="Script" uid="uid://bf3urrtureql3" path="res://features/refs/c_node3dref.gd" id="4_cmi3h"] DEPRECATED
 
 [sub_resource type="Resource" id="Resource_biplc"]
 script = ExtResource("3_cmi3h")
