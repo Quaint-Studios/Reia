@@ -15,17 +15,16 @@ func process(entities: Array[Entity], components: Array[Array], delta: float) ->
 		return
 
 	var body := (entities[0] as Node) as CharacterBody3D
-	var vel := body.velocity
 	var move: C_MoveInput = components[0][0]
 	var cfg: C_PlayerMovementConfig = components[1][0]
-	# var jump_state: C_PlayerJumpState = components[2][0]
+	var jump_state: C_PlayerJumpState = components[2][0]
 
 	# Build move direction
 	var dir := Vector3.ZERO
 	if move.dir.length_squared() >= HORIZONTAL_EPSILON:
 		var basis := Basis(Vector3.UP, deg_to_rad(camera_state.yaw))
 		dir = ((move.dir.x * basis.x) + (move.dir.y * -basis.z)).normalized()
-	
+
 	var base_speed := 0.0
 	match move.state:
 		C_MoveInput.MovementState.RUN:
@@ -39,25 +38,34 @@ func process(entities: Array[Entity], components: Array[Array], delta: float) ->
 		C_MoveInput.MovementState.IDLE:
 			base_speed = 0.0
 
+	# Apply planar movement (preserve vertical velocity)
+	var vel := body.velocity
 	var desired_horizontal := dir * base_speed
 	vel.x = desired_horizontal.x
 	vel.z = desired_horizontal.z
 
-	# Handle Gravity
+	# Jumping and gravity
+	var jump_pressed := move.jump_pressed
+	move.jump_pressed = false
+
 	if body.is_on_floor():
-		if vel.y < 0.0:
+		if jump_pressed:
+			jump_state.upwards_velocity = cfg.jump_speed
+			vel.y = jump_state.upwards_velocity
+		elif vel.y < 0.0:
 			vel.y = 0.0
 	else:
-		vel.y = (-GRAVITY)
-	
+		vel.y = clampf(vel.y - GRAVITY * 4.0 * delta, -30.0, vel.y)
+
 	body.velocity = vel
-	var _collided := body.move_and_slide()
+
+	var __ := body.move_and_slide()
 
 	# Rotate body toward movement direction if there is input
 	if dir.length() > 0.001:
 		var current_yaw := body.rotation.y
 		var target_yaw := atan2(dir.x, dir.z) # X/Z → yaw
-		body.rotation.y = lerp_angle(current_yaw, target_yaw, clampf(cfg.turn_rate * delta, 0.0, 1.0))
+		body.rotation.y = lerp_angle(current_yaw, target_yaw, clampf(cfg.TURN_RATE * delta, 0.0, 1.0))
 
 	# Sync ECS transform from node
 	components[3][0].position = body.global_position
