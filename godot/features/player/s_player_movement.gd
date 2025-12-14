@@ -9,6 +9,9 @@ func query() -> QueryBuilder:
 	return q.with_all([C_LocalPlayer, C_MoveInput, C_PlayerMovementConfig, C_PlayerJumpState, C_Transform]) \
 	.iterate([C_MoveInput, C_PlayerMovementConfig, C_PlayerJumpState, C_Transform])
 
+
+#### TODO: Add back in air control logic, jump buffering, coyote time, etc.
+#### TODO: Since this only locally affects the player, consider moving this logic into the player node script instead of ECS?
 func process(entities: Array[Entity], components: Array[Array], delta: float) -> void:
 	var camera_state: CameraStateData = LocalCache.camera_global.camera_state
 	if camera_state == null:
