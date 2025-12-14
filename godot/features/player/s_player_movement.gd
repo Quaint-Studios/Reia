@@ -2,6 +2,8 @@ class_name PlayerMovementSystem
 extends System
 
 const GRAVITY := 9.8
+const HORIZONTAL_EPSILON := 0.000001
+const AIR_BLEND_EPSILON := 0.0001
 
 func query() -> QueryBuilder:
 	return q.with_all([C_LocalPlayer, C_MoveInput, C_PlayerMovementConfig, C_PlayerJumpState, C_Transform]) \
@@ -9,28 +11,21 @@ func query() -> QueryBuilder:
 
 func process(entities: Array[Entity], components: Array[Array], delta: float) -> void:
 	var camera_state: CameraStateData = LocalCache.camera_global.camera_state
-
 	if camera_state == null:
 		return
 
+	var body := (entities[0] as Node) as CharacterBody3D
+	var vel := body.velocity
 	var move: C_MoveInput = components[0][0]
 	var cfg: C_PlayerMovementConfig = components[1][0]
-	var jump_state: C_PlayerJumpState = components[2][0]
-	var c_trs: C_Transform = components[3][0]
+	# var jump_state: C_PlayerJumpState = components[2][0]
 
-	var body := (entities[0] as Node) as CharacterBody3D
-
-	# Build camera-relative move direction
+	# Build move direction
 	var dir := Vector3.ZERO
-	if move.dir.length_squared() >= 0.000001:
-		# Construct yaw-only basis from camera yaw
-		var yaw_basis := Basis(Vector3.UP, deg_to_rad(camera_state.yaw))
-		var forward := -yaw_basis.z
-		var right := yaw_basis.x
-		dir = ((right * move.dir.x) + (forward * move.dir.y)).normalized()
-
-	var was_on_floor := body.is_on_floor()
-
+	if move.dir.length_squared() >= HORIZONTAL_EPSILON:
+		var basis := Basis(Vector3.UP, deg_to_rad(camera_state.yaw))
+		dir = ((move.dir.x * basis.x) + (move.dir.y * -basis.z)).normalized()
+	
 	var base_speed := 0.0
 	match move.state:
 		C_MoveInput.MovementState.RUN:
@@ -44,61 +39,19 @@ func process(entities: Array[Entity], components: Array[Array], delta: float) ->
 		C_MoveInput.MovementState.IDLE:
 			base_speed = 0.0
 
-	var control_multiplier := 1.0 if was_on_floor else cfg.air_control_multiplier
-	var target_speed := base_speed * control_multiplier
+	var desired_horizontal := dir * base_speed
+	vel.x = desired_horizontal.x
+	vel.z = desired_horizontal.z
 
-	# Preserve vertical velocity; apply planar movement
-	var vel := body.velocity
-	vel.x = dir.x * target_speed
-	vel.z = dir.z * target_speed
-
-	# Handle jumping and gravity
-	if was_on_floor:
-		jump_state.coyote_timer = cfg.coyote_time
-		jump_state.jumps_remaining = cfg.max_jumps
-		jump_state.apex_hold_timer = 0.0
-		jump_state.apex_hold_active = false
+	# Handle Gravity
+	if body.is_on_floor():
+		if vel.y < 0.0:
+			vel.y = 0.0
 	else:
-		jump_state.coyote_timer = max(jump_state.coyote_timer - delta, 0.0)
-
-	var jump_pressed := move.jump_pressed
-	move.jump_pressed = false
-	if jump_pressed:
-		if jump_state.jumps_remaining > 0 or was_on_floor or jump_state.coyote_timer > 0.0:
-			jump_state.jump_buffer_timer = cfg.jump_buffer_time
-		else:
-			jump_state.jump_buffer_timer = 0.0
-
-	var should_apply_gravity := true
-	var can_ground_jump := was_on_floor or jump_state.coyote_timer > 0.0
-	var has_jumps := jump_state.jumps_remaining > 0
-
-	if jump_state.jump_buffer_timer > 0.0 and has_jumps and (can_ground_jump or not was_on_floor):
-		# Perform jump
-		vel.y = cfg.jump_speed
-		jump_state.jump_buffer_timer = 0.0
-		jump_state.coyote_timer = 0.0
-		jump_state.apex_hold_timer = 0.0
-		jump_state.apex_hold_active = false
-		jump_state.jumps_remaining = max(jump_state.jumps_remaining - 1, 0)
-		should_apply_gravity = false
-	else:
-		jump_state.jump_buffer_timer = max(jump_state.jump_buffer_timer - delta, 0.0)
-
-	if should_apply_gravity:
-		var gravity_scale := cfg.fall_multiplier if vel.y < 0.0 else 1.0
-		vel.y -= GRAVITY * gravity_scale * delta
-
+		vel.y = (-GRAVITY)
+	
 	body.velocity = vel
-	var __ := body.move_and_slide()
-
-	var is_on_floor_now := body.is_on_floor()
-	jump_state.was_on_floor = is_on_floor_now
-	if is_on_floor_now:
-		jump_state.jumps_remaining = cfg.max_jumps
-		jump_state.coyote_timer = cfg.coyote_time
-		jump_state.apex_hold_timer = 0.0
-		jump_state.apex_hold_active = false
+	var _collided := body.move_and_slide()
 
 	# Rotate body toward movement direction if there is input
 	if dir.length() > 0.001:
@@ -107,4 +60,145 @@ func process(entities: Array[Entity], components: Array[Array], delta: float) ->
 		body.rotation.y = lerp_angle(current_yaw, target_yaw, clampf(cfg.turn_rate * delta, 0.0, 1.0))
 
 	# Sync ECS transform from node
-	c_trs.position = body.global_position
+	components[3][0].position = body.global_position
+
+
+	## Old movement code for reference
+	# var camera_state: CameraStateData = LocalCache.camera_global.camera_state
+
+	# if camera_state == null:
+	# 	return
+
+	# var move: C_MoveInput = components[0][0]
+	# var cfg: C_PlayerMovementConfig = components[1][0]
+	# var jump_state: C_PlayerJumpState = components[2][0]
+	# var c_trs: C_Transform = components[3][0]
+
+	# var body := (entities[0] as Node) as CharacterBody3D
+
+	# # Build camera-relative move direction
+	# var dir := Vector3.ZERO
+	# if move.dir.length_squared() >= HORIZONTAL_EPSILON:
+	# 	# Construct yaw-only basis from camera yaw
+	# 	var yaw_basis := Basis(Vector3.UP, deg_to_rad(camera_state.yaw))
+	# 	var forward := -yaw_basis.z
+	# 	var right := yaw_basis.x
+	# 	dir = ((right * move.dir.x) + (forward * move.dir.y)).normalized()
+
+	# var was_on_floor := body.is_on_floor()
+
+	# var base_speed := 0.0
+	# match move.state:
+	# 	C_MoveInput.MovementState.RUN:
+	# 		base_speed = cfg.run_speed
+	# 	C_MoveInput.MovementState.JOG:
+	# 		base_speed = cfg.jog_speed
+	# 	C_MoveInput.MovementState.WALK:
+	# 		base_speed = cfg.walk_speed
+	# 	C_MoveInput.MovementState.CROUCH:
+	# 		base_speed = cfg.walk_speed / 1.5
+	# 	C_MoveInput.MovementState.IDLE:
+	# 		base_speed = 0.0
+
+	# var control_multiplier := 1.0 if was_on_floor else cfg.air_control_multiplier
+	# var target_speed := base_speed * control_multiplier
+
+	# # Preserve vertical velocity; apply planar movement
+	# var vel := body.velocity
+	# var desired_horizontal := dir * base_speed
+	# var horizontal_vel := Vector3(vel.x, 0.0, vel.z)
+
+	# if was_on_floor:
+	# 	horizontal_vel = desired_horizontal
+	# else:
+	# 	if desired_horizontal.length_squared() > AIR_BLEND_EPSILON:
+	# 		var forward_dir := desired_horizontal.normalized()
+	# 		var current_forward_speed := horizontal_vel.dot(forward_dir)
+	# 		var target_forward_speed := desired_horizontal.length()
+	# 		var forward_speed := lerpf(current_forward_speed, target_forward_speed, clampf(cfg.air_forward_accel * delta, 0.0, 1.0))
+	# 		var lateral := horizontal_vel - forward_dir * current_forward_speed
+	# 		lateral *= clampf(cfg.air_lateral_damp, 0.0, 1.0)
+	# 		horizontal_vel = forward_dir * forward_speed + lateral
+	# 	else:
+	# 		horizontal_vel = horizontal_vel.move_toward(Vector3.ZERO, cfg.air_idle_damp * delta)
+
+	# vel.x = horizontal_vel.x
+	# vel.z = horizontal_vel.z
+
+	# # Handle jumping and gravity
+	# if was_on_floor:
+	# 	jump_state.coyote_timer = cfg.coyote_time
+	# 	jump_state.jumps_remaining = cfg.max_jumps
+	# 	jump_state.apex_hold_timer = 0.0
+	# 	jump_state.apex_hold_active = false
+	# else:
+	# 	jump_state.coyote_timer = max(jump_state.coyote_timer - delta, 0.0)
+
+	# var jump_pressed := move.jump_pressed
+	# move.jump_pressed = false
+	# if jump_pressed:
+	# 	if jump_state.jumps_remaining > 0 or was_on_floor or jump_state.coyote_timer > 0.0:
+	# 		jump_state.jump_buffer_timer = cfg.jump_buffer_time
+	# 	else:
+	# 		jump_state.jump_buffer_timer = 0.0
+
+	# var should_apply_gravity := true
+	# var can_ground_jump := was_on_floor or jump_state.coyote_timer > 0.0
+	# var has_jumps := jump_state.jumps_remaining > 0
+
+	# if jump_state.jump_buffer_timer > 0.0 and has_jumps and (can_ground_jump or not was_on_floor):
+	# 	# Perform jump
+	# 	vel.y = cfg.jump_speed
+	# 	jump_state.jump_buffer_timer = 0.0
+	# 	jump_state.coyote_timer = 0.0
+	# 	jump_state.apex_hold_timer = 0.0
+	# 	jump_state.apex_hold_active = false
+	# 	jump_state.jumps_remaining = max(jump_state.jumps_remaining - 1, 0)
+	# 	should_apply_gravity = false
+	# else:
+	# 	jump_state.jump_buffer_timer = max(jump_state.jump_buffer_timer - delta, 0.0)
+
+	# if not was_on_floor:
+	# 	if jump_state.apex_hold_active:
+	# 		jump_state.apex_hold_timer = max(jump_state.apex_hold_timer - delta, 0.0)
+	# 		vel.y = 0.0
+	# 		should_apply_gravity = false
+	# 		if jump_state.apex_hold_timer <= 0.0:
+	# 			jump_state.apex_hold_active = false
+	# 			vel.y = - cfg.apex_drop_speed
+	# 	elif should_apply_gravity and vel.y > 0.0 and vel.y <= cfg.apex_snap_threshold:
+	# 		jump_state.apex_hold_active = true
+	# 		jump_state.apex_hold_timer = cfg.apex_hold_time
+	# 		vel.y = 0.0
+	# 		should_apply_gravity = false
+	# else:
+	# 	jump_state.apex_hold_active = false
+	# 	jump_state.apex_hold_timer = 0.0
+
+	# if should_apply_gravity:
+	# 	var gravity_scale := 1.0
+	# 	if vel.y < 0.0:
+	# 		gravity_scale = cfg.fall_multiplier
+	# 		if vel.y < -cfg.fast_fall_trigger_speed:
+	# 			gravity_scale *= cfg.fast_fall_multiplier
+	# 	vel.y -= GRAVITY * gravity_scale * delta
+
+	# body.velocity = vel
+	# var __ := body.move_and_slide()
+
+	# var is_on_floor_now := body.is_on_floor()
+	# jump_state.was_on_floor = is_on_floor_now
+	# if is_on_floor_now:
+	# 	jump_state.jumps_remaining = cfg.max_jumps
+	# 	jump_state.coyote_timer = cfg.coyote_time
+	# 	jump_state.apex_hold_timer = 0.0
+	# 	jump_state.apex_hold_active = false
+
+	# # Rotate body toward movement direction if there is input
+	# if dir.length() > 0.001:
+	# 	var current_yaw := body.rotation.y
+	# 	var target_yaw := atan2(dir.x, dir.z) # X/Z → yaw
+	# 	body.rotation.y = lerp_angle(current_yaw, target_yaw, clampf(cfg.turn_rate * delta, 0.0, 1.0))
+
+	# # Sync ECS transform from node
+	# c_trs.position = body.global_position
