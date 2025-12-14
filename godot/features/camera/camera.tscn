@@ -8,6 +8,7 @@ radius = 0.2
 [node name="Camera" type="Node3D"]
 
 [node name="YawPivot" type="Node3D" parent="."]
+physics_interpolation_mode = 2
 
 [node name="PitchPivot" type="Node3D" parent="YawPivot"]
 
