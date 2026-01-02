@@ -144,7 +144,7 @@ You play as an occupant of Reia's realm. One of your main tasks is to find spiri
     
     How about the not-so-technical stuff first. We're working on designing new locations for you to explore, drawing pretty art with awesome colors to make you drool, a Map system, a new UI system, and a custom quest system so you get intricate questing much like *Old School Runescape* and other great titles!
 
-    Now for the slightly technical side of things -- our tech stack! We're designing our our own [networking solution](https://github.com/Quaint-Studios/Sustenet), we're use Turso with Rust so we can support databases both offline and offline, we also use Bevy-ECS with Rust, and we use GDScript for the bulk of the game!
+    Now for the slightly technical side of things -- our tech stack! We're designing our our own [networking solution](https://github.com/Quaint-Studios/Sustenet), we're use Turso with Rust so we can support databases both offline and offline, we also use [csprance/gecs](https://github.com/csprance/gecs) and GDScript for the bulk of the game!
 
 3. Are there upcoming alpha or beta tests?
 
