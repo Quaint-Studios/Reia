@@ -1,4 +1,4 @@
-[gd_resource type="Environment" load_steps=4 format=3 uid="uid://cfihjq48kmy3v"]
+[gd_resource type="Environment" format=3 uid="uid://cfihjq48kmy3v"]
 
 [ext_resource type="Texture2D" uid="uid://gy5ltve2fcfr" path="res://assets/textures/skyboxes/mountain_skybox_0.jpg" id="1_33lyb"]
 

@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cejo0i5slihx3" path="res://ecs/main.gd" id="1_p72kj"]
 [ext_resource type="Script" uid="uid://d1e4rcintqnoc" path="res://features/inventory/ui/inventory_ui.gd" id="2_6n66g"]
 [ext_resource type="Material" uid="uid://xdy3kjia5745" path="res://presentation/shaders/materials/examples/example_wood.material" id="2_58eoa"]
+[ext_resource type="Environment" uid="uid://cfihjq48kmy3v" path="res://scenes/regions/jadewater_falls/jadewater_falls_day.tres" id="4_hha2g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6n66g"]
 albedo_color = Color(0.5526029, 1, 0.38857287, 1)
@@ -12,7 +13,15 @@ albedo_color = Color(0.61, 0.46410835, 0.3965, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58eoa"]
 transparency = 1
-albedo_color = Color(0.24313726, 0.6784314, 1, 0.34901962)
+depth_draw_mode = 1
+shading_mode = 0
+disable_ambient_light = true
+disable_fog = true
+disable_specular_occlusion = true
+albedo_color = Color(0.24000001, 0.68333346, 1, 0.34901962)
+proximity_fade_enabled = true
+proximity_fade_distance = 0.1
+distance_fade_mode = 1
 
 [node name="JadewaterFalls" type="Node3D" unique_id=561585495]
 script = ExtResource("1_p72kj")
@@ -89,3 +98,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.96085167, -16.342697)
 polygon = PackedVector2Array(-11, -1, -27, 1, 8, 1, 56.155743, 1.338088, 8, -1)
 depth = 14.72
 material = SubResource("StandardMaterial3D_58eoa")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=53836472]
+environment = ExtResource("4_hha2g")
