@@ -4,9 +4,15 @@
 [ext_resource type="Script" uid="uid://d1e4rcintqnoc" path="res://features/inventory/ui/inventory_ui.gd" id="2_6n66g"]
 [ext_resource type="Material" uid="uid://xdy3kjia5745" path="res://presentation/shaders/materials/examples/example_wood.material" id="2_58eoa"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6n66g"]
+albedo_color = Color(0.5526029, 1, 0.38857287, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hha2g"]
+albedo_color = Color(0.61, 0.46410835, 0.3965, 1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58eoa"]
 transparency = 1
-albedo_color = Color(0.24313726, 0.45490196, 1, 0.34901962)
+albedo_color = Color(0.24313726, 0.6784314, 1, 0.34901962)
 
 [node name="JadewaterFalls" type="Node3D" unique_id=561585495]
 script = ExtResource("1_p72kj")
@@ -50,6 +56,7 @@ use_collision = true
 [node name="MapBase" type="CSGBox3D" parent="Level/Map" unique_id=549568796]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, -91.89209)
 size = Vector3(250.949, 3, 255.029)
+material = SubResource("StandardMaterial3D_6n66g")
 
 [node name="Masks" type="CSGCombiner3D" parent="Level/Map" unique_id=927076071]
 operation = 2
@@ -58,6 +65,7 @@ operation = 2
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.45439148, -16.342697)
 polygon = PackedVector2Array(-11, -1, -27, 1, 8, 1, 57.672462, 1.7450142, 8, -1)
 depth = 14.72
+material = SubResource("StandardMaterial3D_hha2g")
 
 [node name="Props" type="CSGCombiner3D" parent="Level" unique_id=692698705]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.5803108)
