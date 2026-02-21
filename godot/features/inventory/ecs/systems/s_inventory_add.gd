@@ -47,7 +47,7 @@ func _try_merge_stack(inv: Entity, incoming_item: Entity, add_count: int) -> boo
 	# Search existing contained items (relationship targets)
 	var rels := inv.get_relationships(InventoryRelation.any_contains_item())
 	for rel in rels:
-		var existing_item : Entity = rel.target # as Entity
+		var existing_item: Entity = rel.target # as Entity
 		if existing_item == null:
 			continue
 		if not existing_item.has_component(C_ItemStack):
@@ -59,7 +59,7 @@ func _try_merge_stack(inv: Entity, incoming_item: Entity, add_count: int) -> boo
 		if not ex_stack.is_stackable:
 			continue
 
-		# “Same stack type” rule (replace with item_def_id later)
+		# Same stack type rule (replace with item_def_id later)
 		if ex_item.category != in_item.category:
 			continue
 		if ex_item.name != in_item.name:

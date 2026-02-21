@@ -26,7 +26,7 @@ static func get_inventory_of_player(player: Entity) -> Entity:
 	var rels := player.get_relationships(any_owns_inventory())
 	if rels.is_empty():
 		return null
-	return rels[0].target as Entity
+	return rels[0].target # as Entity
 
 static func inventory_slot_count(inventory: Entity) -> int:
 	return inventory.get_relationships(any_contains_item()).size()

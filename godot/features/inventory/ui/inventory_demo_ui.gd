@@ -22,7 +22,7 @@ var btn_pickup: Button
 var _current_tab: int = 0
 var _selected_item_id: String = ""
 
-# Tabs: 0..5 are categories, 6 is “Ground”
+# Tabs: 0..5 are categories, 6 is Ground
 const TAB_GROUND := 6
 
 var _ui_root: Control
@@ -31,6 +31,10 @@ var _ui_visible: bool = false
 
 func _ready() -> void:
 	randomize()
+
+	# CanvasLayer... load theme and set it here.
+	# Treat a CanvasLayer like a component container that has a CSS file.
+	# Apply the CSS, create the components within it.
 
 	svc = InventoryDemoService.new()
 	svc.seed_demo_data()

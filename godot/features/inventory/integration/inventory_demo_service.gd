@@ -19,7 +19,7 @@ class Item:
 		stackable = stackable_
 		count = count_
 
-# “Ownership” for demo: inventory is a dict, ground is a dict
+# Ownership for demo: inventory is a dict, ground is a dict
 var _inventory: Dictionary = {} # id -> Item
 var _ground: Dictionary = {} # id -> Item
 
