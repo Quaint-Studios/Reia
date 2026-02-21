@@ -1,1 +1,0 @@
-class_name C_Equipment extends C_ItemData
