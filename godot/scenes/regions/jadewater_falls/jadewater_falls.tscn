@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://b5wk75hsjto8v"]
 
 [ext_resource type="Script" uid="uid://cejo0i5slihx3" path="res://ecs/main.gd" id="1_p72kj"]
-[ext_resource type="Script" uid="uid://ch8utimurbrpm" path="res://features/inventory/ui/inventory_demo_ui.gd" id="2_6n66g"]
+[ext_resource type="Script" uid="uid://d1e4rcintqnoc" path="res://features/inventory/ui/inventory_ui.gd" id="2_6n66g"]
 [ext_resource type="Material" uid="uid://xdy3kjia5745" path="res://presentation/shaders/materials/examples/example_wood.material" id="2_58eoa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58eoa"]
