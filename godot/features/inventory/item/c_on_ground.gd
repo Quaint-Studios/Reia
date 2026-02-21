@@ -1,0 +1,2 @@
+class_name C_OnGround
+extends Component
