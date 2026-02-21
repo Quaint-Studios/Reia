@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dnlo2po010pi7"]
+[gd_scene format=3 uid="uid://dnlo2po010pi7"]
 
 [ext_resource type="Script" uid="uid://cdihsb8bluew1" path="res://features/player/e_player.gd" id="1_tqrk1"]
+[ext_resource type="PackedScene" uid="uid://bfkb7tvrw3yrg" path="res://assets/models/player/Reia_LOD1.gltf" id="2_npkru"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6sorm"]
 
@@ -11,17 +12,18 @@ albedo_color = Color(0, 0, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_npkru"]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" unique_id=148713965]
 collision_layer = 2
 collision_mask = 29
 script = ExtResource("1_tqrk1")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1072131416]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_6sorm")
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=405963724]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
 layers = 4
 use_collision = true
 collision_layer = 2
@@ -29,8 +31,11 @@ collision_mask = 29
 mesh = SubResource("CapsuleMesh_npkru")
 material = SubResource("StandardMaterial3D_tqrk1")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1530689219]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.4)
+visible = false
 layers = 4
 size = Vector3(0.4, 0.25, 0.25)
 material = SubResource("StandardMaterial3D_npkru")
+
+[node name="Reia_LOD1" parent="." unique_id=1996810828 instance=ExtResource("2_npkru")]

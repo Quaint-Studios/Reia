@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://clk264aapxxuu"]
+[gd_resource type="Theme" format=3 uid="uid://clk264aapxxuu"]
 
 [ext_resource type="FontFile" uid="uid://cgiw1u6elrrsd" path="res://assets/fonts/poppins-latin-700-normal.ttf" id="1_1d5rj"]
 [ext_resource type="FontFile" uid="uid://dqprfmwn0cetn" path="res://assets/fonts/poppins-latin-400-normal.ttf" id="1_7alsp"]

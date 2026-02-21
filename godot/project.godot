@@ -8,6 +8,10 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Reia"
@@ -22,7 +26,7 @@ config/version="1.1.0"
 config/tags=PackedStringArray("3d", "adventure", "game", "major", "mmo", "reia", "rpg")
 run/main_scene="uid://djtfroocdt7mo"
 config/use_custom_user_dir=true
-config/features=PackedStringArray("4.5", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
 boot_splash/image="uid://cjsvcwnm1cqda"
 config/icon="uid://c01csoxrxapip"
@@ -33,8 +37,8 @@ buses/default_bus_layout="uid://82gy4qqnnk7o"
 
 [autoload]
 
-SoundManager="*res://addons/sound_manager/sound_manager.gd"
-ECS="*res://addons/gecs/ecs/ecs.gd"
+SoundManager="*uid://rvcpqiv8ntxa"
+ECS="*uid://dfqwl5njvdnmq"
 LocalCache="*res://features/globals/local_cache.gd"
 InputManager="*res://features/globals/input_manager.gd"
 
@@ -174,6 +178,11 @@ ui_release_camera={
 aim={
 "deadzone": 0.2,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(188, 21),"global_position":Vector2(197, 69),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+stash={
+"deadzone": 0.2,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":73,"key_label":0,"unicode":105,"location":0,"echo":false,"script":null)
 ]
 }
 
