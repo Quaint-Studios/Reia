@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://kqb6iomokgg6"]
+[gd_scene format=3 uid="uid://kqb6iomokgg6"]
 
 [ext_resource type="Script" uid="uid://d4bgrp2jmw8px" path="res://tests/perf/attackable_benchmark.gd" id="1_jefcj"]
 
-[node name="AttackableBenchmark" type="Node3D"]
+[node name="AttackableBenchmark" type="Node3D" unique_id=1993061506]
 script = ExtResource("1_jefcj")
 count = 50000
 enable_overlap_query = true
