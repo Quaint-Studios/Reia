@@ -6,6 +6,10 @@ static func sync_transform(entity: Entity) -> void:
 		@warning_ignore("unsafe_property_access")
 		c_trs.position = entity.global_position
 
+static func update_transform3d(entity: Entity, t3d: Transform3D) -> void:
+	@warning_ignore("unsafe_property_access")
+	entity.global_transform = t3d
+
 static func update_transform(entity: Entity, new_position: Vector3) -> void:
 	if entity.has_component(C_Transform):
 		var c_trs := entity.get_component(C_Transform) as C_Transform

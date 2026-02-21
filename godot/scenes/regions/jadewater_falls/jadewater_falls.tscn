@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b5wk75hsjto8v"]
 
 [ext_resource type="Script" uid="uid://cejo0i5slihx3" path="res://ecs/main.gd" id="1_p72kj"]
+[ext_resource type="Script" uid="uid://ch8utimurbrpm" path="res://features/inventory/example/inventory_demo_ui.gd" id="2_6n66g"]
 [ext_resource type="Material" uid="uid://xdy3kjia5745" path="res://presentation/shaders/materials/examples/example_wood.material" id="2_58eoa"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_58eoa"]
@@ -11,6 +12,7 @@ albedo_color = Color(0.24313726, 0.45490196, 1, 0.34901962)
 script = ExtResource("1_p72kj")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=440870607]
+script = ExtResource("2_6n66g")
 
 [node name="Level" type="Node3D" parent="." unique_id=1022206734]
 

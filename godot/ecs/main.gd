@@ -4,6 +4,7 @@ var world: World = World.new()
 
 const GROUP_GAMEPLAY: String = "gameplay"
 const GROUP_INPUT: String = "input"
+const GROUP_INVENTORY: String = "inventory"
 const GROUP_PHYSICS: String = "physics"
 
 func _ready() -> void:
@@ -50,6 +51,22 @@ func _register_systems() -> void:
 	# world.add_system(camera_input)
 
 	# GAMEPLAY
+
+	# INVENTORY
+	var inventory_add := InventoryAddSystem.new()
+	inventory_add.name = "InventoryAddSystem"
+	inventory_add.group = GROUP_INVENTORY
+	world.add_system(inventory_add)
+
+	var pickup := PickupSystem.new()
+	pickup.name = "PickupSystem"
+	pickup.group = GROUP_INVENTORY
+	world.add_system(pickup)
+
+	var drop := DropSystem.new()
+	drop.name = "DropSystem"
+	drop.group = GROUP_INVENTORY
+	world.add_system(drop)
 
 	# PHYSICS
 	var player_move := PlayerMovementSystem.new()

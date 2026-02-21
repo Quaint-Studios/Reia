@@ -12,6 +12,7 @@ func define_components() -> Array:
 		C_PlayerJumpState.new(),
 		C_PlayerMovementConfig.new(),
 
+		C_Player.new(),
 		# C_LocalPlayer.new(), # Mark this entity as the local player
 
 		# C_Health.new(100.0),
