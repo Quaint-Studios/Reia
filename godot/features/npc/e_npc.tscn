@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://c3a020ydsa382"]
+[gd_scene format=3 uid="uid://c3a020ydsa382"]
 
 [ext_resource type="Script" uid="uid://dji70bvifpqv7" path="res://features/npc/e_npc.gd" id="1_g8x32"]
 
@@ -7,20 +7,20 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_g8x32"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u0625"]
-albedo_color = Color(0, 1, 0, 1)
+albedo_color = Color(0.101960786, 0.44313726, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uyfg4"]
 
-[node name="NPC" type="StaticBody3D"]
+[node name="NPC" type="StaticBody3D" unique_id=203178503]
 collision_layer = 16
 collision_mask = 3
 script = ExtResource("1_g8x32")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1803654602]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CapsuleShape3D_u0625")
 
-[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+[node name="CSGMesh3D" type="CSGMesh3D" parent="." unique_id=186401884]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 layers = 16
 use_collision = true
@@ -29,7 +29,7 @@ collision_mask = 3
 mesh = SubResource("CapsuleMesh_g8x32")
 material = SubResource("StandardMaterial3D_u0625")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=2077609165]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.4)
 layers = 16
 size = Vector3(0.4, 0.25, 0.25)
