@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dnlo2po010pi7"]
 
 [ext_resource type="Script" uid="uid://cdihsb8bluew1" path="res://features/player/e_player.gd" id="1_tqrk1"]
-[ext_resource type="PackedScene" uid="uid://bfkb7tvrw3yrg" path="res://assets/models/player/Reia_LOD1.gltf" id="2_npkru"]
+[ext_resource type="PackedScene" uid="uid://dypbwl0bgnptt" path="res://assets/models/player/Reia.glb" id="2_npkru"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_6sorm"]
 

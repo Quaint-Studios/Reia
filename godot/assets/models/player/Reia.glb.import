@@ -1,0 +1,60 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://dypbwl0bgnptt"
+path="res://.godot/imported/Reia.glb-400ff6261fc26f839f158e7e032e20a0.scn"
+
+[deps]
+
+source_file="res://assets/models/player/Reia.glb"
+dest_files=["res://.godot/imported/Reia.glb-400ff6261fc26f839f158e7e032e20a0.scn"]
+
+[params]
+
+nodes/root_type=""
+nodes/root_name=""
+nodes/root_script=null
+nodes/apply_root_scale=true
+nodes/root_scale=1.0
+nodes/import_as_skeleton_bones=false
+nodes/use_name_suffixes=true
+nodes/use_node_type_suffixes=true
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+meshes/force_disable_compression=false
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+animation/import_rest_as_RESET=false
+import_script/path=""
+materials/extract=2
+materials/extract_format=1
+materials/extract_path="res://assets/models/player/mats"
+_subresources={
+"materials": {
+"reia_character_1_body": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/models/player/mats/reia_character_1_body.res",
+"use_external/path": "uid://d27adh0udyqjg"
+},
+"reia_character_1_cloth": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/models/player/mats/reia_character_1_cloth.res",
+"use_external/path": "uid://bmpa1yiy721md"
+},
+"reia_character_1_head": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://assets/models/player/mats/reia_character_1_head.res",
+"use_external/path": "uid://bpwfe02ydupq2"
+}
+}
+}
+gltf/naming_version=2
+gltf/embedded_image_handling=1

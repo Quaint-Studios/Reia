@@ -42,6 +42,7 @@ godot/todo/assets/skyboxes/mountain_skybox_0_night.png~ filter=lfs diff=lfs merg
 *.gltf filter=lfs diff=lfs merge=lfs -text
 *.glb filter=lfs diff=lfs merge=lfs -text
 *.glb.unwrap_cache filter=lfs diff=lfs merge=lfs -text
+*.res filter=lfs diff=lfs merge=lfs -text
 *.blend filter=lfs diff=lfs merge=lfs -text
 *.fbx filter=lfs diff=lfs merge=lfs -text
 *.obj filter=lfs diff=lfs merge=lfs -text
