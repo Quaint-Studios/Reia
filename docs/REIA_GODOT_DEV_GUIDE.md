@@ -139,6 +139,7 @@ res://
     │   └── ui/
     │       ├── components/
     │       │   ├── atoms/
+    │       │   │   ├── test_primary_action_button.gd
     │       │   │   └── test_base_line_edit.gd
     │       │   └── molecules/
     │       │       └── test_main_menu_button.gd
@@ -579,8 +580,31 @@ func _init() -> void:
 class_name BaseLineEdit extends LineEdit
 
 func _init() -> void:
-    theme_type_variation = "BaseLineEdit"
-    add_theme_color_override("font_color", UIColors.Base.DEFAULT_TEXT)
+	theme_type_variation = "BaseLineEdit"
+	add_theme_color_override("font_color", UIColors.Base.DEFAULT_TEXT)
+```
+
+**4\. The Button Atoms:**
+
+```
+## res://client/ui/components/atoms/primary_action_button.gd
+class_name PrimaryActionButton extends Button
+
+func _init() -> void:
+    theme_type_variation = "PrimaryActionButton" # Pulls from ThemeGen (Section 8.3)
+    mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+
+# Encapsulate global audio logic directly in the atom
+mouse_entered.connect(_play_hover_sound)
+pressed.connect(_play_click_sound)
+
+func _play_hover_sound() -> void:
+	# E.g., GlobalAudio.play_ui("hover")
+	pass
+
+func _play_click_sound() -> void:
+	# E.g., GlobalAudio.play_ui("click")
+	pass
 ```
 
 ### 9.3 The Molecules (Pure GDScript Composites)
