@@ -6,7 +6,7 @@ This document outlines the architecture for a hybrid MMO/Offline game using Godo
 
 ## 1\. Massive Scale Project Structure
 
-When dealing with tens of thousands of files across complex MMO systems, we use **Domain-Driven Design**. Everything is grouped by feature, and named using GECS conventions (`C_Component`, `SystemNameSystem`, `e_entity_name.gd`).
+When dealing with tens of thousands of files across complex MMO systems, we use **Domain-Driven Design**. Everything is grouped by feature, and named using GECS conventions (`C_Component`, `SystemNameSystem`, `e_entity_name.gd`). The project utilizes the **Mirror Pattern** for testing, separating source code from tests to prevent client bloat.
 
 ```
 res://
@@ -50,73 +50,116 @@ res://
 │   │   └── daos/                       # Data Access Objects
 │   └── ServerMain.gd
 │
-└── client/                             # Client-Only Logic (Presentation)
-    ├── observers/                      # GECS Observers bridging ECS to UI & VFX
-    │   ├── o_inventory_ui.gd           # Listens for C_HasItem changes, updates UI
-    │   ├── o_health_ui.gd              # Listens for C_Health changes, updates HUD
-    │   ├── o_combat_vfx.gd
-    │   └── o_animation_state.gd
-    ├── ui/                             # UI Scenes & Scripts (The Reverse Hybrid Approach)
-    │   ├── core/                       # Global UI Managers
-    │   │   ├── ui_colors.gd            # Global color namespace registry (UIColors.Base.PURE_WHITE)
-    │   │   ├── ui_window_manager.gd    # Handles Z-sorting, window dragging, focus
-    │   │   ├── ui_event_bus.gd         # Routes UI clicks to the ECS Command Buffer
-    │   │   └── ui_tooltip_manager.gd   # Global tooltip singleton
-    │   │
-    │   ├── themes/                     # Programmatic Styling (ThemeGen)
-    │   │   ├── generators/             # @tool scripts that build the themes
-    │   │   │   └── global_theme_gen.gd
-    │   │   ├── generated/              # The resulting .tres files
-    │   │   │   └── global_theme.tres
-    │   │   └── assets/                 # UI-specific raw assets (Atlases, Fonts)
-    │   │       ├── fonts/
-    │   │       └── atlas/
-    │   │           ├── ui_icons.png    # Single draw-call atlas for all UI icons
-    │   │           └── ui_icons.tres   # AtlasTexture definitions
-    │   │
-    │   ├── components/                 # Atomic Design Hierarchy
-    │   │   ├── atoms/                  # Base primitives (Pure GDScript wrappers)
+├── client/                             # Client-Only Logic (Presentation)
+│   ├── observers/                      # GECS Observers bridging ECS to UI & VFX
+│   │   ├── o_inventory_ui.gd           # Listens for C_HasItem changes, updates UI
+│   │   ├── o_health_ui.gd              # Listens for C_Health changes, updates HUD
+│   │   ├── o_combat_vfx.gd
+│   │   └── o_animation_state.gd
+│   ├── ui/                             # UI Scenes & Scripts (The Reverse Hybrid Approach)
+│   │   ├── core/                       # Global UI Managers
+│   │   │   ├── ui_colors.gd            # Global color namespace registry (UIColors.Base.PURE_WHITE)
+│   │   │   ├── ui_window_manager.gd    # Handles Z-sorting, window dragging, focus
+│   │   │   ├── ui_event_bus.gd         # Routes UI clicks to the ECS Command Buffer
+│   │   │   └── ui_tooltip_manager.gd   # Global tooltip singleton
+│   │   │
+│   │   ├── themes/                     # Programmatic Styling (ThemeGen)
+│   │   │   ├── generators/             # @tool scripts that build the themes
+│   │   │   │   └── global_theme_gen.gd
+│   │   │   ├── generated/              # The resulting .tres files
+│   │   │   │   └── global_theme.tres
+│   │   │   └── assets/                 # UI-specific raw assets (Atlases, Fonts)
+│   │   │       ├── fonts/
+│   │   │       └── atlas/
+│   │   │           ├── ui_icons.png    # Single draw-call atlas for all UI icons
+│   │   │           └── ui_icons.tres   # AtlasTexture definitions
+│   │   │
+│   │   ├── components/                 # Atomic Design Hierarchy
+│   │   │   ├── atoms/                  # Base primitives (Pure GDScript wrappers)
 │   │   │   │   ├── primary_action_button.gd # Handles its own hover/click audio & states
-    │   │   │   ├── header_label.gd          # Enforces H1/H2 typography tokens
-    │   │   │   ├── body_text_label.gd       # Enforces standard body typography tokens
-    │   │   │   ├── window_panel_bg.gd       # Base 9-slice background for all windows
-    │   │   │   ├── item_icon_rect.gd        # TextureRect enforcing standard atlas sizes
-    │   │   │   ├── svg_icon.gd              # TextureRect wrapper strictly for scalable SVGs
-    │   │   │   └── base_line_edit.gd        # Base text input field wrapper
-    │   │   │
-    │   │   ├── molecules/              # Composites of Atoms (Pure GDScript)
-    │   │   │   ├── main_menu_button.gd      # header_label + 2x svg_icon with hover logic
-    │   │   │   ├── pill_button.gd           # StyleBox panel + svg_icon + body_text_label
-    │   │   │   ├── labeled_input_field.gd   # body_text_label + base_line_edit
-    │   │   │   ├── loot_slot.gd             # item_icon_rect + body_text_label (Qty)
-    │   │   │   ├── stat_block.gd            # header_label + body_text_label
-    │   │   │   └── drag_titlebar.gd         # window_panel_bg + header_label + close button
-    │   │   │
-    │   │   └── organisms/              # Complex, reusable UI modules (Godot Scenes)
-    │   │       ├── main_menu_cluster.tscn   # VBox container for main_menu_button.gd instances
-    │   │       ├── login_credentials_form.tscn # Container for labeled_input_field.gd instances
-    │   │       ├── inventory_grid.tscn      # Grid container for loot_slot.gd instances
-    │   │       ├── action_bar.tscn          # Scene handling layout of hotkey bindings
-    │   │       └── unit_frame.tscn          # Arranges Player/Target health and mana bars
-    │   │
-    │   └── screens/                    # Top-level window containers (Godot Scenes)
-    │       ├── hud/                    # Static, non-closable UI
-    │       │   ├── main_hud.tscn
-    │       │   └── chat_box.tscn
-    │       │
-    │       ├── windows/                # Draggable, overlapping panels
-    │       │   ├── inventory_window.tscn
-    │       │   ├── character_sheet.tscn
-    │       │   └── bank_window.tscn
-    │       │
-    │       └── menus/                  # Full-screen blocking UI
-    │           ├── login_screen.tscn   # Root canvas composing the menu organisms
-    │           ├── login_screen.gd     # State machine switching the organisms
-    │           └── game_menu.tscn
+│   │   │   │   ├── header_label.gd          # Enforces H1/H2 typography tokens
+│   │   │   │   ├── body_text_label.gd       # Enforces standard body typography tokens
+│   │   │   │   ├── window_panel_bg.gd       # Base 9-slice background for all windows
+│   │   │   │   ├── item_icon_rect.gd        # TextureRect enforcing standard atlas sizes
+│   │   │   │   ├── svg_icon.gd              # TextureRect wrapper strictly for scalable SVGs
+│   │   │   │   └── base_line_edit.gd        # Base text input field wrapper
+│   │   │   │
+│   │   │   ├── molecules/              # Composites of Atoms (Pure GDScript)
+│   │   │   │   ├── main_menu_button.gd      # header_label + 2x svg_icon with hover logic
+│   │   │   │   ├── pill_button.gd           # StyleBox panel + svg_icon + body_text_label
+│   │   │   │   ├── labeled_input_field.gd   # body_text_label + base_line_edit
+│   │   │   │   ├── loot_slot.gd             # item_icon_rect + body_text_label (Qty)
+│   │   │   │   ├── stat_block.gd            # header_label + body_text_label
+│   │   │   │   └── drag_titlebar.gd         # window_panel_bg + header_label + close button
+│   │   │   │
+│   │   │   └── organisms/              # Complex, reusable UI modules (Godot Scenes)
+│   │   │       ├── main_menu_cluster.tscn   # VBox container for main_menu_button.gd instances
+│   │   │       ├── login_credentials_form.tscn # Container for labeled_input_field.gd instances
+│   │   │       ├── inventory_grid.tscn      # Grid container for loot_slot.gd instances
+│   │   │       ├── action_bar.tscn          # Scene handling layout of hotkey bindings
+│   │   │       └── unit_frame.tscn          # Arranges Player/Target health and mana bars
+│   │   │
+│   │   └── screens/                    # Top-level window containers (Godot Scenes)
+│   │       ├── hud/                    # Static, non-closable UI
+│   │       │   ├── main_hud.tscn
+│   │       │   └── chat_box.tscn
+│   │       │
+│   │       ├── windows/                # Draggable, overlapping panels
+│   │       │   ├── inventory_window.tscn
+│   │       │   ├── character_sheet.tscn
+│   │       │   └── bank_window.tscn
+│   │       │
+│   │       └── menus/                  # Full-screen blocking UI
+│   │           ├── login_screen.tscn   # Root canvas composing the menu organisms
+│   │           ├── login_screen.gd     # State machine switching the organisms
+│   │           └── game_menu.tscn
+│   │
+│   ├── renderers/                      # ECS-to-Visual interpolation systems
+│   ├── assets/                         # Heavy asset storage
+│   └── ClientMain.gd
+│
+└── tests/                              # EXCLUDED FROM FINAL BUILD (GUT Tests)
+    ├── core/                           # Tier 1: ECS Simulation Tests
+    │   ├── features/
+    │   │   ├── combat/
+    │   │   │   └── test_s_damage_calculation.gd
+    │   │   ├── inventory/
+    │   │   │   ├── test_s_bank_access_validator.gd
+    │   │   │   └── test_s_inventory_execution.gd
+    │   │   └── physics_and_movement/
+    │   │       └── test_s_server_physics.gd
+    │   └── network/
+    │       ├── test_network_serializers.gd
+    │       └── test_packet_encryption.gd
     │
-    ├── renderers/                      # ECS-to-Visual interpolation systems
-    ├── assets/                         # Heavy asset storage
-    └── ClientMain.gd
+    ├── client/                         # Tier 2 & 3: Presentation & Bridge Tests
+    │   ├── observers/
+    │   │   ├── test_o_health_ui.gd
+    │   │   └── test_o_inventory_ui.gd
+    │   └── ui/
+    │       ├── components/
+    │       │   ├── atoms/
+    │       │   │   └── test_base_line_edit.gd
+    │       │   └── molecules/
+    │       │       └── test_main_menu_button.gd
+    │       └── core/
+    │           └── test_ui_event_bus.gd
+    │
+    ├── server/                         # Server-Specific Utilities Tests
+    │   ├── utils/
+    │   │   └── test_server_prefab_cache.gd
+    │   └── database/
+    │       └── test_player_dao.gd
+    │
+    └── integration/                    # Tier 4: End-to-End Tests (Organized by Epic)
+        ├── authentication/
+        │   ├── test_valid_login_spawns_character.gd
+        │   └── test_server_rejects_banned_player.gd
+        ├── economy/
+        │   ├── test_npc_vendor_transaction.gd
+        │   └── test_player_to_player_trade_flow.gd
+        └── combat/
+            └── test_player_kills_monster_and_loots.gd
 ```
 
 ## 2\. Entity Composition: GECS Scene Prefabs & Mass Spawning
@@ -661,4 +704,210 @@ func _fade_in(node: Control) -> void:
     node.show()
     var t = create_tween()
     t.tween_property(node, "modulate:a", 1.0, 0.2)
+```
+
+## 10\. Automated Testing Strategy (GUT Integration)
+
+In a massive-scale MMORPG, manual QA testing becomes impossible. Because this architecture enforces a strict separation of Simulation (ECS) and Presentation (Godot Nodes), the game is inherently modular and perfectly suited for Automated Testing using **GUT (Godot Unit Test)**.
+
+Tests are completely separated from the production game code to prevent bloating the exported client. The `tests/` directory strictly mirrors the `res://` directory structure (The Mirror Pattern).
+
+### 10.1 Tier 1: ECS Simulation Tests (The Math)
+
+ECS tests are incredibly fast because they do not require booting Godot's visual scene tree, physics engine, or rendering pipeline. We simply instantiate a mock `ECSWorld`, populate it with data components, run a specific system for one frame, and assert the resulting state.
+
+**Example: Testing the Bank Access Validator** This test ensures that a player cannot open a bank if they are standing more than 5 meters away from the Bank NPC.
+
+```gdscript
+# res://tests/core/features/inventory/test_s_bank_access_validator.gd
+class_name TestBankAccessValidator extends GutTest
+
+var world: ECSWorld
+var system: BankAccessValidator
+
+func before_each():
+    world = ECSWorld.new()
+    system = BankAccessValidator.new()
+    system.world = world # Inject the mock world
+
+func test_blocks_access_when_too_far_away():
+    # 1. Setup: Create the Bank NPC far away
+    var npc = world.create_entity()
+    npc.add(C_BankNPC.new())
+    npc.add(C_Transform.new(Vector3(100, 0, 0))) # 100 meters away
+
+    # 2. Setup: Create the Player at origin trying to access the bank
+    var target_inventory = world.create_entity()
+    target_inventory.add(C_BankTag.new())
+
+    var player = world.create_entity()
+    player.add(C_Transform.new(Vector3.ZERO))
+    player.add(C_InventoryOpenRequest.new(target_inventory.id))
+
+    # 3. Execute: Run the system for 1 frame
+    var entities = [player]
+    system.process(entities, [], 0.016)
+
+    # 4. Assert: The system should have added C_ActionBlocked
+    assert_true(player.has(C_ActionBlocked), "Player should be blocked from opening a distant bank.")
+    var error = player.get_component(C_ActionBlocked) as C_ActionBlocked
+    assert_eq(error.error_code, InventoryErrors.TOO_FAR_FROM_BANK)
+
+func test_allows_access_when_in_range():
+    # 1. Setup: Create the Bank NPC within 5 meters
+    var npc = world.create_entity()
+    npc.add(C_BankNPC.new())
+    npc.add(C_Transform.new(Vector3(3, 0, 0))) # 3 meters away
+
+    # ... (Player setup identical to above) ...
+
+    # 3. Execute
+    var entities = [player]
+    system.process(entities, [], 0.016)
+
+    # 4. Assert: The system should NOT have blocked the action
+    assert_false(player.has(C_ActionBlocked), "Player should be allowed to open a nearby bank.")
+```
+
+### 10.2 Tier 2: Presentation & Dumb UI Tests
+
+Testing UI visually is flaky. Instead, we test the **Data Flow**. Because our UI components are "dumb" and strictly communicate via signals, we can instantiate a UI molecule, simulate input, and use GUT's `watch_signals` feature to verify it broadcasted the correct intent.
+
+**Example: Testing the Main Menu Button**
+
+```gdscript
+# res://tests/client/ui/components/molecules/test_main_menu_button.gd
+class_name TestMainMenuButton extends GutTest
+
+var button: MainMenuButton
+
+func before_each():
+    # autofree() ensures the node is cleaned up after the test
+    button = autofree(MainMenuButton.new())
+    add_child_autofree(button) # Add to SceneTree so UI events can process
+
+func test_emits_clicked_signal_on_left_mouse_press():
+    watch_signals(button)
+
+    # Simulate a Left-Click mouse event
+    var event = InputEventMouseButton.new()
+    event.button_index = MOUSE_BUTTON_LEFT
+    event.pressed = true
+
+    button._on_gui_input(event)
+
+    assert_signal_emitted(button, "clicked", "Button failed to emit 'clicked' on left click.")
+
+func test_ignores_right_mouse_press():
+    watch_signals(button)
+
+    var event = InputEventMouseButton.new()
+    event.button_index = MOUSE_BUTTON_RIGHT # Right click!
+    event.pressed = true
+
+    button._on_gui_input(event)
+
+    assert_signal_not_emitted(button, "clicked", "Button should not respond to right clicks.")
+```
+
+### 10.3 Tier 3: The Bridge Tests (Observers)
+
+Observers bridge the ECS math to the visual Nodes. Testing them involves mutating the ECS data and asserting that the Godot Node properties updated accordingly.
+
+**Example: Testing the Health UI Observer**
+
+```gdscript
+# res://tests/client/observers/test_o_health_ui.gd
+class_name TestHealthObserver extends GutTest
+
+func test_updates_progress_bar_on_health_change():
+    # 1. Setup: Create a mock visual node and the observer
+    var health_bar = autofree(ProgressBar.new())
+    var observer = o_health_ui.new()
+    observer.target_node = health_bar
+
+    # 2. Setup: Mock the ECS Entity and Component
+    var entity = Entity.new()
+    var health_component = C_Health.new()
+    health_component.current = 100
+    health_component.max = 100
+
+    # 3. Execute: Simulate the ECS triggering the observer
+    health_component.current = 45
+    observer.on_component_changed(entity, health_component, "current", 45, 100)
+
+    # 4. Assert: Did the Godot Node visually update?
+    assert_eq(health_bar.value, 45.0, "Progress bar visual did not update to match ECS data.")
+```
+
+### 10.4 Tier 4: Server Utility Tests
+
+The server has unique responsibilities, such as generating the Headless Prefabs to save memory. We must test that these utilities don't accidentally leave heavy 3D meshes in server RAM.
+
+**Example: Testing the Server Prefab Cache**
+
+```gdscript
+# res://tests/server/utils/test_server_prefab_cache.gd
+class_name TestServerPrefabCache extends GutTest
+
+func test_strips_visuals_from_prefabs():
+    # 1. Setup: Create a dummy Godot Scene with logic + visual meshes
+    var root = Node3D.new()
+    var collision = CollisionShape3D.new()
+    var mesh = MeshInstance3D.new() # This should be stripped!
+
+    root.add_child(collision)
+    root.add_child(mesh)
+
+    var packed_scene = PackedScene.new()
+    packed_scene.pack(root)
+
+    # 2. Execute: Run it through the cache
+    var cache = ServerPrefabCache.new()
+    var headless_packed = cache.get_headless_prefab(packed_scene)
+
+    var headless_instance = headless_packed.instantiate()
+
+    # 3. Assert: The mesh must be gone, but collision must remain
+    var has_mesh = false
+    var has_collision = false
+
+    for child in headless_instance.get_children():
+        if child is MeshInstance3D: has_mesh = true
+        if child is CollisionShape3D: has_collision = true
+
+    assert_false(has_mesh, "Server Prefab failed to strip MeshInstance3D!")
+    assert_true(has_collision, "Server Prefab accidentally stripped collision data!")
+
+    headless_instance.free()
+    root.free()
+```
+
+### 10.5 Tier 5: Integration & End-to-End Tests
+
+Integration tests are not kept in a flat directory. As the MMO scales, a flat folder becomes a chaotic dumping ground. Instead, Integration Tests are organized by **Player Epics** or **User Journeys**, modeling how a user actually plays the game.
+
+The focus here is _not_ edge-case math (that belongs in Tier 1). The focus is validating the boundaries: **UI -> ECS -> Client -> Server -> ECS -> Visuals.**
+
+```
+res://tests/integration/
+├── authentication/             # Logging in, character select, spawning
+│   ├── test_valid_login_spawns_character.gd
+│   └── test_server_rejects_banned_player.gd
+├── economy/                    # Trading, banking, auction house
+│   ├── test_npc_vendor_transaction.gd
+│   └── test_player_to_player_trade_flow.gd
+└── combat/                     # End-to-end combat scenarios
+    └── test_player_kills_monster_and_loots.gd
+```
+
+### 10.6 CI/CD Execution (Headless Runs)
+
+Because these tests (especially Tiers 1-4) are largely decoupled from rendering, they can be executed in a Continuous Integration pipeline (like GitHub Actions or GitLab CI) via the Godot command line before any Pull Request is merged.
+
+To keep pipelines fast, integration tests can be tagged in GUT (e.g., `requires_network`) so they only run on nightly builds, while the ECS and UI tests run on every single commit.
+
+```sh
+# Example CI bash command to run all Core ECS tests headlessly
+godot --headless -s res://addons/gut/gut_cmdln.gd -gdir=res://tests/core/
 ```
