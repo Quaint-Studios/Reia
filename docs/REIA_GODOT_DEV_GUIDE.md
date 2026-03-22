@@ -56,8 +56,9 @@ res://
     │   ├── o_health_ui.gd              # Listens for C_Health changes, updates HUD
     │   ├── o_combat_vfx.gd
     │   └── o_animation_state.gd
-    ├── ui/                             # UI Scenes & Scripts (Programmatic & Atomic)
-    │   ├── core/                       # Global UI Managers (Autoloads/Singletons)
+    ├── ui/                             # UI Scenes & Scripts (The Reverse Hybrid Approach)
+    │   ├── core/                       # Global UI Managers
+    │   │   ├── ui_colors.gd            # Global color namespace registry (UIColors.Base.PURE_WHITE)
     │   │   ├── ui_window_manager.gd    # Handles Z-sorting, window dragging, focus
     │   │   ├── ui_event_bus.gd         # Routes UI clicks to the ECS Command Buffer
     │   │   └── ui_tooltip_manager.gd   # Global tooltip singleton
@@ -65,7 +66,7 @@ res://
     │   ├── themes/                     # Programmatic Styling (ThemeGen)
     │   │   ├── generators/             # @tool scripts that build the themes
     │   │   │   └── global_theme_gen.gd
-    │   │   ├── generated/              # The resulting .tres files (Git-tracked)
+    │   │   ├── generated/              # The resulting .tres files
     │   │   │   └── global_theme.tres
     │   │   └── assets/                 # UI-specific raw assets (Atlases, Fonts)
     │   │       ├── fonts/
@@ -75,26 +76,33 @@ res://
     │   │
     │   ├── components/                 # Atomic Design Hierarchy
     │   │   ├── atoms/                  # Base primitives (Pure GDScript wrappers)
-    │   │   │   ├── primary_action_button.gd # Handles its own hover/click audio & states
+│   │   │   │   ├── primary_action_button.gd # Handles its own hover/click audio & states
     │   │   │   ├── header_label.gd          # Enforces H1/H2 typography tokens
     │   │   │   ├── body_text_label.gd       # Enforces standard body typography tokens
     │   │   │   ├── window_panel_bg.gd       # Base 9-slice background for all windows
-    │   │   │   └── item_icon_rect.gd        # TextureRect enforcing standard atlas sizes
+    │   │   │   ├── item_icon_rect.gd        # TextureRect enforcing standard atlas sizes
+    │   │   │   ├── svg_icon.gd              # TextureRect wrapper strictly for scalable SVGs
+    │   │   │   └── base_line_edit.gd        # Base text input field wrapper
     │   │   │
     │   │   ├── molecules/              # Composites of Atoms (Pure GDScript)
+    │   │   │   ├── main_menu_button.gd      # header_label + 2x svg_icon with hover logic
+    │   │   │   ├── pill_button.gd           # StyleBox panel + svg_icon + body_text_label
+    │   │   │   ├── labeled_input_field.gd   # body_text_label + base_line_edit
     │   │   │   ├── loot_slot.gd             # item_icon_rect + body_text_label (Qty)
-    │   │   │   ├── stat_block.gd            # header_label (Name) + body_text_label (Value)
-    │   │   │   └── drag_titlebar.gd         # window_panel_bg + header_label + primary_action_button (Close)
+    │   │   │   ├── stat_block.gd            # header_label + body_text_label
+    │   │   │   └── drag_titlebar.gd         # window_panel_bg + header_label + close button
     │   │   │
     │   │   └── organisms/              # Complex, reusable UI modules (Godot Scenes)
-    │   │       ├── inventory_grid.tscn      # Scene utilizing VBox/Grid containers for loot_slot.gd
+    │   │       ├── main_menu_cluster.tscn   # VBox container for main_menu_button.gd instances
+    │   │       ├── login_credentials_form.tscn # Container for labeled_input_field.gd instances
+    │   │       ├── inventory_grid.tscn      # Grid container for loot_slot.gd instances
     │   │       ├── action_bar.tscn          # Scene handling layout of hotkey bindings
-    │   │       └── unit_frame.tscn          # Scene arranging Player/Target health and mana bars
+    │   │       └── unit_frame.tscn          # Arranges Player/Target health and mana bars
     │   │
     │   └── screens/                    # Top-level window containers (Godot Scenes)
     │       ├── hud/                    # Static, non-closable UI
-    │       │   ├── main_hud.tscn       # Holds Action Bar, Minimap, Unit Frames
-    │       │   └── chat_box.tscn 
+    │       │   ├── main_hud.tscn
+    │       │   └── chat_box.tscn
     │       │
     │       ├── windows/                # Draggable, overlapping panels
     │       │   ├── inventory_window.tscn
@@ -102,8 +110,10 @@ res://
     │       │   └── bank_window.tscn
     │       │
     │       └── menus/                  # Full-screen blocking UI
-    │           ├── login_screen.tscn
-    │           └── game_menu.tscn      # Settings, Logout, etc.
+    │           ├── login_screen.tscn   # Root canvas composing the menu organisms
+    │           ├── login_screen.gd     # State machine switching the organisms
+    │           └── game_menu.tscn
+    │
     ├── renderers/                      # ECS-to-Visual interpolation systems
     ├── assets/                         # Heavy asset storage
     └── ClientMain.gd
@@ -119,7 +129,7 @@ However, calling `.instantiate()` on a scene with 3D meshes and audio players 10
 
 When the server boots, it strips the visuals from the `.tscn` exactly _once_, repacks it into active RAM, and caches it.
 
-```
+```gdscript
 # res://server/utils/ServerPrefabCache.gd (Autoload on Server)
 class_name ServerPrefabCache extends Node
 
@@ -154,7 +164,7 @@ func _strip_visuals(node: Node):
 
 Servers do not spawn monsters globally. They use **Spawn Points** governed by **Zone Proximity**. If no players are in the "Ice Cave" chunk, the spawn points sleep.
 
-```
+```gdscript
 # c_spawn_point.gd
 class_name C_SpawnPoint extends Component
 @export var prefab: PackedScene
@@ -167,7 +177,7 @@ class_name C_SpawnPoint extends Component
 class_name C_SpawnedBy extends Component
 ```
 
-```
+```gdscript
 # res://core/features/spawning_and_zones/systems/s_spawner.gd
 class_name SpawnerSystem extends System
 
@@ -210,7 +220,7 @@ Inventories aren't fixed arrays; they are GECS Relationships. This allows infini
 
 The quantity of an item lives inside the relationship component itself.
 
-```
+```gdscript
 # c_has_item.gd
 class_name C_HasItem extends Component
 @export var quantity: int = 1
@@ -228,7 +238,7 @@ func give_potions(bag_entity: Entity):
 
 A Bank is an inventory that requires physical proximity to an NPC. We enforce this in the Validator Pipeline using standard spatial distance checks.
 
-```
+```gdscript
 # res://core/features/inventory/systems/validators/s_bank_access_validator.gd
 class_name BankAccessValidator extends System
 
@@ -267,7 +277,7 @@ In an MMO, the server runs the physics, but the client must predict movement so 
 
 The Server runs Godot's `CharacterBody3D.move_and_slide()` and syncs the resulting transform to the ECS component.
 
-```
+```gdscript
 # res://core/features/physics/systems/s_server_physics.gd
 class_name ServerPhysicsSystem extends System
 
@@ -294,7 +304,7 @@ func process(entities: Array[Entity], components: Array, delta: float):
 
 The Client receives `C_NetworkSync` updates from the server. It smoothly interpolates other players, but strictly overrides its own local prediction if the server disagrees.
 
-```
+```gdscript
 # res://core/features/physics/systems/s_client_interpolation.gd
 class_name ClientInterpolationSystem extends System
 
@@ -322,7 +332,7 @@ func process(entities: Array[Entity], components: Array, delta: float):
 
 ### 5.1 Combat VFX Observer
 
-```
+```gdscript
 # res://client/observers/o_combat_vfx.gd
 class_name CombatVFXObserver extends Observer
 
@@ -349,7 +359,7 @@ func _play_hit_vfx(entity: Entity, type: String):
 
 We link Godot's `AnimationTree` directly to ECS state changes.
 
-```
+```gdscript
 # res://client/observers/o_animation_state.gd
 class_name AnimationStateObserver extends Observer
 
@@ -373,7 +383,7 @@ MMO servers cannot send the entire world's data to every client. They use **Spat
 3.  The Server serializes entities in the player's current chunk (and 8 surrounding chunks) and sends them.
 4.  The Client loads these chunks asynchronously.
 
-```
+```gdscript
 # res://core/network/handlers/ChunkLoadHandler.gd
 class_name ChunkLoadHandler extends Node
 
@@ -405,13 +415,13 @@ Do not store animations inside individual enemy `.glb` files. This duplicates da
 
 ### 7.3 UI Icons and 2D Textures
 
--   **Avoid separate `.png` files for every icon.** \* **Use Sprite Sheets / Godot AtlasTextures.** Pack all "Fire Skills" into a single `fire_skills_sheet.png`. Create `.tres` files of type `AtlasTexture` that slice out the specific 64x64 region.
+-   **Avoid separate `.png` files for every icon.** Use Sprite Sheets / Godot AtlasTextures. Pack all "Fire Skills" into a single `fire_skills_sheet.png`. Create `.tres` files of type `AtlasTexture` that slice out the specific 64x64 region.
 
 ## 8\. Client UI Architecture (The "Reverse Hybrid" Approach)
 
 In a massive-scale MMO, building complex, overlapping UI menus using Godot's visual scene editor alone leads to severe merge conflicts, messy `.tscn` files, and inconsistent styling. Conversely, building complex layouts purely in code is highly tedious and ignores Godot's robust visual container system.
 
-Therefore, the UI layer employs a Reverse Hybrid Approach based on the Atomic Design methodology. We write small primitives strictly in GDScript for ultimate version control and consistency, but compose them into massive layouts using `.tscn` files.
+Therefore, the UI layer employs a **Reverse Hybrid Approach** based on the **Atomic Design methodology**. We write small primitives strictly in GDScript for ultimate version control and consistency, but compose them into massive layouts using `.tscn` files.
 
 ### 8.1 The "Dumb UI" Principle (State Separation)
 
@@ -428,13 +438,11 @@ Instead of utilizing raw Godot nodes (like `Button` or `Label`) scattered throug
     -   `primary_action_button.gd` (Handles internal hover/click audio, base styling).
     -   `item_icon_rect.gd` (Enforces standard 64x64 sizing and handles tooltip binding).
     -   `header_label.gd` (Enforces the H1/H2 font variations).
+    -   `svg_icon.gd` (Enforces standard interpolation and sizing for SVGs).
 -   **Molecules (Composites) -> PURE GDSCRIPT (`.gd`)**: Reusable groupings of Atoms. These are small enough that the GDScript boilerplate is manageable and ensures zero merge conflicts on highly reused blocks.
-    -   `loot_slot.gd`: Combines an `item_icon_rect` (atom) and a `body_text_label` (atom, for quantity).
-    -   `stat_block.gd`: Combines a `header_label` ("Strength") and a `body_text_label` ("42") in an `HBoxContainer`.
--   **Organisms & Screens -> GODOT SCENES (`.tscn`)**: Complex functional modules and full window containers. We use Godot's visual `.tscn` files here because creating highly nested `MarginContainers`, `VBoxContainers`, and `ScrollContainers` purely in code is an exercise in misery. **Crucially, these scenes are treated as dumb layout containers**; they do not hold complex logic scripts, they merely arrange the `loot_slot.gd` and `primary_action_button.gd` nodes visually.
-    -   `inventory_grid.tscn`: Uses a `GridContainer` to dynamically lay out instantiated `loot_slot` molecules.
-    -   `character_sheet.tscn`: A massive screen using anchoring and layout flags to present paperdoll slots next to stats.
-
+    -   `main_menu_button.gd`: Encapsulates hover tweens and dynamically creates decor SVGs.
+    -   `pill_button.gd`: Hardcodes strict Figma border-radii via `StyleBoxFlat`.
+-   **Organisms & Screens -> GODOT SCENES (`.tscn`)**: Complex functional modules and full window containers. We use Godot's visual `.tscn` files here because creating highly nested `MarginContainers`, `VBoxContainers`, and `ScrollContainers` purely in code is an exercise in misery. **Crucially, these scenes are treated as dumb layout containers**.
 
 ### 8.3 Programmatic Theming (ThemeGen)
 
@@ -442,7 +450,7 @@ Setting visual styles purely through GDScript at runtime (e.g., `button.add_them
 
 Using Godot's **Theme Type Variations**, a master `global_theme.tres` defines standard properties, and variations handle specifics:
 
-```
+```gdscript
 # pseudo-code within themes/generators/global_theme_gen.gd
 define_style("Button", default_button_style)
 
@@ -460,10 +468,197 @@ define_variation("DungeonButton", "Button", {
 
 When building UI elements programmatically, components merely assign the variation:
 
-```
+```gdscript
 # Inside primary_action_button.gd
-func _init():
-    self.theme_type_variation = "PrimaryActionButton"
+func _init(): self.theme_type_variation = "PrimaryActionButton"
 ```
 
 This guarantees an extremely lightweight memory footprint (one theme loaded globally) while preserving the code-centric development experience.
+
+## 9\. Real-World Implementation: The Login Screen
+
+To illustrate the Reverse Hybrid approach in full, here is a complete breakdown of the Login Screen flow. This demonstrates global color management, programmatic atomic styling, and visual layout composition.
+
+### 9.1 The Global Color Registry
+
+Colors are never hardcoded as strings inside components. Instead, we use a global `UIColors` registry. Nested classes act as namespaces, providing rich IDE autocomplete without clutter.
+
+```gdscript
+## res://client/ui/core/ui_colors.gd
+class_name UIColors extends RefCounted
+
+class Base:
+    const CREAMY_WHITE = Color("#F9F3E5")
+    const CHIP_BLUE = Color("#558EDD")
+    const SOFT_WHITE = Color("#F5F5F5")
+    const DEFAULT_TEXT = Color("#07263D")
+```
+
+### 9.2 The Atoms (Pure GDScript Primitives)
+
+We wrap raw Godot nodes in our own classes to enforce ThemeGen properties, preventing artists from accidentally modifying font sizes in the `.tscn` inspector.
+
+**1\. The Typography Atoms:**
+
+```gdscript
+## res://client/ui/components/atoms/header_label.gd
+class_name HeaderLabel extends Label
+
+func _init() -> void:
+    theme_type_variation = "HeaderLabel" # Generated via ThemeGen
+    add_theme_color_override("font_color", UIColors.Base.CREAMY_WHITE)
+
+## res://client/ui/components/atoms/body_text_label.gd
+class_name BodyTextLabel extends Label
+
+func _init() -> void:
+    theme_type_variation = "BodyTextLabel"
+    add_theme_color_override("font_color", UIColors.Base.SOFT_WHITE)
+```
+
+**2\. The Texture Atoms:**
+
+```gdscript
+## res://client/ui/components/atoms/svg_icon.gd
+class_name SVGIcon extends TextureRect
+
+## Enforces perfect SVG rendering without blurring
+func _init() -> void:
+    expand_mode = TextureRect.EXPAND_FIT_WIDTH
+    stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+    texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+```
+
+**3\. The Input Atoms:**
+
+```gdscript
+## res://client/ui/components/atoms/base_line_edit.gd
+class_name BaseLineEdit extends LineEdit
+
+func _init() -> void:
+    theme_type_variation = "BaseLineEdit"
+    add_theme_color_override("font_color", UIColors.Base.DEFAULT_TEXT)
+```
+
+### 9.3 The Molecules (Pure GDScript Composites)
+
+Molecules combine our custom Atoms. Because they are written in code, complex logic (like the SVG hover pop-in) is perfectly encapsulated.
+
+**1\. The Main Menu Button:**
+
+```gdscript
+## res://client/ui/components/molecules/main_menu_button.gd
+class_name MainMenuButton extends MarginContainer
+signal clicked
+
+@export var button_text: String = "Play"
+@export var decoration_texture: Texture2D
+
+var left_decor: SVGIcon   # Using our Atom
+var right_decor: SVGIcon  # Using our Atom
+var label: HeaderLabel    # Using our Atom
+
+func _ready() -> void:
+    var hbox = HBoxContainer.new()
+    add_child(hbox)
+
+    # 1. Left Decor Atom
+    left_decor = SVGIcon.new()
+    left_decor.texture = decoration_texture
+    left_decor.modulate.a = 0.0 # Hidden initially
+    hbox.add_child(left_decor)
+
+    # 2. Header Label Atom
+    label = HeaderLabel.new()
+    label.text = button_text
+    hbox.add_child(label)
+
+    # ... right decor setup & hover signals ...
+
+func _on_hover() -> void:
+    label.add_theme_color_override("font_color", UIColors.Base.PURE_WHITE)
+    # Tween the SVGIcon atoms in
+    var t = create_tween().set_parallel(true)
+    t.tween_property(left_decor, "modulate:a", 1.0, 0.15)
+```
+
+**2\. The Form Input Field:**
+
+```gdscript
+## res://client/ui/components/molecules/labeled_input_field.gd
+class_name LabeledInputField extends VBoxContainer
+
+@export var label_text: String = "Username"
+var input: BaseLineEdit
+
+func _ready() -> void:
+    var title = BodyTextLabel.new() # Atom
+    title.text = label_text
+    add_child(title)
+
+    input = BaseLineEdit.new() # Atom
+    add_child(input)
+```
+
+### 9.4 The Organisms (Visual .tscn Containers)
+
+Instead of placing 50 buttons directly into `login_screen.tscn`, we group our molecules into `.tscn` organisms. This allows designers to visually build the form layouts, keeping the root screen clean.
+
+-   `main_menu_cluster.tscn`: A `VBoxContainer` holding `MainMenuButton` instances (Play, Play Solo, Settings).
+-   `login_credentials_form.tscn`: A `VBoxContainer` holding `LabeledInputField` instances (Username, Password) and a `MainMenuButton` (Login).
+
+### 9.5 The Screen & State Machine (login\_screen.gd)
+
+The root screen acts merely as a visual canvas mapping out the Organisms, and its script acts as a State Machine.
+
+**The Editor Node Tree (`login_screen.tscn`):**
+
+```
+LoginScreen (Control - Full Rect)
+├── ScreenContainer (MarginContainer - Full Rect)
+│   ├── TopSection (MarginContainer - Top 48px)
+│   │   └── Logo (SVGIcon - MinSize 312x312)                <-- ATOM
+│   ├── BottomSection (Control - Bottom Wide)
+│   │   ├── VersionLabel (BodyTextLabel - Bottom Left)      <-- ATOM
+│   │   └── ReleaseNotesBtn (PillButton - Bottom Right)     <-- MOLECULE
+│   └── FlowStates (CenterContainer - Full Rect)
+│       ├── MainMenuCluster (main_menu_cluster.tscn)        <-- ORGANISM
+│       └── LoginFormCluster (login_credentials_form.tscn)  <-- ORGANISM (Hidden)
+```
+
+**The State Machine Controller:**
+
+```gdscript
+## res://client/ui/screens/menus/login_screen.gd
+class_name LoginScreen extends Control
+
+enum State { MAIN_MENU, LOGIN_FORM }
+var current_state: State = State.MAIN_MENU
+
+@onready var main_menu_cluster = $ScreenContainer/FlowStates/MainMenuCluster
+@onready var login_form_cluster = $ScreenContainer/FlowStates/LoginFormCluster
+
+func _ready() -> void:
+    # Setup Version Label using our Atom (Font styles are strictly enforced!)
+    var version_lbl = $ScreenContainer/BottomSection/VersionLabel
+    version_lbl.add_theme_color_override("font_color", Color(UIColors.Base.DEFAULT_TEXT, 0.5))
+    version_lbl.text = "v" + ProjectSettings.get_setting("application/config/version", "1.1.0")
+
+    # Connect signals from the Organism down to the controller
+    main_menu_cluster.get_node("BtnPlay").clicked.connect(_switch_to_login)
+
+func _switch_to_login() -> void:
+    current_state = State.LOGIN_FORM
+    _fade_out(main_menu_cluster)
+    _fade_in(login_form_cluster)
+
+func _fade_out(node: Control) -> void:
+    var t = create_tween()
+    t.tween_property(node, "modulate:a", 0.0, 0.2)
+    t.tween_callback(node.hide)
+
+func _fade_in(node: Control) -> void:
+    node.show()
+    var t = create_tween()
+    t.tween_property(node, "modulate:a", 1.0, 0.2)
+```
