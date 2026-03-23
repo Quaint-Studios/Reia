@@ -16,6 +16,8 @@ res://
 │   │   ├── error_category.gd           # Global bit-packed error registry
 │   │   └── NetworkCore.gd
 │   ├── utils/                          # Pure functional helpers
+│   │   └── generators/
+│   │       └── zone_id_generator.gd    # @tool script for deterministic hashing
 │   ├── features/                       # **DOMAIN-DRIVEN FEATURE FOLDERS**
 │   │   ├── bestiary/
 │   │   │   ├── components/             # c_monster_tag.gd, c_boss.gd
@@ -33,7 +35,9 @@ res://
 │   │   │   ├── components/             # c_transform.gd, c_velocity.gd, c_network_sync.gd
 │   │   │   └── systems/                # s_server_physics.gd, s_client_interpolation.gd
 │   │   ├── spawning_and_zones/
-│   │   │   ├── components/             # c_spawn_point.gd, c_chunk_active.gd
+│   │   │   ├── components/             # c_spawn_point.gd, c_chunk_active.gd, c_current_zone.gd
+│   │   │   ├── zone_ids.gd             # Auto-generated Deterministic Enum
+│   │   │   ├── zones_list.txt          # Raw text list for the generator
 │   │   │   └── systems/                # s_zone_sleep.gd, s_spawner.gd
 │   └── default_systems.tscn            # Scene-based System Group execution order
 │
@@ -48,12 +52,17 @@ res://
 ├── server/                             # Server-Only Logic
 │   ├── database/
 │   │   └── daos/                       # Data Access Objects
+│   ├── utils/
+│   │   └── server_prefab_cache.gd      # Strips visual nodes from RAM
 │   └── ServerMain.gd
 │
 ├── client/                             # Client-Only Logic (Presentation)
+│   ├── core/                           # Client Core Systems
+│   │   └── scene_manager.gd            # Handles seamless/loading screen transitions
 │   ├── observers/                      # GECS Observers bridging ECS to UI & VFX
 │   │   ├── o_inventory_ui.gd           # Listens for C_HasItem changes, updates UI
 │   │   ├── o_health_ui.gd              # Listens for C_Health changes, updates HUD
+│   │   ├── o_zone_audio.gd             # Handles music/ambient crossfading
 │   │   ├── o_combat_vfx.gd
 │   │   └── o_animation_state.gd
 │   ├── ui/                             # UI Scenes & Scripts (The Reverse Hybrid Approach)
@@ -61,6 +70,7 @@ res://
 │   │   │   ├── ui_colors.gd            # Global color namespace registry (UIColors.Base.PURE_WHITE)
 │   │   │   ├── ui_window_manager.gd    # Handles Z-sorting, window dragging, focus
 │   │   │   ├── ui_event_bus.gd         # Routes UI clicks to the ECS Command Buffer
+│   │   │   ├── ui_utils.gd             # Signal error handling and connection helpers
 │   │   │   └── ui_tooltip_manager.gd   # Global tooltip singleton
 │   │   │
 │   │   ├── themes/                     # Programmatic Styling (ThemeGen)
@@ -114,8 +124,17 @@ res://
 │   │           ├── login_screen.gd     # State machine switching the organisms
 │   │           └── game_menu.tscn
 │   │
+│   ├── assets/                         # Heavy asset storage (Organized by type, not feature)
+│   │   ├── audio/
+│   │   │   ├── default_bus_layout.tres # Audio Bus configuration (Master, Music, SFX, Interface, Dialogue)
+│   │   │   ├── ambient/                # Atmospheric looping sounds
+│   │   │   ├── dialogue/               # Voice lines for crossfade tracking
+│   │   │   ├── interface/              # UI clicks, error bloops
+│   │   │   ├── music/                  # Game soundtracks
+│   │   │   └── sfx/                    # Combat, movement, impact sounds
+│   │   └── vfx/
+│   │
 │   ├── renderers/                      # ECS-to-Visual interpolation systems
-│   ├── assets/                         # Heavy asset storage
 │   └── ClientMain.gd
 │
 └── tests/                              # EXCLUDED FROM FINAL BUILD (GUT Tests)
@@ -580,13 +599,13 @@ func _init() -> void:
 class_name BaseLineEdit extends LineEdit
 
 func _init() -> void:
-	theme_type_variation = "BaseLineEdit"
-	add_theme_color_override("font_color", UIColors.Base.DEFAULT_TEXT)
+    theme_type_variation = "BaseLineEdit"
+    add_theme_color_override("font_color", UIColors.Base.DEFAULT_TEXT)
 ```
 
 **4\. The Button Atoms:**
 
-```
+```gdscript
 ## res://client/ui/components/atoms/primary_action_button.gd
 class_name PrimaryActionButton extends Button
 
@@ -594,17 +613,17 @@ func _init() -> void:
     theme_type_variation = "PrimaryActionButton" # Pulls from ThemeGen (Section 8.3)
     mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 
-# Encapsulate global audio logic directly in the atom
-mouse_entered.connect(_play_hover_sound)
-pressed.connect(_play_click_sound)
+    # Encapsulate global audio logic directly in the atom
+    mouse_entered.connect(_play_hover_sound)
+    pressed.connect(_play_click_sound)
 
 func _play_hover_sound() -> void:
-	# E.g., GlobalAudio.play_ui("hover")
-	pass
+    # E.g., SoundManager.play_ui_sound(SOUND_HOVER)
+    pass
 
 func _play_click_sound() -> void:
-	# E.g., GlobalAudio.play_ui("click")
-	pass
+    # E.g., SoundManager.play_ui_sound(SOUND_CLICK)
+    pass
 ```
 
 ### 9.3 The Molecules (Pure GDScript Composites)
@@ -821,117 +840,235 @@ func test_emits_clicked_signal_on_left_mouse_press():
     button._on_gui_input(event)
 
     assert_signal_emitted(button, "clicked", "Button failed to emit 'clicked' on left click.")
-
-func test_ignores_right_mouse_press():
-    watch_signals(button)
-
-    var event = InputEventMouseButton.new()
-    event.button_index = MOUSE_BUTTON_RIGHT # Right click!
-    event.pressed = true
-
-    button._on_gui_input(event)
-
-    assert_signal_not_emitted(button, "clicked", "Button should not respond to right clicks.")
 ```
 
 ### 10.3 Tier 3: The Bridge Tests (Observers)
 
 Observers bridge the ECS math to the visual Nodes. Testing them involves mutating the ECS data and asserting that the Godot Node properties updated accordingly.
 
-**Example: Testing the Health UI Observer**
+### 10.4 Tier 4 & 5: Server Utilities & Integration
+
+Integration Tests are organized by **Player Epics** or **User Journeys** (e.g., `test_valid_login_spawns_character.gd`), modeling how a user actually plays the game. The focus is validating the boundaries: **UI -> ECS -> Client -> Server -> ECS -> Visuals.**
+
+These tests can be tagged in GUT (e.g., `requires_network`) so they only run on nightly builds, while the headless ECS and UI tests run on every single commit via CI/CD.
+
+## 11\. Audio Architecture
+
+Audio in an MMO is strictly a **Presentation Layer** concern. The Simulation (ECS) calculates logic (e.g., "Fireball exploded at X"), and the Presentation layer handles the playback using a centralized manager, preventing Audio dependencies from bleeding into the server binaries.
+
+### 11.1 The Global Audio Registry
+
+To prevent heavy RAM usage, audio files are organized by their intended output bus. The project uses a customized version of Nathan Hoad's Sound Manager, specifically adapted to support MMO-scale Dialogue.
+
+**Audio Bus Layout (`default_bus_layout.tres`):**
+
+-   **Master**: Root output with an `AudioEffectLimiter` to prevent blowout.
+-   **Music**: Global atmospheric tracks (Soundtracks).
+-   **SFX**: World sounds (Combat, Movement).
+-   **Interface**: UI sounds (Button hovers, clicks, error bloops).
+-   **Dialogue**: Custom crossfading bus for voiceovers to prevent jarring cut-offs.
+
+### 11.2 Presentation Execution Strategy
+
+The audio architecture categorizes playback into four distinct use cases:
+
+**1\. Interface Sounds (UI Atoms):** UI clicks and hovers are played directly inside Pure GDScript Atoms utilizing the `Interface` bus. Because it's inside the Atom, developers never have to manually wire button sounds in the editor.
 
 ```gdscript
-# res://tests/client/observers/test_o_health_ui.gd
-class_name TestHealthObserver extends GutTest
+# Inside primary_action_button.gd
+const SOUND_CLICK = preload("res://client/assets/audio/interface/accept_click.wav")
 
-func test_updates_progress_bar_on_health_change():
-    # 1. Setup: Create a mock visual node and the observer
-    var health_bar = autofree(ProgressBar.new())
-    var observer = o_health_ui.new()
-    observer.target_node = health_bar
-
-    # 2. Setup: Mock the ECS Entity and Component
-    var entity = Entity.new()
-    var health_component = C_Health.new()
-    health_component.current = 100
-    health_component.max = 100
-
-    # 3. Execute: Simulate the ECS triggering the observer
-    health_component.current = 45
-    observer.on_component_changed(entity, health_component, "current", 45, 100)
-
-    # 4. Assert: Did the Godot Node visually update?
-    assert_eq(health_bar.value, 45.0, "Progress bar visual did not update to match ECS data.")
+func _init() -> void:
+    pressed.connect(func(): SoundManager.play_ui_sound(SOUND_CLICK, "Interface"))
 ```
 
-### 10.4 Tier 4: Server Utility Tests
-
-The server has unique responsibilities, such as generating the Headless Prefabs to save memory. We must test that these utilities don't accidentally leave heavy 3D meshes in server RAM.
-
-**Example: Testing the Server Prefab Cache**
+**2\. Music & Ambience (ECS Observers):** When a player transitions between areas, the ECS logic assigns a `C_CurrentZone` component. A dedicated Audio Observer watches this change and commands the Sound Manager to crossfade the soundtracks.
 
 ```gdscript
-# res://tests/server/utils/test_server_prefab_cache.gd
-class_name TestServerPrefabCache extends GutTest
+# Inside o_zone_audio.gd
+func on_component_added(entity: Entity, component: Resource) -> void:
+    if not entity.has_component(C_LocalPlayer): return
+    var zone = component as C_CurrentZone
 
-func test_strips_visuals_from_prefabs():
-    # 1. Setup: Create a dummy Godot Scene with logic + visual meshes
-    var root = Node3D.new()
-    var collision = CollisionShape3D.new()
-    var mesh = MeshInstance3D.new() # This should be stripped!
-
-    root.add_child(collision)
-    root.add_child(mesh)
-
-    var packed_scene = PackedScene.new()
-    packed_scene.pack(root)
-
-    # 2. Execute: Run it through the cache
-    var cache = ServerPrefabCache.new()
-    var headless_packed = cache.get_headless_prefab(packed_scene)
-
-    var headless_instance = headless_packed.instantiate()
-
-    # 3. Assert: The mesh must be gone, but collision must remain
-    var has_mesh = false
-    var has_collision = false
-
-    for child in headless_instance.get_children():
-        if child is MeshInstance3D: has_mesh = true
-        if child is CollisionShape3D: has_collision = true
-
-    assert_false(has_mesh, "Server Prefab failed to strip MeshInstance3D!")
-    assert_true(has_collision, "Server Prefab accidentally stripped collision data!")
-
-    headless_instance.free()
-    root.free()
+    match zone.zone_id:
+        Zone.ID.TOWN_CENTER:
+            SoundManager.play_music(preload("res://client/assets/audio/music/town.ogg"), 2.0)
+            SoundManager.play_ambient_sound(preload("res://client/assets/audio/ambient/chatter.ogg"))
 ```
 
-### 10.5 Tier 5: Integration & End-to-End Tests
+**3\. Dialogue (Custom Multi-Track Logic):** Voice acting lines often interrupt each other. Using the custom `dialogue` extension of the Sound Manager allows smooth crossfading of voice clips.
 
-Integration tests are not kept in a flat directory. As the MMO scales, a flat folder becomes a chaotic dumping ground. Instead, Integration Tests are organized by **Player Epics** or **User Journeys**, modeling how a user actually plays the game.
-
-The focus here is _not_ edge-case math (that belongs in Tier 1). The focus is validating the boundaries: **UI -> ECS -> Client -> Server -> ECS -> Visuals.**
-
-```
-res://tests/integration/
-├── authentication/             # Logging in, character select, spawning
-│   ├── test_valid_login_spawns_character.gd
-│   └── test_server_rejects_banned_player.gd
-├── economy/                    # Trading, banking, auction house
-│   ├── test_npc_vendor_transaction.gd
-│   └── test_player_to_player_trade_flow.gd
-└── combat/                     # End-to-end combat scenarios
-    └── test_player_kills_monster_and_loots.gd
+```gdscript
+# Inside the Quest Window UI script
+func _on_next_dialogue_line(audio_clip: AudioStream) -> void:
+    # Uses our custom injected method to crossfade the last voice line over 0.2s
+    SoundManager.play_dialogue(audio_clip, 0.2, "Dialogue")
 ```
 
-### 10.6 CI/CD Execution (Headless Runs)
+**4\. Positional SFX (The 3D Spatial Caveat):** **Crucial Note:** Standard `SoundManager.play_sound()` spawns raw `AudioStreamPlayer` nodes, which lack 3D spatial panning. For 3D combat sounds, we must bypass the global manager and instantiate an `AudioStreamPlayer3D` directly on the visual VFX node via the Observers.
 
-Because these tests (especially Tiers 1-4) are largely decoupled from rendering, they can be executed in a Continuous Integration pipeline (like GitHub Actions or GitLab CI) via the Godot command line before any Pull Request is merged.
+```gdscript
+# Inside o_combat_vfx.gd
+func _play_hit_vfx(entity: Entity) -> void:
+    var vfx = hit_scene.instantiate()
+    get_tree().current_scene.add_child(vfx)
+    vfx.global_position = entity.global_position
 
-To keep pipelines fast, integration tests can be tagged in GUT (e.g., `requires_network`) so they only run on nightly builds, while the ECS and UI tests run on every single commit.
+    # Attach 3D Audio directly to the effect
+    var audio_3d = AudioStreamPlayer3D.new()
+    audio_3d.stream = preload("res://client/assets/audio/sfx/combat/sword_clash.wav")
+    audio_3d.bus = "SFX"
+    vfx.add_child(audio_3d)
+    audio_3d.play()
+```
 
-```sh
-# Example CI bash command to run all Core ECS tests headlessly
-godot --headless -s res://addons/gut/gut_cmdln.gd -gdir=res://tests/core/
+## 12\. Deterministic ID Optimization
+
+In an MMO, relying on raw strings (`"ICE_CAVE"`) is terrible for RAM and Network Bandwidth. Standard Godot Enums are heavily optimized (4 bytes), but they cause an issue where the ID can shift. If you insert a new zone in the middle of an Enum list, every ID below it shifts by +1, instantly breaking all foreign keys in the database.
+
+To get the best of both worlds, this architecture uses **Deterministic String Hashing**.
+
+### 12.1 The Auto-Generator `@tool`
+
+We create a raw text file (`zones_list.txt`) containing simple string names. A Godot `@tool` script reads this file on save, calculates a deterministic 32-bit FNV-1a hash for each string, and automatically generates `zone_ids.gd`.
+
+Because the hash of `"TOWN_CENTER"` will _always_ mathematically equate to `28439572`, **the ID can never shift**, preserving database integrity forever.
+
+```gdscript
+## res://core/utils/generators/zone_id_generator.gd
+@tool
+extends EditorScript
+
+const TXT_PATH = "res://core/features/spawning_and_zones/zones_list.txt"
+const OUT_PATH = "res://core/features/spawning_and_zones/zone_ids.gd"
+
+func _run() -> void:
+    var file = FileAccess.open(TXT_PATH, FileAccess.READ)
+    var lines = file.get_as_text().split("\n", false)
+
+    var output_code = "class_name Zone\n\n## AUTO-GENERATED: DO NOT EDIT DIRECTLY\nenum ID {\n"
+
+    for line in lines:
+        var clean_name = line.strip_edges()
+        if clean_name.is_empty(): continue
+        var hash_val = _hash_fnv1a_32(clean_name)
+        output_code += "\t%s = %d,\n" % [clean_name, hash_val]
+
+    output_code += "}\n"
+
+    var out_file = FileAccess.open(OUT_PATH, FileAccess.WRITE)
+    out_file.store_string(output_code)
+    print("Zone IDs Generated Successfully!")
+
+func _hash_fnv1a_32(text: String) -> int:
+    var hash: int = 2166136261
+    for b in text.to_utf8_buffer():
+        hash = (hash ^ b)
+        hash = (hash * 16777619) & 0xFFFFFFFF # Enforce 32-bit boundary
+    return hash
+```
+
+### 12.2 The Developer Experience (UX)
+
+By generating these deterministic hashes directly into an `enum ID {}`, game designers without a lot of programming experience never have to look at the numbers.
+
+When a designer exports a variable (`@export var target_zone: Zone.ID`), Godot's Inspector automatically displays a beautiful dropdown menu showing `TOWN_CENTER`, `ICE_CAVE`, etc. When they click the name, Godot silently saves the highly optimized 4-byte hash into the `.tscn` file.
+
+## 13\. Scene Transitions & State Management
+
+In a massive world, calling `get_tree().change_scene_to_file()` directly is highly dangerous. It blocks the main thread, causing the game to "freeze" (which can trigger OS-level "Application Not Responding" warnings) and fails to properly flush the ECS World of previous entities.
+
+To manage this, the architecture routes all major transitions through an Autoloaded `SceneManager`.
+
+### 13.1 The Scene Manager Core
+
+The `SceneManager` handles async threaded loading, displays the loading screen, wipes the ECS state, and cleanly swaps the active Node tree without stuttering.
+
+```gdscript
+## res://client/core/scene_manager.gd (Autoload: SceneManager)
+extends Node
+
+var _loading_screen_scene = preload("res://client/ui/screens/menus/loading_screen.tscn")
+var _target_scene_path: String = ""
+
+func transition_to(path: String) -> void:
+    _target_scene_path = path
+
+    # 1. Display the loading screen
+    var loading_screen = _loading_screen_scene.instantiate()
+    get_tree().root.add_child(loading_screen)
+
+    # 2. Flush the ECS World completely
+    ECS.world.clear()
+
+    # 3. Request threaded background loading
+    ResourceLoader.load_threaded_request(_target_scene_path)
+
+    # 4. Monitor the load status (normally via a Timer or _process loop)
+    set_process(true)
+
+func _process(_delta: float) -> void:
+    if _target_scene_path.is_empty():
+        set_process(false)
+        return
+
+    var progress = []
+    var status = ResourceLoader.load_threaded_get_status(_target_scene_path, progress)
+
+    if status == ResourceLoader.THREAD_LOAD_LOADED:
+        var new_scene = ResourceLoader.load_threaded_get(_target_scene_path)
+        get_tree().change_scene_to_packed(new_scene)
+        _target_scene_path = ""
+        # The loading screen node can safely delete itself via its own internal logic
+        # when it detects the new scene has fully loaded.
+```
+
+## 14\. Resilient Signal Handling & Error Logging
+
+At MMO scale, debugging disconnected signals or silent runtime crashes is a major bottleneck. Furthermore, standard `connect()` calls in Godot 4 return an `Error` integer that is frequently discarded, blinding developers to failed UI state changes.
+
+### 14.1 Safe Connections Utility
+
+Instead of using raw `connect()`, all UI components and Observers use a centralized utility function: `ui_utils.safe_connect()`.
+
+This intercepts the discarded value and provides crucial hook points for client-side telemetry. If a player cannot click "Login" because the signal failed, the telemetry server is instantly notified.
+
+```gdscript
+## res://client/ui/core/ui_utils.gd
+class_name UIUtils
+
+## Safely connects a UI signal and handles all logging.
+## Returns true if successful or already connected.
+static func safe_connect(signal_obj: Signal, callable: Callable, context: String = "Unknown UI") -> bool:
+    # Prevent double-connections gracefully without crashing
+    if signal_obj.is_connected(callable):
+        push_warning("[%s] Signal already connected to %s" % [context, callable.get_method()])
+        return true
+
+    var err = signal_obj.connect(callable)
+
+    if err != OK:
+        # At MMO scale, this is where we dispatch to our telemetry/log server
+        var error_msg = "[%s] UI Connection Failed! Method: %s | Error: %s" % [context, callable.get_method(), error_string(err)]
+        push_error(error_msg)
+
+        # Example: ServerLog.send_client_error(error_msg)
+        return false
+
+    return true
+```
+
+### 14.2 Defensive Programming (Assertions)
+
+To further reduce complex branching, the architecture mandates the extensive use of `assert()` within the `_init()` and `_ready()` functions of Atoms and Molecules.
+
+Assertions act as strict contracts. They ensure that logic errors (e.g., a button missing its required decoration texture) are caught immediately with a bright red crash during local development.
+
+Crucially, **Godot automatically strips all `assert()` calls from the final exported Release build.** This guarantees flawless code hygiene in development with exactly zero performance cost in production.
+
+```gdscript
+# Inside main_menu_button.gd
+func _ready():
+    assert(decoration_texture != null, "MainMenuButton requires a decoration texture assigned in the Inspector!")
+    UIUtils.safe_connect(pressed, _on_button_pressed, "MainMenuButton")
 ```
