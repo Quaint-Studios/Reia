@@ -24,7 +24,6 @@ config/name_localized={
 config/description="Reia"
 config/version="1.1.0"
 config/tags=PackedStringArray("3d", "adventure", "game", "major", "mmo", "reia", "rpg")
-run/main_scene="uid://djtfroocdt7mo"
 config/use_custom_user_dir=true
 config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
@@ -39,8 +38,6 @@ buses/default_bus_layout="uid://82gy4qqnnk7o"
 
 SoundManager="*uid://rvcpqiv8ntxa"
 ECS="*uid://dfqwl5njvdnmq"
-LocalCache="*res://features/globals/local_cache.gd"
-InputManager="*res://features/globals/input_manager.gd"
 SceneManager="*res://client/core/scene_manager.gd"
 
 [debug]
@@ -77,10 +74,6 @@ folder_colors={
 "res://client/": "pink",
 "res://core/": "green"
 }
-
-[gui]
-
-theme/custom="uid://clk264aapxxuu"
 
 [importer_defaults]
 
