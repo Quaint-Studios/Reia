@@ -18,7 +18,7 @@ func _prepare_screens() -> void:
 
 func _prepare_sound() -> void:
 	SoundManager.set_sound_volume(0.35)
-	SoundManager.set_music_volume(0.35)
+	SoundManager.set_music_volume(0.0) # Just for testing
 
 	# Audio Stream Player
 	var _asp := SoundManager.play_music(menu_music, 1.0)

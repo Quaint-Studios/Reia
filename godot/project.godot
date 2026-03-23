@@ -41,6 +41,7 @@ SoundManager="*uid://rvcpqiv8ntxa"
 ECS="*uid://dfqwl5njvdnmq"
 LocalCache="*res://features/globals/local_cache.gd"
 InputManager="*res://features/globals/input_manager.gd"
+SceneManager="*res://client/core/scene_manager.gd"
 
 [debug]
 
@@ -73,10 +74,8 @@ enabled=PackedStringArray("res://addons/gecs/plugin.cfg", "res://addons/sound_ma
 
 folder_colors={
 "res://addons/": "yellow",
-"res://assets/": "green",
-"res://presentation/": "pink",
-"res://scenes/": "purple",
-"res://src/": "blue"
+"res://client/": "pink",
+"res://core/": "green"
 }
 
 [gui]
