@@ -4,4 +4,4 @@ class_name C_HasItem extends Component
 @export var quantity: int = 1
 
 func _init(_quantity: int = 1) -> void:
-    quantity = _quantity
+	quantity = _quantity

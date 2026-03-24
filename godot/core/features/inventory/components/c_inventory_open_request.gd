@@ -4,4 +4,4 @@ class_name C_InventoryOpenRequest extends Component
 var target_inventory_entity: Entity
 
 func _init(_target: Entity = null) -> void:
-    target_inventory_entity = _target
+	target_inventory_entity = _target

@@ -4,4 +4,4 @@ class_name C_InventoryActionBlocked extends Component
 @export var error_code: int = 0
 
 func _init(_error_code: int = 0) -> void:
-    error_code = _error_code
+	error_code = _error_code

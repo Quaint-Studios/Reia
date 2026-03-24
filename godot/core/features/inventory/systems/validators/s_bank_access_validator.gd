@@ -1,6 +1,6 @@
 class_name BankAccessValidator extends System
 
-func query():
+func query() -> QueryBuilder:
 	return q.with_all([C_InventoryOpenRequest, C_Transform]).with_none([C_InventoryActionBlocked])
 
 func process(entities: Array[Entity], _components: Array, _delta: float) -> void:
