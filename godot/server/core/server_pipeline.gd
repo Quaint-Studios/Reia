@@ -17,7 +17,7 @@ static func _register_inventory(world: World) -> void:
 	var validator := BankAccessValidator.new()
 	validator.group = SystemGroups.VALIDATION
 	world.add_system(validator)
-	
+
 	var execution := InventoryExecutionSystem.new()
 	execution.group = SystemGroups.EXECUTION
 	world.add_system(execution)

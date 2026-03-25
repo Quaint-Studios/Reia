@@ -10,4 +10,3 @@ class Hud:
 class Menus:
 	const CHARACTER_SELECT = "res://client/ui/screens/menus/character_select.tscn"
 	const TITLE_SCREEN = "res://client/ui/screens/menus/title_screen.tscn"
-

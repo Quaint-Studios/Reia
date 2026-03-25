@@ -1,4 +1,3 @@
-## res://server/server_main.gd
 class_name ServerMain extends Node
 
 ## The Root Node for the Dedicated Server.
@@ -43,5 +42,5 @@ func _physics_process(delta: float) -> void:
 	# Late Phase (Respawning)
 	ECS.world.process(delta, SystemGroups.SPAWNING)
 
-	# 5. Broadcast state chunks to connected clients
+	# Broadcast state chunks to connected clients
 	# ChunkManager.broadcast_updates()
