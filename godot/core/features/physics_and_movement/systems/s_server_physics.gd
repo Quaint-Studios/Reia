@@ -11,7 +11,7 @@ func process(entities: Array[Entity], _components: Array, _delta: float) -> void
 		body.velocity = vel.direction * vel.speed
 		var _collided := body.move_and_slide()
 
-		
+
 		# Sync Godot physics back to the ECS component for network broadcasting
 		var c_trans := entity.get_component(C_Transform) as C_Transform
-		c_trans.transform = entity.global_transform
+		c_trans.transform = (entity as Node as Node3D).global_transform
