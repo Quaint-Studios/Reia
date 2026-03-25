@@ -24,14 +24,14 @@ func _ready() -> void:
 	# (Does not connect yet, just prepares the sockets)
 	# NetworkCore.init_client()
 	
-	print("[CLIENT] ECS & Observers Initialized. Routing to Login Screen...")
+	print("[CLIENT] ECS & Observers Initialized. Routing to Title Screen...")
 	
 	# Hand off visual control to the SceneManager to load the first UI
 	# We use call_deferred to ensure the tree is stable before swapping scenes
-	call_deferred("_route_to_login")
+	call_deferred("_route_to_title")
 
-func _route_to_login() -> void:
-	SceneManager.transition_to(Scenes.Menus.LOGIN)
+func _route_to_title() -> void:
+	SceneManager.transition_to_screen(Scenes.Menus.TITLE_SCREEN)
 
 ## TICKING THE CLIENT
 ## We use _process on the client. The client needs to interpolate visuals 

@@ -12,7 +12,7 @@ func _ready() -> void:
 
 	# DatabaseCore.connect_to_db()
 	print("[SERVER] Database connected.")
-	
+
 	ECS.world = World.new()
 
 	# We process these in a specific pipeline order (Movement -> Logic -> Combat -> Spawning)

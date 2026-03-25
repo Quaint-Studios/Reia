@@ -1,6 +1,6 @@
 class_name ServerPhysicsSystem extends System
 
-func query():
+func query() -> QueryBuilder:
 	return q.with_all([C_Transform, C_Velocity]).with_none([C_Stunned, C_Dead])
 
 func process(entities: Array[Entity], _components: Array, _delta: float) -> void:

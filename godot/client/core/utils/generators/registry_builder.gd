@@ -5,13 +5,14 @@ const SCREENS_DIR = "res://client/ui/screens/"
 const OUT_SCREENS = "res://client/core/scenes.gd"
 
 const ZONES_TXT = "res://core/features/spawning_and_zones/zones_list.txt"
-const ZONES_MAPS_DIR = "res://shared_nodes/maps/dungeons/"
+const ZONES_INSTANCES_DIR = "res://shared_nodes/maps/instances/"
+const ZONES_CHUNKED_DIR = "res://shared_nodes/maps/chunked/"
 const OUT_ZONES = "res://core/features/spawning_and_zones/zone_registry.gd"
 
 func _run() -> void:
 	_generate_screens_registry()
 	_generate_zones_registry()
-	print("[RegistryBuilder] Successfully updated all Namespaces!")
+	print("[RegistryBuilder] Successfully updated all Namespaces and Map Links!")
 
 # ==========================================
 # UI SCENE GENERATOR (Nested by Folder)
@@ -23,7 +24,7 @@ func _generate_screens_registry() -> void:
 	if dir:
 		var err := dir.list_dir_begin()
 		if err != OK:
-			push_error("[RegistryBuilder] Failed to open directory: %s" % SCREENS_DIR)
+			push_error("Failed to open screens directory: %s" % SCREENS_DIR)
 			return
 		var folder_name := dir.get_next()
 		while folder_name != "":
@@ -33,10 +34,8 @@ func _generate_screens_registry() -> void:
 			
 	var out := FileAccess.open(OUT_SCREENS, FileAccess.WRITE)
 	var success := out.store_string(code)
-	if success:
-		print("[RegistryBuilder] Successfully updated Scenes.gd")
-	else:
-		push_error("[RegistryBuilder] Failed to write to file: %s" % OUT_SCREENS)
+	if not success:
+		print("[RegistryBuilder] Failed to write screens registry!")
 
 func _process_ui_folder(path: String, folder_name: String) -> String:
 	var sub_code := "class %s:\n" % folder_name.capitalize().replace(" ", "")
@@ -45,11 +44,7 @@ func _process_ui_folder(path: String, folder_name: String) -> String:
 	
 	for file in files:
 		var raw_name := file.get_file().get_basename().to_upper()
-		
-		# Conflict Resolution & Warning!
-		if known_names.has(raw_name):
-			push_warning("[RegistryBuilder] CONFLICT DETECTED: '%s' in folder '%s'. Skipping duplicate." % [raw_name, folder_name])
-			continue
+		if known_names.has(raw_name): continue
 			
 		known_names[raw_name] = true
 		var uid_str := ResourceUID.get_id_path(ResourceLoader.get_resource_uid(file))
@@ -58,14 +53,16 @@ func _process_ui_folder(path: String, folder_name: String) -> String:
 	return sub_code + "\n"
 
 # ==========================================
-# ZONE GENERATOR (Deterministic Hashes)
+# ZONE GENERATOR (Handles Instances & Chunks)
 # ==========================================
 func _generate_zones_registry() -> void:
 	var txt_file := FileAccess.open(ZONES_TXT, FileAccess.READ)
 	var lines := txt_file.get_as_text().split("\n", false)
 	
-	var code := "class_name Zone\n\n## AUTO-GENERATED ZONE IDS (SERVER/DB)\nenum ID {\n"
-	var map_dict := "## CLIENT MAP ROUTING\nconst MAP_PATHS = {\n"
+	var code_enum := "class_name Zone\n\n## AUTO-GENERATED ZONE IDS\nenum ID {\n"
+	var code_instances := "## SINGLE INSTANCE MAPS (Hard Loads)\nconst MAP_PATHS = {\n"
+	var code_chunks := "## SEAMLESS CHUNK DIRECTORIES (Streamed)\nconst CHUNK_DIRS = {\n"
+	
 	var known_hashes := {}
 	
 	for line in lines:
@@ -73,30 +70,33 @@ func _generate_zones_registry() -> void:
 		if clean_name.is_empty(): continue
 		
 		var hash_val := _hash_fnv1a_32(clean_name)
-		
-		if known_hashes.has(hash_val):
-			push_error("[RegistryBuilder] HASH COLLISION OR DUPLICATE: %s" % clean_name)
-			continue
+		if known_hashes.has(hash_val): continue
 			
 		known_hashes[hash_val] = true
-		code += "\t%s = %d,\n" % [clean_name, hash_val]
+		code_enum += "\t%s = %d,\n" % [clean_name, hash_val]
 		
-		# Look for matching map file
-		var map_file := ZONES_MAPS_DIR + clean_name.to_lower() + ".tscn"
-		if ResourceLoader.exists(map_file):
-			var uid_str := ResourceUID.get_id_path(ResourceLoader.get_resource_uid(map_file))
-			map_dict += "\tID.%s: \"%s\",\n" % [clean_name, uid_str]
-		else:
-			map_dict += "\t# Missing Map File for: %s\n" % clean_name
+		# 1. Search for an Instance file (e.g., waterbrook.tscn)
+		var instance_file := ZONES_INSTANCES_DIR + clean_name.to_lower() + ".tscn"
+		if ResourceLoader.exists(instance_file):
+			var uid_str := ResourceUID.get_id_path(ResourceLoader.get_resource_uid(instance_file))
+			code_instances += "\tID.%s: \"%s\",\n" % [clean_name, uid_str]
+			continue
 			
-	code += "}\n\n" + map_dict + "}\n"
+		# 2. Search for a Chunked directory (e.g., ice_cave/)
+		var chunk_dir := ZONES_CHUNKED_DIR + clean_name.to_lower() + "/"
+		if DirAccess.dir_exists_absolute(chunk_dir):
+			code_chunks += "\tID.%s: \"%s\",\n" % [clean_name, chunk_dir]
+			continue
+			
+		# 3. Missing warning
+		code_instances += "\t# MISSING MAP DATA FOR: %s\n" % clean_name
+
+	var final_code := code_enum + "}\n\n" + code_instances + "}\n\n" + code_chunks + "}\n"
 	
 	var out := FileAccess.open(OUT_ZONES, FileAccess.WRITE)
-	var success := out.store_string(code)
-	if success:
-		print("[RegistryBuilder] Successfully updated ZoneRegistry.gd")
-	else:
-		push_error("[RegistryBuilder] Failed to write to file: %s" % OUT_ZONES)
+	var success := out.store_string(final_code)
+	if not success:
+		push_error("[RegistryBuilder] Failed to write Zone Registry to file.")
 
 func _hash_fnv1a_32(text: String) -> int:
 	var hashValue: int = 2166136261
@@ -111,9 +111,8 @@ func _get_files_in_dir(path: String, ext: String) -> Array[String]:
 	if dir:
 		var err := dir.list_dir_begin()
 		if err != OK:
-			push_error("[RegistryBuilder] Failed to open directory: %s" % path)
+			push_error("Failed to open directory: %s" % path)
 			return result
-
 		var file := dir.get_next()
 		while file != "":
 			if not dir.current_is_dir() and file.ends_with(ext):

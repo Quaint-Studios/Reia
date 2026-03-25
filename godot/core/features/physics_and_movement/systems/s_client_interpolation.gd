@@ -3,10 +3,10 @@ class_name ClientInterpolationSystem extends System
 func query():
 	return q.with_all([C_Transform, C_NetworkSync])
 
-func process(entities: Array[Entity], _components: Array, delta: float):
+func process(entities: Array[Entity], _components: Array, delta: float) -> void:
 	for entity in entities:
-		var sync = entity.get_component(C_NetworkSync) as C_NetworkSync
-		var target_pos = sync.server_transform.origin
+		var sync := entity.get_component(C_NetworkSync) as C_NetworkSync
+		var target_pos := sync.server_transform.origin
 		
 		if entity.has_component(C_LocalPlayer):
 			# Rubberband correction if prediction fails heavily
