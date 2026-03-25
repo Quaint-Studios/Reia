@@ -40,10 +40,12 @@ buses/default_bus_layout="uid://82gy4qqnnk7o"
 SoundManager="*uid://rvcpqiv8ntxa"
 ECS="*uid://dfqwl5njvdnmq"
 SceneManager="*res://client/core/scene_manager.gd"
-UiEventBus="*uid://b42f7eitus3fj"
+UIEventBus="*uid://b42f7eitus3fj"
+MapDatabase="*uid://3y3cbaw6ewh2"
 
 [debug]
 
+gdscript/warnings/unused_signal=0
 gdscript/warnings/untyped_declaration=1
 gdscript/warnings/unsafe_property_access=1
 gdscript/warnings/unsafe_method_access=1

@@ -3,11 +3,12 @@ class_name CombatVFXObserver extends Observer
 func watch() -> Resource:
 	return C_DamageEvent
 
-func on_component_added(entity: Entity, component: Resource):
-	var dmg = component as C_DamageEvent
-	call_deferred("_spawn_vfx", entity.global_position, dmg.damage_type)
+func on_component_added(entity: Entity, component: Resource) -> void:
+	var dmg := component as C_DamageEvent
+	var __: Variant = call_deferred("_spawn_vfx", (entity as Node as Node3D).global_position, dmg.damage_type)
 
-func _spawn_vfx(pos: Vector3, type: String):
+# TODO: Create these scenes for VFX
+func _spawn_vfx(_pos: Vector3, type: String) -> void:
 	# var vfx = preload("res://client/assets/vfx/hit_blood.tscn").instantiate()
 	# get_tree().current_scene.add_child(vfx)
 	# vfx.global_position = pos

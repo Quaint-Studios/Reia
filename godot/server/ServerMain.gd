@@ -2,22 +2,22 @@
 class_name ServerMain extends Node
 
 ## The Root Node for the Dedicated Server.
-## Responsible for Database connections, Network Listening, and ticking the 
+## Responsible for Database connections, Network Listening, and ticking the
 ## Authoritative ECS Simulation.
 
 const SERVER_PORT = 7777
 
 func _ready() -> void:
 	print("[SERVER] Starting Server Initialization...")
-	
+
 	# DatabaseCore.connect_to_db()
 	print("[SERVER] Database connected.")
-	
+
 	ECS.world = World.new()
-	
+
 	# Builds the entire deterministic architecture instantly
 	ServerPipeline.build(ECS.world)
-	
+
 	# NetworkCore.start_server(SERVER_PORT)
 	print("[SERVER] Listening for clients on port %d" % SERVER_PORT)
 
@@ -39,6 +39,6 @@ func _physics_process(delta: float) -> void:
 
 	# Late Phase (Respawning)
 	ECS.world.process(delta, SystemGroups.SPAWNING)
-	
+
 	# 5. Broadcast state chunks to connected clients
 	# ChunkManager.broadcast_updates()
