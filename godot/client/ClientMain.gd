@@ -6,14 +6,14 @@ class_name ClientMain extends Node
 
 func _ready() -> void:
 	print("[CLIENT] Starting Client Initialization...")
-	
+
 	ECS.world = World.new()
-	
+
 	# Builds prediction systems and visual observers instantly
 	ClientPipeline.build(ECS.world)
-	
+
 	# NetworkCore.init_client()
-	
+
 	print("[CLIENT] ECS & Observers Initialized. Routing to Title Screen...")
 	call_deferred("_route_to_title")
 
@@ -28,5 +28,5 @@ func _process(delta: float) -> void:
 	# NetworkCore.poll()
 	# Execute Prediction Math (Interpolation)
 	ECS.world.process(delta, SystemGroups.PRE_PROCESS)
-	
+
 	# Flush things if needed here

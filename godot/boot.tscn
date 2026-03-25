@@ -1,22 +1,6 @@
 [gd_scene format=3 uid="uid://cwdga8uennoqt"]
 
-[ext_resource type="Script" uid="uid://tajdu22of0wp" path="res://core/world/world_root.gd" id="1_hjvc4"]
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_n76rq"]
-size = Vector2(50, 50)
+[ext_resource type="Script" uid="uid://d3j5oq6fsqd03" path="res://boot.gd" id="1_hjvc4"]
 
 [node name="Boot" type="Node" unique_id=1278391379]
-
-[node name="Sun" type="DirectionalLight3D" parent="." unique_id=3437944]
-transform = Transform3D(0.81915206, -0.46984634, 0.32898995, 0, 0.57357645, 0.81915206, -0.57357645, -0.6710101, 0.46984634, 0, 0, 0)
-light_energy = 2.0
-
-[node name="Camera" type="Camera3D" parent="." unique_id=846851369]
-transform = Transform3D(1, 0, 0, 0, 0.9396926, 0.34202012, 0, -0.34202012, 0.9396926, 0, 6, 12)
-current = true
-
-[node name="Ground" type="MeshInstance3D" parent="." unique_id=756002531]
-mesh = SubResource("PlaneMesh_n76rq")
-
-[node name="WorldRoot" type="Node3D" parent="." unique_id=777050473]
 script = ExtResource("1_hjvc4")

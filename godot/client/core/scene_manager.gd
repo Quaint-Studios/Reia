@@ -14,7 +14,7 @@ extends Node
 ## Zone ID: The mathematical 32-bit hash (e.g., 83920112). This is the Server's
 ## nametag for a Map.
 
-var _loading_screen := preload("res://client/ui/screens/menus/loading_screen.tscn")
+var _loading_screen := preload(Scenes.Boot.LOADING_SCREEN)
 var _current_ui_screen: Node = null
 
 # State for Instance Loading
