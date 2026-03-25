@@ -20,7 +20,7 @@ func _run() -> void:
 func _generate_screens_registry() -> void:
 	var code := "class_name Scenes\n\n## AUTO-GENERATED UI ROUTING\n"
 	var dir := DirAccess.open(SCREENS_DIR)
-	
+
 	if dir:
 		var err := dir.list_dir_begin()
 		if err != OK:
@@ -31,7 +31,7 @@ func _generate_screens_registry() -> void:
 			if dir.current_is_dir() and not folder_name.begins_with("."):
 				code += _process_ui_folder(SCREENS_DIR + folder_name + "/", folder_name)
 			folder_name = dir.get_next()
-			
+
 	var out := FileAccess.open(OUT_SCREENS, FileAccess.WRITE)
 	var success := out.store_string(code)
 	if not success:
@@ -41,15 +41,15 @@ func _process_ui_folder(path: String, folder_name: String) -> String:
 	var sub_code := "class %s:\n" % folder_name.capitalize().replace(" ", "")
 	var files := _get_files_in_dir(path, ".tscn")
 	var known_names := {}
-	
+
 	for file in files:
 		var raw_name := file.get_file().get_basename().to_upper()
 		if known_names.has(raw_name): continue
-			
+
 		known_names[raw_name] = true
 		var uid_str := ResourceUID.get_id_path(ResourceLoader.get_resource_uid(file))
 		sub_code += "\tconst %s = \"%s\"\n" % [raw_name, uid_str]
-		
+
 	return sub_code + "\n"
 
 # ==========================================
@@ -58,41 +58,41 @@ func _process_ui_folder(path: String, folder_name: String) -> String:
 func _generate_zones_registry() -> void:
 	var txt_file := FileAccess.open(ZONES_TXT, FileAccess.READ)
 	var lines := txt_file.get_as_text().split("\n", false)
-	
+
 	var code_enum := "class_name Zone\n\n## AUTO-GENERATED ZONE IDS\nenum ID {\n"
 	var code_instances := "## SINGLE INSTANCE MAPS (Hard Loads)\nconst MAP_PATHS = {\n"
 	var code_chunks := "## SEAMLESS CHUNK DIRECTORIES (Streamed)\nconst CHUNK_DIRS = {\n"
-	
+
 	var known_hashes := {}
-	
+
 	for line in lines:
 		var clean_name := line.strip_edges().to_upper()
 		if clean_name.is_empty(): continue
-		
+
 		var hash_val := _hash_fnv1a_32(clean_name)
 		if known_hashes.has(hash_val): continue
-			
+
 		known_hashes[hash_val] = true
 		code_enum += "\t%s = %d,\n" % [clean_name, hash_val]
-		
+
 		# 1. Search for an Instance file (e.g., waterbrook.tscn)
 		var instance_file := ZONES_INSTANCES_DIR + clean_name.to_lower() + ".tscn"
 		if ResourceLoader.exists(instance_file):
 			var uid_str := ResourceUID.get_id_path(ResourceLoader.get_resource_uid(instance_file))
 			code_instances += "\tID.%s: \"%s\",\n" % [clean_name, uid_str]
 			continue
-			
+
 		# 2. Search for a Chunked directory (e.g., ice_cave/)
 		var chunk_dir := ZONES_CHUNKED_DIR + clean_name.to_lower() + "/"
 		if DirAccess.dir_exists_absolute(chunk_dir):
 			code_chunks += "\tID.%s: \"%s\",\n" % [clean_name, chunk_dir]
 			continue
-			
+
 		# 3. Missing warning
 		code_instances += "\t# MISSING MAP DATA FOR: %s\n" % clean_name
 
 	var final_code := code_enum + "}\n\n" + code_instances + "}\n\n" + code_chunks + "}\n"
-	
+
 	var out := FileAccess.open(OUT_ZONES, FileAccess.WRITE)
 	var success := out.store_string(final_code)
 	if not success:
