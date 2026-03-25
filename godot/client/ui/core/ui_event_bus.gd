@@ -1,10 +1,15 @@
-class_name UIEventBus extends Node
+extends Node
+## AUTOLOAD: UIEventBus
+## Global routing hub for UI interactions. Observers emit to this, and UI listens.
 
-## Minimal event router. UI emits intent. Simulation consumes via systems later.
-## Keep this UI-only: it must not mutate ECS state directly.
+# Inventory Signals
+signal inventory_updated()
+signal item_equipped(item_id: int)
 
-signal intent_emitted(intent: StringName, payload: Variant)
+# Combat / HUD Signals
+signal player_health_changed(current: int, max_health: int)
+signal player_mana_changed(current: int, max_mana: int)
 
-func emit_intent(intent: StringName, payload: Variant = null) -> void:
-	assert(intent != &"", "UIEventBus.emit_intent requires a non-empty intent")
-	intent_emitted.emit(intent, payload)
+# Global Requests (UI -> Server/ECS)
+signal request_teleport(zone_id: int)
+signal request_inventory_sort()

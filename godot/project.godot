@@ -40,6 +40,7 @@ buses/default_bus_layout="uid://82gy4qqnnk7o"
 SoundManager="*uid://rvcpqiv8ntxa"
 ECS="*uid://dfqwl5njvdnmq"
 SceneManager="*res://client/core/scene_manager.gd"
+UiEventBus="*uid://b42f7eitus3fj"
 
 [debug]
 
