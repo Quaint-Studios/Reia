@@ -7,9 +7,9 @@ extends Node
 ## Screen: A specific type of Scene (e.g., login_screen.tscn). It is Client-Only.
 ## The server doesn't know it exists. It has no physics and no Zone ID.
 ##
-## Map: A specific type of Scene (e.g., ice_cave.tscn). It is Shared. The client
-## loads it to see the 3D meshes. The server loads it (headlessly) to calculate
-## collision physics.
+## Map (Instance / Chunk): A specific type of Scene (e.g., waterbrook.tscn). It
+## is Shared. The client loads it to see the 3D meshes. The server loads it
+## (headlessly) to calculate collision physics.
 ##
 ## Zone ID: The mathematical 32-bit hash (e.g., 83920112). This is the Server's
 ## nametag for a Map.
