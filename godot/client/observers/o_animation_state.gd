@@ -1,7 +1,7 @@
 class_name AnimationStateObserver extends Observer
 
 func watch() -> Resource:
-	return C_State
+	return C_AnimState
 
 func on_component_changed(entity: Entity, _comp: Resource, property: String, new_state: Variant, _old: Variant) -> void:
 	if property == "current_state":
