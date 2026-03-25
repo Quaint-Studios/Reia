@@ -1,4 +1,3 @@
-## res://client/core/map_database.gd
 extends Node
 ## AUTOLOAD: MapDatabase
 ## Provides data-driven lookups pairing Zone IDs with Client-side resources.
