@@ -1,9 +1,9 @@
 class_name DamageCalculationSystem extends System
 
-func query():
+func query() -> QueryBuilder:
 	return q.with_all([C_Health, C_DamageEvent]).with_none([C_Dead])
 
-func process(entities: Array[Entity], _components: Array, _delta: float):
+func process(entities: Array[Entity], _components: Array, _delta: float) -> void:
 	for entity in entities:
 		var health := entity.get_component(C_Health) as C_Health
 		var damage_event := entity.get_component(C_DamageEvent) as C_DamageEvent
