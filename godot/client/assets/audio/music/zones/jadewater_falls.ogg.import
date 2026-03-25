@@ -3,11 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://dx3ap2yn5iid1"
-valid=false
+path="res://.godot/imported/jadewater_falls.ogg-cc8b8ab9d8d05ed34f47a123593b6908.oggvorbisstr"
 
 [deps]
 
-source_file="res://assets/audio/music/zones/jadewater_falls.ogg"
+source_file="res://client/assets/audio/music/zones/jadewater_falls.ogg"
+dest_files=["res://.godot/imported/jadewater_falls.ogg-cc8b8ab9d8d05ed34f47a123593b6908.oggvorbisstr"]
 
 [params]
 

@@ -5,6 +5,7 @@ class_name ServerMain extends Node
 ## Responsible for Database connections, Network Listening, and ticking the
 ## Authoritative ECS Simulation.
 
+var world: World = World.new()
 const SERVER_PORT = 7777
 
 func _ready() -> void:
@@ -13,7 +14,9 @@ func _ready() -> void:
 	# DatabaseCore.connect_to_db()
 	print("[SERVER] Database connected.")
 
-	ECS.world = World.new()
+	world.name = "ServerWorld"
+	add_child(world)
+	ECS.world = world
 
 	# Builds the entire deterministic architecture instantly
 	ServerPipeline.build(ECS.world)

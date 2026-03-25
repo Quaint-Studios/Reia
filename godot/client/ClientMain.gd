@@ -4,10 +4,13 @@ class_name ClientMain extends Node
 ## Responsible for connecting to the server, registering visual Observers,
 ## and ticking the Client-side prediction ECS.
 
+var world: World = World.new()
+
 func _ready() -> void:
 	print("[CLIENT] Starting Client Initialization...")
-
-	ECS.world = World.new()
+	world.name = "ClientWorld"
+	add_child(world)
+	ECS.world = world
 
 	# Builds prediction systems and visual observers instantly
 	ClientPipeline.build(ECS.world)

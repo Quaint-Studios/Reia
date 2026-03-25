@@ -7,11 +7,11 @@ enum ID {
 }
 
 ## SINGLE INSTANCE MAPS (Hard Loads)
-const MAP_PATHS = {
+const MAP_PATHS: Dictionary[int, String] = {
 	ID.WATERBROOK: "res://shared_nodes/maps/instances/waterbrook.tscn",
 	ID.JADEWATER_FALLS: "res://shared_nodes/maps/instances/jadewater_falls.tscn",
 }
 
 ## SEAMLESS CHUNK DIRECTORIES (Streamed)
-const CHUNK_DIRS = {
+const CHUNK_DIRS: Dictionary[int, String] = {
 }

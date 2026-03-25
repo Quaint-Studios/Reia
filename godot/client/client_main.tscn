@@ -4,3 +4,5 @@
 
 [node name="ClientMain" type="Node" unique_id=760770750]
 script = ExtResource("1_q508y")
+
+[node name="UICanvas" type="CanvasLayer" parent="." unique_id=767661277]

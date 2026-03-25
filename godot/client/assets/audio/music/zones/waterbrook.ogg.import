@@ -3,11 +3,12 @@
 importer="oggvorbisstr"
 type="AudioStreamOggVorbis"
 uid="uid://cgo6gpoutiend"
-valid=false
+path="res://.godot/imported/waterbrook.ogg-a024bafea70f248e3c0035c475f93fe7.oggvorbisstr"
 
 [deps]
 
-source_file="res://assets/audio/music/zones/waterbrook.ogg"
+source_file="res://client/assets/audio/music/zones/waterbrook.ogg"
+dest_files=["res://.godot/imported/waterbrook.ogg-a024bafea70f248e3c0035c475f93fe7.oggvorbisstr"]
 
 [params]
 

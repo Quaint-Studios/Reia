@@ -62,7 +62,9 @@ func _hard_load_instance(map_uid: String) -> void:
 
 	ECS.world.purge()
 
-	ResourceLoader.load_threaded_request(_loading_target)
+	var err := ResourceLoader.load_threaded_request(_loading_target)
+	if err != OK:
+		push_error("[SceneManager] Failed to start threaded load for '%s' (err=%d)" % [_loading_target, err])
 	set_process(true)
 
 func _process(_delta: float) -> void:
