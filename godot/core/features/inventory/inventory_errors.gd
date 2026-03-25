@@ -8,4 +8,4 @@ const ITEM_LOCKED = 3
 
 ## Helper to pack/format errors for the network if necessary.
 static func pack(error_code: int) -> int:
-    return error_code
+	return error_code
