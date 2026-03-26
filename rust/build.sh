@@ -1,35 +1,45 @@
 #!/bin/bash
+set -e # Exit immediately if a command exits with a non-zero status
 
-# Usage: ./build.sh [windows|linux|mac|all]
-set -e
+# Set Defaults
+BUILD_TYPE="debug"
+CARGO_ARGS=""
+TARGET_DIR="debug"
 
-declare -A targets
-targets[windows]="x86_64-pc-windows-msvc"
-targets[linux]="x86_64-unknown-linux-gnu"
-targets[mac]="x86_64-apple-darwin"
+# Parse Arguments
+if [[ "$1" == "release" || "$1" == "--release" ]]; then
+    BUILD_TYPE="release"
+    CARGO_ARGS="--release"
+    TARGET_DIR="release"
+fi
 
-build_target() {
-    local os=$1
-    local target=${targets[$os]}
-    if [[ -z "$target" ]]; then
-        echo "Unknown OS: $os"
-        exit 1
-    fi
-    echo "Building for $os ($target)..."
-    cargo build --release --target "$target"
-}
+echo "==================================================="
+echo "Building Reia's Rust Backend in $BUILD_TYPE mode..."
+echo "==================================================="
 
-if [[ $# -eq 0 ]]; then
-    echo "Usage: $0 [windows|linux|mac|all]"
+# Run Cargo Build
+cargo build $CARGO_ARGS
+
+# Determine OS for the correct file extension
+OS_NAME=$(uname -s)
+if [[ "$OS_NAME" == "Linux" ]]; then
+    EXT="so"
+elif [[ "$OS_NAME" == "Darwin" ]]; then
+    EXT="dylib"
+else
+    echo "Unsupported OS: $OS_NAME"
     exit 1
 fi
 
-if [[ "$1" == "all" ]]; then
-    for os in "${!targets[@]}"; do
-        build_target "$os"
-    done
-else
-    for os in "$@"; do
-        build_target "$os"
-    done
+# Setup Output Directory
+OUT_DIR="../godot/build/bin"
+if [ ! -d "$OUT_DIR" ]; then
+    echo "Creating directory: $OUT_DIR"
+    mkdir -p "$OUT_DIR"
 fi
+
+# Copy and Rename the Shared Object
+echo "Copying binary to $OUT_DIR/libreia_backend.$BUILD_TYPE.$EXT..."
+cp "target/$TARGET_DIR/libreia_backend.$EXT" "$OUT_DIR/libreia_backend.$BUILD_TYPE.$EXT"
+
+echo "Build and deployment complete!"
