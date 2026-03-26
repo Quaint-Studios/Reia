@@ -7,11 +7,24 @@ class_name ServerMain extends Node
 var world: World = World.new()
 const SERVER_PORT = 7777
 
+var rust_core: RustCore
+
 func _ready() -> void:
 	print("[SERVER] Starting Server Initialization...")
 
 	# DatabaseCore.connect_to_db()
-	print("[SERVER] Database connected.")
+	# print("[SERVER] Database connected.")
+
+	rust_core = RustCore.new()
+	add_child(rust_core)
+
+	UIUtils.safe_connect(
+		rust_core.on_network_event,
+		_on_rust_packet_received,
+		"ServerMain rust_core.on_network_event"
+	)
+
+	rust_core.start_backend(SERVER_PORT)
 
 	world.name = "ServerWorld"
 	add_child(world)
@@ -27,8 +40,11 @@ func _ready() -> void:
 ## TICKING THE SERVER
 ## TODO: Implement proper ticking
 func _physics_process(delta: float) -> void:
-	# Gather network inputs
-	# NetworkCore.poll()
+	# DRAIN THE FLUME CHANNEL
+	# This pulls thousands of network events processed by Tokio
+	# and safely fires the connected signals on the main thread.
+	rust_core.poll_network()
+
 	# Strict, Explicit Server Pipeline (No looping overhead, profilable)
 	ECS.world.process(delta, SystemGroups.PRE_PROCESS)
 	ECS.world.process(delta, SystemGroups.PHYSICS)
@@ -44,3 +60,8 @@ func _physics_process(delta: float) -> void:
 
 	# Broadcast state chunks to connected clients
 	# ChunkManager.broadcast_updates()
+
+func _on_rust_packet_received(_client_id: int, _op_code: StringName, _payload: PackedByteArray) -> void:
+	# Parse the binary payload using Godot's StreamPeerBuffer (or rkyv bindings)
+	# and push it to the GECS NetworkEventQueue!
+	pass
