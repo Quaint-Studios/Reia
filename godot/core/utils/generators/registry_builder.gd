@@ -108,6 +108,7 @@ func _generate_screens_registry() -> void:
 			folder_name = dir.get_next()
 
 	var out := FileAccess.open(OUT_SCREENS, FileAccess.WRITE)
+	code = code.rstrip("\n") + "\n"
 	var success := out.store_string(code)
 	if not success:
 		push_error("[RegistryBuilder] Failed to write screens registry!")
@@ -125,7 +126,7 @@ func _process_ui_folder(path: String, folder_name: String) -> String:
 		var uid_str := ResourceUID.get_id_path(ResourceLoader.get_resource_uid(file))
 		sub_code += "\tconst %s = \"%s\"\n" % [raw_name, uid_str]
 
-	return sub_code
+	return sub_code + "\n"
 
 # ==========================================
 # ZONE GENERATOR (Handles Instances & Chunks)
