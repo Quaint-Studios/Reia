@@ -24,7 +24,7 @@ impl PlayerDao {
         // Safe parameterized query to prevent SQL injection
         let query = "SELECT id, username, zone_id, x, y, z, health FROM players WHERE id = ?1";
 
-        let mut stmt = conn.prepare(query).await.ok()?;
+        let stmt = conn.prepare(query).await.ok()?;
         let mut rows = stmt.query(libsql::params![player_id]).await.ok()?;
 
         if let Some(row) = rows.next().await.ok().flatten() {

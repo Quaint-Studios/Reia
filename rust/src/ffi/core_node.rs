@@ -1,4 +1,4 @@
-use flume::{ Receiver, Sender };
+use flume::Receiver;
 use godot::prelude::*;
 use std::sync::Arc;
 use tokio::runtime::Runtime;
