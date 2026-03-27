@@ -6,7 +6,7 @@ use quinn::{ Endpoint, ServerConfig };
 use std::net::SocketAddr;
 use std::sync::Arc;
 
-pub async fn start_quinn_server(port: u16, tx: Sender<IncomingPacket>, state: Arc<WorldState>) {
+pub async fn start_quinn_server(port: u16, tx: Sender<IncomingPacket>, _state: Arc<WorldState>) {
     // Explicitly install the Crypto Provider for rustls
     let _ = rustls::crypto::ring::default_provider().install_default();
 
@@ -25,7 +25,7 @@ pub async fn start_quinn_server(port: u16, tx: Sender<IncomingPacket>, state: Ar
 
     server_crypto.alpn_protocols = vec![b"mmo-proto".to_vec()];
 
-    let quic_config = quinn::crypto::rustls::QuicServerConfig::try_from(server_crypto).unwrap();
+    let quic_config = QuicServerConfig::try_from(server_crypto).unwrap();
     let server_config = ServerConfig::with_crypto(Arc::new(quic_config));
 
     // Bind the UDP endpoint

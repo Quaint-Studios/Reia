@@ -4,7 +4,13 @@ use rkyv::{ Archive, Deserialize, Serialize };
 /// network thread through the Flume channel to the Godot main thread.
 pub struct IncomingPacket {
     pub client_id: i64,
-    pub op_code: String,
+    pub op_code: u16,
+    pub payload: Vec<u8>,
+}
+
+pub struct OutgoingPacket {
+    pub target_id: i64, // Used by server to route to specific client. 0 for Client-to-Server.
+    pub op_code: u16,
     pub payload: Vec<u8>,
 }
 

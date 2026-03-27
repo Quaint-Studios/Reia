@@ -42,6 +42,7 @@ ECS="*uid://dfqwl5njvdnmq"
 SceneManager="*res://client/core/scene_manager.gd"
 UIEventBus="*uid://b42f7eitus3fj"
 MapDatabase="*uid://3y3cbaw6ewh2"
+NetworkRouter="*uid://bcct6em86mvjj"
 
 [debug]
 
