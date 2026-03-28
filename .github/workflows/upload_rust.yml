@@ -13,7 +13,13 @@ jobs:
   build-binaries:
     name: Build on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
+
+    env:
+      # Make sure macOS binary works on older Macs, not just the latest
+      MACOSX_DEPLOYMENT_TARGET: "11.0" 
+
     strategy:
+      fail-fast: false # If Windows fails, let Mac and Linux keep building to see all errors
       matrix:
         include:
           - os: windows-latest
@@ -45,6 +51,11 @@ jobs:
         with:
           targets: ${{ matrix.target }}
 
+      - name: Setup Rust Cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: "./rust -> target" # Tells the cache where Cargo is running
+
       - name: Build Debug
         run: cargo build --target ${{ matrix.target }}
 
@@ -65,7 +76,6 @@ jobs:
           path: staging/${{ matrix.out_folder }}
           retention-days: 1 # We only need this for the next job
 
-  
   # Hash & Publish
   publish:
     name: Generate Manifest and Upload to R2
@@ -120,6 +130,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
           AWS_DEFAULT_REGION: auto
         run: |
-          aws s3 sync staging/ s3://${{ secrets.R2_BUCKET_NAME }}/latest/ \
+          aws s3 sync staging/ s3://rust-build/latest/ \
             --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com \
             --delete
