@@ -31,7 +31,6 @@ func _exit_tree():
 	if http_request:
 		http_request.queue_free()
 	
-	# Cleanup the custom menu
 	remove_tool_menu_item("Reia Tools")
 	if _reia_tools_menu:
 		_reia_tools_menu.queue_free()
@@ -41,7 +40,6 @@ func _setup_menu():
 	_reia_tools_menu.add_item("Update Rust Binaries", 0)
 	_reia_tools_menu.add_item("Finalize Rust Binary Update", 1)
 	_reia_tools_menu.id_pressed.connect(_on_reia_tools_menu_pressed)
-	# This places "Reia Tools" in the top Editor Menu bar under "Project" -> "Tools"
 	add_tool_submenu_item("Reia Tools", _reia_tools_menu)
 
 func _on_reia_tools_menu_pressed(id: int):
@@ -74,7 +72,6 @@ func _check_for_updates_on_startup():
 		_fetch_remote_manifest()
 
 func _fetch_remote_manifest():
-	# Cancel any existing request just in case they spammed the manual button
 	if http_request.get_http_client_status() != HTTPClient.STATUS_DISCONNECTED:
 		http_request.cancel_request()
 	http_request.request(MANIFEST_URL)
@@ -120,8 +117,6 @@ func _get_local_manifest() -> Dictionary:
 
 func _download_binary(manifest: Dictionary):
 	var os_name := OS.get_name()
-	
-	# Default to Linux (covers FreeBSD, NetBSD, OpenBSD, etc.)
 	var target_os := "Linux"
 	if os_name == "Windows":
 		target_os = "Windows"
@@ -142,9 +137,10 @@ func _download_binary(manifest: Dictionary):
 	for build_type in ["debug", "release"]:
 		var build_data: Dictionary = bin_info.get(build_type, {})
 		if not build_data.is_empty():
-			_start_download(build_data["file"], build_type, target_os)
+			var expected_hash: String = build_data.get("sha256", "")
+			_start_download(build_data["file"], build_type, target_os, expected_hash)
 
-func _start_download(file_path: String, build_type: String, target_os: String):
+func _start_download(file_path: String, build_type: String, target_os: String, expected_hash: String):
 	# Default to Linux/BSD naming conventions
 	var prefix := "libreia_backend"
 	var ext := ".so"
@@ -166,37 +162,45 @@ func _start_download(file_path: String, build_type: String, target_os: String):
 	
 	_pending_downloads += 1
 	
+	# Pass the expected_hash through
 	file_http.request_completed.connect(func(res, code, hdrs, bdy):
-		_on_binary_downloaded(res, code, download_path, final_path, file_http)
+		_on_binary_downloaded(res, code, download_path, final_path, expected_hash, file_http)
 	)
 	
 	print("[RustUpdater] Downloading ", build_type, " build -> ", download_path)
 	file_http.request(file_url)
 
-func _on_binary_downloaded(result, response_code, downloaded_path, final_path, http_node):
+func _on_binary_downloaded(result: int, response_code: int, downloaded_path: String, final_path: String, expected_hash: String, http_node: HTTPRequest):
 	http_node.queue_free()
 	_pending_downloads -= 1
 	
 	if response_code == 200:
-		# Attempt immediate hot-swap
 		var final_name: String = final_path.get_file()
-		var err := OK
 		
-		if FileAccess.file_exists(final_path):
-			err = DirAccess.remove_absolute(final_path)
-			
-		if err == OK:
-			err = DirAccess.rename_absolute(downloaded_path, final_path)
-			if err != OK:
-				_failed_replacements.append(final_name)
-			else:
-				print("[RustUpdater] Successfully hot-swapped: ", final_name)
-		else:
+		# Verify the file integrity
+		var actual_hash := FileAccess.get_sha256(downloaded_path)
+		if expected_hash != "" and actual_hash != expected_hash:
+			push_error("[RustUpdater] HASH MISMATCH for " + final_name + "! File corrupted during download.")
+			push_error("Expected: " + expected_hash + " | Got: " + actual_hash)
+			DirAccess.remove_absolute(downloaded_path) # Delete the bad file
 			_failed_replacements.append(final_name)
+		else:
+			# Proceed with hot-swap if verified
+			var err := OK
+			if FileAccess.file_exists(final_path):
+				err = DirAccess.remove_absolute(final_path)
+				
+			if err == OK:
+				err = DirAccess.rename_absolute(downloaded_path, final_path)
+				if err != OK:
+					_failed_replacements.append(final_name)
+				else:
+					print("[RustUpdater] Successfully verified and hot-swapped: ", final_name)
+			else:
+				_failed_replacements.append(final_name)
 	else:
 		push_error("[RustUpdater] Failed to download binary. Code: " + str(response_code))
 		
-	# Once all downloads finish, finalize
 	if _pending_downloads == 0:
 		_finalize_update()
 
@@ -206,19 +210,19 @@ func _finalize_update():
 	
 	if _failed_replacements.size() > 0:
 		push_warning("==================================================")
-		push_warning("[RustUpdater] UPDATE DOWNLOADED, BUT FILES ARE LOCKED!")
+		push_warning("[RustUpdater] UPDATE DOWNLOADED, BUT FILES ARE LOCKED OR CORRUPTED!")
 		push_warning("Could not automatically replace: " + str(_failed_replacements))
 		push_warning("Because active binaries are locked, try these steps:")
 		push_warning("1. Stop the project if it is currently playing/running.")
-		push_warning("2. Go to Project -> Tools -> Reia Tools -> Finalize Rust Binary Update (this will attempt to replace the locked files again)")
+		push_warning("2. Go to Project -> Tools -> Reia Tools -> Finalize Rust Binary Update")
 		push_warning("=================== EXTRA HELP ===================")
 		push_warning("3. If that doesn't work, close the Godot Editor entirely.")
-		push_warning("4. Manually delete the old binaries in res://build/bin/ (e.g. libreia_backend.release.so) and replace them with the new ones that have .update suffix (e.g. libreia_backend.release.so.update -> libreia_backend.release.so)")
+		push_warning("4. Manually delete the old binaries in res://build/bin/ and rename the .update files to their correct names (remove the .update suffix).")
 		push_warning("5. Reopen the project.")
 		push_warning("==================================================")
 	else:
 		push_warning("==================================================")
-		push_warning("[RustUpdater] ALL UPDATES APPLIED SUCCESSFULLY!")
+		push_warning("[RustUpdater] ALL UPDATES VERIFIED AND APPLIED SUCCESSFULLY!")
 		push_warning("The new GDExtension binaries are in place.")
 		push_warning("Godot should reload them automatically.")
 		push_warning("==================================================")

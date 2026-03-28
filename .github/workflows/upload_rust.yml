@@ -93,12 +93,12 @@ jobs:
       - name: Generate Manifest and Hashes
         run: |
           cd staging
-          WIN_DBG_HASH=$(sha256sum windows/reia_backend.debug.dll | awk '{ print $1 }')
-          WIN_REL_HASH=$(sha256sum windows/reia_backend.release.dll | awk '{ print $1 }')
-          LIN_DBG_HASH=$(sha256sum linux/libreia_backend.debug.so | awk '{ print $1 }')
-          LIN_REL_HASH=$(sha256sum linux/libreia_backend.release.so | awk '{ print $1 }')
-          MAC_DBG_HASH=$(sha256sum macos/libreia_backend.debug.dylib | awk '{ print $1 }')
-          MAC_REL_HASH=$(sha256sum macos/libreia_backend.release.dylib | awk '{ print $1 }')
+          WIN_DBG_HASH=$(sha256sum reia_backend.debug.dll | awk '{ print $1 }')
+          WIN_REL_HASH=$(sha256sum reia_backend.release.dll | awk '{ print $1 }')
+          LIN_DBG_HASH=$(sha256sum libreia_backend.debug.so | awk '{ print $1 }')
+          LIN_REL_HASH=$(sha256sum libreia_backend.release.so | awk '{ print $1 }')
+          MAC_DBG_HASH=$(sha256sum libreia_backend.debug.dylib | awk '{ print $1 }')
+          MAC_REL_HASH=$(sha256sum libreia_backend.release.dylib | awk '{ print $1 }')
           COMMIT_HASH=${{ github.sha }}
           DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
@@ -109,16 +109,16 @@ jobs:
             "build_date": "$DATE",
             "binaries": {
               "Windows": {
-                "debug": {"file": "windows/reia_backend.debug.dll", "sha256": "$WIN_DBG_HASH"},
-                "release": {"file": "windows/reia_backend.release.dll", "sha256": "$WIN_REL_HASH"}
+                "debug": {"file": "reia_backend.debug.dll", "sha256": "$WIN_DBG_HASH"},
+                "release": {"file": "reia_backend.release.dll", "sha256": "$WIN_REL_HASH"}
               },
               "Linux": {
-                "debug": {"file": "linux/libreia_backend.debug.so", "sha256": "$LIN_DBG_HASH"},
-                "release": {"file": "linux/libreia_backend.release.so", "sha256": "$LIN_REL_HASH"}
+                "debug": {"file": "libreia_backend.debug.so", "sha256": "$LIN_DBG_HASH"},
+                "release": {"file": "libreia_backend.release.so", "sha256": "$LIN_REL_HASH"}
               },
               "macOS": {
-                "debug": {"file": "macos/libreia_backend.debug.dylib", "sha256": "$MAC_DBG_HASH"},
-                "release": {"file": "macos/libreia_backend.release.dylib", "sha256": "$MAC_REL_HASH"}
+                "debug": {"file": "libreia_backend.debug.dylib", "sha256": "$MAC_DBG_HASH"},
+                "release": {"file": "libreia_backend.release.dylib", "sha256": "$MAC_REL_HASH"}
               }
             }
           }
