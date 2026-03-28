@@ -9,8 +9,28 @@ on:
       - "rust/**" # Only run if Rust code changes
 
 jobs:
-  build-and-upload:
-    runs-on: ubuntu-latest
+  # Matrix Build
+  build-binaries:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            ext: dll
+            prefix: reia_backend
+            out_folder: windows
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            ext: so
+            prefix: libreia_backend
+            out_folder: linux
+          - os: macos-latest
+            target: x86_64-apple-darwin
+            ext: dylib
+            prefix: libreia_backend
+            out_folder: macos
 
     defaults:
       run:
@@ -18,37 +38,47 @@ jobs:
 
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          targets: x86_64-pc-windows-gnu, x86_64-unknown-linux-gnu, x86_64-apple-darwin
+          targets: ${{ matrix.target }}
 
-      - name: Build Binaries
+      - name: Build Debug
+        run: cargo build --target ${{ matrix.target }}
+
+      - name: Build Release
+        run: cargo build --release --target ${{ matrix.target }}
+
+      - name: Stage Artifacts
+        shell: bash
         run: |
-          # Build Debug
-          cargo build --target x86_64-pc-windows-gnu
-          cargo build --target x86_64-unknown-linux-gnu
-          cargo build --target x86_64-apple-darwin
+          mkdir -p ../staging/${{ matrix.out_folder }}
+          cp target/${{ matrix.target }}/debug/${{ matrix.prefix }}.${{ matrix.ext }} ../staging/${{ matrix.out_folder }}/${{ matrix.prefix }}.debug.${{ matrix.ext }}
+          cp target/${{ matrix.target }}/release/${{ matrix.prefix }}.${{ matrix.ext }} ../staging/${{ matrix.out_folder }}/${{ matrix.prefix }}.release.${{ matrix.ext }}
 
-          # Build Release
-          cargo build --release --target x86_64-pc-windows-gnu
-          cargo build --release --target x86_64-unknown-linux-gnu
-          cargo build --release --target x86_64-apple-darwin
+      - name: Upload Temporary Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: binaries-${{ matrix.out_folder }}
+          path: staging/${{ matrix.out_folder }}
+          retention-days: 1 # We only need this for the next job
 
-          # Move to a staging directory
-          mkdir -p staging/windows staging/linux staging/macos
-          
-          # Copy Debug
-          cp target/x86_64-pc-windows-gnu/debug/reia_backend.dll staging/windows/reia_backend.debug.dll
-          cp target/x86_64-unknown-linux-gnu/debug/libreia_backend.so staging/linux/libreia_backend.debug.so
-          cp target/x86_64-apple-darwin/debug/libreia_backend.dylib staging/macos/libreia_backend.debug.dylib
-
-          # Copy Release
-          cp target/x86_64-pc-windows-gnu/release/reia_backend.dll staging/windows/reia_backend.release.dll
-          cp target/x86_64-unknown-linux-gnu/release/libreia_backend.so staging/linux/libreia_backend.release.so
-          cp target/x86_64-apple-darwin/release/libreia_backend.dylib staging/macos/libreia_backend.release.dylib
+  
+  # Hash & Publish
+  publish:
+    name: Generate Manifest and Upload to R2
+    needs: build-binaries # This forces it to wait for all 3 OS builds to finish
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Download All Binaries
+        uses: actions/download-artifact@v4
+        with:
+          path: staging
+          pattern: binaries-*
+          merge-multiple: true # Strips the "binaries-" folder wrapper, leaving just /windows, /linux, /macos
 
       - name: Generate Manifest and Hashes
         run: |
