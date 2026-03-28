@@ -1,0 +1,95 @@
+name: Build and Upload GDExtension
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - "rust/**" # Only run if Rust code changes
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./rust
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v6
+
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: x86_64-pc-windows-gnu, x86_64-unknown-linux-gnu, x86_64-apple-darwin
+
+      - name: Build Binaries
+        run: |
+          # Build Debug
+          cargo build --target x86_64-pc-windows-gnu
+          cargo build --target x86_64-unknown-linux-gnu
+          cargo build --target x86_64-apple-darwin
+
+          # Build Release
+          cargo build --release --target x86_64-pc-windows-gnu
+          cargo build --release --target x86_64-unknown-linux-gnu
+          cargo build --release --target x86_64-apple-darwin
+
+          # Move to a staging directory
+          mkdir -p staging/windows staging/linux staging/macos
+          
+          # Copy Debug
+          cp target/x86_64-pc-windows-gnu/debug/reia_backend.dll staging/windows/reia_backend.debug.dll
+          cp target/x86_64-unknown-linux-gnu/debug/libreia_backend.so staging/linux/libreia_backend.debug.so
+          cp target/x86_64-apple-darwin/debug/libreia_backend.dylib staging/macos/libreia_backend.debug.dylib
+
+          # Copy Release
+          cp target/x86_64-pc-windows-gnu/release/reia_backend.dll staging/windows/reia_backend.release.dll
+          cp target/x86_64-unknown-linux-gnu/release/libreia_backend.so staging/linux/libreia_backend.release.so
+          cp target/x86_64-apple-darwin/release/libreia_backend.dylib staging/macos/libreia_backend.release.dylib
+
+      - name: Generate Manifest and Hashes
+        run: |
+          cd staging
+          WIN_DBG_HASH=$(sha256sum windows/reia_backend.debug.dll | awk '{ print $1 }')
+          WIN_REL_HASH=$(sha256sum windows/reia_backend.release.dll | awk '{ print $1 }')
+          LIN_DBG_HASH=$(sha256sum linux/libreia_backend.debug.so | awk '{ print $1 }')
+          LIN_REL_HASH=$(sha256sum linux/libreia_backend.release.so | awk '{ print $1 }')
+          MAC_DBG_HASH=$(sha256sum macos/libreia_backend.debug.dylib | awk '{ print $1 }')
+          MAC_REL_HASH=$(sha256sum macos/libreia_backend.release.dylib | awk '{ print $1 }')
+          COMMIT_HASH=${{ github.sha }}
+          DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+
+          # Create manifest.json
+          cat <<EOF > manifest.json
+          {
+            "commit_hash": "$COMMIT_HASH",
+            "build_date": "$DATE",
+            "binaries": {
+              "Windows": {
+                "debug": {"file": "windows/reia_backend.debug.dll", "sha256": "$WIN_DBG_HASH"},
+                "release": {"file": "windows/reia_backend.release.dll", "sha256": "$WIN_REL_HASH"}
+              },
+              "Linux": {
+                "debug": {"file": "linux/libreia_backend.debug.so", "sha256": "$LIN_DBG_HASH"},
+                "release": {"file": "linux/libreia_backend.release.so", "sha256": "$LIN_REL_HASH"}
+              },
+              "macOS": {
+                "debug": {"file": "macos/libreia_backend.debug.dylib", "sha256": "$MAC_DBG_HASH"},
+                "release": {"file": "macos/libreia_backend.release.dylib", "sha256": "$MAC_REL_HASH"}
+              }
+            }
+          }
+          EOF
+
+      - name: Upload to Cloudflare R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          aws s3 sync staging/ s3://${{ secrets.R2_BUCKET_NAME }}/latest/ \
+            --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com \
+            --delete
