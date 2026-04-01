@@ -38,7 +38,7 @@ RUN wget -qO manifest.json ${R2_BASE_URL}/manifest.json && \
 	wget -qO "$ZIP_FILE" "${R2_BASE_URL}/$ZIP_FILE" && \
 	echo "$EXPECTED_HASH  $ZIP_FILE" | sha256sum -c - && \
 	unzip "$ZIP_FILE" -d /reia-server && \
-	chmod +x /reia-server/*.x86_64
+	chmod +x /reia-server/reia-linux-server
 
 # - # - # - # - # - # - # - # - # - # - # - # - # - # - #
 
@@ -61,4 +61,4 @@ USER reiauser
 EXPOSE 7777/udp
 
 # Run the Reia headless server
-CMD ["sh", "-c", "exec ./*.x86_64 --server --headless"]
+CMD ["sh", "-c", "exec ./reia-linux-server --server --headless"]
