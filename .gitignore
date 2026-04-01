@@ -28,6 +28,7 @@ mono_crash.*.json
 
 # Build
 .builds/
+godot/build
 
 ###############################
 
