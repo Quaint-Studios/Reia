@@ -8,6 +8,7 @@ static func build(world: World) -> void:
 	_register_ai(world)
 	_register_spawning(world)
 
+	world.add_observer(NetworkIdObserver.new())
 static func _register_physics(world: World) -> void:
 	var physics := ServerPhysicsSystem.new()
 	physics.group = SystemGroups.PHYSICS

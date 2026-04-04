@@ -38,11 +38,12 @@ buses/default_bus_layout="uid://82gy4qqnnk7o"
 [autoload]
 
 SoundManager="*uid://rvcpqiv8ntxa"
-ECS="*uid://dfqwl5njvdnmq"
-SceneManager="*res://client/core/scene_manager.gd"
-UIEventBus="*uid://b42f7eitus3fj"
 MapDatabase="*uid://3y3cbaw6ewh2"
+ECS="*uid://dfqwl5njvdnmq"
+EntityMap="*uid://bl6ovve7emito"
+UIEventBus="*uid://b42f7eitus3fj"
 NetworkRouter="*uid://bcct6em86mvjj"
+SceneManager="*res://client/core/scene_manager.gd"
 
 [debug]
 
