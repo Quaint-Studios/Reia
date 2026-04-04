@@ -31,7 +31,7 @@ pub async fn start_quinn_server(port: u16, tx: Sender<IncomingPacket>, _state: A
     // Bind the UDP endpoint
     let addr = format!("0.0.0.0:{}", port).parse::<SocketAddr>().unwrap();
     let endpoint = Endpoint::server(server_config, addr).unwrap();
-    tracing::info!("Quinn UDP server listening on {}", addr);
+    tracing::info!("UDP Server listening on {}", addr);
 
     // Listen for connections asynchronously
     while let Some(conn) = endpoint.accept().await {
