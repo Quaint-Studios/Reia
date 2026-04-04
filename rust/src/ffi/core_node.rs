@@ -8,6 +8,14 @@ use crate::net::packets::{ IncomingPacket, OutgoingPacket };
 use crate::net::server::start_quinn_server;
 use crate::state::world_state::WorldState;
 
+// A simple struct to help Rust group packets rapidly before sending to Godot
+#[derive(Default)]
+struct PacketBucket {
+    ids: Vec<i64>,
+    data: Vec<u8>,
+    offsets: Vec<i32>,
+}
+
 #[derive(GodotClass)]
 #[class(base = Node)]
 pub struct RustCore {
@@ -39,14 +47,10 @@ impl INode for RustCore {
 
 #[godot_api]
 impl RustCore {
-    /// BATCHED Signal emitted SAFELY on the Godot main thread.
-    /// Passes all network events that occurred this frame in a single FFI crossing.
+    /// Emits a SINGLE dictionary containing our batched buckets.
+    /// Format: { OpCode: { "ids": PackedInt64, "data": PackedByteArray, "offsets": PackedInt32 } }
     #[signal]
-    pub fn on_network_events(
-        client_ids: PackedInt64Array,
-        op_codes: PackedInt32Array,
-        payloads: Array<PackedByteArray>
-    );
+    pub fn on_network_events(batched_buckets: VarDictionary);
 
     /// Called by ServerMain.gd in _ready()
     #[func]
@@ -58,7 +62,10 @@ impl RustCore {
 
         // Create the cross-thread bridge
         let (tx, rx) = flume::unbounded::<IncomingPacket>();
+        let (tx_out, _rx_out) = flume::unbounded::<OutgoingPacket>();
+
         self.rx_from_net = Some(rx);
+        self.tx_to_net = Some(tx_out);
 
         // Spawn the Quinn Server in the background
         let state_clone = self.world_state.clone();
@@ -98,30 +105,44 @@ impl RustCore {
             return;
         };
 
-        let mut client_ids = PackedInt64Array::new();
-        let mut op_codes = PackedInt32Array::new();
-        let mut payloads = Array::<PackedByteArray>::new();
-
         let mut has_data = false;
+
+        let mut buckets: std::collections::HashMap<
+            u16,
+            PacketBucket
+        > = std::collections::HashMap::new();
 
         // Drain the channel completely without blocking Godot
         for packet in rx.try_iter() {
-            client_ids.push(packet.client_id);
-            op_codes.push(packet.op_code as i32);
+            let bucket = buckets.entry(packet.op_code).or_default();
 
-            let bytes = PackedByteArray::from(packet.payload.as_slice());
-            payloads.push(&bytes);
+            bucket.ids.push(packet.client_id);
+            bucket.offsets.push(bucket.data.len() as i32); // Record where this payload starts
+            bucket.data.extend(&packet.payload); // Concatenate raw bytes
 
             has_data = true;
         }
 
-        // Only pay the FFI signal tax if we actually received data
-        if has_data {
-            self.base_mut().emit_signal(
-                "on_network_events",
-                &[client_ids.to_variant(), op_codes.to_variant(), payloads.to_variant()]
-            );
+        if !has_data {
+            return;
         }
+
+        // Convert to Godot Dictionary exactly ONCE per frame
+        let mut godot_buckets = VarDictionary::new();
+
+        for (op_code, bucket) in buckets {
+            let mut inner_dict = VarDictionary::new();
+
+            // Zero-copy-ish conversion from Rust Vec to Godot PackedArrays
+            inner_dict.set("ids", PackedInt64Array::from(bucket.ids.as_slice()));
+            inner_dict.set("data", PackedByteArray::from(bucket.data.as_slice()));
+            inner_dict.set("offsets", PackedInt32Array::from(bucket.offsets.as_slice()));
+
+            godot_buckets.set(op_code, inner_dict);
+        }
+
+        // Emit the batched dictionary across the FFI bridge
+        self.base_mut().emit_signal("on_network_events", &[godot_buckets.to_variant()]);
     }
 
     /// Safely pushes an array of packets from Godot into the Tokio thread in one call
@@ -130,20 +151,57 @@ impl RustCore {
         &self,
         target_ids: PackedInt64Array,
         op_codes: PackedInt32Array,
-        payloads: Array<PackedByteArray>
+        payload_data: PackedByteArray,
+        offsets: PackedInt32Array
     ) {
         if let Some(tx) = &self.tx_to_net {
-            // We can convert Godot's Packed arrays directly into fast Rust slices
-            let target_slice = target_ids.as_slice();
+            let t_slice = target_ids.as_slice();
             let op_slice = op_codes.as_slice();
+            let data_slice = payload_data.as_slice();
+            let offsets_slice = offsets.as_slice();
 
-            for i in 0..target_slice.len() {
-                let packet = OutgoingPacket {
-                    target_id: target_slice[i],
-                    op_code: op_slice[i] as u16,
-                    payload: payloads.at(i).to_vec(),
+            for i in 0..t_slice.len() {
+                let start_idx = offsets_slice[i] as usize;
+
+                // End index is either the start of the next packet, or the end of the byte array
+                let end_idx = if i + 1 < offsets_slice.len() {
+                    offsets_slice[i + 1] as usize
+                } else {
+                    data_slice.len()
                 };
-                let _ = tx.send(packet); // Lock-free push to Tokio thread
+
+                let packet = OutgoingPacket {
+                    target_id: t_slice[i],
+                    op_code: op_slice[i] as u16,
+                    payload: data_slice[start_idx..end_idx].to_vec(),
+                };
+
+                let _ = tx.send(packet); // Push to Tokio safely
+            }
+        }
+    }
+
+    /// Broadcast: Sends ONE payload to MANY targets instantly.
+    /// Perfect for State Syncs (e.g., A monster moved, tell everyone nearby).
+    #[func]
+    pub fn broadcast_packet(
+        &self,
+        target_ids: PackedInt64Array,
+        op_code: i32,
+        payload: PackedByteArray
+    ) {
+        if let Some(tx) = &self.tx_to_net {
+            let targets = target_ids.as_slice();
+            let data = payload.to_vec(); // Clone the data ONCE
+            let op = op_code as u16;
+
+            for &target_id in targets {
+                let packet = OutgoingPacket {
+                    target_id,
+                    op_code: op,
+                    payload: data.clone(), // Arc/Bytes could optimize this further in Quinn
+                };
+                let _ = tx.send(packet);
             }
         }
     }

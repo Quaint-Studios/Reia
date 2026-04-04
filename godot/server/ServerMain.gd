@@ -10,22 +10,21 @@ const SERVER_PORT = 7777
 var rust_core: RustCore
 
 func _ready() -> void:
-	print("[SERVER] Starting Server Initialization...")
+	if not NetworkRouter.offline_mode:
+		print("[SERVER] Starting Server Initialization...")
 
-	# DatabaseCore.connect_to_db()
-	# print("[SERVER] Database connected.")
+		# DatabaseCore.connect_to_db()
+		# print("[SERVER] Database connected.")
 
-	rust_core = RustCore.new()
-	add_child(rust_core)
+		# Start server
+		rust_core = RustCore.new()
+		add_child(rust_core)
 
-	UIUtils.safe_connect(
-		rust_core.on_network_event,
-		_on_rust_packet_received,
-		"ServerMain rust_core.on_network_event"
-	)
+		rust_core.start_backend(SERVER_PORT)
+	else:
+		print("[SERVER] Offline mode enabled. Skipping network initialization.")
 
-	rust_core.start_backend(SERVER_PORT)
-
+	# Create GECS World
 	world.name = "ServerWorld"
 	add_child(world)
 	ECS.world = world
@@ -43,7 +42,8 @@ func _physics_process(delta: float) -> void:
 	# DRAIN THE FLUME CHANNEL
 	# This pulls thousands of network events processed by Tokio
 	# and safely fires the connected signals on the main thread.
-	rust_core.poll_network()
+	if rust_core and not NetworkRouter.offline_mode:
+		rust_core.poll_network()
 
 	# Strict, Explicit Server Pipeline (No looping overhead, profilable)
 	ECS.world.process(delta, SystemGroups.PRE_PROCESS)
@@ -53,15 +53,19 @@ func _physics_process(delta: float) -> void:
 	ECS.world.process(delta, SystemGroups.COMBAT)
 	ECS.world.process(delta, SystemGroups.AI)
 
-	# Flush things if needed here
 
 	# Late Phase (Respawning)
 	ECS.world.process(delta, SystemGroups.SPAWNING)
 
+	# WRITE NETWORK
+	# Systems during the tick have called NetworkRouter.queue_packet(...)
+	# Now we flush the giant flattened buffers back to Rust in one FFI call.
+	NetworkRouter.flush_outbox()
+
+	# CLEANUP
+	# Wipe the inbox clean for the next frame.
+	NetworkRouter.clear_inbox()
+
+
 	# Broadcast state chunks to connected clients
 	# ChunkManager.broadcast_updates()
-
-func _on_rust_packet_received(_client_id: int, _op_code: StringName, _payload: PackedByteArray) -> void:
-	# Parse the binary payload using Godot's StreamPeerBuffer (or rkyv bindings)
-	# and push it to the GECS NetworkEventQueue!
-	pass
