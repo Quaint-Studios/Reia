@@ -10,6 +10,8 @@ pub enum OpCode {
     InputTick = 54449,
     ActionRequest = 312,
     EventTrigger = 52108,
+    CastSkill = 59788,
+    CancelSkill = 20576,
 }
 
 impl TryFrom<u16> for OpCode {
@@ -22,6 +24,8 @@ impl TryFrom<u16> for OpCode {
             54449 => Ok(OpCode::InputTick),
             312 => Ok(OpCode::ActionRequest),
             52108 => Ok(OpCode::EventTrigger),
+            59788 => Ok(OpCode::CastSkill),
+            20576 => Ok(OpCode::CancelSkill),
             _ => Err(()),
         }
     }
