@@ -10,9 +10,10 @@ extends Node
 # ==========================================
 
 class SessionEvents extends RefCounted:
+	signal intent_play_online(ip: String, port: int)
 	signal intent_play_solo()
 	signal intent_host_and_play(port: int)
-	signal intent_play_online(ip: String, port: int)
+	signal intent_host_only(port: int)
 
 class AuthEvents extends RefCounted:
 	signal request_login(username: String, token: String)

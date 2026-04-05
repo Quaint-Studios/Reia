@@ -24,7 +24,6 @@ func _ready() -> void:
 	# Builds prediction systems and visual observers instantly
 	ClientPipeline.build(world)
 
-
 	if not is_offline:
 		print("[CLIENT] Starting Client Initialization...")
 
@@ -39,14 +38,6 @@ func _ready() -> void:
 		print("[CLIENT] Offline mode enabled. Skipping network initialization.")
 		print("[CLIENT] Routing to Title Screen...")
 
-	# Create GECS World
-	world.name = "ClientWorld"
-	add_child(world)
-	ECS.world = world
-
-	# Builds prediction systems and visual observers instantly
-	ClientPipeline.build(ECS.world)
-
 	print("[CLIENT] Network, ECS & Observers Initialized. Routing to Title Screen...")
 
 func _on_rust_packets(buckets: Dictionary) -> void:
@@ -58,6 +49,9 @@ func _physics_process(delta: float) -> void:
 	if rust_core: rust_core.poll_network()
 
 	var world := GameOrchestrator.client_world
+
+	if not world:
+		return
 
 	world.process(delta, SystemGroups.PRE_PROCESS)
 

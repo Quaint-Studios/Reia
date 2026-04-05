@@ -50,6 +50,9 @@ func _physics_process(delta: float) -> void:
 
 	var world := GameOrchestrator.server_world
 
+	if not world:
+		return
+
 	# Strict, Explicit Server Pipeline (No looping overhead, profilable)
 	world.process(delta, SystemGroups.PRE_PROCESS)
 	world.process(delta, SystemGroups.PHYSICS)

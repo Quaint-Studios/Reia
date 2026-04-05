@@ -1,6 +1,11 @@
 [gd_scene format=3 uid="uid://cg0v0622aqonf"]
 
-[node name="TitleScreen" type="Node" unique_id=841290663]
+[ext_resource type="Script" uid="uid://dlru38jxq5ytk" path="res://client/ui/screens/menus/title_screen.gd" id="1_hjjn8"]
+
+[node name="TitleScreen" type="Control" unique_id=1855045235]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_hjjn8")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1345820480]
 
@@ -26,4 +31,9 @@ text = "Play Solo"
 [node name="BtnHostPlay" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=700897737]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Host Game"
+text = "Host & Play"
+
+[node name="BtnHostOnly" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=178990725]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Host Only"

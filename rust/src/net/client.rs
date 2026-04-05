@@ -70,7 +70,7 @@ pub async fn start_quinn_client(
     let quic_config = quinn::crypto::rustls::QuicClientConfig::try_from(crypto).unwrap();
     let client_config = ClientConfig::new(Arc::new(quic_config));
 
-    // 2. Bind to a random local port (0.0.0.0:0) and connect
+    // Bind to a random local port (0.0.0.0:0) and connect
     let mut endpoint = Endpoint::client("0.0.0.0:0".parse().unwrap()).unwrap();
     endpoint.set_default_client_config(client_config);
 

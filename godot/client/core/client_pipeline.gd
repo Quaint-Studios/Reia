@@ -6,17 +6,17 @@ class_name ClientPipeline
 static func build(world: World) -> void:
 	# Core Observers (Data Mapping & Visual Reactions)
 	_register_observers(world)
-	
+
 	# Network Receivers
 	_register_network_receivers(world)
-	
+
 	# Systems (Math & Prediction)
 	_register_prediction_systems(world)
 
 static func _register_observers(world: World) -> void:
 	# Automates EntityMap.client O(1) lookups
 	world.add_observer(NetworkIdObserver.new(EntityMap.client))
-	
+
 	# Visual / Audio Observers
 	world.add_observer(InventoryUIObserver.new())
 	world.add_observer(HealthUIObserver.new())
