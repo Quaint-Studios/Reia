@@ -1,5 +1,5 @@
 extends Node
-
+## AUTOLOAD: SceneManager
 ## The purpose of this script is to manage scene transitions in a centralized way.
 ##
 ## Scene (.tscn): A Godot file. Everything visual is a scene.
@@ -16,6 +16,7 @@ extends Node
 
 var _loading_screen := preload(Scenes.Boot.LOADING_SCREEN)
 var _current_ui_screen: Node = null
+var _ui_canvas: CanvasLayer
 
 # State for Instance Loading
 var _loading_target: String = ""
@@ -23,6 +24,12 @@ var _loading_target: String = ""
 # State for Chunk Streaming
 var _active_chunk_dir: String = ""
 var _loaded_chunks: Dictionary[String, Node] = {}
+
+func _ready() -> void:
+	_ui_canvas = CanvasLayer.new()
+	_ui_canvas.name = "GlobalUICanvas"
+	_ui_canvas.layer = 10
+	add_child(_ui_canvas)
 
 # ==========================================
 # UI SCREEN ROUTING
@@ -32,8 +39,8 @@ func transition_to_screen(screen_uid_path: String) -> void:
 		_current_ui_screen.queue_free()
 
 	var next_screen: Node = (load(screen_uid_path) as PackedScene).instantiate()
-	# Add to a dedicated UI canvas layer, not the world root
-	get_tree().root.get_node("ClientMain/UICanvas").add_child(next_screen)
+
+	_ui_canvas.add_child(next_screen)
 	_current_ui_screen = next_screen
 
 # ==========================================
@@ -60,7 +67,8 @@ func _hard_load_instance(map_uid: String) -> void:
 	var loader := _loading_screen.instantiate()
 	get_tree().root.add_child(loader)
 
-	ECS.world.purge()
+	if GameOrchestrator.client_world:
+		GameOrchestrator.client_world.purge()
 
 	var err := ResourceLoader.load_threaded_request(_loading_target)
 	if err != OK:

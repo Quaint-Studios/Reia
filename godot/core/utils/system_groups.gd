@@ -9,3 +9,4 @@ const EXECUTION = "Execution" ## Applying items, buffs, and logic
 const COMBAT = "Combat" ## Damage calculation, death checks
 const AI = "AI" ## Monster logic and pathfinding
 const SPAWNING = "Spawning" ## Respawning entities and cleanup
+const POST_PROCESS = "PostProcess" ## Network broadcasting, VFX triggering

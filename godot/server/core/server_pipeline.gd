@@ -2,21 +2,30 @@ class_name ServerPipeline
 
 ## Constructs the entire authoritative Server ECS architecture.
 static func build(world: World) -> void:
+	# Core Observers
+	# Automates the EntityMap.server O(1) lookups whenever an entity gets a C_NetworkId
+	world.add_observer(NetworkIdObserver.new(EntityMap.server))
+
+	# Network Receivers (PRE_PROCESS)
 	_register_network_receivers(world)
+
+	# Core Simulation Math
 	_register_physics(world)
 	_register_inventory(world)
 	_register_combat(world)
 	_register_ai(world)
 	_register_spawning(world)
 
-	world.add_observer(NetworkIdObserver.new())
+	# Network Broadcasters (SPAWNING / POST_PROCESS)
+	_register_network_broadcasters(world)
+
 
 static func _register_network_receivers(world: World) -> void:
-	var mov_net := MovementNetworkSystem.new()
+	var mov_net := ServerMovementNetworkSystem.new()
 	mov_net.group = SystemGroups.PRE_PROCESS
 	world.add_system(mov_net)
 
-	var combat_net := CombatNetworkSystem.new()
+	var combat_net := ServerCombatNetworkSystem.new()
 	combat_net.group = SystemGroups.PRE_PROCESS
 	world.add_system(combat_net)
 
@@ -53,3 +62,9 @@ static func _register_spawning(world: World) -> void:
 	var spawner := SpawnerSystem.new()
 	spawner.group = SystemGroups.SPAWNING
 	world.add_system(spawner)
+
+static func _register_network_broadcasters(world: World) -> void:
+	var state_sync := ServerStateSyncSystem.new()
+	# Runs at the very end of the frame after all movement and combat logic is done
+	state_sync.group = SystemGroups.POST_PROCESS
+	world.add_system(state_sync)

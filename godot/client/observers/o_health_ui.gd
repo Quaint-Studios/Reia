@@ -5,4 +5,4 @@ func watch() -> Resource:
 
 func on_component_changed(entity: Entity, component: Resource, property: String, new_val: Variant, _old_val: Variant) -> void:
 	if property == "current" and entity.has_component(C_LocalPlayer):
-		UIEventBus.player_health_changed.emit(new_val, (component as C_Health).max_health)
+		UIEventBus.combat.player_health_changed.emit(new_val, (component as C_Health).max_health)

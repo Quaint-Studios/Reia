@@ -6,8 +6,8 @@ func watch() -> Resource:
 # TODO: Decide what we want to do with the relationship data.
 func on_relationship_added(entity: Entity, _relationship: Relationship) -> void:
 	if entity.has_component(C_LocalPlayer):
-		UIEventBus.inventory_updated.emit() # Tells the UI to redraw
+		UIEventBus.inventory.inventory_updated.emit() # Tells the UI to redraw
 
 func on_relationship_removed(entity: Entity, _relationship: Relationship) -> void:
 	if entity.has_component(C_LocalPlayer):
-		UIEventBus.inventory_updated.emit()
+		UIEventBus.inventory.inventory_updated.emit()

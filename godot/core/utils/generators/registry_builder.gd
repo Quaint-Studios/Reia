@@ -155,20 +155,20 @@ func _generate_zones_registry() -> void:
 		known_hashes[hash_val] = true
 		code_enum += "\t%s = %d,\n" % [clean_name, hash_val]
 
-		# 1. Search for an Instance file (e.g., waterbrook.tscn)
+		# Search for an Instance file (e.g., waterbrook.tscn)
 		var instance_file := ZONES_INSTANCES_DIR + clean_name.to_lower() + ".tscn"
 		if ResourceLoader.exists(instance_file):
 			var uid_str := ResourceUID.get_id_path(ResourceLoader.get_resource_uid(instance_file))
 			code_instances += "\tID.%s: \"%s\",\n" % [clean_name, uid_str]
 			continue
 
-		# 2. Search for a Chunked directory (e.g., ice_cave/)
+		# Search for a Chunked directory (e.g., ice_cave/)
 		var chunk_dir := ZONES_CHUNKED_DIR + clean_name.to_lower() + "/"
 		if DirAccess.dir_exists_absolute(chunk_dir):
 			code_chunks += "\tID.%s: \"%s\",\n" % [clean_name, chunk_dir]
 			continue
 
-		# 3. Missing warning
+		# Missing warning
 		code_instances += "\t# MISSING MAP DATA FOR: %s\n" % clean_name
 
 	var final_code := code_enum + "}\n\n" + code_instances + "}\n\n" + code_chunks + "}\n"

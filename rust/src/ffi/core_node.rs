@@ -205,4 +205,59 @@ impl RustCore {
             }
         }
     }
+
+    /// Highly optimized broadcast batching. Slices flat arrays natively in Rust memory
+    /// to avoid Godot Variant and Array.slice() GC overhead.
+    #[func]
+    pub fn broadcast_packets_batched(
+        &self,
+        targets: PackedInt64Array,
+        target_offsets: PackedInt32Array,
+        op_codes: PackedInt32Array,
+        payload_data: PackedByteArray,
+        data_offsets: PackedInt32Array
+    ) {
+        if let Some(tx) = &self.tx_to_net {
+            let t_slice = targets.as_slice();
+            let t_off_slice = target_offsets.as_slice();
+
+            let op_slice = op_codes.as_slice();
+
+            let d_slice = payload_data.as_slice();
+            let d_off_slice = data_offsets.as_slice();
+
+            // Iterate over each broadcast request
+            for i in 0..op_slice.len() {
+                let op = op_slice[i] as u16;
+
+                // Slice the Data
+                let d_start = d_off_slice[i] as usize;
+                let d_end = if i + 1 < d_off_slice.len() {
+                    d_off_slice[i + 1] as usize
+                } else {
+                    d_slice.len()
+                };
+                let payload = d_slice[d_start..d_end].to_vec(); // Clone payload ONCE per broadcast
+
+                // Slice the Targets
+                let t_start = t_off_slice[i] as usize;
+                let t_end = if i + 1 < t_off_slice.len() {
+                    t_off_slice[i + 1] as usize
+                } else {
+                    t_slice.len()
+                };
+                let current_targets = &t_slice[t_start..t_end];
+
+                // Dispatch exact clones to all targets
+                for &target_id in current_targets {
+                    let packet = OutgoingPacket {
+                        target_id,
+                        op_code: op,
+                        payload: payload.clone(), // Arc/Bytes in Quinn can optimize this further later
+                    };
+                    let _ = tx.send(packet);
+                }
+            }
+        }
+    }
 }

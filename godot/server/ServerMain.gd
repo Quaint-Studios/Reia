@@ -4,37 +4,40 @@ class_name ServerMain extends Node
 ## Responsible for Database connections, Network Listening, and ticking the
 ## Authoritative ECS Simulation.
 
-var world: World = World.new()
-const SERVER_PORT = 7777
+var port: int
+var is_offline: bool
 
 var rust_core: RustCore
 
-func _ready() -> void:
-	if not NetworkRouter.offline_mode:
-		print("[SERVER] Starting Server Initialization...")
+func _init(_port: int, _offline: bool = false) -> void:
+	port = _port
+	is_offline = _offline
+	name = "ServerMain"
 
-		# DatabaseCore.connect_to_db()
-		# print("[SERVER] Database connected.")
+func _ready() -> void:
+	# Create GECS World
+	var world := World.new()
+	world.name = "ServerWorld"
+	GameOrchestrator.server_world = world
+
+	# Builds the entire deterministic architecture instantly
+	ServerPipeline.build(world)
+
+	if not is_offline:
+		print("[SERVER] Starting Server Initialization...")
 
 		# Start server
 		rust_core = RustCore.new()
 		add_child(rust_core)
+		UIUtils.safe_connect(rust_core.on_network_events, _on_rust_packets, "ServerMain _on_network_events")
+		rust_core.start_backend(port)
 
-		rust_core.start_backend(SERVER_PORT)
+		print("[SERVER] Listening for clients on port %d" % port)
 	else:
 		print("[SERVER] Offline mode enabled. Skipping network initialization.")
 
-	# Create GECS World
-	world.name = "ServerWorld"
-	add_child(world)
-	ECS.world = world
-
-	# Builds the entire deterministic architecture instantly
-	ServerPipeline.build(ECS.world)
-
-	# NetworkCore.start_server(SERVER_PORT)
-	print("[SERVER] Listening for clients on port %d" % SERVER_PORT)
-
+func _on_rust_packets(buckets: Dictionary) -> void:
+	NetworkRouter.server.incoming_buckets = buckets
 
 ## TICKING THE SERVER
 ## TODO: Implement proper ticking
@@ -42,30 +45,27 @@ func _physics_process(delta: float) -> void:
 	# DRAIN THE FLUME CHANNEL
 	# This pulls thousands of network events processed by Tokio
 	# and safely fires the connected signals on the main thread.
-	if rust_core and not NetworkRouter.offline_mode:
+	if rust_core:
 		rust_core.poll_network()
 
-	# Strict, Explicit Server Pipeline (No looping overhead, profilable)
-	ECS.world.process(delta, SystemGroups.PRE_PROCESS)
-	ECS.world.process(delta, SystemGroups.PHYSICS)
-	ECS.world.process(delta, SystemGroups.VALIDATION)
-	ECS.world.process(delta, SystemGroups.EXECUTION)
-	ECS.world.process(delta, SystemGroups.COMBAT)
-	ECS.world.process(delta, SystemGroups.AI)
+	var world := GameOrchestrator.server_world
 
+	# Strict, Explicit Server Pipeline (No looping overhead, profilable)
+	world.process(delta, SystemGroups.PRE_PROCESS)
+	world.process(delta, SystemGroups.PHYSICS)
+	world.process(delta, SystemGroups.VALIDATION)
+	world.process(delta, SystemGroups.EXECUTION)
+	world.process(delta, SystemGroups.COMBAT)
+	world.process(delta, SystemGroups.AI)
+
+	# TODO: CommandBuffer
 
 	# Late Phase (Respawning)
-	ECS.world.process(delta, SystemGroups.SPAWNING)
+	world.process(delta, SystemGroups.SPAWNING)
 
-	# WRITE NETWORK
-	# Systems during the tick have called NetworkRouter.queue_packet(...)
-	# Now we flush the giant flattened buffers back to Rust in one FFI call.
-	NetworkRouter.flush_outbox()
+	# Post Process (Network Broadcasting, VFX triggering)
+	world.process(delta, SystemGroups.POST_PROCESS)
 
-	# CLEANUP
-	# Wipe the inbox clean for the next frame.
-	NetworkRouter.clear_inbox()
-
-
-	# Broadcast state chunks to connected clients
-	# ChunkManager.broadcast_updates()
+	# Safely flush to the Rust network thread
+	NetworkRouter.server.flush_to_rust(rust_core)
+	NetworkRouter.server.clear_inbox()

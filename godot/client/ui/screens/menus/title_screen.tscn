@@ -1,3 +1,29 @@
 [gd_scene format=3 uid="uid://cg0v0622aqonf"]
 
 [node name="TitleScreen" type="Node" unique_id=841290663]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1345820480]
+
+[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=686375368]
+offset_right = 1920.0
+offset_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer" unique_id=1085858820]
+layout_mode = 2
+
+[node name="BtnPlayOnline" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=1437521330]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Play Online"
+
+[node name="BtnPlaySolo" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=363200658]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Play Solo"
+
+[node name="BtnHostPlay" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=700897737]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Host Game"
