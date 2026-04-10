@@ -26,7 +26,7 @@ pub async fn handle_client(conn: Connection, tx: Sender<IncomingPacket>) {
                 // (little-endian serialization for the first 2 bytes)
                 let op_code_raw = u16::from_le_bytes([bytes[0], bytes[1]]);
 
-                // 3. Strict Validation using the auto-generated TryFrom trait
+                // Strict Validation using the auto-generated TryFrom trait
                 match OpCode::try_from(op_code_raw) {
                     Ok(_valid_op) => {
                         // The packet is verified against our protocol registry!
