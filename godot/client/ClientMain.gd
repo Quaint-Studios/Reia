@@ -40,6 +40,15 @@ func _ready() -> void:
 
 	print("[CLIENT] Network, ECS & Observers Initialized. Routing to Title Screen...")
 
+	test_entity_map()
+
+func test_entity_map() -> void:
+	var entity := Entity.new()
+	entity.add_components([
+		C_NetworkId.new(10)
+	])
+	GameOrchestrator.client_world.add_entity(entity)
+
 func _on_rust_packets(buckets: Dictionary) -> void:
 	NetworkRouter.client.incoming_buckets = buckets
 
