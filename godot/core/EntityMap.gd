@@ -39,7 +39,7 @@ class EntityMapNamespace extends RefCounted:
 
 	## O(1) Lookup: Get the Network ID for an outgoing ECS broadcast
 	func get_network_id(entity: Entity) -> int:
-		return _ecs_id_to_net_id.get(entity.id as int, 0)
+		return _ecs_id_to_net_id.get(entity.ecs_id, 0)
 
 	func clear() -> void:
 		_net_id_to_entity.clear()
