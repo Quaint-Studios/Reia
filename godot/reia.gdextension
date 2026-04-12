@@ -4,9 +4,12 @@ compatibility_minimum = 4.6
 reloadable = true
 
 [libraries]
-windows.debug.x86_64 = "res://build/bin/reia_backend.debug.dll"
-windows.release.x86_64 = "res://build/bin/reia_backend.release.dll"
-linux.debug.x86_64 = "res://build/bin/libreia_backend.debug.so"
-linux.release.x86_64 = "res://build/bin/libreia_backend.release.so"
-macos.debug = "res://build/bin/libreia_backend.debug.dylib"
-macos.release = "res://build/bin/libreia_backend.release.dylib"
+windows.debug.x86_64 = "res://build/bin/reia_backend.debug.x86_64.dll"
+windows.release.x86_64 = "res://build/bin/reia_backend.release.x86_64.dll"
+linux.debug.x86_64 = "res://build/bin/libreia_backend.debug.x86_64.so"
+linux.release.x86_64 = "res://build/bin/libreia_backend.release.x86_64.so"
+
+macos.debug.x86_64 = "res://build/bin/libreia_backend.macos.debug.universal.dylib"
+macos.debug.arm64 = "res://build/bin/libreia_backend.macos.debug.universal.dylib"
+macos.release.x86_64 = "res://build/bin/libreia_backend.macos.release.universal.dylib"
+macos.release.arm64 = "res://build/bin/libreia_backend.macos.release.universal.dylib"

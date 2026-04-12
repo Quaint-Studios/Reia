@@ -28,6 +28,13 @@ if %ERRORLEVEL% NEQ 0 (
     exit /b %ERRORLEVEL%
 )
 
+:: Determine Architecture
+set ARCH_ID=x86_64
+if /I "%PROCESSOR_ARCHITECTURE%"=="ARM64" set ARCH_ID=arm64
+if /I "%PROCESSOR_ARCHITEW6432%"=="ARM64" set ARCH_ID=arm64
+
+set FINAL_FILENAME=reia_backend.windows.!BUILD_TYPE!.!ARCH_ID!.dll
+
 :: Setup Output Directory
 set OUT_DIR=..\godot\build\bin
 if not exist "%OUT_DIR%" (

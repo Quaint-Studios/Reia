@@ -16,7 +16,7 @@ jobs:
 
     env:
       # Make sure macOS binary works on older Macs, not just the latest
-      MACOSX_DEPLOYMENT_TARGET: "11.0" 
+      MACOSX_DEPLOYMENT_TARGET: "11.0"
 
     strategy:
       fail-fast: false # If Windows fails, let Mac and Linux keep building to see all errors
@@ -27,16 +27,19 @@ jobs:
             ext: dll
             prefix: reia_backend
             out_folder: windows
+            arch: x86_64
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             ext: so
             prefix: libreia_backend
             out_folder: linux
+            arch: x86_64
           - os: macos-latest
-            target: x86_64-apple-darwin
+            target: universal
             ext: dylib
             prefix: libreia_backend
             out_folder: macos
+            arch: universal
 
     defaults:
       run:
@@ -49,7 +52,7 @@ jobs:
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
         with:
-          targets: ${{ matrix.target }}
+          targets: ${{ matrix.target == 'universal' && 'x86_64-apple-darwin, aarch64-apple-darwin' || matrix.target }}
 
       - name: Setup Rust Cache
         uses: Swatinem/rust-cache@v2
@@ -57,17 +60,36 @@ jobs:
           workspaces: "./rust -> target" # Tells the cache where Cargo is running
 
       - name: Build Debug
+        if: matrix.target != 'universal'
         run: cargo build --target ${{ matrix.target }}
 
+      - name: Build Debug (macOS Universal)
+        if: matrix.target == 'universal'
+        run: |
+          cargo build --target x86_64-apple-darwin
+          cargo build --target aarch64-apple-darwin
+          mkdir -p target/universal/debug
+          lipo -create -output target/universal/debug/${{ matrix.prefix }}.${{ matrix.ext }} target/x86_64-apple-darwin/debug/${{ matrix.prefix }}.${{ matrix.ext }} target/aarch64-apple-darwin/debug/${{ matrix.prefix }}.${{ matrix.ext }}
+
       - name: Build Release
+        if: matrix.target != 'universal'
         run: cargo build --release --target ${{ matrix.target }}
+
+      - name: Build Release (macOS Universal)
+        if: matrix.target == 'universal'
+        run: |
+          cargo build --release --target x86_64-apple-darwin
+          cargo build --release --target aarch64-apple-darwin
+          mkdir -p target/universal/release
+          lipo -create -output target/universal/release/${{ matrix.prefix }}.${{ matrix.ext }} target/x86_64-apple-darwin/release/${{ matrix.prefix }}.${{ matrix.ext }} target/aarch64-apple-darwin/release/${{ matrix.prefix }}.${{ matrix.ext }}
 
       - name: Stage Artifacts
         shell: bash
         run: |
           mkdir -p ../staging/${{ matrix.out_folder }}
-          cp target/${{ matrix.target }}/debug/${{ matrix.prefix }}.${{ matrix.ext }} ../staging/${{ matrix.out_folder }}/${{ matrix.prefix }}.debug.${{ matrix.ext }}
-          cp target/${{ matrix.target }}/release/${{ matrix.prefix }}.${{ matrix.ext }} ../staging/${{ matrix.out_folder }}/${{ matrix.prefix }}.release.${{ matrix.ext }}
+          # Copy to staging using the new explicit naming scheme: [prefix].[os].[build_type].[arch].[ext]
+          cp target/${{ matrix.target }}/debug/${{ matrix.prefix }}.${{ matrix.ext }} ../staging/${{ matrix.out_folder }}/${{ matrix.prefix }}.${{ matrix.out_folder }}.debug.${{ matrix.arch }}.${{ matrix.ext }}
+          cp target/${{ matrix.target }}/release/${{ matrix.prefix }}.${{ matrix.ext }} ../staging/${{ matrix.out_folder }}/${{ matrix.prefix }}.${{ matrix.out_folder }}.release.${{ matrix.arch }}.${{ matrix.ext }}
 
       - name: Upload Temporary Artifact
         uses: actions/upload-artifact@v4
@@ -81,7 +103,7 @@ jobs:
     name: Generate Manifest and Upload to R2
     needs: build-binaries # This forces it to wait for all 3 OS builds to finish
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Download All Binaries
         uses: actions/download-artifact@v4
@@ -93,12 +115,22 @@ jobs:
       - name: Generate Manifest and Hashes
         run: |
           cd staging
-          WIN_DBG_HASH=$(sha256sum reia_backend.debug.dll | awk '{ print $1 }')
-          WIN_REL_HASH=$(sha256sum reia_backend.release.dll | awk '{ print $1 }')
-          LIN_DBG_HASH=$(sha256sum libreia_backend.debug.so | awk '{ print $1 }')
-          LIN_REL_HASH=$(sha256sum libreia_backend.release.so | awk '{ print $1 }')
-          MAC_DBG_HASH=$(sha256sum libreia_backend.debug.dylib | awk '{ print $1 }')
-          MAC_REL_HASH=$(sha256sum libreia_backend.release.dylib | awk '{ print $1 }')
+
+          # Define file names
+          WIN_DBG_FILE="reia_backend.windows.debug.x86_64.dll"
+          WIN_REL_FILE="reia_backend.windows.release.x86_64.dll"
+          LIN_DBG_FILE="libreia_backend.linux.debug.x86_64.so"
+          LIN_REL_FILE="libreia_backend.linux.release.x86_64.so"
+          MAC_DBG_FILE="libreia_backend.macos.debug.universal.dylib"
+          MAC_REL_FILE="libreia_backend.macos.release.universal.dylib"
+
+          # Generate Hashes
+          WIN_DBG_HASH=$(sha256sum $WIN_DBG_FILE | awk '{ print $1 }')
+          WIN_REL_HASH=$(sha256sum $WIN_REL_FILE | awk '{ print $1 }')
+          LIN_DBG_HASH=$(sha256sum $LIN_DBG_FILE | awk '{ print $1 }')
+          LIN_REL_HASH=$(sha256sum $LIN_REL_FILE | awk '{ print $1 }')
+          MAC_DBG_HASH=$(sha256sum $MAC_DBG_FILE | awk '{ print $1 }')
+          MAC_REL_HASH=$(sha256sum $MAC_REL_FILE | awk '{ print $1 }')
           COMMIT_HASH=${{ github.sha }}
           DATE=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
 
@@ -109,16 +141,16 @@ jobs:
             "build_date": "$DATE",
             "binaries": {
               "Windows": {
-                "debug": {"file": "reia_backend.debug.dll", "sha256": "$WIN_DBG_HASH"},
-                "release": {"file": "reia_backend.release.dll", "sha256": "$WIN_REL_HASH"}
+                "debug": {"file": "$WIN_DBG_FILE", "sha256": "$WIN_DBG_HASH"},
+                "release": {"file": "$WIN_REL_FILE", "sha256": "$WIN_REL_HASH"}
               },
               "Linux": {
-                "debug": {"file": "libreia_backend.debug.so", "sha256": "$LIN_DBG_HASH"},
-                "release": {"file": "libreia_backend.release.so", "sha256": "$LIN_REL_HASH"}
+                "debug": {"file": "$LIN_DBG_FILE", "sha256": "$LIN_DBG_HASH"},
+                "release": {"file": "$LIN_REL_FILE", "sha256": "$LIN_REL_HASH"}
               },
               "macOS": {
-                "debug": {"file": "libreia_backend.debug.dylib", "sha256": "$MAC_DBG_HASH"},
-                "release": {"file": "libreia_backend.release.dylib", "sha256": "$MAC_REL_HASH"}
+                "debug": {"file": "$MAC_DBG_FILE", "sha256": "$MAC_DBG_HASH"},
+                "release": {"file": "$MAC_REL_FILE", "sha256": "$MAC_REL_HASH"}
               }
             }
           }
