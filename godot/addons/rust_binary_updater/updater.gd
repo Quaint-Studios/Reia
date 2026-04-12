@@ -24,13 +24,13 @@ func _enter_tree():
 	http_request = HTTPRequest.new()
 	add_child(http_request)
 	http_request.request_completed.connect(_on_manifest_downloaded)
-	
+
 	_check_for_updates_on_startup()
 
 func _exit_tree():
 	if http_request:
 		http_request.queue_free()
-	
+
 	remove_tool_menu_item("Reia Tools")
 	if _reia_tools_menu:
 		_reia_tools_menu.queue_free()
@@ -53,14 +53,14 @@ func _on_reia_tools_menu_pressed(id: int):
 func _check_for_updates_on_startup():
 	var local_manifest := _get_local_manifest()
 	var local_manifest_hash := local_manifest.get("commit_hash", "")
-	
+
 	# Attempt to get the current Git hash
 	var output := []
 	var exit_code := OS.execute("git", ["rev-parse", "HEAD"], output, true, true)
-	
+
 	if exit_code == 0 and output.size() > 0:
 		var current_git_hash: String = output[0].strip_edges()
-		
+
 		if local_manifest_hash != "" and current_git_hash == local_manifest_hash:
 			print("[RustUpdater] Git hash matches local manifest (", current_git_hash.substr(0, 7), "). Rust binaries are up to date.")
 			return # Skip the HTTP request entirely!
@@ -80,7 +80,7 @@ func _on_manifest_downloaded(result: int, response_code: int, headers: PackedStr
 	if response_code != 200:
 		push_error("[RustUpdater] Failed to fetch manifest. Network error or R2 bucket not public. Code: " + str(response_code))
 		return
-		
+
 	var json := JSON.new()
 	var error := json.parse(body.get_string_from_utf8())
 	if error == OK:
@@ -91,10 +91,10 @@ func _on_manifest_downloaded(result: int, response_code: int, headers: PackedStr
 
 func _compare_and_update(remote_manifest: Dictionary):
 	var local_manifest := _get_local_manifest()
-	
+
 	var remote_hash := remote_manifest.get("commit_hash", "")
 	var local_hash := local_manifest.get("commit_hash", "")
-	
+
 	if _force_next_update or local_manifest.is_empty() or local_hash != remote_hash:
 		_force_next_update = false
 		print("[RustUpdater] New version required! (Remote Hash: ", remote_hash.substr(0, 7), "). Preparing download...")
@@ -122,17 +122,17 @@ func _download_binary(manifest: Dictionary):
 		target_os = "Windows"
 	elif os_name == "macOS":
 		target_os = "macOS"
-		
+
 	var bin_info: Dictionary = manifest.get("binaries", {}).get(target_os, {})
-	
+
 	if bin_info.is_empty():
 		push_error("[RustUpdater] Missing binary in remote manifest for OS: " + target_os + " (Detected: " + os_name + ")")
 		return
-		
+
 	_current_manifest = manifest
 	_pending_downloads = 0
 	_failed_replacements.clear()
-	
+
 	# Loop through both debug and release configurations
 	for build_type in ["debug", "release"]:
 		var build_data: Dictionary = bin_info.get(build_type, {})
@@ -141,27 +141,17 @@ func _download_binary(manifest: Dictionary):
 			_start_download(build_data["file"], build_type, target_os, expected_hash)
 
 func _start_download(file_path: String, build_type: String, target_os: String, expected_hash: String):
-	# Default to Linux/BSD naming conventions
-	var prefix := "libreia_backend"
-	var ext := ".so"
-	
-	if target_os == "Windows":
-		prefix = "reia_backend"
-		ext = ".dll"
-	elif target_os == "macOS":
-		ext = ".dylib"
-	
-	var final_filename := prefix + "." + build_type + ext
+	var final_filename := file_path
 	var download_path := BIN_DIR + final_filename + ".update"
 	var final_path := BIN_DIR + final_filename
 	var file_url := R2_BASE_URL + file_path
-	
+
 	var file_http := HTTPRequest.new()
 	add_child(file_http)
 	file_http.download_file = download_path
-	
+
 	_pending_downloads += 1
-	
+
 	# Pass the expected_hash through
 	file_http.request_completed.connect(func(res, code, hdrs, bdy):
 		_on_binary_downloaded(res, code, download_path, final_path, expected_hash, file_http)
@@ -170,13 +160,29 @@ func _start_download(file_path: String, build_type: String, target_os: String, e
 	print("[RustUpdater] Downloading ", build_type, " build -> ", download_path)
 	file_http.request(file_url)
 
+func _apply_macos_fixes(path: String):
+	if OS.get_name() != "macOS":
+		return
+
+	var global_path = ProjectSettings.globalize_path(path)
+
+	# 1. Clear quarantine attributes (removes the "Downloaded from Internet" warning)
+	# -c clears all extended attributes
+	OS.execute("xattr", ["-c", global_path], [])
+
+	# 2. Ad-hoc sign the binary (required for Apple Silicon execution)
+	OS.execute("codesign", ["--force", "-s", "-", global_path], [])
+
+	print("[RustUpdater] Applied macOS security fixes to: ", path.get_file())
+
+
 func _on_binary_downloaded(result: int, response_code: int, downloaded_path: String, final_path: String, expected_hash: String, http_node: HTTPRequest):
 	http_node.queue_free()
 	_pending_downloads -= 1
-	
+
 	if response_code == 200:
 		var final_name: String = final_path.get_file()
-		
+
 		# Verify the file integrity
 		var actual_hash := FileAccess.get_sha256(downloaded_path)
 		if expected_hash != "" and actual_hash != expected_hash:
@@ -192,10 +198,15 @@ func _on_binary_downloaded(result: int, response_code: int, downloaded_path: Str
 				
 			if err == OK:
 				err = DirAccess.rename_absolute(downloaded_path, final_path)
-				if err != OK:
-					_failed_replacements.append(final_name)
-				else:
+				if err == OK:
+					if OS.get_name() == "macOS" or OS.get_name() == "Linux":
+						OS.execute("chmod", ["+x", ProjectSettings.globalize_path(final_path)], [])
+					
+					_apply_macos_fixes(final_path)
+
 					print("[RustUpdater] Successfully verified and hot-swapped: ", final_name)
+				else:
+					_failed_replacements.append(final_name)
 			else:
 				_failed_replacements.append(final_name)
 	else:
@@ -207,7 +218,7 @@ func _on_binary_downloaded(result: int, response_code: int, downloaded_path: Str
 func _finalize_update():
 	var file := FileAccess.open(LOCAL_MANIFEST_PATH, FileAccess.WRITE)
 	file.store_string(JSON.stringify(_current_manifest, "\t"))
-	
+
 	if _failed_replacements.size() > 0:
 		push_warning("==================================================")
 		push_warning("[RustUpdater] UPDATE DOWNLOADED, BUT FILES ARE LOCKED OR CORRUPTED!")
@@ -233,10 +244,10 @@ func _attempt_manual_finalize():
 	if not dir:
 		push_error("[RustUpdater] Could not open bin directory.")
 		return
-		
+
 	var found_updates := false
 	var still_locked := []
-	
+
 	dir.list_dir_begin()
 	var file_name := dir.get_next()
 	while file_name != "":
@@ -252,6 +263,10 @@ func _attempt_manual_finalize():
 			if err == OK:
 				err = DirAccess.rename_absolute(update_path, target_path)
 				if err == OK:
+					if OS.get_name() == "macOS" or OS.get_name() == "Linux":
+						OS.execute("chmod", ["+x", ProjectSettings.globalize_path(target_path)], [])
+					
+					_apply_macos_fixes(target_path)
 					print("[RustUpdater] Successfully replaced: ", target_path.get_file())
 				else:
 					still_locked.append(target_path.get_file())
