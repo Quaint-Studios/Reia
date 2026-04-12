@@ -15,24 +15,31 @@ func _physics_process(_delta: float) -> void:
 	var result := space_state.intersect_ray(query)
 
 	if result and result.collider:
-		var hit_node := result.collider.get_parent() as Entity # The StaticBody's parent is the Entity
+		@warning_ignore("unsafe_cast")
+		var hit_node := (result.collider as Node).get_parent() as Entity # The StaticBody's parent is the Entity
 		if hit_node is Entity:
 			var interactable := hit_node.get_component(C_Interactable) as C_Interactable
 			if interactable:
+				# Convert the hashed Enum ID back into a readable string (e.g., "PICKUP" -> "Pickup")
+				# For localization, you can wrap this in tr(): tr("ACTION_" + verb_key)
+				var verb_key: String = ActionVerb.ID.find_key(interactable.action_verb)
+				var display_verb := verb_key.capitalize() if verb_key else "Interact"
+				
 				# Tell the UI to show "Bone [E to Pickup]"
-				UIEventBus.world.show_interaction_prompt.emit(interactable.item_name, interactable.action_verb)
+				UIEventBus.world.show_interaction_prompt.emit(interactable.item_name, display_verb)
 
-				# Listen for the E key!
 				if Input.is_action_just_pressed("interact"):
-					_send_pickup_request(hit_node)
+					_send_interaction_request(hit_node, interactable.interact_op_code)
 				return
 
 	# If we hit nothing, hide the prompt
 	UIEventBus.world.hide_interaction_prompt.emit()
 
-func _send_pickup_request(target_entity: Entity) -> void:
+func _send_interaction_request(target_entity: Entity, op_code: int) -> void:
 	var net_id := EntityMap.client.get_network_id(target_entity)
 	var writer := StreamPeerBuffer.new()
-	writer.put_u32(1) # Action ID 1 = Interact/Pickup (TODO: Enum for this)
 	writer.put_64(net_id)
-	NetworkRouter.client.queue_packet(0, OpCode.ID.ACTION_REQUEST, writer.data_array)
+	
+	# We blindly send the OpCode defined by the component.
+	# Zero client-side branching.
+	NetworkRouter.client.queue_packet(0, op_code, writer.data_array)

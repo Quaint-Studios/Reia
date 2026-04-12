@@ -3,9 +3,9 @@ class_name C_Interactable extends Component
 
 @export var item_name: String = "Item"
 @export var action_verb: ActionVerb.ID = ActionVerb.ID.PICKUP
-@export var item_id: int = 0
+@export var interact_op_code: OpCode.ID = OpCode.ID.PICKUP_ITEM
 
-func _init(_name: String = "Item", _verb: ActionVerb.ID = ActionVerb.ID.PICKUP, _id: int = 0) -> void:
+func _init(_name: String = "Item", _verb: ActionVerb.ID = ActionVerb.ID.PICKUP, _op: OpCode.ID = OpCode.ID.PICKUP_ITEM) -> void:
 	item_name = _name
 	action_verb = _verb
-	item_id = _id
+	interact_op_code = _op

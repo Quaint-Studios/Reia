@@ -3,10 +3,8 @@ AUTH_REQUEST
 AUTH_SUCCESS
 STATE_SYNC
 
-# Input and Actions
+# Input and Movement
 INPUT_TICK
-ACTION_REQUEST
-EVENT_TRIGGER
 
 # Skills
 CAST_SKILL
@@ -15,3 +13,7 @@ CANCEL_SKILL
 # Communication
 SEND_CHAT
 CHAT_MESSAGE
+
+# Inventory & Interactions
+PICKUP_ITEM
+BURY_ITEM

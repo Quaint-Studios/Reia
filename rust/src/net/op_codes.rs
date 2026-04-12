@@ -8,12 +8,12 @@ pub enum OpCode {
     AuthSuccess = 38012,
     StateSync = 17737,
     InputTick = 54449,
-    ActionRequest = 312,
-    EventTrigger = 52108,
     CastSkill = 59788,
     CancelSkill = 20576,
     SendChat = 53360,
     ChatMessage = 51365,
+    PickupItem = 30140,
+    BuryItem = 37904,
 }
 
 impl TryFrom<u16> for OpCode {
@@ -24,12 +24,12 @@ impl TryFrom<u16> for OpCode {
             38012 => Ok(OpCode::AuthSuccess),
             17737 => Ok(OpCode::StateSync),
             54449 => Ok(OpCode::InputTick),
-            312 => Ok(OpCode::ActionRequest),
-            52108 => Ok(OpCode::EventTrigger),
             59788 => Ok(OpCode::CastSkill),
             20576 => Ok(OpCode::CancelSkill),
             53360 => Ok(OpCode::SendChat),
             51365 => Ok(OpCode::ChatMessage),
+            30140 => Ok(OpCode::PickupItem),
+            37904 => Ok(OpCode::BuryItem),
             _ => Err(()),
         }
     }
