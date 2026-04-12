@@ -12,6 +12,8 @@ pub enum OpCode {
     EventTrigger = 52108,
     CastSkill = 59788,
     CancelSkill = 20576,
+    SendChat = 53360,
+    ChatMessage = 51365,
 }
 
 impl TryFrom<u16> for OpCode {
@@ -26,6 +28,8 @@ impl TryFrom<u16> for OpCode {
             52108 => Ok(OpCode::EventTrigger),
             59788 => Ok(OpCode::CastSkill),
             20576 => Ok(OpCode::CancelSkill),
+            53360 => Ok(OpCode::SendChat),
+            51365 => Ok(OpCode::ChatMessage),
             _ => Err(()),
         }
     }

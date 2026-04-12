@@ -30,6 +30,7 @@ class CombatEvents extends RefCounted:
 
 class WorldEvents extends RefCounted:
 	signal request_teleport(zone_id: int)
+	signal chat_message_received(sender: String, message: String)
 
 # ==========================================
 # INSTANTIATED BUSES
