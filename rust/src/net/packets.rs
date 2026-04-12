@@ -29,6 +29,15 @@ pub enum ClientBoundPacket {
         player_id: i64,
         zone_id: u32,
     },
+    /// Broadcasted when a player, monster, or item enters the client's view
+    EntitySpawn {
+        entity_id: i64,
+        entity_type: String, // "PLAYER", "BONE", "GOBLIN"
+        name: String, // Username or Item Name
+        x: f32,
+        y: f32,
+        z: f32,
+    },
     /// A bulk update of transforms for entities in the player's chunk
     StateSync {
         entities: Vec<EntitySyncData>,
@@ -38,6 +47,11 @@ pub enum ClientBoundPacket {
         target_id: i64,
         event_type: String, // e.g., "DAMAGE_TAKEN", "LEVEL_UP"
     },
+    /// A chat message broadcasted to the local zone
+    ChatMessage {
+        sender_name: String,
+        message: String,
+    },
 }
 
 #[derive(Archive, Deserialize, Serialize, Debug, PartialEq)]
@@ -45,6 +59,7 @@ pub enum ClientBoundPacket {
 pub enum ServerBoundPacket {
     /// Client requesting authentication
     AuthRequest {
+        username: String,
         auth_token: String,
     },
     /// High-frequency movement updates from the client
@@ -58,6 +73,10 @@ pub enum ServerBoundPacket {
     ActionRequest {
         action_id: u32,
         target_id: i64,
+    },
+    /// Client wants to send a chat message
+    SendChat {
+        message: String,
     },
 }
 
