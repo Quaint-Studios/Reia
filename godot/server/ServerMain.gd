@@ -29,7 +29,7 @@ func _ready() -> void:
 		# Start server
 		rust_core = RustCore.new()
 		add_child(rust_core)
-		UIUtils.safe_connect(rust_core.on_network_events, _on_rust_packets, "ServerMain _on_network_events")
+		UIUtils.safe_connect(rust_core.on_network_events, _on_rust_packets, "ServerMain on_network_events")
 		rust_core.start_backend(port)
 
 		print("[SERVER] Listening for clients on port %d" % port)

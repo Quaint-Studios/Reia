@@ -8,7 +8,7 @@ func query() -> QueryBuilder:
 
 func process(_entities: Array[Entity], _components: Array, _delta: float) -> void:
 	# Read specifically from the SERVER namespace
-	var buckets:= NetworkRouter.server.incoming_buckets
+	var buckets := NetworkRouter.server.incoming_buckets
 	if buckets.is_empty(): return
 
 	if buckets.has(OpCode.ID.INPUT_TICK):
