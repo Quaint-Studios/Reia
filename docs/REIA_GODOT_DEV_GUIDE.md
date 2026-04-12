@@ -365,20 +365,20 @@ func process(entities: Array[Entity], components: Array, delta: float):
 
 ### 4.2 Client Interpolation & Prediction
 
-The Client receives `C_NetworkSync` updates from the server. It smoothly interpolates other players, but strictly overrides its own local prediction if the server disagrees.
+The Client receives `C_MovementSync` updates from the server. It smoothly interpolates other players, but strictly overrides its own local prediction if the server disagrees.
 
 ```gdscript
 # res://core/features/physics/systems/s_client_interpolation.gd
 class_name ClientInterpolationSystem extends System
 
 func query():
-    return q.with_all([C_Transform, C_NetworkSync])
+    return q.with_all([C_Transform, C_MovementSync])
 
 func process(entities: Array[Entity], components: Array, delta: float):
     if OS.has_feature("dedicated_server"): return # Clients only
 
     for entity in entities:
-        var target_pos = (entity.get_component(C_NetworkSync) as C_NetworkSync).server_transform.origin
+        var target_pos = (entity.get_component(C_MovementSync) as C_MovementSync).server_transform.origin
 
         if entity.has_component(C_LocalPlayer):
             # Local Player: Check if our prediction was wrong (Rubberbanding)

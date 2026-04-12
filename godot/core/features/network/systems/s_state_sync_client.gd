@@ -33,7 +33,7 @@ func _process_state_sync(bucket: Dictionary) -> void:
 			var entity := EntityMap.client.get_entity(net_id)
 			if not entity: continue
 			
-			var sync_comp := entity.get_component(C_NetworkSync) as C_NetworkSync
+			var sync_comp := entity.get_component(C_MovementSync) as C_MovementSync
 			if sync_comp:
 				# Store the absolute truth from the server
 				sync_comp.server_transform.origin = Vector3(target_x, target_y, target_z)
