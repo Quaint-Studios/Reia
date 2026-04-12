@@ -13,11 +13,15 @@ const OP_CODES_TXT = "res://core/features/network/op_codes_list.txt"
 const OUT_GD_OP_CODES = "res://core/features/network/op_codes.gd"
 var OUT_RUST_OP_CODES := ProjectSettings.globalize_path("res://").path_join("../rust/src/net/op_codes.rs")
 
+const VERBS_TXT = "res://core/features/inventory/action_verbs_list.txt"
+const OUT_VERBS = "res://core/features/inventory/action_verbs.gd"
+
 func _run() -> void:
 	_generate_screens_registry()
 	_generate_zones_registry()
 	_generate_opcodes_registry()
-	print("[RegistryBuilder] Successfully updated UI, Zones, and Dual-Language OpCodes!")
+	_generate_verbs_registry()
+	print("[RegistryBuilder] Successfully updated UI, Zones, Dual-Language OpCodes, and Action Verbs!")
 
 # ==========================================
 # OP CODE GENERATOR (Rust + Godot)
@@ -177,6 +181,37 @@ func _generate_zones_registry() -> void:
 	var success := out.store_string(final_code)
 	if not success:
 		push_error("[RegistryBuilder] Failed to write Zone Registry to file.")
+
+# ==========================================
+# VERB GENERATOR (For Inventory Actions)
+# ==========================================
+func _generate_verbs_registry() -> void:
+	if not FileAccess.file_exists(VERBS_TXT):
+		push_error("[RegistryBuilder] Action verbs list not found: " + VERBS_TXT)
+		return
+
+	var txt_file := FileAccess.open(VERBS_TXT, FileAccess.READ)
+	var lines := txt_file.get_as_text().split("\n", false)
+
+	var code := "class_name ActionVerb\n\n## AUTO-GENERATED VERB IDS\nenum ID {\n"
+	var known_hashes := {}
+
+	for line in lines:
+		var clean_name := line.strip_edges().to_upper()
+		if clean_name.is_empty() or clean_name.begins_with("#"): continue
+
+		var hash_val := _hash_16(clean_name)
+		if known_hashes.has(hash_val): continue
+
+		known_hashes[hash_val] = true
+		code += "\t%s = %d,\n" % [clean_name, hash_val]
+
+	code += "}\n"
+
+	var out := FileAccess.open(OUT_VERBS, FileAccess.WRITE)
+	var success := out.store_string(code)
+	if not success:
+		push_error("[RegistryBuilder] Failed to write Verbs Registry to file.")
 
 func _hash_16(text: String) -> int:
 	var hash_32: int = _hash_fnv1a_32(text)

@@ -1,0 +1,11 @@
+class_name ActionVerb
+
+## AUTO-GENERATED VERB IDS
+enum ID {
+	PICKUP = 27202,
+	BURY = 25785,
+	READ = 47156,
+	OPEN = 19673,
+	TALK = 26914,
+	INSPECT = 59254,
+}
