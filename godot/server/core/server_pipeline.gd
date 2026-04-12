@@ -35,9 +35,14 @@ static func _register_network_receivers(world: World) -> void:
 	# world.add_system(inv_net)
 
 static func _register_physics(world: World) -> void:
-	var physics := ServerPhysicsSystem.new()
-	physics.group = SystemGroups.PHYSICS
-	world.add_system(physics)
+	var char_physics := ServerCharacterPhysicsSystem.new()
+	char_physics.group = SystemGroups.PHYSICS
+	world.add_system(char_physics)
+
+	var kin_physics := ServerKinematicPhysicsSystem.new()
+	kin_physics.group = SystemGroups.PHYSICS
+	world.add_system(kin_physics)
+
 
 static func _register_inventory(world: World) -> void:
 	var validator := BankAccessValidator.new()

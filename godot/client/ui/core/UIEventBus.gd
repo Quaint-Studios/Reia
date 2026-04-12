@@ -1,4 +1,3 @@
-## res://client/ui/core/ui_event_bus.gd
 extends Node
 ## AUTOLOAD: UIEventBus
 ## Global routing hub for UI interactions.
