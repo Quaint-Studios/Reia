@@ -45,6 +45,7 @@ UIEventBus="*uid://b42f7eitus3fj"
 GameOrchestrator="*uid://wfffbfiau32v"
 NetworkRouter="*uid://bcct6em86mvjj"
 SceneManager="*uid://cc6iusoi34bpu"
+UserPreferences="*uid://3krmnajq1oo5"
 
 [debug]
 
