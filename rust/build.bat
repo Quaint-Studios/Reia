@@ -21,7 +21,7 @@ echo ===================================================
 echo Building Reia's Rust Backend in !BUILD_TYPE! mode...
 echo ===================================================
 
-:: 3. Run Cargo Build
+:: Run Cargo Build
 cargo build !CARGO_ARGS!
 if %ERRORLEVEL% NEQ 0 (
     echo Cargo build failed!

@@ -8,8 +8,8 @@ func process(entities: Array[Entity], components: Array, _delta: float) -> void:
 	if not OS.has_feature("dedicated_server"): return
 
 	# Extract the parallel component arrays directly based on query order
-	var transforms : Array[C_Transform] = components[0]
-	var velocities : Array[C_Velocity] = components[1]
+	var transforms: Array[C_Transform] = components[0]
+	var velocities: Array[C_Velocity] = components[1]
 
 	# Iterate by Index (Cache-friendly contiguous memory access)
 	var count := entities.size()
@@ -19,8 +19,13 @@ func process(entities: Array[Entity], components: Array, _delta: float) -> void:
 		var vel := velocities[i] as C_Velocity
 
 		# Fast direct access. No method calls, no hash lookups.
-		(entity as Node as CharacterBody3D).velocity = vel.direction * vel.speed
-		var _collided := (entity as Node as CharacterBody3D).move_and_slide()
+		var body := entity as Node as CharacterBody3D
+		if body:
+			body.velocity = vel.direction * vel.speed
+			var _collided := body.move_and_slide()
 
-		# Sync back
-		trans.transform = (entity as Node as CharacterBody3D).global_transform
+			# Sync back
+			trans.transform = body.global_transform
+		else:
+			# Mathematical fallback for non-physics entities
+			trans.transform.origin += vel.direction * vel.speed * _delta

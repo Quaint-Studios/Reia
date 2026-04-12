@@ -61,8 +61,6 @@ func _physics_process(delta: float) -> void:
 	world.process(delta, SystemGroups.COMBAT)
 	world.process(delta, SystemGroups.AI)
 
-	# TODO: CommandBuffer
-
 	# Late Phase (Respawning)
 	world.process(delta, SystemGroups.SPAWNING)
 

@@ -23,7 +23,7 @@ var server_world: World:
 				# Add the world to the tree if it is not already
 				get_tree().root.add_child(server_world)
 			if not server_world.tree_exited.is_connected(_on_server_world_exited):
-				UIUtils.safe_connect(server_world.tree_exited, _on_server_world_exited, "GameOrchestrator _on_server_world_exited")
+				UIUtils.safe_connect(server_world.tree_exited, _on_server_world_exited, "GameOrchestrator tree_exited")
 		server_world_changed.emit(server_world)
 		assert(GECSEditorDebuggerMessages.set_world(server_world) if ECS.debug else true, 'Debug Data')
 var client_world: World:

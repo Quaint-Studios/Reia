@@ -9,14 +9,6 @@ class EntityMapNamespace extends RefCounted:
 	## Reverse Lookup: ECS ID (int) -> Network ID (int)
 	var _ecs_id_to_net_id: Dictionary[int, int] = {}
 
-	# Notes:
-	# print(network_id) # e.g. If you use C_NetworkId.new(10) it's 10
-	# print(entity.id) # e.g. c8e3c209-6169-4d96-bf86-a0e748e70f4a
-	# print(entity.id as int) # e.g. 9223372036854775807, UUID is too large to be represented at an 64-bit int and will error
-	# print(entity.get_instance_id()) # e.g. 82996889288
-	# print(instance_from_id(entity.get_instance_id())) # e.g. @Node@36:<Node#82996889288>
-	# print(entity.ecs_id) # 1 because it's the first entity created, and increments from there
-
 	## Called when an entity (Player or Monster) spawns into the world
 	func register(network_id: int, entity: Entity) -> void:
 		_net_id_to_entity[network_id] = entity
