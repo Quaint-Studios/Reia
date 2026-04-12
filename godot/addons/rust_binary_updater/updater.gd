@@ -156,7 +156,7 @@ func _start_download(file_path: String, build_type: String, target_os: String, e
 	file_http.request_completed.connect(func(res, code, hdrs, bdy):
 		_on_binary_downloaded(res, code, download_path, final_path, expected_hash, file_http)
 	)
-	
+
 	print("[RustUpdater] Downloading ", build_type, " build -> ", download_path)
 	file_http.request(file_url)
 
@@ -195,13 +195,13 @@ func _on_binary_downloaded(result: int, response_code: int, downloaded_path: Str
 			var err := OK
 			if FileAccess.file_exists(final_path):
 				err = DirAccess.remove_absolute(final_path)
-				
+
 			if err == OK:
 				err = DirAccess.rename_absolute(downloaded_path, final_path)
 				if err == OK:
 					if OS.get_name() == "macOS" or OS.get_name() == "Linux":
 						OS.execute("chmod", ["+x", ProjectSettings.globalize_path(final_path)], [])
-					
+
 					_apply_macos_fixes(final_path)
 
 					print("[RustUpdater] Successfully verified and hot-swapped: ", final_name)
@@ -211,7 +211,7 @@ func _on_binary_downloaded(result: int, response_code: int, downloaded_path: Str
 				_failed_replacements.append(final_name)
 	else:
 		push_error("[RustUpdater] Failed to download binary. Code: " + str(response_code))
-		
+
 	if _pending_downloads == 0:
 		_finalize_update()
 
@@ -255,17 +255,17 @@ func _attempt_manual_finalize():
 			found_updates = true
 			var update_path := BIN_DIR + file_name
 			var target_path := BIN_DIR + file_name.trim_suffix(".update")
-			
+
 			var err := OK
 			if FileAccess.file_exists(target_path):
 				err = DirAccess.remove_absolute(target_path)
-				
+
 			if err == OK:
 				err = DirAccess.rename_absolute(update_path, target_path)
 				if err == OK:
 					if OS.get_name() == "macOS" or OS.get_name() == "Linux":
 						OS.execute("chmod", ["+x", ProjectSettings.globalize_path(target_path)], [])
-					
+
 					_apply_macos_fixes(target_path)
 					print("[RustUpdater] Successfully replaced: ", target_path.get_file())
 				else:
@@ -273,7 +273,7 @@ func _attempt_manual_finalize():
 			else:
 				still_locked.append(target_path.get_file())
 		file_name = dir.get_next()
-		
+
 	if not found_updates:
 		print("[RustUpdater] No pending .update files found.")
 	elif still_locked.size() > 0:

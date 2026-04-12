@@ -36,9 +36,14 @@ func _ready() -> void:
 		print("[CLIENT] Connecting to server at %s:%d..." % [ip, port])
 	else:
 		print("[CLIENT] Offline mode enabled. Skipping network initialization.")
-		print("[CLIENT] Routing to Title Screen...")
 
-	print("[CLIENT] Network, ECS & Observers Initialized. Routing to Title Screen...")
+	# Simulate Auth Success for the Demo so we can actually test the 3D world!
+	call_deferred("_simulate_auth_success")
+
+func _simulate_auth_success() -> void:
+	print("[CLIENT] Auth successful! Loading world...")
+	# This automatically loads the 3D meshes for the Waterbrook zone
+	SceneManager.teleport_to_zone(Zone.ID.WATERBROOK)
 
 func _on_rust_packets(buckets: Dictionary) -> void:
 	NetworkRouter.client.incoming_buckets = buckets
