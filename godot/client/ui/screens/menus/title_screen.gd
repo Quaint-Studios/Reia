@@ -18,6 +18,7 @@ var current_state: State = State.MAIN_MENU
 @onready var btn_play_online: Button = %BtnPlayOnline
 @onready var btn_host_play: Button = %BtnHostPlay
 @onready var btn_host_only: Button = %BtnHostOnly
+@onready var btn_back: Button = %BtnBack
 
 func _ready() -> void:
 	_switch_to_state(State.MAIN_MENU, false)
@@ -35,6 +36,7 @@ func _ready() -> void:
 	UIUtils.safe_connect(btn_play_online.pressed, _on_play_online, "TitleScreen btn_play_online")
 	UIUtils.safe_connect(btn_host_play.pressed, _on_host_play, "TitleScreen btn_host_play")
 	UIUtils.safe_connect(btn_host_only.pressed, _on_host_only, "TitleScreen btn_host_only")
+	UIUtils.safe_connect(btn_back.pressed, _on_back_clicked, "TitleScreen btn_back")
 
 # --- MAIN MENU LOGIC ---
 
@@ -49,6 +51,9 @@ func _on_quit_clicked() -> void:
 
 func _execute_quit() -> void:
 	get_tree().quit()
+
+func _on_back_clicked() -> void:
+	_switch_to_state(State.MAIN_MENU)
 
 # --- PLAY MENU LOGIC ---
 

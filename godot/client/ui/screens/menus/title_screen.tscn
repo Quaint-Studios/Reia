@@ -58,7 +58,7 @@ text = "Quit"
 [node name="PlayMenu" type="VBoxContainer" parent="ScreenContainer/FlowStates" unique_id=2105121867]
 visible = false
 layout_mode = 2
-theme_override_constants/separation = 8
+theme_override_constants/separation = 12
 
 [node name="BtnSingleplayer" type="Button" parent="ScreenContainer/FlowStates/PlayMenu" unique_id=1110766753]
 unique_name_in_owner = true
@@ -73,11 +73,13 @@ theme_override_constants/separation = 16
 [node name="InputUsername" type="LineEdit" parent="ScreenContainer/FlowStates/PlayMenu" unique_id=568040657]
 unique_name_in_owner = true
 layout_mode = 2
+theme_type_variation = &"BaseLineEdit"
 placeholder_text = "username"
 
 [node name="InputPassword" type="LineEdit" parent="ScreenContainer/FlowStates/PlayMenu" unique_id=1737429817]
 unique_name_in_owner = true
 layout_mode = 2
+theme_type_variation = &"BaseLineEdit"
 placeholder_text = "password not needed"
 editable = false
 secret = true
@@ -109,3 +111,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"PrimaryActionButton"
 text = "Host Only"
+
+[node name="HSeparator3" type="HSeparator" parent="ScreenContainer/FlowStates/PlayMenu" unique_id=1580226598]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="BtnBack" type="Button" parent="ScreenContainer/FlowStates/PlayMenu" unique_id=1084603445]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PrimaryActionButton"
+text = "Go Back"

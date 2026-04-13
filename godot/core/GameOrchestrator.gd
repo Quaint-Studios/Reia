@@ -7,6 +7,9 @@ const NetworkChannel = NetworkRouter.NetworkChannel
 var active_server: ServerMain
 var active_client: ClientMain
 
+var is_offline_mode: bool = false
+var local_client_net_id: int = 0 # Stores the local player's network ID for easy validation
+
 signal server_world_changed(world: World)
 signal server_world_exited
 signal client_world_changed(world: World)
@@ -40,8 +43,6 @@ var client_world: World:
 				UIUtils.safe_connect(client_world.tree_exited, _on_client_world_exited, "GameOrchestrator tree_exited")
 		client_world_changed.emit(client_world)
 		assert(GECSEditorDebuggerMessages.set_world(client_world) if ECS.debug else true, 'Debug Data')
-
-var is_offline_mode: bool = false
 
 func _ready() -> void:
 	# Listen to UI intents globally
@@ -189,6 +190,7 @@ func _teardown() -> void:
 		active_client = null
 	server_world = null
 	client_world = null
+	local_client_net_id = 0
 	NetworkRouter.clear_all()
 	EntityMap.clear_all()
 	print("[GameOrchestrator] Teardown complete.\n")

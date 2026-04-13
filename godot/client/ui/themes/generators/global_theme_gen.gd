@@ -49,6 +49,33 @@ func _run() -> void:
 	theme.set_stylebox("hover", "PrimaryActionButton", btn_hover)
 	theme.set_stylebox("pressed", "PrimaryActionButton", btn_hover)
 
+	theme.add_type("BaseLineEdit")
+	theme.set_font("font", "BaseLineEdit", body_font)
+	theme.set_font_size("font_size", "BaseLineEdit", 18)
+	theme.set_color("font_color", "BaseLineEdit", UIColors.Base.PURE_WHITE)
+	theme.set_color("font_placeholder_color", "BaseLineEdit", Color(UIColors.Base.SOFT_WHITE, 0.5))
+	theme.set_type_variation("BaseLineEdit", "LineEdit")
+
+	var input_normal := StyleBoxFlat.new()
+	input_normal.bg_color = UIColors.Base.PURE_BLACK
+	input_normal.border_width_bottom = 2
+	input_normal.border_color = UIColors.Base.CHIP_BLUE
+	input_normal.content_margin_left = 16
+	input_normal.content_margin_right = 16
+	input_normal.content_margin_top = 12
+	input_normal.content_margin_bottom = 12
+
+	var input_focus := input_normal.duplicate() as StyleBoxFlat
+	input_focus.border_color = UIColors.Base.SUCCESS_GREEN
+
+	var input_read_only := input_normal.duplicate() as StyleBoxFlat
+	input_read_only.bg_color = Color(UIColors.Base.PURE_BLACK, 0.5)
+	input_read_only.border_color = Color(UIColors.Base.CHIP_BLUE, 0.5)
+
+	theme.set_stylebox("normal", "BaseLineEdit", input_normal)
+	theme.set_stylebox("focus", "BaseLineEdit", input_focus)
+	theme.set_stylebox("read_only", "BaseLineEdit", input_read_only)
+
 	# Save the theme
 	var dir := DirAccess.open("res://client/ui/themes/generated/")
 	if not dir:

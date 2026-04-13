@@ -1,3 +1,37 @@
 [gd_scene format=3 uid="uid://d1ygay8155gxa"]
 
+[ext_resource type="Texture2D" uid="uid://gy5ltve2fcfr" path="res://client/assets/textures/skyboxes/mountain_skybox_0.jpg" id="1_rttew"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_pyyvi"]
+panorama = ExtResource("1_rttew")
+
+[sub_resource type="Sky" id="Sky_4m2ns"]
+sky_material = SubResource("PanoramaSkyMaterial_pyyvi")
+
+[sub_resource type="Environment" id="Environment_tqxjc"]
+background_mode = 2
+sky = SubResource("Sky_4m2ns")
+sky_rotation = Vector3(3.1415927, 0, 0)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rttew"]
+size = Vector2(100, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pyyvi"]
+size = Vector3(100, 1, 100)
+
 [node name="Waterbrook" type="Node3D" unique_id=177669758]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=482491906]
+environment = SubResource("Environment_tqxjc")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=253288878]
+transform = Transform3D(0.70710677, -0.49999997, 0.49999997, 0, 0.70710677, 0.70710677, -0.70710677, -0.49999997, 0.49999997, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1303464280]
+
+[node name="PlaneMesh" type="MeshInstance3D" parent="Floor" unique_id=1161070365]
+mesh = SubResource("PlaneMesh_rttew")
+
+[node name="BoxShape3D" type="CollisionShape3D" parent="Floor" unique_id=1317766893]
+shape = SubResource("BoxShape3D_pyyvi")

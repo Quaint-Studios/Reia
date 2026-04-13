@@ -31,6 +31,16 @@ func _ready() -> void:
 	_ui_canvas.layer = 10
 	add_child(_ui_canvas)
 
+	# Listen for AuthSuccess to automatically clear menus and boot the HUD!
+	UIUtils.safe_connect(UIEventBus.auth.login_success, _on_login_success, "SceneManager login_success")
+
+func _on_login_success(zone_id: int) -> void:
+	# Spawn the in-game HUD (Automatically deletes the TitleScreen)
+	transition_to_screen(Scenes.Hud.MAIN_HUD)
+	
+	# Teleport to the designated server map
+	teleport_to_zone(zone_id)
+
 # ==========================================
 # UI SCREEN ROUTING
 # ==========================================

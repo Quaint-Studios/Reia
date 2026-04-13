@@ -21,6 +21,10 @@ static func build(world: World) -> void:
 
 
 static func _register_network_receivers(world: World) -> void:
+	var auth_net := ServerAuthNetworkSystem.new()
+	auth_net.group = SystemGroups.PRE_PROCESS
+	world.add_system(auth_net)
+
 	var mov_net := ServerMovementNetworkSystem.new()
 	mov_net.group = SystemGroups.PRE_PROCESS
 	world.add_system(mov_net)
@@ -32,6 +36,10 @@ static func _register_network_receivers(world: World) -> void:
 	var inv_net := ServerInventoryNetworkSystem.new()
 	inv_net.group = SystemGroups.PRE_PROCESS
 	world.add_system(inv_net)
+
+	var chat_net := ServerChatNetworkSystem.new()
+	chat_net.group = SystemGroups.PRE_PROCESS
+	world.add_system(chat_net)
 
 static func _register_physics(world: World) -> void:
 	var char_physics := ServerCharacterPhysicsSystem.new()
@@ -56,6 +64,10 @@ static func _register_combat(world: World) -> void:
 	var dmg := DamageCalculationSystem.new()
 	dmg.group = SystemGroups.COMBAT
 	world.add_system(dmg)
+
+	var death := ServerDeathSystem.new()
+	death.group = SystemGroups.COMBAT
+	world.add_system(death)
 
 static func _register_ai(world: World) -> void:
 	var ai := MonsterAISystem.new()

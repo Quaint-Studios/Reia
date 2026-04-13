@@ -24,11 +24,22 @@ static func _register_observers(world: World) -> void:
 	world.add_observer(CombatVFXObserver.new())
 	world.add_observer(AnimationStateObserver.new())
 
+	world.add_observer(NameplateObserver.new())
+
 static func _register_network_receivers(world: World) -> void:
 	# Reads the STATE_SYNC packets from the Server and updates C_NetworkSync
+	var auth_net := ClientAuthNetworkSystem.new()
+	auth_net.group = SystemGroups.PRE_PROCESS
+	world.add_system(auth_net)
+
+	var spawn_net := ClientEntitySpawnSystem.new()
+	spawn_net.group = SystemGroups.PRE_PROCESS
+	world.add_system(spawn_net)
+
 	var state_sync := ClientStateSyncSystem.new()
 	state_sync.group = SystemGroups.PRE_PROCESS
 	world.add_system(state_sync)
+
 
 static func _register_prediction_systems(world: World) -> void:
 	# Smoothly lerps visual Godot nodes to match C_NetworkSync targets

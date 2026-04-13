@@ -16,7 +16,7 @@ class SessionEvents extends RefCounted:
 
 class AuthEvents extends RefCounted:
 	signal request_login(username: String, token: String)
-	signal login_success()
+	signal login_success(zone_id: Zone.ID)
 	signal login_failed(reason: String)
 
 class InventoryEvents extends RefCounted:
@@ -29,7 +29,7 @@ class CombatEvents extends RefCounted:
 	signal player_mana_changed(current: int, max_mana: int)
 
 class WorldEvents extends RefCounted:
-	signal request_teleport(zone_id: int)
+	signal request_teleport(zone_id: Zone.ID)
 	signal chat_message_received(sender: String, message: String)
 	signal show_interaction_prompt(prompt_text: String, action_verb: String)
 	signal hide_interaction_prompt()

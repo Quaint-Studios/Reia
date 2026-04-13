@@ -1,3 +1,24 @@
 [gd_scene format=3 uid="uid://b73nebop66qje"]
 
-[node name="MainHud_tscn" type="Node" unique_id=2001859946]
+[ext_resource type="Script" uid="uid://r51kpjrh6l4b" path="res://client/ui/components/atoms/main_hud.gd" id="1_fjenb"]
+[ext_resource type="Script" uid="uid://t012ego4c5mi" path="res://client/ui/components/organisms/chat_box.gd" id="2_manwo"]
+
+[node name="MainHud" type="Control" unique_id=1072708505]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_fjenb")
+
+[node name="ChatBox" type="VBoxContainer" parent="." unique_id=292383583]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+script = ExtResource("2_manwo")
+metadata/_custom_type_script = "uid://t012ego4c5mi"
