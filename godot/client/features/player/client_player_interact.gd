@@ -24,7 +24,7 @@ func _physics_process(_delta: float) -> void:
 				# For localization, you can wrap this in tr(): tr("ACTION_" + verb_key)
 				var verb_key: String = ActionVerb.ID.find_key(interactable.action_verb)
 				var display_verb := verb_key.capitalize() if verb_key else "Interact"
-				
+
 				# Tell the UI to show "Bone [E to Pickup]"
 				UIEventBus.world.show_interaction_prompt.emit(interactable.item_name, display_verb)
 
@@ -39,7 +39,7 @@ func _send_interaction_request(target_entity: Entity, op_code: int) -> void:
 	var net_id := EntityMap.client.get_network_id(target_entity)
 	var writer := StreamPeerBuffer.new()
 	writer.put_64(net_id)
-	
+
 	# We blindly send the OpCode defined by the component.
 	# Zero client-side branching.
 	NetworkRouter.client.queue_packet(0, op_code, writer.data_array)

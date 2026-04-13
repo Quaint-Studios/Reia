@@ -17,16 +17,19 @@ func _run() -> void:
 	theme.add_type("HeaderLabel")
 	theme.set_font("font", "HeaderLabel", title_font)
 	theme.set_font_size("font_size", "HeaderLabel", 32)
+	theme.set_type_variation("HeaderLabel", "Label")
 
 	# --- BodyTextLabel Variation ---
 	theme.add_type("BodyTextLabel")
 	theme.set_font("font", "BodyTextLabel", body_font)
 	theme.set_font_size("font_size", "BodyTextLabel", 18)
+	theme.set_type_variation("BodyTextLabel", "Label")
 
 	# --- PrimaryActionButton Variation ---
 	theme.add_type("PrimaryActionButton")
 	theme.set_font("font", "PrimaryActionButton", title_font)
 	theme.set_font_size("font_size", "PrimaryActionButton", 20)
+	theme.set_type_variation("PrimaryActionButton", "Button")
 
 	var btn_normal := StyleBoxFlat.new()
 	btn_normal.bg_color = UIColors.Base.CHIP_BLUE

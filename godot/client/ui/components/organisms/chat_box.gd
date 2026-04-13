@@ -1,4 +1,3 @@
-## res://client/ui/components/organisms/chat_box.gd
 class_name ChatBox extends VBoxContainer
 
 var chat_log: RichTextLabel
@@ -24,12 +23,11 @@ func _ready() -> void:
 func _on_text_submitted(text: String) -> void:
 	if text.strip_edges().is_empty(): return
 	
-	# 1. Clear input
+	# Clear input
 	input_field.text = ""
 	input_field.release_focus()
 	
-	# 2. Tell the network router to send the chat packet
-	# (In a real app, you serialize this using Godot's StreamPeerBuffer to match rkyv)
+	# Tell the network router to send the chat packet
 	var writer := StreamPeerBuffer.new()
 	writer.put_string(text)
 	NetworkRouter.client.queue_packet(0, OpCode.ID.SEND_CHAT, writer.data_array)

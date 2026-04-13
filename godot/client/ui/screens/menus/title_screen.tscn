@@ -1,39 +1,111 @@
 [gd_scene format=3 uid="uid://cg0v0622aqonf"]
 
 [ext_resource type="Script" uid="uid://dlru38jxq5ytk" path="res://client/ui/screens/menus/title_screen.gd" id="1_hjjn8"]
+[ext_resource type="Texture2D" uid="uid://b3vpv7thxcaox" path="res://client/assets/models/skyboxes/mountain_skybox_0.jpg" id="2_4jr4a"]
 
 [node name="TitleScreen" type="Control" unique_id=1855045235]
 layout_mode = 3
-anchors_preset = 0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_hjjn8")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1345820480]
+[node name="BackgroundLayer" type="TextureRect" parent="." unique_id=494866289]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_4jr4a")
+flip_h = true
+flip_v = true
 
-[node name="CenterContainer" type="CenterContainer" parent="CanvasLayer" unique_id=686375368]
-offset_right = 1920.0
-offset_bottom = 1080.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="ScreenContainer" type="MarginContainer" parent="." unique_id=1829986217]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/CenterContainer" unique_id=1085858820]
+[node name="FlowStates" type="CenterContainer" parent="ScreenContainer" unique_id=1282917142]
 layout_mode = 2
 
-[node name="BtnPlayOnline" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=1437521330]
+[node name="MainMenu" type="VBoxContainer" parent="ScreenContainer/FlowStates" unique_id=842333544]
+layout_mode = 2
+
+[node name="BtnMainPlay" type="Button" parent="ScreenContainer/FlowStates/MainMenu" unique_id=344494969]
 unique_name_in_owner = true
 layout_mode = 2
+theme_type_variation = &"PrimaryActionButton"
+text = "Play"
+
+[node name="BtnSettings" type="Button" parent="ScreenContainer/FlowStates/MainMenu" unique_id=568793574]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PrimaryActionButton"
+text = "Settings"
+
+[node name="BtnQuit" type="Button" parent="ScreenContainer/FlowStates/MainMenu" unique_id=857854876]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PrimaryActionButton"
+text = "Quit"
+
+[node name="PlayMenu" type="VBoxContainer" parent="ScreenContainer/FlowStates" unique_id=2105121867]
+visible = false
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="BtnSingleplayer" type="Button" parent="ScreenContainer/FlowStates/PlayMenu" unique_id=1110766753]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PrimaryActionButton"
+text = "Singleplayer"
+
+[node name="HSeparator1" type="HSeparator" parent="ScreenContainer/FlowStates/PlayMenu" unique_id=1546939683]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="InputUsername" type="LineEdit" parent="ScreenContainer/FlowStates/PlayMenu" unique_id=568040657]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "username"
+
+[node name="InputPassword" type="LineEdit" parent="ScreenContainer/FlowStates/PlayMenu" unique_id=1737429817]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "password not needed"
+editable = false
+secret = true
+
+[node name="BtnPlayOnline" type="Button" parent="ScreenContainer/FlowStates/PlayMenu" unique_id=1725928505]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"PrimaryActionButton"
 text = "Play Online"
 
-[node name="BtnPlaySolo" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=363200658]
-unique_name_in_owner = true
+[node name="HSeparator2" type="HSeparator" parent="ScreenContainer/FlowStates/PlayMenu" unique_id=1924108432]
 layout_mode = 2
-text = "Play Solo"
+theme_override_constants/separation = 16
 
-[node name="BtnHostPlay" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=700897737]
+[node name="HostRow" type="HBoxContainer" parent="ScreenContainer/FlowStates/PlayMenu" unique_id=1033551914]
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+
+[node name="BtnHostPlay" type="Button" parent="ScreenContainer/FlowStates/PlayMenu/HostRow" unique_id=1121535690]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"PrimaryActionButton"
 text = "Host & Play"
 
-[node name="BtnHostOnly" type="Button" parent="CanvasLayer/CenterContainer/VBoxContainer" unique_id=178990725]
+[node name="BtnHostOnly" type="Button" parent="ScreenContainer/FlowStates/PlayMenu/HostRow" unique_id=2102804398]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"PrimaryActionButton"
 text = "Host Only"

@@ -28,7 +28,7 @@ static func _register_network_receivers(world: World) -> void:
 	var combat_net := ServerCombatNetworkSystem.new()
 	combat_net.group = SystemGroups.PRE_PROCESS
 	world.add_system(combat_net)
-	
+
 	var inv_net := ServerInventoryNetworkSystem.new()
 	inv_net.group = SystemGroups.PRE_PROCESS
 	world.add_system(inv_net)

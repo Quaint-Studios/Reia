@@ -42,6 +42,7 @@ MapDatabase="*uid://3y3cbaw6ewh2"
 ECS="*uid://dfqwl5njvdnmq"
 EntityMap="*uid://bl6ovve7emito"
 UIEventBus="*uid://b42f7eitus3fj"
+UIModalManager="*uid://cmnlm267uc83r"
 GameOrchestrator="*uid://wfffbfiau32v"
 NetworkRouter="*uid://bcct6em86mvjj"
 SceneManager="*uid://cc6iusoi34bpu"
@@ -84,6 +85,10 @@ folder_colors={
 "res://server/": "red",
 "res://shared_nodes/": "purple"
 }
+
+[gui]
+
+theme/custom="uid://c5848jpc4wmx4"
 
 [importer_defaults]
 
