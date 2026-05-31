@@ -7,181 +7,161 @@ on:
       - 'v[0-9]+.[0-9]+.[0-9]+([a-zA-Z]*\-*)*'
 
 env:
-  GODOT_VERSION: 4.5.1
+  GODOT_VERSION: 4.6
   EXPORT_NAME: Reia
   PROJECT_PATH: godot
   WINEPREFIX: /tmp/.wine
 
 jobs:
-  build-gdextension:
-    name: Build Rust GDExtension (${{ matrix.platform }})
-    runs-on: ${{ matrix.runner }}
-    strategy:
-      matrix:
-        include:
-          - platform: windows
-            runner: windows-latest
-            target: x86_64-pc-windows-msvc
-            output: dll
-          # - platform: linux
-          #   runner: ubuntu-24.04
-          #   target: x86_64-unknown-linux-gnu
-          #   output: so
-          # - platform: mac
-          #   runner: macos-15
-          #   target: x86_64-apple-darwin
-          #   output: dylib
-          # - platform: web
-          #   runner: ubuntu-24.04
-          #   target: wasm32-unknown-unknown
-          #   output: wasm
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          submodules: recursive
-      - name: Cache Rust dependencies
-        uses: actions/cache@v4
-        with:
-          path: |
-            ~/.cargo/registry
-            ~/.cargo/git
-            rust/target
-          key: ${{ runner.os }}-cargo-${{ matrix.target }}-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-${{ matrix.target }}-
-            ${{ runner.os }}-cargo-
-      - name: Ensure custom LFS config (Rust)
-        run: |
-          git lfs pull
-      - name: Install Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          toolchain: stable
-          target: ${{ matrix.target }}
-          override: true
-      - name: Build GDExtension
-        run: |
-          cd rust
-          cargo build --release --target ${{ matrix.target }}
-      - name: Upload GDExtension artifact
-        uses: actions/upload-artifact@v5
-        with:
-          name: ${{ matrix.target }}
-          path: rust/target/${{ matrix.target }}/release/reia.${{ matrix.output }}
-
+  # ---------------------------------------------------------------------------
+  # Export
+  # Rust binaries are not built here. They are built by the "Build and Upload
+  # GDExtension" workflow and published to Cloudflare R2. This job pulls the
+  # latest release binaries from R2 and places them where reia.gdextension
+  # expects them (res://build/bin/) before invoking the headless export.
+  # ---------------------------------------------------------------------------
   export:
-    needs: build-gdextension
     name: Export (${{ matrix.export }})
     runs-on: ${{ matrix.runner }}
     container:
-      image: barichello/godot-ci:4.5.1
+      image: barichello/godot-ci:4.6
     strategy:
+      fail-fast: false
       matrix:
         include:
           - export: windows
             runner: ubuntu-24.04
-            artifact: x86_64-pc-windows-msvc
             ext: exe
             godot_export: win
             output_dir: build/windows
             export_name: windows
-          # - export: linux
-          #   runner: ubuntu-24.04
-          #   artifact: x86_64-unknown-linux-gnu
-          #   ext: x86_64
-          #   godot_export: linux
-          #   output_dir: build/linux
-          #   export_name: linux
-          # - export: server
-          #   runner: ubuntu-24.04
-          #   artifact: x86_64-unknown-linux-gnu
-          #   ext: x86_64
-          #   godot_export: server
-          #   output_dir: build/server
-          #   export_name: server
-          # - export: mac
-          #   runner: ubuntu-24.04
-          #   artifact: x86_64-apple-darwin
-          #   ext: zip
-          #   godot_export: mac
-          #   output_dir: build/mac
-          #   export_name: mac
+          - export: linux
+            runner: ubuntu-24.04
+            ext: x86_64
+            godot_export: linux
+            output_dir: build/linux
+            export_name: linux
+          - export: server
+            runner: ubuntu-24.04
+            ext: x86_64
+            godot_export: server
+            output_dir: build/server
+            export_name: server
+          - export: mac
+            runner: ubuntu-24.04
+            ext: zip
+            godot_export: mac
+            output_dir: build/mac
+            export_name: mac
+          # Web export is intentionally excluded from this workflow.
+          # Reia's networking stack (Quinn, libsql, Tokio) requires native I/O
+          # and cannot target WASM. The web client will be a separate, lightweight
+          # Godot project that bridges to the backend over the network.
           # - export: web
           #   runner: ubuntu-24.04
-          #   artifact: wasm32-unknown-unknown
           #   ext: html
           #   godot_export: web
           #   output_dir: build/web
           #   export_name: web
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           submodules: recursive
-      - name: Cache Godot export templates
+
+      - name: Restore Godot editor cache
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.PROJECT_PATH }}/.godot/
+          key: godot-editor-${{ env.GODOT_VERSION }}-${{ hashFiles(format('{0}/**/*.tscn', env.PROJECT_PATH), format('{0}/**/*.gd', env.PROJECT_PATH), format('{0}/**/*.import', env.PROJECT_PATH)) }}
+          restore-keys: |
+            godot-editor-${{ env.GODOT_VERSION }}-
+
+      - name: Restore Godot export templates
         uses: actions/cache@v4
         with:
           path: ~/.local/share/godot/export_templates/
-          key: ${{ runner.os }}-godot-templates-${{ env.GODOT_VERSION }}
+          key: godot-templates-${{ env.GODOT_VERSION }}
           restore-keys: |
-            ${{ runner.os }}-godot-templates-
-      - name: Ensure custom LFS config (Godot)
+            godot-templates-
+
+      - name: Ensure LFS objects are present
         working-directory: ${{ github.workspace }}
         run: |
           git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git lfs install --local
           git lfs pull
-      - name: Download Rust GDExtension
-        uses: actions/download-artifact@v6
-        with:
-          name: ${{ matrix.artifact }}
-          path: rust/target/${{ matrix.artifact }}/release/
-      - name: Setup
+
+      - name: Pull GDExtension binaries from R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          mkdir -p ${{ env.PROJECT_PATH }}/build/bin
+          aws s3 sync s3://rust-build/latest/ ${{ env.PROJECT_PATH }}/build/bin/ \
+            --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com \
+            --exclude "*" \
+            --include "*.release.*"
+
+      - name: Setup export template paths
         run: |
           mkdir -v -p ~/.local/share/godot/export_templates/
           mkdir -v -p ~/.config/
           mv /root/.config/godot ~/.config/godot || true
-          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable || true
-      - name: Export Build
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable \
+             ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable || true
+
+      - name: Import project assets
+        run: |
+          cd ${{ env.PROJECT_PATH }}
+          godot --headless --import || true
+
+      - name: Export build
         run: |
           mkdir -v -p ${{ matrix.output_dir }}
           EXPORT_DIR="$(readlink -f build)"
-          cd $PROJECT_PATH
-          godot --headless --verbose --export-release "${{ matrix.godot_export }}" "$EXPORT_DIR/${{ matrix.export_name }}/${EXPORT_NAME}.${{ matrix.ext }}"
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v5
+          cd ${{ env.PROJECT_PATH }}
+          godot --headless --verbose --export-release "${{ matrix.godot_export }}" \
+            "$EXPORT_DIR/${{ matrix.export_name }}/${EXPORT_NAME}.${{ matrix.ext }}"
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.export_name }}
           path: ${{ matrix.output_dir }}
 
-  release-notes:
-    name: Release Notes
+  # ---------------------------------------------------------------------------
+  # Release
+  # Runs only on tag pushes once all export jobs succeed.
+  # ---------------------------------------------------------------------------
+  release:
+    name: Create Release
     runs-on: ubuntu-latest
     needs: export
     if: ${{ always() && !cancelled() && needs.export.result == 'success' && startsWith(github.ref, 'refs/tags/') }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v4
         with:
           submodules: recursive
-      - name: Format Tag Name
+
+      - name: Format tag for release name
         id: replace_string
         uses: frabert/replace-string-action@v2
         with:
           pattern: '\.'
           string: ${{ github.ref_name }}
           replace-with: "_"
-      - name: Create Release And Upload Asset
+
+      - name: Publish GitHub release
         uses: softprops/action-gh-release@v2
-        if: ${{ startsWith(github.ref, 'refs/tags/') }}
         with:
           files: |
             build/windows
-          # build/linux
-          # build/server
-          # build/mac
-          # build/web
+            build/linux
+            build/server
+            build/mac
           tag_name: ${{ github.ref_name }}
           body: |
             # Reia - `${{ github.ref_name }}`
