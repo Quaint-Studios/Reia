@@ -136,7 +136,7 @@ jobs:
   # Runs only on tag pushes once all export jobs succeed.
   # ---------------------------------------------------------------------------
   release:
-    name: Create Release
+    name: Create Release & Deploy to R2
     runs-on: ubuntu-latest
     needs: export
     if: ${{ always() && !cancelled() && needs.export.result == 'success' && startsWith(github.ref, 'refs/tags/') }}
@@ -146,22 +146,94 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Format tag for release name
-        id: replace_string
-        uses: frabert/replace-string-action@v2
+      - name: Download Artifacts
+        uses: actions/download-artifact@v4
         with:
-          pattern: '\.'
-          string: ${{ github.ref_name }}
-          replace-with: "_"
+          path: unzipped_artifacts
 
-      - name: Publish GitHub release
+      - name: Package Distributions and Generate Manifest
+        run: |
+          mkdir -p staging_latest
+          mkdir -p staging_versioned
+          
+          # Zip build directories
+          if [ -d "unzipped_artifacts/windows" ]; then
+            cd unzipped_artifacts/windows && zip -r ../../staging_latest/reia-windows.zip . && cd ../..
+          fi
+          if [ -d "unzipped_artifacts/linux" ]; then
+            cd unzipped_artifacts/linux && zip -r ../../staging_latest/reia-linux.zip . && cd ../..
+          fi
+          if [ -d "unzipped_artifacts/server" ]; then
+            cd unzipped_artifacts/server && zip -r ../../staging_latest/reia-linux-server.zip . && cd ../..
+          fi
+          if [ -d "unzipped_artifacts/mac" ]; then
+            cd unzipped_artifacts/mac && zip -r ../../staging_latest/reia-macos.zip . && cd ../..
+          fi
+
+          # Calculate SHA256 hashes
+          WIN_HASH=$(sha256sum staging_latest/reia-windows.zip 2>/dev/null | awk '{print $1}')
+          LIN_HASH=$(sha256sum staging_latest/reia-linux.zip 2>/dev/null | awk '{print $1}')
+          SRV_HASH=$(sha256sum staging_latest/reia-linux-server.zip 2>/dev/null | awk '{print $1}')
+          MAC_HASH=$(sha256sum staging_latest/reia-macos.zip 2>/dev/null | awk '{print $1}')
+
+          # Generate Manifest for /latest/
+          cat <<EOF > staging_latest/manifest.json
+          {
+            "version": "latest",
+            "binaries": {
+              "Windows": { "file": "reia-windows.zip", "sha256": "$WIN_HASH" },
+              "Linux": { "file": "reia-linux.zip", "sha256": "$LIN_HASH" },
+              "Linux Server": { "file": "reia-linux-server.zip", "sha256": "$SRV_HASH" },
+              "macOS": { "file": "reia-macos.zip", "sha256": "$MAC_HASH" }
+            }
+          }
+          EOF
+
+          # Copy zipped binaries over to versioned staging area
+          cp staging_latest/*.zip staging_versioned/
+
+          # Clean version name string (e.g., v1.0.0 -> 1.0.0)
+          CLEAN_VERSION=$(echo "${{ github.ref_name }}" | sed 's/^v//')
+
+          # Generate Manifest for versioned directory
+          cat <<EOF > staging_versioned/manifest.json
+          {
+            "version": "$CLEAN_VERSION",
+            "binaries": {
+              "Windows": { "file": "reia-windows.zip", "sha256": "$WIN_HASH" },
+              "Linux": { "file": "reia-linux.zip", "sha256": "$LIN_HASH" },
+              "Linux Server": { "file": "reia-linux-server.zip", "sha256": "$SRV_HASH" },
+              "macOS": { "file": "reia-macos.zip", "sha256": "$MAC_HASH" }
+            }
+          }
+          EOF
+
+      - name: Sync Releases to Cloudflare R2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.R2_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: auto
+        run: |
+          CLEAN_VERSION=$(echo "${{ github.ref_name }}" | sed 's/^v//')
+          
+          # Deploy to /releases/latest/
+          aws s3 sync staging_latest/ s3://game-build/releases/latest/ \
+            --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com \
+            --delete
+
+          # Deploy to versioned folder (e.g., /releases/1.0.0/)
+          aws s3 sync staging_versioned/ s3://game-build/releases/$CLEAN_VERSION/ \
+            --endpoint-url https://${{ secrets.R2_ACCOUNT_ID }}.r2.cloudflarestorage.com \
+            --delete
+
+      - name: Publish GitHub Release Artifacts
         uses: softprops/action-gh-release@v2
         with:
           files: |
-            build/windows
-            build/linux
-            build/server
-            build/mac
+            staging_latest/reia-windows.zip
+            staging_latest/reia-linux.zip
+            staging_latest/reia-linux-server.zip
+            staging_latest/reia-macos.zip
           tag_name: ${{ github.ref_name }}
           body: |
             # Reia - `${{ github.ref_name }}`
