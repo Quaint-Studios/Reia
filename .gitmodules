@@ -4,4 +4,4 @@
 [submodule "godot/addons/gecs"]
 	path = godot/addons/gecs
 	url = https://github.com/makosai/gecs
-	branch = makosai/changes
+	branch = makosai/release-v7.1.0
