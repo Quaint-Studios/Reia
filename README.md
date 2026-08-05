@@ -16,8 +16,13 @@ Explore endless worlds and embark on a magical adventure of a lifetime! Reia is 
 
 > **Jobs:** Check out the list of [jobs](https://github.com/Quaint-Studios/Reia/blob/master/docs/JOBS.md) for this project. You can also visit the [jobs page](https://www.playreia.com/jobs) on our website to learn more information.
 
+## Getting Started
+
+If you are new to the project, please read the [Getting Started Guide](GETTING_STARTED.md) for step-by-step instructions on cloning the repository, downloading Git LFS assets and submodules, opening the project in Godot 4.x, and troubleshooting common setup issues.
+
 ## Table of Contents
 <ol>
+  <li><a href="GETTING_STARTED.md">Getting Started</a></li>
   <li><a href="/docs/ROADMAP.md">Roadmap</a></li>
   <li><a href="#contributing">Contributing</a></li>
   <li><a href="#about-this-project">About this Project</a>
