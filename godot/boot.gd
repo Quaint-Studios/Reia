@@ -4,7 +4,14 @@ const SERVER_SCENE = preload("res://server/server_main.tscn")
 const CLIENT_SCENE = preload("res://client/client_main.tscn")
 
 func _ready() -> void:
-	if OS.has_feature("dedicated_server") or DisplayServer.get_name() == "headless" or OS.get_cmdline_args().has("--server"):
+	var cmd_args := OS.get_cmdline_args()
+	var is_server := not cmd_args.has("--client") and (
+		cmd_args.has("--server")
+		or OS.has_feature("dedicated_server")
+		or DisplayServer.get_name() == "headless"
+	)
+
+	if is_server:
 		_boot_server()
 	else:
 		_boot_client()
