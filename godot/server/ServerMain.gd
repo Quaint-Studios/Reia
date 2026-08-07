@@ -9,7 +9,7 @@ var is_offline: bool
 
 var rust_core: RustCore
 
-func _init(_port: int, _offline: bool = false) -> void:
+func _init(_port: int = 7777, _offline: bool = false) -> void:
 	port = _port
 	is_offline = _offline
 	name = "ServerMain"
