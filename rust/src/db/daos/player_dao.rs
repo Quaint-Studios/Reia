@@ -39,7 +39,7 @@ impl PlayerDao {
     /// Fetches player data from the database by ID.
     /// Returns `Ok(Some(PlayerData))` if found, `Ok(None)` if no matching record exists,
     /// or `Err(DomainDbError)` on database query failure.
-    #[instrument(skip(conn), fields(player_id = %player_id))]
+    #[instrument(name = "dao.fetch_player", skip(conn), fields(player_id = %player_id))]
     pub async fn fetch_player(
         conn: &Arc<Connection>,
         player_id: i64,
@@ -58,7 +58,7 @@ impl PlayerDao {
     }
 
     /// Flushes player state to the database and verifies rows_affected != 0.
-    #[instrument(skip(conn), fields(player_id = %player_id, zone_id = %zone_id))]
+    #[instrument(name = "dao.save_player_state", skip(conn), fields(player_id = %player_id, zone_id = %zone_id))]
     pub async fn save_player_state(
         conn: &Arc<Connection>,
         player_id: i64,
@@ -80,5 +80,44 @@ impl PlayerDao {
         }
 
         Ok(())
+    }
+}
+
+use crate::db::connection::DatabaseManager;
+
+pub struct PlayerRepository {
+    db: Arc<DatabaseManager>,
+}
+
+impl PlayerRepository {
+    pub fn new(db: Arc<DatabaseManager>) -> Self {
+        Self { db }
+    }
+
+    #[instrument(name = "repo.fetch_player", skip(self), fields(player_id = %player_id))]
+    pub async fn fetch_player(&self, player_id: i64) -> Result<Option<PlayerData>, DomainDbError> {
+        PlayerDao::fetch_player(&self.db.conn, player_id).await
+    }
+
+    #[instrument(name = "repo.save_player_state", skip(self, data), fields(player_id = %data.id))]
+    pub async fn save_player_state(&self, data: &PlayerData) -> Result<(), DomainDbError> {
+        let data = data.clone();
+        self.db
+            .execute_with_retry(|conn| {
+                let data = data.clone();
+                async move {
+                    PlayerDao::save_player_state(
+                        &conn,
+                        data.id,
+                        data.zone_id,
+                        data.x,
+                        data.y,
+                        data.z,
+                        data.health,
+                    )
+                    .await
+                }
+            })
+            .await
     }
 }
