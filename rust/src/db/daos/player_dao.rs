@@ -1,6 +1,6 @@
-use libsql::Connection;
-use serde::{ Deserialize, Serialize };
+use serde::{Deserialize, Serialize};
 use std::sync::Arc;
+use turso::Connection;
 
 /// Represents the database schema for a character
 #[derive(Debug, Serialize, Deserialize)]
@@ -24,8 +24,8 @@ impl PlayerDao {
         // Safe parameterized query to prevent SQL injection
         let query = "SELECT id, username, zone_id, x, y, z, health FROM players WHERE id = ?1";
 
-        let stmt = conn.prepare(query).await.ok()?;
-        let mut rows = stmt.query(libsql::params![player_id]).await.ok()?;
+        let mut stmt = conn.prepare(query).await.ok()?;
+        let mut rows = stmt.query(turso::params![player_id]).await.ok()?;
 
         if let Some(row) = rows.next().await.ok().flatten() {
             Some(PlayerData {
@@ -52,12 +52,13 @@ impl PlayerDao {
         x: f32,
         y: f32,
         z: f32,
-        health: i32
-    ) -> Result<(), libsql::Error> {
+        health: i32,
+    ) -> Result<(), turso::Error> {
         let query =
             "UPDATE players SET zone_id = ?1, x = ?2, y = ?3, z = ?4, health = ?5 WHERE id = ?6";
 
-        conn.execute(query, libsql::params![zone_id, x, y, z, health, player_id]).await?;
+        conn.execute(query, turso::params![zone_id, x, y, z, health, player_id])
+            .await?;
 
         Ok(())
     }
