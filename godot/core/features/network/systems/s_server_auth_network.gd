@@ -74,6 +74,9 @@ func _process_auth(bucket: Dictionary) -> void:
 		writer.put_u32(Zone.ID.WATERBROOK)
 		NetworkRouter.server.queue_packet(net_id, OpCode.ID.AUTH_SUCCESS, writer.data_array)
 
+		# Send pre-existing entities to the joining client so they see everyone already online
+		_send_existing_entities_to_client(net_id)
+
 		# Broadcast the Entity Spawn so everyone can see the new player
 		writer.clear()
 		writer.put_64(net_id)
@@ -119,3 +122,28 @@ func _broadcast_test_dummy(all_clients: PackedInt64Array) -> void:
 
 	NetworkRouter.server.queue_broadcast(all_clients, OpCode.ID.ENTITY_SPAWN, writer.data_array)
 	print("[SERVER] Spawned Test Dummy.")
+
+func _send_existing_entities_to_client(new_client_id: int) -> void:
+	for existing_net_id: int in EntityMap.server._net_id_to_entity.keys():
+		if existing_net_id == new_client_id:
+			continue # Skip sending self, self is broadcasted separately
+
+		var existing_entity := EntityMap.server.get_entity(existing_net_id)
+		if not existing_entity: continue
+
+		var username_comp := existing_entity.get_component(C_Username) as C_Username
+		var entity_name := username_comp.username if username_comp else "Entity"
+		var entity_type := "PLAYER" if existing_entity.get_component(C_PlayerTag) else "PLAYER"
+
+		var trans_comp := existing_entity.get_component(C_Transform) as C_Transform
+		var pos := trans_comp.transform.origin if trans_comp else Vector3.ZERO
+
+		writer.clear()
+		writer.put_64(existing_net_id)
+		writer.put_string(entity_type)
+		writer.put_string(entity_name)
+		writer.put_float(pos.x)
+		writer.put_float(pos.y)
+		writer.put_float(pos.z)
+
+		NetworkRouter.server.queue_packet(new_client_id, OpCode.ID.ENTITY_SPAWN, writer.data_array)

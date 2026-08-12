@@ -30,5 +30,3 @@ func _process_despawns(bucket: Dictionary) -> void:
 		var world := GameOrchestrator.client_world
 		if world:
 			world.remove_entity(entity)
-
-		EntityMap.client.remove_entity(net_id)

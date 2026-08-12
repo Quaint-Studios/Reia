@@ -73,7 +73,6 @@ func _on_client_disconnected(client_id: int) -> void:
 	NetworkRouter.server.queue_broadcast(all_clients, OpCode.ID.ENTITY_DESPAWN, writer.data_array)
 
 	world.remove_entity(player_entity)
-	EntityMap.server.remove_entity(client_id)
 	var node := player_entity as Node
 	if node: node.queue_free()
 

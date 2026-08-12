@@ -27,11 +27,11 @@ func initialize_mode(p_mode: ExecutionMode) -> void:
 	execution_mode = p_mode
 	match execution_mode:
 		ExecutionMode.DEDICATED_SERVER:
-			print("[GameOrchestrator] ExecutionMode initialized: DEDICATED_SERVER")
+			print("[GameOrchestrator] Started as DEDICATED_SERVER")
 		ExecutionMode.LISTEN_HOST:
-			print("[GameOrchestrator] ExecutionMode initialized: LISTEN_HOST")
+			print("[GameOrchestrator] Started as LISTEN_HOST")
 		ExecutionMode.STANDALONE_CLIENT:
-			print("[GameOrchestrator] ExecutionMode initialized: STANDALONE_CLIENT")
+			print("[GameOrchestrator] Started as STANDALONE_CLIENT")
 
 var server_world: World:
 	get:
