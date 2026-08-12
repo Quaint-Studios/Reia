@@ -4,14 +4,25 @@ const SERVER_SCENE = preload("res://server/server_main.tscn")
 const CLIENT_SCENE = preload("res://client/client_main.tscn")
 
 func _ready() -> void:
-	var cmd_args := OS.get_cmdline_args()
-	var is_server := not cmd_args.has("--client") and (
-		cmd_args.has("--server")
-		or OS.has_feature("dedicated_server")
-		or DisplayServer.get_name() == "headless"
-	)
+	var mode: GameOrchestrator.ExecutionMode = GameOrchestrator.ExecutionMode.STANDALONE_CLIENT
+	var args: PackedStringArray = OS.get_cmdline_args()
 
-	if is_server:
+	for arg: String in args:
+		match arg:
+			"--server":
+				mode = GameOrchestrator.ExecutionMode.DEDICATED_SERVER
+			"--listen-host":
+				mode = GameOrchestrator.ExecutionMode.LISTEN_HOST
+			"--client":
+				mode = GameOrchestrator.ExecutionMode.STANDALONE_CLIENT
+
+	if mode == GameOrchestrator.ExecutionMode.STANDALONE_CLIENT:
+		if OS.has_feature("dedicated_server") or DisplayServer.get_name() == "headless":
+			mode = GameOrchestrator.ExecutionMode.DEDICATED_SERVER
+
+	GameOrchestrator.initialize_mode(mode)
+
+	if mode == GameOrchestrator.ExecutionMode.DEDICATED_SERVER:
 		_boot_server()
 	else:
 		_boot_client()

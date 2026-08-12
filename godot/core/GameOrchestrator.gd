@@ -4,6 +4,14 @@ extends Node
 
 const NetworkChannel = NetworkRouter.NetworkChannel
 
+enum ExecutionMode {
+	DEDICATED_SERVER,
+	LISTEN_HOST,
+	STANDALONE_CLIENT
+}
+
+@export var execution_mode: ExecutionMode = ExecutionMode.STANDALONE_CLIENT
+
 var active_server: ServerMain
 var active_client: ClientMain
 
@@ -14,6 +22,16 @@ signal server_world_changed(world: World)
 signal server_world_exited
 signal client_world_changed(world: World)
 signal client_world_exited
+
+func initialize_mode(p_mode: ExecutionMode) -> void:
+	execution_mode = p_mode
+	match execution_mode:
+		ExecutionMode.DEDICATED_SERVER:
+			print("[GameOrchestrator] ExecutionMode initialized: DEDICATED_SERVER")
+		ExecutionMode.LISTEN_HOST:
+			print("[GameOrchestrator] ExecutionMode initialized: LISTEN_HOST")
+		ExecutionMode.STANDALONE_CLIENT:
+			print("[GameOrchestrator] ExecutionMode initialized: STANDALONE_CLIENT")
 
 var server_world: World:
 	get:
