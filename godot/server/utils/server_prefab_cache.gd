@@ -2,6 +2,17 @@ class_name ServerPrefabCache extends Node
 
 static var headless_prefabs: Dictionary = {}
 
+static func get_stripped_map_scene(map_path: String) -> PackedScene:
+	if headless_prefabs.has(map_path):
+		return headless_prefabs[map_path] as PackedScene
+
+	var raw_scene: PackedScene = load(map_path) as PackedScene
+	if not raw_scene:
+		push_error("ServerPrefabCache: Failed to load map at " + map_path)
+		return null
+
+	return get_headless_prefab(raw_scene)
+
 static func get_headless_prefab(original_scene: PackedScene) -> PackedScene:
 	var scene_path := original_scene.resource_path
 
@@ -24,7 +35,8 @@ static func get_headless_prefab(original_scene: PackedScene) -> PackedScene:
 
 static func _strip_visuals(node: Node) -> void:
 	for child in node.get_children():
-		if child is VisualInstance3D or child is AudioStreamPlayer3D or child is GPUParticles3D:
-			child.queue_free()
-		else:
-			_strip_visuals(child)
+		_strip_visuals(child)
+
+	if node is VisualInstance3D or node is Light3D or node is AudioStreamPlayer3D or node is GPUParticles3D:
+		if not (node is StaticBody3D or node is CollisionShape3D or node is CollisionPolygon3D):
+			node.queue_free()

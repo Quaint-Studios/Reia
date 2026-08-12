@@ -23,6 +23,15 @@ func _ready() -> void:
 	# Builds the entire deterministic architecture instantly
 	ServerPipeline.build(world)
 
+	# Load stripped map collision scene for headless server physics execution
+	var map_path: String = Zone.MAP_PATHS.get(Zone.ID.WATERBROOK, "")
+	if map_path != "":
+		var stripped_map: PackedScene = ServerPrefabCache.get_stripped_map_scene(map_path)
+		if stripped_map:
+			var map_node: Node = stripped_map.instantiate()
+			add_child(map_node)
+			print("[SERVER] Loaded stripped headless map collision: %s" % map_path)
+
 	if not is_offline:
 		print("[SERVER] Starting Server Initialization...")
 
