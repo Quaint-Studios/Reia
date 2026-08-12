@@ -31,6 +31,7 @@ func _process_spawns(bucket: Dictionary) -> void:
 		var entity := Entity.new()
 		entity.add_component(C_NetworkId.new(net_id))
 		entity.add_component(C_MovementSync.new(Transform3D(Basis(), Vector3(tx, ty, tz))))
+		entity.add_component(C_MoveInput.new())
 
 		# NEW: Create a spatial root for meshes
 		var spatial_root := Node3D.new()

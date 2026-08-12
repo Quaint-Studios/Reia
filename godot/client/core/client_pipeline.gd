@@ -36,6 +36,10 @@ static func _register_network_receivers(world: World) -> void:
 	spawn_net.group = SystemGroups.PRE_PROCESS
 	world.add_system(spawn_net)
 
+	var despawn_net := ClientEntityDespawnSystem.new()
+	despawn_net.group = SystemGroups.PRE_PROCESS
+	world.add_system(despawn_net)
+
 	var state_sync := ClientStateSyncSystem.new()
 	state_sync.group = SystemGroups.PRE_PROCESS
 	world.add_system(state_sync)

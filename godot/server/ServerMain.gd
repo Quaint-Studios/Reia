@@ -66,9 +66,14 @@ func _on_client_disconnected(client_id: int) -> void:
 	var world := GameOrchestrator.server_world
 	if not world: return
 
-	# Tell all other clients that this player left (TODO: Implement ENTITY_DESPAWN later)
-	# For now, we will just completely remove them from the Server ECS and free their Godot Node.
+	# Tell all other clients that this player left
+	var all_clients := EntityMap.server.get_all_active_clients()
+	var writer := StreamPeerBuffer.new()
+	writer.put_64(client_id)
+	NetworkRouter.server.queue_broadcast(all_clients, OpCode.ID.ENTITY_DESPAWN, writer.data_array)
+
 	world.remove_entity(player_entity)
+	EntityMap.server.remove_entity(client_id)
 	var node := player_entity as Node
 	if node: node.queue_free()
 
