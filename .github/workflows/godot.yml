@@ -6,6 +6,9 @@ on:
     tags:
       - 'v[0-9]+.[0-9]+.[0-9]+([a-zA-Z]*\-*)*'
 
+permissions:
+  contents: write  # Required for softprops/action-gh-release to create releases and upload assets
+
 env:
   GODOT_VERSION: 4.6
   EXPORT_NAME: Reia

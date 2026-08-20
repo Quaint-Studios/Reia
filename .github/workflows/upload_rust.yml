@@ -8,6 +8,10 @@ on:
     paths:
       - "rust/**" # Only run if Rust code changes
 
+# Explicitly lock down the token to read-only for security compliance
+permissions:
+  contents: read   # Required for actions/checkout to pull down the repository source
+
 jobs:
   # Matrix Build
   build-binaries:
