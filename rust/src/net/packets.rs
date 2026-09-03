@@ -1,4 +1,4 @@
-use rkyv::{ Archive, Deserialize, Serialize };
+use rkyv::{Archive, Deserialize, Serialize};
 
 /// The internal bridge struct used to pass data from the Tokio async
 /// network thread through the Flume channel to the Godot main thread.
@@ -20,6 +20,8 @@ pub enum LifecycleEvent {
     ClientDisconnected(String),
     ServerClientConnected(i64),
     ServerClientDisconnected(i64),
+    ServerStartFailed(String),
+    ClientStartFailed(String),
 }
 
 // ==========================================
@@ -33,23 +35,18 @@ pub enum LifecycleEvent {
 #[rkyv(compare(PartialEq), derive(Debug))]
 pub enum ClientBoundPacket {
     /// Sent when the server confirms a successful login
-    AuthSuccess {
-        player_id: i64,
-        zone_id: u32,
-    },
+    AuthSuccess { player_id: i64, zone_id: u32 },
     /// Broadcasted when a player, monster, or item enters the client's view
     EntitySpawn {
         entity_id: i64,
         entity_type: String, // "PLAYER", "BONE", "GOBLIN"
-        name: String, // Username or Item Name
+        name: String,        // Username or Item Name
         x: f32,
         y: f32,
         z: f32,
     },
     /// A bulk update of transforms for entities in the player's chunk
-    StateSync {
-        entities: Vec<EntitySyncData>,
-    },
+    StateSync { entities: Vec<EntitySyncData> },
     /// Fire-and-forget events for visual observers (e.g. CombatVFX)
     EventTrigger {
         target_id: i64,
@@ -78,14 +75,9 @@ pub enum ServerBoundPacket {
         dir_z: f32,
     },
     /// Action requests (Attacking, interacting)
-    ActionRequest {
-        action_id: u32,
-        target_id: i64,
-    },
+    ActionRequest { action_id: u32, target_id: i64 },
     /// Client wants to send a chat message
-    SendChat {
-        message: String,
-    },
+    SendChat { message: String },
 }
 
 #[derive(Archive, Deserialize, Serialize, Debug, PartialEq)]
