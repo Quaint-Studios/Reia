@@ -24,22 +24,41 @@ pub enum DomainDbError {
 // Convert Turso / LibSQL errors into domain errors cleanly
 impl From<turso::Error> for DomainDbError {
     fn from(err: turso::Error) -> Self {
-        let err_str = err.to_string();
-
-        if err_str.contains("SQLITE_BUSY")
-            || err_str.contains("serialization")
-            || err_str.contains("40001")
-        {
-            DomainDbError::SerializationFailure
-        } else if err_str.contains("UNIQUE constraint") {
-            DomainDbError::UniqueViolation { detail: err_str }
-        } else if err_str.contains("FOREIGN KEY constraint") {
-            DomainDbError::ForeignKeyViolation { detail: err_str }
-        } else {
-            DomainDbError::QueryFailed {
-                code: "ERR_DB".to_string(),
-                message: err_str,
+        match err {
+            turso::Error::Busy(_) | turso::Error::BusySnapshot(_) => {
+                DomainDbError::SerializationFailure
             }
+            turso::Error::QueryReturnedNoRows => DomainDbError::NotFound,
+            turso::Error::IoError(kind, op) => {
+                DomainDbError::ConnectionError(format!("I/O error ({op}): {kind:?}"))
+            }
+            turso::Error::Constraint(detail) => {
+                // Submatching here is unavoidable - turso merges all constraint types into one variant.
+                // The detail string is the only discriminat SQLite exposes.
+                if detail.contains("UNIQUE") {
+                    DomainDbError::UniqueViolation { detail }
+                } else if detail.contains("FOREIGN KEY") {
+                    DomainDbError::ForeignKeyViolation { detail }
+                } else {
+                    DomainDbError::QueryFailed {
+                        code: "CONSTRAINT".to_string(),
+                        message: detail,
+                    }
+                }
+            }
+            other => DomainDbError::QueryFailed {
+                code: "ERR_DB".to_string(),
+                message: other.to_string(),
+            },
         }
     }
+}
+
+#[test]
+fn busy_maps_to_serialization_failure() {
+    let e = DomainDbError::from(turso::Error::Busy("lock".to_string()));
+    assert_eq!(e, DomainDbError::SerializationFailure);
+
+    let e = DomainDbError::from(turso::Error::BusySnapshot("snapshot".to_string()));
+    assert_eq!(e, DomainDbError::SerializationFailure);
 }
