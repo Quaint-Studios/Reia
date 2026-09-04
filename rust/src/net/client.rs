@@ -1,7 +1,8 @@
+use crate::net::error::NetworkInitError;
 use crate::net::op_codes::OpCode;
-use crate::net::packets::{ IncomingPacket, LifecycleEvent, OutgoingPacket };
-use flume::{ Receiver, Sender };
-use quinn::{ ClientConfig, Endpoint, TransportConfig };
+use crate::net::packets::{IncomingPacket, LifecycleEvent, OutgoingPacket};
+use flume::{Receiver, Sender};
+use quinn::{ClientConfig, Endpoint, TransportConfig};
 use std::net::SocketAddr;
 use std::sync::Arc;
 use std::time::Duration;
@@ -17,7 +18,7 @@ impl rustls::client::danger::ServerCertVerifier for SkipServerVerification {
         _intermediates: &[rustls::pki_types::CertificateDer<'_>],
         _server_name: &rustls::pki_types::ServerName<'_>,
         _ocsp_response: &[u8],
-        _now: rustls::pki_types::UnixTime
+        _now: rustls::pki_types::UnixTime,
     ) -> Result<rustls::client::danger::ServerCertVerified, rustls::Error> {
         Ok(rustls::client::danger::ServerCertVerified::assertion())
     }
@@ -26,7 +27,7 @@ impl rustls::client::danger::ServerCertVerifier for SkipServerVerification {
         &self,
         _message: &[u8],
         _cert: &rustls::pki_types::CertificateDer<'_>,
-        _dss: &rustls::DigitallySignedStruct
+        _dss: &rustls::DigitallySignedStruct,
     ) -> Result<rustls::client::danger::HandshakeSignatureValid, rustls::Error> {
         Ok(rustls::client::danger::HandshakeSignatureValid::assertion())
     }
@@ -35,7 +36,7 @@ impl rustls::client::danger::ServerCertVerifier for SkipServerVerification {
         &self,
         _message: &[u8],
         _cert: &rustls::pki_types::CertificateDer<'_>,
-        _dss: &rustls::DigitallySignedStruct
+        _dss: &rustls::DigitallySignedStruct,
     ) -> Result<rustls::client::danger::HandshakeSignatureValid, rustls::Error> {
         Ok(rustls::client::danger::HandshakeSignatureValid::assertion())
     }
@@ -51,7 +52,7 @@ impl rustls::client::danger::ServerCertVerifier for SkipServerVerification {
             rustls::SignatureScheme::RSA_PSS_SHA256,
             rustls::SignatureScheme::RSA_PSS_SHA384,
             rustls::SignatureScheme::RSA_PSS_SHA512,
-            rustls::SignatureScheme::ED448
+            rustls::SignatureScheme::ED448,
         ]
     }
 }
@@ -61,13 +62,12 @@ pub async fn start_quinn_client(
     port: u16,
     tx_in: Sender<IncomingPacket>,
     rx_out: Receiver<OutgoingPacket>,
-    tx_life: Sender<LifecycleEvent>
-) {
+    tx_life: Sender<LifecycleEvent>,
+) -> Result<(), NetworkInitError> {
     let _ = rustls::crypto::ring::default_provider().install_default();
 
     // Configure the Client to skip cert validation
-    let mut crypto = rustls::ClientConfig
-        ::builder()
+    let mut crypto = rustls::ClientConfig::builder()
         .dangerous()
         .with_custom_certificate_verifier(Arc::new(SkipServerVerification))
         .with_no_client_auth();
@@ -83,22 +83,36 @@ pub async fn start_quinn_client(
     let transport_config = Arc::new(transport_config);
 
     // Quinn requires wrapping the rustls config in `QuicClientConfig`
-    let quic_config = quinn::crypto::rustls::QuicClientConfig::try_from(crypto).unwrap();
+    let quic_config = quinn::crypto::rustls::QuicClientConfig::try_from(crypto)
+        .map_err(|e| NetworkInitError::TlsConfigFailed(e.to_string()))?;
     let mut client_config = ClientConfig::new(Arc::new(quic_config));
     client_config.transport_config(transport_config);
 
     // Bind to a random local port (0.0.0.0:0) and connect
-    let mut endpoint = Endpoint::client("0.0.0.0:0".parse().unwrap()).unwrap();
+    let mut endpoint =
+        Endpoint::client("0.0.0.0:0".parse().expect("hardcoded address")).map_err(|e| {
+            NetworkInitError::BindFailed {
+                port: 0,
+                reason: e.to_string(),
+            }
+        })?;
     endpoint.set_default_client_config(client_config);
 
-    let server_addr: SocketAddr = format!("{}:{}", ip, port).parse().unwrap();
+    let addr_string = format!("{}:{}", ip, port);
+    let server_addr: SocketAddr = addr_string
+        .parse()
+        .map_err(|_| NetworkInitError::InvalidAddress(addr_string))?;
 
     let mut retries = 0;
     let max_retries = 5;
 
     // "localhost" here matches the dummy cert generated on the server
     loop {
-        match endpoint.connect(server_addr, "localhost").unwrap().await {
+        match endpoint
+            .connect(server_addr, "localhost")
+            .map_err(|e| NetworkInitError::ConnectionFailed(e.to_string()))?
+            .await
+        {
             Ok(connection) => {
                 tracing::info!("Connected to Server: {}", server_addr);
                 let _ = tx_life.send_async(LifecycleEvent::ClientConnected).await;
@@ -133,11 +147,11 @@ pub async fn start_quinn_client(
                             Err(e) => {
                                 tracing::warn!("Read connection lost: {}", e);
                                 // Send clean, user-friendly error to Godot
-                                let _ = tx_life_clone.send_async(
-                                    LifecycleEvent::ClientDisconnected(
-                                        "Connection to the server was lost.".to_string()
-                                    )
-                                ).await;
+                                let _ = tx_life_clone
+                                    .send_async(LifecycleEvent::ClientDisconnected(
+                                        "Connection to the server was lost.".to_string(),
+                                    ))
+                                    .await;
                                 break;
                             } // Disconnected
                         }
@@ -153,11 +167,11 @@ pub async fn start_quinn_client(
 
                     if connection.send_datagram(buffer.into()).is_err() {
                         tracing::error!("Failed to send datagram to server. Connection lost.");
-                        let _ = tx_life.send_async(
-                            LifecycleEvent::ClientDisconnected(
-                                "Connection to the server was lost.".to_string()
-                            )
-                        ).await;
+                        let _ = tx_life
+                            .send_async(LifecycleEvent::ClientDisconnected(
+                                "Connection to the server was lost.".to_string(),
+                            ))
+                            .await;
                         break;
                     }
                 }
@@ -188,4 +202,6 @@ pub async fn start_quinn_client(
             }
         }
     }
+
+    Ok(())
 }
