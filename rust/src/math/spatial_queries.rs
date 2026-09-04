@@ -14,7 +14,7 @@ impl SpatialMath {
         origin_x: f32,
         origin_y: f32,
         origin_z: f32,
-        radius: f32
+        radius: f32,
     ) -> Vec<i64> {
         let mut hits = Vec::new();
         let radius_sq = radius * radius; // Compare squared distance to avoid expensive sqrt()
@@ -47,7 +47,7 @@ impl SpatialMath {
         dir_y: f32,
         dir_z: f32,
         radius: f32,
-        angle_degrees: f32
+        angle_degrees: f32,
     ) -> Vec<i64> {
         let mut hits = Vec::new();
         let radius_sq = radius * radius;

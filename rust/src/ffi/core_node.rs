@@ -4,7 +4,7 @@ use std::sync::Arc;
 use tokio::runtime::Runtime;
 
 use crate::net::client::start_quinn_client;
-use crate::net::packets::{ IncomingPacket, LifecycleEvent, OutgoingPacket };
+use crate::net::packets::{IncomingPacket, LifecycleEvent, OutgoingPacket};
 use crate::net::server::start_quinn_server;
 use crate::state::world_state::WorldState;
 
@@ -137,7 +137,9 @@ impl RustCore {
                         self.signals().on_server_client_connected().emit(client_id);
                     }
                     LifecycleEvent::ServerClientDisconnected(client_id) => {
-                        self.signals().on_server_client_disconnected().emit(client_id);
+                        self.signals()
+                            .on_server_client_disconnected()
+                            .emit(client_id);
                     }
                 }
             }
@@ -151,10 +153,8 @@ impl RustCore {
 
         let mut has_data = false;
 
-        let mut buckets: std::collections::HashMap<
-            u16,
-            PacketBucket
-        > = std::collections::HashMap::new();
+        let mut buckets: std::collections::HashMap<u16, PacketBucket> =
+            std::collections::HashMap::new();
 
         // Drain the channel completely without blocking Godot
         for packet in rx.try_iter() {
@@ -180,7 +180,10 @@ impl RustCore {
             // Zero-copy-ish conversion from Rust Vec to Godot PackedArrays
             inner_dict.set("ids", &PackedInt64Array::from(bucket.ids.as_slice()));
             inner_dict.set("data", &PackedByteArray::from(bucket.data.as_slice()));
-            inner_dict.set("offsets", &PackedInt32Array::from(bucket.offsets.as_slice()));
+            inner_dict.set(
+                "offsets",
+                &PackedInt32Array::from(bucket.offsets.as_slice()),
+            );
 
             godot_buckets.set(op_code, &inner_dict);
         }
@@ -195,7 +198,7 @@ impl RustCore {
         target_ids: PackedInt64Array,
         op_codes: PackedInt32Array,
         payload_data: PackedByteArray,
-        offsets: PackedInt32Array
+        offsets: PackedInt32Array,
     ) {
         if let Some(tx) = &self.tx_to_net {
             let t_slice = target_ids.as_slice();
@@ -231,7 +234,7 @@ impl RustCore {
         &self,
         target_ids: PackedInt64Array,
         op_code: i32,
-        payload: PackedByteArray
+        payload: PackedByteArray,
     ) {
         if let Some(tx) = &self.tx_to_net {
             let targets = target_ids.as_slice();
@@ -258,7 +261,7 @@ impl RustCore {
         target_offsets: PackedInt32Array,
         op_codes: PackedInt32Array,
         payload_data: PackedByteArray,
-        data_offsets: PackedInt32Array
+        data_offsets: PackedInt32Array,
     ) {
         if let Some(tx) = &self.tx_to_net {
             let t_slice = targets.as_slice();

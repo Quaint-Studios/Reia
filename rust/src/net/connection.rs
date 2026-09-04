@@ -1,4 +1,7 @@
-use crate::net::{ op_codes::OpCode, packets::{ IncomingPacket, LifecycleEvent } };
+use crate::net::{
+    op_codes::OpCode,
+    packets::{IncomingPacket, LifecycleEvent},
+};
 use dashmap::DashMap;
 use flume::Sender;
 use quinn::Connection;
@@ -9,7 +12,7 @@ pub async fn handle_client(
     conn: Connection,
     tx: Sender<IncomingPacket>,
     tx_life: Sender<LifecycleEvent>,
-    connections: Arc<DashMap<i64, Connection>>
+    connections: Arc<DashMap<i64, Connection>>,
 ) {
     // Loop to read Unreliable Datagrams (Movement/Physics)
     loop {
@@ -42,8 +45,8 @@ pub async fn handle_client(
                         // if valid_op == OpCode::InputTick { crate::math::process_input(...) }
 
                         let packet = IncomingPacket {
-                            client_id, // Safely stamp with server-generated ID
-                            op_code: op_code_raw, // Pass the raw u16 up the bridge
+                            client_id,                    // Safely stamp with server-generated ID
+                            op_code: op_code_raw,         // Pass the raw u16 up the bridge
                             payload: bytes[2..].to_vec(), // Pass the full payload for Godot/rkyv to parse
                         };
 
@@ -75,5 +78,7 @@ pub async fn handle_client(
     connections.remove(&client_id);
 
     // Notify Godot that this client has disconnected
-    let _ = tx_life.send_async(LifecycleEvent::ServerClientDisconnected(client_id)).await;
+    let _ = tx_life
+        .send_async(LifecycleEvent::ServerClientDisconnected(client_id))
+        .await;
 }
