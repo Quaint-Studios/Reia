@@ -12,6 +12,10 @@ on:
 permissions:
   contents: read   # Required for actions/checkout to pull down the repository source
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   # Matrix Build
   build-binaries:

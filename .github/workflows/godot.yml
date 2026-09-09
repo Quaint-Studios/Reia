@@ -9,6 +9,10 @@ on:
 permissions:
   contents: write  # Required for softprops/action-gh-release to create releases and upload assets
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 env:
   GODOT_VERSION: 4.6
   EXPORT_NAME: Reia
