@@ -13,6 +13,9 @@ on:
     paths:
       - "rust/**"
       - ".github/workflows/rust_ci.yml"
+  schedule:
+    - cron: '0 4 * * 0'
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -55,3 +58,15 @@ jobs:
 
       - name: Run Tests
         run: cargo test --all-targets
+
+      - name: Cache cargo-audit
+        uses: actions/cache@v4
+        with:
+          path: ~/.cargo/bin/cargo-audit
+          key: ${{ runner.os }}-cargo-audit-v0.22.2
+
+      - name: Install cargo-audit
+        run: which cargo-audit || cargo install cargo-audit --version 0.22.2 --locked
+
+      - name: Audit Dependencies (Security Advisories)
+        run: cargo audit
