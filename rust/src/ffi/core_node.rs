@@ -68,6 +68,12 @@ impl RustCore {
     #[signal]
     pub fn on_server_client_disconnected(client_id: i64);
 
+    #[signal]
+    pub fn on_server_start_failed(reason: GString);
+
+    #[signal]
+    pub fn on_client_start_failed(reason: GString);
+
     /// Called by ServerMain.gd in _ready()
     #[func]
     pub fn start_backend(&mut self, port: u16) {
@@ -87,8 +93,11 @@ impl RustCore {
 
         // Spawn the Quinn Server in the background
         let state_clone = self.world_state.clone();
+        let tx_life_clone = tx_life.clone();
         rt.spawn(async move {
-            start_quinn_server(port, tx, rx_out, tx_life, state_clone).await;
+            if let Err(e) = start_quinn_server(port, tx, rx_out, tx_life, state_clone).await {
+                let _ = tx_life_clone.send(LifecycleEvent::ServerStartFailed(e.to_string()));
+            }
         });
 
         godot_print!("[Rust] Backend initialized successfully.");
@@ -111,8 +120,11 @@ impl RustCore {
         self.rx_lifecycle = Some(rx_life);
 
         let ip_str = server_ip.to_string();
+        let tx_life_clone = tx_life.clone();
         rt.spawn(async move {
-            start_quinn_client(ip_str, port, tx_in, rx_out, tx_life).await;
+            if let Err(e) = start_quinn_client(ip_str, port, tx_in, rx_out, tx_life).await {
+                let _ = tx_life_clone.send(LifecycleEvent::ClientStartFailed(e.to_string()));
+            }
         });
 
         godot_print!("[Rust] Client network task spawned.");
@@ -140,6 +152,14 @@ impl RustCore {
                         self.signals()
                             .on_server_client_disconnected()
                             .emit(client_id);
+                    }
+                    LifecycleEvent::ServerStartFailed(reason) => {
+                        let gd_reason = GString::from(&reason);
+                        self.signals().on_server_start_failed().emit(&gd_reason);
+                    }
+                    LifecycleEvent::ClientStartFailed(reason) => {
+                        let gd_reason = GString::from(&reason);
+                        self.signals().on_client_start_failed().emit(&gd_reason);
                     }
                 }
             }

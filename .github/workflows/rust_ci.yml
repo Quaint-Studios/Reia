@@ -1,0 +1,57 @@
+name: Rust CI & Quality Gate
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - "rust/**"
+      - ".github/workflows/rust_ci.yml"
+  push:
+    branches:
+      - master
+    paths:
+      - "rust/**"
+      - ".github/workflows/rust_ci.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rust-check:
+    name: Test & Lint (ubuntu-latest)
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./rust
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Rust Toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      - name: Setup Rust Cache
+        uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: "./rust -> target"
+
+      - name: Check Formatting
+        run: cargo fmt --check
+
+      - name: Compile & Check (All Targets)
+        run: cargo check --all-targets
+
+      - name: Clippy Linter
+        run: cargo clippy --all-targets -- -D warnings
+
+      - name: Run Tests
+        run: cargo test --all-targets
