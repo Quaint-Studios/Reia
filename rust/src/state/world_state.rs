@@ -7,6 +7,7 @@ pub struct PlayerSpatialData {
     pub zone_id: u32,
 }
 
+#[derive(Default)]
 pub struct WorldState {
     // DashMap is fast for concurrent reads/writes.
     // Tokio can read it while Godot writes to it without massive locking bottlenecks.
@@ -15,8 +16,6 @@ pub struct WorldState {
 
 impl WorldState {
     pub fn new() -> Self {
-        WorldState {
-            players: DashMap::new(),
-        }
+        Self::default()
     }
 }

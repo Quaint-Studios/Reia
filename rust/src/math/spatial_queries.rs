@@ -1,4 +1,5 @@
 use crate::state::world_state::WorldState;
+use godot::builtin::Vector3;
 use std::sync::Arc;
 
 /// A high-performance math module. Because we are iterating over a
@@ -11,9 +12,7 @@ impl SpatialMath {
     /// Returns a list of network IDs within the radius.
     pub fn query_radius(
         state: &Arc<WorldState>,
-        origin_x: f32,
-        origin_y: f32,
-        origin_z: f32,
+        origin: Vector3,
         radius: f32,
     ) -> Vec<i64> {
         let mut hits = Vec::new();
@@ -23,9 +22,9 @@ impl SpatialMath {
         for entry in state.players.iter() {
             let pd = entry.value();
 
-            let dx = pd.x - origin_x;
-            let dy = pd.y - origin_y;
-            let dz = pd.z - origin_z;
+            let dx = pd.x - origin.x;
+            let dy = pd.y - origin.y;
+            let dz = pd.z - origin.z;
 
             let dist_sq = dx * dx + dy * dy + dz * dz;
             if dist_sq <= radius_sq {
@@ -40,12 +39,8 @@ impl SpatialMath {
     /// (e.g., Dragon's Breath, Cleave).
     pub fn query_cone(
         state: &Arc<WorldState>,
-        origin_x: f32,
-        origin_y: f32,
-        origin_z: f32,
-        dir_x: f32,
-        dir_y: f32,
-        dir_z: f32,
+        origin: Vector3,
+        direction: Vector3,
         radius: f32,
         angle_degrees: f32,
     ) -> Vec<i64> {
@@ -58,18 +53,18 @@ impl SpatialMath {
         let cos_half_angle = half_angle_rad.cos();
 
         // Ensure direction vector is normalized
-        let dir_len = (dir_x * dir_x + dir_y * dir_y + dir_z * dir_z).sqrt();
-        if dir_len == 0.0 {
+        let dir_len_sq = direction.length_squared();
+        if dir_len_sq == 0.0 {
             return hits;
         } // Avoid division by zero
-        let (nx, ny, nz) = (dir_x / dir_len, dir_y / dir_len, dir_z / dir_len);
+        let dir_normalized = direction.normalized();
 
         for entry in state.players.iter() {
             let pd = entry.value();
 
-            let dx = pd.x - origin_x;
-            let dy = pd.y - origin_y;
-            let dz = pd.z - origin_z;
+            let dx = pd.x - origin.x;
+            let dy = pd.y - origin.y;
+            let dz = pd.z - origin.z;
 
             let dist_sq = dx * dx + dy * dy + dz * dz;
 
@@ -80,11 +75,9 @@ impl SpatialMath {
 
             // Narrow-phase Dot Product cull
             let dist = dist_sq.sqrt();
-            let p_nx = dx / dist;
-            let p_ny = dy / dist;
-            let p_nz = dz / dist;
+            let target_dir = Vector3::new(dx / dist, dy / dist, dz / dist);
 
-            let dot_product = nx * p_nx + ny * p_ny + nz * p_nz;
+            let dot_product = dir_normalized.dot(target_dir);
 
             if dot_product >= cos_half_angle {
                 hits.push(*entry.key());
