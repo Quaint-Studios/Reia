@@ -10,11 +10,7 @@ pub struct SpatialMath;
 impl SpatialMath {
     /// Fast distance check. Used for proximity interactions (e.g., looting, talking).
     /// Returns a list of network IDs within the radius.
-    pub fn query_radius(
-        state: &Arc<WorldState>,
-        origin: Vector3,
-        radius: f32,
-    ) -> Vec<i64> {
+    pub fn query_radius(state: &Arc<WorldState>, origin: Vector3, radius: f32) -> Vec<i64> {
         let mut hits = Vec::new();
         let radius_sq = radius * radius; // Compare squared distance to avoid expensive sqrt()
 
