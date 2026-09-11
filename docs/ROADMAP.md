@@ -4,7 +4,7 @@ Below you'll find a list of things needed to be accomplished before we can hit t
 ## Pre-Alpha
 This phase focuses on getting some of the core functionalities implemented for Reia.
 
-- [ ] Solid GECS foundation
+- [x] Solid GECS foundation
 - [x] Animation
 - [ ] Combat Systems
   - [ ] Health System
@@ -98,7 +98,7 @@ This phase focuses on getting some of the core functionalities implemented for R
 - [ ] Saving
   - [ ] ~~MongoDB for Online Environments~~
   - [ ] ~~PoloDB for Local Environments~~
-  - [ ] Supabase + Turso Implementation for Offline (no Supabase) / Online.
+  - [ ] Turso Implementation for Offline / Online.
 - [ ] Update
   - [x] Discord SDK Version
   - [x] GitHub Actions for automatically building the game
@@ -118,7 +118,7 @@ This phase will be about polishing and introducing complex features.
       - [x] Cloudflare
       - [ ] Steamworks
       - [ ] Others
-      - [ ] Vercel (web browsing)
+      - [ ] Vercel (web browsing - We will be moving to Cloudflare Pages soon)
   - [ ] Spirit
     - [ ] Locating
     - [ ] Unlocking
