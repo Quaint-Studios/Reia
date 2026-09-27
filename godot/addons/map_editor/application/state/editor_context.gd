@@ -6,6 +6,7 @@ extends RefCounted
 
 enum ToolMode {
 	SELECT,
+	SHAPE,
 	TRANSLATE,
 	ROTATE,
 	SCALE,
