@@ -161,8 +161,17 @@ func populate_preset_buttons(button_size: Vector2 = Vector2(32, 32)) -> void:
 		_buttons.append(btn)
 
 
-static func get_addon_base_path() -> String:
+static func get_plugin_path() -> String:
+	var script_path: String = (ShapeFlyoutContainer as Script).resource_path
+	var marker: String = "/addons/map_editor"
+	var idx: int = script_path.find(marker)
+	if idx != -1:
+		return script_path.substr(0, idx + marker.length())
 	return (ShapeFlyoutContainer as Script).resource_path.get_base_dir().get_base_dir().get_base_dir()
+
+
+static func get_addon_base_path() -> String:
+	return get_plugin_path()
 
 
 static func get_shape_icon_filename(shape: PrimitiveShape) -> String:

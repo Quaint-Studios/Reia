@@ -1,3 +1,4 @@
+@abstract
 class_name MapEditorCommand
 extends RefCounted
 
@@ -12,15 +13,18 @@ func _init(p_action_name: String = "Map Edit") -> void:
 
 
 ## Executes the command logic. Returns true if execution succeeded.
-func execute() -> bool:
-	return true
+@abstract func execute() -> bool
 
 
 ## Reverses the command logic. Returns true if undo succeeded.
-func undo() -> bool:
-	return true
+@abstract func undo() -> bool
 
 
 ## Returns the human-readable action label shown in the Godot Edit menu.
 func get_action_name() -> String:
 	return action_name
+
+
+## Returns object references that should be tracked by EditorUndoRedoManager.add_do_reference.
+func get_do_references() -> Array[Object]:
+	return []

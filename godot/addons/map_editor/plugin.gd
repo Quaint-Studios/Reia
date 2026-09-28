@@ -1,13 +1,13 @@
 @tool
 extends EditorPlugin
 
-## Map Editor plugin lifecycle entrypoint.
-## Scopes editor context, event bus, and undo/redo handling without global autoloads.
+## Map Editor entrypoint.
 
 var editor_context: MapEditorContext = null
 var editor_state_bus: MapEditorStateBus = null
 var command_history: MapEditorCommandHistory = null
-var viewport_overlay: MapViewportOverlay = null
+var overlay_mount_manager: OverlayMountManager = null
+var input_router: EditorInputRouter = null
 
 
 func get_plugin_path() -> String:
@@ -15,6 +15,8 @@ func get_plugin_path() -> String:
 
 
 func _enter_tree() -> void:
+	set_input_event_forwarding_always_enabled()
+	set_physics_process(true)
 	_initialize_core_systems()
 
 
@@ -26,57 +28,43 @@ func _initialize_core_systems() -> void:
 	editor_context = MapEditorContext.new()
 	editor_state_bus = MapEditorStateBus.new()
 	command_history = MapEditorCommandHistory.new(get_undo_redo())
-	_mount_viewport_overlay()
 
+	overlay_mount_manager = OverlayMountManager.new(get_plugin_path())
+	overlay_mount_manager.mount(editor_context, editor_state_bus)
 
-func _find_3d_viewport_control() -> Control:
-	var vp: SubViewport = EditorInterface.get_editor_viewport_3d(0)
-	if vp == null:
-		return null
-	var parent: Node = vp.get_parent()
-	if parent == null:
-		return null
-	if parent.get_parent() is Control:
-		return parent.get_parent() as Control
-	if parent is Control:
-		return parent as Control
-	return null
-
-
-func _mount_viewport_overlay() -> void:
-	var vp_control: Control = _find_3d_viewport_control()
-	if vp_control == null:
-		_mount_viewport_overlay.call_deferred()
-		return
-
-	# Remove any lingering overlay instance from hot-reloads
-	var existing: Node = vp_control.get_node_or_null("MapEditorViewportOverlay")
-	if existing != null:
-		vp_control.remove_child(existing)
-		existing.queue_free()
-
-	viewport_overlay = MapViewportOverlay.new()
-	viewport_overlay.setup(editor_context, editor_state_bus)
-	vp_control.add_child(viewport_overlay)
+	input_router = EditorInputRouter.new()
+	input_router.setup(editor_context, editor_state_bus, command_history)
 
 
 func _teardown_core_systems() -> void:
-	if viewport_overlay != null:
-		if viewport_overlay.get_parent() != null:
-			viewport_overlay.get_parent().remove_child(viewport_overlay)
-		viewport_overlay.queue_free()
-		viewport_overlay = null
+	set_physics_process(false)
 
-	var vp_control: Control = _find_3d_viewport_control()
-	if vp_control != null:
-		var lingering: Node = vp_control.get_node_or_null("MapEditorViewportOverlay")
-		if lingering != null:
-			vp_control.remove_child(lingering)
-			lingering.queue_free()
+	if input_router != null:
+		input_router.teardown()
+		input_router = null
+
+	if overlay_mount_manager != null:
+		overlay_mount_manager.teardown()
+		overlay_mount_manager = null
 
 	editor_context = null
 	editor_state_bus = null
 	command_history = null
+
+
+func _handles(_object: Object) -> bool:
+	return false
+
+
+func _physics_process(delta: float) -> void:
+	if input_router != null:
+		input_router.process_physics(delta)
+
+
+func _forward_3d_gui_input(viewport_camera: Camera3D, event: InputEvent) -> int:
+	if input_router != null:
+		return input_router.forward_3d_gui_input(viewport_camera, event)
+	return EditorPlugin.AFTER_GUI_INPUT_PASS
 
 
 func get_editor_context() -> MapEditorContext:
@@ -89,3 +77,17 @@ func get_editor_state_bus() -> MapEditorStateBus:
 
 func get_command_history() -> MapEditorCommandHistory:
 	return command_history
+
+
+func get_overlay_mount_manager() -> OverlayMountManager:
+	return overlay_mount_manager
+
+
+func get_viewport_overlay() -> MapViewportOverlay:
+	if overlay_mount_manager != null:
+		return overlay_mount_manager.get_overlay()
+	return null
+
+
+func get_input_router() -> EditorInputRouter:
+	return input_router

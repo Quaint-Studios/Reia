@@ -20,17 +20,35 @@ func _init() -> void:
 	position = Vector2(10, 46)
 
 
-func setup(context: MapEditorContext, state_bus: MapEditorStateBus) -> void:
+var plugin_base_path: String = ""
+
+
+func setup(context: MapEditorContext, state_bus: MapEditorStateBus, p_plugin_path: String = "") -> void:
 	editor_context = context
 	editor_state_bus = state_bus
+	plugin_base_path = p_plugin_path
+
+	if editor_state_bus != null and not editor_state_bus.on_tool_changed.is_connected(_on_external_tool_changed):
+		editor_state_bus.on_tool_changed.connect(_on_external_tool_changed)
 
 
 func _ready() -> void:
 	_build_ui()
 
 
-func get_addon_base_path() -> String:
+func get_plugin_path() -> String:
+	if not plugin_base_path.is_empty():
+		return plugin_base_path
+	var script_path: String = (get_script() as Script).resource_path
+	var marker: String = "/addons/map_editor"
+	var idx: int = script_path.find(marker)
+	if idx != -1:
+		return script_path.substr(0, idx + marker.length())
 	return (get_script() as Script).resource_path.get_base_dir().get_base_dir().get_base_dir()
+
+
+func get_addon_base_path() -> String:
+	return get_plugin_path()
 
 
 func _build_ui() -> void:
@@ -123,6 +141,38 @@ func _on_primitive_shape_selected(shape: ShapeFlyoutContainer.PrimitiveShape) ->
 
 	if _shape_flyout != null:
 		_shape_flyout.visible = false
+
+	if editor_state_bus != null:
+		editor_state_bus.emit_primitive_shape_changed(shape)
+
+
+func _on_external_tool_changed(new_tool: int) -> void:
+	if _select_button == null or _shape_button == null:
+		return
+	if new_tool == MapEditorContext.ToolMode.SELECT:
+		_select_button.button_pressed = true
+		_select_button.set_active_state(true)
+		_shape_button.button_pressed = false
+		_shape_button.set_active_state(false)
+		if _shape_flyout != null:
+			_shape_flyout.visible = false
+	elif new_tool == MapEditorContext.ToolMode.SHAPE:
+		_select_button.button_pressed = false
+		_select_button.set_active_state(false)
+		_shape_button.button_pressed = true
+		_shape_button.set_active_state(true)
+
+
+func select_tool(tool_mode: MapEditorContext.ToolMode) -> void:
+	if tool_mode == MapEditorContext.ToolMode.SELECT:
+		_on_select_tool_pressed()
+	elif tool_mode == MapEditorContext.ToolMode.SHAPE:
+		if editor_context == null or editor_context.active_tool != MapEditorContext.ToolMode.SHAPE:
+			_on_shape_tool_pressed()
+
+
+func toggle_shape_tool() -> void:
+	_on_shape_tool_pressed()
 
 
 func get_active_primitive() -> ShapeFlyoutContainer.PrimitiveShape:

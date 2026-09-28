@@ -29,6 +29,7 @@ var brush_falloff: float = 0.5
 var brush_density: float = 1.0
 var active_floor_slice: int = 1000
 var selected_entities: Array[Node3D] = []
+var selected_element_id: int = -1
 
 
 func get_angle_snap_radians() -> float:
@@ -37,6 +38,16 @@ func get_angle_snap_radians() -> float:
 
 func clear_selection() -> void:
 	selected_entities.clear()
+	selected_element_id = -1
+
+
+func select_element(id: int) -> void:
+	selected_element_id = id
+	selected_entities.clear()
+
+
+func get_selected_element_id() -> int:
+	return selected_element_id
 
 
 func set_selection(entities: Array[Node3D]) -> void:
