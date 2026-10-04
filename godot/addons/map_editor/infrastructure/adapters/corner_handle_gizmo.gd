@@ -314,16 +314,34 @@ func is_dragging() -> bool:
 	return _is_dragging
 
 
-## Dynamically scales handles based on distance to camera for consistent screen clickability.
+func set_visible(p_visible: bool) -> void:
+	if _gizmo_root != null:
+		_gizmo_root.visible = p_visible and has_target()
+
+
+func is_visible() -> bool:
+	return _gizmo_root != null and _gizmo_root.visible
+
+
+## Dynamically scales handles based on distance to camera for subtle, consistent screen size.
 func update_camera_handles(camera: Camera3D) -> void:
 	if not has_target() or camera == null:
 		return
 
-	for i in range(TOTAL_HANDLES):
-		var handle: MeshInstance3D = _handle_instances[i]
-		var cam_dist: float = camera.global_position.distance_to(handle.global_position)
-		var handle_scale: float = clampf(cam_dist * 0.022, 0.2, 3.0)
-		handle.scale = Vector3.ONE * handle_scale
+	var viewport_height: float = maxf(300.0, camera.get_viewport().get_visible_rect().size.y)
+	if camera.projection == Camera3D.PROJECTION_ORTHOGONAL:
+		var s: float = maxf(0.2, (10.0 / viewport_height) * camera.size / 0.22)
+		for i in range(TOTAL_HANDLES):
+			_handle_instances[i].scale = Vector3.ONE * s
+	else:
+		var fov_rad: float = deg_to_rad(camera.fov)
+		var tan_half_fov: float = tan(fov_rad * 0.5)
+		for i in range(TOTAL_HANDLES):
+			var handle: MeshInstance3D = _handle_instances[i]
+			var cam_dist: float = camera.global_position.distance_to(handle.global_position)
+			var world_height: float = 2.0 * cam_dist * tan_half_fov
+			var handle_scale: float = maxf(0.2, (10.0 / viewport_height) * world_height / 0.22)
+			handle.scale = Vector3.ONE * handle_scale
 
 
 ## Tests 2D screen distance from mouse position to 26 handles with depth prioritization.

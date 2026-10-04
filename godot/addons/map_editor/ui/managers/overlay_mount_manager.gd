@@ -26,6 +26,7 @@ func mount(context: MapEditorContext, state_bus: MapEditorStateBus) -> void:
 	_viewport_overlay = MapViewportOverlay.new()
 	_viewport_overlay.setup(context, state_bus, _addon_path)
 	vp_control.add_child(_viewport_overlay)
+	_viewport_overlay.set_anchors_preset(Control.PRESET_FULL_RECT)
 
 
 ## Locates the 3D SubViewport's parent Control inside Godot's EditorInterface.

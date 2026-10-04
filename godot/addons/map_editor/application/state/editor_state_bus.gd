@@ -15,6 +15,11 @@ signal on_brush_settings_changed(radius: float, falloff: float, density: float)
 signal on_palette_color_selected(color: Color)
 signal on_diagnostics_updated(draw_calls: int, tris: int, lights: int)
 signal on_request_viewport_redraw()
+signal on_transform_status_changed(status_text: String)
+
+
+func emit_transform_status_changed(status_text: String) -> void:
+	on_transform_status_changed.emit(status_text)
 
 
 func emit_tool_changed(new_tool: int) -> void:
