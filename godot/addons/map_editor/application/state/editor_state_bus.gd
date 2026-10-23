@@ -4,6 +4,7 @@ extends RefCounted
 ## Central signal bus for the Map Editor.
 ## Decouples presentation components, viewport handlers, and application services.
 
+signal on_active_state_changed(is_active: bool)
 signal on_tool_changed(new_tool: int)
 signal on_primitive_shape_changed(shape: int)
 signal on_snap_settings_changed(grid_snap: bool, snap_size: float, angle_snap: bool, angle_degrees: float)
@@ -16,6 +17,10 @@ signal on_palette_color_selected(color: Color)
 signal on_diagnostics_updated(draw_calls: int, tris: int, lights: int)
 signal on_request_viewport_redraw()
 signal on_transform_status_changed(status_text: String)
+
+
+func emit_active_state_changed(is_active: bool) -> void:
+	on_active_state_changed.emit(is_active)
 
 
 func emit_transform_status_changed(status_text: String) -> void:

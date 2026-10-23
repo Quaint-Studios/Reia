@@ -41,6 +41,24 @@ func setup(context: MapEditorContext, state_bus: MapEditorStateBus, p_plugin_pat
 			editor_state_bus.on_tool_changed.connect(_on_external_tool_changed)
 		if not editor_state_bus.on_transform_status_changed.is_connected(_on_transform_status_changed):
 			editor_state_bus.on_transform_status_changed.connect(_on_transform_status_changed)
+		if not editor_state_bus.on_active_state_changed.is_connected(_on_active_state_changed):
+			editor_state_bus.on_active_state_changed.connect(_on_active_state_changed)
+
+	visible = editor_context.is_active if editor_context != null else true
+
+
+func _on_active_state_changed(p_active: bool) -> void:
+	visible = p_active
+
+
+func teardown() -> void:
+	if editor_state_bus != null:
+		if editor_state_bus.on_tool_changed.is_connected(_on_external_tool_changed):
+			editor_state_bus.on_tool_changed.disconnect(_on_external_tool_changed)
+		if editor_state_bus.on_transform_status_changed.is_connected(_on_transform_status_changed):
+			editor_state_bus.on_transform_status_changed.disconnect(_on_transform_status_changed)
+		if editor_state_bus.on_active_state_changed.is_connected(_on_active_state_changed):
+			editor_state_bus.on_active_state_changed.disconnect(_on_active_state_changed)
 
 
 func _ready() -> void:
@@ -120,7 +138,7 @@ func _build_ui() -> void:
 	_shape_flyout.on_primitive_selected.connect(_on_primitive_shape_selected)
 	add_child(_shape_flyout)
 
-	# Transform Status Bar (Floating bottom-center pill)
+	# Transform Status Bar
 	_status_panel = PanelContainer.new()
 	_status_panel.name = "TransformStatusPanel"
 	_status_panel.mouse_filter = Control.MOUSE_FILTER_IGNORE
@@ -164,7 +182,6 @@ func _on_transform_status_changed(status_text: String) -> void:
 		_status_label.text = status_text
 		_status_panel.visible = true
 		_status_panel.reset_size()
-
 
 
 func _on_select_tool_pressed() -> void:

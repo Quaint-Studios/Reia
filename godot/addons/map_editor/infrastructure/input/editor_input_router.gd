@@ -38,19 +38,40 @@ func setup(
 
 	if editor_state_bus != null:
 		editor_state_bus.on_tool_changed.connect(_on_tool_changed)
+		editor_state_bus.on_active_state_changed.connect(_on_active_state_changed)
 
 	# Initial activation based on current context
-	var initial_mode: MapEditorContext.ToolMode = editor_context.active_tool if editor_context != null else MapEditorContext.ToolMode.SELECT
-	_switch_tool(initial_mode)
+	if editor_context != null and editor_context.is_active:
+		var initial_mode: MapEditorContext.ToolMode = editor_context.active_tool
+		_switch_tool(initial_mode)
+
+
+func _on_active_state_changed(p_active: bool) -> void:
+	if not p_active:
+		_cancel_active_operation()
+		if _active_controller != null:
+			_active_controller.deactivate()
+			_active_controller = null
+		if editor_context != null:
+			editor_context.clear_selection()
+	else:
+		var mode: MapEditorContext.ToolMode = editor_context.active_tool if editor_context != null else MapEditorContext.ToolMode.SELECT
+		_switch_tool(mode)
 
 
 func _on_tool_changed(new_tool: int) -> void:
+	if editor_context != null and not editor_context.is_active:
+		return
 	_switch_tool(new_tool as MapEditorContext.ToolMode)
 
 
 func _switch_tool(mode: MapEditorContext.ToolMode) -> void:
 	if _active_controller != null:
 		_active_controller.deactivate()
+
+	if editor_context != null and not editor_context.is_active:
+		_active_controller = null
+		return
 
 	if _tools.has(mode):
 		_active_controller = _tools[mode]
@@ -69,6 +90,19 @@ func forward_3d_gui_input(viewport_camera: Camera3D, event: InputEvent) -> int:
 	if event is InputEventKey:
 		var key_event := event as InputEventKey
 		if key_event.pressed and not key_event.echo:
+			# Alt+M: Toggle Map Editor active state (intercepted whether active or inactive)
+			if key_event.keycode == KEY_M and key_event.alt_pressed and not key_event.ctrl_pressed and not key_event.meta_pressed:
+				var new_active: bool = not (editor_context.is_active if editor_context != null else true)
+				if editor_context != null:
+					editor_context.is_active = new_active
+				if editor_state_bus != null:
+					editor_state_bus.emit_active_state_changed(new_active)
+				return 1 # AFTER_GUI_INPUT_STOP
+
+			# If editor is inactive, bypass all other hotkeys immediately
+			if editor_context != null and not editor_context.is_active:
+				return 0 # AFTER_GUI_INPUT_PASS
+
 			# Q: Select Tool
 			if key_event.keycode == KEY_Q and not key_event.alt_pressed and not key_event.ctrl_pressed and not key_event.meta_pressed:
 				_cancel_active_operation()
@@ -99,6 +133,10 @@ func forward_3d_gui_input(viewport_camera: Camera3D, event: InputEvent) -> int:
 					_active_controller.cancel_operation()
 					return 1
 
+	# If editor is inactive, bypass all mouse events and controller delegation
+	if editor_context != null and not editor_context.is_active:
+		return 0 # AFTER_GUI_INPUT_PASS
+
 	# Track mouse position and viewport presence
 	if event is InputEventMouseMotion:
 		var motion := event as InputEventMouseMotion
@@ -114,6 +152,8 @@ func forward_3d_gui_input(viewport_camera: Camera3D, event: InputEvent) -> int:
 
 ## Called from EditorPlugin._physics_process every frame.
 func process_physics(delta: float) -> void:
+	if editor_context != null and not editor_context.is_active:
+		return
 	if _active_controller == null:
 		return
 
@@ -158,8 +198,11 @@ func get_active_controller() -> EditorToolController:
 
 
 func teardown() -> void:
-	if editor_state_bus != null and editor_state_bus.on_tool_changed.is_connected(_on_tool_changed):
-		editor_state_bus.on_tool_changed.disconnect(_on_tool_changed)
+	if editor_state_bus != null:
+		if editor_state_bus.on_tool_changed.is_connected(_on_tool_changed):
+			editor_state_bus.on_tool_changed.disconnect(_on_tool_changed)
+		if editor_state_bus.on_active_state_changed.is_connected(_on_active_state_changed):
+			editor_state_bus.on_active_state_changed.disconnect(_on_active_state_changed)
 
 	for tool_ctrl: EditorToolController in _tools.values():
 		if tool_ctrl != null:

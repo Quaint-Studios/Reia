@@ -62,6 +62,7 @@ func get_overlay() -> MapViewportOverlay:
 ## Tears down and frees the overlay.
 func teardown() -> void:
 	if _viewport_overlay != null:
+		_viewport_overlay.teardown()
 		if _viewport_overlay.get_parent() != null:
 			_viewport_overlay.get_parent().remove_child(_viewport_overlay)
 		_viewport_overlay.queue_free()

@@ -18,6 +18,7 @@ enum ToolMode {
 	VERTEX_TINT,
 }
 
+var is_active: bool = true
 var active_tool: ToolMode = ToolMode.SELECT
 var grid_snap_enabled: bool = true
 var grid_snap_size: float = 1.0
